@@ -36,6 +36,7 @@ namespace ClubCloud.Zimbra.Client
         {
             try
             {
+                /*
                 CreateDomainRequest createdomain = new CreateDomainRequest { name = "centralweb.nl" };
                 createdomain.a.Add(new attrN { name = "zimbraDomainType", Value = "alias" });
                 createdomain.a.Add(new attrN { name = "zimbraDomainAliasTargetId", Value = "5e69fe13-6ba0-45df-9135-e079c64b4521" });
@@ -46,6 +47,7 @@ namespace ClubCloud.Zimbra.Client
 
                 CreateDomainResponse createdomainresponse = server.Message(createdomain) as CreateDomainResponse;
                 string name = createdomainresponse.domain.name;
+                */
                 /*
                 Account.GetAccountInfoRequest message = new Account.GetAccountInfoRequest();
                 //message.account = new Global.accountSelector { Value = "d0ec1768-02dd-4fd3-b302-1da0cd6e868a", by = accountBy.Id };
