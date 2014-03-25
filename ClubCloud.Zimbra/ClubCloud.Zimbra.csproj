@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{04F1320B-7FD4-4429-985C-B3946ED2F519}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClubCloud.Zimbra</RootNamespace>
+    <AssemblyName>ClubCloud.Zimbra</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ClubCloud.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\authRequest.cs" />
+    <Compile Include="Account\authResponse.cs" />
+    <Compile Include="Account\changePasswordRequest.cs" />
+    <Compile Include="Account\changePasswordResponse.cs" />
+    <Compile Include="Account\GetAccountInfoRequest.cs" />
+    <Compile Include="Account\getAccountInfoResponse.cs" />
+    <Compile Include="Account\getInfoRequest.cs" />
+    <Compile Include="Account\GetInfoResponse.cs" />
+    <Compile Include="Account\getVersionInfoRequest.cs" />
+    <Compile Include="Account\getVersionInfoResponse.cs" />
+    <Compile Include="Account\zimbraAccount.cs" />
+    <Compile Include="Account\zimbraAccountSoap.cs" />
+    <Compile Include="Account\ZimbraAccountSoapChannel.cs" />
+    <Compile Include="Account\ZimbraAccountSoapClient.cs" />
+    <Compile Include="Administration\AuthRequest.cs" />
+    <Compile Include="Administration\AuthResponse.cs" />
+    <Compile Include="Administration\CreateDomainRequest.cs" />
+    <Compile Include="Administration\CreateDomainResponse.cs" />
+    <Compile Include="Administration\Extended\zimbraAdminExt.cs" />
+    <Compile Include="Administration\GetAllDomainsRequest.cs" />
+    <Compile Include="Administration\getAllDomainsResponse.cs" />
+    <Compile Include="Administration\GetDomainRequest.cs" />
+    <Compile Include="Administration\getDomainResponse.cs" />
+    <Compile Include="Administration\GetVersionInfoRequest.cs" />
+    <Compile Include="Administration\GetVersionInfoResponse.cs" />
+    <Compile Include="Administration\modifyDomainRequest.cs" />
+    <Compile Include="Administration\modifyDomainResponse.cs" />
+    <Compile Include="Administration\modifyUCServiceRequest.cs" />
+    <Compile Include="Administration\updatePresenceSessionIdRequest.cs" />
+    <Compile Include="Administration\zimbraAdmin.cs" />
+    <Compile Include="Administration\zimbraAdminSoap.cs" />
+    <Compile Include="Administration\ZimbraAdminSoapChannel.cs" />
+    <Compile Include="Administration\ZimbraAdminSoapClient.cs" />
+    <Compile Include="Global\accountBy.cs" />
+    <Compile Include="Global\accountInfo.cs" />
+    <Compile Include="Global\accountSelector.cs" />
+    <Compile Include="Global\adminAttrsImpl.cs" />
+    <Compile Include="Global\adminObjectInfo.cs" />
+    <Compile Include="Global\aliasInfo.cs" />
+    <Compile Include="Global\attr.cs" />
+    <Compile Include="Global\attrA.cs" />
+    <Compile Include="Global\attributeSelectorImpl.cs" />
+    <Compile Include="Global\attrN.cs" />
+    <Compile Include="Global\authToken.cs" />
+    <Compile Include="Global\authTokenControl.cs" />
+    <Compile Include="Global\calendarResourceInfo.cs" />
+    <Compile Include="Global\change.cs" />
+    <Compile Include="Global\changeType.cs" />
+    <Compile Include="Global\distributionListInfo.cs" />
+    <Compile Include="Global\dlInfo.cs" />
+    <Compile Include="Global\domainInfo.cs" />
+    <Compile Include="Global\granteeInfo.cs" />
+    <Compile Include="Global\granteeType.cs" />
+    <Compile Include="Global\infoSection.cs" />
+    <Compile Include="Global\namedValue.cs" />
+    <Compile Include="Global\preAuth.cs" />
+    <Compile Include="Global\pref.cs" />
+    <Compile Include="Global\serverInfo.cs" />
+    <Compile Include="Global\session.cs" />
+    <Compile Include="Global\targetType.cs" />
+    <Compile Include="Global\ucServiceInfo.cs" />
+    <Compile Include="Global\userAgent.cs" />
+    <Compile Include="Global\versionInfo.cs" />
+    <Compile Include="Global\zimletInfo.cs" />
+    <Compile Include="Mail\zimbraMail.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Replication\zimbraRepl.cs" />
+    <Compile Include="Service\ZimbraBinding.cs" />
+    <Compile Include="Service\ZimbraEndpointAddress.cs" />
+    <Compile Include="Service\ZimbraHeaderContext.cs" />
+    <Compile Include="Synchronization\zimbraSync.cs" />
+    <Compile Include="Voice\zimbraVoice.cs" />
+    <Compile Include="ZimbraMessage.cs" />
+    <Compile Include="ZimbraServer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Docs\soap-admin.txt" />
+    <Content Include="Docs\soap-calendar.txt" />
+    <Content Include="Docs\soap-context-extension.txt" />
+    <Content Include="Docs\soap-document.txt" />
+    <Content Include="Docs\soap-im.txt" />
+    <Content Include="Docs\soap-mobile.txt" />
+    <Content Include="Docs\soap-right.txt" />
+    <Content Include="Docs\soap-waitset.txt" />
+    <Content Include="Docs\soap.txt" />
+    <Content Include="Docs\WeatherServiceCode.txt" />
+    <Content Include="wsdl\soap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClubCloud.pfx" />
+    <None Include="wsdl\zimbra.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="wsdl\zimbraAccount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="wsdl\zimbraAdmin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="wsdl\zimbraAdminExt.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="wsdl\zimbraMail.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="wsdl\zimbraRepl.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="wsdl\ZimbraService.wsdl" />
+    <None Include="wsdl\zimbraSync.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="wsdl\zimbraVoice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

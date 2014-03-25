@@ -1,0 +1,19 @@
+﻿<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+  <soap:Header>
+    <context xmlns="urn:zimbra">
+      <userAgent xmlns="" name="ZimbraWebClient - [unknown] (Win)" />
+      <session xmlns="" id="359" />
+      <format xmlns="" type="js" />
+    </context>
+  </soap:Header>
+  <soap:Body>
+    <CreateDomainRequest xmlns="urn:zimbraAdmin">
+      <name xmlns="">clubcloud.com</name>
+      <a xmlns="" n="zimbraDomainType">alias</a>
+      <a xmlns="" n="zimbraDomainAliasTargetId">5e69fe13-6ba0-45df-9135-e079c64b4521</a>
+      <a xmlns="" n="description">domeinalias van clubcloud.nl</a>
+      <a xmlns="" n="zimbraMailCatchAllAddress">@clubcloud.com</a>
+      <a xmlns="" n="zimbraMailCatchAllForwardingAddress">@clubcloud.nl</a>
+    </CreateDomainRequest>
+  </soap:Body>
+</soap:Envelope>
