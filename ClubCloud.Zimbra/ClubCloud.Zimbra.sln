@@ -5,14 +5,19 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Zimbra", "ClubCloud.Zimbra.csproj", "{04F1320B-7FD4-4429-985C-B3946ED2F519}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Zimbra.Client", "..\ClubCloud.Zimbra.Client\ClubCloud.Zimbra.Client.csproj", "{9D2C2BE5-11E9-4F36-81AE-8F95A1AFAA06}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://hemrika.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = ClubCloud.Zimbra.csproj
 		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\ClubCloud.Zimbra.Client\\ClubCloud.Zimbra.Client.csproj
+		SccProjectName2 = ../ClubCloud.Zimbra.Client
+		SccLocalPath2 = ..\\ClubCloud.Zimbra.Client
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +28,10 @@ Global
 		{04F1320B-7FD4-4429-985C-B3946ED2F519}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04F1320B-7FD4-4429-985C-B3946ED2F519}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04F1320B-7FD4-4429-985C-B3946ED2F519}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D2C2BE5-11E9-4F36-81AE-8F95A1AFAA06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D2C2BE5-11E9-4F36-81AE-8F95A1AFAA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D2C2BE5-11E9-4F36-81AE-8F95A1AFAA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D2C2BE5-11E9-4F36-81AE-8F95A1AFAA06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
