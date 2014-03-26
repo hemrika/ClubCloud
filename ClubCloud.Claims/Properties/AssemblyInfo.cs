@@ -6,11 +6,11 @@ using System.Security;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ClubCloud.Claims")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ClubCloud Provider")]
+[assembly: AssemblyDescription("ClubCloud Provider for Zimbra")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ClubCloud.Claims")]
+[assembly: AssemblyCompany("Hemrika")]
+[assembly: AssemblyProduct("ClubCloud")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

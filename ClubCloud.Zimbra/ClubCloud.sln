@@ -7,20 +7,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Zimbra", "ClubClo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Zimbra.Client", "..\ClubCloud.Zimbra.Client\ClubCloud.Zimbra.Client.csproj", "{9D2C2BE5-11E9-4F36-81AE-8F95A1AFAA06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Claims", "..\ClubCloud.Claims\ClubCloud.Claims.csproj", "{B259747C-7741-4B61-B261-24FBBE284F05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Provider", "..\ClubCloud.Claims\ClubCloud.Provider.csproj", "{B259747C-7741-4B61-B261-24FBBE284F05}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://hemrika.visualstudio.com/defaultcollection
-		SccProjectUniqueName0 = ClubCloud.Zimbra.csproj
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\ClubCloud.Zimbra.Client\\ClubCloud.Zimbra.Client.csproj
-		SccProjectName1 = ../ClubCloud.Zimbra.Client
-		SccLocalPath1 = ..\\ClubCloud.Zimbra.Client
-		SccLocalPath2 = .
-		SccProjectUniqueName3 = ..\\ClubCloud.Claims\\ClubCloud.Claims.csproj
+		SccProjectUniqueName1 = ClubCloud.Zimbra.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\ClubCloud.Zimbra.Client\\ClubCloud.Zimbra.Client.csproj
+		SccProjectName2 = ../ClubCloud.Zimbra.Client
+		SccLocalPath2 = ..\\ClubCloud.Zimbra.Client
+		SccProjectUniqueName3 = ..\\ClubCloud.Claims\\ClubCloud.Provider.csproj
 		SccProjectName3 = ../ClubCloud.Claims
 		SccLocalPath3 = ..\\ClubCloud.Claims
 	EndGlobalSection

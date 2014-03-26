@@ -8,12 +8,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ClubCloud.Zimbra")]
+[assembly: AssemblyTitle("ClubCloud Zimbra API")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ClubCloud.Zimbra")]
+[assembly: AssemblyCompany("Hemrika")]
+[assembly: AssemblyProduct("ClubCloud")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
+
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

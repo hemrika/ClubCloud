@@ -7,8 +7,8 @@
     <ProjectGuid>{B259747C-7741-4B61-B261-24FBBE284F05}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClubCloud.Claims</RootNamespace>
-    <AssemblyName>ClubCloud.Claims</AssemblyName>
+    <RootNamespace>ClubCloud.Provider</RootNamespace>
+    <AssemblyName>ClubCloud.Provider</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetOfficeVersion>15.0</TargetOfficeVersion>
     <FileAlignment>512</FileAlignment>
@@ -47,30 +47,25 @@
   <ItemGroup>
     <Reference Include="Microsoft.SharePoint.Security, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\ClubCloudClaims\ClubCloudClaims.EventReceiver.cs">
-      <DependentUpon>ClubCloudClaims.feature</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ZimbraAttribute.cs" />
     <Compile Include="ZimbraClaimProvider.cs" />
-    <Compile Include="ZimbraConfig.cs" />
-    <Compile Include="ZimbraConsolidatedResult.cs" />
-    <Compile Include="ZimbraPropertiesComparer.cs" />
+    <Compile Include="ZimbraMembershipProvider.cs" />
+    <Compile Include="ZimbraMembershipUser.cs" />
+    <Compile Include="ZimbraRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClubCloud.pfx" />
-    <None Include="Features\ClubCloudClaims\ClubCloudClaims.feature">
-      <FeatureId>{9f7a9fe8-a317-4bb1-a42d-b8baa7c2626c}</FeatureId>
-    </None>
     <None Include="Package\Package.package">
       <PackageId>{feeca0b7-26ac-459f-83de-82e1943f195c}</PackageId>
     </None>
@@ -78,11 +73,14 @@
       <DependentUpon>Package.package</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Features\ClubCloudClaims\ClubCloudClaims.Template.xml">
-      <DependentUpon>ClubCloudClaims.feature</DependentUpon>
-    </Content>
+    <ProjectReference Include="..\ClubCloud.Zimbra\ClubCloud.Zimbra.csproj">
+      <Project>{04f1320b-7fd4-4429-985c-b3946ed2f519}</Project>
+      <Name>ClubCloud.Zimbra</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
