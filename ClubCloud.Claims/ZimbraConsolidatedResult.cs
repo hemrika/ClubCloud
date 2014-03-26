@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClubCloud.Zimbra.LDAP
+namespace ClubCloud.Claims
 {
     public class ZimbraConsolidatedResult
     {

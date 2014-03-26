@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClubCloud.Zimbra.LDAP
+namespace ClubCloud.Claims
 {
     /// <summary>
     /// Defines an attribute persisted in config database
@@ -94,16 +94,6 @@ namespace ClubCloud.Zimbra.LDAP
         public ZimbraAttribute()
         {
         }
-
-        //protected override void OnDeserialization()
-        //{
-        //    base.OnDeserialization();
-        //}
-
-        //public LDAPClaimProviderTrustConfiguration(string name, SPPersistedObject parent)
-        //    : base(
-        //{
-        //}
     }
 
 }

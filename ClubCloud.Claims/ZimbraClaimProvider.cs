@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 using System.DirectoryServices;
 using System.Linq;
 
-namespace ClubCloud.Zimbra.LDAP
+namespace ClubCloud.Claims
 {
     /// </summary>
     public class ZimbraClaimProvider : SPClaimProvider

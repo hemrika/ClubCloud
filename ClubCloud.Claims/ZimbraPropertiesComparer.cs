@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClubCloud.Zimbra.LDAP
+namespace ClubCloud.Claims
 {
     /// <summary>
     /// Check if 2 attributes are identical (sams class and same name) to not add duplicates to the attributes list

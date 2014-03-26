@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using nsmsclaims = System.Security.Claims;
 
-namespace ClubCloud.Zimbra.LDAP
+namespace ClubCloud.Claims
 {
     public class Constants
     {

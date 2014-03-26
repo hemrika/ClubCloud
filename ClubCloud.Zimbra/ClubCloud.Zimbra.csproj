@@ -40,11 +40,8 @@
     <AssemblyOriginatorKeyFile>ClubCloud.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.SharePoint.Security, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
@@ -118,12 +115,6 @@
     <Compile Include="Global\userAgent.cs" />
     <Compile Include="Global\versionInfo.cs" />
     <Compile Include="Global\zimletInfo.cs" />
-    <Compile Include="LDAP\ZimbraAttribute.cs" />
-    <Compile Include="LDAP\ZimbraClaimProvider.cs" />
-    <Compile Include="LDAP\ZimbraClaimProviderFeatureReceiver.cs" />
-    <Compile Include="LDAP\ZimbraConfig.cs" />
-    <Compile Include="LDAP\ZimbraConsolidatedResult.cs" />
-    <Compile Include="LDAP\ZimbraPropertiesComparer.cs" />
     <Compile Include="Mail\zimbraMail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Replication\zimbraRepl.cs" />
@@ -175,6 +166,9 @@
     <None Include="wsdl\zimbraVoice.xsd">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LDAP\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
