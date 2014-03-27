@@ -42,7 +42,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>ClubCloud.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SharePoint.Security, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
@@ -65,7 +66,6 @@
     <Compile Include="ZimbraRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClubCloud.pfx" />
     <None Include="Package\Package.package">
       <PackageId>{feeca0b7-26ac-459f-83de-82e1943f195c}</PackageId>
     </None>
