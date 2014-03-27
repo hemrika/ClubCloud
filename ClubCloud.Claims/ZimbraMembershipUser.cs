@@ -23,9 +23,9 @@ public ZimbraMembershipUser(string providername,
                                   DateTime lastLoginDate,
                                   DateTime lastActivityDate,
                                   DateTime lastPasswordChangedDate,
-                                  DateTime lastLockedOutDate,
-                                  bool isSubscriber,
-                                  string customerID) :
+                                  DateTime lastLockedOutDate):
+                                  //bool isSubscriber,
+                                  //string customerID) :
                                   base(providername,
                                        username,
                                        providerUserKey,
@@ -40,8 +40,8 @@ public ZimbraMembershipUser(string providername,
                                        lastPasswordChangedDate,
                                        lastLockedOutDate)
         {
-            this.IsSubscriber = isSubscriber;
-            this.CustomerID = customerID;
+            //this.IsSubscriber = isSubscriber;
+            //this.CustomerID = customerID;
         }
 
 
