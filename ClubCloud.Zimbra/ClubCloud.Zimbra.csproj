@@ -37,8 +37,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>ClubCloud.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -141,6 +140,7 @@
     <Content Include="wsdl\soap.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClubCloud.pfx" />
     <None Include="wsdl\zimbra.xsd">
       <SubType>Designer</SubType>
     </None>
