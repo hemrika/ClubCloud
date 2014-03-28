@@ -113,7 +113,7 @@
     <Compile Include="Global\targetType.cs" />
     <Compile Include="Global\ucServiceInfo.cs" />
     <Compile Include="Global\userAgent.cs" />
-    <Compile Include="Global\versionInfo.cs" />
+    <Compile Include="Global\VersionInfo.cs" />
     <Compile Include="Global\zimletInfo.cs" />
     <Compile Include="Mail\zimbraMail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

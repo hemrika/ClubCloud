@@ -8,7 +8,7 @@ namespace ClubCloud.Provider
 {
     class ZimbraRoleProvider : System.Web.Security.RoleProvider
     {
-        protected ZimbraRoleProvider()
+        protected ZimbraRoleProvider() : base()
         {
 
         }

@@ -12,17 +12,17 @@ namespace ClubCloud.Zimbra.Administration
     public partial class GetVersionInfoResponse : ZimbraMessage
     {
 
-        private versionInfo _info;
+        private VersionInfo _info;
 
         public GetVersionInfoResponse()
         {
-            this._info = new versionInfo();
+            this._info = new VersionInfo();
         }
 
         [System.Xml.Serialization.XmlElementAttribute(ElementName = "info", Namespace = "urn:zimbraAdmin")]
         [System.Runtime.Serialization.DataMemberAttribute()]
         [MessageBodyMember]
-        public versionInfo info
+        public VersionInfo info
         {
             get
             {

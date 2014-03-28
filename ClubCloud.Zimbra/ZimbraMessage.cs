@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ClubCloud.Zimbra
 {
     [MessageContract]
-    public partial class ZimbraMessage : System.ComponentModel.INotifyPropertyChanged
+    public partial class ZimbraMessage : System.ComponentModel.INotifyPropertyChanged, IDisposable
     {
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
@@ -19,6 +19,10 @@ namespace ClubCloud.Zimbra
             {
                 handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

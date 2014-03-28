@@ -51,6 +51,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.identitymodel.services" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml" />
@@ -60,9 +62,13 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZimbraClaimProvider.cs" />
+    <Compile Include="ZimbraDiagnosticService.cs" />
     <Compile Include="ZimbraMembershipProvider.cs" />
     <Compile Include="ZimbraMembershipUser.cs" />
+    <Compile Include="ZimbraProviderException.cs" />
+    <Compile Include="ZimbraProviderSettings.cs" />
     <Compile Include="ZimbraRoleProvider.cs" />
+    <Compile Include="ZimbraModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClubCloud.pfx" />

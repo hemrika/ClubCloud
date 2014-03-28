@@ -16,17 +16,17 @@ namespace ClubCloud.Zimbra.Account
     public partial class GetVersionInfoResponse : ZimbraMessage // System.ComponentModel.INotifyPropertyChanged
     {
 
-        private versionInfo _info;
+        private VersionInfo _info;
 
         public GetVersionInfoResponse()
         {
-            this._info = new versionInfo();
+            this._info = new VersionInfo();
         }
 
         [System.Xml.Serialization.XmlElementAttribute(ElementName = "info", Namespace = "urn:zimbraAccount")]
         [System.Runtime.Serialization.DataMemberAttribute()]
         [MessageBodyMember]
-        public versionInfo info
+        public VersionInfo info
         {
             get
             {

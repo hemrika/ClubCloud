@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra
 {
-    public class ZimbraServer : System.ComponentModel.INotifyPropertyChanged
+    public class ZimbraServer : System.ComponentModel.INotifyPropertyChanged, IDisposable
     {
         private static ZimbraBinding binding = new ZimbraBinding();
         private static ZimbraEndpointAddress remoteAddress { get; set; }
@@ -97,8 +97,9 @@ namespace ClubCloud.Zimbra
 
         }
 
-        public void Authenticate(string Username, string Password, bool asAdmin = false)
+        public string Authenticate(string Username, string Password, bool asAdmin = false)
         {
+            string AuthToken = string.Empty;
             if (asAdmin)
             {
                 Zimbra.Administration.AuthResponse response;
@@ -111,6 +112,7 @@ namespace ClubCloud.Zimbra
                 if (!string.IsNullOrEmpty(response.authToken))
                 {
                     AuthenticatedAdmin = true;
+                    AuthToken = response.authToken;
                 }
 
                 ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
@@ -131,16 +133,17 @@ namespace ClubCloud.Zimbra
                 if (!string.IsNullOrEmpty(response.authToken))
                 {
                     Authenticated = true;
+                    AuthToken = response.authToken;
                 }
 
-                ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
-                ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = true };
-                ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
+                //ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
+                //ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = true };
+                //ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
 
             }
 
-            GetVersioInfo(asAdmin);
-
+            //GetVersioInfo(asAdmin);
+            return AuthToken;
         }
 
         private void GetVersioInfo(bool asAdmin = false)
@@ -325,7 +328,7 @@ namespace ClubCloud.Zimbra
             {
                 account = new ZimbraAccountSoapClient(binding, remoteAddress);
             }
-
+            
             return ProcessMessage(account, zimbraMessage);
         }
 
@@ -366,6 +369,21 @@ namespace ClubCloud.Zimbra
             if ((handler != null))
             {
                 handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public void Dispose()
+        {
+            if(account != null)
+            {
+                account.InnerChannel.Dispose();
+                account = null;
+            }
+
+            if (administration != null)
+            {
+                administration.InnerChannel.Dispose();
+                administration = null;
             }
         }
     }
