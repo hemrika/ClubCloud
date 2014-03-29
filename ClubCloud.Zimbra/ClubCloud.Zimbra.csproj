@@ -71,7 +71,9 @@
     <Compile Include="Administration\CreateDomainResponse.cs" />
     <Compile Include="Administration\Extended\zimbraAdminExt.cs" />
     <Compile Include="Administration\GetAllDomainsRequest.cs" />
-    <Compile Include="Administration\getAllDomainsResponse.cs" />
+    <Compile Include="Administration\GetAllDomainsResponse.cs" />
+    <Compile Include="Administration\GetCosRequest.cs" />
+    <Compile Include="Administration\GetCosResponse.cs" />
     <Compile Include="Administration\GetDomainRequest.cs" />
     <Compile Include="Administration\getDomainResponse.cs" />
     <Compile Include="Administration\GetVersionInfoRequest.cs" />
@@ -99,6 +101,10 @@
     <Compile Include="Global\calendarResourceInfo.cs" />
     <Compile Include="Global\change.cs" />
     <Compile Include="Global\changeType.cs" />
+    <Compile Include="Global\cosBy.cs" />
+    <Compile Include="Global\cosInfo.cs" />
+    <Compile Include="Global\cosInfoAttr.cs" />
+    <Compile Include="Global\cosSelector.cs" />
     <Compile Include="Global\distributionListInfo.cs" />
     <Compile Include="Global\dlInfo.cs" />
     <Compile Include="Global\domainInfo.cs" />

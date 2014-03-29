@@ -55,5 +55,10 @@ namespace ClubCloud.Zimbra.Administration
         {
             return base.Channel.CreateDomainRequest(request);
         }
+
+        public GetCosResponse GetCosRequest(GetCosRequest request)
+        {
+            return base.Channel.GetCosRequest(request);
+        }
     }
 }

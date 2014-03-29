@@ -18,8 +18,8 @@ namespace ClubCloud.Zimbra.Global
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getServerRequest))]
     */
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(GetDomainRequest))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(GetCosRequest))]
     /*
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getCosRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getCalendarResourceRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getAccountRequest))]
     */

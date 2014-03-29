@@ -468,9 +468,9 @@ namespace ClubCloud.Provider
 
         private void ZimbraCookie(string AuthToken)
         {
-            if (HttpContext.Current != null && HttpContext.Current.Request != null)
+            if (HttpContext.Current != null || HttpContext.Current.Request != null )
             {
-                HttpCookie ZimbraAuth = HttpContext.Current.Request.Cookies.Get("_ZimbraAuth");
+                HttpCookie ZimbraAuth = HttpContext.Current.Request.Unvalidated.Cookies.Get("_ZimbraAuth");
                 bool update = true;
                 if (ZimbraAuth == null)
                 {
@@ -485,11 +485,11 @@ namespace ClubCloud.Provider
                 ZimbraAuth.Shareable = true;
                 if (update)
                 {
-                    HttpContext.Current.Request.Cookies.Set(ZimbraAuth);
+                    HttpContext.Current.Request.Unvalidated.Cookies.Set(ZimbraAuth);
                 }
                 else
                 {
-                    HttpContext.Current.Request.Cookies.Add(ZimbraAuth);
+                    HttpContext.Current.Request.Unvalidated.Cookies.Add(ZimbraAuth);
                 }
             }
         }

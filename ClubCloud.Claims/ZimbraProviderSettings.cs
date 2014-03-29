@@ -51,6 +51,9 @@ namespace ClubCloud.Provider
         public string ZimbraPassword;
 
         [Persisted]
+        public string ZimbraClassOfService;
+
+        [Persisted]
         public int ZimbraMinRequiredPasswordLength;
 
         [Persisted]

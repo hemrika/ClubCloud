@@ -36,6 +36,20 @@ namespace ClubCloud.Zimbra.Client
         {
             try
             {
+                GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = "clubcloud" } };
+                GetCosResponse response = server.Message(request) as GetCosResponse;
+                cosInfoAttr inf = response.cos.a[0];
+                string name = inf.name;
+                bool pd = inf.pd;
+                string value = inf.Value;
+                //string name = response.cos.name;
+
+                /*
+                Zimbra.Account.ChangePasswordRequest request = new Zimbra.Account.ChangePasswordRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username }, oldPassword = oldPassword, password = newPassword };
+                Zimbra.Account.ChangePasswordResponse response = clientServer.Message(request) as Zimbra.Account.ChangePasswordResponse;
+                string AuthToken = response.authToken;
+                */
+
                 /*
                 CreateDomainRequest createdomain = new CreateDomainRequest { name = "centralweb.nl" };
                 createdomain.a.Add(new attrN { name = "zimbraDomainType", Value = "alias" });
