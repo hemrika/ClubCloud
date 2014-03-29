@@ -29,8 +29,9 @@ namespace ClubCloud.Zimbra.Global
 
         private string _attrs;
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [MessageBodyMember]
         public string attrs
         {
             get

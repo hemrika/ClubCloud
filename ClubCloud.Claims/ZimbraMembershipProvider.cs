@@ -1,9 +1,12 @@
-﻿using Microsoft.SharePoint.Administration;
+﻿using ClubCloud.Zimbra.Administration;
+using ClubCloud.Zimbra.Global;
+using Microsoft.SharePoint.Administration;
 using System;
 using System.Collections.Generic;
 using System.Configuration.Provider;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +21,123 @@ namespace ClubCloud.Provider
     {
         private bool Initialized;
         private string applicationName;
-        private Zimbra.ZimbraServer zimbraServerClient;
         private Zimbra.ZimbraServer zimbraServer;
         private ZimbraProviderSettings zimbraSettings;
         private Zimbra.Global.VersionInfo zimbraVersion;
         private string AdminToken;
 
+        private int _zimbraPasswordMaxLength;
+
+        public int zimbraPasswordMaxLength
+        {
+            get { return _zimbraPasswordMaxLength; }
+            set { _zimbraPasswordMaxLength = value; }
+        }
+        private int _zimbraPasswordMinLength;
+
+        public int zimbraPasswordMinLength
+        {
+            get { return _zimbraPasswordMinLength; }
+            set { _zimbraPasswordMinLength = value; }
+        }
+        private int _zimbraPasswordMinLowerCaseChars;
+
+        public int zimbraPasswordMinLowerCaseChars
+        {
+            get { return _zimbraPasswordMinLowerCaseChars; }
+            set { _zimbraPasswordMinLowerCaseChars = value; }
+        }
+        private int _zimbraPasswordMinAlphaChars;
+
+        public int zimbraPasswordMinAlphaChars
+        {
+            get { return _zimbraPasswordMinAlphaChars; }
+            set { _zimbraPasswordMinAlphaChars = value; }
+        }
+        private int _zimbraPasswordMinNumericChars;
+
+        public int zimbraPasswordMinNumericChars
+        {
+            get { return _zimbraPasswordMinNumericChars; }
+            set { _zimbraPasswordMinNumericChars = value; }
+        }
+        private int _zimbraPasswordMinDigitsOrPuncs;
+
+        public int zimbraPasswordMinDigitsOrPuncs
+        {
+            get { return _zimbraPasswordMinDigitsOrPuncs; }
+            set { _zimbraPasswordMinDigitsOrPuncs = value; }
+        }
+        private int _zimbraPasswordMinPunctuationChars;
+
+        public int zimbraPasswordMinPunctuationChars
+        {
+            get { return _zimbraPasswordMinPunctuationChars; }
+            set { _zimbraPasswordMinPunctuationChars = value; }
+        }
+        private int _zimbraPasswordMinUpperCaseChars;
+
+        public int zimbraPasswordMinUpperCaseChars
+        {
+            get { return _zimbraPasswordMinUpperCaseChars; }
+            set { _zimbraPasswordMinUpperCaseChars = value; }
+        }
+        private string _zimbraPasswordAllowedChars = string.Empty;
+
+        public string zimbraPasswordAllowedChars
+        {
+            get { return _zimbraPasswordAllowedChars; }
+            set { _zimbraPasswordAllowedChars = value; }
+        }
+        private string _zimbraPasswordAllowedPunctuationChars = string.Empty;
+
+        public string zimbraPasswordAllowedPunctuationChars
+        {
+            get { return _zimbraPasswordAllowedPunctuationChars; }
+            set { _zimbraPasswordAllowedPunctuationChars = value; }
+        }
+
+        private string _zimbraPasswordLocked = string.Empty;
+
+        public string zimbraPasswordLocked
+        {
+            get { return _zimbraPasswordLocked; }
+            set { _zimbraPasswordLocked = value; }
+        }
+
+        private string _zimbraPasswordLockoutDuration;
+
+        public string zimbraPasswordLockoutDuration
+        {
+            get { return _zimbraPasswordLockoutDuration; }
+            set { _zimbraPasswordLockoutDuration = value; }
+        }
+
+        private bool _zimbraPasswordLockoutEnabled;
+
+        public bool zimbraPasswordLockoutEnabled
+        {
+            get { return _zimbraPasswordLockoutEnabled; }
+            set { _zimbraPasswordLockoutEnabled = value; }
+        }
+
+        private int _zimbraPasswordLockoutMaxFailures;
+
+        public int zimbraPasswordLockoutMaxFailures
+        {
+            get { return _zimbraPasswordLockoutMaxFailures; }
+            set { _zimbraPasswordLockoutMaxFailures = value; }
+        }
+
+        private string _zimbraPasswordLockoutFailureLifetime;
+
+        public string zimbraPasswordLockoutFailureLifetime
+        {
+            get { return _zimbraPasswordLockoutFailureLifetime; }
+            set { _zimbraPasswordLockoutFailureLifetime = value; }
+        }
+
+        
         #region Initialisation
         protected ZimbraMembershipProvider() : base()
         { 
@@ -111,8 +225,47 @@ namespace ClubCloud.Provider
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message, ex);
             }
+            GetPasswordProperties();
+
+            GetLockProperties();
 
             this.Initialized = true;
+        }
+
+        private void GetLockProperties()
+        {
+            GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = zimbraSettings.ZimbraClassOfService }, attrs = "zimbraPasswordLockoutDuration,zimbraPasswordLockoutEnabled,zimbraPasswordLockoutMaxFailures,zimbraPasswordLockoutFailureLifetime" };
+            GetCosResponse response = zimbraServer.Message(request) as GetCosResponse;
+
+            foreach (var item in response.cos.a)
+            {
+                try
+                {
+                    PropertyInfo propertyInfo = this.GetType().GetProperty(item.name);
+                    propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private void GetPasswordProperties()
+        {
+            GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = zimbraSettings.ZimbraClassOfService }, attrs = "zimbraPasswordLocked,zimbraPasswordLocked,zimbraPasswordLockoutDuration,zimbraPasswordLockoutEnabled,zimbraPasswordLockoutMaxFailures" };
+            GetCosResponse response = zimbraServer.Message(request) as GetCosResponse;
+
+            foreach (var item in response.cos.a)
+            {
+                try
+                {
+                    PropertyInfo propertyInfo = this.GetType().GetProperty(item.name);
+                    propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                }
+                catch
+                {
+                }
+            }
         }
 
         public override string ApplicationName
@@ -176,11 +329,7 @@ namespace ClubCloud.Provider
         {
             get 
             {
-                if (zimbraSettings == null)
-                {
-                    return 14;
-                }
-                return zimbraSettings.ZimbraMinRequiredPasswordLength;
+                return _zimbraPasswordMinLength;
             }
         }
 
@@ -188,12 +337,7 @@ namespace ClubCloud.Provider
         {
             get
             {
-                if (zimbraSettings == null)
-                {
-                    return 3;
-                }
-                return zimbraSettings.ZimbraMinRequiredNonAlphanumericCharacters;
-
+                return zimbraPasswordMinAlphaChars;
             }
         }
 
@@ -226,17 +370,17 @@ namespace ClubCloud.Provider
 
         public override int MaxInvalidPasswordAttempts
         {
-            get { throw new NotImplementedException(); }
+            get { return zimbraPasswordLockoutMaxFailures; }
         }
 
         public override int PasswordAttemptWindow
         {
-            get { throw new NotImplementedException(); }
+            get { return int.Parse(zimbraPasswordLockoutFailureLifetime); }
         }
 
         public override System.Web.Security.MembershipPasswordFormat PasswordFormat
         {
-            get { return MembershipPasswordFormat.Clear; }
+            get { return MembershipPasswordFormat.Hashed; }
         }
 
         public override string PasswordStrengthRegularExpression
@@ -251,7 +395,7 @@ namespace ClubCloud.Provider
 
         public override bool EnablePasswordReset
         {
-            get { return true; }
+            get { return false; }
         }
 
         public override bool EnablePasswordRetrieval
@@ -261,7 +405,7 @@ namespace ClubCloud.Provider
 
         public override bool RequiresUniqueEmail
         {
-            get { return false; }
+            get { return true; }
         }
         #endregion
 
@@ -308,11 +452,8 @@ namespace ClubCloud.Provider
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message);
             }
-            //zmsoap -z -v SearchDirectoryRequest @offset="0" @limit="25" @sortBy="name" @sortAscending="1" @applyCos="false" @applyConfig="false" \
-            //@attrs="displayName,zimbraId,zimbraAliasTargetId,cn,sn,zimbraMailHost,uid,zimbraCOSId,zimbraAccountStatus,zimbraLastLogonTimestamp, \
-            //description,zimbraIsDelegatedAdminAccount,zimbraIsAdminAccount,zimbraIsSystemResource,zimbraAuthTokenValidityValue,zimbraMailStatus, \
-            //zimbraIsAdminGroup,zimbraCalResType,zimbraDomainType,zimbraDomainName,zimbraDomainStatus,zimbraIsDelegatedAdminAccount,zimbraIsAdminAccount,zimbraIsSystemResource" \
-            //@types="accounts" @maxResults="5000" query=""
+            //GetAllAccounts
+            //file:///C:/Source/ClubCloud/Common/api-reference/zimbraAdmin/GetAllAccounts.html
 
             throw new NotImplementedException();
         }
@@ -334,35 +475,78 @@ namespace ClubCloud.Provider
         #region Get User
         public override System.Web.Security.MembershipUser GetUser(string username, bool userIsOnline)
         {
+            ZimbraMembershipUser user = new ZimbraMembershipUser();
+
             if (!Initialized)
             {
                 string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message);
             }
-            throw new NotImplementedException();
+            Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username }, applyCos = true };
+            Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
+            if (response != null)
+            {
+                foreach (var item in response.account.a)
+                {
+                    try
+                    {
+                        PropertyInfo propertyInfo = user.GetType().GetProperty(item.name);
+                        propertyInfo.SetValue(user, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            return user;
         }
 
         public override System.Web.Security.MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
+            ZimbraMembershipUser user = new ZimbraMembershipUser();
+
             if (!Initialized)
             {
                 string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message);
             }
-            throw new NotImplementedException();
+            Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Id, Value = providerUserKey.ToString() }, applyCos = true };
+            Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
+            if (response != null)
+            {
+                foreach (var item in response.account.a)
+                {
+                    try
+                    {
+                        PropertyInfo propertyInfo = user.GetType().GetProperty(item.name);
+                        propertyInfo.SetValue(user, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            return user;
         }
 
         public override string GetUserNameByEmail(string email)
         {
+            string UserName = "Onbekend";
             if (!Initialized)
             {
                 string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message);
             }
-            throw new NotImplementedException();
+            Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = email }, applyCos = false, attrs = "displayName" };
+            Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
+            if (response != null)
+            {
+                UserName = response.account.a[0].Value;
+            }
+            return UserName;
         }
 
         #endregion
@@ -371,13 +555,19 @@ namespace ClubCloud.Provider
 
         public override bool UnlockUser(string userName)
         {
+            bool unlocked = false;
             if (!Initialized)
             {
                 string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message);
             }
-            throw new NotImplementedException();
+            //getUser and check lockoutstate
+            if(zimbraPasswordLockoutEnabled) //&& usre.islockedout)
+            {
+
+            }
+            return unlocked;
         }
 
         #endregion
@@ -440,10 +630,8 @@ namespace ClubCloud.Provider
 
             try
             {
- 
-                //TODO MessageContract redesign on ClubCloud.Zimbra.dll
-                Zimbra.Administration.getAccountInfoRequest request = new Zimbra.Administration.getAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username } };
-                Zimbra.Administration.getAccountInfoResponse response = zimbraServer.Message(request) as Zimbra.Administration.getAccountInfoResponse;
+                Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username } };
+                Zimbra.Administration.GetAccountInfoResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
                 if (response != null)
                 {
                     using (Zimbra.ZimbraServer clientServer = new Zimbra.ZimbraServer(zimbraSettings.ZimbraServer))

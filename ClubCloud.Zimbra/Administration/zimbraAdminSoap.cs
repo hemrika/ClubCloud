@@ -22,6 +22,14 @@ namespace ClubCloud.Zimbra.Administration
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         GetAllDomainsResponse GetAllDomainsRequest(GetAllDomainsRequest request);
 
+        [System.ServiceModel.OperationContractAttribute(Name = "GetAccountInfoRequest", Action = "AccountGetAccountInfoRequestMessage", ReplyAction = "AccountGetAccountInfoResponseMessage")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        GetAccountInfoResponse GetAccountInfoRequest(GetAccountInfoRequest request);
+
+        [System.ServiceModel.OperationContractAttribute(Name = "GetAccountRequest", Action = "AccountGetAccountRequestMessage", ReplyAction = "AccountGetAccountResponseMessage")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        GetAccountResponse GetAccountRequest(GetAccountRequest request);
+
         [System.ServiceModel.OperationContractAttribute(Name = "ModifyDomainRequest", Action = "AdminModifyDomainResquestMessage", ReplyAction = "AdminModifyDomainResponseMessage")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         ModifyDomainResponse ModifyDomainRequest(ModifyDomainRequest request);

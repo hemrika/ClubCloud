@@ -15,23 +15,23 @@ namespace ClubCloud.Zimbra.Global
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(distributionListInfo))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(calendarResourceInfo))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(accountInfo))]
-    public partial class adminObjectInfo : System.ComponentModel.INotifyPropertyChanged
+    public partial class adminObjectInfoN : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private List<attr> _a;
+        private List<attrN> _a;
 
         private string _name;
 
         private string _id;
 
-        public adminObjectInfo()
+        public adminObjectInfoN()
         {
-            this._a = new List<attr>();
+            this._a = new List<attrN>();
         }
 
         [System.Xml.Serialization.XmlElementAttribute("a")]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<attr> a
+        public List<attrN> a
         {
             get
             {

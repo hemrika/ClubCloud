@@ -17,6 +17,7 @@ using ClubCloud.Zimbra.Account;
 using ClubCloud.Zimbra.Global;
 using ClubCloud.Zimbra.Administration;
 using System.ServiceModel;
+using System.Reflection;
 
 namespace ClubCloud.Zimbra.Client
 {
@@ -29,19 +30,39 @@ namespace ClubCloud.Zimbra.Client
             InitializeComponent();
             server = new ZimbraServer("mail.clubcloud.nl");//("info@clubcloud.nl", "rjm557308453!", "mail.clubcloud.nl");
             server.PropertyChanged += server_PropertyChanged;
-            server.Authenticate("info@clubcloud.nl", "rjm557308453!",true);
+            server.Authenticate("admin@clubcloud.nl", "rjm557308453!",true);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = "clubcloud" } };
-                GetCosResponse response = server.Message(request) as GetCosResponse;
-                cosInfoAttr inf = response.cos.a[0];
-                string name = inf.name;
-                bool pd = inf.pd;
-                string value = inf.Value;
+                Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "hemrika@clubcloud.nl" }, applyCos = false, attrs = "displayName" };
+                Zimbra.Administration.GetAccountResponse response = server.Message(request) as Zimbra.Administration.GetAccountResponse;
+                if (response != null)
+                {
+                    string name = response.account.a[0].Value;
+                }
+
+                //Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "info@clubcloud.nl" } };
+                //Zimbra.Administration.GetAccountInfoResponse response = server.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
+                //if (response != null)
+                //{
+                //    string name = response.name;
+                //}
+
+                //zimbraPasswordMaxLength,zimbraPasswordMinLength,zimbraPasswordMinLowerCaseChars,zimbraPasswordMinAlphaChars,zimbraPasswordMinNumericChars,zimbraPasswordMinDigitsOrPuncs,zimbraPasswordMinPunctuationChars,zimbraPasswordMinUpperCaseChars,zimbraPasswordAllowedChars,zimbraPasswordAllowedPunctuationChars
+                //zimbraPasswordLockoutDuration,zimbraPasswordLockoutEnabled,zimbraPasswordLockoutMaxFailures
+                //GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = "clubcloud" }, attrs = "zimbraPasswordMaxLength,zimbraPasswordMinLength,zimbraPasswordMinLowerCaseChars,zimbraPasswordMinAlphaChars,zimbraPasswordMinNumericChars,zimbraPasswordMinDigitsOrPuncs,zimbraPasswordMinPunctuationChars,zimbraPasswordMinUpperCaseChars,zimbraPasswordAllowedChars,zimbraPasswordAllowedPunctuationChars" };
+                //GetCosResponse response = server.Message(request) as GetCosResponse;
+
+                //foreach (var item in response.cos.a)
+                //{
+                //    PropertyInfo propertyInfo = this.GetType().GetProperty(item.name);
+                //    propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                //}
+
+                //int z = zimbraPasswordMinLength;
                 //string name = response.cos.name;
 
                 /*

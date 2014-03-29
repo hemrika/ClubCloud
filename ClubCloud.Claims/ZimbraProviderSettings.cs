@@ -52,12 +52,6 @@ namespace ClubCloud.Provider
 
         [Persisted]
         public string ZimbraClassOfService;
-
-        [Persisted]
-        public int ZimbraMinRequiredPasswordLength;
-
-        [Persisted]
-        public int ZimbraMinRequiredNonAlphanumericCharacters;
         
         public static ZimbraProviderSettings Current
         {
@@ -99,12 +93,13 @@ namespace ClubCloud.Provider
                         child = parent.GetChild<ZimbraProviderSettings>(ZimbraPersistedObjectName);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     child = new ZimbraProviderSettings();
                     child.ZimbraServer = "mail.clubcloud.nl";
                     child.ZimbraUserName = "admin@clubcloud.nl";
                     child.ZimbraPassword = "rjm557308453!";
+                    child.ZimbraClassOfService = "clubcloud";
                 }
 
                 try

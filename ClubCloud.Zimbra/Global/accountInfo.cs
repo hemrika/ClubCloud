@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Global
 {
-    public partial class accountInfo : adminObjectInfo
+    public partial class accountInfo : adminObjectInfoN
     {
 
         private System.Nullable<bool> _isExternal;
@@ -35,7 +35,7 @@ namespace ClubCloud.Zimbra.Global
                 }
             }
         }
-
+        /*
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
         public bool isExternalSpecified
@@ -52,5 +52,6 @@ namespace ClubCloud.Zimbra.Global
                 }
             }
         }
+        */
     }
 }

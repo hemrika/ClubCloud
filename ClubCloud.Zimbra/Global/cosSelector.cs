@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Global
 {
-    public partial class cosSelector : System.ComponentModel.INotifyPropertyChanged
+    public partial class cosSelector : ZimbraMessage
     {
 
         private System.Nullable<cosBy> _by;
@@ -15,6 +16,7 @@ namespace ClubCloud.Zimbra.Global
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [MessageBodyMember]
         public cosBy by
         {
             get
@@ -72,17 +74,6 @@ namespace ClubCloud.Zimbra.Global
                     this._value = value;
                     this.OnPropertyChanged("Value");
                 }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }

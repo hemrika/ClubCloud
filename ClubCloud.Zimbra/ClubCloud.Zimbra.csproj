@@ -56,7 +56,7 @@
     <Compile Include="Account\changePasswordRequest.cs" />
     <Compile Include="Account\changePasswordResponse.cs" />
     <Compile Include="Account\GetAccountInfoRequest.cs" />
-    <Compile Include="Account\getAccountInfoResponse.cs" />
+    <Compile Include="Account\GetAccountInfoResponse.cs" />
     <Compile Include="Account\getInfoRequest.cs" />
     <Compile Include="Account\GetInfoResponse.cs" />
     <Compile Include="Account\getVersionInfoRequest.cs" />
@@ -70,6 +70,10 @@
     <Compile Include="Administration\CreateDomainRequest.cs" />
     <Compile Include="Administration\CreateDomainResponse.cs" />
     <Compile Include="Administration\Extended\zimbraAdminExt.cs" />
+    <Compile Include="Administration\GetAccountInfoRequest.cs" />
+    <Compile Include="Administration\GetAccountInfoResponse.cs" />
+    <Compile Include="Administration\GetAccountRequest.cs" />
+    <Compile Include="Administration\GetAccountResponse.cs" />
     <Compile Include="Administration\GetAllDomainsRequest.cs" />
     <Compile Include="Administration\GetAllDomainsResponse.cs" />
     <Compile Include="Administration\GetCosRequest.cs" />
@@ -90,6 +94,7 @@
     <Compile Include="Global\accountInfo.cs" />
     <Compile Include="Global\accountSelector.cs" />
     <Compile Include="Global\adminAttrsImpl.cs" />
+    <Compile Include="Global\adminObjectInfoN.cs" />
     <Compile Include="Global\adminObjectInfo.cs" />
     <Compile Include="Global\aliasInfo.cs" />
     <Compile Include="Global\attr.cs" />

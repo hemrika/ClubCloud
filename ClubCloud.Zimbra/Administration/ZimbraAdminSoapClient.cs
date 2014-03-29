@@ -41,6 +41,16 @@ namespace ClubCloud.Zimbra.Administration
             return base.Channel.GetAllDomainsRequest(request);
         }
 
+        public GetAccountInfoResponse GetAccountInfoRequest(GetAccountInfoRequest request)
+        {
+            return base.Channel.GetAccountInfoRequest(request);
+        }
+
+        public GetAccountResponse GetAccountRequest(GetAccountRequest request)
+        {
+            return base.Channel.GetAccountRequest(request);
+        }
+
         public ModifyDomainResponse ModifyDomainRequest(ModifyDomainRequest request)
         {
             return base.Channel.ModifyDomainRequest(request);
