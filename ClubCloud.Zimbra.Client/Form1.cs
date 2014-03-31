@@ -18,6 +18,7 @@ using ClubCloud.Zimbra.Global;
 using ClubCloud.Zimbra.Administration;
 using System.ServiceModel;
 using System.Reflection;
+using System.Collections;
 
 namespace ClubCloud.Zimbra.Client
 {
@@ -25,12 +26,42 @@ namespace ClubCloud.Zimbra.Client
     {
         private static ZimbraServer server;
 
-        public Form1()
+        private List<string> _zimbraPasswordMaxLength;
+
+        public List<string> zimbraPasswordMaxLength
+        {
+            get {
+                if(_zimbraPasswordMaxLength == null)
+                {
+                    _zimbraPasswordMaxLength = new List<string>();
+                }
+                return _zimbraPasswordMaxLength; 
+            }
+            set { _zimbraPasswordMaxLength = value; }
+        }
+
+        private string _zimbraPasswordMinLength;
+
+        public string zimbraPasswordMinLength
+        {
+            get { return _zimbraPasswordMinLength; }
+            set { _zimbraPasswordMinLength = value; }
+        }
+
+            public Form1()
         {
             InitializeComponent();
             server = new ZimbraServer("mail.clubcloud.nl");//("info@clubcloud.nl", "rjm557308453!", "mail.clubcloud.nl");
             server.PropertyChanged += server_PropertyChanged;
+            try
+            {
             server.Authenticate("admin@clubcloud.nl", "rjm557308453!",true);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -65,12 +96,12 @@ namespace ClubCloud.Zimbra.Client
                 }
                 */
 
-                Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "12073385@clubcloud.nl" }, applyCos = true};//, attrs = "displayName" };
-                Zimbra.Administration.GetAccountResponse response = server.Message(request) as Zimbra.Administration.GetAccountResponse;
-                if (response != null)
-                {
-                    string name = response.account.a[0].Value;
-                }
+                //Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "12073385@clubcloud.nl" }, applyCos = true};//, attrs = "displayName" };
+                //Zimbra.Administration.GetAccountResponse response = server.Message(request) as Zimbra.Administration.GetAccountResponse;
+                //if (response != null)
+                //{
+                //    string name = response.account.a[0].Value;
+                //}
 
                 //Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "info@clubcloud.nl" } };
                 //Zimbra.Administration.GetAccountInfoResponse response = server.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
@@ -81,14 +112,36 @@ namespace ClubCloud.Zimbra.Client
 
                 //zimbraPasswordMaxLength,zimbraPasswordMinLength,zimbraPasswordMinLowerCaseChars,zimbraPasswordMinAlphaChars,zimbraPasswordMinNumericChars,zimbraPasswordMinDigitsOrPuncs,zimbraPasswordMinPunctuationChars,zimbraPasswordMinUpperCaseChars,zimbraPasswordAllowedChars,zimbraPasswordAllowedPunctuationChars
                 //zimbraPasswordLockoutDuration,zimbraPasswordLockoutEnabled,zimbraPasswordLockoutMaxFailures
-                //GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = "clubcloud" }, attrs = "zimbraPasswordMaxLength,zimbraPasswordMinLength,zimbraPasswordMinLowerCaseChars,zimbraPasswordMinAlphaChars,zimbraPasswordMinNumericChars,zimbraPasswordMinDigitsOrPuncs,zimbraPasswordMinPunctuationChars,zimbraPasswordMinUpperCaseChars,zimbraPasswordAllowedChars,zimbraPasswordAllowedPunctuationChars" };
-                //GetCosResponse response = server.Message(request) as GetCosResponse;
+                GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = "clubcloud" }, attrs = "zimbraPasswordMaxLength,zimbraPasswordMinLength" };
+                GetCosResponse response = server.Message(request) as GetCosResponse;
 
-                //foreach (var item in response.cos.a)
-                //{
-                //    PropertyInfo propertyInfo = this.GetType().GetProperty(item.name);
-                //    propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
-                //}
+                foreach (var item in response.cos.a)
+                {
+                    PropertyInfo propertyInfo = this.GetType().GetProperty(item.name);
+                    Type t = propertyInfo.PropertyType;
+
+                    if (propertyInfo.PropertyType == typeof(string))// || t == typeof(Array))
+                    {
+                        propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                    }
+                    else
+                    {
+                        IList attr = (IList)propertyInfo.GetValue(this);
+                        if (attr != null)
+                        {
+                            attr.Add("string");
+                            if (attr.Contains("string"))
+                            {
+                                Console.Write("string found");
+                            }
+
+                            propertyInfo.SetValue(this, attr);
+                            Console.Write(this.zimbraPasswordMaxLength);
+
+                        }
+                    }
+                    //propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                }
 
                 //int z = zimbraPasswordMinLength;
                 //string name = response.cos.name;

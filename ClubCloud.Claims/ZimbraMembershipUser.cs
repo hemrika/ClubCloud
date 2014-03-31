@@ -89,15 +89,38 @@ namespace ClubCloud.Provider
         }
 
         //<a n="zimbraMailAlias">rutger.hemrika@clubcloud.nl</a>
-        private string _zimbraMailAlias;
+        private List<string> _zimbraMail;
 
-        public string zimbraMailAlias
+        public List<string> zimbraMail
         {
-            get { return _zimbraMailAlias; }
+            get
+            {
+                if (_zimbraMail == null)
+                {
+                    _zimbraMail = new List<string>();
+                }
+                return _zimbraMail;
+            }
+            set { _zimbraMail = value; }
+        }
+
+        //<a n="zimbraMailAlias">rutger.hemrika@clubcloud.nl</a>
+        private List<string> _zimbraMailAlias;
+
+        public List<string> zimbraMailAlias
+        {
+            get
+            {
+                if (_zimbraMailAlias == null)
+                {
+                    _zimbraMailAlias = new List<string>();
+                }
+                return _zimbraMailAlias;
+            }
             set { _zimbraMailAlias = value; }
         }
 
-        public string EmailAlias
+        public List<string> EmailAlias
         {
             get
             {
@@ -406,18 +429,6 @@ namespace ClubCloud.Provider
         <a n="company">Hemrika</a>
         */
 
-        /*
-        <a n="mail">info@clubcloud.nl</a>
-        <a n="mail">hostmaster@clubcloud.nl</a>
-        <a n="mail">webmaster@clubcloud.nl</a>
-        <a n="mail">root@clubcloud.nl</a>
-        <a n="mail">hemrika@clubcloud.nl</a>
-                
-        <a n="zimbraMailAlias">hostmaster@clubcloud.nl</a>
-        <a n="zimbraMailAlias">webmaster@clubcloud.nl</a>
-        <a n="zimbraMailAlias">root@clubcloud.nl</a>
-        <a n="zimbraMailAlias">hemrika@clubcloud.nl</a>        
-        */
         #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.SharePoint.Administration;
+using Microsoft.SharePoint.Administration.Backup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace ClubCloud.Provider
 {
     [GuidAttribute("2F657B81-3710-41F5-B4B9-4A2B3522B897")]
-    internal class ZimbraProviderSettings : SPPersistedObject
+    internal class ZimbraProviderSettings : SPPersistedObject, IBackupRestore
     {
 
         public const string ZimbraPersistedObjectName = "ZimbraProviderSettings";
@@ -132,5 +133,82 @@ namespace ClubCloud.Provider
             {
             }
         }
+
+        #region Backup
+        public void AddBackupObjects(SPBackupRestoreObject parent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CanRenameOnRestore
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool CanSelectForBackup
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool CanSelectForRestore
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public ulong DiskSizeRequired
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool OnAbort(object sender, SPBackupRestoreInformation args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool OnBackup(object sender, SPBackupInformation args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool OnBackupComplete(object sender, SPBackupInformation args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool OnPostRestore(object sender, SPRestoreInformation args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool OnPreRestore(object sender, SPRestoreInformation args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool OnPrepareBackup(object sender, SPBackupInformation args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool OnRestore(object sender, SPRestoreInformation args)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

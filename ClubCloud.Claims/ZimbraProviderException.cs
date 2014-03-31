@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration.Provider;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace ClubCloud.Provider
 {
     [Serializable]
-    public class ZimbraException : Exception
+    public class ZimbraException : ProviderException
     {
         public ZimbraException() { }
         public ZimbraException(string message) : base(message) { }
@@ -19,7 +20,7 @@ namespace ClubCloud.Provider
     }
 
     [Serializable]
-    public class ZimbraSettingsException : Exception
+    public class ZimbraSettingsException : ZimbraException
     {
         public ZimbraSettingsException() { }
         public ZimbraSettingsException(string message) : base(message) { }

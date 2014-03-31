@@ -2,6 +2,7 @@
 using ClubCloud.Zimbra.Global;
 using Microsoft.SharePoint.Administration;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration.Provider;
 using System.Linq;
@@ -157,7 +158,7 @@ namespace ClubCloud.Provider
         {
             get
             {
-                return "Zimbra MembershipProvider";
+                return "Zimbra Membership Provider";
             }
         }
 
@@ -657,9 +658,19 @@ namespace ClubCloud.Provider
                         PropertyInfo propertyInfo = tuser.GetProperty(item.name);
                         if (propertyInfo != null)
                         {
-                            Type type = propertyInfo.PropertyType;
-
-                            propertyInfo.SetValue(user, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                            if (propertyInfo.PropertyType == typeof(string))
+                            {
+                                propertyInfo.SetValue(item, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                            }
+                            else
+                            {
+                                IList attr = (IList)propertyInfo.GetValue(item);
+                                if (attr != null)
+                                {
+                                    attr.Add(Convert.ChangeType(item.Value, propertyInfo.PropertyType));
+                                    propertyInfo.SetValue(this, attr);
+                                }
+                            }
                         }
                     }
                     catch
@@ -699,11 +710,19 @@ namespace ClubCloud.Provider
                         PropertyInfo propertyInfo = tuser.GetProperty(item.name);
                         if (propertyInfo != null)
                         {
-                            Type type = propertyInfo.PropertyType;
-
-                            propertyInfo.SetValue(user, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
-
-                            //propertyInfo.SetValue(user, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                            if (propertyInfo.PropertyType == typeof(string))
+                            {
+                                propertyInfo.SetValue(item, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                            }
+                            else
+                            {
+                                IList attr = (IList)propertyInfo.GetValue(item);
+                                if (attr != null)
+                                {
+                                    attr.Add(Convert.ChangeType(item.Value,propertyInfo.PropertyType));
+                                    propertyInfo.SetValue(this, attr);
+                                }
+                            }
                         }
                     }
                     catch
@@ -955,7 +974,7 @@ namespace ClubCloud.Provider
         {
             try
             {
-                SPDiagnosticsCategory category = new SPDiagnosticsCategory("Zimbra MembershipProvider", traceSeverity, eventSeverity);
+                SPDiagnosticsCategory category = new SPDiagnosticsCategory("Zimbra Membership Provider", traceSeverity, eventSeverity);
                 SPDiagnosticsService ds = SPDiagnosticsService.Local;
                 ds.WriteTrace(0, category, traceSeverity, message);
             }
