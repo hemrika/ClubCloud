@@ -37,7 +37,35 @@ namespace ClubCloud.Zimbra.Client
         {
             try
             {
-                Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "hemrika@clubcloud.nl" }, applyCos = false, attrs = "displayName" };
+                /*
+                string zimbraId = null;
+
+                Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "info@clubcloud.nl" } };
+                Zimbra.Administration.GetAccountInfoResponse response = server.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
+                if (response != null)
+                {
+
+                    foreach (var item in response.a)
+                    {
+                        if (item.name == "zimbraId")
+                        {
+                            zimbraId = item.Value;
+                        }
+                    }
+                }
+                if (!string.IsNullOrWhiteSpace(zimbraId))
+                {
+                    List<attrN> password = new List<attrN>();
+                    password.Add(new attrN { name = "userPassword", Value = "rjm557308453!" });
+
+                    Zimbra.Administration.ModifyAccountRequest modify = new Zimbra.Administration.ModifyAccountRequest { id = zimbraId, a = password };
+                    Zimbra.Administration.ModifyAccountResponse modified = server.Message(modify) as Zimbra.Administration.ModifyAccountResponse;
+
+                    string id = modified.account.id;
+                }
+                */
+
+                Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "12073385@clubcloud.nl" }, applyCos = true};//, attrs = "displayName" };
                 Zimbra.Administration.GetAccountResponse response = server.Message(request) as Zimbra.Administration.GetAccountResponse;
                 if (response != null)
                 {

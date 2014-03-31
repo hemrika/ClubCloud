@@ -65,6 +65,7 @@
     <Compile Include="ZimbraDiagnosticService.cs" />
     <Compile Include="ZimbraMembershipProvider.cs" />
     <Compile Include="ZimbraMembershipUser.cs" />
+    <Compile Include="ZimbraMembershipUserCollection.cs" />
     <Compile Include="ZimbraProviderException.cs" />
     <Compile Include="ZimbraProviderSettings.cs" />
     <Compile Include="ZimbraRoleProvider.cs" />

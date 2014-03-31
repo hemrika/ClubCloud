@@ -82,6 +82,8 @@
     <Compile Include="Administration\getDomainResponse.cs" />
     <Compile Include="Administration\GetVersionInfoRequest.cs" />
     <Compile Include="Administration\GetVersionInfoResponse.cs" />
+    <Compile Include="Administration\ModifyAccountRequest.cs" />
+    <Compile Include="Administration\ModifyAccountResponse.cs" />
     <Compile Include="Administration\modifyDomainRequest.cs" />
     <Compile Include="Administration\modifyDomainResponse.cs" />
     <Compile Include="Administration\modifyUCServiceRequest.cs" />
@@ -134,6 +136,7 @@
     <Compile Include="Service\ZimbraHeaderContext.cs" />
     <Compile Include="Synchronization\zimbraSync.cs" />
     <Compile Include="Voice\zimbraVoice.cs" />
+    <Compile Include="wsdl\soap.cs" />
     <Compile Include="ZimbraMessage.cs" />
     <Compile Include="ZimbraServer.cs" />
   </ItemGroup>

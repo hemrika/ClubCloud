@@ -1055,37 +1055,7 @@ namespace ClubCloud.Zimbra.Administration
         }
     }
 
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("ModifyAccountRequest", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "modifyAccountRequest", Namespace = "urn:zimbraAdmin")]
-    public partial class modifyAccountRequest : adminAttrsImpl
-    {
 
-        private string _id;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                if (((this._id == null)
-                            || (_id.Equals(value) != true)))
-                {
-                    this._id = value;
-                    this.OnPropertyChanged("id");
-                }
-            }
-        }
-    }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
@@ -40948,53 +40918,7 @@ namespace ClubCloud.Zimbra.Administration
         }
     }
 
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("ModifyAccountResponse", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "modifyAccountResponse", Namespace = "urn:zimbraAdmin")]
-    public partial class modifyAccountResponse : System.ComponentModel.INotifyPropertyChanged
-    {
 
-        private accountInfo _account;
-
-        public modifyAccountResponse()
-        {
-            this._account = new accountInfo();
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public accountInfo account
-        {
-            get
-            {
-                return this._account;
-            }
-            set
-            {
-                if (((this._account == null)
-                            || (_account.Equals(value) != true)))
-                {
-                    this._account = value;
-                    this.OnPropertyChanged("account");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
