@@ -68,6 +68,143 @@ namespace ClubCloud.Zimbra.Client
         {
             try
             {
+                
+                /*
+                GetAccountMembershipRequest request = new GetAccountMembershipRequest { account = new accountSelector { by = accountBy.Name, Value = "12073385@clubcloud.nl" } };
+                GetAccountMembershipResponse response = server.Message(request) as GetAccountMembershipResponse;
+
+                List<Global.dlInfo> dls = response.dl;
+                foreach (Global.dlInfo dl in dls)
+                {
+                    string dl_id = dl.id;
+
+                    GetDistributionListRequest dlrequest = new GetDistributionListRequest { dl = new Global.distributionListSelector { by = Global.distributionListBy.id, Value = dl_id }, };
+                    GetDistributionListResponse dlresponse = server.Message(dlrequest) as GetDistributionListResponse;
+
+                    List<string> members = dlresponse.dl.dlm;
+                    int number = members.Count;
+
+                    
+                    List<Global.attrN> attributes = dlresponse.dl.a;
+                    string displayName = dlresponse.dl.name;
+                    foreach (Global.attrN attr in attributes)
+                    {
+                        if (attr.name == "displayName")
+                        {
+                            displayName = attr.Value;
+                            break;
+                        }
+                    }
+                    displayName = displayName.ToLower();
+                    
+                    string name = dl.name;
+
+                }
+                */
+                
+                StringBuilder returnUrl = new StringBuilder();
+                string url = "http://www.clubcloud.nl/pages/default.aspx";
+                Uri uri = new Uri(url);
+                if(uri.HostNameType == UriHostNameType.Dns)
+                {
+                    string[] parts = uri.DnsSafeHost.Split(new char[] { '.' });
+                    if (parts.Length > 0)
+                    {
+                        if(parts.Length == 2)
+                        {
+                            returnUrl.Append(parts[0] + "." + parts[1]);
+                        }
+
+                        if (parts.Length == 3)
+                        {
+                            if ((parts[1].ToLower() == "clubcloud") && (parts[0].ToLower() != "www"))
+                            {
+                                returnUrl.Append(parts[0] + "." + parts[2]);
+                            }
+                            else
+                            {
+                                returnUrl.Append(parts[1] + "." + parts[2]);
+                            }
+                        }
+                    }
+
+                }
+
+                List<string> users = new List<string>();
+
+                SearchDirectoryRequest srequest = new SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = returnUrl.ToString(), limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts", attrs = "displayName,zimbraId,zimbraAliasTargetId,cn,sn,zimbraMailHost,uid,zimbraCOSId,zimbraAccountStatus,zimbraLastLogonTimestamp,description,zimbraIsSystemAccount,zimbraIsDelegatedAdminAccount,zimbraIsAdminAccount,zimbraIsSystemResource,zimbraAuthTokenValidityValue,zimbraIsExternalVirtualAccount,zimbraMailStatus,zimbraIsAdminGroup,zimbraCalResType,zimbraDomainType,zimbraDomainName,zimbraDomainStatus" };
+                srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", textBox1.Text);
+
+                SearchDirectoryResponse sresponse = server.Message(srequest) as SearchDirectoryResponse;
+                List<accountInfo> accounts = sresponse.Items.ConvertAll<accountInfo>(delegate (object o){return o as accountInfo;});
+
+                if (accounts.Count > 0)
+                {
+                    string dl_id = null;
+                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = returnUrl.ToString() } };
+                    Zimbra.Administration.GetAllDistributionListsResponse response = server.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                    if (response != null)
+                    {
+                        foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                        {
+                            if (dl.dynamic)
+                            {
+                                List<Zimbra.Global.attrN> attributes = dl.a;
+                                string displayName = dl.id;
+                                foreach (Zimbra.Global.attrN attr in attributes)
+                                {
+                                    if (attr.name == "displayName" && attr.Value == "Leden")
+                                    {
+                                        dl_id = dl.id;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(dl_id))
+                    {
+                        Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.distributionListSelector { by = Zimbra.Global.distributionListBy.id, Value = dl_id } };
+                        Zimbra.Administration.GetDistributionListResponse dlresponse = server.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
+
+                        if (dlresponse != null)
+                        {
+                            foreach (string member in dlresponse.dl.dlm)
+                            {
+                                accountInfo account = accounts.Find(a => a.name.Equals(member));
+                                if (account != null)
+                                {
+                                    users.Add(account.a.Single<attrN>(a => a.name == "displayName").Value);
+                                }
+                            }
+                        }
+                    }
+                }
+                /*
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = returnUrl.ToString() } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = server.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                foreach (ClubCloud.Zimbra.Global.distributionListInfo dl in response.dl)
+                {
+                    List<Global.attrN> attributes = dl.a;
+                    List<string> members = dl.dlm;
+
+                    string displayName = dl.name;
+                    foreach (Global.attrN attr in attributes)
+                    {
+                        if (attr.name == "displayName")
+                        {
+                            displayName = attr.Value;
+                            break;
+                        }
+                    }
+                    displayName = displayName.ToLower();
+                    string name = dl.name;
+                    
+                }
+                */               
                 /*
                 string zimbraId = null;
 
@@ -112,36 +249,37 @@ namespace ClubCloud.Zimbra.Client
 
                 //zimbraPasswordMaxLength,zimbraPasswordMinLength,zimbraPasswordMinLowerCaseChars,zimbraPasswordMinAlphaChars,zimbraPasswordMinNumericChars,zimbraPasswordMinDigitsOrPuncs,zimbraPasswordMinPunctuationChars,zimbraPasswordMinUpperCaseChars,zimbraPasswordAllowedChars,zimbraPasswordAllowedPunctuationChars
                 //zimbraPasswordLockoutDuration,zimbraPasswordLockoutEnabled,zimbraPasswordLockoutMaxFailures
-                GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = "clubcloud" }, attrs = "zimbraPasswordMaxLength,zimbraPasswordMinLength" };
-                GetCosResponse response = server.Message(request) as GetCosResponse;
 
-                foreach (var item in response.cos.a)
-                {
-                    PropertyInfo propertyInfo = this.GetType().GetProperty(item.name);
-                    Type t = propertyInfo.PropertyType;
+                //GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = "clubcloud" }, attrs = "zimbraPasswordMaxLength,zimbraPasswordMinLength" };
+                //GetCosResponse response = server.Message(request) as GetCosResponse;
 
-                    if (propertyInfo.PropertyType == typeof(string))// || t == typeof(Array))
-                    {
-                        propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
-                    }
-                    else
-                    {
-                        IList attr = (IList)propertyInfo.GetValue(this);
-                        if (attr != null)
-                        {
-                            attr.Add("string");
-                            if (attr.Contains("string"))
-                            {
-                                Console.Write("string found");
-                            }
+                //foreach (var item in response.cos.a)
+                //{
+                //    PropertyInfo propertyInfo = this.GetType().GetProperty(item.name);
+                //    Type t = propertyInfo.PropertyType;
 
-                            propertyInfo.SetValue(this, attr);
-                            Console.Write(this.zimbraPasswordMaxLength);
+                //    if (propertyInfo.PropertyType == typeof(string))// || t == typeof(Array))
+                //    {
+                //        propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                //    }
+                //    else
+                //    {
+                //        IList attr = (IList)propertyInfo.GetValue(this);
+                //        if (attr != null)
+                //        {
+                //            attr.Add("string");
+                //            if (attr.Contains("string"))
+                //            {
+                //                Console.Write("string found");
+                //            }
 
-                        }
-                    }
-                    //propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
-                }
+                //            propertyInfo.SetValue(this, attr);
+                //            Console.Write(this.zimbraPasswordMaxLength);
+
+                //        }
+                //    }
+                //    //propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                //}
 
                 //int z = zimbraPasswordMinLength;
                 //string name = response.cos.name;

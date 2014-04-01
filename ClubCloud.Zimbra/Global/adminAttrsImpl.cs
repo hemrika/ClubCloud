@@ -22,7 +22,7 @@ namespace ClubCloud.Zimbra.Global
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ModifyAccountRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(networkInformation))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(smimeConfigInfo))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getDistributionListRequest))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(GetDistributionListRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getDataSourcesRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getConfigResponse))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getAllConfigResponse))]

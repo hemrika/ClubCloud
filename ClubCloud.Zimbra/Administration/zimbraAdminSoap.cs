@@ -49,6 +49,22 @@ namespace ClubCloud.Zimbra.Administration
         [System.ServiceModel.OperationContractAttribute(Name = "GetCosRequest", Action = "AdminGetCosRequestMessage", ReplyAction = "AdminGetCosResponseMessage")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         GetCosResponse GetCosRequest(GetCosRequest request);
+
+        [System.ServiceModel.OperationContractAttribute(Name = "GetAllDistributionListsRequest", Action = "AdminGetAllDistributionListsRequest", ReplyAction = "AdminGetAllDistributionListsResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        GetAllDistributionListsResponse GetAllDistributionListsRequest(GetAllDistributionListsRequest request);
+
+        [System.ServiceModel.OperationContractAttribute(Name = "GetAccountMembershipRequest", Action = "AdminGetAccountMembershipRequest", ReplyAction = "AdminGetAccountMembershipResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        GetAccountMembershipResponse GetAccountMembershipRequest(GetAccountMembershipRequest request);
+
+        [System.ServiceModel.OperationContractAttribute(Name = "GetDistributionListRequest", Action = "AdminGetDistributionListRequest", ReplyAction = "AdminGetDistributionListResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        GetDistributionListResponse GetDistributionListRequest(GetDistributionListRequest request);
+
+        [System.ServiceModel.OperationContractAttribute(Name = "SearchDirectoryRequest", Action = "AdminSearchDirectoryRequest", ReplyAction = "AdminSearchDirectoryResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        SearchDirectoryResponse SearchDirectoryRequest(SearchDirectoryRequest request);
     }
     
 }

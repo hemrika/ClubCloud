@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Global
 {
+    
     /*
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(searchDirectoryRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(searchCalendarResourcesRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(searchAutoProvDirectoryRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getZimletRequest))]
@@ -17,6 +17,7 @@ namespace ClubCloud.Zimbra.Global
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getUCServiceRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(getServerRequest))]
     */
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SearchDirectoryRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(GetDomainRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(GetCosRequest))]
     /*

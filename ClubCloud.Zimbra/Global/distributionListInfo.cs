@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Global
 {
-    public partial class distributionListInfo : adminObjectInfo
+    public partial class distributionListInfo : adminObjectInfoN
     {
-
         private List<string> _dlm;
 
         private List<granteeInfo> _owners;
@@ -85,6 +85,7 @@ namespace ClubCloud.Zimbra.Global
             }
         }
 
+        /*
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
         public bool dynamicSpecified
@@ -101,5 +102,6 @@ namespace ClubCloud.Zimbra.Global
                 }
             }
         }
+        */
     }
 }

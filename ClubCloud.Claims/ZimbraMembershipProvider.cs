@@ -21,6 +21,8 @@ namespace ClubCloud.Provider
 {
     public class ZimbraMembershipProvider : System.Web.Security.MembershipProvider
     {
+        #region properties
+
         private bool Initialized;
         private string applicationName;
         private Zimbra.ZimbraServer zimbraServer;
@@ -139,7 +141,8 @@ namespace ClubCloud.Provider
             set { _zimbraPasswordLockoutFailureLifetime = value; }
         }
 
-        
+        #endregion
+
         #region Initialisation
         protected ZimbraMembershipProvider() : base()
         { 
@@ -337,7 +340,8 @@ namespace ClubCloud.Provider
                     Zimbra.Account.ChangePasswordResponse response = clientServer.Message(request) as Zimbra.Account.ChangePasswordResponse;
                     string AuthToken = response.authToken;
                     ZimbraCookie(AuthToken);
-                    changed = true;                    
+                    changed = true;               
+                    //TODO send message
                 }
             }
             catch { }
@@ -421,6 +425,7 @@ namespace ClubCloud.Provider
                 password.Add(new attrN { name = "userPassword", Value = resetPassword });
                 Zimbra.Administration.ModifyAccountRequest modify = new Zimbra.Administration.ModifyAccountRequest { id = zimbraId, a = password };
                 Zimbra.Administration.ModifyAccountResponse modified = zimbraServer.Message(modify) as Zimbra.Administration.ModifyAccountResponse;
+                //TODO send message
             }
             else
             {
@@ -746,7 +751,8 @@ namespace ClubCloud.Provider
             Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
             if (response != null)
             {
-                UserName = response.account.a[0].Value;
+                UserName = response.a.Single<attrN>(a => a.name == "displayName").Value;
+                //UserName = response.account.a[0].Value;
             }
             return UserName;
         }

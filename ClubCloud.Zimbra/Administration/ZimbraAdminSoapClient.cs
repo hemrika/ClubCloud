@@ -73,5 +73,25 @@ namespace ClubCloud.Zimbra.Administration
         {
             return base.Channel.GetCosRequest(request);
         }
+
+        public GetAllDistributionListsResponse GetAllDistributionListsRequest(GetAllDistributionListsRequest request)
+        {
+            return base.Channel.GetAllDistributionListsRequest(request);
+        }
+
+        public GetAccountMembershipResponse GetAccountMembershipRequest(GetAccountMembershipRequest request)
+        {
+            return base.Channel.GetAccountMembershipRequest(request);
+        }
+
+        public GetDistributionListResponse GetDistributionListRequest(GetDistributionListRequest request)
+        {
+            return base.Channel.GetDistributionListRequest(request);
+        }
+
+        public SearchDirectoryResponse SearchDirectoryRequest(SearchDirectoryRequest request)
+        {
+            return base.Channel.SearchDirectoryRequest(request);
+        }
     }
 }

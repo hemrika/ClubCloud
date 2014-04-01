@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Global
 {
-    public partial class dlInfo : adminObjectInfo
+    public partial class dlInfo : adminObjectInfoN
     {
 
         private System.Nullable<bool> _dynamic;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint.Administration.Claims;
+using Microsoft.SharePoint.WebControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,11 @@ namespace ClubCloud.Provider
     {
         public ZimbraClaimProvider(string displayName) : base(displayName)
         { 
-        
+        }
+
+        public override string Name
+        {
+            get { return "ZimbraClaimProvider"; }
         }
 
         protected override SPClaim CreateClaimForArguments(SPClaimArguments arguments)
@@ -60,6 +65,7 @@ namespace ClubCloud.Provider
         protected override void FillClaimTypes(List<string> claimTypes)
         {
             throw new NotImplementedException();
+
         }
 
         protected override void FillClaimValueTypes(List<string> claimValueTypes)
@@ -74,7 +80,13 @@ namespace ClubCloud.Provider
 
         protected override void FillEntityTypes(List<string> entityTypes)
         {
-            throw new NotImplementedException();
+            if (entityTypes == null)
+                throw new ArgumentNullException(Name + ":Invalid Entity Types");
+
+            entityTypes.Add(SPClaimEntityTypes.FormsRole);
+            entityTypes.Add(SPClaimEntityTypes.DistributionList);
+            entityTypes.Add(SPClaimEntityTypes.SecurityGroup);
+            entityTypes.Add(SPClaimEntityTypes.User);
         }
 
         protected override void FillHierarchy(Uri context, string[] entityTypes, string hierarchyNodeID, int numberOfLevels, Microsoft.SharePoint.WebControls.SPProviderHierarchyTree hierarchy)
@@ -94,7 +106,19 @@ namespace ClubCloud.Provider
 
         protected override void FillSchema(Microsoft.SharePoint.WebControls.SPProviderSchema schema)
         {
-            throw new NotImplementedException();
+            if (schema == null)
+                throw new ArgumentNullException(Name + ":Invalid Schema Provider");
+
+            schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.AccountName, "Account Naam", SPSchemaElementType.Both));
+            schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.Department, "Group Naam", SPSchemaElementType.Both));
+            schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.DisplayName, "Display Naam", SPSchemaElementType.Both));
+            schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.Email, "Email", SPSchemaElementType.Both));
+            schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.Email, "Email Alias", SPSchemaElementType.Both));
+            schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.MobilePhone, "Mobiel", SPSchemaElementType.Both));
+            schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.PrincipalType, "zimbraId", SPSchemaElementType.Both));
+            schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.SharePointGroupId, "Group", SPSchemaElementType.Both));
+            schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.UserId, "uid", SPSchemaElementType.Both));
+            schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.WorkPhone, "Telefoon", SPSchemaElementType.Both));
         }
 
         protected override void FillSearch(Uri context, string[] entityTypes, string searchPattern, string hierarchyNodeID, int maxCount, Microsoft.SharePoint.WebControls.SPProviderHierarchyTree searchTree)
@@ -102,10 +126,6 @@ namespace ClubCloud.Provider
             throw new NotImplementedException();
         }
 
-        public override string Name
-        {
-            get { throw new NotImplementedException(); }
-        }
 
         public override bool SupportsEntityInformation
         {
