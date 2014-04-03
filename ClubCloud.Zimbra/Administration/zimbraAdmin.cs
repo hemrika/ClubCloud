@@ -1422,108 +1422,9 @@ namespace ClubCloud.Zimbra.Administration
 
 
 
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "serverSelector", Namespace = "urn:zimbraAdmin")]
-    public partial class serverSelector : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private System.Nullable<serverBy> _by;
-
-        private string _value;
 
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public serverBy by
-        {
-            get
-            {
-                if (this._by.HasValue)
-                {
-                    return this._by.Value;
-                }
-                else
-                {
-                    return default(serverBy);
-                }
-            }
-            set
-            {
-                if ((_by.Equals(value) != true))
-                {
-                    this._by = value;
-                    this.OnPropertyChanged("by");
-                }
-            }
-        }
 
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool bySpecified
-        {
-            get
-            {
-                return this._by.HasValue;
-            }
-            set
-            {
-                if (value == false)
-                {
-                    this._by = null;
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this._value;
-            }
-            set
-            {
-                if (((this._value == null)
-                            || (_value.Equals(value) != true)))
-                {
-                    this._value = value;
-                    this.OnPropertyChanged("Value");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    public enum serverBy
-    {
-
-        /// <remarks/>
-        id,
-
-        /// <remarks/>
-        name,
-
-        /// <remarks/>
-        serviceHostname,
-    }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
@@ -23583,74 +23484,7 @@ namespace ClubCloud.Zimbra.Administration
         }
     }
 
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getAllCalendarResourcesRequest))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("GetAllAccountsRequest", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "getAllAccountsRequest", Namespace = "urn:zimbraAdmin")]
-    public partial class getAllAccountsRequest : System.ComponentModel.INotifyPropertyChanged
-    {
 
-        private serverSelector _server;
-
-        private domainSelector _domain;
-
-        public getAllAccountsRequest()
-        {
-            this._domain = new domainSelector();
-            this._server = new serverSelector();
-        }
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public serverSelector server
-        {
-            get
-            {
-                return this._server;
-            }
-            set
-            {
-                if (((this._server == null)
-                            || (_server.Equals(value) != true)))
-                {
-                    this._server = value;
-                    this.OnPropertyChanged("server");
-                }
-            }
-        }
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public domainSelector domain
-        {
-            get
-            {
-                return this._domain;
-            }
-            set
-            {
-                if (((this._domain == null)
-                            || (_domain.Equals(value) != true)))
-                {
-                    this._domain = value;
-                    this.OnPropertyChanged("domain");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
@@ -23659,57 +23493,11 @@ namespace ClubCloud.Zimbra.Administration
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
     [System.Xml.Serialization.XmlRootAttribute("GetAllCalendarResourcesRequest", Namespace = "urn:zimbraAdmin", IsNullable = false)]
     [System.Runtime.Serialization.DataContractAttribute(Name = "getAllCalendarResourcesRequest", Namespace = "urn:zimbraAdmin")]
-    public partial class getAllCalendarResourcesRequest : getAllAccountsRequest
+    public partial class getAllCalendarResourcesRequest : GetAllAccountsRequest
     {
     }
 
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("GetAllAccountsResponse", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "getAllAccountsResponse", Namespace = "urn:zimbraAdmin")]
-    public partial class getAllAccountsResponse : System.ComponentModel.INotifyPropertyChanged
-    {
 
-        private List<accountInfo> _account;
-
-        public getAllAccountsResponse()
-        {
-            this._account = new List<accountInfo>();
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("account")]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<accountInfo> account
-        {
-            get
-            {
-                return this._account;
-            }
-            set
-            {
-                if (((this._account == null)
-                            || (_account.Equals(value) != true)))
-                {
-                    this._account = value;
-                    this.OnPropertyChanged("account");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]

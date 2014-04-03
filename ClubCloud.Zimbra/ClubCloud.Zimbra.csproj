@@ -41,9 +41,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +78,8 @@
     <Compile Include="Administration\GetAccountMembershipResponse.cs" />
     <Compile Include="Administration\GetAccountRequest.cs" />
     <Compile Include="Administration\GetAccountResponse.cs" />
+    <Compile Include="Administration\GetAllAccountsRequest.cs" />
+    <Compile Include="Administration\GetAllAccountsResponse.cs" />
     <Compile Include="Administration\GetAllDistributionListsRequest.cs" />
     <Compile Include="Administration\GetAllDistributionListsResponse.cs" />
     <Compile Include="Administration\GetAllDomainsRequest.cs" />
@@ -133,7 +137,9 @@
     <Compile Include="Global\namedValue.cs" />
     <Compile Include="Global\preAuth.cs" />
     <Compile Include="Global\pref.cs" />
+    <Compile Include="Global\serverBy.cs" />
     <Compile Include="Global\serverInfo.cs" />
+    <Compile Include="Global\serverSelector.cs" />
     <Compile Include="Global\session.cs" />
     <Compile Include="Global\targetType.cs" />
     <Compile Include="Global\ucServiceInfo.cs" />
@@ -144,8 +150,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Replication\zimbraRepl.cs" />
     <Compile Include="Service\ZimbraBinding.cs" />
+    <Compile Include="Service\ZimbraBindingElement.cs" />
+    <Compile Include="Service\ZimbraConfigurationHandler.cs" />
+    <Compile Include="Service\ZimbraConfigurationSection.cs" />
     <Compile Include="Service\ZimbraEndpointAddress.cs" />
     <Compile Include="Service\ZimbraHeaderContext.cs" />
+    <Compile Include="Service\ZimbraServerElement.cs" />
     <Compile Include="Synchronization\zimbraSync.cs" />
     <Compile Include="Voice\zimbraVoice.cs" />
     <Compile Include="wsdl\soap.cs" />

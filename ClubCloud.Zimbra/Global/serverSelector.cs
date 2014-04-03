@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Global
 {
-    public partial class domainSelector : System.ComponentModel.INotifyPropertyChanged
+    public partial class serverSelector : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private System.Nullable<domainBy> _by;
+        private System.Nullable<serverBy> _by;
 
         private string _value;
 
+
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public domainBy by
+        public serverBy by
         {
             get
             {
@@ -25,7 +26,7 @@ namespace ClubCloud.Zimbra.Global
                 }
                 else
                 {
-                    return default(domainBy);
+                    return default(serverBy);
                 }
             }
             set

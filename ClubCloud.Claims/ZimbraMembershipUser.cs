@@ -287,7 +287,7 @@ namespace ClubCloud.Provider
         {
             get
             {
-                return base.UserName;
+                return uid;////base.UserName;
             }
         }
 

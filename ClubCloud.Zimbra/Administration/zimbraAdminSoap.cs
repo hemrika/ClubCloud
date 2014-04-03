@@ -65,6 +65,12 @@ namespace ClubCloud.Zimbra.Administration
         [System.ServiceModel.OperationContractAttribute(Name = "SearchDirectoryRequest", Action = "AdminSearchDirectoryRequest", ReplyAction = "AdminSearchDirectoryResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         SearchDirectoryResponse SearchDirectoryRequest(SearchDirectoryRequest request);
+
+        [System.ServiceModel.OperationContractAttribute(Name = "GetAllAccountsRequest", Action = "AdminGetAllAccountsRequest", ReplyAction = "AdminGetAllAccountsResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        GetAllAccountsResponse GetAllAccountsRequest(GetAllAccountsRequest request);
+
+        
     }
     
 }

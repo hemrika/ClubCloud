@@ -51,11 +51,13 @@ namespace ClubCloud.Zimbra.Client
             public Form1()
         {
             InitializeComponent();
-            server = new ZimbraServer("mail.clubcloud.nl");//("info@clubcloud.nl", "rjm557308453!", "mail.clubcloud.nl");
+            server = new ZimbraServer();
+            //server = new ZimbraServer("mail.clubcloud.nl");
             server.PropertyChanged += server_PropertyChanged;
             try
             {
-            server.Authenticate("admin@clubcloud.nl", "rjm557308453!",true);
+                server.Authenticate();
+            //server.Authenticate("admin@clubcloud.nl", "rjm557308453!",true);
             }
             catch (Exception ex)
             {
@@ -68,7 +70,7 @@ namespace ClubCloud.Zimbra.Client
         {
             try
             {
-                
+
                 /*
                 GetAccountMembershipRequest request = new GetAccountMembershipRequest { account = new accountSelector { by = accountBy.Name, Value = "12073385@clubcloud.nl" } };
                 GetAccountMembershipResponse response = server.Message(request) as GetAccountMembershipResponse;
@@ -101,16 +103,16 @@ namespace ClubCloud.Zimbra.Client
 
                 }
                 */
-                
+
                 StringBuilder returnUrl = new StringBuilder();
                 string url = "http://www.clubcloud.nl/pages/default.aspx";
                 Uri uri = new Uri(url);
-                if(uri.HostNameType == UriHostNameType.Dns)
+                if (uri.HostNameType == UriHostNameType.Dns)
                 {
                     string[] parts = uri.DnsSafeHost.Split(new char[] { '.' });
                     if (parts.Length > 0)
                     {
-                        if(parts.Length == 2)
+                        if (parts.Length == 2)
                         {
                             returnUrl.Append(parts[0] + "." + parts[1]);
                         }
@@ -130,9 +132,18 @@ namespace ClubCloud.Zimbra.Client
 
                 }
 
+                GetAllAccountsRequest request = new GetAllAccountsRequest { domain = new domainSelector { by = domainBy.name, Value = returnUrl.ToString() }, server = null };
+                GetAllAccountsResponse response = server.Message(request) as GetAllAccountsResponse;
+
+                if (response != null)
+                {
+                    List<accountInfo> accounts = response.account;
+                }
+
+                /*
                 List<string> users = new List<string>();
 
-                SearchDirectoryRequest srequest = new SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = returnUrl.ToString(), limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts", attrs = "displayName,zimbraId,zimbraAliasTargetId,cn,sn,zimbraMailHost,uid,zimbraCOSId,zimbraAccountStatus,zimbraLastLogonTimestamp,description,zimbraIsSystemAccount,zimbraIsDelegatedAdminAccount,zimbraIsAdminAccount,zimbraIsSystemResource,zimbraAuthTokenValidityValue,zimbraIsExternalVirtualAccount,zimbraMailStatus,zimbraIsAdminGroup,zimbraCalResType,zimbraDomainType,zimbraDomainName,zimbraDomainStatus" };
+                SearchDirectoryRequest srequest = new SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = returnUrl.ToString(), limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
                 srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", textBox1.Text);
 
                 SearchDirectoryResponse sresponse = server.Message(srequest) as SearchDirectoryResponse;
@@ -182,6 +193,9 @@ namespace ClubCloud.Zimbra.Client
                         }
                     }
                 }
+
+                int total = users.Count;
+                */
                 /*
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = returnUrl.ToString() } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = server.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -204,7 +218,7 @@ namespace ClubCloud.Zimbra.Client
                     string name = dl.name;
                     
                 }
-                */               
+                */
                 /*
                 string zimbraId = null;
 
@@ -351,7 +365,7 @@ namespace ClubCloud.Zimbra.Client
                 GetInfoResponse inforesponse = server.Message(info) as GetInfoResponse;
                 List<prop> props = inforesponse.props;
                 */
-                
+
             }
             catch (FaultException fex)
             {
@@ -368,6 +382,11 @@ namespace ClubCloud.Zimbra.Client
         void server_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Console.Write(server.Authenticated.Value);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            server.Authenticate("admin@clubcloud.nl", "rjm557308453!", true);
         }
     }
 }

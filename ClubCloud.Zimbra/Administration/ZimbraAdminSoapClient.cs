@@ -93,5 +93,10 @@ namespace ClubCloud.Zimbra.Administration
         {
             return base.Channel.SearchDirectoryRequest(request);
         }
+
+        public GetAllAccountsResponse GetAllAccountsRequest(GetAllAccountsRequest request)
+        {
+            return base.Channel.GetAllAccountsRequest(request);
+        }
     }
 }

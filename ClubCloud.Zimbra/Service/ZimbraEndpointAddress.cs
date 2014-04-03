@@ -23,7 +23,6 @@ namespace ClubCloud.Zimbra.Service
             {
                 return (true);
             };
-
         }
 
         private static ZimbraHeaderContext _ZimbraHeaderContext;

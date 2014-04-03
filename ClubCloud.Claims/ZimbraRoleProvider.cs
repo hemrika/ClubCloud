@@ -10,10 +10,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 using ClubCloud.Zimbra;
+using ClubCloud.Zimbra.Service;
+using System.Configuration;
 
 namespace ClubCloud.Provider
 {
-    class ZimbraRoleProvider : System.Web.Security.RoleProvider
+    public class ZimbraRoleProvider : System.Web.Security.RoleProvider
     {
         #region properties
 
@@ -21,6 +23,7 @@ namespace ClubCloud.Provider
         private string applicationName;
         private Zimbra.ZimbraServer zimbraServer;
         private ZimbraProviderSettings zimbraSettings;
+        internal static ZimbraConfigurationSection zimbraconfiguration = null;
         private Zimbra.Global.VersionInfo zimbraVersion;
         private string AdminToken;
         public const string AllAuthenticatedUsersRoleName = "All Authenticated Users";
@@ -29,9 +32,18 @@ namespace ClubCloud.Provider
 
         #region Initialisation
 
-        protected ZimbraRoleProvider() : base()
+        public ZimbraRoleProvider() : base()
         {
+            try
+            {
+                zimbraconfiguration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
+            }
+            catch { };
 
+            if (zimbraconfiguration == null)
+            {
+                zimbraconfiguration = new ZimbraConfigurationSection();
+            }
         }
 
         public override string Name
@@ -79,6 +91,9 @@ namespace ClubCloud.Provider
 
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
         {
+            base.Initialize(name, config); 
+
+            /*
             if (HostingEnvironment.IsHosted)
             {
                 NamedPermissionSet permission = HttpRuntime.GetNamedPermissionSet();
@@ -90,6 +105,7 @@ namespace ClubCloud.Provider
                     throw new ProviderException(message);
                 }
             }
+            */
 
             if (this.Initialized)
             {
@@ -109,12 +125,17 @@ namespace ClubCloud.Provider
             {
                 zimbraSettings = ZimbraProviderSettings.Current;
 
-                if (zimbraSettings == null || String.IsNullOrEmpty(zimbraSettings.ZimbraServer) || String.IsNullOrEmpty(zimbraSettings.ZimbraUserName) || String.IsNullOrEmpty(zimbraSettings.ZimbraPassword))
+                if (zimbraSettings != null && !String.IsNullOrEmpty(zimbraSettings.ZimbraServer) && !String.IsNullOrEmpty(zimbraSettings.ZimbraUserName) && !String.IsNullOrEmpty(zimbraSettings.ZimbraPassword))
                 {
+                    zimbraconfiguration.Server.UserName = zimbraSettings.ZimbraUserName;
+                    zimbraconfiguration.Server.Password = zimbraSettings.ZimbraPassword;
+                    zimbraconfiguration.Server.ServerName = zimbraSettings.ZimbraServer;
+                    zimbraconfiguration.Server.IsAdmin = true;
+                    /*
                     string message = String.Format("Error while initializing settings Role Provider {0}: {1}", this.applicationName, "The setting for Zimbra are not complete.");
                     LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                     throw new ProviderException(message);
-
+                    */
                 }
             }
             catch (ZimbraSettingsException zex)
@@ -123,47 +144,51 @@ namespace ClubCloud.Provider
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message, zex);
             }
-
+            /*
             if (string.IsNullOrEmpty(zimbraSettings.ZimbraServer.Trim()))
             {
                 string message = String.Format("Error while initializing settings Role Provider {0}: {1}", this.applicationName, "The Zimbra server name can not be empty.");
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ZimbraMembershipException(message);
             }
+            */
 
-            zimbraServer = new Zimbra.ZimbraServer(zimbraSettings.ZimbraServer);
-
-            try
+            if (!string.IsNullOrEmpty(zimbraconfiguration.Server.ServerName))
             {
-                if (!zimbraServer.AuthenticatedAdmin.Value)
+                zimbraServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName);
+
+                try
                 {
-                    AdminToken = zimbraServer.Authenticate(zimbraSettings.ZimbraUserName, zimbraSettings.ZimbraPassword, true);
-                }
+                    if (!zimbraServer.AuthenticatedAdmin.Value)
+                    {
+                        AdminToken = zimbraServer.Authenticate(zimbraconfiguration.Server.UserName, zimbraconfiguration.Server.Password, zimbraconfiguration.Server.IsAdmin);
+                    }
 
-                using (Zimbra.Administration.GetVersionInfoResponse response = zimbraServer.Message(new Zimbra.Administration.GetVersionInfoRequest()) as Zimbra.Administration.GetVersionInfoResponse)
+                    using (Zimbra.Administration.GetVersionInfoResponse response = zimbraServer.Message(new Zimbra.Administration.GetVersionInfoRequest()) as Zimbra.Administration.GetVersionInfoResponse)
+                    {
+                        if (response != null)
+                        {
+                            zimbraVersion = response.info;
+                        }
+                        else
+                        {
+                            string message = String.Format("Error while getting VersionInfo for {0}: {1}", this.applicationName, "The Zimbra server returned no VersionInfo.");
+                            LogToULS(message, TraceSeverity.Unexpected, EventSeverity.Information);
+                        }
+                    }
+                }
+                catch (Exception ex)
                 {
-                    if (response != null)
-                    {
-                        zimbraVersion = response.info;
-                    }
-                    else
-                    {
-                        string message = String.Format("Error while getting VersionInfo for {0}: {1}", this.applicationName, "The Zimbra server returned no VersionInfo.");
-                        LogToULS(message, TraceSeverity.Unexpected, EventSeverity.Information);
-                    }
+                    string message = String.Format("Error while initializing settings Role Provider {0}: {1}", this.applicationName, ex.Message);
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message, ex);
                 }
-            }
-            catch (Exception ex)
-            {
-                string message = String.Format("Error while initializing settings Role Provider {0}: {1}", this.applicationName, ex.Message);
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message, ex);
-            }
-            //GetPasswordProperties();
+                //GetPasswordProperties();
 
-            //GetLockProperties();
+                //GetLockProperties();
 
-            this.Initialized = true;
+                this.Initialized = true;
+            }
         }
 
         #endregion
@@ -187,7 +212,7 @@ namespace ClubCloud.Provider
                 {
                     domain = GetZimbraDomain(context.Site.Url);
 
-                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts", attrs = "displayName,zimbraId,zimbraAliasTargetId,cn,sn,zimbraMailHost,uid,zimbraCOSId,zimbraAccountStatus,zimbraLastLogonTimestamp,description,zimbraIsSystemAccount,zimbraIsDelegatedAdminAccount,zimbraIsAdminAccount,zimbraIsSystemResource,zimbraAuthTokenValidityValue,zimbraIsExternalVirtualAccount,zimbraMailStatus,zimbraIsAdminGroup,zimbraCalResType,zimbraDomainType,zimbraDomainName,zimbraDomainStatus" };
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
                     srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", usernameToMatch);
 
                     Zimbra.Administration.SearchDirectoryResponse sresponse = zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
@@ -267,7 +292,7 @@ namespace ClubCloud.Provider
                 {
                     domain = GetZimbraDomain(context.Site.Url);
 
-                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts", attrs = "displayName,zimbraId,zimbraAliasTargetId,cn,sn,zimbraMailHost,uid,zimbraCOSId,zimbraAccountStatus,zimbraLastLogonTimestamp,description,zimbraIsSystemAccount,zimbraIsDelegatedAdminAccount,zimbraIsAdminAccount,zimbraIsSystemResource,zimbraAuthTokenValidityValue,zimbraIsExternalVirtualAccount,zimbraMailStatus,zimbraIsAdminGroup,zimbraCalResType,zimbraDomainType,zimbraDomainName,zimbraDomainStatus" };
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
                     srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", usernameToMatch);
 
                     Zimbra.Administration.SearchDirectoryResponse sresponse = zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
@@ -847,6 +872,7 @@ namespace ClubCloud.Provider
             }
 
         }
+
         public void RemoveUsersFromGroups(string[] usernames, string[] groupNames)
         {
             if (!Initialized)
@@ -1002,7 +1028,7 @@ namespace ClubCloud.Provider
             if (uri.HostNameType == UriHostNameType.Dns)
             {
                 string[] parts = uri.DnsSafeHost.Split(new char[] { '.' });
-                if (parts.Length > 0)
+                if (parts.Length > 1)
                 {
                     if (parts.Length == 2)
                     {
@@ -1021,7 +1047,10 @@ namespace ClubCloud.Provider
                         }
                     }
                 }
-
+                else
+                {
+                    return "clubcloud.nl";
+                }
             }
             return returnUrl.ToString();
         }

@@ -4,6 +4,7 @@ using ClubCloud.Zimbra.Global;
 using ClubCloud.Zimbra.Service;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
@@ -17,17 +18,33 @@ namespace ClubCloud.Zimbra
         private static ZimbraBinding binding = new ZimbraBinding();
         private static ZimbraEndpointAddress remoteAddress { get; set; }
         internal static ZimbraEndpointAddress remoteAddressAdmin { get; set; }
-
-        private static string _serverName;
+        internal static ZimbraConfigurationSection configuration = null;
+        private static string _serverNameClient;
         private static string _serverNameAdmin;
 
         private static System.Nullable<bool> _authenticated;
         private static System.Nullable<bool> _authenticatedAdmin;
 
-        public static string ServerName
+        public ZimbraServer()
         {
-            get { return ZimbraServer._serverName; }
-            set { ZimbraServer._serverName = value; }
+            try
+            {
+                configuration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
+            }
+            catch { };
+
+            if (configuration == null)
+            {
+                configuration = new ZimbraConfigurationSection();
+            }
+            Connect();
+
+        }
+
+        public static string ServerNameClient
+        {
+            get { return ZimbraServer._serverNameClient; }
+            set { ZimbraServer._serverNameClient = value; }
         }
 
         public static string ServerNameAdmin 
@@ -82,32 +99,74 @@ namespace ClubCloud.Zimbra
                 }
             }
         }
+        
         public ZimbraServer(string ServerName)
         {
-            Connect(ServerName);
+            try
+            {
+                configuration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
+            }
+            catch { };
+
+            if (configuration == null)
+            {
+                configuration = new ZimbraConfigurationSection();
+            }
+            if (!string.IsNullOrEmpty(ServerName))
+            {
+                configuration.Server.ServerName = ServerName;
+            }
+            if (!string.IsNullOrEmpty(configuration.Server.ServerName))
+            {
+                Connect();
+            }
         }
 
 
 
-        public ZimbraServer(string Username, string Password, string ServerName)
+        public ZimbraServer(string UserName, string Password, string ServerName, bool IsAdmin = false)
         {
-            Connect(ServerName);
+            try
+            {
+                configuration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
+            }
+            catch { };
 
-            Authenticate(Username, Password);
+            if (configuration == null)
+            {
+                configuration = new ZimbraConfigurationSection();
+            }
+
+            configuration.Server.ServerName = ServerName;
+            configuration.Server.UserName = UserName;
+            configuration.Server.Password = Password;
+            configuration.Server.IsAdmin = IsAdmin;
+            Connect();
+
+            Authenticate();
 
         }
-
-        public string Authenticate(string Username, string Password, bool asAdmin = false)
+        public string Authenticate() 
         {
+            return Authenticate(configuration.Server.UserName, configuration.Server.Password, configuration.Server.IsAdmin);
+        }
+
+        public string Authenticate(string UserName, string Password, bool IsAdmin = false)
+        {
+            configuration.Server.UserName = UserName;
+            configuration.Server.Password = Password;
+            configuration.Server.IsAdmin = IsAdmin;
+
             string AuthToken = string.Empty;
-            if (asAdmin)
+
+            if (IsAdmin)
             {
                 Zimbra.Administration.AuthResponse response;
                 if (administration == null)
                 {
                     administration = new ZimbraAdminSoapClient(binding, remoteAddressAdmin);
                 }
-                Zimbra.Administration.AuthRequest request = new Administration.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.AdministratorName, Value = Username }, password = Password };
+                Zimbra.Administration.AuthRequest request = new Administration.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.AdministratorName, Value = UserName }, password = Password };
                 response = administration.AccountAuth(request);
                 if (!string.IsNullOrEmpty(response.authToken))
                 {
@@ -128,7 +187,7 @@ namespace ClubCloud.Zimbra
                 {
                     account = new ZimbraAccountSoapClient(binding, remoteAddress);
                 }
-                Zimbra.Account.AuthRequest request = new Account.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.Name, Value = Username }, password = Password };
+                Zimbra.Account.AuthRequest request = new Account.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.Name, Value = UserName }, password = Password };
                 response = account.AccountAuth(request);
                 if (!string.IsNullOrEmpty(response.authToken))
                 {
@@ -352,12 +411,12 @@ namespace ClubCloud.Zimbra
             }
         }
 
-        private static void Connect(string ServerName)
+        private static void Connect()
         {
-            ZimbraServer.ServerName = "https://" + ServerName + ":443/service/soap/";
-            ZimbraServer.ServerNameAdmin = "https://" + ServerName + ":7071/service/admin/soap/";
+            ZimbraServer.ServerNameClient = "https://" + configuration.Server.ServerName + ":443/service/soap/";
+            ZimbraServer.ServerNameAdmin = "https://" + configuration.Server.ServerName + ":7071/service/admin/soap/";
 
-            remoteAddress= new Service.ZimbraEndpointAddress(ZimbraServer.ServerName);
+            remoteAddress= new Service.ZimbraEndpointAddress(ZimbraServer.ServerNameClient);
             remoteAddressAdmin = new Service.ZimbraEndpointAddress(ZimbraServer.ServerNameAdmin);            
         }
 
