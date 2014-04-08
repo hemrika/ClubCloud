@@ -6,5 +6,6 @@
   <features>
     <featureReference itemId="51918dfa-cf18-4d78-a092-98d7ef773613" />
     <featureReference itemId="ac3760a1-6a4c-464b-b22a-558fce9f9193" />
+    <featureReference itemId="91421599-20ff-4ccf-ba3a-5f7bb9c676d7" />
   </features>
 </package>
