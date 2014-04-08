@@ -79,21 +79,21 @@
       <DependentUpon>Zimbra Provider.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Webparts\Add User\Add User.ascx.cs">
-      <DependentUpon>Add User.ascx</DependentUpon>
+    <Compile Include="Webparts\Add_User\Add_User.ascx.cs">
+      <DependentUpon>Add_User.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Webparts\Add User\Add User.ascx.g.cs">
+    <Compile Include="Webparts\Add_User\Add_User.ascx.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Add User.ascx</DependentUpon>
+      <DependentUpon>Add_User.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Webparts\Approve User\Approve User.ascx.cs">
-      <DependentUpon>Approve User.ascx</DependentUpon>
+    <Compile Include="Webparts\Approve_User\Approve_User.ascx.cs">
+      <DependentUpon>Approve_User.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Webparts\Approve User\Approve User.ascx.g.cs">
+    <Compile Include="Webparts\Approve_User\Approve_User.ascx.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Approve User.ascx</DependentUpon>
+      <DependentUpon>Approve_User.ascx</DependentUpon>
     </Compile>
     <Compile Include="Webparts\Claim\Claim.ascx.cs">
       <DependentUpon>Claim.ascx</DependentUpon>
@@ -111,29 +111,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Login.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Webparts\Modify Password\Modify Password.ascx.cs">
-      <DependentUpon>Modify Password.ascx</DependentUpon>
+    <Compile Include="Webparts\Modify_Password\Modify_Password.ascx.cs">
+      <DependentUpon>Modify_Password.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Webparts\Modify Password\Modify Password.ascx.g.cs">
+    <Compile Include="Webparts\Modify_Password\Modify_Password.ascx.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Modify Password.ascx</DependentUpon>
+      <DependentUpon>Modify_Password.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Webparts\Modify User\Modify User.ascx.cs">
-      <DependentUpon>Modify User.ascx</DependentUpon>
+    <Compile Include="Webparts\Modify_User\Modify_User.ascx.cs">
+      <DependentUpon>Modify_User.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Webparts\Modify User\Modify User.ascx.g.cs">
+    <Compile Include="Webparts\Modify_User\Modify_User.ascx.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Modify User.ascx</DependentUpon>
+      <DependentUpon>Modify_User.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Webparts\Reset Password\Reset Password.ascx.cs">
-      <DependentUpon>Reset Password.ascx</DependentUpon>
+    <Compile Include="Webparts\Reset_Password\Reset_Password.ascx.cs">
+      <DependentUpon>Reset_Password.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Webparts\Reset Password\Reset Password.ascx.g.cs">
+    <Compile Include="Webparts\Reset_Password\Reset_Password.ascx.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Reset Password.ascx</DependentUpon>
+      <DependentUpon>Reset_Password.ascx</DependentUpon>
     </Compile>
     <Compile Include="ZimbraClaimProvider.cs" />
     <Compile Include="ZimbraDiagnosticService.cs" />
@@ -164,12 +164,12 @@
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
-    <None Include="Webparts\Add User\Add User.webpart" />
-    <None Include="Webparts\Add User\SharePointProjectItem.spdata">
+    <None Include="Webparts\Add_User\Add_User.webpart" />
+    <None Include="Webparts\Add_User\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b30261b0-c2b8-44a8-8774-ebdb4241f559}</SharePointProjectItemId>
     </None>
-    <None Include="Webparts\Approve User\Approve User.webpart" />
-    <None Include="Webparts\Approve User\SharePointProjectItem.spdata">
+    <None Include="Webparts\Approve_User\Approve_User.webpart" />
+    <None Include="Webparts\Approve_User\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6490ab05-7013-4495-8a07-21813c045864}</SharePointProjectItemId>
     </None>
     <None Include="Webparts\Claim\Claim.webpart" />
@@ -180,16 +180,16 @@
     <None Include="Webparts\Login\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{c3cf2f30-79d1-44be-ba95-c078509b5c1a}</SharePointProjectItemId>
     </None>
-    <None Include="Webparts\Modify Password\Modify Password.webpart" />
-    <None Include="Webparts\Modify Password\SharePointProjectItem.spdata">
+    <None Include="Webparts\Modify_Password\Modify_Password.webpart" />
+    <None Include="Webparts\Modify_Password\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{74f7de16-b1d1-4a98-a3f2-75d17a3734cf}</SharePointProjectItemId>
     </None>
-    <None Include="Webparts\Modify User\Modify User.webpart" />
-    <None Include="Webparts\Modify User\SharePointProjectItem.spdata">
+    <None Include="Webparts\Modify_User\Modify_User.webpart" />
+    <None Include="Webparts\Modify_User\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2024dca9-a25a-4d6c-8d4c-69186b69bd3b}</SharePointProjectItemId>
     </None>
-    <None Include="Webparts\Reset Password\Reset Password.webpart" />
-    <None Include="Webparts\Reset Password\SharePointProjectItem.spdata">
+    <None Include="Webparts\Reset_Password\Reset_Password.webpart" />
+    <None Include="Webparts\Reset_Password\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ba5a4acf-d13c-4278-8dca-d3af12a4bc1d}</SharePointProjectItemId>
     </None>
   </ItemGroup>
@@ -210,16 +210,16 @@
     <Content Include="Features\Zimbra Provider\Zimbra Provider.Template.xml">
       <DependentUpon>Zimbra Provider.feature</DependentUpon>
     </Content>
-    <Content Include="Webparts\Add User\Add User.ascx">
+    <Content Include="Webparts\Add_User\Add_User.ascx">
       <Generator>SharePointWebPartCodeGenerator</Generator>
-      <LastGenOutput>Add User.ascx.g.cs</LastGenOutput>
+      <LastGenOutput>Add_User.ascx.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Webparts\Add User\Elements.xml" />
-    <Content Include="Webparts\Approve User\Approve User.ascx">
+    <Content Include="Webparts\Add_User\Elements.xml" />
+    <Content Include="Webparts\Approve_User\Approve_User.ascx">
       <Generator>SharePointWebPartCodeGenerator</Generator>
-      <LastGenOutput>Approve User.ascx.g.cs</LastGenOutput>
+      <LastGenOutput>Approve_User.ascx.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Webparts\Approve User\Elements.xml" />
+    <Content Include="Webparts\Approve_User\Elements.xml" />
     <Content Include="Webparts\Claim\Claim.ascx">
       <Generator>SharePointWebPartCodeGenerator</Generator>
       <LastGenOutput>Claim.ascx.g.cs</LastGenOutput>
@@ -230,20 +230,20 @@
       <Generator>SharePointWebPartCodeGenerator</Generator>
       <LastGenOutput>Login.ascx.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Webparts\Modify Password\Elements.xml" />
-    <Content Include="Webparts\Modify Password\Modify Password.ascx">
+    <Content Include="Webparts\Modify_Password\Elements.xml" />
+    <Content Include="Webparts\Modify_Password\Modify_Password.ascx">
       <Generator>SharePointWebPartCodeGenerator</Generator>
-      <LastGenOutput>Modify Password.ascx.g.cs</LastGenOutput>
+      <LastGenOutput>Modify_Password.ascx.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Webparts\Modify User\Elements.xml" />
-    <Content Include="Webparts\Modify User\Modify User.ascx">
+    <Content Include="Webparts\Modify_User\Elements.xml" />
+    <Content Include="Webparts\Modify_User\Modify_User.ascx">
       <Generator>SharePointWebPartCodeGenerator</Generator>
-      <LastGenOutput>Modify User.ascx.g.cs</LastGenOutput>
+      <LastGenOutput>Modify_User.ascx.g.cs</LastGenOutput>
     </Content>
-    <Content Include="Webparts\Reset Password\Elements.xml" />
-    <Content Include="Webparts\Reset Password\Reset Password.ascx">
+    <Content Include="Webparts\Reset_Password\Elements.xml" />
+    <Content Include="Webparts\Reset_Password\Reset_Password.ascx">
       <Generator>SharePointWebPartCodeGenerator</Generator>
-      <LastGenOutput>Reset Password.ascx.g.cs</LastGenOutput>
+      <LastGenOutput>Reset_Password.ascx.g.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Web.UI.WebControls.WebParts;
 
-namespace ClubCloud.Provider.Webparts.Claim
+namespace ClubCloud.Provider.Webparts
 {
     [ToolboxItemAttribute(false)]
     public partial class Claim : WebPart

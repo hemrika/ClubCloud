@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClubCloud.Provider.Webparts.Claim {
+namespace ClubCloud.Provider.Webparts {
     using System.Web.UI.WebControls.Expressions;
     using System.Web.UI.HtmlControls;
     using System.Collections;
@@ -48,7 +48,7 @@ namespace ClubCloud.Provider.Webparts.Claim {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [GeneratedCodeAttribute("Microsoft.VisualStudio.SharePoint.ProjectExtensions.CodeGenerators.SharePointWebP" +
             "artCodeGenerator", "12.0.0.0")]
-        private void @__BuildControlTree(global::ClubCloud.Provider.Webparts.Claim.Claim @__ctrl) {
+        private void @__BuildControlTree(global::ClubCloud.Provider.Webparts.Claim @__ctrl) {
         }
         
         [GeneratedCodeAttribute("Microsoft.VisualStudio.SharePoint.ProjectExtensions.CodeGenerators.SharePointWebP" +

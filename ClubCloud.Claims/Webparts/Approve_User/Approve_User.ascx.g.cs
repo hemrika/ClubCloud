@@ -37,10 +37,10 @@ namespace ClubCloud.Provider.Webparts {
     using System.CodeDom.Compiler;
     
     
-    public partial class Login {
+    public partial class Approve_User {
         
         [GeneratedCodeAttribute("Microsoft.VisualStudio.SharePoint.ProjectExtensions.CodeGenerators.SharePointWebPartCodeGenerator", "12.0.0.0")]
-        public static implicit operator global::System.Web.UI.TemplateControl(Login target) 
+        public static implicit operator global::System.Web.UI.TemplateControl(Approve_User target) 
         {
             return target == null ? null : target.TemplateControl;
         }
@@ -48,7 +48,7 @@ namespace ClubCloud.Provider.Webparts {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         [GeneratedCodeAttribute("Microsoft.VisualStudio.SharePoint.ProjectExtensions.CodeGenerators.SharePointWebP" +
             "artCodeGenerator", "12.0.0.0")]
-        private void @__BuildControlTree(global::ClubCloud.Provider.Webparts.Login @__ctrl) {
+        private void @__BuildControlTree(global::ClubCloud.Provider.Webparts.Approve_User @__ctrl) {
         }
         
         [GeneratedCodeAttribute("Microsoft.VisualStudio.SharePoint.ProjectExtensions.CodeGenerators.SharePointWebP" +
