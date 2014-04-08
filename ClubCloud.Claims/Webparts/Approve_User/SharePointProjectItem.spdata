@@ -5,6 +5,6 @@
     <ProjectItemFile Source="Approve_User.webpart" Target="Approve_User\" Type="ElementFile" />
   </Files>
   <SafeControls>
-    <SafeControl Name="SafeControlEntry1" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Provider.Webparts.Approve_User" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
+    <SafeControl Name="ApproveUserSafeControl" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Provider.Webparts" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
   </SafeControls>
 </ProjectItem>

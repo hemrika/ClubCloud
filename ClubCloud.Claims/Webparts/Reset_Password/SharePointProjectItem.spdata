@@ -5,6 +5,6 @@
     <ProjectItemFile Source="Reset_Password.webpart" Target="Reset_Password\" Type="ElementFile" />
   </Files>
   <SafeControls>
-    <SafeControl Name="SafeControlEntry1" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Provider.Webparts.Reset_Password" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
+    <SafeControl Name="ResetPaswordSafeControl" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Provider.Webparts" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
   </SafeControls>
 </ProjectItem>

@@ -5,6 +5,6 @@
     <ProjectItemFile Source="Claim.webpart" Target="Claim\" Type="ElementFile" />
   </Files>
   <SafeControls>
-    <SafeControl Name="SafeControlEntry1" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Provider.Webparts.Claim" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
+    <SafeControl Name="ClaimSafeControl" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Provider.Webparts" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
   </SafeControls>
 </ProjectItem>

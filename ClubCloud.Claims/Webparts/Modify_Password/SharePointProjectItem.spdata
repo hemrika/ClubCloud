@@ -5,6 +5,6 @@
     <ProjectItemFile Source="Modify_Password.webpart" Target="Modify_Password\" Type="ElementFile" />
   </Files>
   <SafeControls>
-    <SafeControl Name="SafeControlEntry1" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Provider.Webparts.Modify_Password" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
+    <SafeControl Name="ModifyPasswordSafeControl" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Provider.Webparts" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
   </SafeControls>
 </ProjectItem>
