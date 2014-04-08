@@ -12,13 +12,29 @@ namespace ClubCloud.Provider
     //result.Add(SPClaimEncodingManager.EncodeClaimIntoFormsSuffix("http://schemas.microsoft.com/ws/2008/06/identity/claims/groupsid", current4.Sid.Value, "http://www.w3.org/2001/XMLSchema#string", SPOriginalIssuers.Format(SPOriginalIssuerType.Windows)));
     public class ZimbraClaimProvider : Microsoft.SharePoint.Administration.Claims.SPClaimProvider 
     {
-        public ZimbraClaimProvider(string displayName) : base(displayName)
-        { 
+        public ZimbraClaimProvider()
+            : base(ZimbraDisplayName)
+        {
+
         }
+
+        public ZimbraClaimProvider(string displayName)
+            : base(ZimbraDisplayName)
+        {
+        }
+
+        internal static string ZimbraName = "ZimbraClaimProvider";
+        internal static string ZimbraDisplayName = "Zimbra Claim Provider";
+        internal static string ZimbraDescription = "Zimbra Claim Provider";
 
         public override string Name
         {
-            get { return "ZimbraClaimProvider"; }
+            get { return ZimbraName; }
+        }
+
+        public string Description
+        {
+            get { return ZimbraDescription; }
         }
 
         protected override SPClaim CreateClaimForArguments(SPClaimArguments arguments)

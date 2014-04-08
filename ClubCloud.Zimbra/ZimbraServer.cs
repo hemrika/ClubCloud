@@ -175,7 +175,7 @@ namespace ClubCloud.Zimbra
                 }
 
                 ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
-                ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = true };
+                ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = false };
                 ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
                 //ZimbraEndpointAddress.ZimbraHeaderContext.account.by = accountBy.name;
 

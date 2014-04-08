@@ -3,4 +3,8 @@
   <assemblies>
     <projectOutputAssembly location="ClubCloud.Zimbra.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.Zimbra\ClubCloud.Zimbra.csproj" />
   </assemblies>
+  <features>
+    <featureReference itemId="51918dfa-cf18-4d78-a092-98d7ef773613" />
+    <featureReference itemId="ac3760a1-6a4c-464b-b22a-558fce9f9193" />
+  </features>
 </package>

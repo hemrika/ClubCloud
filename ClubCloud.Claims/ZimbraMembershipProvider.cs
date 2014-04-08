@@ -827,43 +827,48 @@ namespace ClubCloud.Provider
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message);
             }
-            Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username }, applyCos = true };
-            Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
-            if (response != null)
+
+            try
             {
-                Type tuser = user.GetType();
-                foreach (var item in response.account.a)
+                Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username }, applyCos = true };
+                Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
+                if (response != null)
                 {
-                    try
+                    Type tuser = user.GetType();
+                    foreach (var item in response.account.a)
                     {
-                        PropertyInfo propertyInfo = tuser.GetProperty(item.name);
-                        if (propertyInfo != null)
+                        try
                         {
-                            if (propertyInfo.PropertyType == typeof(string))
+                            PropertyInfo propertyInfo = tuser.GetProperty(item.name);
+                            if (propertyInfo != null)
                             {
-                                propertyInfo.SetValue(user, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
-                            }
-                            else
-                            {
-                                IList attr = (IList)propertyInfo.GetValue(item);
-                                if (attr != null)
+                                if (propertyInfo.PropertyType == typeof(string))
                                 {
-                                    attr.Add(Convert.ChangeType(item.Value, propertyInfo.PropertyType));
-                                    propertyInfo.SetValue(user, attr);
+                                    propertyInfo.SetValue(user, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                                }
+                                else
+                                {
+                                    IList attr = (IList)propertyInfo.GetValue(item);
+                                    if (attr != null)
+                                    {
+                                        attr.Add(Convert.ChangeType(item.Value, propertyInfo.PropertyType));
+                                        propertyInfo.SetValue(user, attr);
+                                    }
                                 }
                             }
                         }
-                    }
-                    catch
-                    {
+                        catch
+                        {
+                        }
                     }
                 }
             }
+            catch (Exception)
+            {
+                return null;
+            }
 
-            MembershipUser spuser = user as MembershipUser;
-            string pr = spuser.ProviderName;
-            object key = spuser.ProviderUserKey;
-            return spuser;
+            return user;
         }
 
         public ZimbraMembershipUser GetZimbraUser(object providerUserKey, bool userIsOnline)
@@ -927,13 +932,22 @@ namespace ClubCloud.Provider
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message);
             }
-            Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = email }, applyCos = false, attrs = "displayName" };
-            Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
-            if (response != null)
+
+            try
             {
-                UserName = response.account.a.Single<attrN>(a => a.name == "displayName").Value;
-                //UserName = response.account.a[0].Value;
+                Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = email }, applyCos = false, attrs = "displayName" };
+                Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
+                if (response != null)
+                {
+                    UserName = response.account.a.Single<attrN>(a => a.name == "displayName").Value;
+                    //UserName = response.account.a[0].Value;
+                }
             }
+            catch (Exception)
+            {
+                return null;
+            }
+
             return UserName;
         }
 

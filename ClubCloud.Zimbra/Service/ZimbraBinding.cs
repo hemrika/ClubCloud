@@ -27,7 +27,7 @@ namespace ClubCloud.Zimbra.Service
                 configuration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
             }
             catch { };
-            /*
+
             if (configuration != null)
             {
                 Type tbindingElement = configuration.Binding.GetType();
@@ -51,7 +51,7 @@ namespace ClubCloud.Zimbra.Service
             {
                 MaxReceivedMessageSize = (base.MaxReceivedMessageSize * 4);
             }
-            */
+
             //string name
             //AllowCookies = true;
             //base.MaxBufferPoolSize

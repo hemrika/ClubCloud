@@ -19,6 +19,8 @@ using ClubCloud.Zimbra.Administration;
 using System.ServiceModel;
 using System.Reflection;
 using System.Collections;
+using Microsoft.Web.Administration;
+using System.Xml;
 
 namespace ClubCloud.Zimbra.Client
 {
@@ -48,28 +50,174 @@ namespace ClubCloud.Zimbra.Client
             set { _zimbraPasswordMinLength = value; }
         }
 
-            public Form1()
+        public Form1()
         {
             InitializeComponent();
+            /*
             server = new ZimbraServer();
             //server = new ZimbraServer("mail.clubcloud.nl");
             server.PropertyChanged += server_PropertyChanged;
             try
             {
                 server.Authenticate();
-            //server.Authenticate("admin@clubcloud.nl", "rjm557308453!",true);
+                //server.Authenticate("admin@clubcloud.nl", "rjm557308453!",true);
             }
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
             }
+            */
+        }
 
+
+            private static XmlDocument GetWebConfig(string configFilePath)
+            {
+                var webConfig = new XmlDocument();
+                webConfig.Load(configFilePath);
+                webConfig.Save(configFilePath.ToLower().Replace("web.config", "web_" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_Zimbra.config"));
+                return webConfig;
+            }
+
+            private static void AppendSectionGroupZimbra(ref XmlDocument rootConfig)
+            {
+                string fullname = Assembly.GetExecutingAssembly().FullName;
+                XmlNode configuration = rootConfig.SelectSingleNode("/configuration");
+
+                //Section
+                XmlNode configSections = rootConfig.SelectSingleNode("/configuration/configSections");
+                XmlNode sectionGroup = rootConfig.CreateNode(XmlNodeType.Element, "sectionGroup","");
+                XmlAttribute nameAttribute = rootConfig.CreateAttribute("name");
+                nameAttribute.Value = "Zimbra";
+                sectionGroup.Attributes.Append(nameAttribute);
+                sectionGroup.InnerXml = string.Format("<section name=\"Configuration\" type=\"ClubCloud.Zimbra.Service.ZimbraConfigurationHandler,{0}\" />", fullname);
+                configSections.AppendChild(sectionGroup);
+
+                
+                XmlNode ZimbraSection = rootConfig.CreateNode(XmlNodeType.Element, "Zimbra", "");
+                ZimbraSection.InnerXml = "<Configuration><Server Name=\"ClubCloud\" ServerName=\"mail.clubcloud.nl\" UserName=\"admin@clubcloud.nl\" Password=\"rjm557308453!\" IsAdmin=\"true\" Encoded=\"false\" /><Binding MaxReceivedMessageSize=\"2147483647\" /></Configuration>";
+                configuration.InsertAfter(ZimbraSection, configSections);
+            }
+
+        private static void AppendProviderZimbra(ref XmlDocument rootConfig)
+            {
+                string fullname = Assembly.GetExecutingAssembly().FullName;
+
+                XmlNode PeoplePickerWildcards = rootConfig.SelectSingleNode("/configuration/SharePoint/PeoplePickerWildcards");
+                //<add key="ZimbraMembershipProvider" value="%" />
+                XmlNode peopleRolenode = rootConfig.CreateNode(XmlNodeType.Element, "add", "");
+                XmlAttribute peopleRolekeyAttribute = rootConfig.CreateAttribute("key");
+                peopleRolekeyAttribute.Value = "ZimbraRoleProvider";
+                peopleRolenode.Attributes.Append(peopleRolekeyAttribute);
+                XmlAttribute peopleRoleValueAttribute = rootConfig.CreateAttribute("value");
+                peopleRoleValueAttribute.Value = "%";
+                peopleRolenode.Attributes.Append(peopleRoleValueAttribute);
+                PeoplePickerWildcards.AppendChild(peopleRolenode);
+
+                //<add key="ZimbraRoleProvider" value="%" />
+                XmlNode peopleMembernode = rootConfig.CreateNode(XmlNodeType.Element, "add", "");
+                XmlAttribute peopleMemberkeyAttribute = rootConfig.CreateAttribute("key");
+                peopleMemberkeyAttribute.Value = "ZimbramemberProvider";
+                peopleMembernode.Attributes.Append(peopleMemberkeyAttribute);
+                XmlAttribute peopleMemberValueAttribute = rootConfig.CreateAttribute("value");
+                peopleMemberValueAttribute.Value = "%";
+                peopleMembernode.Attributes.Append(peopleMemberValueAttribute);
+                PeoplePickerWildcards.AppendChild(peopleMembernode);
+
+                //<add name="ZimbraRoleProvider" type="ClubCloud.Provider.ZimbraRoleProvider, ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" />
+                XmlNode roleManager = rootConfig.SelectSingleNode("/configuration/system.web/roleManager/providers");
+                XmlNode rolenode = rootConfig.CreateNode(XmlNodeType.Element, "add", "");
+                XmlAttribute roleNameAttribute = rootConfig.CreateAttribute("name");
+                roleNameAttribute.Value = "ZimbraRoleProvider";
+                XmlAttribute roleTypeAttribute = rootConfig.CreateAttribute("type");
+                roleTypeAttribute.Value = string.Format("ClubCloud.Provider.ZimbraRoleProvider, {0}\" />", fullname);
+                roleManager.AppendChild(rolenode);
+
+                //<add name="ZimbraMembershipProvider" type="ClubCloud.Provider.ZimbraMembershipProvider, ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" />
+                XmlNode membership = rootConfig.SelectSingleNode("/configuration/system.web/membership/providers");
+                XmlNode membernode = rootConfig.CreateNode(XmlNodeType.Element, "add", "");
+                XmlAttribute memberNameAttribute = rootConfig.CreateAttribute("name");
+                memberNameAttribute.Value = "ZimbraRoleProvider";
+                XmlAttribute memberTypeAttribute = rootConfig.CreateAttribute("type");
+                memberTypeAttribute.Value = string.Format("ClubCloud.Provider.ZimbraMembershipProvider, {0}\" />", fullname);
+                membership.AppendChild(membernode);
+                
+            }
+
+        private static void AppendModuleZimbra(ref XmlDocument rootConfig)
+        {
+            string fullname = Assembly.GetExecutingAssembly().FullName;
+            XmlNode configuration = rootConfig.SelectSingleNode("/configuration");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
+                ServerManager manager = new ServerManager();
+                Site site = manager.Sites["SharePoint Web Services"];
+
+                if (site != null)
+                {
+                    Configuration configuration = site.GetWebConfiguration();
+
+                    //SectionGroupCollection sections = configuration.RootSectionGroup.SectionGroups;
+                    SectionGroup zimbra = configuration.RootSectionGroup.SectionGroups.SingleOrDefault(section => section.Name == "Zimbra");
+
+                    if(zimbra == null )
+                    {
+                        //XmlNode sectionGroupNode = ZimbrasectionGroup();
+                        Microsoft.Web.Administration.Application root = site.Applications.SingleOrDefault(app => app.ApplicationPoolName == "SharePoint Web Services Root");
+                        string rootPath = root.VirtualDirectories.SingleOrDefault().PhysicalPath;
+                        XmlDocument rootConfig = GetWebConfig(rootPath + @"\web.config");
+
+                        AppendSectionGroupZimbra(ref rootConfig);
+                        rootConfig.Save(rootPath + @"\web.config");
+
+
+                        //sections.AppendChild(ZimbrasectionGroup());
+
+                        Microsoft.Web.Administration.Application sts = site.Applications.SingleOrDefault(app => app.ApplicationPoolName == "SecurityTokenServiceApplicationPool");
+                        string stsPath = sts.VirtualDirectories.FirstOrDefault().PhysicalPath;
+                        XmlDocument stsConfig = GetWebConfig(rootPath + @"\web.config");
+                    }
+
+                    /*
+                    foreach (Microsoft.Web.Administration.Application app in apps)
+                    {
+                        //"SecurityTokenServiceApplicationPool"
+                        //"SharePoint Web Services Root"
+                        string name = app.ApplicationPoolName;
+                        VirtualDirectoryCollection directories = app.VirtualDirectories;
+                        foreach (VirtualDirectory directory in directories)
+                        {
+                            string path = directory.PhysicalPath;
+                        }
+                    }
+                    */
+                    /*
+                    ConfigurationSection ZimbraSection = null;
+                    try
+                    {
+                        SectionGroup effective = configuration.GetEffectiveSectionGroup();
+                        SectionGroupCollection sections = configuration.RootSectionGroup.SectionGroups;
+                        SectionGroup zimbra = sections.Single(section => Name == "Zimbra");
+
+
+                        //ZimbraSection = configuration.GetSection("Zimbra/Configuration");
+                    }
+                    catch { }
+
+                    if (ZimbraSection != null)
+                    {
+
+                        ConfigurationElementCollection elements = ZimbraSection.GetCollection();
+                        foreach (ConfigurationElement element in elements)
+                        {
+                            string name = element.Attributes["name"].Value.ToString();
+                        }
+                    }
+                    */
+                }
 
                 /*
                 GetAccountMembershipRequest request = new GetAccountMembershipRequest { account = new accountSelector { by = accountBy.Name, Value = "12073385@clubcloud.nl" } };
@@ -103,7 +251,7 @@ namespace ClubCloud.Zimbra.Client
 
                 }
                 */
-
+                /*
                 StringBuilder returnUrl = new StringBuilder();
                 string url = "http://www.clubcloud.nl/pages/default.aspx";
                 Uri uri = new Uri(url);
@@ -139,7 +287,7 @@ namespace ClubCloud.Zimbra.Client
                 {
                     List<accountInfo> accounts = response.account;
                 }
-
+                */
                 /*
                 List<string> users = new List<string>();
 
