@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="736bbba5-7259-465e-9e0e-032a6e290998" solutionId="736bbba5-7259-465e-9e0e-032a6e290998" resetWebServer="true" title="ServiceApp11 Service Application" description="Installs the ServiceApp11 Service Application" name="ServiceApp11.Service" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="95303089-9602-4186-a353-cb5f1405a9ac" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="df7ca0b9-6af4-4ebc-956b-1e2eacd09ce0" />
+    <projectItemReference itemId="87f5caa1-378d-4e3c-b7d3-62d6d30f125c" />
+    <projectItemReference itemId="d22f16c2-965b-47f3-90c7-922c10b25ab0" />
+    <projectItemReference itemId="18358e38-f8be-47c5-b6c2-98c88ba74f16" />
+    <projectItemReference itemId="9c10b425-f593-48c9-96c1-714998bc48f6" />
+    <projectItemReference itemId="28dc8612-1ccf-4bab-a0bc-5aa788ef9f8b" />
+    <projectItemReference itemId="ea7c8f11-ec11-47e9-99fb-461404771e55" />
+  </projectItems>
+</package>

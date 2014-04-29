@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomActionGroup
+      Id="aa31fca1-d375-4964-86ce-85c05858f3d2"
+      Location="Microsoft.SharePoint.Administration.Applications"
+      Title="$Resources:CustomActionGroupTitle"
+      ImageUrl="/_admin/ClubCloud.Service/ca-icon.png"
+      Sequence="1001"/>
+
+  <CustomAction Description="$Resources:CustomActionDescription" GroupId="aa31fca1-d375-4964-86ce-85c05858f3d2" Id="6bc56d28-c7f4-459a-9bfc-cb006ec100f7" Sequence="100" Location="Microsoft.SharePoint.Administration.Applications" Title="$Resources:CustomActionTitle" RequiredAdmin="Delegated">
+    <UrlAction Url="/_admin/ClubCloud.Service/ManageService.aspx" />
+  </CustomAction>  
+</Elements>

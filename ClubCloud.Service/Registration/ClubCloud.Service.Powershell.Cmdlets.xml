@@ -1,0 +1,32 @@
+﻿<ps:Config xmlns:ps="urn:Microsoft.SharePoint.PowerShell"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:schemaLocation="urn:Microsoft.SharePoint.PowerShell SPCmdletSchema.xml">
+  <ps:Assembly Name="$SharePoint.Project.AssemblyFullName$">
+    <ps:Cmdlet>
+      <ps:VerbName>New-ClubCloudServiceApplication</ps:VerbName>
+      <ps:ClassName>$SharePoint.Type.245809ef-3bba-444e-b165-7fec3200634c.FullName$</ps:ClassName>
+      <ps:HelpFile />
+    </ps:Cmdlet>
+    <ps:Cmdlet>
+      <ps:VerbName>Remove-ClubCloudService</ps:VerbName>
+      <ps:ClassName>$SharePoint.Type.01f3638d-170c-4f91-8e8f-ad1e71ddb4b5.FullName$</ps:ClassName>
+      <ps:HelpFile />
+    </ps:Cmdlet>
+    <ps:Cmdlet>
+      <ps:VerbName>New-ClubCloudServiceApplicationProxy</ps:VerbName>
+      <ps:ClassName>$SharePoint.Type.24a670c0-c374-4e29-84be-e7c1b2fe0c58.FullName$</ps:ClassName>
+      <ps:HelpFile />
+    </ps:Cmdlet>
+    <ps:Cmdlet>
+      <ps:VerbName>Set-ClubCloudServiceApplication</ps:VerbName>
+      <ps:ClassName>$SharePoint.Type.11f4c31f-efba-4ff2-b039-19e2c574d845.FullName$</ps:ClassName>
+      <ps:HelpFile />
+    </ps:Cmdlet>
+    <ps:Cmdlet>
+      <ps:VerbName>Set-ClubCloudServiceApplicationProxy</ps:VerbName>
+      <ps:ClassName>$SharePoint.Type.859c0f40-5982-4e9d-a558-7d0cc88750b5.FullName$</ps:ClassName>
+      <ps:HelpFile />
+    </ps:Cmdlet>
+  </ps:Assembly>
+</ps:Config>
+
