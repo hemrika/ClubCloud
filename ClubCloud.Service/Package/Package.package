@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="736bbba5-7259-465e-9e0e-032a6e290998" solutionId="736bbba5-7259-465e-9e0e-032a6e290998" resetWebServer="true" title="ServiceApp11 Service Application" description="Installs the ServiceApp11 Service Application" name="ServiceApp11.Service" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="736bbba5-7259-465e-9e0e-032a6e290998" solutionId="736bbba5-7259-465e-9e0e-032a6e290998" resetWebServer="true" title="ServiceApp11 Service Application" description="Installs the ServiceApp11 Service Application" name="ClubCloud.Service" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <features>
     <featureReference itemId="95303089-9602-4186-a353-cb5f1405a9ac" />
   </features>

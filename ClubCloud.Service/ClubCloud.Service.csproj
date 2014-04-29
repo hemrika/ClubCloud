@@ -160,23 +160,21 @@
     <None Include="SQL\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9c10b425-f593-48c9-96c1-714998bc48f6}</SharePointProjectItemId>
     </None>
-    <None Include="WebClients\ClubCloud.Service\client.config" />
+    <Content Include="WebClients\ClubCloud.Service\client.config" />
     <None Include="WebClients\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{28dc8612-1ccf-4bab-a0bc-5aa788ef9f8b}</SharePointProjectItemId>
     </None>
-    <None Include="WebServices\ClubCloud.Service\web.config" />
+    <Content Include="WebServices\ClubCloud.Service\web.config" />
     <None Include="WebServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ea7c8f11-ec11-47e9-99fb-461404771e55}</SharePointProjectItemId>
     </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="AdminResources\ClubCloud.Service.ServiceAdminResources.en-US.resx" />
-    <EmbeddedResource Include="AdminResources\ClubCloud.Service.ServiceAdminResources.resx" />
+    <Content Include="AdminResources\ClubCloud.Service.ServiceAdminResources.en-US.resx" />
+    <Content Include="AdminResources\ClubCloud.Service.ServiceAdminResources.resx" />
     <Content Include="Features\ClubCloudServiceAdministration\Resources.en-US.resx" />
     <Content Include="Features\ClubCloudServiceAdministration\Resources.resx" />
-    <EmbeddedResource Include="Resources\ClubCloud.Service.ServiceResources.en-US.resx" />
-    <EmbeddedResource Include="Resources\ClubCloud.Service.ServiceResources.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdministrationActions\Elements.xml" />
@@ -196,7 +194,9 @@
       <DependentUpon>ClubCloudServiceAdministration.feature</DependentUpon>
     </Content>
     <Content Include="Registration\ClubCloud.Service.Powershell.Cmdlets.xml" />
-    <Content Include="SQL\ClubCloud.Service\CreateDatabase.sql" />
+    <Content Include="Resources\ClubCloud.Service.ServiceResources.en-US.resx" />
+    <Content Include="Resources\ClubCloud.Service.ServiceResources.resx" />
+    <Content Include="SQL\ClubCloud.Service\ClubCloud.sql" />
     <Content Include="WebServices\ClubCloud.Service\HelloWorld.svc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

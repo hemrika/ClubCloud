@@ -73,7 +73,7 @@ namespace ClubCloud.Service
                 SPDatabase.Provision(
                     this.DatabaseConnectionString,
                     //SPUtility.GetGenericSetupPath(@"TEMPLATE\SQL\ClubCloud.Service\CreateDatabase.sql"),
-                    SPUtility.GetVersionedGenericSetupPath(@"TEMPLATE\SQL\ClubCloud.Service\CreateDatabase.sql",15),
+                    SPUtility.GetVersionedGenericSetupPath(@"TEMPLATE\SQL\ClubCloud.Service\ClubCloud.sql",15),
                     options);
             }
 
