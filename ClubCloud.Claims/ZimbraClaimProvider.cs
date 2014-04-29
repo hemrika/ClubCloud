@@ -1,16 +1,23 @@
 ﻿using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint.Administration.Claims;
+using Microsoft.SharePoint.IdentityModel.OAuth2;
 using Microsoft.SharePoint.WebControls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Security;
 
 namespace ClubCloud.Provider
 {
     //result.Add(SPClaimEncodingManager.EncodeClaimIntoFormsSuffix("http://schemas.microsoft.com/ws/2008/06/identity/claims/groupsid", current4.Sid.Value, "http://www.w3.org/2001/XMLSchema#string", SPOriginalIssuers.Format(SPOriginalIssuerType.Windows)));
-    public class ZimbraClaimProvider : Microsoft.SharePoint.Administration.Claims.SPClaimProvider 
+    [Guid("E504EC65-27B3-4281-BF74-60FB81DFA898")]
+    public class ZimbraClaimProvider : Microsoft.SharePoint.Administration.Claims.SPClaimProvider
     {
         public ZimbraClaimProvider()
             : base(ZimbraDisplayName)
@@ -37,6 +44,28 @@ namespace ClubCloud.Provider
             get { return ZimbraDescription; }
         }
 
+        private string m_providerName = "ZimbraMembershipProvider";
+
+        public string ProviderName
+        {
+            get
+            {
+                return this.m_providerName;
+            }
+        }
+
+        private MembershipProvider m_membershipProvider;
+        public MembershipProvider Provider
+        {
+            get
+            {
+                if (this.m_membershipProvider == null)
+                {
+                    this.m_membershipProvider = Membership.Providers[this.ProviderName];
+                }
+                return this.m_membershipProvider;
+            }
+        }
         protected override SPClaim CreateClaimForArguments(SPClaimArguments arguments)
         {
             return base.CreateClaimForArguments(arguments);
@@ -44,7 +73,74 @@ namespace ClubCloud.Provider
 
         protected override void FillClaimsForEntity(Uri context, SPClaim entity, SPClaimProviderContext claimProviderContext, List<SPClaim> claims)
         {
-            base.FillClaimsForEntity(context, entity, claimProviderContext, claims);
+            //base.FillClaimsForEntity(context, entity, claimProviderContext, claims);
+
+            if (entity.Value.Contains("zimbramembershipprovider") || entity.Value.Contains("zimbraroleprovider"))
+            {
+                //0#.f|zimbramembershipprovider|12073385
+                string identifier = entity.Value.Split('|').Last();
+                MembershipUser user;
+                if (!string.IsNullOrWhiteSpace(identifier))
+                {
+                    user = Provider.GetUser(identifier, true);
+                }
+                else
+                {
+                    user = Provider.GetUser(entity.Value, true);
+                }
+
+                ZimbraMembershipUser zuser = null;
+                if(user != null && user.GetType() == typeof(ZimbraMembershipUser))
+                {
+                     zuser = user as ZimbraMembershipUser;
+                }
+
+                if (zuser != null)
+                {
+                    Type tuser = zuser.GetType();
+                    PropertyInfo[] properties= tuser.GetProperties();
+                    IEnumerable<ZimbraClaim> zimbraClaims = ZimbraClaimsMapped.Claims.Where(x => x.ClaimTypeValue != null);
+
+                    foreach (ZimbraClaim claim in zimbraClaims)
+                    {
+                        PropertyInfo propertyInfo = properties.SingleOrDefault(p => p.Name == claim.Name);
+                        if (propertyInfo != null && propertyInfo.Name == claim.Name)
+                        {
+                            if (propertyInfo.PropertyType == typeof(string))
+                            {
+                                string value = propertyInfo.GetValue(zuser) as string;
+                                if (!string.IsNullOrWhiteSpace(value))
+                                {
+                                    
+                                    SPClaim spclaim = CreateClaim(claim.ClaimType, value, claim.ClaimTypeValue);
+                                    if (!claims.Contains(spclaim))
+                                    {
+                                        claims.Add(spclaim);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                IList values = (IList)propertyInfo.GetValue(zuser);
+                                if (values != null)
+                                {
+                                    foreach (string value in values)
+                                    {
+                                        if (!string.IsNullOrWhiteSpace(value))
+                                        {
+                                            SPClaim spclaim = CreateClaim(claim.ClaimType, value, claim.ClaimTypeValue);
+                                            if (!claims.Contains(spclaim))
+                                            {
+                                                claims.Add(spclaim);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         protected override void FillDefaultLocalizedDisplayName(System.Globalization.CultureInfo culture, out string localizedName)
@@ -66,6 +162,7 @@ namespace ClubCloud.Provider
         {
             get
             {
+                //return true;
                 return base.SupportsUserKey;
             }
         }
@@ -74,24 +171,107 @@ namespace ClubCloud.Provider
         {
             get
             {
+                //return true;
                 return base.SupportsUserSpecificHierarchy;
             }
         }
 
         protected override void FillClaimTypes(List<string> claimTypes)
         {
-            throw new NotImplementedException();
+            if (claimTypes == null)
+                throw new ArgumentNullException(Name + ":Invalid Claim Types");
 
+            IEnumerable<ZimbraClaim> claims = ZimbraClaimsMapped.Claims.Where(x => x.ClaimType != null);
+
+            foreach (ZimbraClaim claim in claims)
+            {
+                claimTypes.Add(claim.ClaimType);
+            }
+            //throw new NotImplementedException();
         }
 
         protected override void FillClaimValueTypes(List<string> claimValueTypes)
         {
-            throw new NotImplementedException();
+            if (claimValueTypes == null)
+                throw new ArgumentNullException(Name + ":Invalid Claim Value Types");
+
+            IEnumerable<ZimbraClaim> claims = ZimbraClaimsMapped.Claims.Where(x => x.ClaimTypeValue != null);
+
+            foreach (ZimbraClaim claim in claims)
+            {
+                claimValueTypes.Add(claim.ClaimTypeValue);
+            }
+
+            //throw new NotImplementedException();
         }
 
         protected override void FillClaimsForEntity(Uri context, Microsoft.SharePoint.Administration.Claims.SPClaim entity, List<Microsoft.SharePoint.Administration.Claims.SPClaim> claims)
         {
-            throw new NotImplementedException();
+            if (entity.Value.Contains("zimbramembershipprovider") || entity.Value.Contains("zimbraroleprovider"))
+            {
+                string identifier = entity.Value.Split('|').Last();
+                MembershipUser user;
+                if (!string.IsNullOrWhiteSpace(identifier))
+                {
+                     user = Provider.GetUser(identifier, true);
+                }
+                else
+                {
+                    user = Provider.GetUser(entity.Value,true);
+                }
+
+                ZimbraMembershipUser zuser = null;
+                if (user != null && user.GetType() == typeof(ZimbraMembershipUser))
+                {
+                    zuser = user as ZimbraMembershipUser;
+                }
+
+                if (zuser != null)
+                {
+                    Type tuser = zuser.GetType();
+                    PropertyInfo[] properties = tuser.GetProperties();
+                    IEnumerable<ZimbraClaim> zimbraClaims = ZimbraClaimsMapped.Claims.Where(x => x.ClaimTypeValue != null);
+
+                    foreach (ZimbraClaim claim in zimbraClaims)
+                    {
+                        PropertyInfo propertyInfo = properties.SingleOrDefault(p => p.Name == claim.Name);
+                        if (propertyInfo != null && propertyInfo.Name == claim.Name)
+                        {
+                            if (propertyInfo.PropertyType == typeof(string))
+                            {
+                                string value = propertyInfo.GetValue(zuser) as string;
+                                if (!string.IsNullOrWhiteSpace(value))
+                                {
+                                    SPClaim spclaim = CreateClaim(claim.ClaimType, value, claim.ClaimTypeValue);
+                                    if (!claims.Contains(spclaim))
+                                    {
+                                        claims.Add(spclaim);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                IList values = (IList)propertyInfo.GetValue(zuser);
+                                if (values != null)
+                                {
+                                    foreach (string value in values)
+                                    {
+                                        if (!string.IsNullOrWhiteSpace(value))
+                                        {
+                                            SPClaim spclaim = CreateClaim(claim.ClaimType, value, claim.ClaimTypeValue);
+                                            if (!claims.Contains(spclaim))
+                                            {
+                                                claims.Add(spclaim);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //throw new NotImplementedException();
         }
 
         protected override void FillEntityTypes(List<string> entityTypes)
@@ -99,25 +279,167 @@ namespace ClubCloud.Provider
             if (entityTypes == null)
                 throw new ArgumentNullException(Name + ":Invalid Entity Types");
 
-            entityTypes.Add(SPClaimEntityTypes.FormsRole);
-            entityTypes.Add(SPClaimEntityTypes.DistributionList);
-            entityTypes.Add(SPClaimEntityTypes.SecurityGroup);
-            entityTypes.Add(SPClaimEntityTypes.User);
+            IEnumerable<ZimbraClaim> claims = ZimbraClaimsMapped.Claims.Where(x => x.EntityType != null);
+
+            foreach (ZimbraClaim claim in claims)
+            {
+                entityTypes.Add(claim.EntityType);
+            }
         }
 
         protected override void FillHierarchy(Uri context, string[] entityTypes, string hierarchyNodeID, int numberOfLevels, Microsoft.SharePoint.WebControls.SPProviderHierarchyTree hierarchy)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         protected override void FillResolve(Uri context, string[] entityTypes, Microsoft.SharePoint.Administration.Claims.SPClaim resolveInput, List<Microsoft.SharePoint.WebControls.PickerEntity> resolved)
         {
-            throw new NotImplementedException();
+            //PickerEntity[] baseResolved = base.Resolve(context, entityTypes, resolveInput);
+            List<SPClaim> claims = base.GetClaimsForEntity(context,resolveInput).ToList<SPClaim>();
+            FillClaimsForEntity(context, resolveInput, claims);
+
+            if (resolveInput.OriginalIssuer.Contains("zimbramembershipprovider") || resolveInput.OriginalIssuer.Contains("zimbraroleprovider"))
+            {
+                if (resolved.Count > 0)// || resolved.Count == 1)
+                {
+                    string identifier = resolveInput.Value.Split('|').Last();
+                    MembershipUser user;
+                    if (!string.IsNullOrWhiteSpace(identifier))
+                    {
+                        user = Provider.GetUser(identifier, true);
+                    }
+                    else
+                    {
+                        user = Provider.GetUser(resolveInput.Value, true);
+                    }
+
+                    //MembershipUser user = Provider.GetUser(resolveInput.Value, true);
+                    ZimbraMembershipUser zuser = null;
+                    if (user != null && user.GetType() == typeof(ZimbraMembershipUser))
+                    {
+                        zuser = user as ZimbraMembershipUser;
+                    }
+
+                    if (zuser != null)
+                    {
+                        PickerEntity pe = CreatePickerEntity();
+                        pe.Claim = resolveInput;
+                        //pe.ProviderName = resolveInput.OriginalIssuer;
+                        //pe.Description = resolveInput.OriginalIssuer + ":" + zuser.displayName;
+                        pe.DisplayText = zuser.displayName;
+                        pe.EntityType = SPClaimEntityTypes.User;
+                        pe.IsResolved = true;
+                        //pe.EntityGroupName = "Leden";
+                        pe.EntityData[PeopleEditorEntityDataKeys.DisplayName] = zuser.displayName;
+                        pe.EntityData[PeopleEditorEntityDataKeys.Email] = zuser.Email;
+                        pe.EntityData[PeopleEditorEntityDataKeys.UserId] = zuser.uid;
+                        pe.EntityData[PeopleEditorEntityDataKeys.AccountName] = zuser.uid;
+                        resolved.Add(pe);
+
+                    }
+                }
+                //FillResolve(context, entityTypes, resolveInput.Value, resolved);
+                //throw new NotImplementedException();
+            }
         }
 
         protected override void FillResolve(Uri context, string[] entityTypes, string resolveInput, List<Microsoft.SharePoint.WebControls.PickerEntity> resolved)
         {
-            throw new NotImplementedException();
+            if (resolved.Count == 0)// || resolved.Count == 1)
+            {
+                string identifier = resolveInput.Split('|').Last();
+                MembershipUser user;
+                if (!string.IsNullOrWhiteSpace(identifier))
+                {
+                    user = Provider.GetUser(identifier, false);
+                }
+                else
+                {
+                    user = Provider.GetUser(resolveInput, false);
+                }
+
+                ZimbraMembershipUser zuser = null;
+                if (user != null && user.GetType() == typeof(ZimbraMembershipUser))
+                {
+                    zuser = user as ZimbraMembershipUser;
+                }
+
+                if (zuser != null)
+                {
+                    PickerEntity pe = CreatePickerEntity();
+                    pe.Claim = base.CreateClaim(SPClaimTypes.UserLogonName,zuser.uid, "http://www.w3.org/2001/XMLSchema#string");
+                    pe.DisplayText = zuser.displayName;
+                    pe.EntityType = SPClaimEntityTypes.User;
+                    pe.IsResolved = true;
+                    pe.EntityData[PeopleEditorEntityDataKeys.DisplayName] = zuser.displayName;
+                    pe.EntityData[PeopleEditorEntityDataKeys.Email] = zuser.Email;
+                    pe.EntityData[PeopleEditorEntityDataKeys.SIPAddress] = zuser.Email;
+                    pe.EntityData[PeopleEditorEntityDataKeys.UserId] = zuser.uid;
+                    pe.EntityData[PeopleEditorEntityDataKeys.AccountName] = zuser.uid;
+                    resolved.Add(pe);
+
+                    List<SPClaim> claims = base.GetClaimsForEntity(context, pe.Claim).ToList<SPClaim>();
+                    FillClaimsForEntity(context, pe.Claim, claims);
+                }
+            }
+            //MembershipUser user = Provider.GetUser(resolveInput, true);
+            //ZimbraMembershipUser zuser = null;
+            /*
+            if (user != null && user.GetType() == typeof(ZimbraMembershipUser))
+            {
+                zuser = user as ZimbraMembershipUser;
+            }
+            */
+            //if (zuser != null)
+            //{
+                /*
+                PickerEntity pe = CreatePickerEntity();
+                pe.Claim = new SPClaim(SPClaimTypes.UserLogonName, zuser.uid, "http://www.w3.org/2001/XMLSchema#string", "Forms:ZimbraMembershipProvider");
+                //pe.ProviderName = Provider.Name;
+                //pe.Description = Provider.Description;
+                pe.DisplayText = zuser.displayName;
+                pe.EntityType = SPClaimEntityTypes.User;
+                pe.IsResolved = true;
+                //pe.EntityGroupName = "Leden";
+                pe.EntityData[PeopleEditorEntityDataKeys.DisplayName] = zuser.displayName;
+                pe.EntityData[PeopleEditorEntityDataKeys.Email] = zuser.Email;
+                pe.EntityData[PeopleEditorEntityDataKeys.UserId] = zuser.uid;
+                pe.EntityData[PeopleEditorEntityDataKeys.AccountName] = zuser.uid;
+                resolved.Add(pe);
+                */
+                /*
+                Type tuser = zuser.GetType();
+                PropertyInfo[] properties = tuser.GetProperties();
+                IEnumerable<ZimbraClaim> zimbraClaims = ZimbraClaimsMapped.Claims.Where(x => x.ClaimTypeValue != null);
+
+                foreach (ZimbraClaim claim in zimbraClaims)
+                {
+                    PropertyInfo propertyInfo = properties.SingleOrDefault(p => p.Name == claim.Name);
+                    if (propertyInfo != null && propertyInfo.Name == claim.Name)
+                    {
+                        if (propertyInfo.PropertyType == typeof(string))
+                        {
+                            string value = propertyInfo.GetValue(zuser) as string;
+                            SPClaim spclaim = CreateClaim(claim.ClaimType, value, claim.ClaimTypeValue);
+                            claims.Add(spclaim);
+                        }
+                        else
+                        {
+                            IList values = (IList)propertyInfo.GetValue(zuser);
+                            if (values != null)
+                            {
+                                foreach (string value in values)
+                                {
+                                    SPClaim spclaim = CreateClaim(claim.ClaimType, value, claim.ClaimTypeValue);
+                                    claims.Add(spclaim);
+                                }
+                            }
+                        }
+                    }
+                }
+                */
+            //} 
+            //throw new NotImplementedException();
         }
 
         protected override void FillSchema(Microsoft.SharePoint.WebControls.SPProviderSchema schema)
@@ -125,6 +447,14 @@ namespace ClubCloud.Provider
             if (schema == null)
                 throw new ArgumentNullException(Name + ":Invalid Schema Provider");
 
+            IEnumerable<ZimbraClaim> claims = ZimbraClaimsMapped.Claims.Where(x => x.EntityDataKey != null);
+
+            foreach (ZimbraClaim claim in claims)
+            {
+                schema.AddSchemaElement(new SPSchemaElement(claim.EntityDataKey, claim.Name, SPSchemaElementType.Both));
+            }
+
+            /*
             schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.AccountName, "Account Naam", SPSchemaElementType.Both));
             schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.Department, "Group Naam", SPSchemaElementType.Both));
             schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.DisplayName, "Display Naam", SPSchemaElementType.Both));
@@ -135,32 +465,34 @@ namespace ClubCloud.Provider
             schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.SharePointGroupId, "Group", SPSchemaElementType.Both));
             schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.UserId, "uid", SPSchemaElementType.Both));
             schema.AddSchemaElement(new SPSchemaElement(PeopleEditorEntityDataKeys.WorkPhone, "Telefoon", SPSchemaElementType.Both));
+            */
         }
 
         protected override void FillSearch(Uri context, string[] entityTypes, string searchPattern, string hierarchyNodeID, int maxCount, Microsoft.SharePoint.WebControls.SPProviderHierarchyTree searchTree)
         {
-            throw new NotImplementedException();
+            //SPProviderHierarchyNode matchNode = null;
+            //throw new NotImplementedException();
         }
 
 
         public override bool SupportsEntityInformation
         {
-            get { throw new NotImplementedException(); }
+            get { return true; }
         }
 
         public override bool SupportsHierarchy
         {
-            get { throw new NotImplementedException(); }
+            get { return true; }
         }
 
         public override bool SupportsResolve
         {
-            get { throw new NotImplementedException(); }
+            get { return true; }
         }
 
         public override bool SupportsSearch
         {
-            get { throw new NotImplementedException(); }
+            get { return true; }
         }
 
         #region ULS

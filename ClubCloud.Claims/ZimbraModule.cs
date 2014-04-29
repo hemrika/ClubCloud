@@ -8,6 +8,7 @@ using Microsoft.SharePoint.Administration.Claims;
 using System.IdentityModel.Services;
 using System.Security.Principal;
 using System.Security.Claims;
+using System.Web.Security;
 
 namespace ClubCloud.Provider
 {
@@ -17,16 +18,117 @@ namespace ClubCloud.Provider
 
         public void Init(HttpApplication context)
         {
-            // Single Sign-Out
-            FederatedAuthentication.WSFederationAuthenticationModule.SignedIn += WSFederationAuthenticationModule_SignedIn;
-            FederatedAuthentication.SessionAuthenticationModule.SigningOut += SessionAuthenticationModule_SigningOut;
+            context.AuthenticateRequest += context_AuthenticateRequest;
+            context.AuthorizeRequest += context_AuthorizeRequest;
+            context.PostAuthenticateRequest += context_PostAuthenticateRequest;
+            context.PostAuthorizeRequest += context_PostAuthorizeRequest;
+
+            FederatedAuthentication.SessionAuthenticationModule.SessionSecurityTokenCreated += SessionAuthenticationModule_SessionSecurityTokenCreated;
             FederatedAuthentication.SessionAuthenticationModule.SessionSecurityTokenReceived += SessionAuthenticationModule_SessionSecurityTokenReceived;
+            FederatedAuthentication.SessionAuthenticationModule.SignedOut += SessionAuthenticationModule_SignedOut;
+            FederatedAuthentication.SessionAuthenticationModule.SigningOut += SessionAuthenticationModule_SigningOut;
+            FederatedAuthentication.SessionAuthenticationModule.SignOutError += SessionAuthenticationModule_SignOutError;
+
+            FederatedAuthentication.WSFederationAuthenticationModule.AuthorizationFailed += WSFederationAuthenticationModule_AuthorizationFailed;
+            FederatedAuthentication.WSFederationAuthenticationModule.SecurityTokenReceived += WSFederationAuthenticationModule_SecurityTokenReceived;
+            FederatedAuthentication.WSFederationAuthenticationModule.SecurityTokenValidated += WSFederationAuthenticationModule_SecurityTokenValidated;
+            FederatedAuthentication.WSFederationAuthenticationModule.SessionSecurityTokenCreated += WSFederationAuthenticationModule_SessionSecurityTokenCreated;
+            FederatedAuthentication.WSFederationAuthenticationModule.SignedIn += WSFederationAuthenticationModule_SignedIn;
+            FederatedAuthentication.WSFederationAuthenticationModule.SignedOut += WSFederationAuthenticationModule_SignedOut;
+            FederatedAuthentication.WSFederationAuthenticationModule.SigningOut += WSFederationAuthenticationModule_SigningOut;
+
+            // Single Sign-Out
+            //FederatedAuthentication.WSFederationAuthenticationModule.SignedIn += WSFederationAuthenticationModule_SignedIn;
+            //FederatedAuthentication.SessionAuthenticationModule.SigningOut += SessionAuthenticationModule_SigningOut;
+            //FederatedAuthentication.SessionAuthenticationModule.SessionSecurityTokenReceived += SessionAuthenticationModule_SessionSecurityTokenReceived;
+        }
+
+        void WSFederationAuthenticationModule_SigningOut(object sender, SigningOutEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void WSFederationAuthenticationModule_SignedOut(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void WSFederationAuthenticationModule_SignedIn(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void WSFederationAuthenticationModule_SessionSecurityTokenCreated(object sender, SessionSecurityTokenCreatedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void WSFederationAuthenticationModule_SecurityTokenValidated(object sender, SecurityTokenValidatedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void WSFederationAuthenticationModule_SecurityTokenReceived(object sender, SecurityTokenReceivedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void WSFederationAuthenticationModule_AuthorizationFailed(object sender, AuthorizationFailedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void SessionAuthenticationModule_SignOutError(object sender, ErrorEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void SessionAuthenticationModule_SigningOut(object sender, SigningOutEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void SessionAuthenticationModule_SignedOut(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void SessionAuthenticationModule_SessionSecurityTokenReceived(object sender, SessionSecurityTokenReceivedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void SessionAuthenticationModule_SessionSecurityTokenCreated(object sender, SessionSecurityTokenCreatedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void context_PostAuthorizeRequest(object sender, EventArgs e)
+        {
+            //FormsAuthentication..SetAuthCookie(username, true);
+            //throw new NotImplementedException();
+        }
+
+        void context_PostAuthenticateRequest(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void context_AuthorizeRequest(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        void context_AuthenticateRequest(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
         }
 
         public void Dispose()
         {
         }
 
+        /*
         private void WSFederationAuthenticationModule_SignedIn(object sender, EventArgs e)
         {
             ClaimsIdentity identity = HttpContext.Current.User.Identity as ClaimsIdentity;
@@ -134,5 +236,6 @@ namespace ClubCloud.Provider
                 e.ReissueCookie = true;
             }
         }
+        */
     }
 }

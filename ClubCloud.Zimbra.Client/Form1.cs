@@ -21,6 +21,8 @@ using System.Reflection;
 using System.Collections;
 using Microsoft.Web.Administration;
 using System.Xml;
+using System.Net.Cache;
+using ClubCloud.KNLTB.Client;
 
 namespace ClubCloud.Zimbra.Client
 {
@@ -153,71 +155,146 @@ namespace ClubCloud.Zimbra.Client
         {
             try
             {
-                ServerManager manager = new ServerManager();
-                Site site = manager.Sites["SharePoint Web Services"];
+                KNLTB.KNLTBService service = new KNLTB.KNLTBService();
+                List<string> bondsnummers= new List<string>();
+                bondsnummers.Add("11894962");
+                bondsnummers.Add("12073377");
+                bondsnummers.Add("12073385");
+                List<Spelersprofiel> profielen = service.Spelersprofielen(bondsnummers);
 
-                if (site != null)
+                foreach (Spelersprofiel profiel in profielen)
                 {
-                    Configuration configuration = site.GetWebConfiguration();
-
-                    //SectionGroupCollection sections = configuration.RootSectionGroup.SectionGroups;
-                    SectionGroup zimbra = configuration.RootSectionGroup.SectionGroups.SingleOrDefault(section => section.Name == "Zimbra");
-
-                    if(zimbra == null )
-                    {
-                        //XmlNode sectionGroupNode = ZimbrasectionGroup();
-                        Microsoft.Web.Administration.Application root = site.Applications.SingleOrDefault(app => app.ApplicationPoolName == "SharePoint Web Services Root");
-                        string rootPath = root.VirtualDirectories.SingleOrDefault().PhysicalPath;
-                        XmlDocument rootConfig = GetWebConfig(rootPath + @"\web.config");
-
-                        AppendSectionGroupZimbra(ref rootConfig);
-                        rootConfig.Save(rootPath + @"\web.config");
-
-
-                        //sections.AppendChild(ZimbrasectionGroup());
-
-                        Microsoft.Web.Administration.Application sts = site.Applications.SingleOrDefault(app => app.ApplicationPoolName == "SecurityTokenServiceApplicationPool");
-                        string stsPath = sts.VirtualDirectories.FirstOrDefault().PhysicalPath;
-                        XmlDocument stsConfig = GetWebConfig(rootPath + @"\web.config");
-                    }
-
-                    /*
-                    foreach (Microsoft.Web.Administration.Application app in apps)
-                    {
-                        //"SecurityTokenServiceApplicationPool"
-                        //"SharePoint Web Services Root"
-                        string name = app.ApplicationPoolName;
-                        VirtualDirectoryCollection directories = app.VirtualDirectories;
-                        foreach (VirtualDirectory directory in directories)
-                        {
-                            string path = directory.PhysicalPath;
-                        }
-                    }
-                    */
-                    /*
-                    ConfigurationSection ZimbraSection = null;
-                    try
-                    {
-                        SectionGroup effective = configuration.GetEffectiveSectionGroup();
-                        SectionGroupCollection sections = configuration.RootSectionGroup.SectionGroups;
-                        SectionGroup zimbra = sections.Single(section => Name == "Zimbra");
-
-
-                        //ZimbraSection = configuration.GetSection("Zimbra/Configuration");
-                    }
-                    catch { }
-
-                    if (ZimbraSection != null)
-                    {
-
-                        ConfigurationElementCollection elements = ZimbraSection.GetCollection();
-                        foreach (ConfigurationElement element in elements)
-                        {
-                            string name = element.Attributes["name"].Value.ToString();
-                        }
-                    }
-                    */
+                    string naam = profiel.Spelersnaam;
+                    string vereniging = profiel.Vereniging;
+                    string vId = profiel.VerenigingsNummer;
+                    string vpl = profiel.VerenigingsPlaats;                    
                 }
+
+
+                /*
+                string postData = "curl=Z2F&flags=0&forcedownlevel=0&formdir=12&trusted=0&username=12073385&password=rjm557308453%21&SubmitCreds=%C2%A0";
+                HttpWebRequest request = WebRequest.CreateHttp("https://www.mijnknltb.nl/CookieAuth.dll?Logon");
+                request.Method = "POST";
+                */
+                //request.Accept = "text/html, application/xhtml+xml, */*";
+                /*
+                request.Referer = "https://www.mijnknltb.nl/CookieAuth.dll?GetLogon?curl=Z2F&reason=2&formdir=12";
+                request.UserAgent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+                request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
+                request.Headers.Set(HttpRequestHeader.CacheControl, "no-cache");
+                byte[] data = Encoding.ASCII.GetBytes(postData);
+                request.ContentLength = data.Length;
+                request.KeepAlive = true;
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(data, 0, data.Length);
+                requestStream.Close();
+
+                HttpWebResponse myHttpWebResponse = (HttpWebResponse)request.GetResponse();
+
+                int headcount = myHttpWebResponse.Headers.Count;
+                string header = myHttpWebResponse.GetResponseHeader("Set-Cookie");
+                int number = myHttpWebResponse.Cookies.Count;
+
+                Stream responseStream = myHttpWebResponse.GetResponseStream();
+
+                StreamReader myStreamReader = new StreamReader(responseStream, Encoding.Default);
+
+                string pageContent = myStreamReader.ReadToEnd();
+
+                myStreamReader.Close();
+                responseStream.Close();
+
+                myHttpWebResponse.Close();
+
+                string bogus = pageContent.ToString();
+                */
+                /*
+                HttpWebResponse  response = null;
+                string URLAuth = "https://" + "mail.clubcloud.nl" + ":7071/zimbraAdmin/";
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URLAuth);
+                request.AllowAutoRedirect = false;
+
+                request.KeepAlive = true;
+                */
+                //request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+                /*
+                request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17";
+
+                request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip,deflate,sdch");
+
+                request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US,en;q=0.8");
+
+                request.Headers.Set(HttpRequestHeader.AcceptCharset, "ISO-8859-1,utf-8;q=0.7,*;q=0.3");
+
+                response = (HttpWebResponse)request.GetResponse();
+                */
+                //ServerManager manager = new ServerManager();
+                //Site site = manager.Sites["SharePoint Web Services"];
+
+                //if (site != null)
+                //{
+                //    Configuration configuration = site.GetWebConfiguration();
+
+                //    //SectionGroupCollection sections = configuration.RootSectionGroup.SectionGroups;
+                //    SectionGroup zimbra = configuration.RootSectionGroup.SectionGroups.SingleOrDefault(section => section.Name == "Zimbra");
+
+                //    if(zimbra == null )
+                //    {
+                //        //XmlNode sectionGroupNode = ZimbrasectionGroup();
+                //        Microsoft.Web.Administration.Application root = site.Applications.SingleOrDefault(app => app.ApplicationPoolName == "SharePoint Web Services Root");
+                //        string rootPath = root.VirtualDirectories.SingleOrDefault().PhysicalPath;
+                //        XmlDocument rootConfig = GetWebConfig(rootPath + @"\web.config");
+
+                //        AppendSectionGroupZimbra(ref rootConfig);
+                //        rootConfig.Save(rootPath + @"\web.config");
+
+
+                //        //sections.AppendChild(ZimbrasectionGroup());
+
+                //        Microsoft.Web.Administration.Application sts = site.Applications.SingleOrDefault(app => app.ApplicationPoolName == "SecurityTokenServiceApplicationPool");
+                //        string stsPath = sts.VirtualDirectories.FirstOrDefault().PhysicalPath;
+                //        XmlDocument stsConfig = GetWebConfig(rootPath + @"\web.config");
+                //    }
+
+                //    /*
+                //    foreach (Microsoft.Web.Administration.Application app in apps)
+                //    {
+                //        //"SecurityTokenServiceApplicationPool"
+                //        //"SharePoint Web Services Root"
+                //        string name = app.ApplicationPoolName;
+                //        VirtualDirectoryCollection directories = app.VirtualDirectories;
+                //        foreach (VirtualDirectory directory in directories)
+                //        {
+                //            string path = directory.PhysicalPath;
+                //        }
+                //    }
+                //    */
+                //    /*
+                //    ConfigurationSection ZimbraSection = null;
+                //    try
+                //    {
+                //        SectionGroup effective = configuration.GetEffectiveSectionGroup();
+                //        SectionGroupCollection sections = configuration.RootSectionGroup.SectionGroups;
+                //        SectionGroup zimbra = sections.Single(section => Name == "Zimbra");
+
+
+                //        //ZimbraSection = configuration.GetSection("Zimbra/Configuration");
+                //    }
+                //    catch { }
+
+                //    if (ZimbraSection != null)
+                //    {
+
+                //        ConfigurationElementCollection elements = ZimbraSection.GetCollection();
+                //        foreach (ConfigurationElement element in elements)
+                //        {
+                //            string name = element.Attributes["name"].Value.ToString();
+                //        }
+                //    }
+                //    */
+                //}
 
                 /*
                 GetAccountMembershipRequest request = new GetAccountMembershipRequest { account = new accountSelector { by = accountBy.Name, Value = "12073385@clubcloud.nl" } };
@@ -534,7 +611,6 @@ namespace ClubCloud.Zimbra.Client
 
         private void button2_Click(object sender, EventArgs e)
         {
-            server.Authenticate("admin@clubcloud.nl", "rjm557308453!", true);
         }
     }
 }

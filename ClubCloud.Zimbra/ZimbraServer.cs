@@ -4,8 +4,10 @@ using ClubCloud.Zimbra.Global;
 using ClubCloud.Zimbra.Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
@@ -161,6 +163,8 @@ namespace ClubCloud.Zimbra
 
             if (IsAdmin)
             {
+                //ZimbraEndpointAddress.ZimbraHeaderContext = new ZimbraHeaderContext();
+
                 Zimbra.Administration.AuthResponse response;
                 if (administration == null)
                 {
@@ -170,18 +174,19 @@ namespace ClubCloud.Zimbra
                 response = administration.AccountAuth(request);
                 if (!string.IsNullOrEmpty(response.authToken))
                 {
+                    ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
+                    ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = false };
+                    ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
+                    //ZimbraEndpointAddress.ZimbraHeaderContext.account.by = accountBy.name;
+
                     AuthenticatedAdmin = true;
                     AuthToken = response.authToken;
                 }
-
-                ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
-                ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = false };
-                ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
-                //ZimbraEndpointAddress.ZimbraHeaderContext.account.by = accountBy.name;
-
             }
             else
             {
+                //ZimbraEndpointAddress.ZimbraHeaderContext = new ZimbraHeaderContext();
+
                 Zimbra.Account.AuthResponse response;
                 if (account == null)
                 {
@@ -203,6 +208,24 @@ namespace ClubCloud.Zimbra
 
             //GetVersioInfo(asAdmin);
             return AuthToken;
+        }
+
+        public void TriggerWebSite()
+        {
+            try
+            {
+                string URLAuth = "https://" + configuration.Server.ServerName + ":7071/zimbraAdmin/";
+                WebClient webClient = new WebClient();
+
+                NameValueCollection formData = new NameValueCollection();
+                formData["ZLoginUserName"] = configuration.Server.UserName;
+                formData["ZLoginPassword"] = configuration.Server.Password;
+
+                byte[] responseBytes = webClient.UploadValues(URLAuth, "POST", formData);
+                string resultAuthTicket = Encoding.UTF8.GetString(responseBytes);
+                webClient.Dispose();
+            }
+            catch { }
         }
 
         private void GetVersioInfo(bool asAdmin = false)

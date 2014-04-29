@@ -1,19 +1,23 @@
 ﻿using ClubCloud.Zimbra.Administration;
 using ClubCloud.Zimbra.Global;
 using ClubCloud.Zimbra.Service;
+using Microsoft.IdentityModel.Web;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
+using Microsoft.SharePoint.IdentityModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Configuration.Provider;
+using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Security;
 using System.Security.Principal;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
@@ -154,7 +158,10 @@ namespace ClubCloud.Provider
             {
                 zimbraconfiguration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
             }
-            catch { };
+            catch (Exception ex)
+            {
+                string messsage = ex.Message;
+            }
 
             if (zimbraconfiguration == null)
             {
@@ -250,7 +257,7 @@ namespace ClubCloud.Provider
             }
             catch (ZimbraSettingsException zex)
             {
-                string message = String.Format("Error while initializing settings Memebership Provider {0}: {1}", this.applicationName, zex.Message);
+                string message = String.Format("Error while initializing settings Membership Provider {0}: {1}", this.applicationName, zex.Message);
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message, zex);
             }
@@ -261,9 +268,20 @@ namespace ClubCloud.Provider
 
                 try
                 {
-                    if (!zimbraServer.AuthenticatedAdmin.Value)
+                    while(!zimbraServer.AuthenticatedAdmin.Value)
                     {
-                        AdminToken = zimbraServer.Authenticate(zimbraconfiguration.Server.UserName, zimbraconfiguration.Server.Password, zimbraconfiguration.Server.IsAdmin);
+                        try
+                        {
+                            AdminToken = zimbraServer.Authenticate(zimbraconfiguration.Server.UserName, zimbraconfiguration.Server.Password, zimbraconfiguration.Server.IsAdmin);
+                        }
+                        catch { }
+
+                        if (string.IsNullOrEmpty(AdminToken))
+                        {
+                            //zimbraServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName);
+                            zimbraServer.TriggerWebSite();
+                            System.Threading.Thread.Sleep(1000);
+                        }
                     }
 
                     using (Zimbra.Administration.GetVersionInfoResponse response = zimbraServer.Message(new Zimbra.Administration.GetVersionInfoRequest()) as Zimbra.Administration.GetVersionInfoResponse)
@@ -285,6 +303,7 @@ namespace ClubCloud.Provider
                     LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                     throw new ProviderException(message, ex);
                 }
+
                 GetPasswordProperties();
 
                 GetLockProperties();
@@ -582,6 +601,24 @@ namespace ClubCloud.Provider
 
         public override System.Web.Security.MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
+            MembershipUserCollection users = new MembershipUserCollection();
+
+            string[] parts = emailToMatch.Split('@');//.Last();
+            if (parts.Length == 2)
+            {
+                string emaildomain = parts.Last();
+                Uri uri = new Uri(emaildomain);
+                if (uri.HostNameType == UriHostNameType.Dns)
+                {
+
+                }
+            }
+            else
+            {
+                totalRecords = 0;
+                return users;
+            }
+
             if (!Initialized)
             {
                 string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
@@ -589,13 +626,17 @@ namespace ClubCloud.Provider
                 throw new ProviderException(message);
             }
 
-            MembershipUserCollection users = new MembershipUserCollection();
+            
             SPContext context = SPContext.Current;
             string domain = null;
             totalRecords = 0;
             if (context != null)
             {
                 domain = GetZimbraDomain(context.Site.Url);
+                if (emailToMatch.Contains('<') && emailToMatch.Contains('>'))
+                {
+                    emailToMatch = Regex.Match(emailToMatch, @"\<([^)]*)\>").Groups[1].Value;
+                }
 
                 Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
                 srequest.query = String.Format("(|(mail=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", emailToMatch);
@@ -603,6 +644,7 @@ namespace ClubCloud.Provider
                 Zimbra.Administration.SearchDirectoryResponse sresponse = zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
                 List<Zimbra.Global.accountInfo> accounts = sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; });
 
+                totalRecords += accounts.Count;
                 if (accounts.Count > 0)
                 {
                     foreach (accountInfo account in accounts)
@@ -631,23 +673,23 @@ namespace ClubCloud.Provider
                                         }
                                     }
                                 }
-                                users.Add(user);
+
                             }
                             catch
                             {
                             }
                         }
+                        users.Add(user);
                     }
-                    totalRecords = accounts.Count;
                 }
                 return users;
             }
-
             return new MembershipUserCollection();
         }
 
         public override System.Web.Security.MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
+            
             if (!Initialized)
             {
                 string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
@@ -662,12 +704,18 @@ namespace ClubCloud.Provider
             if (context != null)
             {
                 domain = GetZimbraDomain(context.Site.Url);
+                if(usernameToMatch.Contains('<') && usernameToMatch.Contains('>'))
+                {
+                    usernameToMatch = Regex.Match(usernameToMatch, @"\<([^)]*)\>").Groups[1].Value;
+                }
 
                 Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts", attrs = "displayName,zimbraId,zimbraAliasTargetId,cn,sn,zimbraMailHost,uid,zimbraCOSId,zimbraAccountStatus,zimbraLastLogonTimestamp,description,zimbraIsSystemAccount,zimbraIsDelegatedAdminAccount,zimbraIsAdminAccount,zimbraIsSystemResource,zimbraAuthTokenValidityValue,zimbraIsExternalVirtualAccount,zimbraMailStatus,zimbraIsAdminGroup,zimbraCalResType,zimbraDomainType,zimbraDomainName,zimbraDomainStatus" };
-                srequest.query = String.Format("(|(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(givenName=*{0}*))", usernameToMatch);
+                srequest.query = String.Format("(|(uid=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(givenName=*{0}*))", usernameToMatch);
 
                 Zimbra.Administration.SearchDirectoryResponse sresponse = zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
                 List<Zimbra.Global.accountInfo> accounts = sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; });
+
+                totalRecords += accounts.Count;
 
                 if (accounts.Count > 0)
                 {
@@ -697,13 +745,14 @@ namespace ClubCloud.Provider
                                         }
                                     }
                                 }
-                                users.Add(user);
+                                
                             }
                             catch
                             {
                             }
                         }
-                        totalRecords = accounts.Count;
+                        users.Add(user);
+                        
                     }
                 }
                 return users;
@@ -729,15 +778,48 @@ namespace ClubCloud.Provider
             {
                 domain = GetZimbraDomain(context.Site.Url);
 
-                GetAllAccountsRequest request = new GetAllAccountsRequest { domain = new domainSelector { by = domainBy.name, Value = domain } };
+                GetAllAccountsRequest request = new GetAllAccountsRequest { domain = new domainSelector { by = domainBy.name, Value = domain }, server = new serverSelector { by = serverBy.name, Value = zimbraconfiguration.Server.ServerName } };
                 GetAllAccountsResponse response = zimbraServer.Message(request) as GetAllAccountsResponse;
 
-                if(response != null)
+                if (response != null)
                 {
-                    List<accountInfo> accounts = response.account;
-                    
-                    foreach (accountInfo account in accounts)
+                    List<accountInfo> allaccounts = response.account;
+                    List<accountInfo> accounts = new List<accountInfo>();
+
+                    foreach (accountInfo account in allaccounts)
                     {
+                        try
+                        {
+                            attrN zimbraIsSystemAccount = account.a.SingleOrDefault(a => a.name == "zimbraIsSystemAccount");
+                            if (zimbraIsSystemAccount == null)
+                            {
+                                accounts.Add(account);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.ToString();
+                        }
+                    }
+
+                    totalRecords = accounts.Count;
+
+                    int startIndex = 0;
+                    int endIndex = totalRecords;
+
+                    if (pageIndex > 0)
+                    {
+                        startIndex = pageIndex * pageSize;
+                    }
+
+                    if (((pageIndex * pageSize) + pageSize) < totalRecords)
+                    {
+                        endIndex = (pageIndex * pageSize) + pageSize;
+                    }
+
+                    for (int i = startIndex; i < endIndex; i++)
+                    {
+                        accountInfo account = accounts[i];
                         ZimbraMembershipUser user = new ZimbraMembershipUser();
                         Type tuser = user.GetType();
 
@@ -762,13 +844,10 @@ namespace ClubCloud.Provider
                                         }
                                     }
                                 }
-                                users.Add(user);
                             }
-                            catch
-                            {
-                            }
+                            catch { }
                         }
-                        totalRecords = accounts.Count;
+                        users.Add(user);
                     }
                 }
                 return users;
@@ -825,7 +904,7 @@ namespace ClubCloud.Provider
             {
                 string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                //throw new ProviderException(message);
             }
 
             try
@@ -863,11 +942,10 @@ namespace ClubCloud.Provider
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
-
             return user;
         }
 
@@ -888,44 +966,70 @@ namespace ClubCloud.Provider
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message);
             }
-            Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Id, Value = providerUserKey.ToString() }, applyCos = true };
-            Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
-            if (response != null)
+            try
             {
-                Type tuser = user.GetType();
-                foreach (var item in response.account.a)
+
+                Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Id, Value = providerUserKey.ToString() }, applyCos = true };
+                Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
+                if (response != null)
                 {
-                    try
+                    Type tuser = user.GetType();
+                    foreach (var item in response.account.a)
                     {
-                        PropertyInfo propertyInfo = tuser.GetProperty(item.name);
-                        if (propertyInfo != null)
+                        try
                         {
-                            if (propertyInfo.PropertyType == typeof(string))
+                            PropertyInfo propertyInfo = tuser.GetProperty(item.name);
+                            if (propertyInfo != null)
                             {
-                                propertyInfo.SetValue(user, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
-                            }
-                            else
-                            {
-                                IList attr = (IList)propertyInfo.GetValue(item);
-                                if (attr != null)
+                                if (propertyInfo.PropertyType == typeof(string))
                                 {
-                                    attr.Add(Convert.ChangeType(item.Value,propertyInfo.PropertyType));
-                                    propertyInfo.SetValue(user, attr);
+                                    propertyInfo.SetValue(user, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
+                                }
+                                else
+                                {
+                                    IList attr = (IList)propertyInfo.GetValue(item);
+                                    if (attr != null)
+                                    {
+                                        attr.Add(Convert.ChangeType(item.Value, propertyInfo.PropertyType));
+                                        propertyInfo.SetValue(user, attr);
+                                    }
                                 }
                             }
                         }
-                    }
-                    catch
-                    {
+                        catch
+                        {
+                        }
                     }
                 }
             }
+            catch
+            {
+                return null;
+            }
+            //MembershipUser spuser = new MembershipUser(this.ApplicationName, user.displayName, user.ProviderUserKey, user.Email, string.Empty, string.Empty, user.IsApproved, user.IsLockedOut, user.CreationDate, user.LastLoginDate, user.LastActivityDate, user.LastPasswordChangedDate, user.LastLockoutDate);
+            //return spuser as ZimbraMembershipUser;
             return user;
         }
 
         public override string GetUserNameByEmail(string email)
         {
-            string UserName = "Onbekend";
+            string UserName = null;
+
+            string[] parts = email.Split('@');//.Last();
+            if (parts.Length == 2)
+            {
+                string domain = parts.Last();
+                Uri uri = new Uri(domain);
+                if (uri.HostNameType != UriHostNameType.Dns)
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return UserName;
+            }
+
             if (!Initialized)
             {
                 string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
@@ -943,7 +1047,7 @@ namespace ClubCloud.Provider
                     //UserName = response.account.a[0].Value;
                 }
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
@@ -1188,7 +1292,7 @@ namespace ClubCloud.Provider
 
                     if (parts.Length == 3)
                     {
-                        if ((parts[1].ToLower() == "clubcloud") && (parts[0].ToLower() != "www"))
+                        if ((parts[1].ToLower() == "clubcloud") && ((parts[0].ToLower() != "www") && (parts[0].ToLower() != "mijn") && (parts[0].ToLower() != "development") ))
                         {
                             returnUrl.Append(parts[0] + "." + parts[2]);
                         }

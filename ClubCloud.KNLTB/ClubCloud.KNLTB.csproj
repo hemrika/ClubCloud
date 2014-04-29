@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9D2C2BE5-11E9-4F36-81AE-8F95A1AFAA06}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{68CAE0A5-9672-48DE-8047-3904A4B840B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClubCloud.Zimbra.Client</RootNamespace>
-    <AssemblyName>ClubCloud.Zimbra.Client</AssemblyName>
+    <RootNamespace>ClubCloud.KNLTB</RootNamespace>
+    <AssemblyName>ClubCloud.KNLTB</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -34,28 +34,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
-  <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>ClubCloud.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Web.Administration, Version=7.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Windows\System32\inetsrv\Microsoft.Web.Administration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Management, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Windows\System32\inetsrv\Microsoft.Web.Management.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,33 +51,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Client\CalWedstrijd.cs" />
+    <Compile Include="Client\Competitie.cs" />
+    <Compile Include="Client\Ledenpas.cs" />
+    <Compile Include="Client\MKTeam.cs" />
+    <Compile Include="Client\Partij.cs" />
+    <Compile Include="Client\PartijResult.cs" />
+    <Compile Include="Client\PartijSpeler.cs" />
+    <Compile Include="Client\Pasfoto.cs" />
+    <Compile Include="Client\Persoon.cs" />
+    <Compile Include="Client\PouleStanden.cs" />
+    <Compile Include="Client\PouleWedstrijd.cs" />
+    <Compile Include="Client\Set.cs" />
+    <Compile Include="Client\SlideShowItem.cs" />
+    <Compile Include="Client\Speler.cs" />
+    <Compile Include="Client\SpelersPas.cs" />
+    <Compile Include="Client\Spelersprofiel.cs" />
+    <Compile Include="Client\SpelersprofielTotaal.cs" />
+    <Compile Include="Client\Team.cs" />
+    <Compile Include="Client\Vereniging.cs" />
+    <Compile Include="Client\Wedstrijd.cs" />
+    <Compile Include="Client\ZoekPersoon.cs" />
+    <Compile Include="KNLTBService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\KNLTBBinding.cs" />
+    <Compile Include="Service\KNLTBEndpointAddress.cs" />
+    <Compile Include="Service\KNLTBHeaderContext.cs" />
+    <Compile Include="Service\KNLTBSoap.cs" />
+    <Compile Include="Service\KNLTBSoapChannel.cs" />
+    <Compile Include="Service\KNLTBSoapClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="ClubCloud.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ClubCloud.KNLTB\ClubCloud.KNLTB.csproj">
-      <Project>{68cae0a5-9672-48de-8047-3904a4b840b1}</Project>
-      <Name>ClubCloud.KNLTB</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ClubCloud.Zimbra\ClubCloud.Zimbra.csproj">
-      <Project>{04f1320b-7fd4-4429-985c-b3946ed2f519}</Project>
-      <Name>ClubCloud.Zimbra</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,3 +6,17 @@
 <%@ Import Namespace="Microsoft.SharePoint" %> 
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Claim.ascx.cs" Inherits="ClubCloud.Provider.Webparts.Claim" %>
+<div style="margin-bottom:8px;">
+
+   <h2>SAML Token for Current User</h2>
+
+    <asp:GridView ID="grdClaims" runat="server" AutoGenerateColumns="true" CssClass="gridTable" RowStyle-Wrap="true" AlternatingRowStyle-Wrap="true" Width="800px" >
+      <HeaderStyle CssClass="gridHeaderRow" />
+      <RowStyle CssClass="gridRow" />
+      <AlternatingRowStyle CssClass="gridAlternatingRow" />
+    </asp:GridView>
+
+    <asp:Label ID="status" runat="server" />
+
+  </div>
+

@@ -4,6 +4,10 @@ using System.Security.Permissions;
 using Microsoft.SharePoint;
 using Microsoft.Web.Administration;
 using System.Xml;
+using System.Reflection;
+using System.Collections.Generic;
+using Microsoft.SharePoint.Administration;
+using Microsoft.SharePoint.Utilities;
 
 namespace ClubCloud.Provider.Features.Zimbra_Provider
 {
@@ -22,7 +26,34 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
         {
             SPSecurity.RunWithElevatedPrivileges(delegate()
             {
+                SPSite site = properties.Feature.Parent as SPSite;
+
+                CreateVirtualDirectory(site);
+                SPWeb web = site.RootWeb;
+                //Adding the GroupUserAdded event
+                SPEventReceiverDefinition grpUserAdded = web.EventReceivers.Add();
+                grpUserAdded.Name = "Zimbra User Added";
+                grpUserAdded.Type = SPEventReceiverType.GroupUserAdded;
+                grpUserAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
+                grpUserAdded.Class = "ClubCloud.Provider.ZimbraSecurityEventReceiver";
+                grpUserAdded.Update();
+
+                SPEventReceiverDefinition grpUserAdding = web.EventReceivers.Add();
+                grpUserAdding.Name = "Zimbra User Adding";
+                grpUserAdding.Type = SPEventReceiverType.GroupUserAdding;
+                grpUserAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
+                grpUserAdding.Class = "ClubCloud.Provider.ZimbraSecurityEventReceiver";
+                grpUserAdding.Update();
+
+                web.Update();
             });
+        }
+
+        private void CreateVirtualDirectory(SPSite site)
+        {
+            //TODO
+            string vDirPath = SPUtility.GetVersionedGenericSetupPath(@"TEMPLATE\IDENTITYMODEL\ZIMBRA",15);
+            ZimbraConfiguration.CreatevDir(site.WebApplication.ApplicationPool.Name, "_zimbra", vDirPath);
         }
 
         public override void FeatureDeactivating(SPFeatureReceiverProperties properties)
@@ -36,9 +67,9 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
         {
             SPSecurity.RunWithElevatedPrivileges(delegate()
             {
-                AppendConfigurationCentralAdministration();
                 AppendConfigurationSecureTokenServices();
                 AppendConfigurationRootWebServices();
+                AppendConfigurationCentralAdministration();
             });
         }
 
@@ -46,9 +77,9 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
         {
             SPSecurity.RunWithElevatedPrivileges(delegate()
             {
-                RemoveConfigurationCentralAdministration();
                 RemoveConfigurationSecureTokenServices();
                 RemoveConfigurationRootWebServices();
+                RemoveConfigurationCentralAdministration();
             });
         }
 
@@ -56,14 +87,14 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
         {
             SPSecurity.RunWithElevatedPrivileges(delegate()
             {
-                RemoveConfigurationCentralAdministration();
-                AppendConfigurationCentralAdministration();
-
                 RemoveConfigurationSecureTokenServices();
                 AppendConfigurationSecureTokenServices();
 
                 RemoveConfigurationRootWebServices();
                 AppendConfigurationRootWebServices();
+
+                RemoveConfigurationCentralAdministration();
+                AppendConfigurationCentralAdministration();
             });
         }
 

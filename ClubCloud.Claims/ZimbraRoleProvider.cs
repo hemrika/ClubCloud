@@ -38,7 +38,10 @@ namespace ClubCloud.Provider
             {
                 zimbraconfiguration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
             }
-            catch { };
+            catch(Exception ex)
+            {
+                string messsage = ex.Message;
+            }
 
             if (zimbraconfiguration == null)
             {
@@ -159,9 +162,20 @@ namespace ClubCloud.Provider
 
                 try
                 {
-                    if (!zimbraServer.AuthenticatedAdmin.Value)
+                    while (!zimbraServer.AuthenticatedAdmin.Value)
                     {
-                        AdminToken = zimbraServer.Authenticate(zimbraconfiguration.Server.UserName, zimbraconfiguration.Server.Password, zimbraconfiguration.Server.IsAdmin);
+                        try
+                        {
+                            AdminToken = zimbraServer.Authenticate(zimbraconfiguration.Server.UserName, zimbraconfiguration.Server.Password, zimbraconfiguration.Server.IsAdmin);
+                        }
+                        catch { }
+
+                        if (string.IsNullOrEmpty(AdminToken))
+                        {
+                            //zimbraServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName);
+                            zimbraServer.TriggerWebSite();
+                            System.Threading.Thread.Sleep(1000);
+                        }
                     }
 
                     using (Zimbra.Administration.GetVersionInfoResponse response = zimbraServer.Message(new Zimbra.Administration.GetVersionInfoRequest()) as Zimbra.Administration.GetVersionInfoResponse)
@@ -1037,7 +1051,7 @@ namespace ClubCloud.Provider
 
                     if (parts.Length == 3)
                     {
-                        if ((parts[1].ToLower() == "clubcloud") && (parts[0].ToLower() != "www"))
+                        if ((parts[1].ToLower() == "clubcloud") && ((parts[0].ToLower() != "www") && (parts[0].ToLower() != "mijn") && (parts[0].ToLower() != "development")))
                         {
                             returnUrl.Append(parts[0] + "." + parts[2]);
                         }

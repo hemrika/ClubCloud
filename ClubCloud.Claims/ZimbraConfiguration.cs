@@ -33,6 +33,42 @@ namespace ClubCloud.Provider
         internal static string stsServicesConfigPath = stsServices.VirtualDirectories.FirstOrDefault().PhysicalPath + @"\web.config";
         internal static string caServicesConfigPath = caServices.VirtualDirectories.FirstOrDefault().PhysicalPath + @"\web.config";
 
+        internal static void CreatevDir(string applicationPoolName, string vDirName, string vDirPath)
+        {
+            //Site site = null;
+            try
+            {
+                foreach (Site site in manager.Sites)
+                {
+
+                    Microsoft.Web.Administration.Application siteServices = site.Applications.SingleOrDefault(app => app.ApplicationPoolName == applicationPoolName);
+
+                    if (siteServices != null && siteServices.ApplicationPoolName == applicationPoolName)
+                    {
+                        try
+                        {
+                            VirtualDirectory login = siteServices.VirtualDirectories["_login"];
+                            
+                            VirtualDirectory vDir = login as VirtualDirectory;
+                            vDir.PhysicalPath = vDirPath;
+                            vDir.Path = vDirName;
+                            if (!siteServices.VirtualDirectories.Contains(vDir))
+                            {
+                                siteServices.VirtualDirectories.Add(vDir);
+                            }
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+
+                    }
+                }
+            }
+            catch { return; }
+        }
+
         internal static void GetWebConfig(string configFilePath, ref XmlDocument webConfig)
         {
             //var webConfig = new XmlDocument();
@@ -58,13 +94,15 @@ namespace ClubCloud.Provider
 
             //Section
             XmlNode configSections = webConfig.SelectSingleNode("/configuration/configSections");
-            XmlNode sectionGroup = webConfig.CreateNode(XmlNodeType.Element, "sectionGroup", "");
-            XmlAttribute nameAttribute = webConfig.CreateAttribute("name");
-            nameAttribute.Value = "Zimbra";
-            sectionGroup.Attributes.Append(nameAttribute);
-            sectionGroup.InnerXml = string.Format("<section name=\"Configuration\" type=\"ClubCloud.Zimbra.Service.ZimbraConfigurationHandler,{0}\" />", fullname);
-            configSections.AppendChild(sectionGroup);
-
+            if (configSections != null)
+            {
+                XmlNode sectionGroup = webConfig.CreateNode(XmlNodeType.Element, "sectionGroup", "");
+                XmlAttribute nameAttribute = webConfig.CreateAttribute("name");
+                nameAttribute.Value = "Zimbra";
+                sectionGroup.Attributes.Append(nameAttribute);
+                sectionGroup.InnerXml = string.Format("<section name=\"Configuration\" type=\"ClubCloud.Zimbra.Service.ZimbraConfigurationHandler, {0} \" />", fullname);
+                configSections.AppendChild(sectionGroup);
+            }
 
             XmlNode ZimbraSection = webConfig.CreateNode(XmlNodeType.Element, "Zimbra", "");
             ZimbraSection.InnerXml = "<Configuration><Server Name=\"ClubCloud\" ServerName=\"mail.clubcloud.nl\" UserName=\"admin@clubcloud.nl\" Password=\"rjm557308453!\" IsAdmin=\"true\" Encoded=\"false\" /><Binding MaxReceivedMessageSize=\"2147483647\" /></Configuration>";
@@ -75,32 +113,38 @@ namespace ClubCloud.Provider
         {
             XmlNode configSections = webConfig.SelectSingleNode("/configuration/configSections");
             XmlNode sectionGroup = null;
-            foreach (XmlNode node in configSections.ChildNodes)
+            if (configSections != null)
             {
-                if (node.Attributes["name"].Value == "Zimbra")
+                foreach (XmlNode node in configSections.ChildNodes)
                 {
-                    sectionGroup = node;
-                    break;
+                    if (node.Attributes["name"].Value == "Zimbra")
+                    {
+                        sectionGroup = node;
+                        break;
+                    }
                 }
-            }
-            if (sectionGroup != null)
-            {
-                configSections.RemoveChild(sectionGroup);
+                if (sectionGroup != null)
+                {
+                    configSections.RemoveChild(sectionGroup);
+                }
             }
 
             XmlNode configuration = webConfig.SelectSingleNode("/configuration");
             XmlNode zimbraNode = null;
-            foreach (XmlNode node in configuration.ChildNodes)
+            if (configuration != null)
             {
-                if (node.Name == "Zimbra")
+                foreach (XmlNode node in configuration.ChildNodes)
                 {
-                    zimbraNode = node;
-                    break;
+                    if (node.Name == "Zimbra")
+                    {
+                        zimbraNode = node;
+                        break;
+                    }
                 }
-            }
-            if (zimbraNode != null)
-            {
-                configuration.RemoveChild(zimbraNode);
+                if (zimbraNode != null)
+                {
+                    configuration.RemoveChild(zimbraNode);
+                }
             }
         }
 
@@ -110,44 +154,56 @@ namespace ClubCloud.Provider
 
             XmlNode PeoplePickerWildcards = webConfig.SelectSingleNode("/configuration/SharePoint/PeoplePickerWildcards");
 
-            //<add key="ZimbraMembershipProvider" value="%" />
-            XmlNode peopleRolenode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
-            XmlAttribute peopleRolekeyAttribute = webConfig.CreateAttribute("key");
-            peopleRolekeyAttribute.Value = "ZimbraRoleProvider";
-            peopleRolenode.Attributes.Append(peopleRolekeyAttribute);
-            XmlAttribute peopleRoleValueAttribute = webConfig.CreateAttribute("value");
-            peopleRoleValueAttribute.Value = "%";
-            peopleRolenode.Attributes.Append(peopleRoleValueAttribute);
-            PeoplePickerWildcards.AppendChild(peopleRolenode);
+            if (PeoplePickerWildcards != null)
+            {
+                //<add key="ZimbraMembershipProvider" value="%" />
+                XmlNode peopleRolenode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
+                XmlAttribute peopleRolekeyAttribute = webConfig.CreateAttribute("key");
+                peopleRolekeyAttribute.Value = "ZimbraRoleProvider";
+                peopleRolenode.Attributes.Append(peopleRolekeyAttribute);
+                XmlAttribute peopleRoleValueAttribute = webConfig.CreateAttribute("value");
+                peopleRoleValueAttribute.Value = "";
+                peopleRolenode.Attributes.Append(peopleRoleValueAttribute);
+                PeoplePickerWildcards.AppendChild(peopleRolenode);
 
-            //<add key="ZimbraRoleProvider" value="%" />
-            XmlNode peopleMembernode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
-            XmlAttribute peopleMemberkeyAttribute = webConfig.CreateAttribute("key");
-            peopleMemberkeyAttribute.Value = "ZimbraMembershipProvider";
-            peopleMembernode.Attributes.Append(peopleMemberkeyAttribute);
-            XmlAttribute peopleMemberValueAttribute = webConfig.CreateAttribute("value");
-            peopleMemberValueAttribute.Value = "%";
-            peopleMembernode.Attributes.Append(peopleMemberValueAttribute);
-            PeoplePickerWildcards.AppendChild(peopleMembernode);
+                //<add key="ZimbraRoleProvider" value="%" />
+                XmlNode peopleMembernode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
+                XmlAttribute peopleMemberkeyAttribute = webConfig.CreateAttribute("key");
+                peopleMemberkeyAttribute.Value = "ZimbraMembershipProvider";
+                peopleMembernode.Attributes.Append(peopleMemberkeyAttribute);
+                XmlAttribute peopleMemberValueAttribute = webConfig.CreateAttribute("value");
+                peopleMemberValueAttribute.Value = "";
+                peopleMembernode.Attributes.Append(peopleMemberValueAttribute);
+                PeoplePickerWildcards.AppendChild(peopleMembernode);
+            }
 
             //<add name="ZimbraRoleProvider" type="ClubCloud.Provider.ZimbraRoleProvider, ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" />
             XmlNode roleManager = webConfig.SelectSingleNode("/configuration/system.web/roleManager/providers");
-            XmlNode rolenode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
-            XmlAttribute roleNameAttribute = webConfig.CreateAttribute("name");
-            roleNameAttribute.Value = "ZimbraRoleProvider";
-            XmlAttribute roleTypeAttribute = webConfig.CreateAttribute("type");
-            roleTypeAttribute.Value = string.Format("ClubCloud.Provider.ZimbraRoleProvider, {0}\" />", fullname);
-            roleManager.AppendChild(rolenode);
+            if (roleManager != null)
+            {
+                XmlNode rolenode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
+                XmlAttribute roleNameAttribute = webConfig.CreateAttribute("name");
+                roleNameAttribute.Value = "ZimbraRoleProvider";
+                rolenode.Attributes.Append(roleNameAttribute);
+                XmlAttribute roleTypeAttribute = webConfig.CreateAttribute("type");
+                roleTypeAttribute.Value = string.Format("ClubCloud.Provider.ZimbraRoleProvider, {0} \" />", fullname);
+                rolenode.Attributes.Append(roleTypeAttribute);
+                roleManager.AppendChild(rolenode);
+            }
 
             //<add name="ZimbraMembershipProvider" type="ClubCloud.Provider.ZimbraMembershipProvider, ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" />
             XmlNode membership = webConfig.SelectSingleNode("/configuration/system.web/membership/providers");
-            XmlNode membernode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
-            XmlAttribute memberNameAttribute = webConfig.CreateAttribute("name");
-            memberNameAttribute.Value = "ZimbraMembershipProvider";
-            XmlAttribute memberTypeAttribute = webConfig.CreateAttribute("type");
-            memberTypeAttribute.Value = string.Format("ClubCloud.Provider.ZimbraMembershipProvider, {0}\" />", fullname);
-            membership.AppendChild(membernode);
-
+            if (membership != null)
+            {
+                XmlNode membernode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
+                XmlAttribute memberNameAttribute = webConfig.CreateAttribute("name");
+                memberNameAttribute.Value = "ZimbraMembershipProvider";
+                membernode.Attributes.Append(memberNameAttribute);
+                XmlAttribute memberTypeAttribute = webConfig.CreateAttribute("type");
+                memberTypeAttribute.Value = string.Format("ClubCloud.Provider.ZimbraMembershipProvider, {0} \" />", fullname);
+                membernode.Attributes.Append(memberTypeAttribute);
+                membership.AppendChild(membernode);
+            }
         }
 
         internal static void RemoveProviderZimbra(ref XmlDocument webConfig)
@@ -155,18 +211,21 @@ namespace ClubCloud.Provider
             XmlNode PeoplePickerWildcards = webConfig.SelectSingleNode("/configuration/SharePoint/PeoplePickerWildcards");
             XmlNode peopleRolenode = null;
             XmlNode peopleMembernode = null;
-            foreach (XmlNode node in PeoplePickerWildcards.ChildNodes)
+            if (PeoplePickerWildcards != null)
             {
-                if (node.Attributes["key"].Value == "ZimbraMembershipProvider")
+                foreach (XmlNode node in PeoplePickerWildcards.ChildNodes)
                 {
-                    peopleMembernode = node;
-                }
+                    if (node.Attributes["key"].Value == "ZimbraMembershipProvider")
+                    {
+                        peopleMembernode = node;
+                    }
 
-                if (node.Attributes["key"].Value == "ZimbraRoleProvider")
-                {
-                    peopleRolenode = node;
-                }
+                    if (node.Attributes["key"].Value == "ZimbraRoleProvider")
+                    {
+                        peopleRolenode = node;
+                    }
 
+                }
             }
 
             if(peopleMembernode != null)
@@ -181,12 +240,14 @@ namespace ClubCloud.Provider
 
             XmlNode rolenode = null;
             XmlNode roleManager = webConfig.SelectSingleNode("/configuration/system.web/roleManager/providers");
-
-            foreach (XmlNode node in PeoplePickerWildcards.ChildNodes)
+            if (roleManager != null)
             {
-                if (node.Attributes["name"].Value == "ZimbraRoleProvider")
+                foreach (XmlNode node in PeoplePickerWildcards.ChildNodes)
                 {
-                    rolenode = node;
+                    if (node.Attributes["name"].Value == "ZimbraRoleProvider")
+                    {
+                        rolenode = node;
+                    }
                 }
             }
 
@@ -197,12 +258,14 @@ namespace ClubCloud.Provider
 
             XmlNode membernode = null;
             XmlNode membership = webConfig.SelectSingleNode("/configuration/system.web/membership/providers");
-
-            foreach (XmlNode node in PeoplePickerWildcards.ChildNodes)
+            if (membership != null)
             {
-                if (node.Attributes["name"].Value == "ZimbraMembershipProvider")
+                foreach (XmlNode node in PeoplePickerWildcards.ChildNodes)
                 {
-                    membernode = node;
+                    if (node.Attributes["name"].Value == "ZimbraMembershipProvider")
+                    {
+                        membernode = node;
+                    }
                 }
             }
 
@@ -219,38 +282,45 @@ namespace ClubCloud.Provider
 
             //<add name="ZimbraModule" type="ClubCloud.Provider.ZimbraModule, ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" />
             XmlNode httpModules = webConfig.SelectSingleNode("/configuration/system.web/httpModules");
-            XmlNode httpModulesZimbranode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
-            XmlAttribute httpModulesNameAttribute = webConfig.CreateAttribute("name");
-            httpModulesNameAttribute.Value = "ZimbraModule";
-            httpModulesZimbranode.Attributes.Append(httpModulesNameAttribute);
-            XmlAttribute httpModulesTypeAttribute = webConfig.CreateAttribute("type");
-            httpModulesTypeAttribute.Value = string.Format("ClubCloud.Provider.ZimbraModule, {0}\" />", fullname); ;
-            httpModulesZimbranode.Attributes.Append(httpModulesTypeAttribute);
-            httpModules.AppendChild(httpModulesZimbranode);
+            if (httpModules != null)
+            {
+                XmlNode httpModulesZimbranode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
+                XmlAttribute httpModulesNameAttribute = webConfig.CreateAttribute("name");
+                httpModulesNameAttribute.Value = "ZimbraModule";
+                httpModulesZimbranode.Attributes.Append(httpModulesNameAttribute);
+                XmlAttribute httpModulesTypeAttribute = webConfig.CreateAttribute("type");
+                httpModulesTypeAttribute.Value = string.Format("ClubCloud.Provider.ZimbraModule, {0} \" />", fullname); ;
+                httpModulesZimbranode.Attributes.Append(httpModulesTypeAttribute);
+                httpModules.AppendChild(httpModulesZimbranode);
+            }
 
             //<add name="ZimbraModule" type="ClubCloud.Provider.ZimbraModule, ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" />
             XmlNode modules = webConfig.SelectSingleNode("/configuration/system.webServer/modules");
-            XmlNode modulesZimbranode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
-            XmlAttribute modulesNameAttribute = webConfig.CreateAttribute("name");
-            modulesNameAttribute.Value = "ZimbraModule";
-            modulesZimbranode.Attributes.Append(httpModulesNameAttribute);
-            XmlAttribute modulesTypeAttribute = webConfig.CreateAttribute("type");
-            modulesTypeAttribute.Value = string.Format("ClubCloud.Provider.ZimbraModule, {0}\" />", fullname); ;
-            modulesZimbranode.Attributes.Append(httpModulesTypeAttribute);
-            modules.AppendChild(modulesZimbranode);
-
+            if (modules != null)
+            {
+                XmlNode modulesZimbranode = webConfig.CreateNode(XmlNodeType.Element, "add", "");
+                XmlAttribute modulesNameAttribute = webConfig.CreateAttribute("name");
+                modulesNameAttribute.Value = "ZimbraModule";
+                modulesZimbranode.Attributes.Append(modulesNameAttribute);
+                XmlAttribute modulesTypeAttribute = webConfig.CreateAttribute("type");
+                modulesTypeAttribute.Value = string.Format("ClubCloud.Provider.ZimbraModule, {0} \" />", fullname); ;
+                modulesZimbranode.Attributes.Append(modulesTypeAttribute);
+                modules.AppendChild(modulesZimbranode);
+            }
         }
 
         internal static void RemoveModuleZimbra(ref XmlDocument webConfig)
         {
             XmlNode httpModulesZimbranode = null;
             XmlNode httpModules = webConfig.SelectSingleNode("/configuration/system.web/httpModules");
-
-            foreach (XmlNode node in httpModules.ChildNodes)
+            if (httpModules != null)
             {
-                if (node.Attributes["name"].Value == "ZimbraModule")
+                foreach (XmlNode node in httpModules.ChildNodes)
                 {
-                    httpModulesZimbranode = node;
+                    if (node.Attributes["name"].Value == "ZimbraModule")
+                    {
+                        httpModulesZimbranode = node;
+                    }
                 }
             }
 
@@ -261,20 +331,21 @@ namespace ClubCloud.Provider
 
             XmlNode modulesZimbranode = null;
             XmlNode modules = webConfig.SelectSingleNode("/configuration/system.webServer/modules");
-
-            foreach (XmlNode node in modules.ChildNodes)
+            if (modules != null)
             {
-                if (node.Attributes["name"].Value == "ZimbraModule")
+                foreach (XmlNode node in modules.ChildNodes)
                 {
-                    modulesZimbranode = node;
+                    if (node.Attributes["name"].Value == "ZimbraModule")
+                    {
+                        modulesZimbranode = node;
+                    }
+                }
+
+                if (modulesZimbranode != null)
+                {
+                    modules.RemoveChild(modulesZimbranode);
                 }
             }
-
-            if (modulesZimbranode != null)
-            {
-                modules.RemoveChild(modulesZimbranode);
-            }
-
         }
     }
 }

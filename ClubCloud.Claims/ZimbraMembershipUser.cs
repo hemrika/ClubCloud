@@ -67,7 +67,17 @@ namespace ClubCloud.Provider
         {
             get
             {
-                return base.CreationDate;
+                try
+                {
+                    DateTime cd = DateTime.ParseExact(zimbraCreateTimestamp, "yyyyMMddHHmmssZ", null);
+                    return cd;
+                }
+
+                catch
+                {
+                    return base.CreationDate;
+                }
+                
             }
         }
 
@@ -134,7 +144,11 @@ namespace ClubCloud.Provider
         public string zimbraMailDeliveryAddress
         {
             get { return _zimbraMailDeliveryAddress; }
-            set { _zimbraMailDeliveryAddress = value; }
+            set
+            {
+                base.Email = value;
+                _zimbraMailDeliveryAddress = value;
+            }
         }
 
         public override string Email
@@ -147,7 +161,7 @@ namespace ClubCloud.Provider
             set
             {
                 base.Email = value;
-                zimbraMailDeliveryAddress = value;
+                //zimbraMailDeliveryAddress = value;
             }
         }
 
@@ -223,7 +237,16 @@ namespace ClubCloud.Provider
         {
             get
             {
-                return base.LastLoginDate;
+                try
+                {
+                    DateTime lld = DateTime.ParseExact(zimbraLastLogonTimestamp, "yyyyMMddHHmmssZ", null);
+                    return lld;
+                }
+
+                catch
+                {
+                    return base.LastLoginDate;
+                }
             }
             set
             {
@@ -244,7 +267,16 @@ namespace ClubCloud.Provider
         {
             get
             {
-                return base.LastPasswordChangedDate;
+                try
+                {
+                    DateTime lpcd = DateTime.ParseExact(zimbraPasswordModifiedTime, "yyyyMMddHHmmssZ", null);
+                    return lpcd;
+                }
+
+                catch
+                {
+                    return base.LastPasswordChangedDate;
+                }               
             }
         }
 
@@ -279,7 +311,7 @@ namespace ClubCloud.Provider
                 }
                 return this.zid;
                 */
-                return zimbraId;
+                return uid;
             }
         }
 
@@ -287,7 +319,7 @@ namespace ClubCloud.Provider
         {
             get
             {
-                return uid;////base.UserName;
+                return uid;//uid;////base.UserName;
             }
         }
 
