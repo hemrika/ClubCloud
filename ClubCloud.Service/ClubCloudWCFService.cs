@@ -17,7 +17,7 @@ namespace ClubCloud.Service
     /// </summary>
     [System.Runtime.InteropServices.Guid("e00d1eca-a977-4ba9-a357-5fd35dfc0f63")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
-    internal class HelloWorldWCFService : IHelloWorldWCFService
+    internal class ClubCloudWCFService : IClubCloudWCFService
     {
         #region Methods
 

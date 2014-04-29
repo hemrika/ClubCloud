@@ -112,12 +112,14 @@
       <DependentUpon>Properties.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="BaseServiceClient.cs" />
+    <Compile Include="ClubCloudRESTService.cs" />
     <Compile Include="Features\ClubCloudServiceAdministration\ClubCloudServiceAdministration.EventReceiver.cs">
       <DependentUpon>ClubCloudServiceAdministration.feature</DependentUpon>
     </Compile>
-    <Compile Include="HelloWorldServiceClient.cs" />
-    <Compile Include="HelloWorldWCFService.cs" />
-    <Compile Include="IHelloWorldWCFService.cs" />
+    <Compile Include="ClubCloudServiceClient.cs" />
+    <Compile Include="ClubCloudWCFService.cs" />
+    <Compile Include="IClubCloudRESTService.cs" />
+    <Compile Include="IClubCloudWCFService.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplication.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplicationProxy.cs" />
     <Compile Include="Powershell\RemoveClubCloudService.cs" />
@@ -145,6 +147,10 @@
     <None Include="Features\ClubCloudServiceAdministration\ClubCloudServiceAdministration.feature">
       <FeatureId>{95303089-9602-4186-a353-cb5f1405a9ac}</FeatureId>
     </None>
+    <Content Include="ISAPI\ClubCloud.Service\web.config" />
+    <None Include="ISAPI\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{c6486a53-a50c-430c-8820-347e87f19a2b}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{a4c0cf73-d541-41c3-a1ef-0f71fd8e03ac}</PackageId>
     </None>
@@ -160,6 +166,7 @@
     <None Include="SQL\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9c10b425-f593-48c9-96c1-714998bc48f6}</SharePointProjectItemId>
     </None>
+    <Content Include="ISAPI\ClubCloud.Service\ClubCloud.svc" />
     <Content Include="WebClients\ClubCloud.Service\client.config" />
     <None Include="WebClients\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{28dc8612-1ccf-4bab-a0bc-5aa788ef9f8b}</SharePointProjectItemId>
@@ -197,7 +204,7 @@
     <Content Include="Resources\ClubCloud.Service.ServiceResources.en-US.resx" />
     <Content Include="Resources\ClubCloud.Service.ServiceResources.resx" />
     <Content Include="SQL\ClubCloud.Service\ClubCloud.sql" />
-    <Content Include="WebServices\ClubCloud.Service\HelloWorld.svc" />
+    <Content Include="WebServices\ClubCloud.Service\ClubCloud.svc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

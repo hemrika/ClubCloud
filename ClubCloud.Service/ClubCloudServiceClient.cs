@@ -15,23 +15,23 @@ namespace ClubCloud.Service
     /// <summary>
     /// This is the class that is accessible to the Client callers (web parts, user controls, timer jobs, etc.).
     /// </summary>
-    public class HelloWorldServiceClient : BaseServiceClient
+    public class ClubCloudServiceClient : BaseServiceClient
     {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HelloWorldServiceClient"/> class.
+        /// Initializes a new instance of the <see cref="ClubCloudServiceClient"/> class.
         /// </summary>
-        public HelloWorldServiceClient()
+        public ClubCloudServiceClient()
             : base()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HelloWorldServiceClient"/> class.
+        /// Initializes a new instance of the <see cref="ClubCloudServiceClient"/> class.
         /// </summary>
         /// <param name="serviceContext">An <see cref="Microsoft.SharePoint.Administration.SPServiceContext" />.</param>
-        public HelloWorldServiceClient(SPServiceContext serviceContext)
+        public ClubCloudServiceClient(SPServiceContext serviceContext)
             : base(serviceContext)
         {
         }
@@ -52,7 +52,7 @@ namespace ClubCloud.Service
         /// </remarks>
         protected override string EndPoint
         {
-            get { return "HelloWorld.svc"; }
+            get { return "ClubCloud.svc"; }
         }
 
         #endregion
@@ -68,8 +68,8 @@ namespace ClubCloud.Service
         {
             string response = null;
 
-            this.ExecuteOnChannel<IHelloWorldWCFService>(
-                delegate(IHelloWorldWCFService channel)
+            this.ExecuteOnChannel<IClubCloudWCFService>(
+                delegate(IClubCloudWCFService channel)
                 {
                     response = channel.HelloWorld(inputText);
                 },
@@ -87,8 +87,8 @@ namespace ClubCloud.Service
         {
             string response = null;
 
-            this.ExecuteOnChannel<IHelloWorldWCFService>(
-                delegate(IHelloWorldWCFService channel)
+            this.ExecuteOnChannel<IClubCloudWCFService>(
+                delegate(IClubCloudWCFService channel)
                 {
                     response = channel.HelloWorldFromDatabase(inputText);
                 },
