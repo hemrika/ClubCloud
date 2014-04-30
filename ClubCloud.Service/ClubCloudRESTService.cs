@@ -9,10 +9,12 @@ namespace ClubCloud.Service
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using Microsoft.SharePoint.Administration;
+    using Microsoft.SharePoint.Client.Services;
 
     /// <summary>
     /// The REST Service.
     /// </summary>
+    [BasicHttpBindingServiceMetadataExchangeEndpoint]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     [System.Runtime.InteropServices.Guid("ca13956f-3676-4c74-abdc-e16f784d08ac")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
@@ -25,6 +27,7 @@ namespace ClubCloud.Service
         /// <returns>A string of text echoing the input value.</returns>
         public string HelloWorld(string helloWorld)
         {
+            //return "Hello World - You entered: " + helloWorld;
             ClubCloudServiceClient client = new ClubCloudServiceClient();
             return client.HelloWorld(helloWorld);
         }
@@ -36,8 +39,9 @@ namespace ClubCloud.Service
         /// <returns>A string of text echoing the input value.</returns>
         public string HelloWorldFromDatabase(string helloWorld)
         {
-            ClubCloudServiceClient client = new ClubCloudServiceClient();
-            return client.HelloWorldFromDatabase(helloWorld);
+            return "Hello World - You entered: " + helloWorld;
+            //ClubCloudServiceClient client = new ClubCloudServiceClient();
+            //return client.HelloWorldFromDatabase(helloWorld);
         }
     }
 }

@@ -47,6 +47,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.SharePoint.ApplicationPages.Administration">
       <HintPath>..\..\..\Program Files\Common Files\microsoft shared\Web Server Extensions\15\CONFIG\ADMINBIN\Microsoft.SharePoint.ApplicationPages.Administration.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.SharePoint.Powershell, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -117,9 +118,9 @@
       <DependentUpon>ClubCloudServiceAdministration.feature</DependentUpon>
     </Compile>
     <Compile Include="ClubCloudServiceClient.cs" />
-    <Compile Include="ClubCloudWCFService.cs" />
+    <Compile Include="ClubCloudApplicationService.cs" />
     <Compile Include="IClubCloudRESTService.cs" />
-    <Compile Include="IClubCloudWCFService.cs" />
+    <Compile Include="IClubCloudApplicationService.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplication.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplicationProxy.cs" />
     <Compile Include="Powershell\RemoveClubCloudService.cs" />

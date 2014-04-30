@@ -1,3 +1,3 @@
 ﻿<%@ServiceHost Language="C#" Debug="true"
-               Service="$SharePoint.Type.e00d1eca-a977-4ba9-a357-5fd35dfc0f63.AssemblyQualifiedName$"
-               Factory="$SharePoint.Type.22ae479b-a73f-4e7e-a5db-7a59fe34b514.AssemblyQualifiedName$" %>
+               Service="ClubCloud.Service.ClubCloudApplicationService, ClubCloud.Service, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e"
+               Factory="ClubCloud.Service.ClubCloudServiceHostFactory, ClubCloud.Service, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>

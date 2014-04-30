@@ -68,8 +68,8 @@ namespace ClubCloud.Service
         {
             string response = null;
 
-            this.ExecuteOnChannel<IClubCloudWCFService>(
-                delegate(IClubCloudWCFService channel)
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
                 {
                     response = channel.HelloWorld(inputText);
                 },
@@ -87,8 +87,8 @@ namespace ClubCloud.Service
         {
             string response = null;
 
-            this.ExecuteOnChannel<IClubCloudWCFService>(
-                delegate(IClubCloudWCFService channel)
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
                 {
                     response = channel.HelloWorldFromDatabase(inputText);
                 },

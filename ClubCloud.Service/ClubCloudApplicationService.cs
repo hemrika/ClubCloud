@@ -11,13 +11,17 @@ namespace ClubCloud.Service
     using System.Data.SqlClient;
     using System.ServiceModel;
     using Microsoft.SharePoint.Administration;
+    using Microsoft.SharePoint.Client.Services;
+    using System.ServiceModel.Activation;
 
     /// <summary>
     /// The WCF Service.
     /// </summary>
+    [BasicHttpBindingServiceMetadataExchangeEndpoint]
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [System.Runtime.InteropServices.Guid("e00d1eca-a977-4ba9-a357-5fd35dfc0f63")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
-    internal class ClubCloudWCFService : IClubCloudWCFService
+    internal class ClubCloudApplicationService : IClubCloudApplicationService
     {
         #region Methods
 
