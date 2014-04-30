@@ -13,7 +13,7 @@ namespace ClubCloud.Service
     /// The REST Service Contract.
     /// </summary>
     [ServiceContract]
-    public interface IClubCloudRESTService
+    public interface IClubCloudClientService
     {
         /// <summary>
         /// Returns a hello world string.

@@ -113,13 +113,13 @@
       <DependentUpon>Properties.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="BaseServiceClient.cs" />
-    <Compile Include="ClubCloudRESTService.cs" />
+    <Compile Include="ClubCloudClientService.cs" />
     <Compile Include="Features\ClubCloudServiceAdministration\ClubCloudServiceAdministration.EventReceiver.cs">
       <DependentUpon>ClubCloudServiceAdministration.feature</DependentUpon>
     </Compile>
     <Compile Include="ClubCloudServiceClient.cs" />
     <Compile Include="ClubCloudApplicationService.cs" />
-    <Compile Include="IClubCloudRESTService.cs" />
+    <Compile Include="IClubCloudClientService.cs" />
     <Compile Include="IClubCloudApplicationService.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplication.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplicationProxy.cs" />
