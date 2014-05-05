@@ -58,9 +58,12 @@ namespace ClubCloud.Provider.IdentityModel
                 this.ClaimsFormsPageTitleInTitleArea.Text = SPHttpUtility.NoEncode((string)HttpContext.GetGlobalResourceObject("wss", "login_pagetitle", Thread.CurrentThread.CurrentUICulture));
             }
             this.ClaimsFormsPageMessage.Text = SPHttpUtility.NoEncode((string)HttpContext.GetGlobalResourceObject("wss", "SSL_warning", Thread.CurrentThread.CurrentUICulture));
+
             this.signInControl.Focus();
+
             this.signInControl.LoggingIn += new LoginCancelEventHandler(this.LoggingInEventHandler);
             this.signInControl.Authenticate += new AuthenticateEventHandler(this.AuthenticateEventHandler);
+
             CheckBox checkBox = null;
 
             if (SPSecurityTokenServiceManager.Local.UseSessionCookies)
@@ -250,7 +253,7 @@ namespace ClubCloud.Provider.IdentityModel
             return flag;
         }
 
-        private void LoggingInEventHandler(object sender, LoginCancelEventArgs e)
+        protected void LoggingInEventHandler(object sender, LoginCancelEventArgs e)
         {
             Login login = sender as Login;
             if (login == null)
@@ -280,6 +283,14 @@ namespace ClubCloud.Provider.IdentityModel
             ULS.SendTraceTag(1714582897, ULSCat.msoulscat_WSS_ClaimsAuthentication, ULSTraceLevel.VerboseEx, string.Concat(this.LogPrefix, "Failed to validate user input. Username is empty."));
             */
             e.Cancel = true;
+        }
+
+        protected override Uri AppliesTo
+        {
+            get
+            {
+                return base.AppliesTo;
+            }
         }
     }
 }

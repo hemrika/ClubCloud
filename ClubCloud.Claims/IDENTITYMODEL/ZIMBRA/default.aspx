@@ -13,14 +13,14 @@
  <div id="SslWarning" style="color:red;display:none">
  <SharePoint:EncodedLiteral runat="server"  EncodeMethod="HtmlEncode" Id="ClaimsFormsPageMessage" />
  </div>
-  <script language="javascript" >
+  <script language="javascript" type="text/javascript" >
 	if (document.location.protocol != 'https:')
 	{
 		var SslWarning = document.getElementById('SslWarning');
 		SslWarning.style.display = '';
 	}
   </script>
- <asp:login id="signInControl" FailureText="<%$Resources:wss,login_pageFailureText%>" runat="server" width="100%">
+ <asp:login id="signInControl" FailureText="<%$Resources:wss,login_pageFailureText%>" runat="server" width="100%" OnLoggingIn="LoggingInEventHandler" OnAuthenticate="AuthenticateEventHandler" >
 	<layouttemplate>
 		<asp:label id="FailureText" class="ms-error" runat="server"/>
 		<table width="100%">

@@ -454,14 +454,16 @@ namespace ClubCloud.Provider
             }
             resetPassword = this.GeneratePassword();
 
-            if(string.IsNullOrWhiteSpace(zimbraId) && string.IsNullOrWhiteSpace(resetPassword))
+            if(!string.IsNullOrWhiteSpace(zimbraId) && !string.IsNullOrWhiteSpace(resetPassword))
             {
-                resetPassword = this.GeneratePassword();
-                List<attrN> password = new List<attrN>();
-                password.Add(new attrN { name = "userPassword", Value = resetPassword });
-                Zimbra.Administration.ModifyAccountRequest modify = new Zimbra.Administration.ModifyAccountRequest { id = zimbraId, a = password };
-                Zimbra.Administration.ModifyAccountResponse modified = zimbraServer.Message(modify) as Zimbra.Administration.ModifyAccountResponse;
+                //resetPassword = this.GeneratePassword();
+                //List<attrN> password = new List<attrN>();
+                //password.Add(new attrN { name = "userPassword", Value = resetPassword });
+                //Zimbra.Administration.ModifyAccountRequest modify = new Zimbra.Administration.ModifyAccountRequest { id = zimbraId, a = password };
+                //Zimbra.Administration.ModifyAccountResponse modified = zimbraServer.Message(modify) as Zimbra.Administration.ModifyAccountResponse;
                 //TODO send message
+                Zimbra.Administration.SetPasswordRequest setpwrequest = new SetPasswordRequest { id = zimbraId, newPassword = resetPassword };
+                Zimbra.Administration.SetPasswordResponse setpwresponse = zimbraServer.Message(setpwrequest) as Zimbra.Administration.SetPasswordResponse;
             }
             else
             {

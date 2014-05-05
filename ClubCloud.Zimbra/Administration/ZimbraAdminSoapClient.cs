@@ -98,5 +98,10 @@ namespace ClubCloud.Zimbra.Administration
         {
             return base.Channel.GetAllAccountsRequest(request);
         }
+
+        public SetPasswordResponse SetPasswordRequest(SetPasswordRequest request)
+        {
+            return base.Channel.SetPasswordRequest(request);
+        }
     }
 }

@@ -99,6 +99,8 @@
     <Compile Include="Administration\modifyUCServiceRequest.cs" />
     <Compile Include="Administration\SearchDirectoryRequest.cs" />
     <Compile Include="Administration\SearchDirectoryResponse.cs" />
+    <Compile Include="Administration\SetPasswordRequest.cs" />
+    <Compile Include="Administration\SetPasswordResponse.cs" />
     <Compile Include="Administration\updatePresenceSessionIdRequest.cs" />
     <Compile Include="Administration\zimbraAdmin.cs" />
     <Compile Include="Administration\zimbraAdminSoap.cs" />

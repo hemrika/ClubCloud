@@ -70,6 +70,9 @@ namespace ClubCloud.Zimbra.Administration
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         GetAllAccountsResponse GetAllAccountsRequest(GetAllAccountsRequest request);
 
+        [System.ServiceModel.OperationContractAttribute(Name = "SetPasswordRequest", Action = "AdminSetPasswordRequest", ReplyAction = "AdminSetPasswordResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        SetPasswordResponse SetPasswordRequest(SetPasswordRequest request);
         
     }
     
