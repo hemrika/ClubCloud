@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="2bd01f3c-9534-4b31-9b48-2a86eba5b586" solutionId="2bd01f3c-9534-4b31-9b48-2a86eba5b586" resetWebServer="false" sharePointProductVersion="15.0" name="ClubCloud.Mijn" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="f50e1765-a264-4d7f-af6e-c372431d73c0" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="9b4e86c6-6f7a-41eb-9ca2-ea9c499e7391" />
+    <projectItemReference itemId="17d6c2db-c9c3-4643-be36-e24619371401" />
+    <projectItemReference itemId="69f2249b-1931-4708-b7c7-2e666040dddd" />
+  </projectItems>
+</package>

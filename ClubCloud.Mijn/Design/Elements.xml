@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <!--
+  <Module Name="Design" Url="_catalogs/masterpage">
+    <File Url="MijnClubCloud.master" Type="GhostableInLibrary"
+          Path="MasterPage\MijnClubCloud.master" IgnoreIfAlreadyExists="true">
+      <Property Name="UIVersion" Value="15" />
+      <Property Name="ContentTypeId" Value="0x010105" />
+    </File>
+  </Module>
+  -->
+</Elements>

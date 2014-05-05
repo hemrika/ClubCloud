@@ -37,7 +37,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>ClubCloud.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -80,9 +80,6 @@
     <Compile Include="Service\KNLTBSoap.cs" />
     <Compile Include="Service\KNLTBSoapChannel.cs" />
     <Compile Include="Service\KNLTBSoapClient.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClubCloud.pfx" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

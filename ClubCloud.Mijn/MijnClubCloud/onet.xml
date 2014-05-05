@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Title="MijnClubCloud" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" HideSiteContentsLink="true" DisableWebDesignFeatures="true" EnableMinimalDownload="true">
+  <NavBars>
+  </NavBars>
+  <Configurations>
+    <Configuration ID="0" Name="MijnClubCloud" Description="ClubCloud Personal Site" Hidden="false" Title="Mijn ClubCloud" >
+      <Lists/>
+      <SiteFeatures>
+      </SiteFeatures>
+      <WebFeatures>
+      </WebFeatures>
+      <Modules>
+        <Module Name="DefaultBlank" />
+      </Modules>
+    </Configuration>
+  </Configurations>
+  <Modules>
+    <Module Name="DefaultBlank" Url="" Path="" >
+      <File Url="default.aspx">
+      </File>
+      <File Path="mijngegevens.aspx" Url="mijngegevens.aspx" />
+      <File Path="mijnclubs.aspx" Url="mijnclubs.aspx" />
+      <File Path="mijnfacturen.aspx" Url="mijnfacturen.aspx" />
+      <File Path="mijnwachtwoord.aspx" Url="mijnwachtwoord.aspx" />
+    </Module>
+  </Modules>
+</Project>

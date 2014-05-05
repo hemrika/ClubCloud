@@ -33,6 +33,7 @@ namespace ClubCloud.Zimbra.Administration
             }
         }
 
+        /*
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
         public virtual void OnPropertyChanged(string propertyName)
@@ -43,5 +44,6 @@ namespace ClubCloud.Zimbra.Administration
                 handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+        */
     }
 }

@@ -42,7 +42,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>ClubCloud.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -172,7 +172,6 @@
     <Compile Include="ZimbraUserSettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClubCloud.pfx" />
     <None Include="Features\Zimbra UserSettings\Zimbra UserSettings.feature">
       <FeatureId>{48f6970d-4eef-4245-b89f-3ee2a9c8bf9d}</FeatureId>
     </None>

@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{718DE400-472A-4F4D-A91C-3C6C9503D365}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClubCloud.Mijn</RootNamespace>
+    <AssemblyName>ClubCloud.Mijn</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetOfficeVersion>15.0</TargetOfficeVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SandboxedSolution>False</SandboxedSolution>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.BusinessData, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\Microsoft.BusinessData\v4.0_15.0.0.0__71e9bce111e9429c\Microsoft.BusinessData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files\Reference Assemblies\Microsoft\Windows Identity Foundation\v3.5\Microsoft.IdentityModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.SecureStoreService, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\Microsoft.Office.SecureStoreService\v4.0_15.0.0.0__71e9bce111e9429c\Microsoft.Office.SecureStoreService.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Linq, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.Security, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\BetalingenUserControl.ascx.cs">
+      <DependentUpon>BetalingenUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\BetalingenUserControl.ascx.designer.cs">
+      <DependentUpon>BetalingenUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\FaceBookUserControl.ascx.cs">
+      <DependentUpon>FaceBookUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\FaceBookUserControl.ascx.designer.cs">
+      <DependentUpon>FaceBookUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx.cs">
+      <DependentUpon>KNLTBUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx.designer.cs">
+      <DependentUpon>KNLTBUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\PromotedLinksDelegate.ascx.cs">
+      <DependentUpon>PromotedLinksDelegate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\PromotedLinksDelegate.ascx.designer.cs">
+      <DependentUpon>PromotedLinksDelegate.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\SuiteBarBrandingDelegate.ascx.cs">
+      <DependentUpon>SuiteBarBrandingDelegate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\SuiteBarBrandingDelegate.ascx.designer.cs">
+      <DependentUpon>SuiteBarBrandingDelegate.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\SuiteLinksDelegate.ascx.cs">
+      <DependentUpon>SuiteLinksDelegate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\SuiteLinksDelegate.ascx.designer.cs">
+      <DependentUpon>SuiteLinksDelegate.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\TwitterUserControl.ascx.cs">
+      <DependentUpon>TwitterUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\TwitterUserControl.ascx.designer.cs">
+      <DependentUpon>TwitterUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KNLTBSecureStoreManagement.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ControlTemplates\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{69f2249b-1931-4708-b7c7-2e666040dddd}</SharePointProjectItemId>
+    </None>
+    <None Include="Design\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e4862532-dcd0-42cf-b5ab-0876a117ddb9}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\BrandingDelegate\BrandingDelegate.feature">
+      <FeatureId>{f50e1765-a264-4d7f-af6e-c372431d73c0}</FeatureId>
+    </None>
+    <None Include="Images\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{17d6c2db-c9c3-4643-be36-e24619371401}</SharePointProjectItemId>
+    </None>
+    <None Include="MijnClubCloud\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9b4e86c6-6f7a-41eb-9ca2-ea9c499e7391}</SharePointProjectItemId>
+    </None>
+    <None Include="Package\Package.package">
+      <PackageId>{2bd01f3c-9534-4b31-9b48-2a86eba5b586}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="BrandingDelegateElement\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{267002a1-8f61-4555-8472-8160d8a80716}</SharePointProjectItemId>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
+      <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
+      <Name>ClubCloud.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClubCloud.Social\ClubCloud.Social.csproj">
+      <Project>{f6f1ffac-cac1-4b6d-969a-3925ded726ca}</Project>
+      <Name>ClubCloud.Social</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ControlTemplates\ClubCloud.Mijn\BetalingenUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\FaceBookUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\PromotedLinksDelegate.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\SuiteBarBrandingDelegate.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\SuiteLinksDelegate.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\TwitterUserControl.ascx" />
+    <Content Include="Design\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Features\BrandingDelegate\BrandingDelegate.Template.xml">
+      <DependentUpon>BrandingDelegate.feature</DependentUpon>
+    </Content>
+    <Content Include="Images\ClubCloud.Mijn\cloud.jpg" />
+    <Content Include="Images\ClubCloud.Mijn\mijnknltb.png" />
+    <Content Include="MijnClubCloud\mijnwachtwoord.aspx" />
+    <Content Include="MijnClubCloud\mijnfacturen.aspx" />
+    <Content Include="MijnClubCloud\mijnclubs.aspx" />
+    <Content Include="MijnClubCloud\mijngegevens.aspx" />
+    <Content Include="MijnClubCloud\default.aspx" />
+    <Content Include="MijnClubCloud\onet.xml" />
+    <Content Include="MijnClubCloud\webtemp_MijnClubCloud.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="BrandingDelegateElement\Elements.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>
