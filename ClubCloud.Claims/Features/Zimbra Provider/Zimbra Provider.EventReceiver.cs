@@ -170,7 +170,7 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
         {
             XmlDocument stsConfig = new XmlDocument();
             ZimbraConfiguration.GetWebConfig(ZimbraConfiguration.stsServicesConfigPath, ref stsConfig);
-            ZimbraConfiguration.AppendSectionGroupZimbra(ref stsConfig);
+            //ZimbraConfiguration.AppendSectionGroupZimbra(ref stsConfig);
             ZimbraConfiguration.AppendProviderZimbra(ref stsConfig);
             //ZimbraConfiguration.AppendModuleZimbra(ref stsConfig);
             ZimbraConfiguration.SetWebConfig(ZimbraConfiguration.stsServicesConfigPath, ref stsConfig);

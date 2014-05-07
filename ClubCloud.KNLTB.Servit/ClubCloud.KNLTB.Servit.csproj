@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B98CD37B-E5D0-49E4-A765-F8FBA945E050}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClubCloud.KNLTB.Servit</RootNamespace>
+    <AssemblyName>ClubCloud.KNLTB.Servit</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CRM\Entities\BusinessEntity.cs" />
+    <Compile Include="CRM\Core\CrmBoolean.cs" />
+    <Compile Include="CRM\Core\CrmFloat.cs" />
+    <Compile Include="CRM\Entities\Key.cs" />
+    <Compile Include="CRM\Entities\Picklist.cs" />
+    <Compile Include="CRM\Origins\ApplicationOrigin.cs" />
+    <Compile Include="CRM\Origins\AsyncServiceOrigin.cs" />
+    <Compile Include="CRM\Origins\CallerOrigin.cs" />
+    <Compile Include="CRM\CallerOriginToken.cs" />
+    <Compile Include="CRM\Core\CrmDateTime.cs" />
+    <Compile Include="CRM\CorrelationToken.cs" />
+    <Compile Include="CRM\CrmAuthenticationToken.cs" />
+    <Compile Include="CRM\Origins\OfflineOrigin.cs" />
+    <Compile Include="CRM\Origins\WebServiceApiOrigin.cs" />
+    <Compile Include="CRM\Properties\CrmBooleanProperty.cs" />
+    <Compile Include="CRM\Properties\CrmDateTimeProperty.cs" />
+    <Compile Include="CRM\Properties\CrmDecimalProperty.cs" />
+    <Compile Include="CRM\Properties\CrmFloatProperty.cs" />
+    <Compile Include="CRM\Properties\CrmMoneyProperty.cs" />
+    <Compile Include="CRM\Properties\CrmNumberProperty.cs" />
+    <Compile Include="CRM\Properties\CustomerProperty.cs" />
+    <Compile Include="CRM\Properties\DynamicEntityArrayProperty.cs" />
+    <Compile Include="CRM\Properties\EntityNameReferenceProperty.cs" />
+    <Compile Include="CRM\Properties\KeyProperty.cs" />
+    <Compile Include="CRM\Properties\LookupProperty.cs" />
+    <Compile Include="CRM\Properties\OwnerProperty.cs" />
+    <Compile Include="CRM\Properties\PicklistProperty.cs" />
+    <Compile Include="CRM\Properties\StateProperty.cs" />
+    <Compile Include="CRM\Properties\StatusProperty.cs" />
+    <Compile Include="CRM\Properties\StringProperty.cs" />
+    <Compile Include="CRM\Properties\UniqueIdentifierProperty.cs" />
+    <Compile Include="CRM\References\CrmReference.cs" />
+    <Compile Include="CRM\Entities\activityparty.cs" />
+    <Compile Include="CRM\Properties\Property.cs" />
+    <Compile Include="CRM\References\Customer.cs" />
+    <Compile Include="CRM\References\Lookup.cs" />
+    <Compile Include="CRM\References\Owner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\ServItBinding.cs" />
+    <Compile Include="Service\ServItEndpointAddress.cs" />
+    <Compile Include="Service\ServItHeaderContext.cs" />
+    <Compile Include="Service\ServItSoap.cs" />
+    <Compile Include="Service\ServItSoapChannel.cs" />
+    <Compile Include="Service\ServItSoapClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ServItService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClubCloud.KNLTB\ClubCloud.KNLTB.csproj">
+      <Project>{68cae0a5-9672-48de-8047-3904a4b840b1}</Project>
+      <Name>ClubCloud.KNLTB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

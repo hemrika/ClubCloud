@@ -14,13 +14,13 @@
         </asp:panel>
         <fieldset>
         <asp:panel runat="server" ID="pnl_betalingen">
-            <asp:CheckBox id="betalingen_overboeking" runat="server" Checked="False" Text="Machtiging" ></asp:CheckBox><br />
+            <asp:CheckBox id="betalingen_overboeking" runat="server" Checked="False" Text="Betaling per machtiging" ></asp:CheckBox><br />
             Instellen : <asp:LinkButton ID="btn_machtiging" Text="Machtiging instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/Machtiging.aspx', title: 'Overboekingen instellen', showClose: true});" runat="server" /><br />
-            <asp:CheckBox id="betalingen_ideal" runat="server" Checked="False" Text="iDEAL betaling" ></asp:CheckBox><br />
+            <asp:CheckBox id="betalingen_ideal" runat="server" Checked="False" Text="Betaling per iDEAL" ></asp:CheckBox><br />
             Instellen : <asp:LinkButton ID="btn_ideal" Text="iDEAL instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/ideal.aspx', title: 'iDEAL instellen', showClose: true});" runat="server" /><br />
-            <asp:CheckBox id="betalingen_paypal" runat="server" Checked="False" Text="PayPal betaling" ></asp:CheckBox><br />
+            <asp:CheckBox id="betalingen_paypal" runat="server" Checked="False" Text="Betaling per PayPal" ></asp:CheckBox><br />
             Instellen : <asp:LinkButton ID="btn_paypal" Text="PayPal instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/paypal.aspx', title: 'PayPal instellen', showClose: true});" runat="server" /><br />
-            <asp:CheckBox id="betalingen_factuur" runat="server" Checked="False" Text="Factuur betaling" ></asp:CheckBox><br />
+            <asp:CheckBox id="betalingen_factuur" runat="server" Checked="False" Text="Betaling per factuur" ></asp:CheckBox><br />
             Instellen : <asp:LinkButton ID="btn_factuur" Text="Facturatie instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/factuur.aspx', title: 'Factuur instellen', showClose: true});" runat="server" /><br />
             <br />
             <asp:Button ID="btn_betaling" runat="server" Text="Opslaan" Enabled="True" CssClass="button big blue" OnClick="btn_betaling_Click" />
