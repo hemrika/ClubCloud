@@ -15,6 +15,7 @@ namespace ClubCloud.KNLTB.Security
         private CookieContainer _Container;
         IAsyncResult result;
 
+        public KNLTBContainer() { }
         public CookieContainer Container
         {
             get

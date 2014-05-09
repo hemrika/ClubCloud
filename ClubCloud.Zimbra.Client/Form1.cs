@@ -23,6 +23,7 @@ using Microsoft.Web.Administration;
 using System.Xml;
 using System.Net.Cache;
 using ClubCloud.KNLTB.Client;
+using ClubCloud.KNLTB.ServIt;
 
 namespace ClubCloud.Zimbra.Client
 {
@@ -151,25 +152,39 @@ namespace ClubCloud.Zimbra.Client
             XmlNode configuration = rootConfig.SelectSingleNode("/configuration");
         }
 
+        CookieContainer cc = null;
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                KNLTB.KNLTBService service = new KNLTB.KNLTBService();
-                List<string> bondsnummers= new List<string>();
-                bondsnummers.Add("11894962");
-                bondsnummers.Add("12073377");
-                bondsnummers.Add("12073385");
-                List<Spelersprofiel> profielen = service.Spelersprofielen(bondsnummers);
-
-                foreach (Spelersprofiel profiel in profielen)
+                if (cc == null)
                 {
-                    string naam = profiel.Spelersnaam;
-                    string vereniging = profiel.Vereniging;
-                    string vId = profiel.VerenigingsNummer;
-                    string vpl = profiel.VerenigingsPlaats;                    
+                    ClubCloud.KNLTB.Security.KNLTBContainer container = new KNLTB.Security.KNLTBContainer();
+                    container.RequestAcces("12073385", "rjm557308453!");
+                    while (container.Container == null) { }
+                    cc = container.Container;
                 }
 
+                ClubCloud.KNLTB.ServIt.CrmServiceSoapClient service = new KNLTB.ServIt.CrmServiceSoapClient();
+                service.CallerOriginTokenValue = null; //new KNLTB.ServIt.CallerOriginToken{ CallerOrigin = new ClubCloud.KNLTB.ServIt.CallerOrigin{ }};
+                service.CorrelationTokenValue = null; //new KNLTB.ServIt.CorrelationToken{ CorrelationId = new Guid("00000000-0000-0000-0000-000000000000")};
+                service.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
+                service.CrmCookieContainer = cc;
+                //WebProxy proxy = new WebProxy("10.10.0.16", 8888);
+                //service.Proxy = proxy;
+                service.Url = "https://servit.mijnknltb.nl/mscrmservices/2007/CrmService.asmx";
+                //ClubCloud.KNLTB.ServIt.Response response = service.Execute(new ClubCloud.KNLTB.ServIt.WhoAmIRequest()) as ClubCloud.KNLTB.ServIt.Response;
+
+                //Console.WriteLine(response.ToString());
+                //service.ExecuteCompleted += service_ExecuteCompleted;
+                //service.ExecuteAsync(new ClubCloud.KNLTB.ServIt.WhoAmIRequest());
+
+                ClubCloud.KNLTB.ServIt.WhoAmIResponse response = service.Execute(new WhoAmIRequest { OptionalParameters = null }) as ClubCloud.KNLTB.ServIt.WhoAmIResponse;
+
+                Console.WriteLine(response.BusinessUnitId);
+                Console.WriteLine(response.OrganizationId);
+                Console.WriteLine(response.UserId);
+                
 
                 /*
                 string postData = "curl=Z2F&flags=0&forcedownlevel=0&formdir=12&trusted=0&username=12073385&password=rjm557308453%21&SubmitCreds=%C2%A0";
@@ -602,6 +617,16 @@ namespace ClubCloud.Zimbra.Client
             }
             //Application.Exit();
             
+        }
+
+        void service_ExecuteCompleted(object sender, ExecuteCompletedEventArgs e)
+        {
+            MetadataServiceResponse response = e.Result;
+            
+            //Console.WriteLine(response.BusinessUnitId);
+            //Console.WriteLine(response.OrganizationId);
+            //Console.WriteLine(response.UserId);
+
         }
 
         void server_PropertyChanged(object sender, PropertyChangedEventArgs e)
