@@ -2,7 +2,7 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
-namespace ClubCloud.KNLTB.ServIt
+namespace ClubCloud.KNLTB.ServIt.CrmService
 {
 	[GeneratedCode("System.Web.Services", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough]
 	public class FetchCompletedEventArgs : AsyncCompletedEventArgs

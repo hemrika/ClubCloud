@@ -8,7 +8,7 @@ using System.Web.Services;
 using System.Web.Services.Description;
 using System.Web.Services.Protocols;
 using System.Xml.Serialization;
-namespace ClubCloud.KNLTB.ServIt
+namespace ClubCloud.KNLTB.ServIt.CrmService
 {
 	[GeneratedCode("System.Web.Services", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, WebServiceBinding(Name = "CrmServiceSoap", Namespace = "http://schemas.microsoft.com/crm/2007/WebServices"), XmlInclude(typeof(CrmReference)), XmlInclude(typeof(Property[])), XmlInclude(typeof(activityparty[]))]
 	public class CrmService : SoapHttpClientProtocol

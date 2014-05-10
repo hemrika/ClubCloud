@@ -24,6 +24,10 @@ using System.Xml;
 using System.Net.Cache;
 using ClubCloud.KNLTB.Client;
 using ClubCloud.KNLTB.ServIt;
+using System.Web.Services.Protocols;
+using ClubCloud.KNLTB.ServIt.CrmService;
+using ClubCloud.KNLTB.ServIt.MetadataService;
+//using ClubCloud.KNLTB.ServIt.MetadataService;
 
 namespace ClubCloud.Zimbra.Client
 {
@@ -165,24 +169,40 @@ namespace ClubCloud.Zimbra.Client
                     cc = container.Container;
                 }
 
-                ClubCloud.KNLTB.ServIt.CrmService service = new KNLTB.ServIt.CrmService();
+                /*
+                ClubCloud.KNLTB.ServIt.MetadataService.MetadataService service = new KNLTB.ServIt.MetadataService.MetadataService();
+                service.CookieContainer = cc;
+                service.CrmAuthenticationTokenValue = new KNLTB.ServIt.MetadataService.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
+
+                RetrieveAllEntitiesRequest request = new RetrieveAllEntitiesRequest();
+                request.MetadataItems = MetadataItems.IncludeRelationships;
+                RetrieveAllEntitiesResponse metadata = (RetrieveAllEntitiesResponse)service.Execute(request);
+                WriteMetadata(metadata);
+                */
+                
+                ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService();
                 service.CallerOriginTokenValue = null; //new KNLTB.ServIt.CallerOriginToken{ CallerOrigin = new ClubCloud.KNLTB.ServIt.CallerOrigin{ }};
                 service.CorrelationTokenValue = null; //new KNLTB.ServIt.CorrelationToken{ CorrelationId = new Guid("00000000-0000-0000-0000-000000000000")};
-                service.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
+                service.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmService.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
                 service.CrmCookieContainer = cc;
+                GetUsersUsingExecute(service);
+                /*
                 service.ExecuteCompleted += service_ExecuteCompleted;
                 //BusinessUnitId = 3cea4b0b-595b-e311-a846-02bf0aead617
                 //OrganizationId = b005c89b-8c65-e311-b057-005056951a68
                 //UserId = da8ad842-6bd5-e311-8e30-005056952140
-                //TargetRetrieveSgt_alg_accommodatie acc= new TargetRetrieveSgt_alg_accommodatie{ EntityId = new Guid("b005c89b-8c65-e311-b057-005056951a68") };
-                BusinessEntity entity = service.Retrieve("usersettings", new Guid("da8ad842-6bd5-e311-8e30-005056952140"), null);
+                //addressid{B02845E0-B3C7-407B-B36B-AE6606506DFC}
+                TargetRetrieveSgt_alg_baan acc = new TargetRetrieveSgt_alg_baan {};// { EntityId = new Guid("da8ad842-6bd5-e311-8e30-005056952140") };
+                ClubCloud.KNLTB.ServIt.CrmService.ColumnSetBase columns = new ClubCloud.KNLTB.ServIt.CrmService.AllColumns();
+                //ClubCloud.KNLTB.ServIt.CrmService.systemuser systemuser = service.Retrieve(ClubCloud.KNLTB.ServIt.CrmService.EntityName.systemuser.ToString(), new Guid("da8ad842-6bd5-e311-8e30-005056952140"), columns) as ClubCloud.KNLTB.ServIt.CrmService.systemuser;
+                BusinessEntity entity = service.Retrieve("Sgt_alg_baan", new Guid("3cea4b0b-595b-e311-a846-02bf0aead617"), columns);
                 Console.WriteLine(entity.ToString());
                 //service.ExecuteAsync(new WhoAmIRequest());
                 //WhoAmIResponse response = service.Execute(new WhoAmIRequest()) as WhoAmIResponse;
                 //Console.WriteLine(response.BusinessUnitId);
                 //Console.WriteLine(response.OrganizationId);
                 //Console.WriteLine(response.UserId);
-                
+                */
 
                 /*
                 string postData = "curl=Z2F&flags=0&forcedownlevel=0&formdir=12&trusted=0&username=12073385&password=rjm557308453%21&SubmitCreds=%C2%A0";
@@ -609,6 +629,10 @@ namespace ClubCloud.Zimbra.Client
             {
                 Console.Write(fex.Message);
             }
+                catch(SoapException sex)
+            {
+                Console.WriteLine(sex.Detail);
+            }
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
@@ -617,9 +641,428 @@ namespace ClubCloud.Zimbra.Client
             
         }
 
-        void service_ExecuteCompleted(object sender, ExecuteCompletedEventArgs e)
+        private void GetUsersUsingExecute(ClubCloud.KNLTB.ServIt.CrmService.CrmService service)
         {
-            WhoAmIResponse response = e.Result as WhoAmIResponse;
+            RetrieveMultipleResponse results = null;
+            int pageNum = 1;
+            while (results == null || (results != null && results.BusinessEntityCollection.MoreRecords))
+            {
+
+                // specify the columns we want to return
+                ColumnSetBase cols = new AllColumns();
+                //cols.Attributes = new string[] { "domainname", "systemuserid" };
+
+                // Create the FilterExpression.
+                FilterExpression filter = new FilterExpression();
+
+                PagingInfo pageInfo = new PagingInfo();
+                pageInfo.Count = 100; // the number of rows in each batch
+                pageInfo.PageNumber = pageNum;
+
+                // Create the QueryExpression.
+                QueryExpression query = new QueryExpression();
+
+                // Set the properties of the QueryExpression.
+                //sgt_alg_ledenpas_vereniging
+                //organization
+                //sgt_alg_kenmerk
+                //sgt_alg_administratie
+                //sgt_alg_bestuursorgaan
+                //sgt_alg_functie
+                //sgt_alg_functionaris
+                //sgt_alg_gebeurtenis
+                //sgt_alg_type_bestuursorgaan
+                //sgt_alg_district
+                //systemuser
+                query.EntityName = "systemuser";//EntityName.systemuser.ToString();
+                query.ColumnSet = cols;
+                query.Criteria = filter;
+                query.PageInfo = pageInfo;
+                query.Distinct = true;
+
+                // Create the request object.
+                RetrieveMultipleRequest request = new RetrieveMultipleRequest();
+
+                // Set the properties of the request object.
+                request.Query = query;
+
+                // Execute the request.
+                results = (RetrieveMultipleResponse)service.Execute(request);
+
+
+                List<BusinessEntity> entities = results.BusinessEntityCollection.BusinessEntities.ToList<BusinessEntity>();
+                foreach (systemuser entity in entities)
+                {
+                    string sentity = SerializeObjectList<systemuser>(entity);
+                    WriteToXmlFile<systemuser>(@"C:\systemuser.xml", entity, true);
+                }
+                
+                /*
+                foreach (sgt_alg_bestuursorgaan entity in entities)
+                {
+                    if (entity != null)
+                    {
+                        Console.WriteLine(entity.sgt_alg_bestuursorgaan1);
+                        Console.WriteLine(entity.sgt_alg_bestuursorgaanid.Value);
+                        Console.WriteLine(entity.sgt_basisorganisatieid.name + " | " + entity.sgt_basisorganisatieid.Value);
+                        Console.WriteLine(entity.sgt_beschrijving);
+                        Console.WriteLine(entity.sgt_typebestuursorgaanid.Value);
+                        Console.WriteLine(entity.statecode.Value + " | " + entity.statecode.formattedvalue);
+                        Console.WriteLine(entity.sgt_verkorte_code);
+                    }
+                }
+                */
+                /*
+                foreach (systemuser user in users)
+                {
+                    Console.WriteLine(user.systemuserid.Value + " | " + user.domainname + " | " + user.sgt_persoonid + " | " + user.fullname + " | " + user.organizationid + " | " + user.businessunitid);
+                }
+                */
+
+                pageNum++;
+            } // end while
+
+        }
+
+        public static void WriteToXmlFile<T>(string filePath, T objectToWrite, bool append = false) where T : new()
+        {
+            TextWriter writer = null;
+            try
+            {
+                var serializer = new XmlSerializer(typeof(T));
+                writer = new StreamWriter(filePath, append);
+                serializer.Serialize(writer, objectToWrite);
+            }
+            catch
+            {
+            }
+            finally
+            {
+                if (writer != null)
+                    writer.Close();
+            }
+        }
+
+        public static string SerializeObjectList<T>(T value)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Encoding = new UnicodeEncoding(false, false);
+            settings.Indent = false;
+            settings.OmitXmlDeclaration = false;
+            using (StringWriter textWriter = new StringWriter())
+            {
+                using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, settings))
+                {
+                    serializer.Serialize(xmlWriter, value);
+                }
+                return textWriter.ToString();
+            }
+        }
+
+        private void WriteMetadata(RetrieveAllEntitiesResponse metadata)
+        {
+            // Create an instance of StreamWriter to write text to a file.
+            // The using statement also closes the StreamWriter.
+            using (StreamWriter sw = new StreamWriter(@"C:\metadata.xml"))
+            {
+                // Create Xml Writer.
+                XmlTextWriter metadataWriter = new XmlTextWriter(sw);
+
+                // Start Xml File.
+                metadataWriter.WriteStartDocument();
+
+                // Metadata Xml Node.
+                metadataWriter.WriteStartElement("Metadata");
+
+                AttributeMetadata currentAttribute;// Declared outside of loop
+
+                // Iterate through all entities and add their attributes and relationships to the file.
+                foreach (EntityMetadata currentEntity in metadata.CrmMetadata)
+                {
+                    // Start Entity Node
+                    metadataWriter.WriteStartElement("Entity");
+
+                    // Write the Entity's Information.
+                    metadataWriter.WriteElementString("Name", currentEntity.LogicalName);
+
+                    if (currentEntity.DisplayName.UserLocLabel != null)
+                    {
+                        metadataWriter.WriteElementString("DisplayName", currentEntity.DisplayName.UserLocLabel.Label);
+                    }
+                    else
+                    {
+                        metadataWriter.WriteElementString("DisplayName", "[NONE]");
+                    }
+
+                    if (currentEntity.DisplayCollectionName.UserLocLabel != null)
+                    {
+                        metadataWriter.WriteElementString("DisplayCollectionName", currentEntity.DisplayCollectionName.UserLocLabel.Label);
+                    }
+                    else
+                    {
+                        metadataWriter.WriteElementString("DisplayCollectionName", "[NONE]");
+                    }
+
+                    metadataWriter.WriteElementString("IsCustomEntity", currentEntity.IsCustomEntity.ToString());
+                    metadataWriter.WriteElementString("IsCustomizable", currentEntity.IsCustomizable.ToString());
+                    metadataWriter.WriteElementString("ReportViewName", currentEntity.ReportViewName);
+                    metadataWriter.WriteElementString("PrimaryField", currentEntity.PrimaryField);
+                    metadataWriter.WriteElementString("PrimaryKey", currentEntity.PrimaryKey);
+
+                    #region Attributes
+
+                    // Write Entity's Attributes.
+                    metadataWriter.WriteStartElement("Attributes");
+
+                    for (int j = 0; j < currentEntity.Attributes.Length; j++)
+                    {
+                        // Get Current Attribute.
+                        currentAttribute = currentEntity.Attributes[j];
+                        // Start Attribute Node
+                        metadataWriter.WriteStartElement("Attribute");
+
+                        // Write Attribute's information.
+                        metadataWriter.WriteElementString("Name", currentAttribute.LogicalName);
+                        metadataWriter.WriteElementString("Type", currentAttribute.AttributeType.ToString());
+
+                        if (currentAttribute.DisplayName.UserLocLabel != null)
+                        {
+                            metadataWriter.WriteElementString("DisplayName", currentAttribute.DisplayName.UserLocLabel.Label);
+                        }
+                        else
+                        {
+                            metadataWriter.WriteElementString("DisplayName", "[NONE]");
+                        }
+
+                        metadataWriter.WriteElementString("Description", currentAttribute.IsCustomField.ToString());
+                        metadataWriter.WriteElementString("IsCustomField", currentAttribute.IsCustomField.ToString());
+                        metadataWriter.WriteElementString("RequiredLevel", currentAttribute.RequiredLevel.ToString());
+                        metadataWriter.WriteElementString("ValidForCreate", currentAttribute.ValidForCreate.ToString());
+                        metadataWriter.WriteElementString("ValidForRead", currentAttribute.ValidForRead.ToString());
+                        metadataWriter.WriteElementString("ValidForUpdate", currentAttribute.ValidForUpdate.ToString());
+
+                        // Write the Default Value if it is set.
+                        if (currentAttribute.DefaultValue != null)
+                        {
+                            metadataWriter.WriteElementString("DefualtValue", currentAttribute.DefaultValue.ToString());
+                        }
+
+                        // Write the Description if it is set.
+                        if (currentAttribute.Description != null &&
+                           currentAttribute.Description.UserLocLabel != null)
+                        {
+                            metadataWriter.WriteElementString("Description", currentAttribute.Description.UserLocLabel.Label);
+                        }
+
+
+                        // Write Type Specific Attribute Information using helper functions.
+
+                        Type attributeType = currentAttribute.GetType();
+
+                        if (attributeType == typeof(DecimalAttributeMetadata))
+                        {
+                            writeDecimalAttribute((DecimalAttributeMetadata)currentAttribute, metadataWriter);
+                        }
+                        else if (attributeType == typeof(FloatAttributeMetadata))
+                        {
+                            writeFloatAttribute((FloatAttributeMetadata)currentAttribute, metadataWriter);
+                        }
+                        else if (attributeType == typeof(IntegerAttributeMetadata))
+                        {
+                            writeIntegerAttribute((IntegerAttributeMetadata)currentAttribute, metadataWriter);
+                        }
+                        else if (attributeType == typeof(MoneyAttributeMetadata))
+                        {
+                            writeMoneyAttribute((MoneyAttributeMetadata)currentAttribute, metadataWriter);
+                        }
+                        else if (attributeType == typeof(PicklistAttributeMetadata))
+                        {
+                            writePicklistAttribute((PicklistAttributeMetadata)currentAttribute, metadataWriter);
+                        }
+                        else if (attributeType == typeof(StateAttributeMetadata))
+                        {
+                            writeStateAttribute((StateAttributeMetadata)currentAttribute, metadataWriter);
+                        }
+                        else if (attributeType == typeof(StatusAttributeMetadata))
+                        {
+                            writeStatusAttribute((StatusAttributeMetadata)currentAttribute, metadataWriter);
+                        }
+                        else if (attributeType == typeof(StringAttributeMetadata))
+                        {
+                            writeStringAttribute((StringAttributeMetadata)currentAttribute, metadataWriter);
+                        }
+
+                        // End Attribute Node
+                        metadataWriter.WriteEndElement();
+
+                    }
+                    // End Attributes Node
+                    metadataWriter.WriteEndElement();
+
+                    #endregion
+
+                    #region References From
+
+                    metadataWriter.WriteStartElement("OneToMany");
+
+                    // Get Current ReferencesFrom
+                    foreach (OneToManyMetadata currentRelationship in currentEntity.OneToManyRelationships)
+                    {
+                        // Start ReferencesFrom Node
+                        metadataWriter.WriteStartElement("From");
+                        metadataWriter.WriteElementString("Name", currentRelationship.SchemaName);
+                        metadataWriter.WriteElementString("IsCustomRelationship", currentRelationship.IsCustomRelationship.ToString());
+                        metadataWriter.WriteElementString("ReferencedEntity", currentRelationship.ReferencedEntity);
+                        metadataWriter.WriteElementString("ReferencingEntity", currentRelationship.ReferencingEntity);
+                        metadataWriter.WriteElementString("ReferencedAttribute", currentRelationship.ReferencedAttribute);
+                        metadataWriter.WriteElementString("ReferencingAttribute", currentRelationship.ReferencingAttribute);
+
+                        // End ReferencesFrom Node
+                        metadataWriter.WriteEndElement();
+                    }
+
+                    metadataWriter.WriteEndElement();
+
+                    #endregion
+
+                    #region References To
+
+                    metadataWriter.WriteStartElement("ManyToOne");
+
+                    foreach (OneToManyMetadata currentRelationship in currentEntity.ManyToOneRelationships)
+                    {
+                        // Start ReferencesFrom Node
+                        metadataWriter.WriteStartElement("To");
+                        metadataWriter.WriteElementString("Name", currentRelationship.SchemaName);
+                        metadataWriter.WriteElementString("IsCustomRelationship", currentRelationship.IsCustomRelationship.ToString());
+                        metadataWriter.WriteElementString("ReferencedEntity", currentRelationship.ReferencedEntity);
+                        metadataWriter.WriteElementString("ReferencingEntity", currentRelationship.ReferencingEntity);
+                        metadataWriter.WriteElementString("ReferencedAttribute", currentRelationship.ReferencedAttribute);
+                        metadataWriter.WriteElementString("ReferencingAttribute", currentRelationship.ReferencingAttribute);
+
+                        // End ReferencesFrom Node
+                        metadataWriter.WriteEndElement();
+                    }
+
+                    metadataWriter.WriteEndElement();
+
+                    #endregion
+
+                    // End Entity Node
+                    metadataWriter.WriteEndElement();
+                }
+
+                // End Metadata Xml Node
+                metadataWriter.WriteEndElement();
+                metadataWriter.WriteEndDocument();
+
+                // Close xml writer.
+                metadataWriter.Close();
+            }
+
+        }
+
+        #region Specific Attribute Helper Functions
+
+        // Writes the Decimal Specific Attributes
+        private static void writeDecimalAttribute(DecimalAttributeMetadata attribute, XmlTextWriter writer)
+        {
+            writer.WriteElementString("MinValue", attribute.MinValue.ToString());
+            writer.WriteElementString("MaxValue", attribute.MaxValue.ToString());
+            writer.WriteElementString("Precision", attribute.Precision.ToString());
+        }
+
+        // Writes the Float Specific Attributes
+        private static void writeFloatAttribute(FloatAttributeMetadata attribute, XmlTextWriter writer)
+        {
+            writer.WriteElementString("MinValue", attribute.MinValue.ToString());
+            writer.WriteElementString("MaxValue", attribute.MaxValue.ToString());
+            writer.WriteElementString("Precision", attribute.Precision.ToString());
+        }
+
+        // Writes the Integer Specific Attributes
+        private static void writeIntegerAttribute(IntegerAttributeMetadata attribute, XmlTextWriter writer)
+        {
+            writer.WriteElementString("MinValue", attribute.MinValue.ToString());
+            writer.WriteElementString("MaxValue", attribute.MaxValue.ToString());
+        }
+
+        // Writes the Money Specific Attributes
+        private static void writeMoneyAttribute(MoneyAttributeMetadata attribute, XmlTextWriter writer)
+        {
+            writer.WriteElementString("MinValue", attribute.MinValue.ToString());
+            writer.WriteElementString("MaxValue", attribute.MaxValue.ToString());
+            writer.WriteElementString("Precision", attribute.Precision.ToString());
+        }
+
+        // Writes the Picklist Specific Attributes
+        private static void writePicklistAttribute(PicklistAttributeMetadata attribute, XmlTextWriter writer)
+        {
+            // Writes the picklist's options
+            writer.WriteStartElement("Options");
+
+            // Writes the attributes of each picklist option
+            for (int i = 0; i < attribute.Options.Length; i++)
+            {
+                writer.WriteStartElement("Option");
+                writer.WriteElementString("OptionValue", attribute.Options[i].Value.ToString());
+                writer.WriteElementString("Description", attribute.Options[i].Label.UserLocLabel.Label);
+                writer.WriteEndElement();
+            }
+
+            writer.WriteEndElement();
+        }
+
+        // Writes the State Specific Attributes
+        private static void writeStateAttribute(StateAttributeMetadata attribute, XmlTextWriter writer)
+        {
+            // Writes the state's options
+            writer.WriteStartElement("Options");
+
+            // Writes the attributes of each picklist option
+            for (int i = 0; i < attribute.Options.Length; i++)
+            {
+                writer.WriteStartElement("Option");
+                writer.WriteElementString("OptionValue", attribute.Options[i].Value.ToString());
+                writer.WriteElementString("Description", attribute.Options[i].Label.UserLocLabel.Label);
+                writer.WriteElementString("DefaultStatus", attribute.Options[i].DefaultStatus.ToString());
+                writer.WriteEndElement();
+            }
+
+            writer.WriteEndElement();
+        }
+
+        // Writes the Status Specific Attributes
+        private static void writeStatusAttribute(StatusAttributeMetadata attribute, XmlTextWriter writer)
+        {
+            // Writes the status's options
+            writer.WriteStartElement("Options");
+
+            // Writes the attributes of each picklist option
+            for (int i = 0; i < attribute.Options.Length; i++)
+            {
+                writer.WriteStartElement("Option");
+                writer.WriteElementString("OptionValue", attribute.Options[i].Value.ToString());
+                writer.WriteElementString("Description", attribute.Options[i].Label.UserLocLabel.Label);
+                writer.WriteElementString("State", attribute.Options[i].State.ToString());
+                writer.WriteEndElement();
+            }
+
+            writer.WriteEndElement();
+        }
+
+        // Writes the String Specific Attributes
+        private static void writeStringAttribute(StringAttributeMetadata attribute, XmlTextWriter writer)
+        {
+            writer.WriteElementString("MaxLength", attribute.MaxLength.ToString());
+        }
+        #endregion
+
+        
+        private void service_ExecuteCompleted(object sender, KNLTB.ServIt.CrmService.ExecuteCompletedEventArgs e)
+        {
+            ClubCloud.KNLTB.ServIt.CrmService.WhoAmIResponse response = e.Result as ClubCloud.KNLTB.ServIt.CrmService.WhoAmIResponse;
             Console.WriteLine(response.BusinessUnitId);
             Console.WriteLine(response.OrganizationId);
             Console.WriteLine(response.UserId);

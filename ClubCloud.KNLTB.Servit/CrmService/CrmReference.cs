@@ -3,9 +3,9 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
-namespace ClubCloud.KNLTB.ServIt
+namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlInclude(typeof(Owner)), XmlInclude(typeof(Lookup)), XmlInclude(typeof(Customer)), XmlType(Namespace = "http://schemas.microsoft.com/crm/2006/WebServices")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlInclude(typeof(Lookup)), XmlInclude(typeof(Owner)), XmlInclude(typeof(Customer)), XmlType(Namespace = "http://schemas.microsoft.com/crm/2006/WebServices")]
 	[Serializable]
 	public abstract class CrmReference
 	{
