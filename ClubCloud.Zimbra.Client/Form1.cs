@@ -160,30 +160,28 @@ namespace ClubCloud.Zimbra.Client
                 if (cc == null)
                 {
                     ClubCloud.KNLTB.Security.KNLTBContainer container = new KNLTB.Security.KNLTBContainer();
-                    container.RequestAcces("12073385", "rjm557308453!");
+                    container.ServItRequestAcces("12073385", "rjm557308453!");
                     while (container.Container == null) { }
                     cc = container.Container;
                 }
 
-                ClubCloud.KNLTB.ServIt.CrmServiceSoapClient service = new KNLTB.ServIt.CrmServiceSoapClient();
+                ClubCloud.KNLTB.ServIt.CrmService service = new KNLTB.ServIt.CrmService();
                 service.CallerOriginTokenValue = null; //new KNLTB.ServIt.CallerOriginToken{ CallerOrigin = new ClubCloud.KNLTB.ServIt.CallerOrigin{ }};
                 service.CorrelationTokenValue = null; //new KNLTB.ServIt.CorrelationToken{ CorrelationId = new Guid("00000000-0000-0000-0000-000000000000")};
                 service.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
                 service.CrmCookieContainer = cc;
-                //WebProxy proxy = new WebProxy("10.10.0.16", 8888);
-                //service.Proxy = proxy;
-                service.Url = "https://servit.mijnknltb.nl/mscrmservices/2007/CrmService.asmx";
-                //ClubCloud.KNLTB.ServIt.Response response = service.Execute(new ClubCloud.KNLTB.ServIt.WhoAmIRequest()) as ClubCloud.KNLTB.ServIt.Response;
-
-                //Console.WriteLine(response.ToString());
-                //service.ExecuteCompleted += service_ExecuteCompleted;
-                //service.ExecuteAsync(new ClubCloud.KNLTB.ServIt.WhoAmIRequest());
-
-                ClubCloud.KNLTB.ServIt.WhoAmIResponse response = service.Execute(new WhoAmIRequest { OptionalParameters = null }) as ClubCloud.KNLTB.ServIt.WhoAmIResponse;
-
-                Console.WriteLine(response.BusinessUnitId);
-                Console.WriteLine(response.OrganizationId);
-                Console.WriteLine(response.UserId);
+                service.ExecuteCompleted += service_ExecuteCompleted;
+                //BusinessUnitId = 3cea4b0b-595b-e311-a846-02bf0aead617
+                //OrganizationId = b005c89b-8c65-e311-b057-005056951a68
+                //UserId = da8ad842-6bd5-e311-8e30-005056952140
+                //TargetRetrieveSgt_alg_accommodatie acc= new TargetRetrieveSgt_alg_accommodatie{ EntityId = new Guid("b005c89b-8c65-e311-b057-005056951a68") };
+                BusinessEntity entity = service.Retrieve("usersettings", new Guid("da8ad842-6bd5-e311-8e30-005056952140"), null);
+                Console.WriteLine(entity.ToString());
+                //service.ExecuteAsync(new WhoAmIRequest());
+                //WhoAmIResponse response = service.Execute(new WhoAmIRequest()) as WhoAmIResponse;
+                //Console.WriteLine(response.BusinessUnitId);
+                //Console.WriteLine(response.OrganizationId);
+                //Console.WriteLine(response.UserId);
                 
 
                 /*
@@ -621,12 +619,10 @@ namespace ClubCloud.Zimbra.Client
 
         void service_ExecuteCompleted(object sender, ExecuteCompletedEventArgs e)
         {
-            MetadataServiceResponse response = e.Result;
-            
-            //Console.WriteLine(response.BusinessUnitId);
-            //Console.WriteLine(response.OrganizationId);
-            //Console.WriteLine(response.UserId);
-
+            WhoAmIResponse response = e.Result as WhoAmIResponse;
+            Console.WriteLine(response.BusinessUnitId);
+            Console.WriteLine(response.OrganizationId);
+            Console.WriteLine(response.UserId);
         }
 
         void server_PropertyChanged(object sender, PropertyChangedEventArgs e)
