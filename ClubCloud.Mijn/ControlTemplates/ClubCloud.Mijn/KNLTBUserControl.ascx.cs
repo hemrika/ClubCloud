@@ -91,6 +91,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                 
                 try
                 {
+                    if (update) { }
 
                     cookie.Domain = (!string.IsNullOrWhiteSpace(wcookie.Domain)) ? wcookie.Domain : "mijnknltb.nl";
                     cookie.Expires = wcookie.Expires;

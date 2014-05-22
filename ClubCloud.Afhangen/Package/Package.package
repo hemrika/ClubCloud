@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="36c458e8-6b78-4300-86e1-5656e6ff790c" solutionId="36c458e8-6b78-4300-86e1-5656e6ff790c" resetWebServer="false" sharePointProductVersion="15.0" name="ClubCloud.Afhangen" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <projectItems>
+    <projectItemReference itemId="bfee2197-44d4-4a92-b0a3-71e2d146b64e" />
+  </projectItems>
+</package>

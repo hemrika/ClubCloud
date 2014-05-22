@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="7112ac8b-61c3-451e-a145-0c245dcb4b38" solutionId="7112ac8b-61c3-451e-a145-0c245dcb4b38" resetWebServer="false" sharePointProductVersion="15.0" name="ClubCloud.SignalR" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <customAssembly location="Microsoft.AspNet.SignalR.Core.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.AspNet.SignalR.Core.dll" />
+    <customAssembly location="Microsoft.AspNet.SignalR.SqlServer.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.AspNet.SignalR.SqlServer.dll" />
+    <customAssembly location="Microsoft.AspNet.SignalR.SystemWeb.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.AspNet.SignalR.SystemWeb.dll" />
+    <customAssembly location="Microsoft.Owin.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.dll" />
+    <customAssembly location="Microsoft.Owin.Host.SystemWeb.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Host.SystemWeb.dll" />
+    <customAssembly location="Microsoft.Owin.Security.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Security.dll" />
+    <customAssembly location="Newtonsoft.Json.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Newtonsoft.Json.dll" />
+    <customAssembly location="Owin.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Owin.dll" />
+    <customAssembly location="Microsoft.Owin.Cors.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Cors.dll" />
+    <customAssembly location="System.Web.Cors.dll" deploymentTarget="WebApplication" sourcePath="..\Common\System.Web.Cors.dll" />
+  </assemblies>
+  <projectItems>
+    <projectItemReference itemId="b3e4aa11-cc73-4537-a378-7184f93d773f" />
+  </projectItems>
+</package>

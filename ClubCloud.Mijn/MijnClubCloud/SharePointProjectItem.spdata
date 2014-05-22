@@ -8,5 +8,12 @@
     <ProjectItemFile Source="mijnclubs.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
     <ProjectItemFile Source="mijnfacturen.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
     <ProjectItemFile Source="mijnwachtwoord.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="afhangen.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="competitie.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="instellingen.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="profiel.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="toernooi.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="twitter.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="uitslagen.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
   </Files>
 </ProjectItem>

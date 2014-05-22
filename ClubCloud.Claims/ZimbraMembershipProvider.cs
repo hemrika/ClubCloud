@@ -8,6 +8,7 @@ using Microsoft.SharePoint.IdentityModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Configuration.Provider;
 using System.IdentityModel.Tokens;
@@ -1211,6 +1212,7 @@ namespace ClubCloud.Provider
         public override bool ValidateUser(string username, string password)
         {
             bool validated = false;
+
             if(!Initialized)
             {
                 string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");

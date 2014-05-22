@@ -59,7 +59,7 @@ namespace ClubCloud.Zimbra.Global
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool pd
+        public new bool pd
         {
             get
             {

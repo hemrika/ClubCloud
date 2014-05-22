@@ -50,3 +50,4 @@ using System.Security;
 
 [assembly: NeutralResourcesLanguage("en-us")]
 [assembly: CLSCompliant(false)]
+[assembly: InternalsVisibleTo("ClubCloud.SignalR, PublicKey=0024000004800000940000000602000000240000525341310004000001000100ddd2f92fa027f5aa7cbb8a08b4f0cf0d89d14d8ccb8c1124455f2572a78e2fc2cc6c70b3c5bf40026626be7c5cb2f96f889d1fcb968798c57c6e5d18380be58d9e3c19a769842f6f5475d1797466e4ddc957f9e07d37b7afe549a6aec9d3b0c96c91ccfb9338840c53c8f87049685c4f1a63ee0712dc302f07dfda2e076e58c2")]

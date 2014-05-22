@@ -289,7 +289,7 @@ namespace ClubCloud.Provider
         }
 
         //<a n="zimbraId">d0ec1768-02dd-4fd3-b302-1da0cd6e868a</a>
-        private SecurityIdentifier zid;
+        //private SecurityIdentifier zid;
         private string _zimbraId;
 
         public string zimbraId

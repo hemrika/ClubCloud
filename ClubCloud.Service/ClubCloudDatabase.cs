@@ -12,10 +12,13 @@ namespace ClubCloud.Service
     using System.Security.Principal;
     using Microsoft.SharePoint.Administration;
     using Microsoft.SharePoint.Utilities;
+using System.Runtime.CompilerServices;
+    using System.Security.Permissions;
 
     /// <summary>
     /// Custom Database class. Contains logic to Provision/Upgrade/Remove the custom database.
     /// </summary>
+    //[InternalsVisibleTo("ClubCloud.SignalR, PublicKey=144fd205e283172e")]
     [System.Runtime.InteropServices.Guid("a965364b-3e92-468f-985f-ddf9f661174f")]
     internal sealed class ClubCloudDatabase : SPDatabase
     {

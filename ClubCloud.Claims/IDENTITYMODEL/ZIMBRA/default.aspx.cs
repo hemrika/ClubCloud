@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI.WebControls;
 
 namespace ClubCloud.Provider.IdentityModel
@@ -45,6 +46,10 @@ namespace ClubCloud.Provider.IdentityModel
             try
             {
                 this.SetThreadCultureFromRequestedWeb();
+
+                //ZimbraMembershipProvider z_membershipProvider = (ZimbraMembershipProvider)Membership.Providers["ZimbraMembershipProvider"];
+                //ZimbraRoleProvider z_roleProvider = (ZimbraRoleProvider)Roles.Providers["ZimbraRoleProvider"];
+
             }
             catch { }
         }
@@ -170,7 +175,7 @@ namespace ClubCloud.Provider.IdentityModel
             }
             if (this.IsLoginControlInValidState(formsSignInControl))
             {
-                string str1 = null;
+                //string str1 = null;
                 Uri appliesTo = this.AppliesTo;
                 SPFormsAuthenticationProvider formsClaimsAuthenticationProvider = iisSettings.FormsClaimsAuthenticationProvider;
                 CultureInfo invariantCulture = CultureInfo.InvariantCulture;
@@ -214,8 +219,8 @@ namespace ClubCloud.Provider.IdentityModel
 
         protected virtual bool IsLoginControlInValidState(Login formsSignInControl)
         {
-            string logPrefix;
-            string str;
+            //string logPrefix;
+            //string str;
             //ULSCat msoulscatWSSClaimsAuthentication;
             if (formsSignInControl == null)
             {

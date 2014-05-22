@@ -20,6 +20,7 @@ namespace ClubCloud.Service
     [BasicHttpBindingServiceMetadataExchangeEndpoint]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [System.Runtime.InteropServices.Guid("e00d1eca-a977-4ba9-a357-5fd35dfc0f63")]
+    [ServiceBehavior(Namespace = "http://clubcloud.nl/", Name="ClubCloudService")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
     internal class ClubCloudApplicationService : IClubCloudApplicationService
     {

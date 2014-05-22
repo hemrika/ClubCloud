@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="2bd01f3c-9534-4b31-9b48-2a86eba5b586" solutionId="2bd01f3c-9534-4b31-9b48-2a86eba5b586" resetWebServer="false" sharePointProductVersion="15.0" name="ClubCloud.Mijn" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <projectOutputAssembly location="ClubCloud.Social.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.Social\ClubCloud.Social.csproj" />
+  </assemblies>
   <features>
     <featureReference itemId="f50e1765-a264-4d7f-af6e-c372431d73c0" />
   </features>

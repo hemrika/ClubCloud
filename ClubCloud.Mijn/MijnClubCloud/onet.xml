@@ -15,13 +15,19 @@
     </Configuration>
   </Configurations>
   <Modules>
-    <Module Name="DefaultBlank" Url="" Path="" >
-      <File Url="default.aspx">
-      </File>
+    <Module Name="DefaultBlank" Url="" Path=""  >
+      <File Path="default.aspx" Url="default.aspx" />
       <File Path="mijngegevens.aspx" Url="mijngegevens.aspx" />
       <File Path="mijnclubs.aspx" Url="mijnclubs.aspx" />
       <File Path="mijnfacturen.aspx" Url="mijnfacturen.aspx" />
       <File Path="mijnwachtwoord.aspx" Url="mijnwachtwoord.aspx" />
+      <File Path="afhangen.aspx" Url="afhangen.aspx" />
+      <File Path="competitie.aspx" Url="competitie.aspx" />
+      <File Path="instellingen.aspx" Url="instellingen.aspx" />
+      <File Path="profiel.aspx" Url="profiel.aspx" />
+      <File Path="toernooi.aspx" Url="toernooi.aspx" />
+      <File Path="twitter.aspx" Url="twitter.aspx" />
+      <File Path="uitslagen.aspx" Url="uitslagen.aspx" />
     </Module>
   </Modules>
 </Project>

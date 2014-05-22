@@ -13,7 +13,7 @@ namespace ClubCloud.Service
     /// <summary>
     /// The Service Contract.
     /// </summary>
-    [ServiceContract]
+    [ServiceContract(Namespace = "http://clubcloud.nl/", Name = "ClubCloudService")]
     [System.Runtime.InteropServices.Guid("23c6e4c4-d8d7-4bef-8d11-420c88bbefc2")]
     internal interface IClubCloudApplicationService
     {

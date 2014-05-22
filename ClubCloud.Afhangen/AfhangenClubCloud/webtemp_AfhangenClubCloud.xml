@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Templates xmlns:ows="Microsoft SharePoint">
+  <Template Name="AfhangenClubCloud" ID="10001">
+    <Configuration ID="0" Title="Afhangen ClubCloud" Hidden="FALSE" ImageUrl="/_layouts/images/cloud.jpg" Description="ClubCloud Afhangen" DisplayCategory="ClubCloud" >
+    </Configuration>
+  </Template>
+</Templates>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Web.Administration;
+﻿using ClubCloud.Zimbra.Service;
+using Microsoft.Web.Administration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,7 +90,9 @@ namespace ClubCloud.Provider
 
         internal static void AppendSectionGroupZimbra(ref XmlDocument webConfig)
         {
+            
             string fullname = Assembly.GetExecutingAssembly().FullName;
+            fullname = fullname.Replace("ClubCloud.Provider", "ClubCloud.Zimbra");
             XmlNode configuration = webConfig.SelectSingleNode("/configuration");
 
             bool section = ContainsNode("name", "Zimbra", "/configuration/configSections", ref webConfig);

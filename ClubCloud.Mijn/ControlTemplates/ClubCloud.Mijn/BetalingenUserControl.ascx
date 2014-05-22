@@ -6,6 +6,11 @@
 <%@ Import Namespace="Microsoft.SharePoint" %> 
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BetalingenUserControl.ascx.cs" Inherits="ClubCloud.Mijn.ControlTemplates.BetalingenUserControl" %>
+<script src="/_layouts/15/ClubCloud.SignalR/jquery.min.js" type="text/javascript"></script>
+<script src="/_layouts/15/ClubCloud.SignalR/jquery.signalR.min.js" type="text/javascript"></script>
+<script src="/_layouts/15/ClubCloud.SignalR/json2.min.js" type="text/javascript"></script>
+<script src="/signalr/hubs" type="text/javascript"></script>
+
 <asp:UpdatePanel ID="udp_betalingen" runat="server">
     <ContentTemplate>
         <asp:panel runat="server" ID="pnl_secure" Visible="False">

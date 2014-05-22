@@ -10,6 +10,9 @@ namespace ClubCloud.Service
     using System.ServiceModel.Activation;
     using Microsoft.SharePoint.Administration;
     using Microsoft.SharePoint.Client.Services;
+    using Microsoft.AspNet.SignalR.Infrastructure;
+    using Microsoft.AspNet.SignalR;
+    using ClubCloud.SignalR.Hubs;
 
     /// <summary>
     /// The REST Service.
@@ -17,6 +20,7 @@ namespace ClubCloud.Service
     [BasicHttpBindingServiceMetadataExchangeEndpoint]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     [System.Runtime.InteropServices.Guid("ca13956f-3676-4c74-abdc-e16f784d08ac")]
+    [ServiceBehavior(Namespace = "http://clubcloud.nl/", Name="ClubCloudService")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
     public class ClubCloudClientService : IClubCloudClientService
     {
@@ -29,6 +33,12 @@ namespace ClubCloud.Service
         {
             //return "Hello World - You entered: " + helloWorld;
             ClubCloudServiceClient client = new ClubCloudServiceClient();
+
+            IConnectionManager connectionManager = GlobalHost.ConnectionManager;
+            var context = connectionManager.GetHubContext<MijnHub>();
+
+            context.Clients.Group(helloWorld).JoinClub(helloWorld);
+
             return client.HelloWorld(helloWorld);
         }
 
@@ -41,6 +51,12 @@ namespace ClubCloud.Service
         {
             //return "Hello World - You entered: " + helloWorld;
             ClubCloudServiceClient client = new ClubCloudServiceClient();
+
+            IConnectionManager connectionManager = GlobalHost.ConnectionManager;
+            var context = connectionManager.GetHubContext<MijnHub>();
+
+            context.Clients.Group(helloWorld).JoinClub(client.HelloWorldFromDatabase(helloWorld));
+
             return client.HelloWorldFromDatabase(helloWorld);
         }
     }
