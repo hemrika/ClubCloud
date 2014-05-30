@@ -151,7 +151,7 @@ namespace ClubCloud.Provider
             XmlNode zimbraNode = null;
             if (configuration != null)
             {
-                foreach (XmlNode node in configuration.ChildNodes)
+                foreach (XmlNode node in webConfig.ChildNodes)
                 {
                     if (node.Name == "Zimbra")
                     {
@@ -161,7 +161,7 @@ namespace ClubCloud.Provider
                 }
                 if (zimbraNode != null)
                 {
-                    configuration.RemoveChild(zimbraNode);
+                    webConfig.RemoveChild(zimbraNode);
                 }
             }
         }

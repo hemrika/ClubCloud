@@ -64,6 +64,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -132,6 +133,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="ControlTemplates\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{69f2249b-1931-4708-b7c7-2e666040dddd}</SharePointProjectItemId>
     </None>
@@ -158,6 +160,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClubCloud.KNLTB.Servit\ClubCloud.KNLTB.Servit.csproj">
+      <Project>{b98cd37b-e5d0-49e4-a765-f8fba945e050}</Project>
+      <Name>ClubCloud.KNLTB.Servit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
       <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
       <Name>ClubCloud.Service</Name>

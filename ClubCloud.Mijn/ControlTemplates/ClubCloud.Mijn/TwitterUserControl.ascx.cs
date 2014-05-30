@@ -1,4 +1,5 @@
-﻿using Microsoft.SharePoint;
+﻿using ClubCloud.Service.Model;
+using Microsoft.SharePoint;
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -27,7 +28,11 @@ namespace ClubCloud.Mijn.ControlTemplates
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                tbx_twitterid.Text = Client.HelloWorldFromDatabase(userId);
+                ClubCloud_Gebruiker user = Client.GetClubCloudUser(userId);
+                if (user != null)
+                {
+                    tbx_twitterid.Text = user.FirstName;
+                }
             }
             else
             {

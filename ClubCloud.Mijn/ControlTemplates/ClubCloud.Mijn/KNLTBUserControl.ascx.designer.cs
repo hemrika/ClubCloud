@@ -94,6 +94,15 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.Button btn_knltbpw;
         
         /// <summary>
+        /// lbl_knltbpw_result control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_knltbpw_result;
+        
+        /// <summary>
         /// pnl_information control.
         /// </summary>
         /// <remarks>
@@ -119,5 +128,14 @@ namespace ClubCloud.Mijn.ControlTemplates {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbn_vergeten;
+        
+        /// <summary>
+        /// udp_knltb_progress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress udp_knltb_progress;
     }
 }

@@ -11,6 +11,7 @@ namespace ClubCloud.Service
     using System.Linq;
     using System.Text;
     using Microsoft.SharePoint;
+    using ClubCloud.Service.Model;
 
     /// <summary>
     /// This is the class that is accessible to the Client callers (web parts, user controls, timer jobs, etc.).
@@ -59,6 +60,7 @@ namespace ClubCloud.Service
 
         #region Methods
 
+        /*
         /// <summary>
         /// Executes the HelloWorld method on the service through the proxy.
         /// </summary>
@@ -95,6 +97,22 @@ namespace ClubCloud.Service
                 false);
 
             return response;
+        }
+        */
+
+        public ClubCloud_Gebruiker GetClubCloudUser(string user)
+        {
+            ClubCloud_Gebruiker response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetClubCloudUserFromDatabase(user);
+                },
+                false);
+
+            return response;
+
         }
 
         #endregion

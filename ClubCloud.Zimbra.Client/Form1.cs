@@ -27,6 +27,10 @@ using ClubCloud.KNLTB.ServIt;
 using System.Web.Services.Protocols;
 using ClubCloud.KNLTB.ServIt.CrmService;
 using ClubCloud.KNLTB.ServIt.MetadataService;
+using System.ServiceModel.Channels;
+using ClubCloud.KNLTB.ServIt.UserService;
+using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
+using ClubCloud.KNLTB.ServIt.CompetitieService;
 //using ClubCloud.KNLTB.ServIt.MetadataService;
 
 namespace ClubCloud.Zimbra.Client
@@ -164,10 +168,135 @@ namespace ClubCloud.Zimbra.Client
                 if (cc == null)
                 {
                     ClubCloud.KNLTB.Security.KNLTBContainer container = new KNLTB.Security.KNLTBContainer();
-                    container.ServItRequestAcces("12073385", "rjm557308453!");
+                    //container.MijnRequestAcces("12073385", "rjm557308453!");
+                    container.ServItRequestAcces("27908313", "SfRMTu4");
+
                     while (container.Container == null) { }
                     cc = container.Container;
                 }
+
+                LedenadministratieServiceClient ledenadministratie = new LedenadministratieServiceClient(cc);
+                CompetitieServiceClient competitieService = new CompetitieServiceClient(cc);
+                //GetSpelersprofielResponse spelersprofiel = ledenadministratie.GetSpelersprofiel(new GetSpelersprofielRequest { Bondsnummer = "27908313" });
+                //GetSpelersProfielDetailResponse spelersprofieldetail = ledenadministratie.GetSpelersProfielDetail(new GetSpelersProfielDetailRequest { Bondsnummer = "27908313" });
+
+                //GetUserDistrictResponse district = ledenadministratie.GetUserDistrict(new GetUserDistrictRequest { Bondsnummer = "27908313" });
+                GetMijnVerenigingenResponse verenigingen = ledenadministratie.GetMijnVerenigingen(new GetMijnVerenigingenRequest { Bondsnummer = "27908313" });
+                foreach (ClubCloud.KNLTB.ServIt.LedenAdministratieService.Vereniging vereniging in verenigingen.Verenigingen)
+                {
+                    //GetVerenigingResponse verenigingdetails = ledenadministratie.GetVereniging(new KNLTB.ServIt.LedenAdministratieService.GetVerenigingRequest { Bondsnummer = "27908313", VerenigingId = vereniging.Id });
+                    GetCompetitiesForVerenigingResponse competities = ledenadministratie.GetCompetitiesForVereniging(new GetCompetitiesForVerenigingRequest { Bondsnummer = "27908313", VerenigingId = vereniging.Id });
+
+                    foreach (ClubCloud.KNLTB.ServIt.LedenAdministratieService.CompetitieForVereniging competitie in competities.Competities)
+                    {
+                        //GetAfdelingenResponse afdelingen = competitieService.GetAfdelingen(new GetAfdelingenRequest { CompetitieId = competitie.Id, Filter = GetAfdelingenFilter.AfdelingenWithIngedeeldePloeg });
+                        //foreach (Afdeling afdeling in afdelingen.Afdelingen)
+                        //{
+                            GetWedstrijdgegevensResponse wedstrijden = competitieService.GetWedstrijdgegevens(new GetWedstrijdgegevensRequest { CompetitieId = competitie.Id, AfdelingVerenigingWedstrijdgegevenId = vereniging.Id, Filter = GetWedstrijdgegevensFilter.WedstrijdgegevensForVereniging });
+
+                            foreach (Wedstrijdgegevens wedstrijd in wedstrijden.Wedstrijdgegevens)
+                            {
+                                GetPartijresultatenResponse partijen = competitieService.GetPartijresultaten(new GetPartijresultatenRequest { WedstrijdgegevenId = wedstrijd.Id });
+                                foreach (Partijresultaat partij in partijen.Partijresultaten)
+                                {
+                                    Console.WriteLine(partij.BondsnummerThuisspeler);
+                                    Console.WriteLine(partij.BondsnummerUitspeler);
+                                }
+                            }
+                        //}
+                        /*
+                        GetPloegenResponse ploegen = competitieService.GetPloegen(new GetPloegenRequest { CompetitieId = competitie.Id });
+                        foreach (Ploeg ploeg in ploegen.Ploegen)
+                        {
+                            ploeg.
+                            //partij.Partijresultaten[0].BondsnummerThuisspeler;
+                            GetStandenResponse standen = competitieService.GetStanden(new GetStandenRequest { AfdelingVerenigingPloegId = ploegen.Ploegen[0].Id, CompetitieId = competitie.Id, Filter = GetStandenRequestFilter.GetStandenForCompetitieAndPloeg });
+
+                            foreach (Stand stand in standen.Standen)
+                            {
+
+                                GetUitslagenAfdelingResponse uitslagen = competitieService.GetUitslagenAfdeling(new GetUitslagenAfdelingRequest { AfdelingId = stand.AfdelingId.Value, CompetitieId = competitie.Id, PiramideId = stand.PiramideId });
+                            }
+                        }
+                        */
+
+                        //Console.WriteLine(ploegen.Ploegen[0].Id);
+                        
+                        //competitieService.GetVerenigingen(new GetVerenigingenRequest { CompetitieId = competitie.Id, Filter = GetVerenigingenFilter.VerenigingenFromIngedeeldePloeg });
+                        
+                        Console.WriteLine(competitie.Id);
+                        Console.WriteLine(competitie.AantalPloegen);
+                        Console.WriteLine(competitie.Naam);
+                    }
+                }
+
+
+                
+                
+
+                /*
+                competitie.GetStanden(new GetStandenRequest { AfdelingVerenigingPloegId = new Guid(), CompetitieId = new Guid(), Filter = GetStandenRequestFilter.GetStandenForCompetitieAndAfdeling });
+                competitie.GetPloegen(new GetPloegenRequest { CompetitieId = new Guid() });
+                competitie.GetPartijresultaten(new GetPartijresultatenRequest { WedstrijdgegevenId = new Guid() });
+
+                GetCompetitiesResponse comps = competitie.GetCompetities(new GetCompetitiesRequest { Filter = GetCompetitiesFilter.CompetitiesMijnKnltb });
+                //competitie.GetStanden(new GetStandenRequest{ Filter = GetStandenRequestFilter.}.GetPloegen(new GetPloegenRequest{ })
+                foreach (ClubCloud.KNLTB.ServIt.CompetitieService.Competitie comp in comps.Competities)
+                {
+                    Console.WriteLine(comp.Id);
+                    Console.WriteLine(comp.Naam);
+                    Console.WriteLine(comp.Omschrijving);
+                }
+                */
+                /*
+                UserServiceClient client = new UserServiceClient(cc);
+                HasAccessToCrmResponse acces = client.HasAccessToCrm(new HasAccessToCrmRequest { UserName = "27908313" });
+
+                Console.WriteLine(acces.AccessPermitted);
+                */
+                /*
+                Uri serverUri = new Uri("https://servit.mijnknltb.nl/ISV/KNLTB.ServIT2/KNLTB/Services/LedenAdministratieService.svc");
+
+                ChannelFactory<ClubCloud.KNLTB.ServIt.LedenAdministratieService.ILedenadministratieService> factory = new ChannelFactory<ClubCloud.KNLTB.ServIt.LedenAdministratieService.ILedenadministratieService>(new BasicHttpsBinding() { AllowCookies = true, HostNameComparisonMode = HostNameComparisonMode.WeakWildcard }, new EndpointAddress(serverUri));
+                ClubCloud.KNLTB.ServIt.LedenAdministratieService.ILedenadministratieService client = factory.CreateChannel();
+                factory.GetProperty<IHttpCookieContainerManager>().CookieContainer = cc;
+
+                //ClubCloud.KNLTB.ServIt.UserService.UserServiceClient client = channel as UserServiceClient;
+                ClubCloud.KNLTB.ServIt.LedenAdministratieService.GetMijnVerenigingenResponse response = client.GetMijnVerenigingen(new KNLTB.ServIt.LedenAdministratieService.GetMijnVerenigingenRequest { Bondsnummer = "27908313" });
+                GetPersoonsgegevensResponse persoon = client.GetPersoonsgegevens(new GetPersoonsgegevensRequest { Bondsnummer = "27908313" });
+
+                GetUserDistrictResponse district = client.GetUserDistrict(new GetUserDistrictRequest { Bondsnummer = "27908313" });
+
+
+                Console.WriteLine(persoon.Persoonsgegevens.Geboortedatum);
+                foreach (KNLTB.ServIt.LedenAdministratieService.Vereniging vereniging in response.Verenigingen)
+                {
+                    Console.WriteLine(vereniging.Id);
+                    Console.WriteLine(vereniging.Naam);
+
+                    GetVerenigingResponse verenigingdetails = client.GetVereniging(new KNLTB.ServIt.LedenAdministratieService.GetVerenigingRequest { Bondsnummer = "27908313", VerenigingId = vereniging.Id });
+                    Console.WriteLine(verenigingdetails.Verenigingsnummer);                    
+                }
+
+                ((IChannel)client).Close();
+                factory.Close();
+                */
+
+                /*
+                Uri serverUri = new Uri("https://servit.mijnknltb.nl/ISV/KNLTB.ServIT2/KNLTB/Services/UserService.svc");
+
+                ChannelFactory<ClubCloud.KNLTB.ServIt.UserService.IUserService> factory = new ChannelFactory<ClubCloud.KNLTB.ServIt.UserService.IUserService>(new BasicHttpsBinding() { AllowCookies = true, HostNameComparisonMode = HostNameComparisonMode.WeakWildcard }, new EndpointAddress(serverUri));
+                ClubCloud.KNLTB.ServIt.UserService.IUserService client = factory.CreateChannel();
+                factory.GetProperty<IHttpCookieContainerManager>().CookieContainer = cc;
+
+                //ClubCloud.KNLTB.ServIt.UserService.UserServiceClient client = channel as UserServiceClient;
+                ClubCloud.KNLTB.ServIt.UserService.HasAccessToCrmResponse response = client.HasAccessToCrm(new KNLTB.ServIt.UserService.HasAccessToCrmRequest { UserName = "27908313" });
+                Console.WriteLine(response.AccessPermitted);
+                Console.WriteLine(response.ExtensionData);
+
+                ((IChannel)client).Close();
+                factory.Close();
+                */
 
                 /*
                 ClubCloud.KNLTB.ServIt.MetadataService.MetadataService service = new KNLTB.ServIt.MetadataService.MetadataService();
@@ -179,13 +308,21 @@ namespace ClubCloud.Zimbra.Client
                 RetrieveAllEntitiesResponse metadata = (RetrieveAllEntitiesResponse)service.Execute(request);
                 WriteMetadata(metadata);
                 */
-                
+
+                /*
                 ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService();
                 service.CallerOriginTokenValue = null; //new KNLTB.ServIt.CallerOriginToken{ CallerOrigin = new ClubCloud.KNLTB.ServIt.CallerOrigin{ }};
                 service.CorrelationTokenValue = null; //new KNLTB.ServIt.CorrelationToken{ CorrelationId = new Guid("00000000-0000-0000-0000-000000000000")};
                 service.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmService.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
                 service.CrmCookieContainer = cc;
-                GetUsersUsingExecute(service);
+
+                WhoAmIResponse response = service.Execute(new WhoAmIRequest()) as WhoAmIResponse;
+                
+                Console.WriteLine(response.BusinessUnitId);
+                Console.WriteLine(response.OrganizationId);
+                Console.WriteLine(response.UserId);
+                */
+                //GetUsersUsingExecute(service);
                 /*
                 service.ExecuteCompleted += service_ExecuteCompleted;
                 //BusinessUnitId = 3cea4b0b-595b-e311-a846-02bf0aead617
@@ -629,7 +766,7 @@ namespace ClubCloud.Zimbra.Client
             {
                 Console.Write(fex.Message);
             }
-                catch(SoapException sex)
+            catch (SoapException sex)
             {
                 Console.WriteLine(sex.Detail);
             }
@@ -638,7 +775,7 @@ namespace ClubCloud.Zimbra.Client
                 Console.Write(ex.Message);
             }
             //Application.Exit();
-            
+
         }
 
         private void GetUsersUsingExecute(ClubCloud.KNLTB.ServIt.CrmService.CrmService service)

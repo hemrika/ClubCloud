@@ -6,6 +6,8 @@
 
 namespace ClubCloud.Service
 {
+    using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
+    using ClubCloud.Service.Model;
     using System;
     using System.ServiceModel;
     using System.ServiceModel.Description;
@@ -19,6 +21,7 @@ namespace ClubCloud.Service
     {
         #region Methods
 
+        /*
         /// <summary>
         /// Returns a hello world string.
         /// </summary>
@@ -34,6 +37,13 @@ namespace ClubCloud.Service
         /// <returns>A string of text echoing the input value.</returns>
         [OperationContract]
         string HelloWorldFromDatabase(string helloWorld);
+        */
+
+        
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
+        ClubCloud_Gebruiker GetClubCloudUserFromDatabase(string user);
 
         #endregion
     }

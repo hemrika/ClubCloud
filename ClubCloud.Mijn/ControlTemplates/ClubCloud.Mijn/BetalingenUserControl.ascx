@@ -9,9 +9,8 @@
 <script src="/_layouts/15/ClubCloud.SignalR/jquery.min.js" type="text/javascript"></script>
 <script src="/_layouts/15/ClubCloud.SignalR/jquery.signalR.min.js" type="text/javascript"></script>
 <script src="/_layouts/15/ClubCloud.SignalR/json2.min.js" type="text/javascript"></script>
-<script src="/signalr/hubs" type="text/javascript"></script>
-
-<asp:UpdatePanel ID="udp_betalingen" runat="server">
+<script src="~/signalr/hubs" type="text/javascript"></script>
+<asp:UpdatePanel ID="udp_betalingen" runat="server"  >
     <ContentTemplate>
         <asp:panel runat="server" ID="pnl_secure" Visible="False">
             <i class="icon-lock-1 special"></i>U moet ingelogd zijn om uw instellingen te kunnen wijzigen.
@@ -33,3 +32,8 @@
         </fieldset>
     </ContentTemplate>
 </asp:UpdatePanel>
+<asp:UpdateProgress ID="udp_betalingen_progress" runat="server">
+<ProgressTemplate>
+    Bezig met verwerken.
+</ProgressTemplate>
+</asp:UpdateProgress>

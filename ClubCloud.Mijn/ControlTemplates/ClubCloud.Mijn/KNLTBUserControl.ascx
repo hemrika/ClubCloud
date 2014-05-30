@@ -6,6 +6,23 @@
 <%@ Import Namespace="Microsoft.SharePoint" %> 
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="KNLTBUserControl.ascx.cs" Inherits="ClubCloud.Mijn.ControlTemplates.KNLTBUserControl" %>
+<!--
+<script type="text/javascript">
+    function pageLoad() {
+        $create(
+            Sys.UI.DataView,
+            {
+                autoFetch: "true",
+                dataProvider: "~/_vti_bin/ClubCloud.Service/ClubCloud.svc",
+                fetchOperation: "HelloWorld",
+            },
+              {},
+              {},
+              $get("companyListView")
+          );
+    }
+</script>
+-->
 <asp:UpdatePanel ID="udp_knltb" runat="server">
     <ContentTemplate>
         <asp:image imageurl="https://mijn.clubcloud.nl/_layouts/15/images/ClubCloud.Mijn/mijnknltb.png" runat="server" alt="MijnKNLTB" />
@@ -19,9 +36,10 @@
         <asp:TextBox ID="tbx_knltbid" runat="server" Enabled="False" CssClass="text-input" ></asp:TextBox> 
         <br />
         <asp:Label ID="lbl_knltbpw" runat="server" Text="KNLTB Wachtwoord :"></asp:Label> 
-        <asp:TextBox ID="tbx_knltbpw" runat="server" TextMode="Password" OnTextChanged="tbx_knltbpw_TextChanged" CssClass="text-input" ></asp:TextBox> 
+        <asp:TextBox ID="tbx_knltbpw" runat="server" TextMode="Password" OnTextChanged="tbx_knltbpw_TextChanged" CssClass="text-input" CausesValidation="True" ></asp:TextBox> 
         <br />
-        <asp:Button ID="btn_knltbpw" runat="server" Text="Opslaan" OnClick="btn_knltbpw_Click" Enabled="False" CssClass="button big blue" />
+        <asp:Button ID="btn_knltbpw" runat="server" Text="Opslaan" OnClick="btn_knltbpw_Click" CssClass="button big blue" />
+        <asp:Label ID="lbl_knltbpw_result" runat="server" />
         </asp:panel>
         </fieldset>
         <p><br /></p>
@@ -33,4 +51,8 @@
         </asp:panel>
     </ContentTemplate>
 </asp:UpdatePanel>
-
+<asp:UpdateProgress ID="udp_knltb_progress" runat="server">
+<ProgressTemplate>
+    Bezig met verwerken.
+</ProgressTemplate>
+</asp:UpdateProgress>
