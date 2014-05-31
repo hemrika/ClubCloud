@@ -110,12 +110,14 @@ namespace ClubCloud.Service
             {
                 using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(connection.ConnectionString))
                 {
+                    
                     model.Database.CreateIfNotExists();
-
+                    /*
                     if (model.Database.Exists())
                     {
                         model.Database.Initialize(true);
                     }
+                    */
 
                     gebruiker = model.ClubCloud_Gebruikers.Find(int.Parse(user));
 

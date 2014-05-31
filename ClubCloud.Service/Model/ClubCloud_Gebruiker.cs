@@ -10,7 +10,11 @@
 namespace ClubCloud.Service.Model
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ClubCloud_Vereniging))]
     
     public partial class ClubCloud_Gebruiker
     {
@@ -19,14 +23,22 @@ namespace ClubCloud.Service.Model
             this.ClubCloud_Vereniging = new HashSet<ClubCloud_Vereniging>();
         }
     
+    	[DataMember]
         public int Id { get; set; }
+    	[DataMember]
         public string FirstName { get; set; }
+    	[DataMember]
         public string MiddleName { get; set; }
+    	[DataMember]
         public string LastName { get; set; }
+    	[DataMember]
         public string mijnknltb_password { get; set; }
+    	[DataMember]
         public string oauth_token { get; set; }
+    	[DataMember]
         public string oauth_token_secret { get; set; }
     
+    	[DataMember]
         public virtual ICollection<ClubCloud_Vereniging> ClubCloud_Vereniging { get; set; }
     }
 }

@@ -46,12 +46,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+      <HintPath>..\ClubCloud.Zimbra\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+      <HintPath>..\ClubCloud.Zimbra\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -149,29 +149,29 @@
     <Compile Include="ClubCloudApplicationService.cs" />
     <Compile Include="IClubCloudClientService.cs" />
     <Compile Include="IClubCloudApplicationService.cs" />
-    <Compile Include="Model\ClubCloudModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClubCloudModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloudModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\ClubCloudModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ClubCloudModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClubCloudWCF.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloudWCF.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloudWCF.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloudWCF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ClubCloud_Accomodatie.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+      <DependentUpon>ClubCloudWCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClubCloud_Gebruiker.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+      <DependentUpon>ClubCloudWCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClubCloud_Vereniging.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+      <DependentUpon>ClubCloudWCF.tt</DependentUpon>
     </Compile>
     <Compile Include="Powershell\NewClubCloudServiceApplication.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplicationProxy.cs" />
@@ -213,19 +213,20 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ClubCloudModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\ClubCloudModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClubCloudModel.Context.cs</LastGenOutput>
-      <DependentUpon>ClubCloudModel.edmx</DependentUpon>
-    </None>
     <None Include="Model\ClubCloudModel.edmx.diagram">
       <DependentUpon>ClubCloudModel.edmx</DependentUpon>
     </None>
-    <None Include="Model\ClubCloudModel.tt">
+    <None Include="Model\ClubCloudWCF.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClubCloudModel.cs</LastGenOutput>
+      <LastGenOutput>ClubCloudWCF.Context.cs</LastGenOutput>
       <DependentUpon>ClubCloudModel.edmx</DependentUpon>
     </None>
+    <None Include="Model\ClubCloudWCF.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloudWCF.cs</LastGenOutput>
+      <DependentUpon>ClubCloudModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Package\Package.package">
       <PackageId>{a4c0cf73-d541-41c3-a1ef-0f71fd8e03ac}</PackageId>
     </None>

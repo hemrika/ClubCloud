@@ -4,123 +4,123 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ClubCloudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ClubCloud_Accomodaties">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="mijnknltb_id" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ClubCloud_Gebruiker_ClubCloud_Vereniging">
-          <Key>
-            <PropertyRef Name="ClubCloud_Gebruiker_Id" />
-            <PropertyRef Name="ClubCloud_Vereniging_Id" />
-          </Key>
-          <Property Name="ClubCloud_Gebruiker_Id" Type="int" Nullable="false" />
-          <Property Name="ClubCloud_Vereniging_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ClubCloud_Gebruikers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="varchar(max)" />
-          <Property Name="MiddleName" Type="varchar(max)" />
-          <Property Name="LastName" Type="varchar(max)" />
-          <Property Name="mijnknltb_password" Type="varchar(max)" />
-          <Property Name="oauth_token" Type="varchar(max)" />
-          <Property Name="oauth_token_secret" Type="varchar(max)" />
-        </EntityType>
-        <EntityType Name="ClubCloud_Vereniging_ClubCloud_Accomodatie">
-          <Key>
-            <PropertyRef Name="ClubCloud_Vereniging_Id" />
-            <PropertyRef Name="ClubCloud_Accomodatie_Id" />
-          </Key>
-          <Property Name="ClubCloud_Vereniging_Id" Type="int" Nullable="false" />
-          <Property Name="ClubCloud_Accomodatie_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ClubCloud_Verenigingen">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="mijnknltb_id" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Gebruiker">
-          <End Role="ClubCloud_Gebruikers" Type="Self.ClubCloud_Gebruikers" Multiplicity="1" />
-          <End Role="ClubCloud_Gebruiker_ClubCloud_Vereniging" Type="Self.ClubCloud_Gebruiker_ClubCloud_Vereniging" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClubCloud_Gebruikers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClubCloud_Gebruiker_ClubCloud_Vereniging">
-              <PropertyRef Name="ClubCloud_Gebruiker_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Vereniging">
-          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="1" />
-          <End Role="ClubCloud_Gebruiker_ClubCloud_Vereniging" Type="Self.ClubCloud_Gebruiker_ClubCloud_Vereniging" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClubCloud_Verenigingen">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClubCloud_Gebruiker_ClubCloud_Vereniging">
-              <PropertyRef Name="ClubCloud_Vereniging_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Accomodatie">
-          <End Role="ClubCloud_Accomodaties" Type="Self.ClubCloud_Accomodaties" Multiplicity="1" />
-          <End Role="ClubCloud_Vereniging_ClubCloud_Accomodatie" Type="Self.ClubCloud_Vereniging_ClubCloud_Accomodatie" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClubCloud_Accomodaties">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClubCloud_Vereniging_ClubCloud_Accomodatie">
-              <PropertyRef Name="ClubCloud_Accomodatie_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Vereniging">
-          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="1" />
-          <End Role="ClubCloud_Vereniging_ClubCloud_Accomodatie" Type="Self.ClubCloud_Vereniging_ClubCloud_Accomodatie" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClubCloud_Verenigingen">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClubCloud_Vereniging_ClubCloud_Accomodatie">
-              <PropertyRef Name="ClubCloud_Vereniging_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="ClubCloudModelStoreContainer">
-          <EntitySet Name="ClubCloud_Accomodaties" EntityType="Self.ClubCloud_Accomodaties" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ClubCloud_Gebruiker_ClubCloud_Vereniging" EntityType="Self.ClubCloud_Gebruiker_ClubCloud_Vereniging" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ClubCloud_Gebruikers" EntityType="Self.ClubCloud_Gebruikers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ClubCloud_Vereniging_ClubCloud_Accomodatie" EntityType="Self.ClubCloud_Vereniging_ClubCloud_Accomodatie" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ClubCloud_Verenigingen" EntityType="Self.ClubCloud_Verenigingen" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Gebruiker" Association="Self.FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Gebruiker">
-            <End Role="ClubCloud_Gebruikers" EntitySet="ClubCloud_Gebruikers" />
-            <End Role="ClubCloud_Gebruiker_ClubCloud_Vereniging" EntitySet="ClubCloud_Gebruiker_ClubCloud_Vereniging" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Vereniging" Association="Self.FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Vereniging">
-            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
-            <End Role="ClubCloud_Gebruiker_ClubCloud_Vereniging" EntitySet="ClubCloud_Gebruiker_ClubCloud_Vereniging" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Accomodatie" Association="Self.FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Accomodatie">
-            <End Role="ClubCloud_Accomodaties" EntitySet="ClubCloud_Accomodaties" />
-            <End Role="ClubCloud_Vereniging_ClubCloud_Accomodatie" EntitySet="ClubCloud_Vereniging_ClubCloud_Accomodatie" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Vereniging" Association="Self.FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Vereniging">
-            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
-            <End Role="ClubCloud_Vereniging_ClubCloud_Accomodatie" EntitySet="ClubCloud_Vereniging_ClubCloud_Accomodatie" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="ClubCloudModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ClubCloudModelStoreContainer">
+    <EntitySet Name="ClubCloud_Gebruikers" EntityType="ClubCloudModel.Store.ClubCloud_Gebruikers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Verenigingen" EntityType="ClubCloudModel.Store.ClubCloud_Verenigingen" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Accomodaties" EntityType="ClubCloudModel.Store.ClubCloud_Accomodaties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Gebruiker_ClubCloud_Vereniging" EntityType="ClubCloudModel.Store.ClubCloud_Gebruiker_ClubCloud_Vereniging" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Vereniging_ClubCloud_Accomodatie" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_ClubCloud_Accomodatie" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Gebruiker" Association="ClubCloudModel.Store.FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Gebruiker">
+      <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
+      <End Role="ClubCloud_Gebruiker_ClubCloud_Vereniging" EntitySet="ClubCloud_Gebruiker_ClubCloud_Vereniging" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Vereniging" Association="ClubCloudModel.Store.FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Vereniging">
+      <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+      <End Role="ClubCloud_Gebruiker_ClubCloud_Vereniging" EntitySet="ClubCloud_Gebruiker_ClubCloud_Vereniging" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Vereniging" Association="ClubCloudModel.Store.FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Vereniging">
+      <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+      <End Role="ClubCloud_Vereniging_ClubCloud_Accomodatie" EntitySet="ClubCloud_Vereniging_ClubCloud_Accomodatie" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Accomodatie" Association="ClubCloudModel.Store.FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Accomodatie">
+      <End Role="ClubCloud_Accomodatie" EntitySet="ClubCloud_Accomodaties" />
+      <End Role="ClubCloud_Vereniging_ClubCloud_Accomodatie" EntitySet="ClubCloud_Vereniging_ClubCloud_Accomodatie" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ClubCloud_Gebruikers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar(max)" Nullable="true" />
+    <Property Name="MiddleName" Type="varchar(max)" Nullable="true" />
+    <Property Name="LastName" Type="varchar(max)" Nullable="true" />
+    <Property Name="mijnknltb_password" Type="varchar(max)" Nullable="true" />
+    <Property Name="oauth_token" Type="varchar(max)" Nullable="true" />
+    <Property Name="oauth_token_secret" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Verenigingen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="mijnknltb_id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Accomodaties">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="mijnknltb_id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Gebruiker_ClubCloud_Vereniging">
+    <Key>
+      <PropertyRef Name="ClubCloud_Gebruiker_Id" />
+      <PropertyRef Name="ClubCloud_Vereniging_Id" />
+    </Key>
+    <Property Name="ClubCloud_Gebruiker_Id" Type="int" Nullable="false" />
+    <Property Name="ClubCloud_Vereniging_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Vereniging_ClubCloud_Accomodatie">
+    <Key>
+      <PropertyRef Name="ClubCloud_Vereniging_Id" />
+      <PropertyRef Name="ClubCloud_Accomodatie_Id" />
+    </Key>
+    <Property Name="ClubCloud_Vereniging_Id" Type="int" Nullable="false" />
+    <Property Name="ClubCloud_Accomodatie_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Gebruiker">
+    <End Role="ClubCloud_Gebruiker" Type="ClubCloudModel.Store.ClubCloud_Gebruikers" Multiplicity="1" />
+    <End Role="ClubCloud_Gebruiker_ClubCloud_Vereniging" Type="ClubCloudModel.Store.ClubCloud_Gebruiker_ClubCloud_Vereniging" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Gebruiker">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Gebruiker_ClubCloud_Vereniging">
+        <PropertyRef Name="ClubCloud_Gebruiker_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClubCloud_Gebruiker_ClubCloud_Vereniging_ClubCloud_Vereniging">
+    <End Role="ClubCloud_Gebruiker_ClubCloud_Vereniging" Type="ClubCloudModel.Store.ClubCloud_Gebruiker_ClubCloud_Vereniging" Multiplicity="*" />
+    <End Role="ClubCloud_Vereniging" Type="ClubCloudModel.Store.ClubCloud_Verenigingen" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Vereniging">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Gebruiker_ClubCloud_Vereniging">
+        <PropertyRef Name="ClubCloud_Vereniging_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Vereniging">
+    <End Role="ClubCloud_Vereniging" Type="ClubCloudModel.Store.ClubCloud_Verenigingen" Multiplicity="1" />
+    <End Role="ClubCloud_Vereniging_ClubCloud_Accomodatie" Type="ClubCloudModel.Store.ClubCloud_Vereniging_ClubCloud_Accomodatie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Vereniging">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Vereniging_ClubCloud_Accomodatie">
+        <PropertyRef Name="ClubCloud_Vereniging_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClubCloud_Vereniging_ClubCloud_Accomodatie_ClubCloud_Accomodatie">
+    <End Role="ClubCloud_Vereniging_ClubCloud_Accomodatie" Type="ClubCloudModel.Store.ClubCloud_Vereniging_ClubCloud_Accomodatie" Multiplicity="*" />
+    <End Role="ClubCloud_Accomodatie" Type="ClubCloudModel.Store.ClubCloud_Accomodaties" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Accomodatie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Vereniging_ClubCloud_Accomodatie">
+        <PropertyRef Name="ClubCloud_Accomodatie_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ClubCloudModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -247,7 +247,7 @@
     <edmx:Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="False" />
