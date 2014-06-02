@@ -80,6 +80,9 @@
     <Compile Include="ControlTemplates\ClubCloud.Mijn\BetalingenUserControl.ascx.designer.cs">
       <DependentUpon>BetalingenUserControl.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\ClubCloudUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ControlTemplates\ClubCloud.Mijn\FaceBookUserControl.ascx.cs">
       <DependentUpon>FaceBookUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

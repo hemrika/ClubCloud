@@ -6,10 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f7cdba0088ea44ecbef833b4d217ff48" Name="ClubCloud" >
         <EntityTypeShape EntityType="ClubCloudModel.ClubCloud_Gebruiker" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ClubCloudModel.ClubCloud_Vereniging" Width="1.5" PointX="3.375" PointY="1.5" />
-        <EntityTypeShape EntityType="ClubCloudModel.ClubCloud_Accomodatie" Width="2.25" PointX="6.125" PointY="1.75" />
-        <AssociationConnector Association="ClubCloudModel.ClubCloud_Gebruiker_ClubCloud_Vereniging" />
-        <AssociationConnector Association="ClubCloudModel.ClubCloud_Vereniging_ClubCloud_Accomodatie" />
+        <EntityTypeShape EntityType="ClubCloudModel.ClubCloud_Vereniging" Width="2.25" PointX="3.375" PointY="1.5" />
+        <EntityTypeShape EntityType="ClubCloudModel.ClubCloud_Tracking" Width="1.5" PointX="0.875" PointY="4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

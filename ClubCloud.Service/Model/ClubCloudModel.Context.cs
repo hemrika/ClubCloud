@@ -13,7 +13,6 @@ namespace ClubCloud.Service.Model
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Linq;
     
     public partial class ClubCloudModelContainer : DbContext
     {
@@ -23,11 +22,10 @@ namespace ClubCloud.Service.Model
         public ClubCloudModelContainer(bool proxyCreationEnabled)
             : base("name=ClubCloudModelContainer")
         {
-    				this.Configuration.LazyLoadingEnabled = false;
+    				this.Configuration.LazyLoadingEnabled = true;
     		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = false;
-    
     		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
         }
     	
@@ -37,7 +35,7 @@ namespace ClubCloud.Service.Model
         public ClubCloudModelContainer(string connectionString, bool proxyCreationEnabled)
             : base(connectionString)
         {
-    				this.Configuration.LazyLoadingEnabled = false;
+    				this.Configuration.LazyLoadingEnabled = true;
     		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = false;
@@ -56,15 +54,6 @@ namespace ClubCloud.Service.Model
     
         public virtual DbSet<ClubCloud_Gebruiker> ClubCloud_Gebruikers { get; set; }
         public virtual DbSet<ClubCloud_Vereniging> ClubCloud_Verenigingen { get; set; }
-        public virtual DbSet<ClubCloud_Accomodatie> ClubCloud_Accomodaties { get; set; }
-    
-        public virtual int HelloWorld(string input, ObjectParameter output)
-        {
-            var inputParameter = input != null ?
-                new ObjectParameter("input", input) :
-                new ObjectParameter("input", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("HelloWorld", inputParameter, output);
-        }
+        public virtual DbSet<ClubCloud_Tracking> ClubCloud_TrackingSet { get; set; }
     }
 }

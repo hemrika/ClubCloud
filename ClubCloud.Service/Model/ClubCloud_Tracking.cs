@@ -14,23 +14,12 @@ namespace ClubCloud.Service.Model
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ClubCloud_Vereniging))]
     
-    public partial class ClubCloud_Accomodatie
+    public partial class ClubCloud_Tracking
     {
-        public ClubCloud_Accomodatie()
-        {
-            this.ClubCloud_Vereniging = new HashSet<ClubCloud_Vereniging>();
-        }
-    
     	[DataMember]
         public int Id { get; set; }
     	[DataMember]
-        public string Name { get; set; }
-    	[DataMember]
-        public System.Guid mijnknltb_id { get; set; }
-    
-    	[DataMember]
-        public virtual ICollection<ClubCloud_Vereniging> ClubCloud_Vereniging { get; set; }
+        public string Data { get; set; }
     }
 }

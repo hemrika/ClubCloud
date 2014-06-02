@@ -6,7 +6,7 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace ClubCloud.Mijn.ControlTemplates
 {
-    public partial class FaceBookUserControl : UserControl
+    public partial class FaceBookUserControl : ClubCloudUserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -65,11 +65,10 @@ using System.Linq;
 		if (!loader.IsLazyLoadingEnabled(container))
 		{
 		#>
-		this.Configuration.LazyLoadingEnabled = false;
+		this.Configuration.LazyLoadingEnabled = true;
 		this.Configuration.AutoDetectChangesEnabled = true;
 		this.Configuration.UseDatabaseNullSemantics = false;
 		this.Configuration.ValidateOnSaveEnabled = false;
-
 		<#
 		}
 
@@ -98,7 +97,7 @@ using System.Linq;
 		if (!loader.IsLazyLoadingEnabled(container))
 		{
 		#>
-		this.Configuration.LazyLoadingEnabled = false;
+		this.Configuration.LazyLoadingEnabled = true;
 		this.Configuration.AutoDetectChangesEnabled = true;
 		this.Configuration.UseDatabaseNullSemantics = false;
 		this.Configuration.ValidateOnSaveEnabled = false;

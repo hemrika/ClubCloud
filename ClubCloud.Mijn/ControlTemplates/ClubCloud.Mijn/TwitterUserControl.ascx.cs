@@ -7,7 +7,7 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace ClubCloud.Mijn.ControlTemplates
 {
-    public partial class TwitterUserControl : UserControl
+    public partial class TwitterUserControl : ClubCloudUserControl
     {
         private ClubCloud.Service.ClubCloudServiceClient _client = null;
 

@@ -944,6 +944,10 @@ namespace ClubCloud.Provider
                         }
                     }
                 }
+                else
+                {
+                    user = null;
+                }
             }
             catch
             {
@@ -1003,6 +1007,10 @@ namespace ClubCloud.Provider
                         {
                         }
                     }
+                }
+                else
+                {
+                    user = null;
                 }
             }
             catch

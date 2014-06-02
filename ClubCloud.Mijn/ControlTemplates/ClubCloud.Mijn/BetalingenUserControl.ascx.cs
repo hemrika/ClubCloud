@@ -6,7 +6,7 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace ClubCloud.Mijn.ControlTemplates
 {
-    public partial class BetalingenUserControl : UserControl
+    public partial class BetalingenUserControl : ClubCloudUserControl
     {
         private ClubCloud.Service.ClubCloudServiceClient _client = null;
 

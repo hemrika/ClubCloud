@@ -149,30 +149,32 @@
     <Compile Include="ClubCloudApplicationService.cs" />
     <Compile Include="IClubCloudClientService.cs" />
     <Compile Include="IClubCloudApplicationService.cs" />
+    <Compile Include="Model\ClubCloudModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloudModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloudModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ClubCloudModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ClubCloudModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\ClubCloudWCF.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClubCloudWCF.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloudWCF.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClubCloudWCF.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Accomodatie.cs">
-      <DependentUpon>ClubCloudWCF.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\ClubCloud_Gebruiker.cs">
-      <DependentUpon>ClubCloudWCF.tt</DependentUpon>
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Tracking.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClubCloud_Vereniging.cs">
-      <DependentUpon>ClubCloudWCF.tt</DependentUpon>
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SpelersProfiel.cs" />
+    <Compile Include="Model\SpelerTracking.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplication.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplicationProxy.cs" />
     <Compile Include="Powershell\RemoveClubCloudService.cs" />
@@ -213,17 +215,17 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ClubCloudModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Model\ClubCloudModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloudModel.Context.cs</LastGenOutput>
+      <DependentUpon>ClubCloudModel.edmx</DependentUpon>
+    </None>
     <None Include="Model\ClubCloudModel.edmx.diagram">
       <DependentUpon>ClubCloudModel.edmx</DependentUpon>
     </None>
-    <None Include="Model\ClubCloudWCF.Context.tt">
+    <None Include="Model\ClubCloudModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClubCloudWCF.Context.cs</LastGenOutput>
-      <DependentUpon>ClubCloudModel.edmx</DependentUpon>
-    </None>
-    <None Include="Model\ClubCloudWCF.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClubCloudWCF.cs</LastGenOutput>
+      <LastGenOutput>ClubCloudModel.cs</LastGenOutput>
       <DependentUpon>ClubCloudModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />

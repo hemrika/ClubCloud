@@ -12,6 +12,7 @@ namespace ClubCloud.Service
     using System.Text;
     using Microsoft.SharePoint;
     using ClubCloud.Service.Model;
+    using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
 
     /// <summary>
     /// This is the class that is accessible to the Client callers (web parts, user controls, timer jobs, etc.).
@@ -60,46 +61,6 @@ namespace ClubCloud.Service
 
         #region Methods
 
-        /*
-        /// <summary>
-        /// Executes the HelloWorld method on the service through the proxy.
-        /// </summary>
-        /// <param name="inputText">Input text.</param>
-        /// <returns>A string of text echoing the input, with the current date time appended.</returns>
-        public string HelloWorld(string inputText)
-        {
-            string response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.HelloWorld(inputText);
-                },
-                false);
-
-            return response;
-        }
-
-        /// <summary>
-        /// Executes the HelloWorld method on the service through the proxy.
-        /// </summary>
-        /// <param name="inputText">Input text.</param>
-        /// <returns>A string of text echoing the input, with the current date time appended.</returns>
-        public string HelloWorldFromDatabase(string inputText)
-        {
-            string response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.HelloWorldFromDatabase(inputText);
-                },
-                false);
-
-            return response;
-        }
-        */
-
         public ClubCloud_Gebruiker GetClubCloudUser(string user)
         {
             ClubCloud_Gebruiker response = null;
@@ -107,7 +68,97 @@ namespace ClubCloud.Service
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetClubCloudUserFromDatabase(user);
+                    response = channel.GetClubCloudUser(user);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public Persoonsgegevens GetPersoonsgegevens(string bondsnummer)
+        {
+            Persoonsgegevens response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetPersoonsgegevens(bondsnummer);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool track = false)
+        {
+            SpelersProfiel response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetPersoonsprofiel(bondsnummer);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Vereniging> GetVerenigingen(string bondsnummer)
+        {
+            List<Vereniging> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetVerenigingen(bondsnummer);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Vereniging> GetVereniging(string bondsnummer, Guid verenigingId)
+        {
+            List<Vereniging> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetVereniging(bondsnummer,verenigingId);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<District> GetDistricten(string user)
+        {
+            List<District> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetDistricten(user);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public bool CreateClubCloudWebSite(string verenigingsnummer)
+        {
+            bool response = false;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.CreateClubCloudWebSite(verenigingsnummer);
                 },
                 false);
 

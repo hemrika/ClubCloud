@@ -9,7 +9,7 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace ClubCloud.Mijn.ControlTemplates
 {
-    public partial class KNLTBUserControl : UserControl
+    public partial class KNLTBUserControl : ClubCloudUserControl
     {
         private ClubCloud.Service.ClubCloudServiceClient _client = null;
 
@@ -44,6 +44,8 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         protected void btn_knltbpw_Click(object sender, EventArgs e)
         {
+            Client.CreateClubCloudWebSite("82503");
+            /*
             if (!string.IsNullOrWhiteSpace(tbx_knltbpw.Text))
             {
                 password = tbx_knltbpw.Text.Trim();
@@ -61,7 +63,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     }
                 }
             }
-
+            */
         }
 
         protected void tbx_knltbpw_TextChanged(object sender, EventArgs e)

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace ClubCloud.Mijn.ControlTemplates
 {
-    public partial class TwitterAuthorize : UserControl
+    public partial class TwitterAuthorize : ClubCloudUserControl
     {
         private ClubCloud.Service.ClubCloudServiceClient _client = null;
         private TwitterConnect _twitterConnect;
