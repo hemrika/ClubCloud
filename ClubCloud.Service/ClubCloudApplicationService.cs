@@ -77,6 +77,18 @@ namespace ClubCloud.Service
             return application.Database.DatabaseConnectionString;
         }
 
+        private static void CheckDatabase(string catalog = null)
+        {
+            using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(GetConnectionString(catalog)))
+            {
+
+                if (model.Database.CreateIfNotExists())
+                {
+                    model.Database.Initialize(true);
+                }
+            }
+        }
+
         /// <summary>
         /// Serialize List<Object> to one XML string
         /// </summary>
@@ -131,20 +143,18 @@ namespace ClubCloud.Service
 
         #region Methods
 
+        public void CheckDatabaseExists()
+        {
+            CheckDatabase();
+        }
+
         #region Gebruikers
 
-        public ClubCloud_Gebruiker GetClubCloudUser(string user)
+        /*
+        public ClubCloud_Gebruiker GetClubCloudUser(string user, bool refresh = false)
         {
+            CheckDatabase();
             ClubCloud_Gebruiker gebruiker = null;
-
-            using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(GetConnectionString()))
-            {
-
-                if (model.Database.CreateIfNotExists())
-                {
-                    model.Database.Initialize(true);
-                }
-            }
 
             using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(GetConnectionString()))
             {
@@ -165,17 +175,17 @@ namespace ClubCloud.Service
             }
             return gebruiker;
         }
+        */
 
-
-        public Persoonsgegevens GetPersoonsgegevens(string bondsnummer, bool refresh = false)
+        public ClubCloud_Gebruiker GetClubCloudGebruiker(string bondsnummer, bool refresh = false)
         {
-            Persoonsgegevens persoon = new Persoonsgegevens();
+            CheckDatabase();
+
+            ClubCloud_Gebruiker gebruiker = new ClubCloud_Gebruiker();
 
             using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(GetConnectionString()))
             {
-                ClubCloud_Gebruiker gebruiker = model.ClubCloud_Gebruikers.Find(int.Parse(bondsnummer));
-
-                persoon = new Persoonsgegevens { Achternaam = gebruiker.LastName };
+                gebruiker = model.ClubCloud_Gebruikers.Find(int.Parse(bondsnummer));
 
                 if (refresh && gebruiker != null && !string.IsNullOrWhiteSpace(gebruiker.mijnknltb_password))
                 {
@@ -188,20 +198,50 @@ namespace ClubCloud.Service
                         GetPersoonsgegevensResponse persoonResponse = LedenAdministratie.GetPersoonsgegevens(new GetPersoonsgegevensRequest { Bondsnummer = gebruiker.Id.ToString() });
                         if (persoonResponse != null && persoonResponse.Persoonsgegevens != null)
                         {
-                            persoon = persoonResponse.Persoonsgegevens;
+                            Persoonsgegevens persoon = persoonResponse.Persoonsgegevens;
+                            /*
+                            gebruiker.FirstName = persoon.Achternaam;
+                            gebruiker.FirstName = persoon.DistrictNaam;
+                            gebruiker.FirstName = persoon.Email;
+                            gebruiker.FirstName = persoon.Geboortedatum;
+                            gebruiker.FirstName = persoon.Geboorteplaats;
+                            gebruiker.FirstName = persoon.Gemeente;
+                            gebruiker.FirstName = persoon.Geslacht;
+                            gebruiker.FirstName = persoon.Huisnummer;
+                            gebruiker.FirstName = persoon.Id;
+                            gebruiker.FirstName = persoon.IsLid;
+                            gebruiker.FirstName = persoon.Mobiel;
+                            gebruiker.FirstName = persoon.NationaliteitId;
+                            gebruiker.FirstName = persoon.OrganisatieNummer;
+                            gebruiker.FirstName = persoon.Plaats;
+                            gebruiker.FirstName = persoon.Postcode;
+                            gebruiker.FirstName = persoon.RatingDubbel;
+                            gebruiker.FirstName = persoon.RatingEnkel;
+                            gebruiker.FirstName = persoon.Roepnaam;
+                            gebruiker.FirstName = persoon.SpeelsterkteDubbel;
+                            gebruiker.FirstName = persoon.SpeelsterkteEnkel;
+                            gebruiker.FirstName = persoon.Straat;
+                            gebruiker.FirstName = persoon.TelefoonAvond;
+                            gebruiker.FirstName = persoon.TelefoonOverdag;
+                            gebruiker.FirstName = persoon.Toevoeging;
+                            gebruiker.FirstName = persoon.Tussenvoegsel;
+                            gebruiker.FirstName = persoon.VolledigeNaam;
+                            gebruiker.FirstName = persoon.Voorletters;
+                            gebruiker.FirstName = persoon.Voornamen;
+                            */
                         }
                     }
-                    //TODO Update
-                    //gebruiker.LastName = persoon.Achternaam;
-                    //model.SaveChanges();
+                    model.SaveChanges();
                 }
             }
 
-            return persoon;
+            return gebruiker;
         }
 
-        public SpelersProfiel GetPersoonsprofiel(string bondsnummer)
+        public SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool refresh = false)
         {
+            CheckDatabase();
+
             SpelersProfiel profiel = new SpelersProfiel();
 
 
@@ -222,6 +262,11 @@ namespace ClubCloud.Service
                         {
                             profiel = (SpelersProfiel)profielResponse;
                         }
+
+                        if(refresh)
+                        {
+                            GetTracking(bondsnummer, refresh);
+                        }
                     }
                 }
             }
@@ -229,8 +274,10 @@ namespace ClubCloud.Service
             return profiel;
         }
 
-        public SpelerTracking GetTracking(string bondsnummer, bool update = false)
+        public SpelerTracking GetTracking(string bondsnummer, bool refresh = false)
         {
+            CheckDatabase();
+
             SpelerTracking spelertracking = new SpelerTracking { Id = int.Parse(bondsnummer) };
 
             using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(GetConnectionString()))
@@ -271,6 +318,8 @@ namespace ClubCloud.Service
 
         public List<Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false)
         {
+            CheckDatabase();
+
             List<Vereniging> verenigingen = new List<Vereniging>();
 
             using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(GetConnectionString()))
@@ -298,6 +347,8 @@ namespace ClubCloud.Service
 
         public List<District> GetDistricten(string bondsnummer, bool refresh = false)
         {
+            CheckDatabase();
+
             throw new NotImplementedException();
         }
 
@@ -313,42 +364,43 @@ namespace ClubCloud.Service
             {
                 vereniging = model.ClubCloud_Verenigingen.Find(verenigingId);
 
-                if ((refresh && vereniging != null) || vereniging == null )
+                if ((refresh && vereniging != null) || vereniging == null)
                 {
                     ClubCloud_Gebruiker gebruiker = model.ClubCloud_Gebruikers.Find(int.Parse(bondsnummer));
-                    if(gebruiker != null && !string.IsNullOrWhiteSpace(gebruiker.mijnknltb_password))
+                    if (gebruiker != null && !string.IsNullOrWhiteSpace(gebruiker.mijnknltb_password))
                     {
-                    CookieContainer cc = RequestContainer(gebruiker.Id.ToString(), gebruiker.mijnknltb_password);
+                        CookieContainer cc = RequestContainer(gebruiker.Id.ToString(), gebruiker.mijnknltb_password);
 
-                    if (cc != null)
-                    {
-                        LedenadministratieServiceClient LedenAdministratie = new LedenadministratieServiceClient(cc);
-                        GetVerenigingResponse verenigingenResponse = LedenAdministratie.GetVereniging(new GetVerenigingRequest { Bondsnummer = bondsnummer, VerenigingId = verenigingId });
-                        if (verenigingenResponse != null)
+                        if (cc != null)
                         {
-                            vereniging.BanknummerPlaats = verenigingenResponse.BanknummerPlaats;
-                            vereniging.Bezoekadres = verenigingenResponse.Bezoekadres;
-                            vereniging.BezoekadresGemeente = verenigingenResponse.BezoekadresGemeente;
-                            vereniging.BezoekadresPlaats = verenigingenResponse.BezoekadresPlaats;
-                            vereniging.BezoekadresPostcode = verenigingenResponse.BezoekadresPostcode;
-                            vereniging.DatumOpgericht = verenigingenResponse.DatumOpgericht;
-                            vereniging.District = verenigingenResponse.District;
-                            vereniging.Emailadres = verenigingenResponse.Emailadres;
-                            vereniging.IbanCode = verenigingenResponse.IbanCode;
-                            vereniging.KvKnummer = verenigingenResponse.KvKnummer;
-                            vereniging.KvKplaats = verenigingenResponse.KvKplaats;
-                            vereniging.Naam = verenigingenResponse.Naam;
-                            vereniging.Postadres = verenigingenResponse.Postadres;
-                            vereniging.PostadresGemeente = verenigingenResponse.PostadresGemeente;
-                            vereniging.PostadresPlaats = verenigingenResponse.PostadresPlaats;
-                            vereniging.PostadresPostcode = verenigingenResponse.PostadresPostcode;
-                            vereniging.Regio = verenigingenResponse.Regio;
-                            vereniging.TelefoonnummerAvond = verenigingenResponse.TelefoonnummerAvond;
-                            vereniging.TelefoonnummerOverdag = verenigingenResponse.TelefoonnummerOverdag;
-                            vereniging.Verenigingsnummer = verenigingenResponse.Verenigingsnummer;
-                            vereniging.Website = verenigingenResponse.Website;
+                            LedenadministratieServiceClient LedenAdministratie = new LedenadministratieServiceClient(cc);
+                            GetVerenigingResponse verenigingenResponse = LedenAdministratie.GetVereniging(new GetVerenigingRequest { Bondsnummer = bondsnummer, VerenigingId = verenigingId });
+                            
+                            if (verenigingenResponse != null)
+                            {
+                                vereniging.BanknummerPlaats = verenigingenResponse.BanknummerPlaats;
+                                vereniging.Bezoekadres = verenigingenResponse.Bezoekadres;
+                                vereniging.BezoekadresGemeente = verenigingenResponse.BezoekadresGemeente;
+                                vereniging.BezoekadresPlaats = verenigingenResponse.BezoekadresPlaats;
+                                vereniging.BezoekadresPostcode = verenigingenResponse.BezoekadresPostcode;
+                                vereniging.DatumOpgericht = verenigingenResponse.DatumOpgericht;
+                                vereniging.District = verenigingenResponse.District;
+                                vereniging.Emailadres = verenigingenResponse.Emailadres;
+                                vereniging.IbanCode = verenigingenResponse.IbanCode;
+                                vereniging.KvKnummer = verenigingenResponse.KvKnummer;
+                                vereniging.KvKplaats = verenigingenResponse.KvKplaats;
+                                vereniging.Naam = verenigingenResponse.Naam;
+                                vereniging.Postadres = verenigingenResponse.Postadres;
+                                vereniging.PostadresGemeente = verenigingenResponse.PostadresGemeente;
+                                vereniging.PostadresPlaats = verenigingenResponse.PostadresPlaats;
+                                vereniging.PostadresPostcode = verenigingenResponse.PostadresPostcode;
+                                vereniging.Regio = verenigingenResponse.Regio;
+                                vereniging.TelefoonnummerAvond = verenigingenResponse.TelefoonnummerAvond;
+                                vereniging.TelefoonnummerOverdag = verenigingenResponse.TelefoonnummerOverdag;
+                                vereniging.Verenigingsnummer = verenigingenResponse.Verenigingsnummer;
+                                vereniging.Website = verenigingenResponse.Website;
+                            }
                         }
-                    }
                     }
                     model.SaveChanges();
                 }
@@ -359,7 +411,33 @@ namespace ClubCloud.Service
 
         public ClubCloud_Vereniging GetVereniging(string bondsnummer, string vereniginsnummer, bool refresh = false)
         {
+            ClubCloud_Vereniging vereniging = new ClubCloud_Vereniging();
+            using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(GetConnectionString()))
+            {
+                ClubCloud_Gebruiker gebruiker = model.ClubCloud_Gebruikers.Find(int.Parse(bondsnummer));
+                if (gebruiker != null && !string.IsNullOrWhiteSpace(gebruiker.mijnknltb_password))
+                {
+                    CookieContainer cc = RequestContainer(gebruiker.Id.ToString(), gebruiker.mijnknltb_password);
 
+                    if (cc != null)
+                    {
+                        LedenadministratieServiceClient LedenAdministratie = new LedenadministratieServiceClient(cc);
+
+                        ZoekVerenigingenResponse verenigingenResponse = LedenAdministratie.ZoekVerenigingen(new ZoekVerenigingenRequest { VerenigingsNummer = vereniginsnummer });
+                        if (verenigingenResponse != null && verenigingenResponse.GevondenVerenigingen != null)
+                        {
+                            GevondenVerenigingen gevonden = verenigingenResponse.GevondenVerenigingen.SingleOrDefault(v => v.VerenigingsNummer == vereniginsnummer);
+
+                            if(gevonden.Id.Value != null)
+                            {
+                                vereniging = GetVereniging(bondsnummer, gevonden.Id.Value, refresh);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return vereniging;
         }
 
         #endregion
@@ -484,7 +562,7 @@ namespace ClubCloud.Service
                                 builder.InitialCatalog = "ClubCloudService_DB";
                                 using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(builder.ConnectionString))
                                 {
-                                    vereniging = model.ClubCloud_Verenigingen.Add(new ClubCloud_Vereniging { Id = int.Parse(verenigingsnummer), Name = "S.V. Kampong", mijnknltb_id = new Guid("02ada6c7-80f9-4671-91f9-898ea5da3ccd") });
+                                    vereniging = model.ClubCloud_Verenigingen.Add(new ClubCloud_Vereniging { Verenigingsnummer = verenigingsnummer, Naam = "S.V. Kampong", VerenigingsId = new Guid("02ada6c7-80f9-4671-91f9-898ea5da3ccd") });
                                     model.SaveChanges();
 
                                     //vereniging = model.ClubCloud_Verenigingen.Find(int.Parse(verenigingsnummer));
@@ -494,7 +572,7 @@ namespace ClubCloud.Service
                                 {
 
                                     string url = string.Format("http://{0}.clubcloud.nl", verenigingsnummer);
-                                    SPSite createdSite = webApp.Sites.Add(url, vereniging.Name, vereniging.Name, 1043, "STS#1", @"12073385",
+                                    SPSite createdSite = webApp.Sites.Add(url, vereniging.Naam, vereniging.Naam, 1043, "STS#1", @"12073385",
                                     "Rutger hemrika", "12073385@clubcloud.nl", null, null, null, true);
                                     //createdSite.SetUrl(new Uri("http://"++".clubcloud.n"))
                                     SPContentDatabase database = createdSite.ContentDatabase;

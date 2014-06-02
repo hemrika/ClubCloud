@@ -121,9 +121,9 @@ namespace ClubCloud.Service
 
         }
 
-        public List<Vereniging> GetVereniging(string bondsnummer, Guid verenigingId)
+        public ClubCloud_Vereniging GetVereniging(string bondsnummer, Guid verenigingId)
         {
-            List<Vereniging> response = null;
+            ClubCloud_Vereniging response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)

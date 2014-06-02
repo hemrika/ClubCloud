@@ -27,43 +27,48 @@ namespace ClubCloud.Service
         [OperationContract]
         string GetPostcode(string postcode, int huisnummer);
 
+        [OperationContract]
+        void CheckDatabaseExists();
+
         #endregion
 
         #region Gebruiker
 
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
-        ClubCloud_Gebruiker GetClubCloudUser(string user);
+        ClubCloud_Gebruiker GetClubCloudUser(string user, bool refresh = false);
+        */
 
         [OperationContract]
-        [ServiceKnownType(typeof(Persoonsgegevens))]
-        Persoonsgegevens GetPersoonsgegevens(string bondsnummer, bool refresh = false);
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
+        ClubCloud_Gebruiker GetClubCloudGebruiker(string bondsnummer, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(SpelersProfiel))]
-        SpelersProfiel GetPersoonsprofiel(string bondsnummer);
+        SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(SpelerTracking))]
-        SpelerTracking GetTracking(string bondsnummer, bool update = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(District))]
-        List<District> GetDistricten(string bondsnummer, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(Vereniging))]
-        List<Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false);
+        SpelerTracking GetTracking(string bondsnummer, bool refresh = false);
 
         #endregion
 
         #region Club
 
         [OperationContract]
+        [ServiceKnownType(typeof(Vereniging))]
+        List<Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false);
+
+        [OperationContract]
         ClubCloud_Vereniging GetVereniging(string bondsnummer, Guid verenigingId, bool refresh = false);
 
         [OperationContract]
         ClubCloud_Vereniging GetVereniging(string bondsnummer, string vereniginsnummer, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(District))]
+        List<District> GetDistricten(string bondsnummer, bool refresh = false);
 
         #endregion
 

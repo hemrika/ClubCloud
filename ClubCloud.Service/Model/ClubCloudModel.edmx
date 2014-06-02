@@ -9,13 +9,37 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="varchar(max)" />
-          <Property Name="MiddleName" Type="varchar(max)" />
-          <Property Name="LastName" Type="varchar(max)" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="mijnknltb_password" Type="varchar(max)" />
           <Property Name="oauth_token" Type="varchar(max)" />
           <Property Name="oauth_token_secret" Type="varchar(max)" />
+          <Property Name="Achternaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DistrictNaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Geboortedatum" Type="datetime" />
+          <Property Name="Geboorteplaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Gemeente" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Geslacht" Type="int" Nullable="false" />
+          <Property Name="Huisnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsLid" Type="bit" Nullable="false" />
+          <Property Name="Mobiel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NationaliteitId" Type="uniqueidentifier" />
+          <Property Name="OrganisatieNummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Plaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Postcode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RatingDubbel" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="RatingEnkel" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Roepnaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SpeelsterkteDubbel" Type="int" />
+          <Property Name="SpeelsterkteEnkel" Type="nvarchar(max)" />
+          <Property Name="Straat" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonAvond" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonOverdag" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Toevoeging" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tussenvoegsel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VolledigeNaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Voorletters" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Voornamen" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="ClubCloud_TrackingSet">
           <Key>
@@ -34,7 +58,7 @@
           <Property Name="BezoekadresGemeente" Type="nvarchar(max)" Nullable="false" />
           <Property Name="BezoekadresPlaats" Type="nvarchar(max)" Nullable="false" />
           <Property Name="BezoekadresPostcode" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DatumOpgericht" Type="datetime" Nullable="false" />
+          <Property Name="DatumOpgericht" Type="datetime" />
           <Property Name="District" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Emailadres" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IbanCode" Type="nvarchar(max)" Nullable="false" />
@@ -69,13 +93,37 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" FixedLength="false" Unicode="false" MaxLength="Max" />
-          <Property Name="MiddleName" Type="String" FixedLength="false" Unicode="false" MaxLength="Max" />
-          <Property Name="LastName" Type="String" FixedLength="false" Unicode="false" MaxLength="Max" />
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="mijnknltb_password" Type="String" FixedLength="false" Unicode="false" MaxLength="Max" />
           <Property Name="oauth_token" Type="String" FixedLength="false" Unicode="false" MaxLength="Max" />
           <Property Name="oauth_token_secret" Type="String" FixedLength="false" Unicode="false" MaxLength="Max" />
+          <Property Name="Achternaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DistrictNaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Geboortedatum" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="Geboorteplaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Gemeente" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Geslacht" Type="ClubCloudModel.Geslacht" Nullable="false" />
+          <Property Name="Huisnummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsLid" Type="Boolean" Nullable="false" />
+          <Property Name="Mobiel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NationaliteitId" Type="Guid" Nullable="true" />
+          <Property Name="OrganisatieNummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Plaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RatingDubbel" Type="Decimal" Nullable="true" Precision="18" Scale="0" />
+          <Property Name="RatingEnkel" Type="Decimal" Nullable="true" Precision="18" Scale="0" />
+          <Property Name="Roepnaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SpeelsterkteDubbel" Type="Int32" Nullable="true" />
+          <Property Name="SpeelsterkteEnkel" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Straat" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TelefoonAvond" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TelefoonOverdag" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Toevoeging" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Tussenvoegsel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="VolledigeNaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Voorletters" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Voornamen" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="ClubCloud_Vereniging">
           <Key>
@@ -87,7 +135,7 @@
           <Property Name="BezoekadresGemeente" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="BezoekadresPlaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="BezoekadresPostcode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="DatumOpgericht" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DatumOpgericht" Type="DateTime" Precision="3" Nullable="true" />
           <Property Name="District" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Emailadres" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="IbanCode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
@@ -111,6 +159,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
+        <EnumType Name="Geslacht" IsFlags="false" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.Geslacht">
+          <Member Name="Man" Value="1" />
+          <Member Name="Vrouw" Value="2" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -121,12 +173,36 @@
       <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Gebruiker)">
         <MappingFragment StoreEntitySet="ClubCloud_Gebruikers">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="mijnknltb_password" ColumnName="mijnknltb_password" />
           <ScalarProperty Name="oauth_token" ColumnName="oauth_token" />
           <ScalarProperty Name="oauth_token_secret" ColumnName="oauth_token_secret" />
+          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+          <ScalarProperty Name="DistrictNaam" ColumnName="DistrictNaam" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Geboortedatum" ColumnName="Geboortedatum" />
+          <ScalarProperty Name="Geboorteplaats" ColumnName="Geboorteplaats" />
+          <ScalarProperty Name="Gemeente" ColumnName="Gemeente" />
+          <ScalarProperty Name="Geslacht" ColumnName="Geslacht" />
+          <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+          <ScalarProperty Name="IsLid" ColumnName="IsLid" />
+          <ScalarProperty Name="Mobiel" ColumnName="Mobiel" />
+          <ScalarProperty Name="NationaliteitId" ColumnName="NationaliteitId" />
+          <ScalarProperty Name="OrganisatieNummer" ColumnName="OrganisatieNummer" />
+          <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+          <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+          <ScalarProperty Name="RatingDubbel" ColumnName="RatingDubbel" />
+          <ScalarProperty Name="RatingEnkel" ColumnName="RatingEnkel" />
+          <ScalarProperty Name="Roepnaam" ColumnName="Roepnaam" />
+          <ScalarProperty Name="SpeelsterkteDubbel" ColumnName="SpeelsterkteDubbel" />
+          <ScalarProperty Name="SpeelsterkteEnkel" ColumnName="SpeelsterkteEnkel" />
+          <ScalarProperty Name="Straat" ColumnName="Straat" />
+          <ScalarProperty Name="TelefoonAvond" ColumnName="TelefoonAvond" />
+          <ScalarProperty Name="TelefoonOverdag" ColumnName="TelefoonOverdag" />
+          <ScalarProperty Name="Toevoeging" ColumnName="Toevoeging" />
+          <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+          <ScalarProperty Name="VolledigeNaam" ColumnName="VolledigeNaam" />
+          <ScalarProperty Name="Voorletters" ColumnName="Voorletters" />
+          <ScalarProperty Name="Voornamen" ColumnName="Voornamen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

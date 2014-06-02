@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/02/2014 11:35:37
+-- Date Created: 06/02/2014 13:03:20
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Service\Model\ClubCloudModel.edmx
 -- --------------------------------------------------
 
@@ -25,11 +25,11 @@ GO
 IF OBJECT_ID(N'[dbo].[ClubCloud_Gebruikers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Gebruikers];
 GO
-IF OBJECT_ID(N'[dbo].[ClubCloud_Verenigingen]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ClubCloud_Verenigingen];
-GO
 IF OBJECT_ID(N'[dbo].[ClubCloud_TrackingSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_TrackingSet];
+GO
+IF OBJECT_ID(N'[dbo].[ClubCloud_Verenigingen]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_Verenigingen];
 GO
 
 -- --------------------------------------------------
@@ -38,13 +38,37 @@ GO
 
 -- Creating table 'ClubCloud_Gebruikers'
 CREATE TABLE [dbo].[ClubCloud_Gebruikers] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [FirstName] varchar(max)  NULL,
-    [MiddleName] varchar(max)  NULL,
-    [LastName] varchar(max)  NULL,
+    [Id] uniqueidentifier  NOT NULL,
     [mijnknltb_password] varchar(max)  NULL,
     [oauth_token] varchar(max)  NULL,
-    [oauth_token_secret] varchar(max)  NULL
+    [oauth_token_secret] varchar(max)  NULL,
+    [Achternaam] nvarchar(max)  NOT NULL,
+    [DistrictNaam] nvarchar(max)  NOT NULL,
+    [Email] nvarchar(max)  NOT NULL,
+    [Geboortedatum] datetime  NULL,
+    [Geboorteplaats] nvarchar(max)  NOT NULL,
+    [Gemeente] nvarchar(max)  NOT NULL,
+    [Geslacht] int  NOT NULL,
+    [Huisnummer] nvarchar(max)  NOT NULL,
+    [IsLid] bit  NOT NULL,
+    [Mobiel] nvarchar(max)  NOT NULL,
+    [NationaliteitId] uniqueidentifier  NULL,
+    [OrganisatieNummer] nvarchar(max)  NOT NULL,
+    [Plaats] nvarchar(max)  NOT NULL,
+    [Postcode] nvarchar(max)  NOT NULL,
+    [RatingDubbel] decimal(18,0)  NULL,
+    [RatingEnkel] decimal(18,0)  NULL,
+    [Roepnaam] nvarchar(max)  NOT NULL,
+    [SpeelsterkteDubbel] int  NULL,
+    [SpeelsterkteEnkel] nvarchar(max)  NULL,
+    [Straat] nvarchar(max)  NOT NULL,
+    [TelefoonAvond] nvarchar(max)  NOT NULL,
+    [TelefoonOverdag] nvarchar(max)  NOT NULL,
+    [Toevoeging] nvarchar(max)  NOT NULL,
+    [Tussenvoegsel] nvarchar(max)  NOT NULL,
+    [VolledigeNaam] nvarchar(max)  NOT NULL,
+    [Voorletters] nvarchar(max)  NOT NULL,
+    [Voornamen] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -56,7 +80,7 @@ CREATE TABLE [dbo].[ClubCloud_Verenigingen] (
     [BezoekadresGemeente] nvarchar(max)  NOT NULL,
     [BezoekadresPlaats] nvarchar(max)  NOT NULL,
     [BezoekadresPostcode] nvarchar(max)  NOT NULL,
-    [DatumOpgericht] datetime  NOT NULL,
+    [DatumOpgericht] datetime  NULL,
     [District] nvarchar(max)  NOT NULL,
     [Emailadres] nvarchar(max)  NOT NULL,
     [IbanCode] nvarchar(max)  NOT NULL,
