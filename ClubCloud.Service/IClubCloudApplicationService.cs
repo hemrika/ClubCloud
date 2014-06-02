@@ -41,12 +41,41 @@ namespace ClubCloud.Service
         */
 
         [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetPrivacy(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetMijnKNLTB(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetTwitter(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetFaceBook(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetFinancieel(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetTracking(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting GetClubCloudSettings(string bondsnummer);
+
+        [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         ClubCloud_Gebruiker GetClubCloudGebruiker(string bondsnummer, bool refresh = false);
 
+
         [OperationContract]
         [ServiceKnownType(typeof(SpelersProfiel))]
-        SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool refresh = false);
+        SpelersProfiel GetSpelersProfiel(string bondsnummer, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(SpelerTracking))]
@@ -61,10 +90,10 @@ namespace ClubCloud.Service
         List<Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false);
 
         [OperationContract]
-        ClubCloud_Vereniging GetVereniging(string bondsnummer, Guid verenigingId, bool refresh = false);
+        ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false);
 
         [OperationContract]
-        ClubCloud_Vereniging GetVereniging(string bondsnummer, string vereniginsnummer, bool refresh = false);
+        ClubCloud_Vereniging GetVerenigingByNummer(string bondsnummer, string vereniginsnummer, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(District))]

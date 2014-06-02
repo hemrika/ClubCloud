@@ -1,4 +1,5 @@
-﻿using Microsoft.SharePoint;
+﻿using ClubCloud.Service.Model;
+using Microsoft.SharePoint;
 using System;
 using System.IO;
 using System.Net;
@@ -9,28 +10,23 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace ClubCloud.Mijn.ControlTemplates
 {
+    
+
     public partial class KNLTBUserControl : ClubCloudUserControl
     {
-        private ClubCloud.Service.ClubCloudServiceClient _client = null;
-
-        public ClubCloud.Service.ClubCloudServiceClient Client
-        {
-            get
-            {
-                if (_client == null)
-                {
-                    _client = new Service.ClubCloudServiceClient(SPServiceContext.Current);
-                }
-                return _client;
-            }
-        }
+        private ClubCloud_Setting settings;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if(SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
-                userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                this.tbx_knltbid.Text = userId;
+                if (!IsPostBack)
+                {
+                    userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+                    settings = Client.GetClubCloudSettings(userId);
+                    this.tbx_knltbid.Text = settings.Id.ToString();
+                    this.cbx_knltb.Checked = settings.mijnknltb_allow;
+                }
             }
             else
             {
@@ -44,18 +40,23 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         protected void btn_knltbpw_Click(object sender, EventArgs e)
         {
-            Client.CreateClubCloudWebSite("82503");
-            /*
             if (!string.IsNullOrWhiteSpace(tbx_knltbpw.Text))
             {
                 password = tbx_knltbpw.Text.Trim();
                 if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
                 {
                     userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                    ClubCloud.Service.Model.ClubCloud_Gebruiker user = Client.GetClubCloudUser(userId);
-                    if(password != user.mijnknltb_password || string.IsNullOrWhiteSpace(user.mijnknltb_password))
+                    settings = new ClubCloud_Setting();
+                    settings.Id = int.Parse(userId);
+
+                    if(!string.IsNullOrWhiteSpace(password) && cbx_knltb.Checked)
                     {
-                        lbl_knltbpw_result.Text = "Wachtwoord gewijzigd";
+                        settings.mijnknltb_allow = cbx_knltb.Checked;
+                        settings.mijnknltb_password = password;
+                        settings = Client.SetMijnKNLTB(settings);
+                        lbl_knltbpw_result.Text = "Veranderingen opgeslagen";
+
+                        Client.GetClubCloudGebruiker(userId, true);
                     }
                     else
                     {
@@ -63,7 +64,6 @@ namespace ClubCloud.Mijn.ControlTemplates
                     }
                 }
             }
-            */
         }
 
         protected void tbx_knltbpw_TextChanged(object sender, EventArgs e)

@@ -167,6 +167,9 @@
     <Compile Include="Model\ClubCloud_Gebruiker.cs">
       <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClubCloud_Setting.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ClubCloud_Tracking.cs">
       <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
@@ -175,6 +178,9 @@
     </Compile>
     <Compile Include="Model\SpelersProfiel.cs" />
     <Compile Include="Model\SpelerTracking.cs" />
+    <Compile Include="Model\Twitter.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Powershell\NewClubCloudServiceApplication.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplicationProxy.cs" />
     <Compile Include="Powershell\RemoveClubCloudService.cs" />

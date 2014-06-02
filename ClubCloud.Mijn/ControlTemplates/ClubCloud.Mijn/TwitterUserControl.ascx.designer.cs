@@ -49,6 +49,15 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.Panel pnl_twitter;
         
         /// <summary>
+        /// twitter_allow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox twitter_allow;
+        
+        /// <summary>
         /// twitter_updates control.
         /// </summary>
         /// <remarks>
@@ -85,15 +94,6 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.CheckBox twitter_toernament;
         
         /// <summary>
-        /// twitter_friends control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox twitter_friends;
-        
-        /// <summary>
         /// tbx_twitterid control.
         /// </summary>
         /// <remarks>
@@ -101,6 +101,15 @@ namespace ClubCloud.Mijn.ControlTemplates {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbx_twitterid;
+        
+        /// <summary>
+        /// twitter_save control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button twitter_save;
         
         /// <summary>
         /// lbn_aanvragen control.

@@ -14,27 +14,52 @@ namespace ClubCloud.Service.Model
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ClubCloud_Gebruiker))]
-    [KnownType(typeof(ClubCloud_Accomodatie))]
     
     public partial class ClubCloud_Vereniging
     {
-        public ClubCloud_Vereniging()
-        {
-            this.ClubCloud_Gebruiker = new HashSet<ClubCloud_Gebruiker>();
-            this.ClubCloud_Accomodatie = new HashSet<ClubCloud_Accomodatie>();
-        }
-    
     	[DataMember]
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
     	[DataMember]
-        public string Name { get; set; }
+        public string BanknummerPlaats { get; set; }
     	[DataMember]
-        public System.Guid mijnknltb_id { get; set; }
-    
+        public string Bezoekadres { get; set; }
     	[DataMember]
-        public virtual ICollection<ClubCloud_Gebruiker> ClubCloud_Gebruiker { get; set; }
+        public string BezoekadresGemeente { get; set; }
     	[DataMember]
-        public virtual ICollection<ClubCloud_Accomodatie> ClubCloud_Accomodatie { get; set; }
+        public string BezoekadresPlaats { get; set; }
+    	[DataMember]
+        public string BezoekadresPostcode { get; set; }
+    	[DataMember]
+        public Nullable<System.DateTime> DatumOpgericht { get; set; }
+    	[DataMember]
+        public string District { get; set; }
+    	[DataMember]
+        public string Emailadres { get; set; }
+    	[DataMember]
+        public string IbanCode { get; set; }
+    	[DataMember]
+        public string KvKnummer { get; set; }
+    	[DataMember]
+        public string KvKplaats { get; set; }
+    	[DataMember]
+        public string Naam { get; set; }
+    	[DataMember]
+        public string Postadres { get; set; }
+    	[DataMember]
+        public string PostadresGemeente { get; set; }
+    	[DataMember]
+        public string PostadresPlaats { get; set; }
+    	[DataMember]
+        public string PostadresPostcode { get; set; }
+    	[DataMember]
+        public string Regio { get; set; }
+    	[DataMember]
+        public string TelefoonnummerAvond { get; set; }
+    	[DataMember]
+        public string TelefoonnummerOverdag { get; set; }
+    	[DataMember]
+        public string Verenigingsnummer { get; set; }
+    	[DataMember]
+        public string Website { get; set; }
     }
 }

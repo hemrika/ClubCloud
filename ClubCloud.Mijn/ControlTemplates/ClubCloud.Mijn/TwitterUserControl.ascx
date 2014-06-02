@@ -14,12 +14,13 @@
         </asp:panel>
         <fieldset>
         <asp:panel runat="server" ID="pnl_twitter">
-            <asp:CheckBox id="twitter_updates" runat="server" Checked="True" Text="Tweet prestatie updates" ></asp:CheckBox><br />
+            <asp:CheckBox id="twitter_allow" runat="server" Checked="True" Text="Twitteren !!" ></asp:CheckBox><br />
+            <asp:CheckBox id="twitter_updates" runat="server" Checked="True" Text="Tweet prestatie informatie" ></asp:CheckBox><br />
             <asp:CheckBox id="twitter_winning" runat="server" Checked="False" Text="Tweet alleen winst ;-)" ></asp:CheckBox><br />
-            <asp:CheckBox id="twitter_competitie" runat="server" Checked="True" Text="Tweet competitie deelname" ></asp:CheckBox><br />
-            <asp:CheckBox id="twitter_toernament" runat="server" Checked="True" Text="Tweet toernooi deelname" ></asp:CheckBox><br />
-            <asp:CheckBox id="twitter_friends" runat="server" Checked="False" Text="Tweet ontvangen ClubCloud vrienden" Visible="false" ></asp:CheckBox><br />
+            <asp:CheckBox id="twitter_competitie" runat="server" Checked="True" Text="Tweet competitie informatie" ></asp:CheckBox><br />
+            <asp:CheckBox id="twitter_toernament" runat="server" Checked="True" Text="Tweet toernooi informatie" ></asp:CheckBox><br />
             <asp:TextBox ID="tbx_twitterid" runat="server" Enabled="False" CssClass="text-input" ></asp:TextBox><br />
+            <asp:Button ID="twitter_save" runat="server" Text="Opslaan" OnClick="twitter_save_Click" /><br />
             <br />
         Toegang verlenen/intrekken : <asp:LinkButton ID="lbn_aanvragen" Text="Toegang verlenen/intrekken" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/twitter.aspx', title: 'Aanvragen Twitter', showClose: true});" runat="server" /><br />
         </asp:panel>

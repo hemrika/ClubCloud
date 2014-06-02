@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SharePoint;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,20 @@ namespace ClubCloud.Mijn.ControlTemplates
             this.EnsureScriptManager();
             this.EnsureUpdatePanelFixups();
 
+        }
+
+        private ClubCloud.Service.ClubCloudServiceClient _client = null;
+
+        public ClubCloud.Service.ClubCloudServiceClient Client
+        {
+            get
+            {
+                if (_client == null)
+                {
+                    _client = new Service.ClubCloudServiceClient(SPServiceContext.Current);
+                }
+                return _client;
+            }
         }
 
         /// <summary>

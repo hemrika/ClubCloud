@@ -61,44 +61,126 @@ namespace ClubCloud.Service
 
         #region Methods
 
-        public ClubCloud_Gebruiker GetClubCloudUser(string user)
+        public ClubCloud_Setting SetPrivacy(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetPrivacy(settings);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Setting SetMijnKNLTB(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetMijnKNLTB(settings);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Setting SetTwitter(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetTwitter(settings);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Setting SetFaceBook(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetFaceBook(settings);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Setting SetFinancieel(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetFinancieel(settings);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Setting SetTracking(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetTracking(settings);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Setting GetClubCloudSettings(string bondsnummer)
+        {
+            ClubCloud_Setting response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetClubCloudSettings(bondsnummer);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Gebruiker GetClubCloudGebruiker(string bondsnummer, bool refresh = false)
         {
             ClubCloud_Gebruiker response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetClubCloudUser(user);
+                    response = channel.GetClubCloudGebruiker(bondsnummer, refresh);
                 },
                 false);
 
             return response;
-
         }
 
-        public Persoonsgegevens GetPersoonsgegevens(string bondsnummer)
-        {
-            Persoonsgegevens response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetPersoonsgegevens(bondsnummer);
-                },
-                false);
-
-            return response;
-
-        }
-
-        public SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool track = false)
+        public SpelersProfiel GetSpelersProfiel(string bondsnummer, bool refresh = false)
         {
             SpelersProfiel response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetPersoonsprofiel(bondsnummer);
+                    response = channel.GetSpelersProfiel(bondsnummer, refresh);
                 },
                 false);
 
@@ -106,14 +188,14 @@ namespace ClubCloud.Service
 
         }
 
-        public List<Vereniging> GetVerenigingen(string bondsnummer)
+        public List<Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false)
         {
             List<Vereniging> response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetVerenigingen(bondsnummer);
+                    response = channel.GetVerenigingen(bondsnummer, refresh);
                 },
                 false);
 
@@ -121,14 +203,44 @@ namespace ClubCloud.Service
 
         }
 
-        public ClubCloud_Vereniging GetVereniging(string bondsnummer, Guid verenigingId)
+        public ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
             ClubCloud_Vereniging response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetVereniging(bondsnummer,verenigingId);
+                    response = channel.GetVerenigingById(bondsnummer, verenigingId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public ClubCloud_Vereniging GetVerenigingByNummer(string bondsnummer, string vereniginsnummer, bool refresh = false)
+        {
+            ClubCloud_Vereniging response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetVerenigingByNummer(bondsnummer, vereniginsnummer, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public SpelerTracking GetTracking(string bondsnummer, bool refresh = false)
+        {
+            SpelerTracking response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetTracking(bondsnummer, refresh);
                 },
                 false);
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Service.Model
 {
-    [DataContract(IsReference = true)]
+    [DataContract(Name = "SpelersProfiel")]
     [KnownType(typeof(SpelersProfiel))]
 
     public partial class SpelersProfiel : GetSpelersProfielDetailResponse

@@ -9,39 +9,69 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class TwitterUserControl : ClubCloudUserControl
     {
-        private ClubCloud.Service.ClubCloudServiceClient _client = null;
-
-        public ClubCloud.Service.ClubCloudServiceClient Client
-        {
-            get
-            {
-                if (_client == null)
-                {
-                    _client = new Service.ClubCloudServiceClient(SPServiceContext.Current);
-                }
-                return _client;
-            }
-        }
+        private ClubCloud_Setting settings;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
-            {
-                userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                ClubCloud_Gebruiker user = Client.GetClubCloudUser(userId);
-                if (user != null)
+                if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
                 {
-                    tbx_twitterid.Text = user.FirstName;
-                }
-            }
-            else
-            {
-                this.pnl_twitter.Visible = false;
-                this.pnl_secure.Visible = true;
-            }
+                    if (!IsPostBack)
+                    {
 
+                        userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+                        settings = Client.GetClubCloudSettings(userId);
+
+                        if (settings != null)
+                        {
+                            twitter_allow.Checked = settings.twitter_allow;
+                            twitter_updates.Checked = settings.twitter_setting.HasFlag(Twitter.Tweet);
+                            twitter_winning.Checked = settings.twitter_setting.HasFlag(Twitter.Succes);
+                            twitter_competitie.Checked = settings.twitter_setting.HasFlag(Twitter.Competitie);
+                            twitter_toernament.Checked = settings.twitter_setting.HasFlag(Twitter.Toernooi);
+                        }
+                    }
+                }
+                else
+                {
+                    this.pnl_twitter.Visible = false;
+                    this.pnl_secure.Visible = true;
+                }
         }
 
         private string userId = string.Empty;
+
+        protected void twitter_save_Click(object sender, EventArgs e)
+        {
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                settings = new ClubCloud_Setting();
+
+                settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
+                settings.twitter_allow = twitter_allow.Checked;
+                settings.twitter_setting = Twitter.None;
+
+                if(twitter_updates.Checked)
+                {
+                    settings.twitter_setting |= Twitter.Tweet;
+                }
+
+                if (twitter_winning.Checked)
+                {
+                    settings.twitter_setting |= Twitter.Succes;
+                }
+
+                if (twitter_competitie.Checked)
+                {
+                    settings.twitter_setting |= Twitter.Competitie;
+                }
+
+                if (twitter_toernament.Checked)
+                {
+                    settings.twitter_setting |= Twitter.Toernooi;
+                }
+
+                settings = Client.SetTwitter(settings);
+            }            
+        }
     }
 }

@@ -6,6 +6,7 @@
 namespace ClubCloud.Service
 {
     using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
+    using ClubCloud.Service.Model;
     using Microsoft.SharePoint;
     using System;
     using System.ServiceModel;
@@ -28,37 +29,52 @@ namespace ClubCloud.Service
         //[WebInvoke(UriTemplate = "/GetCurrentUser", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         string GetCurrentUser();
-        
-        
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetPrivacy(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetMijnKNLTB(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetTwitter(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetFaceBook(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetFinancieel(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetTracking(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting GetClubCloudSettings(string bondsnummer);
+
         /// <summary>
         /// Gets the current User
         /// </summary>
         /// <returns></returns>
         [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         //[WebInvoke(UriTemplate = "/GetCurrentUserGegevens", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        Persoonsgegevens GetPersoonsGegevens();
-        
-        /*
-        /// <summary>
-        /// Returns a hello world string.
-        /// </summary>
-        /// <param name="helloWorld">An input string of text.</param>
-        /// <returns>A string of text echoing the input value.</returns>
-        [OperationContract]
-        //[WebGet(UriTemplate = "/HelloWorld/{helloWorld}", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string HelloWorld(string helloWorld);
+        ClubCloud_Gebruiker GetClubCloudGebruiker(bool refresh = false);
 
-        /// <summary>
-        /// Returns a hello world string from the database.
-        /// </summary>
-        /// <param name="helloWorld">An input string of text.</param>
-        /// <returns>A string of text echoing the input value.</returns>
         [OperationContract]
-        //[WebGet(UriTemplate = "/HelloWorldFromDatabase/{helloWorld}", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
-        //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string HelloWorldFromDatabase(string helloWorld);
-        */
+        [ServiceKnownType(typeof(SpelersProfiel))]
+        SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(SpelerTracking))]
+        SpelerTracking GetTracking(string bondsnummer, bool refresh = false);
+
     }
 }

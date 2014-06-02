@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/02/2014 13:03:20
+-- Date Created: 06/02/2014 22:47:15
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Service\Model\ClubCloudModel.edmx
 -- --------------------------------------------------
 
@@ -25,6 +25,9 @@ GO
 IF OBJECT_ID(N'[dbo].[ClubCloud_Gebruikers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Gebruikers];
 GO
+IF OBJECT_ID(N'[dbo].[ClubCloud_Settings]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_Settings];
+GO
 IF OBJECT_ID(N'[dbo].[ClubCloud_TrackingSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_TrackingSet];
 GO
@@ -39,9 +42,6 @@ GO
 -- Creating table 'ClubCloud_Gebruikers'
 CREATE TABLE [dbo].[ClubCloud_Gebruikers] (
     [Id] uniqueidentifier  NOT NULL,
-    [mijnknltb_password] varchar(max)  NULL,
-    [oauth_token] varchar(max)  NULL,
-    [oauth_token_secret] varchar(max)  NULL,
     [Achternaam] nvarchar(max)  NOT NULL,
     [DistrictNaam] nvarchar(max)  NOT NULL,
     [Email] nvarchar(max)  NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE [dbo].[ClubCloud_Gebruikers] (
     [RatingEnkel] decimal(18,0)  NULL,
     [Roepnaam] nvarchar(max)  NOT NULL,
     [SpeelsterkteDubbel] int  NULL,
-    [SpeelsterkteEnkel] nvarchar(max)  NULL,
+    [SpeelsterkteEnkel] int  NULL,
     [Straat] nvarchar(max)  NOT NULL,
     [TelefoonAvond] nvarchar(max)  NOT NULL,
     [TelefoonOverdag] nvarchar(max)  NOT NULL,
@@ -74,7 +74,7 @@ GO
 
 -- Creating table 'ClubCloud_Verenigingen'
 CREATE TABLE [dbo].[ClubCloud_Verenigingen] (
-    [VerenigingsId] uniqueidentifier  NOT NULL,
+    [Id] uniqueidentifier  NOT NULL,
     [BanknummerPlaats] nvarchar(max)  NOT NULL,
     [Bezoekadres] nvarchar(max)  NOT NULL,
     [BezoekadresGemeente] nvarchar(max)  NOT NULL,
@@ -101,8 +101,22 @@ GO
 
 -- Creating table 'ClubCloud_TrackingSet'
 CREATE TABLE [dbo].[ClubCloud_TrackingSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
+    [Id] uniqueidentifier  NOT NULL,
     [Data] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'ClubCloud_Settings'
+CREATE TABLE [dbo].[ClubCloud_Settings] (
+    [Id] int  NOT NULL,
+    [mijnknltb_Id] uniqueidentifier  NULL,
+    [mijnknltb_allow] bit  NOT NULL,
+    [mijnknltb_password] nvarchar(max)  NOT NULL,
+    [mijnknltb_tracking] bit  NOT NULL,
+    [twitter_allow] bit  NOT NULL,
+    [twitter_oauth_token] nvarchar(max)  NOT NULL,
+    [twitter_oauth_token_secret] nvarchar(max)  NOT NULL,
+    [twitter_setting] int  NOT NULL
 );
 GO
 
@@ -116,15 +130,21 @@ ADD CONSTRAINT [PK_ClubCloud_Gebruikers]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [VerenigingsId] in table 'ClubCloud_Verenigingen'
+-- Creating primary key on [Id] in table 'ClubCloud_Verenigingen'
 ALTER TABLE [dbo].[ClubCloud_Verenigingen]
 ADD CONSTRAINT [PK_ClubCloud_Verenigingen]
-    PRIMARY KEY CLUSTERED ([VerenigingsId] ASC);
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'ClubCloud_TrackingSet'
 ALTER TABLE [dbo].[ClubCloud_TrackingSet]
 ADD CONSTRAINT [PK_ClubCloud_TrackingSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ClubCloud_Settings'
+ALTER TABLE [dbo].[ClubCloud_Settings]
+ADD CONSTRAINT [PK_ClubCloud_Settings]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

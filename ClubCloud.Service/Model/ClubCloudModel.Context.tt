@@ -44,6 +44,8 @@ using System;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations.Schema;
+
 <#
 if (container.FunctionImports.Any())
 {
@@ -65,7 +67,7 @@ using System.Linq;
 		if (!loader.IsLazyLoadingEnabled(container))
 		{
 		#>
-		this.Configuration.LazyLoadingEnabled = true;
+		this.Configuration.LazyLoadingEnabled = false;
 		this.Configuration.AutoDetectChangesEnabled = true;
 		this.Configuration.UseDatabaseNullSemantics = false;
 		this.Configuration.ValidateOnSaveEnabled = false;
@@ -97,7 +99,7 @@ using System.Linq;
 		if (!loader.IsLazyLoadingEnabled(container))
 		{
 		#>
-		this.Configuration.LazyLoadingEnabled = true;
+		this.Configuration.LazyLoadingEnabled = false;
 		this.Configuration.AutoDetectChangesEnabled = true;
 		this.Configuration.UseDatabaseNullSemantics = false;
 		this.Configuration.ValidateOnSaveEnabled = false;
@@ -124,10 +126,14 @@ using System.Linq;
       get { return ((IObjectContextAdapter)this).ObjectContext; }
     }
 
-    //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    //{
-    //    throw new UnintentionalCodeFirstException();
-    //}
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+            modelBuilder.Entity<ClubCloud_Gebruiker>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            modelBuilder.Entity<ClubCloud_Vereniging>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            modelBuilder.Entity<ClubCloud_Tracking>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            modelBuilder.Entity<ClubCloud_Setting>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+           //throw new UnintentionalCodeFirstException();
+    }
 
 <#
     foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())

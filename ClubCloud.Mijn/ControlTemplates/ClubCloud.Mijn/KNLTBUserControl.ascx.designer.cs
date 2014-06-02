@@ -85,6 +85,15 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.TextBox tbx_knltbpw;
         
         /// <summary>
+        /// cbx_knltb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbx_knltb;
+        
+        /// <summary>
         /// btn_knltbpw control.
         /// </summary>
         /// <remarks>

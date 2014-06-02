@@ -28,48 +28,13 @@ namespace ClubCloud.Service
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
     public class ClubCloudClientService : IClubCloudClientService
     {
+        /*
         private CookieContainer RequestContainer(string bondsnummer, string wachtwoord)
         {
             ClubCloud.KNLTB.Security.KNLTBContainer container = new KNLTB.Security.KNLTBContainer();
             container.MijnRequestAcces(bondsnummer, wachtwoord);
             while (container.Container == null) { }
             return container.Container;
-        }
-        /*
-        /// <summary>
-        /// Returns a hello world string.
-        /// </summary>
-        /// <param name="helloWorld">An input string of text.</param>
-        /// <returns>A string of text echoing the input value.</returns>
-        public string HelloWorld(string helloWorld)
-        {
-            //return "Hello World - You entered: " + helloWorld;
-            ClubCloudServiceClient client = new ClubCloudServiceClient();
-
-            IConnectionManager connectionManager = GlobalHost.ConnectionManager;
-            var context = connectionManager.GetHubContext<MijnHub>();
-
-            context.Clients.Group(helloWorld).JoinClub(helloWorld);
-
-            return client.HelloWorld(helloWorld);
-        }
-
-        /// <summary>
-        /// Returns a hello world string from the database.
-        /// </summary>
-        /// <param name="helloWorld">An input string of text.</param>
-        /// <returns>A string of text echoing the input value.</returns>
-        public string HelloWorldFromDatabase(string helloWorld)
-        {
-            //return "Hello World - You entered: " + helloWorld;
-            ClubCloudServiceClient client = new ClubCloudServiceClient();
-
-            IConnectionManager connectionManager = GlobalHost.ConnectionManager;
-            var context = connectionManager.GetHubContext<MijnHub>();
-
-            context.Clients.Group(helloWorld).JoinClub(client.HelloWorldFromDatabase(helloWorld));
-
-            return client.HelloWorldFromDatabase(helloWorld);
         }
         */
 
@@ -84,26 +49,139 @@ namespace ClubCloud.Service
                 return null;
             }
         }
-        
-        
-        public Persoonsgegevens GetPersoonsGegevens()
+
+        public ClubCloud_Setting SetPrivacy(ClubCloud_Setting settings)
         {
-            Persoonsgegevens persoonsgegevens = null;
+            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
 
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                ClubCloud_Gebruiker user = client.GetClubCloudUser(SPContext.Current.Web.CurrentUser.LoginName);
-
-                CookieContainer cc = RequestContainer(user.Id.ToString(), user.mijnknltb_password);
-
-                LedenadministratieServiceClient LedenAdministratie = new LedenadministratieServiceClient(cc);
-                GetPersoonsgegevensResponse persoon = LedenAdministratie.GetPersoonsgegevens(new GetPersoonsgegevensRequest { Bondsnummer = user.Id.ToString() });
-                persoonsgegevens = persoon.Persoonsgegevens;
+                currentsettings = client.SetPrivacy(settings);
             }
 
-            return persoonsgegevens;
+            return currentsettings;
         }
-        
+
+        public ClubCloud_Setting SetMijnKNLTB(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                currentsettings = client.SetMijnKNLTB(settings);
+            }
+
+            return currentsettings;
+        }
+
+        public ClubCloud_Setting SetTwitter(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                currentsettings = client.SetTwitter(settings);
+            }
+
+            return currentsettings;
+        }
+
+        public ClubCloud_Setting SetFaceBook(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                currentsettings = client.SetFaceBook(settings);
+            }
+
+            return currentsettings;
+        }
+
+        public ClubCloud_Setting SetFinancieel(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                currentsettings = client.SetFinancieel(settings);
+            }
+
+            return currentsettings;
+        }
+
+        public ClubCloud_Setting SetTracking(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                currentsettings = client.SetTracking(settings);
+            }
+
+            return currentsettings;
+        }
+
+        public ClubCloud_Setting GetClubCloudSettings(string bondsnummer)
+        {
+            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                currentsettings = client.GetClubCloudSettings(SPContext.Current.Web.CurrentUser.LoginName);
+            }
+
+            return currentsettings;
+        }
+
+        public ClubCloud_Gebruiker GetClubCloudGebruiker(bool refresh = false)
+        {
+            ClubCloud_Gebruiker clubCloud_gebruiker = new ClubCloud_Gebruiker();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                clubCloud_gebruiker = client.GetClubCloudGebruiker(SPContext.Current.Web.CurrentUser.LoginName, refresh);
+            }
+
+            return clubCloud_gebruiker;
+        }
+
+
+
+        public SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool refresh = false)
+        {
+            SpelersProfiel spelersprofiel = new SpelersProfiel();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                spelersprofiel = client.GetSpelersProfiel(SPContext.Current.Web.CurrentUser.LoginName, refresh);
+            }
+
+            return spelersprofiel;
+        }
+
+
+        public SpelerTracking GetTracking(string bondsnummer, bool refresh = false)
+        {
+            SpelerTracking tracking = new SpelerTracking();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                tracking = client.GetTracking(SPContext.Current.Web.CurrentUser.LoginName, refresh);
+            }
+
+            return tracking;
+
+        }
     }
 }

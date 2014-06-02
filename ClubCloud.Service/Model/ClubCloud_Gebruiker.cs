@@ -14,31 +14,64 @@ namespace ClubCloud.Service.Model
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ClubCloud_Vereniging))]
     
     public partial class ClubCloud_Gebruiker
     {
-        public ClubCloud_Gebruiker()
-        {
-            this.ClubCloud_Vereniging = new HashSet<ClubCloud_Vereniging>();
-        }
-    
     	[DataMember]
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
     	[DataMember]
-        public string FirstName { get; set; }
+        public string Achternaam { get; set; }
     	[DataMember]
-        public string MiddleName { get; set; }
+        public string DistrictNaam { get; set; }
     	[DataMember]
-        public string LastName { get; set; }
+        public string Email { get; set; }
     	[DataMember]
-        public string mijnknltb_password { get; set; }
+        public Nullable<System.DateTime> Geboortedatum { get; set; }
     	[DataMember]
-        public string oauth_token { get; set; }
+        public string Geboorteplaats { get; set; }
     	[DataMember]
-        public string oauth_token_secret { get; set; }
-    
+        public string Gemeente { get; set; }
     	[DataMember]
-        public virtual ICollection<ClubCloud_Vereniging> ClubCloud_Vereniging { get; set; }
+        public ClubCloud.KNLTB.ServIt.LedenAdministratieService.Geslacht Geslacht { get; set; }
+    	[DataMember]
+        public string Huisnummer { get; set; }
+    	[DataMember]
+        public bool IsLid { get; set; }
+    	[DataMember]
+        public string Mobiel { get; set; }
+    	[DataMember]
+        public Nullable<System.Guid> NationaliteitId { get; set; }
+    	[DataMember]
+        public string OrganisatieNummer { get; set; }
+    	[DataMember]
+        public string Plaats { get; set; }
+    	[DataMember]
+        public string Postcode { get; set; }
+    	[DataMember]
+        public Nullable<decimal> RatingDubbel { get; set; }
+    	[DataMember]
+        public Nullable<decimal> RatingEnkel { get; set; }
+    	[DataMember]
+        public string Roepnaam { get; set; }
+    	[DataMember]
+        public Nullable<int> SpeelsterkteDubbel { get; set; }
+    	[DataMember]
+        public Nullable<int> SpeelsterkteEnkel { get; set; }
+    	[DataMember]
+        public string Straat { get; set; }
+    	[DataMember]
+        public string TelefoonAvond { get; set; }
+    	[DataMember]
+        public string TelefoonOverdag { get; set; }
+    	[DataMember]
+        public string Toevoeging { get; set; }
+    	[DataMember]
+        public string Tussenvoegsel { get; set; }
+    	[DataMember]
+        public string VolledigeNaam { get; set; }
+    	[DataMember]
+        public string Voorletters { get; set; }
+    	[DataMember]
+        public string Voornamen { get; set; }
     }
 }

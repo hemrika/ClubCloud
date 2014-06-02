@@ -13,6 +13,8 @@ namespace ClubCloud.Service.Model
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.ComponentModel.DataAnnotations.Schema;
+    
     
     public partial class ClubCloudModelContainer : DbContext
     {
@@ -22,7 +24,7 @@ namespace ClubCloud.Service.Model
         public ClubCloudModelContainer(bool proxyCreationEnabled)
             : base("name=ClubCloudModelContainer")
         {
-    				this.Configuration.LazyLoadingEnabled = true;
+    				this.Configuration.LazyLoadingEnabled = false;
     		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = false;
@@ -35,7 +37,7 @@ namespace ClubCloud.Service.Model
         public ClubCloudModelContainer(string connectionString, bool proxyCreationEnabled)
             : base(connectionString)
         {
-    				this.Configuration.LazyLoadingEnabled = true;
+    				this.Configuration.LazyLoadingEnabled = false;
     		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = false;
@@ -47,13 +49,18 @@ namespace ClubCloud.Service.Model
           get { return ((IObjectContextAdapter)this).ObjectContext; }
         }
     
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    throw new UnintentionalCodeFirstException();
-        //}
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+                modelBuilder.Entity<ClubCloud_Gebruiker>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+                modelBuilder.Entity<ClubCloud_Vereniging>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+                modelBuilder.Entity<ClubCloud_Tracking>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+                modelBuilder.Entity<ClubCloud_Setting>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+               //throw new UnintentionalCodeFirstException();
+        }
     
         public virtual DbSet<ClubCloud_Gebruiker> ClubCloud_Gebruikers { get; set; }
         public virtual DbSet<ClubCloud_Vereniging> ClubCloud_Verenigingen { get; set; }
         public virtual DbSet<ClubCloud_Tracking> ClubCloud_TrackingSet { get; set; }
+        public virtual DbSet<ClubCloud_Setting> ClubCloud_Settings { get; set; }
     }
 }
