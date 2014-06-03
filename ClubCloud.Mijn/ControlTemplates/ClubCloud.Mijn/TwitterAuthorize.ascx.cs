@@ -1,6 +1,8 @@
 ﻿using ClubCloud.Service.Model;
+using ClubCloud.Social.OAuth;
 using ClubCloud.Social.Twitter;
 using ClubCloud.Social.Twitter.OAuth;
+using ClubCloud.Social.Twitter.Objects;
 using Microsoft.SharePoint;
 using System;
 using System.Data;
@@ -12,6 +14,29 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class TwitterAuthorize : ClubCloudUserControl
     {
+        private string ConsumerKey = "xKESVN9CwdlWGA1ve7qWdPPzU";
+        private string ConsumerSecret = "szoyhGCcw4fp7fDlt8pit0o3HwwdvFd3BUbBEDTfkU08ToJyNS";
+
+        public string OAuthToken
+        {
+            get { return Request.QueryString["oauth_token"]; }
+        }
+
+        public string OAuthVerifier
+        {
+            get { return Request.QueryString["oauth_verifier"]; }
+        }
+
+        public string DeniedToken
+        {
+            get { return Request.QueryString["denied"]; }
+        }
+
+        public bool HasUserDenied
+        {
+            get { return !String.IsNullOrEmpty(DeniedToken); }
+        }
+
         private ClubCloud_Setting settings;
         /*
         private ClubCloud.Social.Twitter.TwitterService _twitterService;
@@ -44,57 +69,72 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
                 settings = Client.GetClubCloudSettings(userId);
-                TwitterOAuthClient twitterOAuth = new TwitterOAuthClient();
 
-                /*
-                if (!TwitterConnect.IsAuthorized && (!settings.twitter_allow && string.IsNullOrWhiteSpace(settings.twitter_oauth_token) && string.IsNullOrWhiteSpace(settings.twitter_oauth_token_secret)) )
+                TwitterOAuthClient client = new TwitterOAuthClient
                 {
-                    twitterConnect.Authorize(this.Page.Request.Url.AbsoluteUri);
+                    ConsumerKey = ConsumerKey,
+                    ConsumerSecret = ConsumerSecret,
+                    Callback = this.Page.Request.Url.AbsoluteUri
+                };
+
+                OAuthRequestToken token;
+
+                if ((OAuthToken == null) && (!settings.twitter_allow && string.IsNullOrWhiteSpace(settings.twitter_oauth_token) && string.IsNullOrWhiteSpace(settings.twitter_oauth_token_secret)))
+                {
+                    token = client.GetRequestToken();
+                    settings.twitter_oauth_token = token.Token;
+                    settings.twitter_oauth_token_secret = token.TokenSecret;
+                    Client.SetTwitter(settings);
+
+                    Response.Redirect(token.AuthorizeUrl);
                 }
                 else
                 {
-                */
-                    if (Page.Request.QueryString.HasKeys())
+                    client.Token = settings.twitter_oauth_token;
+                    client.TokenSecret = settings.twitter_oauth_token_secret;
+
+                    if (!settings.twitter_allow)
                     {
-                        System.Collections.Specialized.NameValueCollection query = Page.Request.QueryString;
-
-                        if (query.HasKeys())
+                        try
                         {
-                            foreach (string key in query.Keys)
-                            {
-                                if (key == "oauth_token")
-                                {
-                                    string value = query[key];
-                                    //twitterConnect.OAuthToken = value;
-                                    settings.twitter_oauth_token = value;
-                                }
-
-                                if (key == "oauth_verifier")
-                                {
-                                    string value = query[key];
-                                    //twitterConnect.OAuthTokenSecret = value;
-                                    settings.twitter_oauth_token_secret = value;
-                                }
-
-                                if (key == "denied")
-                                {
-                                    settings.twitter_allow = false;
-                                    settings.twitter_oauth_token_secret = null;
-                                    settings.twitter_oauth_token = null;
-                                }
-
-                            }
-
-                            if(!string.IsNullOrWhiteSpace(settings.twitter_oauth_token) && !string.IsNullOrWhiteSpace(settings.twitter_oauth_token_secret))
-                            {
-                                settings.twitter_allow = true;
-                                
-                            }
-
-                            Client.SetTwitter(settings);
+                            OAuthAccessToken accessToken = client.GetAccessToken(OAuthVerifier);
+                            client.Token = accessToken.Token;
+                            client.TokenSecret = accessToken.TokenSecret;
+                            settings.twitter_oauth_token = accessToken.Token;
+                            settings.twitter_oauth_token_secret = accessToken.TokenSecret;
+                            settings.twitter_allow = true;
                         }
+                        catch (Exception)
+                        {
+                            settings.twitter_allow = false;
+
+                        }
+
+                        Client.SetTwitter(settings);
+                        string finished = "finished";
                     }
 
+                    if(settings.twitter_allow)
+                    {
+
+                        try
+                        {
+                            TwitterService service = TwitterService.CreateFromOAuthClient(client);
+                            TwitterUser user = service.Account.VerifyCredentials();
+
+                            long Id = user.Id;
+                            string ScreenName = user.ScreenName;
+                            string ProfileImageUrlHttps = user.ProfileImageUrlHttps;
+                        }
+                        catch (Exception)
+                        {
+                            
+                            throw;
+                        }
+
+                    }
+                }
+                /*
                     if(settings.twitter_allow)
                     {
                         //TwitterAccessInformation information = new TwitterAccessInformation 
@@ -105,6 +145,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                         //DataTable data = twitterConnect.FetchProfile("MijnClubCloud");
                         //int count = data.Rows.Count;
                     }
+                 */
                 //}
             }
             else

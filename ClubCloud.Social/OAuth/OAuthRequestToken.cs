@@ -7,22 +7,22 @@
         /// <summary>
         /// The request token.
         /// </summary>
-        public string Token { get; internal set; }
+        public string Token { get; set; }
 
         /// <summary>
         /// The request token secret.
         /// </summary>
-        public string TokenSecret { get; internal set; }
+        public string TokenSecret { get; set; }
 
         /// <summary>
         /// Is the callback confirmed?
         /// </summary>
-        public bool CallbackConfirmed { get; internal set; }
+        public bool CallbackConfirmed { get; set; }
 
         /// <summary>
         /// Gets the authentication URL based for this request token.
         /// </summary>
-        public string AuthorizeUrl { get; internal set; }
+        public string AuthorizeUrl { get; set; }
 
         #endregion
 
