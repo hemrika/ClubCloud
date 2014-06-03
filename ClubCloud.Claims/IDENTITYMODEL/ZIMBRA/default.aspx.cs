@@ -9,6 +9,7 @@ using Microsoft.SharePoint.WebControls;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI.WebControls;
+using System.Xml;
 
 namespace ClubCloud.Provider.IdentityModel
 {
@@ -134,10 +136,33 @@ namespace ClubCloud.Provider.IdentityModel
                 }
             }
             formAuthenticateEventArgs.Authenticated = flag;
+
             if (flag)
             {
-                //SPContext.Current.Web.CurrentUser.UserToken.BinaryToken;
-                this.RedirectToSuccessUrl();
+                Guid id = SPContext.Current.Site.ID;
+                SPSecurity.RunWithElevatedPrivileges(delegate()
+                {
+                    using (SPWeb elevatedWeb = new SPSite(id).OpenWeb())
+                    {
+                        elevatedWeb.AllowUnsafeUpdates = true;
+
+                        
+                        GenericXmlSecurityToken xmlToken = securityToken as GenericXmlSecurityToken;
+                        XmlDocument xmlDoc = new XmlDocument();
+                        xmlDoc.LoadXml(xmlToken.TokenXml.OuterXml);
+                        XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
+                        nsmgr.AddNamespace("saml", "urn:oasis:names:tc:SAML:1.0:assertion");
+                        string userid = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userid']/saml:AttributeValue", nsmgr).InnerText;
+                        string userlogonname = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userlogonname']/saml:AttributeValue", nsmgr).InnerText;
+                        string emailaddress = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='emailaddress']/saml:AttributeValue", nsmgr).InnerText;
+                        string name = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='name']/saml:AttributeValue", nsmgr)[1].InnerText;
+                        SPUser spUser = elevatedWeb.EnsureUser(name);
+                        elevatedWeb.Update();
+                        elevatedWeb.AllowUnsafeUpdates = false;
+                    }
+
+                    this.RedirectToSuccessUrl();
+                });
             }
         }
 

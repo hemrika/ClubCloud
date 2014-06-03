@@ -373,11 +373,20 @@ namespace ClubCloud.Provider
             {
                 using (Zimbra.ZimbraServer clientServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName))
                 {
-                    Zimbra.Account.ChangePasswordRequest request = new Zimbra.Account.ChangePasswordRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username }, oldPassword = oldPassword, password = newPassword };
-                    Zimbra.Account.ChangePasswordResponse response = clientServer.Message(request) as Zimbra.Account.ChangePasswordResponse;
-                    string AuthToken = response.authToken;
-                    ZimbraCookie(AuthToken);
-                    changed = true;               
+                    if (string.IsNullOrEmpty(oldPassword) || string.IsNullOrWhiteSpace(oldPassword))
+                    {
+                        ClubCloud.Zimbra.Administration.SetPasswordRequest request = new SetPasswordRequest { id = username, newPassword = newPassword };
+                        SetPasswordResponse response = clientServer.Message(request) as SetPasswordResponse;
+                        string message = response.message;
+                    }
+                    else
+                    {
+                        ClubCloud.Zimbra.Account.ChangePasswordRequest request = new Zimbra.Account.ChangePasswordRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username }, oldPassword = oldPassword, password = newPassword };
+                        Zimbra.Account.ChangePasswordResponse response = clientServer.Message(request) as Zimbra.Account.ChangePasswordResponse;
+                        string AuthToken = response.authToken;
+                        //ZimbraCookie(AuthToken);
+                    }
+                    changed = true;           
                     //TODO send message
                 }
             }
@@ -712,11 +721,19 @@ namespace ClubCloud.Provider
                     usernameToMatch = Regex.Match(usernameToMatch, @"\<([^)]*)\>").Groups[1].Value;
                 }
 
-                Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts", attrs = "displayName,zimbraId,zimbraAliasTargetId,cn,sn,zimbraMailHost,uid,zimbraCOSId,zimbraAccountStatus,zimbraLastLogonTimestamp,description,zimbraIsSystemAccount,zimbraIsDelegatedAdminAccount,zimbraIsAdminAccount,zimbraIsSystemResource,zimbraAuthTokenValidityValue,zimbraIsExternalVirtualAccount,zimbraMailStatus,zimbraIsAdminGroup,zimbraCalResType,zimbraDomainType,zimbraDomainName,zimbraDomainStatus" };
-                srequest.query = String.Format("(|(uid=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(givenName=*{0}*))", usernameToMatch);
+                List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
+                try
+                {
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts", attrs = "displayName,zimbraId,zimbraAliasTargetId,cn,sn,zimbraMailHost,uid,zimbraCOSId,zimbraAccountStatus,zimbraLastLogonTimestamp,description,zimbraIsSystemAccount,zimbraIsDelegatedAdminAccount,zimbraIsAdminAccount,zimbraIsSystemResource,zimbraAuthTokenValidityValue,zimbraIsExternalVirtualAccount,zimbraMailStatus,zimbraIsAdminGroup,zimbraCalResType,zimbraDomainType,zimbraDomainName,zimbraDomainStatus" };
+                    srequest.query = String.Format("(|(uid=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(givenName=*{0}*))", usernameToMatch);
 
-                Zimbra.Administration.SearchDirectoryResponse sresponse = zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                List<Zimbra.Global.accountInfo> accounts = sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; });
+                    Zimbra.Administration.SearchDirectoryResponse sresponse = zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                    accounts = sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; });
+                }
+                catch (Exception)
+                {
+                    accounts = new List<accountInfo>();
+                }
 
                 totalRecords += accounts.Count;
 

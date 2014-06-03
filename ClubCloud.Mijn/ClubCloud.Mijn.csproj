@@ -67,6 +67,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -132,6 +133,13 @@
     <Compile Include="ControlTemplates\ClubCloud.Mijn\TwitterUserControl.ascx.designer.cs">
       <DependentUpon>TwitterUserControl.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\VeranderwachtwoordUserControl.ascx.cs">
+      <DependentUpon>VeranderwachtwoordUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\VeranderwachtwoordUserControl.ascx.designer.cs">
+      <DependentUpon>VeranderwachtwoordUserControl.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="KNLTBSecureStoreManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -185,6 +193,7 @@
     <Content Include="ControlTemplates\ClubCloud.Mijn\SuiteLinksDelegate.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\TwitterAuthorize.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\TwitterUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\VeranderwachtwoordUserControl.ascx" />
     <Content Include="Design\Elements.xml">
       <SubType>Designer</SubType>
     </Content>

@@ -75,7 +75,8 @@ namespace ClubCloud.Provider
         {
             //base.FillClaimsForEntity(context, entity, claimProviderContext, claims);
 
-            if (entity.Value.Contains("zimbramembershipprovider") || entity.Value.Contains("zimbraroleprovider"))
+            //if (entity.Value.Contains("zimbramembershipprovider") || entity.Value.Contains("zimbraroleprovider"))
+            if((entity.OriginalIssuer.Contains("ZimbraClaimProvider")) || (entity.Value.Contains("zimbramembershipprovider")) || (entity.Value.Contains("zimbraroleprovider")))
             {
                 //0#.f|zimbramembershipprovider|12073385
                 string identifier = entity.Value.Split('|').Last();
@@ -207,7 +208,7 @@ namespace ClubCloud.Provider
 
         protected override void FillClaimsForEntity(Uri context, Microsoft.SharePoint.Administration.Claims.SPClaim entity, List<Microsoft.SharePoint.Administration.Claims.SPClaim> claims)
         {
-            if (entity.Value.Contains("zimbramembershipprovider") || entity.Value.Contains("zimbraroleprovider"))
+            if ((entity.OriginalIssuer.Contains("ZimbraClaimProvider")) || (entity.OriginalIssuer.Contains("ZimbraMembershipProvider")) || (entity.OriginalIssuer.Contains("ZimbraRoleProvider")))
             {
                 string identifier = entity.Value.Split('|').Last();
                 MembershipUser user;
@@ -295,8 +296,8 @@ namespace ClubCloud.Provider
         protected override void FillResolve(Uri context, string[] entityTypes, Microsoft.SharePoint.Administration.Claims.SPClaim resolveInput, List<Microsoft.SharePoint.WebControls.PickerEntity> resolved)
         {
             //PickerEntity[] baseResolved = base.Resolve(context, entityTypes, resolveInput);
-            List<SPClaim> claims = base.GetClaimsForEntity(context,resolveInput).ToList<SPClaim>();
-            FillClaimsForEntity(context, resolveInput, claims);
+            //List<SPClaim> claims = base.GetClaimsForEntity(context,resolveInput).ToList<SPClaim>();
+            //FillClaimsForEntity(context, resolveInput, claims);
 
             if (resolveInput.OriginalIssuer.Contains("zimbramembershipprovider") || resolveInput.OriginalIssuer.Contains("zimbraroleprovider"))
             {
@@ -379,7 +380,7 @@ namespace ClubCloud.Provider
                     resolved.Add(pe);
 
                     List<SPClaim> claims = base.GetClaimsForEntity(context, pe.Claim).ToList<SPClaim>();
-                    FillClaimsForEntity(context, pe.Claim, claims);
+                    //FillClaimsForEntity(context, pe.Claim, claims);
                 }
             }
             //MembershipUser user = Provider.GetUser(resolveInput, true);

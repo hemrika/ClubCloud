@@ -13,10 +13,38 @@ namespace ClubCloud.Mijn.ControlTemplates
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-
+            this.EnsureVisitor();
             this.EnsureScriptManager();
             this.EnsureUpdatePanelFixups();
 
+        }
+
+        private void EnsureVisitor()
+        {
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                Guid id = SPContext.Current.Site.ID;
+                SPUser user = SPContext.Current.Web.CurrentUser;
+                SPSecurity.RunWithElevatedPrivileges(delegate()
+                {
+                        using (SPSite site = new SPSite(id))
+                        {
+                            using (SPWeb web = site.RootWeb)
+                            {
+                                try
+                                {
+                                    if (user.Groups.GetByID(web.SiteGroups.Web.AssociatedVisitorGroup.ID) == null)
+                                    web.AllowUnsafeUpdates = true;
+                                    SPGroup group = web.SiteGroups.Web.AssociatedVisitorGroup;
+                                    group.AddUser(user);
+                                    web.Update();
+                                    web.AllowUnsafeUpdates = false;
+                                }
+                                catch { }
+                            }
+                        }
+                });
+            }
         }
 
         private ClubCloud.Service.ClubCloudServiceClient _client = null;

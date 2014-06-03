@@ -96,7 +96,11 @@ namespace ClubCloud.Zimbra.Administration
 
         public SearchDirectoryResponse SearchDirectoryRequest(SearchDirectoryRequest request)
         {
-            return base.Channel.SearchDirectoryRequest(request);
+            try
+            {
+                return base.Channel.SearchDirectoryRequest(request);
+            }
+            catch { return null; }
         }
 
         public GetAllAccountsResponse GetAllAccountsRequest(GetAllAccountsRequest request)
