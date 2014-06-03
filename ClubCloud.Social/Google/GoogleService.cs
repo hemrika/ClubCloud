@@ -64,7 +64,6 @@ namespace ClubCloud.Social.Google {
             };
         }
 
-        /*
         /// <summary>
         /// Initializes a new instance based on the specified refresh token.
         /// The refresh token is used for making a call to the Google Accounts
@@ -78,7 +77,6 @@ namespace ClubCloud.Social.Google {
         public static GoogleService CreateFromRequestToken(string clientId, string clientSecret, string refreshToken) {
             return CreateFromRefreshToken(clientId, clientSecret, refreshToken);
         }
-        */
 
         /// <summary>
         /// Initializes a new instance based on the specified refresh token.

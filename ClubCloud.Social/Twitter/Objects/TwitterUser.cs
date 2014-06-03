@@ -144,7 +144,6 @@ namespace ClubCloud.Social.Twitter.Objects {
         /// </summary>
         public bool IsTranslator { get; private set; }
 
-        /*
         /// <summary>
         /// <em>Nullable</em>. <em>Perspectival</em>. <em>Deprecated</em>. When true, indicates that the authenticating user is
         /// following this user. Some false negatives are possible when set to "false", but these
@@ -152,7 +151,6 @@ namespace ClubCloud.Social.Twitter.Objects {
         /// </summary>
         [Obsolete("Deprecated in the Twitter API")]
         public bool? IsFollowing { get; private set; }
-        */
 
         /// <summary>
         /// <em>Nullable</em>. <em>Perspectival</em>. When true, indicates that the authenticating user has issued a
@@ -160,14 +158,12 @@ namespace ClubCloud.Social.Twitter.Objects {
         /// </summary>
         public bool? FollowRequestSent { get; private set; }
 
-        /*
         /// <summary>
         /// <em>Nullable</em>. <em>Deprecated</em>. May incorrectly report "false" at times. Indicates whether the
         /// authenticated user has chosen to receive this user's tweets by SMS.
         /// </summary>
         [Obsolete("Deprecated in the Twitter API")]
         public bool? Notifications { get; private set; }
-        */
 
         /// <summary>
         /// The hexadecimal color chosen by the user for their background.
@@ -348,9 +344,9 @@ namespace ClubCloud.Social.Twitter.Objects {
             user.Language = obj.GetString("lang");
             user.ContributorsEnabled = obj.GetBoolean("contributors_enabled");
             user.IsTranslator = obj.GetBoolean("is_translator");
-            //user.IsFollowing = obj.HasValue("following") && obj.GetBoolean("following");
+            user.IsFollowing = obj.HasValue("following") && obj.GetBoolean("following");
             user.FollowRequestSent = obj.HasValue("follow_request_sent") && obj.GetBoolean("follow_request_sent");
-            //user.Notifications = obj.HasValue("notifications") && obj.GetBoolean("notifications");
+            user.Notifications = obj.HasValue("notifications") && obj.GetBoolean("notifications");
             user.Status = obj.GetObject("status", TwitterStatusMessage.Parse);
            
             #endregion

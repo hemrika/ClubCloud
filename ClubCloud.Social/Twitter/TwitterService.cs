@@ -17,7 +17,6 @@ namespace ClubCloud.Social.Twitter {
             // make constructor private
         }
 
-        /*
         [Obsolete("Made obsolete to have consistent naming across framework. Use CreateFromAccessInformation or CreateFromOAuthClient instead.")]
         public static TwitterService GetFromAccessInformation(TwitterAccessInformation info) {
             return CreateFromOAuthClient(new TwitterOAuthClient {
@@ -27,8 +26,7 @@ namespace ClubCloud.Social.Twitter {
                 TokenSecret = info.AccessTokenSecret
             });
         }
-        */
-        /*
+        
         public static TwitterService CreateFromAccessInformation(TwitterAccessInformation info) {
             return CreateFromOAuthClient(new TwitterOAuthClient {
                 ConsumerKey = info.ConsumerKey,
@@ -37,7 +35,6 @@ namespace ClubCloud.Social.Twitter {
                 TokenSecret = info.AccessTokenSecret
             });
         }
-        */
 
         public static TwitterService CreateFromOAuthClient(TwitterOAuthClient client) {
 

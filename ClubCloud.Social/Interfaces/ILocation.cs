@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ClubCloud.Social.Interfaces {
 
-namespace ClubCloud.Social.Interfaces
-{
-    public interface ILocation
-    {
+    public interface ILocation {
+
         /// <summary>
         /// Gets the latitude of the location. The latitude specifies the north-south position of a
         /// point on the Earth's surface.
@@ -19,5 +13,7 @@ namespace ClubCloud.Social.Interfaces
         /// point on the Earth's surface.
         /// </summary>
         double Longitude { get; }
+
     }
+
 }

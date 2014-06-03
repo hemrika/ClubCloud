@@ -57,7 +57,6 @@ namespace ClubCloud.Social.Facebook {
             };
         }
 
-        /*
         /// <summary>
         /// Gets the login URL for the application.
         /// </summary>
@@ -65,9 +64,7 @@ namespace ClubCloud.Social.Facebook {
         public string GetUserLoginUrl() {
             return Client.GetAuthorizationUrl(Guid.NewGuid().ToString(), new string[0]);
         }
-        */
 
-        /*
         /// <summary>
         /// Gets the login URL for the application using the specified <var>state</var> and <var>scope</var>.
         /// </summary>
@@ -78,7 +75,6 @@ namespace ClubCloud.Social.Facebook {
         public string GetUserLoginUrl(string state, params string[] scope) {
             return Client.GetAuthorizationUrl(state, scope);
         }
-        */
 
         /// <summary>
         /// Generates the authorization URL using the specified state and scope.

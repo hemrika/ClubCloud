@@ -11,13 +11,11 @@ namespace ClubCloud.Social.Twitter {
         public string AccessToken { get; set; }
         public string AccessTokenSecret { get; set; }
 
-        /*
         [Obsolete("Use 'AccessTokenSecret' instead")]
         public string AccessSecret {
             get { return AccessTokenSecret; }
             set { AccessTokenSecret = value; }
         }
-        */
 
         public static TwitterAccessInformation ParseXml(XElement xml) {
             if (xml == null) return new TwitterAccessInformation();

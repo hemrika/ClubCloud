@@ -1,50 +1,37 @@
 ﻿using ClubCloud.Social.Facebook.Exceptions;
-using ClubCloud.Social.Facebook.OAuth;
 using ClubCloud.Social.Facebook.Objects;
 using ClubCloud.Social.Json;
 
 namespace ClubCloud.Social.Facebook.Responses {
+    
+    public class FacebookPhotosResponse {
 
-    public class FacebookPhotosResponse
-    {
-
-        public FacebookPhoto[] Data
-        {
-            get;
-            private set;
+        public FacebookPhoto[] Data {
+            get; private set;
         }
 
-        public FacebookPaging Paging
-        {
-            get;
-            private set;
+        public FacebookPaging Paging {
+            get; private set;
         }
 
-        public static FacebookPhotosResponse ParseJson(string json)
-        {
+        public static FacebookPhotosResponse ParseJson(string json) {
             return JsonConverter.ParseObject(json, Parse);
         }
 
-        public static FacebookPhotosResponse Parse(JsonObject obj)
-        {
+        public static FacebookPhotosResponse Parse(JsonObject obj) {
             if (obj == null) return null;
             if (obj.HasValue("error")) throw obj.GetObject("error", FacebookException.Parse);
-            return new FacebookPhotosResponse
-            {
+            return new FacebookPhotosResponse {
                 Data = FacebookPhoto.ParseMultiple(obj.GetArray("data")),
                 Paging = FacebookPaging.Parse(obj.GetObject("paging"))
             };
-
+        
         }
 
-        /*
         public FacebookPhotosResponse Next(FacebookService service) {
             return Paging.Next == null ? null : Parse(SocialUtils.DoHttpGetRequestAndGetBodyAsJsonObject(Paging.Next + "&access_token=" + service.AccessToken));
         }
-        */
-        public FacebookPhotosResponse Next(FacebookOAuthClient client)
-        {
-            return Paging.Next == null ? null : Parse(SocialUtils.DoHttpGetRequestAndGetBodyAsJsonObject(Paging.Next + "&access_token=" + client.AccessToken));
-        }
+    
     }
+
 }

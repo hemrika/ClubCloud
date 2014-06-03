@@ -52,15 +52,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FaceBook\FaceBookUtils.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="BitBucket\BitBucketService.cs" />
+    <Compile Include="BitBucket\Endpoints\BitBucketRepositoriesEndpoint.cs" />
+    <Compile Include="BitBucket\Endpoints\BitBucketUserEndpoint.cs" />
+    <Compile Include="BitBucket\Endpoints\BitBucketUsersEndpoint.cs" />
+    <Compile Include="BitBucket\Endpoints\Raw\BitBucketRepositoriesRawEndpoint.cs" />
+    <Compile Include="BitBucket\Endpoints\Raw\BitBucketUserRawEndpoint.cs" />
+    <Compile Include="BitBucket\Endpoints\Raw\BitBucketUsersRawEndpoint.cs" />
+    <Compile Include="BitBucket\Exceptions\BitBucketHttpException.cs" />
+    <Compile Include="BitBucket\OAuth\BitBucketOAuthClient.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketAuthor.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketAuthorUser.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketChangeset.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketCommit.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketLink.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketLinkCollection.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketRepositoryInfo.cs" />
+    <Compile Include="BitBucket\Objects\BitBucketUser.cs" />
+    <Compile Include="BitBucket\Responses\BitBucketChangesetsResponse.cs" />
+    <Compile Include="BitBucket\Responses\BitBucketCommitsResponse.cs" />
+    <Compile Include="BitBucket\Responses\BitBucketCurrentUserResponse.cs" />
+    <Compile Include="BitBucket\Responses\BitBucketUserResponse.cs" />
+    <Compile Include="FaceBook\FacebookApplication.cs" />
     <Compile Include="FaceBook\Endpoints\FacebookMethodsEndpoint.cs" />
     <Compile Include="FaceBook\Endpoints\Raw\FacebookMethodsRawEndpoint.cs" />
     <Compile Include="FaceBook\Exceptions\FacebookException.cs" />
-    <Compile Include="FaceBook\FaceBookConnect.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="FaceBook\FacebookScope.cs" />
     <Compile Include="FaceBook\FacebookScopeCollection.cs" />
     <Compile Include="FaceBook\FacebookService.cs" />
@@ -92,6 +108,11 @@
     <Compile Include="FaceBook\Responses\FacebookMeResponse.cs" />
     <Compile Include="FaceBook\Responses\FacebookPhotosResponse.cs" />
     <Compile Include="FaceBook\Responses\FacebookPostsResponse.cs" />
+    <Compile Include="GitHub\Endpoints\GitHubRepositoriesEndpoint.cs" />
+    <Compile Include="GitHub\Endpoints\Raw\GitHubRepositoriesRawEndpoint.cs" />
+    <Compile Include="GitHub\GitHubScope.cs" />
+    <Compile Include="GitHub\GitHubService.cs" />
+    <Compile Include="GitHub\OAuth\GitHubOAuthClient.cs" />
     <Compile Include="Google\Analytics\AnalyticsEndpoint.cs" />
     <Compile Include="Google\Analytics\AnalyticsRawEndpoint.cs" />
     <Compile Include="Google\Analytics\AnalyticsScope.cs" />
@@ -136,6 +157,47 @@
     <Compile Include="Google\OAuth\GoogleApprovalPrompt.cs" />
     <Compile Include="Google\OAuth\GoogleOAuthClient.cs" />
     <Compile Include="Google\OAuth\GoogleScope.cs" />
+    <Compile Include="Instagram\Endpoints\InstagramEndpoints.cs" />
+    <Compile Include="Instagram\Endpoints\InstagramLocationsEndpoint.cs" />
+    <Compile Include="Instagram\Endpoints\InstagramMediaEndpoint.cs" />
+    <Compile Include="Instagram\Endpoints\InstagramRelationshipsEndpoint.cs" />
+    <Compile Include="Instagram\Endpoints\InstagramTagsEndpoint.cs" />
+    <Compile Include="Instagram\Endpoints\InstagramUsersEndpoint.cs" />
+    <Compile Include="Instagram\Endpoints\Raw\InstagramLocationsRawEndpoint.cs" />
+    <Compile Include="Instagram\Endpoints\Raw\InstagramMediaRawEndpoint.cs" />
+    <Compile Include="Instagram\Endpoints\Raw\InstagramRelationshipsRawEndpoint.cs" />
+    <Compile Include="Instagram\Endpoints\Raw\InstagramTagsRawEndpoint.cs" />
+    <Compile Include="Instagram\Endpoints\Raw\InstagramUsersRawEndpoint.cs" />
+    <Compile Include="Instagram\Exceptions\InstagramException.cs" />
+    <Compile Include="Instagram\Exceptions\InstagramNotFoundException.cs" />
+    <Compile Include="Instagram\Exceptions\InstagramOAuthAccessTokenException.cs" />
+    <Compile Include="Instagram\Exceptions\InstagramOAuthException.cs" />
+    <Compile Include="Instagram\InstagramScope.cs" />
+    <Compile Include="Instagram\InstagramService.cs" />
+    <Compile Include="Instagram\OAuth\InstagramOAuthClient.cs" />
+    <Compile Include="Instagram\Objects\InstagramComment.cs" />
+    <Compile Include="Instagram\Objects\InstagramImage.cs" />
+    <Compile Include="Instagram\Objects\InstagramImageSummary.cs" />
+    <Compile Include="Instagram\Objects\InstagramLocation.cs" />
+    <Compile Include="Instagram\Objects\InstagramMedia.cs" />
+    <Compile Include="Instagram\Objects\InstagramMediaSummary.cs" />
+    <Compile Include="Instagram\Objects\InstagramTag.cs" />
+    <Compile Include="Instagram\Objects\InstagramUser.cs" />
+    <Compile Include="Instagram\Objects\InstagramUserSummary.cs" />
+    <Compile Include="Instagram\Objects\InstagramVideo.cs" />
+    <Compile Include="Instagram\Objects\InstagramVideoSummary.cs" />
+    <Compile Include="Instagram\Options\InstagramLocationSearchOptions.cs" />
+    <Compile Include="Instagram\Options\InstagramMediaSearchOptions.cs" />
+    <Compile Include="Instagram\Responses\InstagramAccessTokenResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramLocationResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramLocationsResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramMediaResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramRecentMediaResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramTagResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramUserResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramUsersResponse.cs" />
+    <Compile Include="Instagram\Responses\InstagramUserSummariesResponse.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
     <Compile Include="Interfaces\ISocialTimelineEntry.cs" />
     <Compile Include="Json\Exceptions\JsonParseException.cs" />
@@ -143,10 +205,6 @@
     <Compile Include="Json\JsonArray.cs" />
     <Compile Include="Json\JsonConverter.cs" />
     <Compile Include="Json\JsonObject.cs" />
-    <Compile Include="LinkedIn\LinkedInUtils.cs" />
-    <Compile Include="LinkedIn\LinkedInActions.cs" />
-    <Compile Include="LinkedIn\LinkedInToken.cs" />
-    <Compile Include="LinkedIn\LinkedInConnect.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="OAuth\OAuthAccessToken.cs" />
     <Compile Include="OAuth\OAuthClient.cs" />
@@ -154,6 +212,11 @@
     <Compile Include="OAuth\OAuthRequestToken.cs" />
     <Compile Include="OAuth\OAuthUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pushover\PushoverException.cs" />
+    <Compile Include="Pushover\PushoverMessage.cs" />
+    <Compile Include="Pushover\PushoverPriority.cs" />
+    <Compile Include="Pushover\PushoverService.cs" />
+    <Compile Include="Pushover\PushoverSound.cs" />
     <Compile Include="SocialExtensions.cs" />
     <Compile Include="SocialHttpRequest.cs" />
     <Compile Include="SocialHttpResponse.cs" />
@@ -175,9 +238,6 @@
     <Compile Include="Twitter\Entities\TwitterUrlEntity.cs" />
     <Compile Include="Twitter\Enums\TwitterAuthentication.cs" />
     <Compile Include="Twitter\Enums\TwitterGranularity.cs" />
-    <Compile Include="Twitter\Extensions.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Twitter\OAuth\TwitterOAuthClient.cs" />
     <Compile Include="Twitter\Objects\TwitterBoundingBox.cs" />
     <Compile Include="Twitter\Objects\TwitterContributor.cs" />
@@ -191,22 +251,42 @@
     <Compile Include="Twitter\Options\TwitterStatusMessageOptions.cs" />
     <Compile Include="Twitter\Options\TwitterTimelineOptions.cs" />
     <Compile Include="Twitter\Responses\TwitterReverseGeocodeResponse.cs" />
-    <Compile Include="Twitter\TwitterAuthorize.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Twitter\TwitterBase.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Twitter\TwitterConnect.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Twitter\TwitterAccessInformation.cs" />
     <Compile Include="Twitter\TwitterException.cs" />
     <Compile Include="Twitter\TwitterService.cs" />
     <Compile Include="Twitter\TwitterUtils.cs" />
+    <Compile Include="Vimeo\Advanced\Endpoints\Raw\VimeoChannelsRawEndpoint.cs" />
+    <Compile Include="Vimeo\Advanced\Endpoints\VimeoChannelsEndpoint.cs" />
+    <Compile Include="Vimeo\Advanced\Endpoints\VimeoPeopleEndpoint.cs" />
+    <Compile Include="Vimeo\Advanced\Endpoints\VimeoTestEndpoint.cs" />
+    <Compile Include="Vimeo\Advanced\Endpoints\VimeoVideosEndpoint.cs" />
+    <Compile Include="Vimeo\Advanced\Enums\VimeoChannelsSort.cs" />
+    <Compile Include="Vimeo\Advanced\Objects\VimeoCastMember.cs" />
+    <Compile Include="Vimeo\Advanced\Objects\VimeoChannel.cs" />
+    <Compile Include="Vimeo\Advanced\Objects\VimeoTag.cs" />
+    <Compile Include="Vimeo\Advanced\Objects\VimeoThumbnail.cs" />
+    <Compile Include="Vimeo\Advanced\Objects\VimeoUrl.cs" />
+    <Compile Include="Vimeo\Advanced\Objects\VimeoUser.cs" />
+    <Compile Include="Vimeo\Advanced\Objects\VimeoVideo.cs" />
+    <Compile Include="Vimeo\Advanced\Objects\VimeoVideoOwner.cs" />
+    <Compile Include="Vimeo\Advanced\Responses\VimeoApiResponse.cs" />
+    <Compile Include="Vimeo\Advanced\Responses\VimeoChannelsResponse.cs" />
+    <Compile Include="Vimeo\Advanced\Responses\VimeoTestLoginResponse.cs" />
+    <Compile Include="Vimeo\Advanced\Responses\VimeoUserResponse.cs" />
+    <Compile Include="Vimeo\Advanced\Responses\VimeoVideoResponse.cs" />
+    <Compile Include="Vimeo\Advanced\Responses\VimeoVideosResponse.cs" />
+    <Compile Include="Vimeo\Advanced\VimeoException.cs" />
+    <Compile Include="Vimeo\Advanced\VimeoOAuthClient.cs" />
+    <Compile Include="Vimeo\Advanced\VimeoService.cs" />
+    <Compile Include="Vimeo\Advanced\VimeoUtils.cs" />
+    <Compile Include="Vimeo\Simple\Objects\VimeoChannel.cs" />
+    <Compile Include="Vimeo\Simple\Objects\VimeoVideo.cs" />
+    <Compile Include="Vimeo\Simple\Responses\VimeoChannelsResponse.cs" />
+    <Compile Include="Vimeo\Simple\Responses\VimeoVideosResponse.cs" />
+    <Compile Include="Vimeo\Simple\VimeoException.cs" />
+    <Compile Include="Vimeo\Simple\VimeoService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Microsoft\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

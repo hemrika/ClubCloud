@@ -16,12 +16,10 @@ namespace ClubCloud.Social.Facebook {
 
         public FacebookMethodsEndpoint Methods { get; private set; }
 
-        /*
         [Obsolete("Use Client.AccessToken instead.")]
         public string AccessToken {
             get { return Client == null ? null : Client.AccessToken; }
         }
-        */
 
         #endregion
 
@@ -73,7 +71,7 @@ namespace ClubCloud.Social.Facebook {
         #region Obsolete
 
         #region Accounts
-        /*
+
         /// <summary>
         /// Gets information about accounts associated with the current user by calling the <var>/me/accounts</var> method. This call requires a user access token.
         /// </summary>
@@ -90,11 +88,11 @@ namespace ClubCloud.Social.Facebook {
         public FacebookAccountsResponse Accounts() {
             return Methods.GetAccounts();
         }
-        */
+
         #endregion
 
         #region Debug token
-        /*
+
         /// <summary>
         /// Gets debug information about the specified access token.
         /// </summary>
@@ -120,11 +118,11 @@ namespace ClubCloud.Social.Facebook {
         public FacebookDebugTokenResponse DebugToken(string accessToken) {
             return Methods.DebugToken(accessToken);
         }
-        */
+
         #endregion
 
         #region Me
-        /*
+
         /// <summary>
         /// Gets information about the current user by calling the <var>/me</var> method. This call requires a user access token.
         /// </summary>
@@ -141,11 +139,11 @@ namespace ClubCloud.Social.Facebook {
         public FacebookMeResponse Me() {
             return Methods.Me();
         }
-        */
+
         #endregion
 
         #region App
-        /*
+
         /// <summary>
         /// Gets information about the specified app.
         /// </summary>
@@ -172,11 +170,11 @@ namespace ClubCloud.Social.Facebook {
         public FacebookAppResponse GetApp() {
             return Methods.GetApp();
         }
-        */
+
         #endregion
 
         #region Events
-        /*
+
         /// <summary>
         /// Gets the events of the specified user or page.
         /// </summary>
@@ -207,11 +205,11 @@ namespace ClubCloud.Social.Facebook {
         public FacebookEventsResponse GetEvents(string name, int limit = 0) {
             return Methods.GetEvents(name, limit);
         }
-        */
+
         #endregion
 
         #region Feed
-        /*
+
         /// <summary>
         /// Gets the feed of the specified user or page.
         /// </summary>
@@ -242,11 +240,11 @@ namespace ClubCloud.Social.Facebook {
         public FacebookFeedResponse GetFeed(string name, int limit = 0) {
             return Methods.GetFeed(name, limit);
         }
-        */
+
         #endregion
 
         #region Photos
-        /*
+
         /// <summary>
         /// Gets the photos of the specified album, page or user.
         /// </summary>
@@ -272,11 +270,11 @@ namespace ClubCloud.Social.Facebook {
         public FacebookPhotosResponse GetPhotos(string name, int limit) {
             return FacebookPhotosResponse.ParseJson(Client.Methods.GetPhotos(name, limit));
         }
-        */
+
         #endregion
 
         #region Posts
-        /*
+
         /// <summary>
         /// Gets the posts by the specified user or page.
         /// </summary>
@@ -307,7 +305,7 @@ namespace ClubCloud.Social.Facebook {
         public FacebookPostsResponse GetPosts(string name, int limit = 0) {
             return Methods.GetPosts(name, limit);
         }
-        */
+
         #endregion
 
         #endregion
