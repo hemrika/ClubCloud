@@ -22,6 +22,7 @@ namespace ClubCloud.Service.Model
             this.mijnknltb_allow = false;
             this.mijnknltb_tracking = false;
             this.twitter_allow = false;
+            this.facebook_allow = false;
         }
     
     	[DataMember]
@@ -42,5 +43,9 @@ namespace ClubCloud.Service.Model
         public string twitter_oauth_token_secret { get; set; }
     	[DataMember]
         public Twitter twitter_setting { get; set; }
+    	[DataMember]
+        public bool facebook_allow { get; set; }
+    	[DataMember]
+        public string facebook_access_token { get; set; }
     }
 }

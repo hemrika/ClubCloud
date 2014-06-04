@@ -186,6 +186,8 @@
           <Property Name="twitter_oauth_token" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="twitter_oauth_token_secret" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="twitter_setting" Type="ClubCloudModel.Twitter" Nullable="false" />
+          <Property Name="facebook_allow" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <Property Name="facebook_access_token" Type="String" Nullable="false" />
         </EntityType>
         <EnumType Name="Twitter" IsFlags="true">
           <Member Name="None" Value="0" />

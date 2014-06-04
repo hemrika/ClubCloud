@@ -84,6 +84,13 @@
     <Compile Include="ControlTemplates\ClubCloud.Mijn\ClubCloudUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\FaceBookAuthorize.ascx.cs">
+      <DependentUpon>FaceBookAuthorize.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\FaceBookAuthorize.ascx.designer.cs">
+      <DependentUpon>FaceBookAuthorize.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\ClubCloud.Mijn\FaceBookUserControl.ascx.cs">
       <DependentUpon>FaceBookUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -186,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ControlTemplates\ClubCloud.Mijn\BetalingenUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\FaceBookAuthorize.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\FaceBookUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\PromotedLinksDelegate.ascx" />

@@ -14,6 +14,8 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class TwitterAuthorize : ClubCloudUserControl
     {
+        private string userId = string.Empty;
+        private ClubCloud_Setting settings;
         private string ConsumerKey = "xKESVN9CwdlWGA1ve7qWdPPzU";
         private string ConsumerSecret = "szoyhGCcw4fp7fDlt8pit0o3HwwdvFd3BUbBEDTfkU08ToJyNS";
 
@@ -37,23 +39,6 @@ namespace ClubCloud.Mijn.ControlTemplates
             get { return !String.IsNullOrEmpty(DeniedToken); }
         }
 
-        private ClubCloud_Setting settings;
-        /*
-        private ClubCloud.Social.Twitter.TwitterService _twitterService;
-        
-
-        public TwitterService twitterService
-        {
-            get {
-                if (_twitterService == null)
-                {
-                    _twitterService = new TwitterService();
-                }
-                return _twitterService;
-            }
-            set { _twitterService = value; }
-        }
-        */
 
         public TwitterAuthorize()
         {
@@ -111,28 +96,8 @@ namespace ClubCloud.Mijn.ControlTemplates
                         }
 
                         Client.SetTwitter(settings);
-                        string finished = "finished";
                     }
 
-                    if(settings.twitter_allow)
-                    {
-
-                        try
-                        {
-                            TwitterService service = TwitterService.CreateFromOAuthClient(client);
-                            TwitterUser user = service.Account.VerifyCredentials();
-
-                            long Id = user.Id;
-                            string ScreenName = user.ScreenName;
-                            string ProfileImageUrlHttps = user.ProfileImageUrlHttps;
-                        }
-                        catch (Exception)
-                        {
-                            
-                            throw;
-                        }
-
-                    }
                 }
                 /*
                     if(settings.twitter_allow)
@@ -156,7 +121,55 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         }
 
-        private string userId = string.Empty;
+
+        protected override void Render(HtmlTextWriter writer)
+        {
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+
+                if (settings.twitter_allow)
+                {
+                    TwitterOAuthClient client = new TwitterOAuthClient
+                    {
+                        ConsumerKey = ConsumerKey,
+                        ConsumerSecret = ConsumerSecret,
+                        Token = settings.twitter_oauth_token,
+                        TokenSecret = settings.twitter_oauth_token_secret,
+                        Callback = this.Page.Request.Url.AbsoluteUri
+                    };
+
+                    try
+                    {
+                        TwitterService service = TwitterService.CreateFromOAuthClient(client);
+                        TwitterUser user = service.Account.VerifyCredentials();
+
+                        if (user != null)
+                        {
+                            System.Web.UI.WebControls.Literal literal = new Literal();
+
+                            literal.Text += "<pre><b>Id</b> " + user.Id + "</pre>";
+                            literal.Text += "<pre><b>ScreenName</b> " + user.ScreenName + "</pre>";
+                            literal.Text += "<pre><b>Name</b> " + user.Name + "</pre>";
+                            literal.Text += "<pre><b>Avatar</b> " + user.ProfileImageUrlHttps + "</pre>";
+                            literal.Text += "<pre><b>Url</b> " + user.Url + "</pre>";
+                            literal.Text += "<pre><b>Description</b> " + user.Description + "</pre>";
+
+                            literal.Text += "<img src=\"" + user.ProfileImageUrlHttps + "\" alt=\"\" />\n";
+
+                            pnl_twitter.Controls.Add(literal);
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+
+                }
+            }
+        
+            base.Render(writer);
+        }
 
     }
 }

@@ -54,6 +54,13 @@
             "Provides access to the user's friend's online/offline presence."
         );
 
+        public static readonly FacebookScope Birthday = new FacebookScope(
+            "user_birthday",
+            "Provides access to the birthday with year as the birthday property. Note that your app may determine if a user is 'old enough' to use an app by obtaining the age_range public profile property"
+        );
+
+        
+
         #endregion
 
         #region Publish Permissions

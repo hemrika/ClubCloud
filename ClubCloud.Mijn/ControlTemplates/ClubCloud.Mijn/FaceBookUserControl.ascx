@@ -10,7 +10,7 @@
     <ContentTemplate>
         <asp:panel runat="server" ID="pnl_secure" Visible="False">
             <i class="icon-lock-1 special"></i>U moet ingelogd zijn om uw instellingen te kunnen wijzigen.
-            <asp:LinkButton ID="btn_login" Text="Inloggen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/_zimbra/default.aspx', title: 'Inloggen op MijnClubCloud', showClose: true});" runat="server" /><br />
+            <asp:LinkButton ID="btn_login" Text="Inloggen" OnClientClick="document.location.href ='https://mijn.clubcloud.nl/_zimbra/default.aspx'; return false" runat="server" /><br />
         </asp:panel>
         <asp:panel runat="server" ID="pnl_facebook">
             </asp:panel>
