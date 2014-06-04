@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClubCloud.Social.Google.Analytics.Objects {
+namespace Skybrud.Social.Google.Analytics.Objects {
     
     [Obsolete("Use class AnalyticsMetric instead")]
     public class AnalyticsMetrics {
