@@ -85,12 +85,17 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="mijnknltb_Id" Type="uniqueidentifier" Nullable="true" />
     <Property Name="mijnknltb_allow" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="mijnknltb_password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="mijnknltb_password" Type="nvarchar(max)" Nullable="true" />
     <Property Name="mijnknltb_tracking" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="twitter_allow" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="twitter_oauth_token" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="twitter_oauth_token_secret" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="twitter_setting" Type="int" Nullable="false" />
+    <Property Name="twitter_oauth_token" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="twitter_oauth_token_secret" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="twitter_setting" Type="int" Nullable="true" />
+    <Property Name="facebook_allow" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="facebook_access_token" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="facebook_setting" Type="int" Nullable="false" />
+    <Property Name="privacy" Type="int" Nullable="true" />
+    <Property Name="financieel" Type="int" Nullable="true" />
   </EntityType>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -180,14 +185,17 @@
           <Property Name="Id" Type="Int32" annotation:StoreGeneratedPattern="None" Nullable="false" />
           <Property Name="mijnknltb_Id" Type="Guid" Nullable="true" />
           <Property Name="mijnknltb_allow" Type="Boolean" Nullable="false" DefaultValue="False" />
-          <Property Name="mijnknltb_password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="mijnknltb_password" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
           <Property Name="mijnknltb_tracking" Type="Boolean" Nullable="false" DefaultValue="False" />
           <Property Name="twitter_allow" Type="Boolean" Nullable="false" DefaultValue="False" />
-          <Property Name="twitter_oauth_token" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="twitter_oauth_token_secret" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="twitter_oauth_token" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
+          <Property Name="twitter_oauth_token_secret" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
           <Property Name="twitter_setting" Type="ClubCloudModel.Twitter" Nullable="false" />
           <Property Name="facebook_allow" Type="Boolean" Nullable="false" DefaultValue="False" />
-          <Property Name="facebook_access_token" Type="String" Nullable="false" />
+          <Property Name="facebook_access_token" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
+          <Property Name="facebook_setting" Type="ClubCloudModel.Facebook" Nullable="false" />
+          <Property Name="privacy" Type="ClubCloudModel.Privacy" Nullable="false" />
+          <Property Name="financieel" Type="ClubCloudModel.Financieel" Nullable="false" />
         </EntityType>
         <EnumType Name="Twitter" IsFlags="true">
           <Member Name="None" Value="0" />
@@ -195,6 +203,25 @@
           <Member Name="Succes" Value="2" />
           <Member Name="Competitie" Value="4" />
           <Member Name="Toernooi" Value="8" />
+        </EnumType>
+        <EnumType Name="Privacy" IsFlags="true">
+          <Member Name="None" Value="0" />
+          <Member Name="leden_club" Value="1" />
+          <Member Name="leden_clubcloud" Value="2" />
+          <Member Name="competitie_club" Value="4" />
+          <Member Name="competitie_leden" Value="8" />
+          <Member Name="toernooi_club" Value="16" />
+          <Member Name="toernooi_leden" Value="32" />
+        </EnumType>
+        <EnumType Name="Financieel" IsFlags="true">
+          <Member Name="None" Value="0" />
+          <Member Name="Machtiging" Value="1" />
+          <Member Name="iDEAL" Value="2" />
+          <Member Name="PayPal" Value="4" />
+          <Member Name="Factuur" Value="8" />
+        </EnumType>
+        <EnumType Name="Facebook" IsFlags="true">
+        <Member Name="None" Value="0" />
         </EnumType>
       </Schema>
     </edmx:ConceptualModels>
@@ -284,6 +311,11 @@
           <ScalarProperty Name="twitter_oauth_token" ColumnName="twitter_oauth_token" />
           <ScalarProperty Name="twitter_oauth_token_secret" ColumnName="twitter_oauth_token_secret" />
           <ScalarProperty Name="twitter_setting" ColumnName="twitter_setting" />
+          <ScalarProperty Name="facebook_allow" ColumnName="facebook_allow" />
+          <ScalarProperty Name="facebook_access_token" ColumnName="facebook_access_token" />
+          <ScalarProperty Name="facebook_setting" ColumnName="facebook_setting" />
+          <ScalarProperty Name="privacy" ColumnName="privacy" />
+          <ScalarProperty Name="financieel" ColumnName="financieel" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

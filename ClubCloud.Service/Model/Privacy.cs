@@ -13,12 +13,14 @@ namespace ClubCloud.Service.Model
     using System.Runtime.Serialization;
     
     [Flags]
-    public enum Twitter : int
+    public enum Privacy : int
     {
         None = 0,
-        Tweet = 1,
-        Succes = 2,
-        Competitie = 4,
-        Toernooi = 8
+        leden_club = 1,
+        leden_clubcloud = 2,
+        competitie_club = 4,
+        competitie_leden = 8,
+        toernooi_club = 16,
+        toernooi_leden = 32
     }
 }

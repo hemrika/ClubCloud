@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Title="AfhangenClubCloud" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" HideSiteContentsLink="true" DisableWebDesignFeatures="true" EnableMinimalDownload="true" >
   <NavBars>
+    <NavBar ID="1002" Name="Afhangen ClubCloud" >
+    </NavBar>
   </NavBars>
   <Configurations>
     <Configuration ID="0" Name="AfhangenClubCloud" Description="ClubCloud Afhangen Site" Hidden="false" Title="ClubCloud Afhangen" >

@@ -17,7 +17,7 @@
             <asp:LinkButton ID="btn_login" Text="Inloggen" OnClientClick="document.location.href ='https://mijn.clubcloud.nl/_zimbra/default.aspx'; return false" runat="server" /><br />
         </asp:panel>
         <fieldset>
-        <asp:panel runat="server" ID="pnl_betalingen">
+        <asp:panel runat="server" ID="pnl_betalingen" GroupingText="Betalings instellingen:" >
             <asp:CheckBox id="betalingen_overboeking" runat="server" Checked="False" Text="Betaling per machtiging" ></asp:CheckBox><br />
             Instellen : <asp:LinkButton ID="btn_machtiging" Text="Machtiging instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/Machtiging.aspx', title: 'Overboekingen instellen', showClose: true});" runat="server" /><br />
             <asp:CheckBox id="betalingen_ideal" runat="server" Checked="False" Text="Betaling per iDEAL" ></asp:CheckBox><br />
@@ -28,12 +28,13 @@
             Instellen : <asp:LinkButton ID="btn_factuur" Text="Facturatie instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/factuur.aspx', title: 'Factuur instellen', showClose: true});" runat="server" /><br />
             <br />
             <asp:Button ID="btn_betaling" runat="server" Text="Opslaan" Enabled="True" CssClass="button big blue" OnClick="btn_betaling_Click" />
+            <asp:ValidationSummary ID="financieel_error" runat="server" OnDataBinding="btn_betaling_Click" />
         </asp:panel>
         </fieldset>
     </ContentTemplate>
 </asp:UpdatePanel>
-<asp:UpdateProgress ID="udp_betalingen_progress" runat="server">
+<asp:UpdateProgress ID="udp_betalingen_progress" runat="server" AssociatedUpdatePanelID="udp_betalingen">
 <ProgressTemplate>
-    Bezig met verwerken.
+    Bezig met verwerken.    
 </ProgressTemplate>
 </asp:UpdateProgress>

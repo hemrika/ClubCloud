@@ -11,5 +11,32 @@ namespace ClubCloud.Mijn.ControlTemplates {
     
     
     public partial class VeranderwachtwoordUserControl {
+        
+        /// <summary>
+        /// udp_password control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udp_password;
+        
+        /// <summary>
+        /// ChangeUserPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ChangePassword ChangeUserPassword;
+        
+        /// <summary>
+        /// udp_password_progress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress udp_password_progress;
     }
 }

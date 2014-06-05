@@ -176,6 +176,15 @@
     <Compile Include="Model\ClubCloud_Vereniging.cs">
       <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Facebook.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Financieel.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Privacy.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SpelersProfiel.cs" />
     <Compile Include="Model\SpelerTracking.cs" />
     <Compile Include="Model\Twitter.cs">

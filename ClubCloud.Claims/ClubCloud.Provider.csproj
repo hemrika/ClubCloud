@@ -89,10 +89,6 @@
     <Compile Include="Features\Zimbra UserSettings\Zimbra UserSettings.EventReceiver.cs">
       <DependentUpon>Zimbra UserSettings.feature</DependentUpon>
     </Compile>
-    <Compile Include="IDENTITYMODEL\ZIMBRA\Authenticate.aspx.cs">
-      <DependentUpon>Authenticate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="IDENTITYMODEL\ZIMBRA\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -250,7 +246,6 @@
     <Content Include="Features\Zimbra Provider\Zimbra Provider.Template.xml">
       <DependentUpon>Zimbra Provider.feature</DependentUpon>
     </Content>
-    <Content Include="IDENTITYMODEL\ZIMBRA\Authenticate.aspx" />
     <Content Include="IDENTITYMODEL\ZIMBRA\cloud\cloud10.png" />
     <Content Include="IDENTITYMODEL\ZIMBRA\cloud\Detector.js" />
     <Content Include="IDENTITYMODEL\ZIMBRA\cloud\three.min.js" />

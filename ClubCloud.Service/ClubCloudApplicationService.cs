@@ -159,7 +159,8 @@ namespace ClubCloud.Service
             using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(GetConnectionString()))
             {
                 currentsettings = model.ClubCloud_Settings.Find(settings.Id);
-                //TODO Privacy
+                currentsettings.privacy = settings.privacy;
+                model.SaveChanges();
             }
 
             currentsettings.mijnknltb_password = string.Empty;
@@ -214,7 +215,10 @@ namespace ClubCloud.Service
             using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(GetConnectionString()))
             {
                 currentsettings = model.ClubCloud_Settings.Find(settings.Id);
-                //TODO FacceBook
+                currentsettings.facebook_allow = settings.facebook_allow;
+                currentsettings.facebook_access_token = settings.facebook_access_token;
+                currentsettings.facebook_setting = settings.facebook_setting;
+                model.SaveChanges();
             }
 
             currentsettings.mijnknltb_password = string.Empty;
@@ -229,7 +233,8 @@ namespace ClubCloud.Service
             using (ClubCloud.Service.Model.ClubCloudModelContainer model = new Model.ClubCloudModelContainer(GetConnectionString()))
             {
                 currentsettings = model.ClubCloud_Settings.Find(settings.Id);
-                //TODO Financieel
+                currentsettings.financieel = settings.financieel;
+                model.SaveChanges();
             }
 
             currentsettings.mijnknltb_password = string.Empty;
@@ -245,6 +250,7 @@ namespace ClubCloud.Service
             {
                 currentsettings = model.ClubCloud_Settings.Find(settings.Id);
                 currentsettings.mijnknltb_tracking = settings.mijnknltb_tracking;
+                model.SaveChanges();
             }
 
             currentsettings.mijnknltb_password = string.Empty;

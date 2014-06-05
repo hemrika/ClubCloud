@@ -4,10 +4,6 @@
     <ProjectItemFile Source="default.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
     <ProjectItemFile Source="onet.xml" Target="SiteTemplates\MijnClubCloud\Xml\" Type="TemplateFile" />
     <ProjectItemFile Source="webtemp_MijnClubCloud.xml" Target="1043\xml\" Type="TemplateFile" />
-    <ProjectItemFile Source="mijngegevens.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
-    <ProjectItemFile Source="mijnclubs.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
-    <ProjectItemFile Source="mijnfacturen.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
-    <ProjectItemFile Source="mijnwachtwoord.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
     <ProjectItemFile Source="afhangen.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
     <ProjectItemFile Source="competitie.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
     <ProjectItemFile Source="instellingen.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />

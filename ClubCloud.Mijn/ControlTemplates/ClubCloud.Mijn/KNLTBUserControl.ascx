@@ -52,7 +52,7 @@
         </asp:panel>
     </ContentTemplate>
 </asp:UpdatePanel>
-<asp:UpdateProgress ID="udp_knltb_progress" runat="server">
+<asp:UpdateProgress ID="udp_knltb_progress" runat="server" AssociatedUpdatePanelID="udp_knltb">
 <ProgressTemplate>
     Bezig met verwerken.
 </ProgressTemplate>

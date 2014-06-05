@@ -10,16 +10,16 @@
 namespace ClubCloud.Mijn.ControlTemplates {
     
     
-    public partial class BetalingenUserControl {
+    public partial class PrivacyUserControl {
         
         /// <summary>
-        /// udp_betalingen control.
+        /// udp_privacy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udp_betalingen;
+        protected global::System.Web.UI.UpdatePanel udp_privacy;
         
         /// <summary>
         /// pnl_secure control.
@@ -40,111 +40,93 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.LinkButton btn_login;
         
         /// <summary>
-        /// pnl_betalingen control.
+        /// pnl_privacy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_betalingen;
+        protected global::System.Web.UI.WebControls.Panel pnl_privacy;
         
         /// <summary>
-        /// betalingen_overboeking control.
+        /// privacy_club control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox betalingen_overboeking;
+        protected global::System.Web.UI.WebControls.CheckBox privacy_club;
         
         /// <summary>
-        /// btn_machtiging control.
+        /// privacy_leden_club control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btn_machtiging;
+        protected global::System.Web.UI.WebControls.CheckBox privacy_leden_club;
         
         /// <summary>
-        /// betalingen_ideal control.
+        /// privacy_leden_clubcloud control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox betalingen_ideal;
+        protected global::System.Web.UI.WebControls.CheckBox privacy_leden_clubcloud;
         
         /// <summary>
-        /// btn_ideal control.
+        /// privacy_competitie_club control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btn_ideal;
+        protected global::System.Web.UI.WebControls.CheckBox privacy_competitie_club;
         
         /// <summary>
-        /// betalingen_paypal control.
+        /// privacy_competitie_leden control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox betalingen_paypal;
+        protected global::System.Web.UI.WebControls.CheckBox privacy_competitie_leden;
         
         /// <summary>
-        /// btn_paypal control.
+        /// privacy_toernooi_club control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btn_paypal;
+        protected global::System.Web.UI.WebControls.CheckBox privacy_toernooi_club;
         
         /// <summary>
-        /// betalingen_factuur control.
+        /// privacy_toernooi_leden control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox betalingen_factuur;
+        protected global::System.Web.UI.WebControls.CheckBox privacy_toernooi_leden;
         
         /// <summary>
-        /// btn_factuur control.
+        /// privacy_save control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btn_factuur;
+        protected global::System.Web.UI.WebControls.Button privacy_save;
         
         /// <summary>
-        /// btn_betaling control.
+        /// udp_privacy_progress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_betaling;
-        
-        /// <summary>
-        /// financieel_error control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary financieel_error;
-        
-        /// <summary>
-        /// udp_betalingen_progress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress udp_betalingen_progress;
+        protected global::System.Web.UI.UpdateProgress udp_privacy_progress;
     }
 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/02/2014 22:47:15
+-- Date Created: 06/05/2014 22:16:56
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Service\Model\ClubCloudModel.edmx
 -- --------------------------------------------------
 
@@ -111,12 +111,17 @@ CREATE TABLE [dbo].[ClubCloud_Settings] (
     [Id] int  NOT NULL,
     [mijnknltb_Id] uniqueidentifier  NULL,
     [mijnknltb_allow] bit  NOT NULL,
-    [mijnknltb_password] nvarchar(max)  NOT NULL,
+    [mijnknltb_password] nvarchar(max)  NULL,
     [mijnknltb_tracking] bit  NOT NULL,
     [twitter_allow] bit  NOT NULL,
-    [twitter_oauth_token] nvarchar(max)  NOT NULL,
-    [twitter_oauth_token_secret] nvarchar(max)  NOT NULL,
-    [twitter_setting] int  NOT NULL
+    [twitter_oauth_token] nvarchar(max)  NULL,
+    [twitter_oauth_token_secret] nvarchar(max)  NULL,
+    [twitter_setting] int  NULL,
+    [facebook_allow] bit  NOT NULL,
+    [facebook_access_token] nvarchar(max)  NULL,
+    [facebook_setting] int  NOT NULL,
+    [privacy] int  NULL,
+    [financieel] int  NULL
 );
 GO
 

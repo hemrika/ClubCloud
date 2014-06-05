@@ -105,6 +105,13 @@
     <Compile Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx.designer.cs">
       <DependentUpon>KNLTBUserControl.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\PrivacyUserControl.ascx.cs">
+      <DependentUpon>PrivacyUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\PrivacyUserControl.ascx.designer.cs">
+      <DependentUpon>PrivacyUserControl.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\ClubCloud.Mijn\PromotedLinksDelegate.ascx.cs">
       <DependentUpon>PromotedLinksDelegate.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -196,6 +203,7 @@
     <Content Include="ControlTemplates\ClubCloud.Mijn\FaceBookAuthorize.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\FaceBookUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\PrivacyUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\PromotedLinksDelegate.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\SuiteBarBrandingDelegate.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\SuiteLinksDelegate.ascx" />
@@ -217,10 +225,6 @@
     <Content Include="MijnClubCloud\instellingen.aspx" />
     <Content Include="MijnClubCloud\competitie.aspx" />
     <Content Include="MijnClubCloud\afhangen.aspx" />
-    <Content Include="MijnClubCloud\mijnwachtwoord.aspx" />
-    <Content Include="MijnClubCloud\mijnfacturen.aspx" />
-    <Content Include="MijnClubCloud\mijnclubs.aspx" />
-    <Content Include="MijnClubCloud\mijngegevens.aspx" />
     <Content Include="MijnClubCloud\default.aspx" />
     <Content Include="MijnClubCloud\onet.xml" />
     <Content Include="MijnClubCloud\webtemp_MijnClubCloud.xml">

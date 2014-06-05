@@ -11,15 +11,14 @@ namespace ClubCloud.Service.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
     
-    [DataContract(IsReference = true)]
-    
-    public partial class ClubCloud_Tracking
+    [Flags]
+    public enum Financieel : int
     {
-    	[DataMember]
-        public System.Guid Id { get; set; }
-    	[DataMember]
-        public string Data { get; set; }
+        None = 0,
+        Machtiging = 1,
+        iDEAL = 2,
+        PayPal = 4,
+        Factuur = 8
     }
 }
