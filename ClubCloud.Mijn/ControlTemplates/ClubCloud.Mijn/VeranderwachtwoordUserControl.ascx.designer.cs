@@ -22,6 +22,33 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.UpdatePanel udp_password;
         
         /// <summary>
+        /// pnl_secure control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_secure;
+        
+        /// <summary>
+        /// btn_login control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btn_login;
+        
+        /// <summary>
+        /// pnl_password control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_password;
+        
+        /// <summary>
         /// ChangeUserPassword control.
         /// </summary>
         /// <remarks>

@@ -9,6 +9,7 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class TwitterUserControl : ClubCloudUserControl
     {
+        private string userId = string.Empty;
         private ClubCloud_Setting settings;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -37,8 +38,6 @@ namespace ClubCloud.Mijn.ControlTemplates
                     this.pnl_secure.Visible = true;
                 }
         }
-
-        private string userId = string.Empty;
 
         protected void twitter_save_Click(object sender, EventArgs e)
         {
