@@ -439,7 +439,7 @@ public class CodeStringGenerator
 		var complexProperties = _typeMapper.GetComplexProperties(type);
 		foreach(var complexProperty in complexProperties)
 		{
-			typeList.Add(_code.Escape(complexProperty));
+			typeList.Add(_code.Escape(_typeMapper.GetTypeName(complexProperty.TypeUsage)));
 		}
 
 		var navigationProperties = _typeMapper.GetNavigationProperties(type);

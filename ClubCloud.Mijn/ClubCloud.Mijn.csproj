@@ -105,6 +105,20 @@
     <Compile Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx.designer.cs">
       <DependentUpon>KNLTBUserControl.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnGegevensUserControl.ascx.cs">
+      <DependentUpon>MijnGegevensUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnGegevensUserControl.ascx.designer.cs">
+      <DependentUpon>MijnGegevensUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnVerenigingUserControl.ascx.cs">
+      <DependentUpon>MijnVerenigingUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnVerenigingUserControl.ascx.designer.cs">
+      <DependentUpon>MijnVerenigingUserControl.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\ClubCloud.Mijn\PrivacyUserControl.ascx.cs">
       <DependentUpon>PrivacyUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -203,6 +217,8 @@
     <Content Include="ControlTemplates\ClubCloud.Mijn\FaceBookAuthorize.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\FaceBookUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\MijnGegevensUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\MijnVerenigingUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\PrivacyUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\PromotedLinksDelegate.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\SuiteBarBrandingDelegate.ascx" />

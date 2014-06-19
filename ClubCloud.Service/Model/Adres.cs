@@ -12,13 +12,13 @@ namespace ClubCloud.Service.Model
     using System;
     using System.Runtime.Serialization;
     
-    [Flags]
-    public enum Financieel : int
+    public partial class Adres
     {
-        None = 0,
-        Machtiging = 1,
-        iDEAL = 2,
-        PayPal = 4,
-        Factuur = 8
+        public string Straat { get; set; }
+        public string Huisnummer { get; set; }
+        public string Toevoeging { get; set; }
+        public string Postcode { get; set; }
+        public string Plaats { get; set; }
+        public string Gemeente { get; set; }
     }
 }

@@ -1191,42 +1191,80 @@ namespace ClubCloud.Provider
                 string zimbraId = null;
                 List<attrN> properties = new List<attrN>();
 
-                MembershipUser membershipUser = new MembershipUser("Fake", "Fake", null, "fake@zimbra.com", "Fake", "Fake", false, true, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now);
+                MembershipUser membershipUser = new MembershipUser(this.Name, "Fake", null, "fake@zimbra.com", "Fake", "Fake", false, true, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now);
                 List<PropertyInfo> basepropertyInfos = membershipUser.GetType().GetProperties().ToList<PropertyInfo>();
                 List<PropertyInfo> propertyInfos = zuser.GetType().GetProperties().ToList<PropertyInfo>();
 
+                //Remove Immutables
+                PropertyInfo uid = propertyInfos.SingleOrDefault(p => p.Name == "uid");
+                propertyInfos.Remove(uid);
+
+                PropertyInfo zimbraMailDeliveryAddress = propertyInfos.SingleOrDefault(p => p.Name == "zimbraMailDeliveryAddress");
+                propertyInfos.Remove(zimbraMailDeliveryAddress);
+
+                PropertyInfo zimbraLastLogonTimestamp = propertyInfos.SingleOrDefault(p => p.Name == "zimbraLastLogonTimestamp");
+                propertyInfos.Remove(zimbraLastLogonTimestamp);
+
+                PropertyInfo zimbraMailAlias = propertyInfos.SingleOrDefault(p => p.Name == "zimbraMailAlias");
+                propertyInfos.Remove(zimbraMailAlias);
+
+                PropertyInfo zimbraPasswordModifiedTime = propertyInfos.SingleOrDefault(p => p.Name == "zimbraPasswordModifiedTime");
+                propertyInfos.Remove(zimbraPasswordModifiedTime);
+
+                PropertyInfo Email = propertyInfos.SingleOrDefault(p => p.Name == "Email");
+                propertyInfos.Remove(Email);
+
+                PropertyInfo zimbraMail = propertyInfos.SingleOrDefault(p => p.Name == "zimbraMail");
+                propertyInfos.Remove(zimbraMail);
+
+                PropertyInfo LastActivityDate = propertyInfos.SingleOrDefault(p => p.Name == "LastActivityDate");
+                propertyInfos.Remove(LastActivityDate);
+
+                PropertyInfo LastLoginDate = propertyInfos.SingleOrDefault(p => p.Name == "LastLoginDate");
+                propertyInfos.Remove(LastLoginDate);
+
+                PropertyInfo zimbraCreateTimestamp = propertyInfos.SingleOrDefault(p => p.Name == "zimbraCreateTimestamp");
+                propertyInfos.Remove(zimbraCreateTimestamp);
+
+                PropertyInfo IsApproved = propertyInfos.SingleOrDefault(p => p.Name == "IsApproved");
+                propertyInfos.Remove(IsApproved);
+                
                 foreach (PropertyInfo propertyInfo in propertyInfos)
                 {
-                    if (!basepropertyInfos.Contains(propertyInfo))
+                    if (propertyInfo.CanWrite)
                     {
-                        try
+                        if (!basepropertyInfos.Contains(propertyInfo))
                         {
-                            string value = propertyInfo.GetValue(zuser).ToString();
-
-                            if (!string.IsNullOrWhiteSpace(value))
+                            try
                             {
-                                if (propertyInfo.Name == "zimbraId")
+                                string value = propertyInfo.GetValue(zuser).ToString();
+
+                                if (!string.IsNullOrWhiteSpace(value))
                                 {
-                                    zimbraId = value;
-                                }
-                                else
-                                {
-                                    properties.Add(new attrN { name = propertyInfo.Name, Value = value });
+                                    if (propertyInfo.Name == "zimbraId")
+                                    {
+                                        zimbraId = value;
+                                    }
+                                    else
+                                    {
+                                        properties.Add(new attrN { name = propertyInfo.Name, Value = value });
+                                    }
                                 }
                             }
+                            catch { }
                         }
-                        catch { }
                     }
                 }
 
-                if (string.IsNullOrWhiteSpace(zimbraId) && properties.Count > 0)
+                if (!string.IsNullOrWhiteSpace(zimbraId) && properties.Count > 0)
                 {
                     Zimbra.Administration.ModifyAccountRequest modify = new Zimbra.Administration.ModifyAccountRequest { id = zimbraId, a = properties };
                     Zimbra.Administration.ModifyAccountResponse modified = zimbraServer.Message(modify) as Zimbra.Administration.ModifyAccountResponse;
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                throw ex;
             }
         }
 

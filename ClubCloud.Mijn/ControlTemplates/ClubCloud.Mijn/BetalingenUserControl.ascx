@@ -19,16 +19,16 @@
         <fieldset>
         <asp:panel runat="server" ID="pnl_betalingen" GroupingText="Betalings instellingen:" >
             <asp:CheckBox id="betalingen_overboeking" runat="server" Checked="False" Text="Betaling per machtiging" ></asp:CheckBox><br />
-            Instellen : <asp:LinkButton ID="btn_machtiging" Text="Machtiging instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/Machtiging.aspx', title: 'Overboekingen instellen', showClose: true});" runat="server" /><br />
+            Instellen : <asp:LinkButton ID="btn_machtiging" Text="Machtiging instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: '../Machtiging.aspx', title: 'Machtigingen instellen', showClose: true});" runat="server" /><br />
             <asp:CheckBox id="betalingen_ideal" runat="server" Checked="False" Text="Betaling per iDEAL" ></asp:CheckBox><br />
-            Instellen : <asp:LinkButton ID="btn_ideal" Text="iDEAL instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/ideal.aspx', title: 'iDEAL instellen', showClose: true});" runat="server" /><br />
+            Instellen : <asp:LinkButton ID="btn_ideal" Text="iDEAL instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: '../ideal.aspx', title: 'iDEAL instellen', showClose: true});" runat="server" /><br />
             <asp:CheckBox id="betalingen_paypal" runat="server" Checked="False" Text="Betaling per PayPal" ></asp:CheckBox><br />
-            Instellen : <asp:LinkButton ID="btn_paypal" Text="PayPal instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/paypal.aspx', title: 'PayPal instellen', showClose: true});" runat="server" /><br />
+            Instellen : <asp:LinkButton ID="btn_paypal" Text="PayPal instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: '../paypal.aspx', title: 'PayPal instellen', showClose: true});" runat="server" /><br />
             <asp:CheckBox id="betalingen_factuur" runat="server" Checked="False" Text="Betaling per factuur" ></asp:CheckBox><br />
-            Instellen : <asp:LinkButton ID="btn_factuur" Text="Facturatie instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/factuur.aspx', title: 'Factuur instellen', showClose: true});" runat="server" /><br />
+            Instellen : <asp:LinkButton ID="btn_factuur" Text="Facturatie instellen" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: '../factuur.aspx', title: 'Factuur instellen', showClose: true});" runat="server" /><br />
             <br />
-            <asp:Button ID="btn_betaling" runat="server" Text="Opslaan" Enabled="True" CssClass="button big blue" OnClick="btn_betaling_Click" />
-            <asp:ValidationSummary ID="financieel_error" runat="server" OnDataBinding="btn_betaling_Click" />
+            <asp:LinkButton ID="btn_betaling" runat="server" Text="Opslaan" Enabled="True" CssClass="button small alignright" OnClick="btn_betaling_Click" />
+            <asp:ValidationSummary ID="vds_betalingen" runat="server" OnDataBinding="btn_betaling_Click"  DisplayMode="SingleParagraph" />
         </asp:panel>
         </fieldset>
     </ContentTemplate>

@@ -86,14 +86,28 @@ namespace ClubCloud.Service
         #region Club
 
         [OperationContract]
-        [ServiceKnownType(typeof(Vereniging))]
-        List<Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false);
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker_Vereniging))]
+        List<ClubCloud_Gebruiker_Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false);
 
         [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
         ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false);
 
         [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
         ClubCloud_Vereniging GetVerenigingByNummer(string bondsnummer, string vereniginsnummer, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Vereniging_Accomodatie))]
+        ClubCloud_Vereniging_Accomodatie GetAccommodatieForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Accomodatie))]
+        ClubCloud_Accomodatie GetAccommodatie(string bondsnummer, Guid accommodatieId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Vereniging_BestuursLid))]
+        List<ClubCloud_Vereniging_BestuursLid> GetBestuurForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(District))]
@@ -105,5 +119,8 @@ namespace ClubCloud.Service
         [OperationContract]
         bool CreateClubCloudWebSite(string verenigingsummer);
         #endregion
+
+        [OperationContract]
+        bool SetClubCloudGebruiker(string bondsnummer, ClubCloud_Gebruiker gebruiker, bool refresh);
     }
 }

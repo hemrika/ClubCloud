@@ -23,7 +23,7 @@
     }
 </script>
 -->
-<asp:UpdatePanel ID="udp_knltb" runat="server">
+<asp:UpdatePanel ID="udp_knltb" runat="server" >
     <ContentTemplate>
         <asp:image imageurl="https://mijn.clubcloud.nl/_layouts/15/images/ClubCloud.Mijn/mijnknltb.png" runat="server" alt="MijnKNLTB" />
         <asp:panel runat="server" ID="pnl_secure" Visible="False">
@@ -32,15 +32,16 @@
         </asp:panel>
         <fieldset>
         <asp:panel runat="server" ID="pnl_knltb">
-        <asp:Label ID="lbl_knltbid" runat="server" Text="KNLTB nummer:"></asp:Label> 
-        <asp:TextBox ID="tbx_knltbid" runat="server" Enabled="False" CssClass="text-input" ></asp:TextBox> 
-        <br />
-        <asp:Label ID="lbl_knltbpw" runat="server" Text="KNLTB Wachtwoord :"></asp:Label> 
-        <asp:TextBox ID="tbx_knltbpw" runat="server" TextMode="Password" OnTextChanged="tbx_knltbpw_TextChanged" CssClass="text-input" CausesValidation="True" ></asp:TextBox> 
-        <br />
-        <asp:CheckBox ID="cbx_knltb" runat="server" Text="Akkoord met voorwaarden" TextAlign="Right" />
-        <asp:Button ID="btn_knltbpw" runat="server" Text="Opslaan" OnClick="btn_knltbpw_Click" CssClass="button big blue" />
-        <asp:Label ID="lbl_knltbpw_result" runat="server" />
+        <asp:Label ID="lbl_knltbid" runat="server" Text="KNLTB nummer:" ></asp:Label> 
+        <asp:TextBox ID="tbx_knltbid" runat="server" Enabled="False" CssClass="text-input"></asp:TextBox> 
+
+        <asp:Label ID="lbl_knltbpw" runat="server" Text="KNLTB Wachtwoord :" ></asp:Label> 
+        <asp:TextBox ID="tbx_knltbpw" runat="server" TextMode="Password" OnTextChanged="tbx_knltbpw_TextChanged" CssClass="text-input" CausesValidation="True" ></asp:TextBox>
+        <asp:RequiredFieldValidator ControlToValidate="tbx_knltbpw" ErrorMessage="Vul uw MijnKNLTB  wachtwoord in." Text="*" runat="server"/>
+
+        <asp:CheckBox ID="cbx_knltb" runat="server" Text="Akkoord met voorwaarden" TextAlign="Right" Width="80%" />
+        <asp:LinkButton ID="btn_knltbpw" runat="server" Text="Opslaan" Enabled="True" CssClass="button small alignright" OnClick="btn_knltbpw_Click" /><br />
+        <asp:ValidationSummary ID="vds_knltb" runat="server" OnDataBinding="btn_knltbpw_Click" DisplayMode="SingleParagraph" />
         </asp:panel>
         </fieldset>
         <p><br /></p>

@@ -13,8 +13,9 @@
             <asp:LinkButton ID="btn_login" Text="Inloggen" OnClientClick="document.location.href ='https://mijn.clubcloud.nl/_zimbra/default.aspx'; return false" runat="server" /><br />
         </asp:panel>
         <fieldset>
-        <asp:panel runat="server" ID="pnl_privacy" GroupingText="Zichtbaar voor :">
-            <asp:CheckBox id="privacy_club" runat="server" Checked="True" Text="Vereniging" Enabled="false" ></asp:CheckBox><br />
+        <asp:panel runat="server" ID="pnl_privacy" GroupingText="Zichtbaar voor :" >
+            <asp:CheckBox id="privacy_club" runat="server" Checked="True" Text="Vereniging" Enabled="false" ></asp:CheckBox>
+            <br />
             <asp:CheckBox id="privacy_leden_club" runat="server" Checked="False" Text="Vereniging leden" ></asp:CheckBox><br />
             <asp:CheckBox id="privacy_leden_clubcloud" runat="server" Checked="False" Text="ClubCloud leden" ></asp:CheckBox><br />
             <asp:CheckBox id="privacy_competitie_club" runat="server" Checked="False" Text="Competitie clubs" ></asp:CheckBox><br />

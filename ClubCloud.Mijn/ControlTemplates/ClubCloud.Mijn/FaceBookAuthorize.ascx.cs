@@ -12,9 +12,6 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class FaceBookAuthorize : ClubCloudUserControl
     {
-        private string userId = string.Empty;
-        private ClubCloud_Setting settings;
-
         private string AppId = "554213928032357";
         private string AppSecret = "77fcabfeb52728726784ebc0b552f0c9";
 
@@ -47,45 +44,45 @@ namespace ClubCloud.Mijn.ControlTemplates
         {
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
-                userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                settings = Client.GetClubCloudSettings(userId);
-
-                byte[] BinaryId = SPContext.Current.Web.CurrentUser.GetBinaryId();
-                string BinaryJoin = string.Join("|", BinaryId);
-
-                FacebookOAuthClient client = new FacebookOAuthClient
+                if (Settings != null)
                 {
-                    AppId = AppId,
-                    AppSecret = AppSecret,
-                    ReturnUri = this.Page.Request.Url.AbsoluteUri
-                };
+                    byte[] BinaryId = SPContext.Current.Web.CurrentUser.GetBinaryId();
+                    string BinaryJoin = string.Join("|", BinaryId);
 
-                if ((AuthCode == null) && (!settings.facebook_allow && string.IsNullOrWhiteSpace(settings.facebook_access_token)))
-                {
-                    FacebookScopeCollection scope = new FacebookScopeCollection();
-                    scope.Add(FacebookScope.PublishStream);
-                    scope.Add(FacebookScope.PublishActions);
-                    scope.Add(FacebookScope.Email);
-                    scope.Add(FacebookScope.Birthday);
-                    
-
-                    Response.Redirect(client.GetAuthorizationUrl(BinaryJoin, scope));
-
-                }
-                else
-                {
-                    if (AuthCode != null)
+                    FacebookOAuthClient client = new FacebookOAuthClient
                     {
-                        try
+                        AppId = AppId,
+                        AppSecret = AppSecret,
+                        ReturnUri = this.Page.Request.Url.AbsoluteUri
+                    };
+
+                    if ((AuthCode == null) && (!Settings.facebook_allow && string.IsNullOrWhiteSpace(Settings.facebook_access_token)))
+                    {
+                        FacebookScopeCollection scope = new FacebookScopeCollection();
+                        scope.Add(FacebookScope.PublishStream);
+                        scope.Add(FacebookScope.PublishActions);
+                        scope.Add(FacebookScope.Email);
+                        scope.Add(FacebookScope.Birthday);
+
+
+                        Response.Redirect(client.GetAuthorizationUrl(BinaryJoin, scope));
+
+                    }
+                    else
+                    {
+                        if (AuthCode != null)
                         {
-                            string userAccessToken = client.GetAccessTokenFromAuthCode(AuthCode);
-                            settings.facebook_access_token = userAccessToken;
-                            settings.facebook_allow = true;
-                            Client.SetFaceBook(settings);
-                        }
-                        catch (Exception ex)
-                        {
-                            string emssage = ex.Message;
+                            try
+                            {
+                                string userAccessToken = client.GetAccessTokenFromAuthCode(AuthCode);
+                                Settings.facebook_access_token = userAccessToken;
+                                Settings.facebook_allow = true;
+                                Client.SetFaceBook(Settings);
+                            }
+                            catch (Exception ex)
+                            {
+                                string emssage = ex.Message;
+                            }
                         }
                     }
                 }
@@ -102,44 +99,46 @@ namespace ClubCloud.Mijn.ControlTemplates
         {
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
-
-                if (settings.facebook_allow)
+                if (Settings != null)
                 {
-                    FacebookOAuthClient client = new FacebookOAuthClient
+                    if (Settings.facebook_allow)
                     {
-                        AppId = AppId,
-                        AppSecret = AppSecret,
-                        ReturnUri = this.Page.Request.Url.AbsoluteUri
-                    };
-
-                    try
-                    {
-
-                        // Initialize the Facebook service (no calls are made here)
-                        FacebookService service = FacebookService.CreateFromAccessToken(settings.facebook_access_token);
-
-                        // Make a call to the Facebook API to get information about the user
-                        FacebookMeResponse user = service.Methods.Me();
-
-                        if (user != null)
+                        FacebookOAuthClient client = new FacebookOAuthClient
                         {
-                            System.Web.UI.WebControls.Literal literal = new Literal();
+                            AppId = AppId,
+                            AppSecret = AppSecret,
+                            ReturnUri = this.Page.Request.Url.AbsoluteUri
+                        };
 
-                            literal.Text += "<pre><b>Id</b> " + user.Id + "</pre>";
-                            literal.Text += "<pre><b>UserName</b> " + user.UserName + "</pre>";
-                            literal.Text += "<pre><b>Name</b> " + user.Name + "</pre>";
-                            literal.Text += "<pre><b>Url</b> " + user.Link + "</pre>";
-                            literal.Text += "<pre><b>Description</b> " + user.Locale + "</pre>\n";
+                        try
+                        {
 
-                            pnl_facebook.Controls.Add(literal);
+                            // Initialize the Facebook service (no calls are made here)
+                            FacebookService service = FacebookService.CreateFromAccessToken(Settings.facebook_access_token);
+
+                            // Make a call to the Facebook API to get information about the user
+                            FacebookMeResponse user = service.Methods.Me();
+
+                            if (user != null)
+                            {
+                                System.Web.UI.WebControls.Literal literal = new Literal();
+
+                                literal.Text += "<pre><b>Id</b> " + user.Id + "</pre>";
+                                literal.Text += "<pre><b>UserName</b> " + user.UserName + "</pre>";
+                                literal.Text += "<pre><b>Name</b> " + user.Name + "</pre>";
+                                literal.Text += "<pre><b>Url</b> " + user.Link + "</pre>";
+                                literal.Text += "<pre><b>Description</b> " + user.Locale + "</pre>\n";
+
+                                pnl_facebook.Controls.Add(literal);
+                            }
                         }
-                    }
-                    catch (Exception)
-                    {
+                        catch (Exception)
+                        {
 
-                        throw;
-                    }
+                            throw;
+                        }
 
+                    }
                 }
             }
 

@@ -11,6 +11,7 @@ namespace ClubCloud.Service
     using System;
     using System.ServiceModel;
     using System.ServiceModel.Web;
+    using System.Threading.Tasks;
     
     /// <summary>
     ///
@@ -53,6 +54,10 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting SetTracking(ClubCloud_Setting settings);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        Task<ClubCloud_Setting> GetClubCloudSettingsTask(string bondsnummer);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]

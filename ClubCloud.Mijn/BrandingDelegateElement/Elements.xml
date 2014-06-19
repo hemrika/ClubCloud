@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <Control Id="SuiteBarBrandingDelegate" Sequence="9" ControlSrc="/_ControlTemplates/15/ClubCloud.Mijn/SuiteBarBrandingDelegate.ascx" ></Control>
-  <Control Id="SuiteLinksDelegate" Sequence="90" ControlSrc="/_ControlTemplates/15/ClubCloud.Mijn/SuiteLinksDelegate.ascx"></Control>
-  <Control Id="PromotedActions" Sequence="91" ControlSrc="/_ControlTemplates/15/ClubCloud.Mijn/PromotedActionsDelegate.ascx"></Control>
+  <Control Id="SuiteBarBrandingDelegate" Sequence="9" ControlSrc="~/_controltemplates/ClubCloud.Mijn/SuiteBarBrandingDelegate.ascx" ></Control>
+  <Control Id="SuiteLinksDelegate" Sequence="90" ControlSrc="~/_ControlTemplates/ClubCloud.Mijn/SuiteLinksDelegate.ascx"></Control>
+  <Control Id="PromotedActions" Sequence="91" ControlSrc="~/_ControlTemplates/ClubCloud.Mijn/PromotedActionsDelegate.ascx"></Control>
 </Elements>

@@ -10,16 +10,16 @@
 namespace ClubCloud.Mijn.ControlTemplates {
     
     
-    public partial class TwitterUserControl {
+    public partial class MijnVerenigingUserControl {
         
         /// <summary>
-        /// udp_twitter control.
+        /// udp_verenigingen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udp_twitter;
+        protected global::System.Web.UI.UpdatePanel udp_verenigingen;
         
         /// <summary>
         /// pnl_secure control.
@@ -40,93 +40,66 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.LinkButton btn_login;
         
         /// <summary>
-        /// pnl_twitter control.
+        /// pnl_verenigingen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_twitter;
+        protected global::System.Web.UI.WebControls.Panel pnl_verenigingen;
         
         /// <summary>
-        /// twitter_allow control.
+        /// lst_verenigingen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox twitter_allow;
+        protected global::System.Web.UI.WebControls.ListView lst_verenigingen;
         
         /// <summary>
-        /// twitter_updates control.
+        /// fvw_vereniging control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox twitter_updates;
+        protected global::System.Web.UI.WebControls.FormView fvw_vereniging;
         
         /// <summary>
-        /// twitter_winning control.
+        /// fvw_accomodatie control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox twitter_winning;
+        protected global::System.Web.UI.WebControls.FormView fvw_accomodatie;
         
         /// <summary>
-        /// twitter_competitie control.
+        /// fvw_bestuur control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox twitter_competitie;
+        protected global::System.Web.UI.WebControls.FormView fvw_bestuur;
         
         /// <summary>
-        /// twitter_toernament control.
+        /// fvw_functionarissen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox twitter_toernament;
+        protected global::System.Web.UI.WebControls.FormView fvw_functionarissen;
         
         /// <summary>
-        /// twitter_save control.
+        /// udp_verenigingen_progress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button twitter_save;
-        
-        /// <summary>
-        /// lbn_aanvragen control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbn_aanvragen;
-        
-        /// <summary>
-        /// lbl_result control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_result;
-        
-        /// <summary>
-        /// udp_twitter_progress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress udp_twitter_progress;
+        protected global::System.Web.UI.UpdateProgress udp_verenigingen_progress;
     }
 }

@@ -54,7 +54,6 @@ namespace ClubCloud.Provider
             }
         }
 
-        //<a n="zimbraCreateTimestamp">20140328153516Z</a>
         private string _zimbraCreateTimestamp;
 
         public string zimbraCreateTimestamp
@@ -77,13 +76,15 @@ namespace ClubCloud.Provider
                 {
                     return base.CreationDate;
                 }
-                
+
             }
         }
 
-        //<a n="zimbraPrefMailForwardingAddress">rutger@hemrika.nl</a>
         private string _zimbraPrefMailForwardingAddress;
 
+        /// <summary>
+        /// Forwarding Mail Adress
+        /// </summary>
         public string zimbraPrefMailForwardingAddress
         {
             get { return _zimbraPrefMailForwardingAddress; }
@@ -98,7 +99,7 @@ namespace ClubCloud.Provider
             }
         }
 
-        //<a n="zimbraMailAlias">rutger.hemrika@clubcloud.nl</a>
+
         private List<string> _zimbraMail;
 
         public List<string> zimbraMail
@@ -114,7 +115,6 @@ namespace ClubCloud.Provider
             set { _zimbraMail = value; }
         }
 
-        //<a n="zimbraMailAlias">rutger.hemrika@clubcloud.nl</a>
         private List<string> _zimbraMailAlias;
 
         public List<string> zimbraMailAlias
@@ -129,7 +129,6 @@ namespace ClubCloud.Provider
             }
             set { _zimbraMailAlias = value; }
         }
-
         public List<string> EmailAlias
         {
             get
@@ -137,8 +136,7 @@ namespace ClubCloud.Provider
                 return zimbraMailAlias;
             }
         }
-
-        //<a n="zimbraMailDeliveryAddress">12073385@clubcloud.nl</a>
+ 
         private string _zimbraMailDeliveryAddress;
 
         public string zimbraMailDeliveryAddress
@@ -156,16 +154,13 @@ namespace ClubCloud.Provider
             get
             {
                 return zimbraMailDeliveryAddress;
-                //return base.Email;
             }
             set
             {
                 base.Email = value;
-                //zimbraMailDeliveryAddress = value;
             }
         }
 
-        //<a n="zimbraAccountStatus">active</a>
         private string _zimbraAccountStatus;
 
         public string zimbraAccountStatus
@@ -179,7 +174,6 @@ namespace ClubCloud.Provider
             get
             {
                 return (zimbraAccountStatus == "active");
-                //return base.IsApproved;
             }
             set
             {
@@ -224,7 +218,6 @@ namespace ClubCloud.Provider
             }
         }
 
-        //<a n="zimbraLastLogonTimestamp">2014 03 25 2150 53 Z</a>
         private string _zimbraLastLogonTimestamp;
 
         public string zimbraLastLogonTimestamp
@@ -254,7 +247,6 @@ namespace ClubCloud.Provider
             }
         }
 
-        //<a n="zimbraPasswordModifiedTime">2014 03 28 1535 16 Z</a>
         private string _zimbraPasswordModifiedTime;
 
         public string zimbraPasswordModifiedTime
@@ -276,7 +268,7 @@ namespace ClubCloud.Provider
                 catch
                 {
                     return base.LastPasswordChangedDate;
-                }               
+                }
             }
         }
 
@@ -288,10 +280,11 @@ namespace ClubCloud.Provider
             }
         }
 
-        //<a n="zimbraId">d0ec1768-02dd-4fd3-b302-1da0cd6e868a</a>
-        //private SecurityIdentifier zid;
         private string _zimbraId;
 
+        /// <summary>
+        /// Zimbra Guid
+        /// </summary>
         public string zimbraId
         {
             get { return _zimbraId; }
@@ -319,7 +312,7 @@ namespace ClubCloud.Provider
         {
             get
             {
-                return uid;//uid;////base.UserName;
+                return uid;
             }
         }
 
@@ -387,79 +380,225 @@ namespace ClubCloud.Provider
 
         #region Zimbra Properties
 
-        //<a n="uid">info</a><a n="uid">12073385</a>
         private string _uid;
 
+        /// <summary>
+        /// Unique identifier
+        /// </summary>
         public string uid
         {
             get { return _uid; }
             set { _uid = value; }
         }
 
-        //<a n="cn">Rutger Hemrika</a>
         private string _cn;
 
+        /// <summary>
+        /// Full name
+        /// </summary>
         public string cn
         {
             get { return _cn; }
             set { _cn = value; }
         }
 
-        //<a n="givenName">Rutger</a>
         private string _givenName;
 
+        /// <summary>
+        /// First Name
+        /// </summary>
         public string givenName
         {
             get { return _givenName; }
             set { _givenName = value; }
         }
 
-        //<a n="initials">M</a>
         private string _initials;
 
+        /// <summary>
+        /// Initials
+        /// </summary>
         public string initials
         {
             get { return _initials; }
             set { _initials = value; }
         }
 
-        //<a n="sn">Hemrika</a>
         private string _sn;
 
+        /// <summary>
+        /// Family Name
+        /// </summary>
         public string sn
         {
             get { return _sn; }
             set { _sn = value; }
         }
 
-        //<a n="displayName">Rutger M. Hemrika</a>
         private string _displayName;
 
+        /// <summary>
+        /// Diplay name
+        /// </summary>
         public string displayName
         {
             get { return _displayName; }
             set { _displayName = value; }
         }
 
-        /*
-        <a n="telephoneNumber">0645350840</a>
-        <a n="mobile">0645350840</a>
-        <a n="homePhone">030</a>
-        */
+        private string _telephoneNumber;
 
-        /*
-        <a n="street">Hoogstraat 63</a>
-        <a n="postalCode">3552XL</a>
-        <a n="postalCode">3552XL</a>
-        <a n="l">Utrecht</a>
-        <a n="co">Nerderland</a>
-        <a n="st">Utrecht</a>
-        */
+        /// <summary>
+        /// Telephone
+        /// </summary>
+        public string telephoneNumber
+        {
+            get { return _telephoneNumber; }
+            set { _telephoneNumber = value; }
+        }
 
-        /*
-        <a n="title">Eigenaar</a>        
-        <a n="company">Hemrika</a>
-        */
+        private string _mobile;
+
+        /// <summary>
+        /// Mobile Phone
+        /// </summary>
+        public string mobile
+        {
+            get { return _mobile; }
+            set { _mobile = value; }
+        }
+
+        private string _homePhone;
+
+        /// <summary>
+        /// Home Phone
+        /// </summary>
+        public string homePhone
+        {
+            get { return _homePhone; }
+            set { _homePhone = value; }
+        }
+
+        private string _street;
+
+        /// <summary>
+        /// Street
+        /// </summary>
+        public string street
+        {
+            get { return _street; }
+            set { _street = value; }
+        }
+
+        private string _postalCode;
+
+        /// <summary>
+        /// Postal Code
+        /// </summary>
+        public string postalCode
+        {
+            get { return _postalCode; }
+            set { _postalCode = value; }
+        }
+
+        private string _l;
+
+        /// <summary>
+        /// City
+        /// </summary>
+        public string l
+        {
+            get { return _l; }
+            set { _l = value; }
+        }
+
+        private string _co;
+
+        /// <summary>
+        /// Country
+        /// </summary>
+        public string co
+        {
+            get { return _co; }
+            set { _co = value; }
+        }
+
+        private string _st;
+
+        /// <summary>
+        /// State
+        /// </summary>
+        public string st
+        {
+            get { return _st; }
+            set { _st = value; }
+        }
+
+        private string _departmentNumber;
+
+        /// <summary>
+        /// Department Number
+        /// </summary>
+        public string departmentNumber
+        {
+            get { return _departmentNumber; }
+            set { _departmentNumber = value; }
+        }
+
+        private string _employeeNumber;
+
+        /// <summary>
+        /// Employee Number
+        /// </summary>
+        public string employeeNumber
+        {
+            get { return _employeeNumber; }
+            set { _employeeNumber = value; }
+        }
+
+        private string _homePostalAddress;
+
+        /// <summary>
+        /// Home post
+        /// </summary>
+        public string homePostalAddress
+        {
+            get { return _homePostalAddress; }
+            set { _homePostalAddress = value; }
+        }
+
+        private string _o;
+
+        /// <summary>
+        /// Organization
+        /// </summary>
+        public string o
+        {
+            get { return _o; }
+            set { _o = value; }
+        }
+
+        private string _postalAddress;
+
+        /// <summary>
+        /// Post
+        /// </summary>
+        public string postalAddress
+        {
+            get { return _postalAddress; }
+            set { _postalAddress = value; }
+        }
+
+        private string _company;
+
+        /// <summary>
+        /// Company
+        /// </summary>
+        public string company
+        {
+            get { return _company; }
+            set { _company = value; }
+        }
 
         #endregion
     }

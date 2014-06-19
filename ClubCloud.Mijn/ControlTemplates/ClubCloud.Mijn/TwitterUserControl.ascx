@@ -14,7 +14,7 @@
         </asp:panel>
         <fieldset>
         <asp:panel runat="server" ID="pnl_twitter" GroupingText="Twitter intellingen :"  CssClass="etabs">
-            <asp:CheckBox id="twitter_allow" runat="server" Checked="True" Text="Twitteren !!" ></asp:CheckBox><br />
+            <asp:CheckBox id="twitter_allow" runat="server" Checked="True" Text="Twitteren !!" Enabled="false" ></asp:CheckBox><br />
             <asp:CheckBox id="twitter_updates" runat="server" Checked="True" Text="Tweet prestatie informatie" ></asp:CheckBox><br />
             <asp:CheckBox id="twitter_winning" runat="server" Checked="False" Text="Tweet alleen winst ;-)" ></asp:CheckBox><br />
             <asp:CheckBox id="twitter_competitie" runat="server" Checked="True" Text="Tweet competitie informatie" ></asp:CheckBox><br />
@@ -22,13 +22,15 @@
             <br />
             <asp:Button ID="twitter_save" runat="server" Text="Opslaan" OnClick="twitter_save_Click" /><br />
             <br />
-        Toegang verlenen/intrekken : <asp:LinkButton ID="lbn_aanvragen" Text="Toegang verlenen/intrekken" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: 'https://mijn.clubcloud.nl/twitter.aspx', title: 'Aanvragen Twitter', showClose: true});" runat="server" /><br />
+        Toegang verlenen/intrekken : <asp:LinkButton ID="lbn_aanvragen" Text="Toegang verlenen/intrekken" OnClientClick="javascript:SP.UI.ModalDialog.showModalDialog({url: '../twitter.aspx', title: 'Aanvragen Twitter', showClose: true});" runat="server" CausesValidation="False" /><br />
         </asp:panel>
         </fieldset>
+        <asp:Label ID="lbl_result" runat="server"></asp:Label>
     </ContentTemplate>
 </asp:UpdatePanel>
 <asp:UpdateProgress ID="udp_twitter_progress" runat="server" AssociatedUpdatePanelID="udp_twitter">
-<ProgressTemplate>
+    <progresstemplate>
     Bezig met verwerken.
-</ProgressTemplate>
+</progresstemplate>
+    
 </asp:UpdateProgress>

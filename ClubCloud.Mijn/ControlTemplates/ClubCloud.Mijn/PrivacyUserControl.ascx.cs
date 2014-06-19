@@ -1,6 +1,7 @@
 ﻿using ClubCloud.Service.Model;
 using Microsoft.SharePoint;
 using System;
+using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
@@ -9,28 +10,13 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class PrivacyUserControl : ClubCloudUserControl
     {
-        private string userId = string.Empty;
-        private ClubCloud_Setting settings;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 if (!IsPostBack)
                 {
-
-                    userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                    settings = Client.GetClubCloudSettings(userId);
-
-                    if (settings != null)
-                    {
-                        privacy_leden_club.Checked = settings.privacy.HasFlag(Privacy.leden_club);
-                        privacy_leden_clubcloud.Checked = settings.privacy.HasFlag(Privacy.leden_clubcloud);
-                        privacy_competitie_club.Checked = settings.privacy.HasFlag(Privacy.competitie_club);
-                        privacy_competitie_leden.Checked = settings.privacy.HasFlag(Privacy.competitie_leden);
-                        privacy_toernooi_club.Checked = settings.privacy.HasFlag(Privacy.toernooi_club);
-                        privacy_toernooi_leden.Checked = settings.privacy.HasFlag(Privacy.toernooi_leden);
-                    }
+                    SetPageData();
                 }
             }
             else
@@ -40,46 +26,61 @@ namespace ClubCloud.Mijn.ControlTemplates
             }
         }
 
+        internal override void SetPageData()
+        {
+            if (Settings != null)
+            {
+                privacy_leden_club.Checked = Settings.privacy.HasFlag(Privacy.leden_club);
+                privacy_leden_clubcloud.Checked = Settings.privacy.HasFlag(Privacy.leden_clubcloud);
+                privacy_competitie_club.Checked = Settings.privacy.HasFlag(Privacy.competitie_club);
+                privacy_competitie_leden.Checked = Settings.privacy.HasFlag(Privacy.competitie_leden);
+                privacy_toernooi_club.Checked = Settings.privacy.HasFlag(Privacy.toernooi_club);
+                privacy_toernooi_leden.Checked = Settings.privacy.HasFlag(Privacy.toernooi_leden);
+
+            }
+
+        }
+
         protected void privacy_save_Click(object sender, EventArgs e)
         {
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
-                settings = new ClubCloud_Setting();
+                Settings = new ClubCloud_Setting();
 
-                settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
-                settings.privacy = Privacy.None;
+                Settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
+                Settings.privacy = Privacy.None;
 
                 if (privacy_leden_club.Checked)
                 {
-                    settings.privacy |= Privacy.leden_club;
+                    Settings.privacy |= Privacy.leden_club;
                 }
 
                 if (privacy_leden_clubcloud.Checked)
                 {
-                    settings.privacy |= Privacy.leden_clubcloud;
+                    Settings.privacy |= Privacy.leden_clubcloud;
                 }
 
                 if (privacy_competitie_club.Checked)
                 {
-                    settings.privacy |= Privacy.competitie_club;
+                    Settings.privacy |= Privacy.competitie_club;
                 }
 
                 if (privacy_competitie_leden.Checked)
                 {
-                    settings.privacy |= Privacy.competitie_leden;
+                    Settings.privacy |= Privacy.competitie_leden;
                 }
 
                 if (privacy_toernooi_club.Checked)
                 {
-                    settings.privacy |= Privacy.toernooi_club;
+                    Settings.privacy |= Privacy.toernooi_club;
                 }
 
                 if (privacy_toernooi_leden.Checked)
                 {
-                    settings.privacy |= Privacy.toernooi_leden;
+                    Settings.privacy |= Privacy.toernooi_leden;
                 }
 
-                settings = Client.SetPrivacy(settings);
+                Settings = Client.SetPrivacy(Settings);
             }     
         }
     }

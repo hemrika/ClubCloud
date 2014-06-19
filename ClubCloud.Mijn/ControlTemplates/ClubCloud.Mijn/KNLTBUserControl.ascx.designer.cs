@@ -100,16 +100,16 @@ namespace ClubCloud.Mijn.ControlTemplates {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_knltbpw;
+        protected global::System.Web.UI.WebControls.LinkButton btn_knltbpw;
         
         /// <summary>
-        /// lbl_knltbpw_result control.
+        /// vds_knltb control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_knltbpw_result;
+        protected global::System.Web.UI.WebControls.ValidationSummary vds_knltb;
         
         /// <summary>
         /// pnl_information control.

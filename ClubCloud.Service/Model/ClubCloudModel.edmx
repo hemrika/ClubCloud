@@ -6,11 +6,148 @@
     <edmx:StorageModels>
     <Schema Namespace="ClubCloudModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="ClubCloudModelStoreContainer">
-    <EntitySet Name="ClubCloud_Gebruikers" EntityType="ClubCloudModel.Store.ClubCloud_Gebruikers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Verenigingen" EntityType="ClubCloudModel.Store.ClubCloud_Verenigingen" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_TrackingSet" EntityType="ClubCloudModel.Store.ClubCloud_TrackingSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Gebruiker_Abonementen" EntityType="ClubCloudModel.Store.ClubCloud_Gebruiker_Abonementen" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Abonnementen" EntityType="ClubCloudModel.Store.ClubCloud_Abonnementen" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Vereniging_Accomodaties" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_Accomodaties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Gebruiker_Verenigingen" EntityType="ClubCloudModel.Store.ClubCloud_Gebruiker_Verenigingen" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Vereniging_BestuursLeden" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_BestuursLeden" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Settings" EntityType="ClubCloudModel.Store.ClubCloud_Settings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Verenigingen" EntityType="ClubCloudModel.Store.ClubCloud_Verenigingen" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Gebruikers" EntityType="ClubCloudModel.Store.ClubCloud_Gebruikers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Accomodaties" EntityType="ClubCloudModel.Store.ClubCloud_Accomodaties" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
+  <EntityType Name="ClubCloud_TrackingSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Gebruiker_Abonementen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Abonnementen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Vereniging_Accomodaties">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AccommodatieNaam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BezoekAdres_Straat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BezoekAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BezoekAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BezoekAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BezoekAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BezoekAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Minibanen" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Oefenmuren" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ondergrond" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Playgrounds" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Straat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Speeltoestellen" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TelefoonNummer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Gebruiker_Verenigingen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VerenigingNaam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Vereniging_BestuursLeden">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Emailadres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Functie" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Orgaan" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefoon" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="VolledigeNaam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Settings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="mijnknltb_Id" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="mijnknltb_allow" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="mijnknltb_password" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="mijnknltb_tracking" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="twitter_allow" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="twitter_oauth_token" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="twitter_oauth_token_secret" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="twitter_setting" Type="int" Nullable="false" />
+    <Property Name="facebook_allow" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="facebook_access_token" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="facebook_setting" Type="int" Nullable="false" />
+    <Property Name="privacy" Type="int" Nullable="false" />
+    <Property Name="financieel" Type="int" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Verenigingen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BanknummerPlaats" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Bezoekadres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BezoekadresGemeente" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BezoekadresPlaats" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BezoekadresPostcode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DatumOpgericht" Type="datetime" Nullable="true" />
+    <Property Name="District" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Emailadres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IbanCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="KvKnummer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="KvKplaats" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Postadres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostadresGemeente" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostadresPlaats" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostadresPostcode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Regio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TelefoonnummerAvond" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TelefoonnummerOverdag" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Verenigingsnummer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
   <EntityType Name="ClubCloud_Gebruikers">
     <Key>
       <PropertyRef Name="Id" />
@@ -43,69 +180,76 @@
     <Property Name="VolledigeNaam" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Voorletters" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Voornamen" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
   </EntityType>
-  <EntityType Name="ClubCloud_Verenigingen">
+  <EntityType Name="ClubCloud_Accomodaties">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="BanknummerPlaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Bezoekadres" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekadresGemeente" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekadresPlaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekadresPostcode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DatumOpgericht" Type="datetime" Nullable="true" />
-    <Property Name="District" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Emailadres" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IbanCode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="KvKnummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="KvKplaats" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccommodatieAdres_Straat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccommodatieAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccommodatieAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccommodatieAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccommodatieAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccommodatieAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AantalBinnenBanen" Type="int" Nullable="false" />
+    <Property Name="AantalBuitenBanen" Type="int" Nullable="false" />
+    <Property Name="Blaashal" Type="int" Nullable="true" />
+    <Property Name="BouwjaarClubhuis" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DatumKeuring" Type="datetime" Nullable="true" />
+    <Property Name="DistrictNaam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Faxnummer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GekeurdDoor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HalAanwezig" Type="int" Nullable="true" />
+    <Property Name="KleedruimteClubhuisAanwezig" Type="bit" Nullable="false" />
+    <Property Name="MetOVBereikbaar" Type="bit" Nullable="false" />
+    <Property Name="MinderValideParkeerplaatsen" Type="int" Nullable="true" />
+    <Property Name="Minibanen" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Postadres" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostadresGemeente" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostadresPlaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostadresPostcode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Regio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TelefoonnummerAvond" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TelefoonnummerOverdag" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Verenigingsnummer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Oefenmuren" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ondergrond" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OppervlakteClubhuis" Type="int" Nullable="true" />
+    <Property Name="Overkapping" Type="int" Nullable="true" />
+    <Property Name="Playgrounds" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Straat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RegioNaam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Resultaatkeuring" Type="int" Nullable="true" />
+    <Property Name="RolStoeltoegankelijk" Type="bit" Nullable="false" />
+    <Property Name="SoortClubhuis" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Speeltoestellen" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefoonnummer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TotaalAantalWasKleedruimte" Type="int" Nullable="true" />
+    <Property Name="ValideParkeerplaatsen" Type="int" Nullable="true" />
+    <Property Name="WasruimteClubhuisAanwezig" Type="bit" Nullable="false" />
     <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ClubCloud_TrackingSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Settings">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="mijnknltb_Id" Type="uniqueidentifier" Nullable="true" />
-    <Property Name="mijnknltb_allow" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="mijnknltb_password" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="mijnknltb_tracking" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="twitter_allow" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="twitter_oauth_token" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="twitter_oauth_token_secret" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="twitter_setting" Type="int" Nullable="true" />
-    <Property Name="facebook_allow" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="facebook_access_token" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="facebook_setting" Type="int" Nullable="false" />
-    <Property Name="privacy" Type="int" Nullable="true" />
-    <Property Name="financieel" Type="int" Nullable="true" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
   </EntityType>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ClubCloudModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="ClubCloudModelContainer" annotation:LazyLoadingEnabled="false">
-          <EntitySet Name="ClubCloud_Gebruikers" EntityType="ClubCloudModel.ClubCloud_Gebruiker" />
-          <EntitySet Name="ClubCloud_Verenigingen" EntityType="ClubCloudModel.ClubCloud_Vereniging" />
           <EntitySet Name="ClubCloud_TrackingSet" EntityType="ClubCloudModel.ClubCloud_Tracking" />
+          <EntitySet Name="ClubCloud_Gebruiker_Abonementen" EntityType="ClubCloudModel.ClubCloud_Gebruiker_Abonement" />
+          <EntitySet Name="ClubCloud_Abonnementen" EntityType="ClubCloudModel.ClubCloud_Abonnement" />
+          <EntitySet Name="ClubCloud_Vereniging_Accomodaties" EntityType="ClubCloudModel.ClubCloud_Vereniging_Accomodatie" />
+          <EntitySet Name="ClubCloud_Gebruiker_Verenigingen" EntityType="ClubCloudModel.ClubCloud_Gebruiker_Vereniging" />
+          <EntitySet Name="ClubCloud_Vereniging_BestuursLeden" EntityType="ClubCloudModel.ClubCloud_Vereniging_BestuursLid" />
           <EntitySet Name="ClubCloud_Settings" EntityType="ClubCloudModel.ClubCloud_Setting" />
+          <EntitySet Name="ClubCloud_Verenigingen" EntityType="ClubCloudModel.ClubCloud_Vereniging" />
+          <EntitySet Name="ClubCloud_Gebruikers" EntityType="ClubCloudModel.ClubCloud_Gebruiker" />
+          <EntitySet Name="ClubCloud_Accomodaties" EntityType="ClubCloudModel.ClubCloud_Accomodatie" />
         </EntityContainer>
         <EntityType Name="ClubCloud_Gebruiker">
           <Key>
@@ -139,6 +283,9 @@
           <Property Name="VolledigeNaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Voorletters" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Voornamen" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="ClubCloud_Vereniging">
           <Key>
@@ -166,7 +313,10 @@
           <Property Name="TelefoonnummerOverdag" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Verenigingsnummer" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Website" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-        </EntityType>
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+          </EntityType>
         <EntityType Name="ClubCloud_Tracking">
           <Key>
             <PropertyRef Name="Id" />
@@ -174,10 +324,8 @@
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
-        <EnumType Name="Geslacht" IsFlags="false" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.Geslacht">
-          <Member Name="Man" Value="1" />
-          <Member Name="Vrouw" Value="2" />
-        </EnumType>
+        <EnumType Name="Geslacht" IsFlags="true" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.Geslacht">
+          </EnumType>
         <EntityType Name="ClubCloud_Setting">
           <Key>
             <PropertyRef Name="Id" />
@@ -196,6 +344,9 @@
           <Property Name="facebook_setting" Type="ClubCloudModel.Facebook" Nullable="false" />
           <Property Name="privacy" Type="ClubCloudModel.Privacy" Nullable="false" />
           <Property Name="financieel" Type="ClubCloudModel.Financieel" Nullable="false" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
         </EntityType>
         <EnumType Name="Twitter" IsFlags="true">
           <Member Name="None" Value="0" />
@@ -223,12 +374,271 @@
         <EnumType Name="Facebook" IsFlags="true">
         <Member Name="None" Value="0" />
         </EnumType>
+        <EntityType Name="ClubCloud_Accomodatie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="AccommodatieAdres" Type="ClubCloudModel.Adres" Nullable="false" />
+          <Property Name="AantalBinnenBanen" Type="Int32" Nullable="false" />
+          <Property Name="AantalBuitenBanen" Type="Int32" Nullable="false" />
+          <Property Name="Blaashal" Type="ClubCloudModel.Blaashal" Nullable="true" />
+          <Property Name="BouwjaarClubhuis" Type="String" Nullable="false" />
+          <Property Name="DatumKeuring" Type="DateTime" Nullable="true" />
+          <Property Name="DistrictNaam" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Faxnummer" Type="String" Nullable="false" />
+          <Property Name="GekeurdDoor" Type="String" Nullable="false" />
+          <Property Name="HalAanwezig" Type="ClubCloudModel.Hal" Nullable="true" />
+          <Property Name="KleedruimteClubhuisAanwezig" Type="Boolean" Nullable="false" />
+          <Property Name="MetOVBereikbaar" Type="Boolean" Nullable="false" />
+          <Property Name="MinderValideParkeerplaatsen" Type="Int32" Nullable="true" />
+          <Property Name="Minibanen" Type="String" Nullable="false" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="Oefenmuren" Type="String" Nullable="false" />
+          <Property Name="Ondergrond" Type="String" Nullable="false" />
+          <Property Name="OppervlakteClubhuis" Type="Int32" Nullable="true" />
+          <Property Name="Overkapping" Type="ClubCloudModel.Overkapping" Nullable="true" />
+          <Property Name="Playgrounds" Type="String" Nullable="false" />
+          <Property Name="PostAdres" Type="ClubCloudModel.Adres" Nullable="false" />
+          <Property Name="RegioNaam" Type="String" Nullable="false" />
+          <Property Name="Resultaatkeuring" Type="ClubCloudModel.ResultaatKeuring" Nullable="true" />
+          <Property Name="RolStoeltoegankelijk" Type="Boolean" Nullable="false" />
+          <Property Name="SoortClubhuis" Type="String" Nullable="false" />
+          <Property Name="Speeltoestellen" Type="String" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="String" Nullable="false" />
+          <Property Name="TotaalAantalWasKleedruimte" Type="Int32" Nullable="true" />
+          <Property Name="ValideParkeerplaatsen" Type="Int32" Nullable="true" />
+          <Property Name="WasruimteClubhuisAanwezig" Type="Boolean" Nullable="false" />
+          <Property Name="Website" Type="String" Nullable="false" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <EnumType Name="Hal" IsFlags="true" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.TypeHal">
+          </EnumType>
+        <EnumType Name="Overkapping" IsFlags="true" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.SoortOverkapping" />
+        <ComplexType Name="Adres" >
+          <Property Type="String" Name="Straat" Nullable="false" />
+          <Property Type="String" Name="Huisnummer" Nullable="false" />
+          <Property Type="String" Name="Toevoeging" Nullable="false" />
+          <Property Type="String" Name="Postcode" Nullable="false" />
+          <Property Type="String" Name="Plaats" Nullable="false" />
+          <Property Type="String" Name="Gemeente" Nullable="false" />
+        </ComplexType>
+        <EnumType Name="ResultaatKeuring" IsFlags="true" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.TypeResultaatKeuring" />
+        <EntityType Name="ClubCloud_Gebruiker_Vereniging">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="false" />
+          <Property Name="VerenigingNaam" Type="String" Nullable="false" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Vereniging_Accomodatie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="AccommodatieNaam" Type="String" Nullable="false" />
+          <Property Name="BezoekAdres" Type="ClubCloudModel.Adres" Nullable="false" />
+          <Property Name="Minibanen" Type="String" Nullable="false" />
+          <Property Name="Oefenmuren" Type="String" Nullable="false" />
+          <Property Name="Ondergrond" Type="String" Nullable="false" />
+          <Property Name="Playgrounds" Type="String" Nullable="false" />
+          <Property Name="PostAdres" Type="ClubCloudModel.Adres" Nullable="false" />
+          <Property Name="Speeltoestellen" Type="String" Nullable="false" />
+          <Property Name="TelefoonNummer" Type="String" Nullable="false" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <EnumType Name="Blaashal" IsFlags="true" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.Blaashal" />
+        <EntityType Name="ClubCloud_Vereniging_BestuursLid">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="false" />
+          <Property Name="Emailadres" Type="String" Nullable="false" />
+          <Property Name="Functie" Type="String" Nullable="false" />
+          <Property Name="Orgaan" Type="String" Nullable="false" />
+          <Property Name="Telefoon" Type="String" Nullable="false" />
+          <Property Name="VolledigeNaam" Type="String" Nullable="false" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Abonnement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Gebruiker_Abonement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ClubCloudModelStoreContainer" CdmEntityContainer="ClubCloudModelContainer">
+    <EntitySetMapping Name="ClubCloud_TrackingSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Tracking)">
+        <MappingFragment StoreEntitySet="ClubCloud_TrackingSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Gebruiker_Abonementen">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Gebruiker_Abonement)">
+        <MappingFragment StoreEntitySet="ClubCloud_Gebruiker_Abonementen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Abonnementen">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Abonnement)">
+        <MappingFragment StoreEntitySet="ClubCloud_Abonnementen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Vereniging_Accomodaties">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging_Accomodatie)">
+        <MappingFragment StoreEntitySet="ClubCloud_Vereniging_Accomodaties">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccommodatieNaam" ColumnName="AccommodatieNaam" />
+          <ComplexProperty Name="BezoekAdres" TypeName="ClubCloudModel.Adres">
+            <ScalarProperty Name="Straat" ColumnName="BezoekAdres_Straat" />
+            <ScalarProperty Name="Huisnummer" ColumnName="BezoekAdres_Huisnummer" />
+            <ScalarProperty Name="Toevoeging" ColumnName="BezoekAdres_Toevoeging" />
+            <ScalarProperty Name="Postcode" ColumnName="BezoekAdres_Postcode" />
+            <ScalarProperty Name="Plaats" ColumnName="BezoekAdres_Plaats" />
+            <ScalarProperty Name="Gemeente" ColumnName="BezoekAdres_Gemeente" />
+          </ComplexProperty>
+          <ScalarProperty Name="Minibanen" ColumnName="Minibanen" />
+          <ScalarProperty Name="Oefenmuren" ColumnName="Oefenmuren" />
+          <ScalarProperty Name="Ondergrond" ColumnName="Ondergrond" />
+          <ScalarProperty Name="Playgrounds" ColumnName="Playgrounds" />
+          <ComplexProperty Name="PostAdres" TypeName="ClubCloudModel.Adres">
+            <ScalarProperty Name="Straat" ColumnName="PostAdres_Straat" />
+            <ScalarProperty Name="Huisnummer" ColumnName="PostAdres_Huisnummer" />
+            <ScalarProperty Name="Toevoeging" ColumnName="PostAdres_Toevoeging" />
+            <ScalarProperty Name="Postcode" ColumnName="PostAdres_Postcode" />
+            <ScalarProperty Name="Plaats" ColumnName="PostAdres_Plaats" />
+            <ScalarProperty Name="Gemeente" ColumnName="PostAdres_Gemeente" />
+          </ComplexProperty>
+          <ScalarProperty Name="Speeltoestellen" ColumnName="Speeltoestellen" />
+          <ScalarProperty Name="TelefoonNummer" ColumnName="TelefoonNummer" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Gebruiker_Verenigingen">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Gebruiker_Vereniging)">
+        <MappingFragment StoreEntitySet="ClubCloud_Gebruiker_Verenigingen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
+          <ScalarProperty Name="VerenigingNaam" ColumnName="VerenigingNaam" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Vereniging_BestuursLeden">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging_BestuursLid)">
+        <MappingFragment StoreEntitySet="ClubCloud_Vereniging_BestuursLeden">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
+          <ScalarProperty Name="Emailadres" ColumnName="Emailadres" />
+          <ScalarProperty Name="Functie" ColumnName="Functie" />
+          <ScalarProperty Name="Orgaan" ColumnName="Orgaan" />
+          <ScalarProperty Name="Telefoon" ColumnName="Telefoon" />
+          <ScalarProperty Name="VolledigeNaam" ColumnName="VolledigeNaam" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Settings">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Setting)">
+        <MappingFragment StoreEntitySet="ClubCloud_Settings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="mijnknltb_Id" ColumnName="mijnknltb_Id" />
+          <ScalarProperty Name="mijnknltb_allow" ColumnName="mijnknltb_allow" />
+          <ScalarProperty Name="mijnknltb_password" ColumnName="mijnknltb_password" />
+          <ScalarProperty Name="mijnknltb_tracking" ColumnName="mijnknltb_tracking" />
+          <ScalarProperty Name="twitter_allow" ColumnName="twitter_allow" />
+          <ScalarProperty Name="twitter_oauth_token" ColumnName="twitter_oauth_token" />
+          <ScalarProperty Name="twitter_oauth_token_secret" ColumnName="twitter_oauth_token_secret" />
+          <ScalarProperty Name="twitter_setting" ColumnName="twitter_setting" />
+          <ScalarProperty Name="facebook_allow" ColumnName="facebook_allow" />
+          <ScalarProperty Name="facebook_access_token" ColumnName="facebook_access_token" />
+          <ScalarProperty Name="facebook_setting" ColumnName="facebook_setting" />
+          <ScalarProperty Name="privacy" ColumnName="privacy" />
+          <ScalarProperty Name="financieel" ColumnName="financieel" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Verenigingen">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging)">
+        <MappingFragment StoreEntitySet="ClubCloud_Verenigingen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BanknummerPlaats" ColumnName="BanknummerPlaats" />
+          <ScalarProperty Name="Bezoekadres" ColumnName="Bezoekadres" />
+          <ScalarProperty Name="BezoekadresGemeente" ColumnName="BezoekadresGemeente" />
+          <ScalarProperty Name="BezoekadresPlaats" ColumnName="BezoekadresPlaats" />
+          <ScalarProperty Name="BezoekadresPostcode" ColumnName="BezoekadresPostcode" />
+          <ScalarProperty Name="DatumOpgericht" ColumnName="DatumOpgericht" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="Emailadres" ColumnName="Emailadres" />
+          <ScalarProperty Name="IbanCode" ColumnName="IbanCode" />
+          <ScalarProperty Name="KvKnummer" ColumnName="KvKnummer" />
+          <ScalarProperty Name="KvKplaats" ColumnName="KvKplaats" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Postadres" ColumnName="Postadres" />
+          <ScalarProperty Name="PostadresGemeente" ColumnName="PostadresGemeente" />
+          <ScalarProperty Name="PostadresPlaats" ColumnName="PostadresPlaats" />
+          <ScalarProperty Name="PostadresPostcode" ColumnName="PostadresPostcode" />
+          <ScalarProperty Name="Regio" ColumnName="Regio" />
+          <ScalarProperty Name="TelefoonnummerAvond" ColumnName="TelefoonnummerAvond" />
+          <ScalarProperty Name="TelefoonnummerOverdag" ColumnName="TelefoonnummerOverdag" />
+          <ScalarProperty Name="Verenigingsnummer" ColumnName="Verenigingsnummer" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ClubCloud_Gebruikers">
       <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Gebruiker)">
         <MappingFragment StoreEntitySet="ClubCloud_Gebruikers">
@@ -260,62 +670,65 @@
           <ScalarProperty Name="VolledigeNaam" ColumnName="VolledigeNaam" />
           <ScalarProperty Name="Voorletters" ColumnName="Voorletters" />
           <ScalarProperty Name="Voornamen" ColumnName="Voornamen" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_Verenigingen">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging)">
-        <MappingFragment StoreEntitySet="ClubCloud_Verenigingen">
+    <EntitySetMapping Name="ClubCloud_Accomodaties">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Accomodatie)">
+        <MappingFragment StoreEntitySet="ClubCloud_Accomodaties">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="BanknummerPlaats" ColumnName="BanknummerPlaats" />
-          <ScalarProperty Name="Bezoekadres" ColumnName="Bezoekadres" />
-          <ScalarProperty Name="BezoekadresGemeente" ColumnName="BezoekadresGemeente" />
-          <ScalarProperty Name="BezoekadresPlaats" ColumnName="BezoekadresPlaats" />
-          <ScalarProperty Name="BezoekadresPostcode" ColumnName="BezoekadresPostcode" />
-          <ScalarProperty Name="DatumOpgericht" ColumnName="DatumOpgericht" />
-          <ScalarProperty Name="District" ColumnName="District" />
-          <ScalarProperty Name="Emailadres" ColumnName="Emailadres" />
-          <ScalarProperty Name="IbanCode" ColumnName="IbanCode" />
-          <ScalarProperty Name="KvKnummer" ColumnName="KvKnummer" />
-          <ScalarProperty Name="KvKplaats" ColumnName="KvKplaats" />
+          <ComplexProperty Name="AccommodatieAdres" TypeName="ClubCloudModel.Adres">
+            <ScalarProperty Name="Straat" ColumnName="AccommodatieAdres_Straat" />
+            <ScalarProperty Name="Huisnummer" ColumnName="AccommodatieAdres_Huisnummer" />
+            <ScalarProperty Name="Toevoeging" ColumnName="AccommodatieAdres_Toevoeging" />
+            <ScalarProperty Name="Postcode" ColumnName="AccommodatieAdres_Postcode" />
+            <ScalarProperty Name="Plaats" ColumnName="AccommodatieAdres_Plaats" />
+            <ScalarProperty Name="Gemeente" ColumnName="AccommodatieAdres_Gemeente" />
+          </ComplexProperty>
+          <ScalarProperty Name="AantalBinnenBanen" ColumnName="AantalBinnenBanen" />
+          <ScalarProperty Name="AantalBuitenBanen" ColumnName="AantalBuitenBanen" />
+          <ScalarProperty Name="Blaashal" ColumnName="Blaashal" />
+          <ScalarProperty Name="BouwjaarClubhuis" ColumnName="BouwjaarClubhuis" />
+          <ScalarProperty Name="DatumKeuring" ColumnName="DatumKeuring" />
+          <ScalarProperty Name="DistrictNaam" ColumnName="DistrictNaam" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Faxnummer" ColumnName="Faxnummer" />
+          <ScalarProperty Name="GekeurdDoor" ColumnName="GekeurdDoor" />
+          <ScalarProperty Name="HalAanwezig" ColumnName="HalAanwezig" />
+          <ScalarProperty Name="KleedruimteClubhuisAanwezig" ColumnName="KleedruimteClubhuisAanwezig" />
+          <ScalarProperty Name="MetOVBereikbaar" ColumnName="MetOVBereikbaar" />
+          <ScalarProperty Name="MinderValideParkeerplaatsen" ColumnName="MinderValideParkeerplaatsen" />
+          <ScalarProperty Name="Minibanen" ColumnName="Minibanen" />
           <ScalarProperty Name="Naam" ColumnName="Naam" />
-          <ScalarProperty Name="Postadres" ColumnName="Postadres" />
-          <ScalarProperty Name="PostadresGemeente" ColumnName="PostadresGemeente" />
-          <ScalarProperty Name="PostadresPlaats" ColumnName="PostadresPlaats" />
-          <ScalarProperty Name="PostadresPostcode" ColumnName="PostadresPostcode" />
-          <ScalarProperty Name="Regio" ColumnName="Regio" />
-          <ScalarProperty Name="TelefoonnummerAvond" ColumnName="TelefoonnummerAvond" />
-          <ScalarProperty Name="TelefoonnummerOverdag" ColumnName="TelefoonnummerOverdag" />
-          <ScalarProperty Name="Verenigingsnummer" ColumnName="Verenigingsnummer" />
+          <ScalarProperty Name="Oefenmuren" ColumnName="Oefenmuren" />
+          <ScalarProperty Name="Ondergrond" ColumnName="Ondergrond" />
+          <ScalarProperty Name="OppervlakteClubhuis" ColumnName="OppervlakteClubhuis" />
+          <ScalarProperty Name="Overkapping" ColumnName="Overkapping" />
+          <ScalarProperty Name="Playgrounds" ColumnName="Playgrounds" />
+          <ComplexProperty Name="PostAdres" TypeName="ClubCloudModel.Adres">
+            <ScalarProperty Name="Straat" ColumnName="PostAdres_Straat" />
+            <ScalarProperty Name="Huisnummer" ColumnName="PostAdres_Huisnummer" />
+            <ScalarProperty Name="Toevoeging" ColumnName="PostAdres_Toevoeging" />
+            <ScalarProperty Name="Postcode" ColumnName="PostAdres_Postcode" />
+            <ScalarProperty Name="Plaats" ColumnName="PostAdres_Plaats" />
+            <ScalarProperty Name="Gemeente" ColumnName="PostAdres_Gemeente" />
+          </ComplexProperty>
+          <ScalarProperty Name="RegioNaam" ColumnName="RegioNaam" />
+          <ScalarProperty Name="Resultaatkeuring" ColumnName="Resultaatkeuring" />
+          <ScalarProperty Name="RolStoeltoegankelijk" ColumnName="RolStoeltoegankelijk" />
+          <ScalarProperty Name="SoortClubhuis" ColumnName="SoortClubhuis" />
+          <ScalarProperty Name="Speeltoestellen" ColumnName="Speeltoestellen" />
+          <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
+          <ScalarProperty Name="TotaalAantalWasKleedruimte" ColumnName="TotaalAantalWasKleedruimte" />
+          <ScalarProperty Name="ValideParkeerplaatsen" ColumnName="ValideParkeerplaatsen" />
+          <ScalarProperty Name="WasruimteClubhuisAanwezig" ColumnName="WasruimteClubhuisAanwezig" />
           <ScalarProperty Name="Website" ColumnName="Website" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_TrackingSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Tracking)">
-        <MappingFragment StoreEntitySet="ClubCloud_TrackingSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Data" ColumnName="Data" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_Settings">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Setting)">
-        <MappingFragment StoreEntitySet="ClubCloud_Settings">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="mijnknltb_Id" ColumnName="mijnknltb_Id" />
-          <ScalarProperty Name="mijnknltb_allow" ColumnName="mijnknltb_allow" />
-          <ScalarProperty Name="mijnknltb_password" ColumnName="mijnknltb_password" />
-          <ScalarProperty Name="mijnknltb_tracking" ColumnName="mijnknltb_tracking" />
-          <ScalarProperty Name="twitter_allow" ColumnName="twitter_allow" />
-          <ScalarProperty Name="twitter_oauth_token" ColumnName="twitter_oauth_token" />
-          <ScalarProperty Name="twitter_oauth_token_secret" ColumnName="twitter_oauth_token_secret" />
-          <ScalarProperty Name="twitter_setting" ColumnName="twitter_setting" />
-          <ScalarProperty Name="facebook_allow" ColumnName="facebook_allow" />
-          <ScalarProperty Name="facebook_access_token" ColumnName="facebook_access_token" />
-          <ScalarProperty Name="facebook_setting" ColumnName="facebook_setting" />
-          <ScalarProperty Name="privacy" ColumnName="privacy" />
-          <ScalarProperty Name="financieel" ColumnName="financieel" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

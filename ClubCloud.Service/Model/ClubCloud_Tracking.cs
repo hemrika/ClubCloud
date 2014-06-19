@@ -11,16 +11,15 @@ namespace ClubCloud.Service.Model
 {
     using System;
     using System.Runtime.Serialization;
+    using System.Collections.Generic;
     
-    [Flags]
-    public enum Privacy : int
+    [DataContract(IsReference = true)]
+    
+    public partial class ClubCloud_Tracking
     {
-        None = 0,
-        leden_club = 1,
-        leden_clubcloud = 2,
-        competitie_club = 4,
-        competitie_leden = 8,
-        toernooi_club = 16,
-        toernooi_leden = 32
+    	[DataMember]
+        public System.Guid Id { get; set; }
+    	[DataMember]
+        public string Data { get; set; }
     }
 }

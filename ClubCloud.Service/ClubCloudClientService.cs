@@ -17,6 +17,7 @@ namespace ClubCloud.Service
     using ClubCloud.Service.Model;
     using System.Net;
     using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// The REST Service.
@@ -125,6 +126,19 @@ namespace ClubCloud.Service
                 currentsettings = client.SetTracking(settings);
             }
 
+            return currentsettings;
+        }
+
+        public async Task<ClubCloud_Setting> GetClubCloudSettingsTask(string bondsnummer)
+        {
+            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                currentsettings = await Task.Run(() => GetClubCloudSettings(bondsnummer));
+                //currentsettings = client.GetClubCloudSettings(SPContext.Current.Web.CurrentUser.LoginName);
+            }
             return currentsettings;
         }
 

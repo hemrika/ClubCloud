@@ -44,8 +44,8 @@ using System;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 <#
 if (container.FunctionImports.Any())
 {
@@ -86,7 +86,8 @@ using System.Linq;
 			}
 		}
 		#>
-        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+		this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+		Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
     }
 	
     public <#=code.Escape(container)#>(string connectionString)
@@ -119,6 +120,7 @@ using System.Linq;
 		}
 		#>
         this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+		Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
     }	
 	
     public ObjectContext ObjectContext
@@ -128,11 +130,14 @@ using System.Linq;
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
-            modelBuilder.Entity<ClubCloud_Gebruiker>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            modelBuilder.Entity<ClubCloud_Vereniging>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            modelBuilder.Entity<ClubCloud_Tracking>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            modelBuilder.Entity<ClubCloud_Setting>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-           //throw new UnintentionalCodeFirstException();
+<#
+	foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
+    {
+#>
+		<#=codeStringGenerator.DBGeneratedOption(entitySet)#>
+<#
+    }
+#>
     }
 
 <#
@@ -354,6 +359,37 @@ public class CodeStringGenerator
             callParams);
     }
     
+	public string DBGeneratedOption(EntitySet entitySet)
+	{
+		string annotationNamespace = "http://schemas.microsoft.com/ado/2009/02/edm/annotation";
+		string options = string.Empty;
+		foreach (EdmProperty keyProperty in entitySet.ElementType.KeyMembers)
+		{	
+			string name = keyProperty.MetadataProperties["Name"].Value.ToString();
+			foreach (EdmProperty edmProperty in entitySet.ElementType.Properties.Where(p => p.Name == name))
+			{
+				MetadataProperty storeGeneratedPatternProperty = null;
+				edmProperty.MetadataProperties.TryGetValue(annotationNamespace+":StoreGeneratedPattern", false, out storeGeneratedPatternProperty);
+				if (storeGeneratedPatternProperty == null || (storeGeneratedPatternProperty != null && storeGeneratedPatternProperty.Value.ToString() != "Identity"))
+				{
+								options += string.Format(
+					CultureInfo.InvariantCulture,
+					"modelBuilder.Entity<{0}>().Property(e => e.{1}).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);{2}",
+					_typeMapper.GetTypeName(entitySet.ElementType), keyProperty.Name,Environment.NewLine);
+				}
+				else
+				{
+								options += string.Format(
+					CultureInfo.InvariantCulture,
+					"modelBuilder.Entity<{0}>().Property(e => e.{1}).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);{2}",
+					_typeMapper.GetTypeName(entitySet.ElementType), keyProperty.Name,Environment.NewLine);
+				}
+			}
+		}
+		
+		return options;
+	}
+
     public string DbSet(EntitySet entitySet)
     {
         return string.Format(

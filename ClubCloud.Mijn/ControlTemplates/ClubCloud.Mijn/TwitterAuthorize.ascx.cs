@@ -14,8 +14,6 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class TwitterAuthorize : ClubCloudUserControl
     {
-        private string userId = string.Empty;
-        private ClubCloud_Setting settings;
         private string ConsumerKey = "xKESVN9CwdlWGA1ve7qWdPPzU";
         private string ConsumerSecret = "szoyhGCcw4fp7fDlt8pit0o3HwwdvFd3BUbBEDTfkU08ToJyNS";
 
@@ -52,52 +50,54 @@ namespace ClubCloud.Mijn.ControlTemplates
         {
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
-                userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                settings = Client.GetClubCloudSettings(userId);
-
-                TwitterOAuthClient client = new TwitterOAuthClient
+                if (Settings != null)
                 {
-                    ConsumerKey = ConsumerKey,
-                    ConsumerSecret = ConsumerSecret,
-                    Callback = this.Page.Request.Url.AbsoluteUri
-                };
-
-                OAuthRequestToken token;
-
-                if ((OAuthToken == null) && (!settings.twitter_allow && string.IsNullOrWhiteSpace(settings.twitter_oauth_token) && string.IsNullOrWhiteSpace(settings.twitter_oauth_token_secret)))
-                {
-                    token = client.GetRequestToken();
-                    settings.twitter_oauth_token = token.Token;
-                    settings.twitter_oauth_token_secret = token.TokenSecret;
-                    Client.SetTwitter(settings);
-
-                    Response.Redirect(token.AuthorizeUrl);
-                }
-                else
-                {
-                    client.Token = settings.twitter_oauth_token;
-                    client.TokenSecret = settings.twitter_oauth_token_secret;
-
-                    if (!settings.twitter_allow)
+                    TwitterOAuthClient client = new TwitterOAuthClient
                     {
-                        try
-                        {
-                            OAuthAccessToken accessToken = client.GetAccessToken(OAuthVerifier);
-                            client.Token = accessToken.Token;
-                            client.TokenSecret = accessToken.TokenSecret;
-                            settings.twitter_oauth_token = accessToken.Token;
-                            settings.twitter_oauth_token_secret = accessToken.TokenSecret;
-                            settings.twitter_allow = true;
-                        }
-                        catch (Exception)
-                        {
-                            settings.twitter_allow = false;
+                        ConsumerKey = ConsumerKey,
+                        ConsumerSecret = ConsumerSecret,
+                        Callback = this.Page.Request.Url.AbsoluteUri
+                    };
 
-                        }
+                    OAuthRequestToken token;
 
-                        Client.SetTwitter(settings);
+                    if ((OAuthToken == null) && (!Settings.twitter_allow && string.IsNullOrWhiteSpace(Settings.twitter_oauth_token) && string.IsNullOrWhiteSpace(Settings.twitter_oauth_token_secret)))
+                    {
+                        token = client.GetRequestToken();
+                        Settings.twitter_oauth_token = token.Token;
+                        Settings.twitter_oauth_token_secret = token.TokenSecret;
+                        Client.SetTwitter(Settings);
+
+                        Response.Redirect(token.AuthorizeUrl);
                     }
+                    else
+                    {
+                        client.Token = Settings.twitter_oauth_token;
+                        client.TokenSecret = Settings.twitter_oauth_token_secret;
 
+                        if (!Settings.twitter_allow)
+                        {
+                            try
+                            {
+                                OAuthAccessToken accessToken = client.GetAccessToken(OAuthVerifier);
+                                client.Token = accessToken.Token;
+                                client.TokenSecret = accessToken.TokenSecret;
+                                Settings.twitter_oauth_token = accessToken.Token;
+                                Settings.twitter_oauth_token_secret = accessToken.TokenSecret;
+                                Settings.twitter_allow = true;
+                            }
+                            catch (Exception)
+                            {
+                                Settings.twitter_allow = false;
+                                Settings.twitter_oauth_token = null;
+                                Settings.twitter_oauth_token_secret = null;
+
+                            }
+
+                            Client.SetTwitter(Settings);
+                        }
+
+                    }
                 }
                 /*
                     if(settings.twitter_allow)
@@ -118,7 +118,6 @@ namespace ClubCloud.Mijn.ControlTemplates
                 this.pnl_twitter.Visible = false;
                 this.pnl_secure.Visible = true;
             }
-
         }
 
 
@@ -126,50 +125,52 @@ namespace ClubCloud.Mijn.ControlTemplates
         {
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
-
-                if (settings.twitter_allow)
+                if (Settings != null)
                 {
-                    TwitterOAuthClient client = new TwitterOAuthClient
+                    if (Settings.twitter_allow && !string.IsNullOrWhiteSpace(Settings.twitter_oauth_token) && !string.IsNullOrWhiteSpace(Settings.twitter_oauth_token_secret))
                     {
-                        ConsumerKey = ConsumerKey,
-                        ConsumerSecret = ConsumerSecret,
-                        Token = settings.twitter_oauth_token,
-                        TokenSecret = settings.twitter_oauth_token_secret,
-                        Callback = this.Page.Request.Url.AbsoluteUri
-                    };
-
-                    try
-                    {
-                        TwitterService service = TwitterService.CreateFromOAuthClient(client);
-                        TwitterUser user = service.Account.VerifyCredentials();
-
-                        if (user != null)
+                        TwitterOAuthClient client = new TwitterOAuthClient
                         {
-                            System.Web.UI.WebControls.Literal literal = new Literal();
+                            ConsumerKey = ConsumerKey,
+                            ConsumerSecret = ConsumerSecret,
+                            Token = Settings.twitter_oauth_token,
+                            TokenSecret = Settings.twitter_oauth_token_secret,
+                            Callback = this.Page.Request.Url.AbsoluteUri
+                        };
 
-                            literal.Text += "<pre><b>Id</b> " + user.Id + "</pre>";
-                            literal.Text += "<pre><b>ScreenName</b> " + user.ScreenName + "</pre>";
-                            literal.Text += "<pre><b>Name</b> " + user.Name + "</pre>";
-                            literal.Text += "<pre><b>Avatar</b> " + user.ProfileImageUrlHttps + "</pre>";
-                            literal.Text += "<pre><b>Url</b> " + user.Url + "</pre>";
-                            literal.Text += "<pre><b>Description</b> " + user.Description + "</pre>";
+                        try
+                        {
+                            TwitterService service = TwitterService.CreateFromOAuthClient(client);
+                            TwitterUser user = service.Account.VerifyCredentials();
 
-                            literal.Text += "<img src=\"" + user.ProfileImageUrlHttps + "\" alt=\"\" />\n";
+                            if (user != null)
+                            {
+                                System.Web.UI.WebControls.Literal literal = new Literal();
 
-                            pnl_twitter.Controls.Add(literal);
+                                literal.Text += "<pre><b>Id</b> " + user.Id + "</pre>";
+                                literal.Text += "<pre><b>ScreenName</b> " + user.ScreenName + "</pre>";
+                                literal.Text += "<pre><b>Name</b> " + user.Name + "</pre>";
+                                literal.Text += "<pre><b>Avatar</b> " + user.ProfileImageUrlHttps + "</pre>";
+                                literal.Text += "<pre><b>Url</b> " + user.Url + "</pre>";
+                                literal.Text += "<pre><b>Description</b> " + user.Description + "</pre>";
+
+                                literal.Text += "<img src=\"" + user.ProfileImageUrlHttps + "\" alt=\"\" />\n";
+
+                                pnl_twitter.Controls.Add(literal);
+                            }
                         }
-                    }
-                    catch (Exception)
-                    {
+                        catch (Exception)
+                        {
 
-                        throw;
-                    }
+                            throw;
+                        }
 
+                    }
                 }
             }
-        
             base.Render(writer);
         }
+        
 
     }
 }

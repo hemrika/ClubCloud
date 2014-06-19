@@ -3,6 +3,7 @@ using Microsoft.SharePoint;
 using System;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -14,18 +15,13 @@ namespace ClubCloud.Mijn.ControlTemplates
 
     public partial class KNLTBUserControl : ClubCloudUserControl
     {
-        private ClubCloud_Setting settings;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 if (!IsPostBack)
                 {
-                    userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                    settings = Client.GetClubCloudSettings(userId);
-                    this.tbx_knltbid.Text = settings.Id.ToString();
-                    this.cbx_knltb.Checked = settings.mijnknltb_allow;
+                    SetPageData();
                 }
             }
             else
@@ -33,6 +29,22 @@ namespace ClubCloud.Mijn.ControlTemplates
                 this.pnl_knltb.Visible = false;
                 this.pnl_secure.Visible = true;
             }
+
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+        }
+
+        internal override void SetPageData()
+        {
+            if (Settings != null)
+            {
+                this.tbx_knltbid.Text = Settings.Id.ToString();
+                this.cbx_knltb.Checked = Settings.mijnknltb_allow;
+            }
+
         }
 
         private string password = string.Empty;
@@ -46,21 +58,21 @@ namespace ClubCloud.Mijn.ControlTemplates
                 if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
                 {
                     userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                    settings = new ClubCloud_Setting();
-                    settings.Id = int.Parse(userId);
+                    Settings = new ClubCloud_Setting();
+                    Settings.Id = int.Parse(userId);
 
                     if(!string.IsNullOrWhiteSpace(password) && cbx_knltb.Checked)
                     {
-                        settings.mijnknltb_allow = cbx_knltb.Checked;
-                        settings.mijnknltb_password = password;
-                        settings = Client.SetMijnKNLTB(settings);
-                        lbl_knltbpw_result.Text = "Veranderingen opgeslagen";
+                        Settings.mijnknltb_allow = cbx_knltb.Checked;
+                        Settings.mijnknltb_password = password;
+                        Settings = Client.SetMijnKNLTB(Settings);
+                        //vds_knltb.Text = "Veranderingen opgeslagen";
 
                         Client.GetClubCloudGebruiker(userId, true);
                     }
                     else
                     {
-                        lbl_knltbpw_result.Text = "Geen veranderingen gedaan";
+                        //vds_betalingen.Text = "Geen veranderingen gedaan";
                     }
                 }
             }

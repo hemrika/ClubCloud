@@ -95,6 +95,7 @@
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -149,6 +150,9 @@
     <Compile Include="ClubCloudApplicationService.cs" />
     <Compile Include="IClubCloudClientService.cs" />
     <Compile Include="IClubCloudApplicationService.cs" />
+    <Compile Include="Model\Adres.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ClubCloudModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -164,7 +168,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClubCloudModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClubCloud_Abonnement.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Accomodatie.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ClubCloud_Gebruiker.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Gebruiker_Abonement.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Gebruiker_Vereniging.cs">
       <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClubCloud_Setting.cs">
@@ -174,6 +190,12 @@
       <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClubCloud_Vereniging.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Vereniging_Accomodatie.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Vereniging_BestuursLid.cs">
       <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Facebook.cs">
@@ -279,6 +301,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClubCloud.Claims\ClubCloud.Provider.csproj">
+      <Project>{b259747c-7741-4b61-b261-24fbbe284f05}</Project>
+      <Name>ClubCloud.Provider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClubCloud.KNLTB.Servit\ClubCloud.KNLTB.Servit.csproj">
       <Project>{b98cd37b-e5d0-49e4-a765-f8fba945e050}</Project>
       <Name>ClubCloud.KNLTB.Servit</Name>

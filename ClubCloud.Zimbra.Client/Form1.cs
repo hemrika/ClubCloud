@@ -175,8 +175,8 @@ namespace ClubCloud.Zimbra.Client
                     cc = container.Container;
                 }
 
-                LedenadministratieServiceClient ledenadministratie = new LedenadministratieServiceClient(cc);
-                CompetitieServiceClient competitieService = new CompetitieServiceClient(cc);
+                LedenadministratieServiceClient ledenadministratie = new LedenadministratieServiceClient(cc, "27908313");
+                CompetitieServiceClient competitieService = new CompetitieServiceClient(cc, "27908313");
                 //GetSpelersprofielResponse spelersprofiel = ledenadministratie.GetSpelersprofiel(new GetSpelersprofielRequest { Bondsnummer = "27908313" });
                 //GetSpelersProfielDetailResponse spelersprofieldetail = ledenadministratie.GetSpelersProfielDetail(new GetSpelersProfielDetailRequest { Bondsnummer = "27908313" });
 

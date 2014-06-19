@@ -152,9 +152,9 @@ namespace ClubCloud.Provider.IdentityModel
                         xmlDoc.LoadXml(xmlToken.TokenXml.OuterXml);
                         XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
                         nsmgr.AddNamespace("saml", "urn:oasis:names:tc:SAML:1.0:assertion");
-                        string userid = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userid']/saml:AttributeValue", nsmgr).InnerText;
-                        string userlogonname = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userlogonname']/saml:AttributeValue", nsmgr).InnerText;
-                        string emailaddress = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='emailaddress']/saml:AttributeValue", nsmgr).InnerText;
+                        //string userid = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userid']/saml:AttributeValue", nsmgr).InnerText;
+                        //string userlogonname = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userlogonname']/saml:AttributeValue", nsmgr).InnerText;
+                        //string emailaddress = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='emailaddress']/saml:AttributeValue", nsmgr).InnerText;
                         string name = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='name']/saml:AttributeValue", nsmgr)[1].InnerText;
                         SPUser spUser = elevatedWeb.EnsureUser(name);
                         elevatedWeb.Update();

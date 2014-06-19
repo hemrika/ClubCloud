@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Security;
 using System.Threading.Tasks;
 
 namespace ClubCloud.KNLTB.ServIt.LedenAdministratieService
@@ -13,11 +14,13 @@ namespace ClubCloud.KNLTB.ServIt.LedenAdministratieService
     public class LedenadministratieServiceClient : ChannelFactory<ClubCloud.KNLTB.ServIt.LedenAdministratieService.ILedenadministratieService>, ILedenadministratieService// ClientBase<ILedenadministratieService>, ILedenadministratieService
 	{
         private static Uri serverUri = new Uri("https://servit.mijnknltb.nl/ISV/KNLTB.ServIT2/KNLTB/Services/LedenAdministratieService.svc");
+        private static BasicHttpsSecurity security = new BasicHttpsSecurity { Mode = BasicHttpsSecurityMode.Transport, Transport = new HttpTransportSecurity { ClientCredentialType = HttpClientCredentialType.Basic, Realm = "servit.mijnknltb.nl" } };
 
-		public LedenadministratieServiceClient(CookieContainer cookiecontainer)
-            : this(new BasicHttpsBinding() { AllowCookies = true, HostNameComparisonMode = HostNameComparisonMode.WeakWildcard }, new EndpointAddress(serverUri))
+		public LedenadministratieServiceClient(CookieContainer cookiecontainer,string bondsnummer)
+            : this(new BasicHttpsBinding() { Security= security,  AllowCookies = true, HostNameComparisonMode = HostNameComparisonMode.WeakWildcard }, new EndpointAddress(serverUri))
 		{
             cookieContainer = cookiecontainer;
+            this.Credentials.UserName.UserName = bondsnummer;
 		}
 
         private LedenadministratieServiceClient(Binding binding, EndpointAddress remoteAddress)

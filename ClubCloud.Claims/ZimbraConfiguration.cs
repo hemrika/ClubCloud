@@ -36,9 +36,9 @@ namespace ClubCloud.Provider
 
         internal static void CreatevDir(string applicationPoolName, string vDirName, string vDirPath)
         {
-            //Site site = null;
             try
             {
+                
                 foreach (Site site in manager.Sites)
                 {
 

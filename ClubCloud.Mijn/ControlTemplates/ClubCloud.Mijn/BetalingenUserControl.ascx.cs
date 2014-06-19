@@ -1,6 +1,7 @@
 ﻿using ClubCloud.Service.Model;
 using Microsoft.SharePoint;
 using System;
+using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
@@ -9,8 +10,8 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class BetalingenUserControl : ClubCloudUserControl
     {
-        private string userId = string.Empty;
-        private ClubCloud_Setting settings;
+        //private string userId = string.Empty;
+        //private ClubCloud_Setting settings;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,17 +19,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 if (!IsPostBack)
                 {
-
-                    userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                    settings = Client.GetClubCloudSettings(userId);
-
-                    if (settings != null)
-                    {
-                        betalingen_overboeking.Checked = settings.financieel.HasFlag(Financieel.Machtiging);
-                        betalingen_factuur.Checked = settings.financieel.HasFlag(Financieel.Factuur);
-                        betalingen_ideal.Checked = settings.financieel.HasFlag(Financieel.iDEAL);
-                        betalingen_paypal.Checked = settings.financieel.HasFlag(Financieel.PayPal);
-                    }
+                    SetPageData();
                 }
             }
             else
@@ -39,43 +30,60 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+        }
+
+        internal override void SetPageData()
+        {
+            if (Settings != null)
+            {
+                betalingen_overboeking.Checked = Settings.financieel.HasFlag(Financieel.Machtiging);
+                betalingen_factuur.Checked = Settings.financieel.HasFlag(Financieel.Factuur);
+                betalingen_ideal.Checked = Settings.financieel.HasFlag(Financieel.iDEAL);
+                betalingen_paypal.Checked = Settings.financieel.HasFlag(Financieel.PayPal);
+            }
+
+        }
+
         protected void btn_betaling_Click(object sender, EventArgs e)
         {
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
-                financieel_error.ShowSummary = false;
-                settings = new ClubCloud_Setting();
+                vds_betalingen.ShowSummary = false;
+                Settings = new ClubCloud_Setting();
 
-                settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
-                settings.financieel = Financieel.None;
+                Settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
+                Settings.financieel = Financieel.None;
 
                 if (betalingen_overboeking.Checked)
                 {
-                    settings.financieel |= Financieel.Machtiging;
+                    Settings.financieel |= Financieel.Machtiging;
                 }
 
                 if (betalingen_factuur.Checked)
                 {
-                    settings.financieel |= Financieel.Factuur;
+                    Settings.financieel |= Financieel.Factuur;
                 }
 
                 if (betalingen_ideal.Checked)
                 {
-                    settings.financieel |= Financieel.iDEAL;
+                    Settings.financieel |= Financieel.iDEAL;
                 }
 
                 if (betalingen_paypal.Checked)
                 {
-                    settings.financieel |= Financieel.PayPal;
+                    Settings.financieel |= Financieel.PayPal;
                 }
 
-                if (settings.financieel != Financieel.None)
+                if (Settings.financieel != Financieel.None)
                 {
-                    settings = Client.SetFinancieel(settings);
+                    Settings = Client.SetFinancieel(Settings);
                 }
                 else
                 {
-                    financieel_error.ShowSummary = true;
+                    vds_betalingen.ShowSummary = true;
                 }
             }
         }

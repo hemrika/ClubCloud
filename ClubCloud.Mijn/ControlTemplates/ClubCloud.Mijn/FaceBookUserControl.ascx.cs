@@ -19,5 +19,10 @@ namespace ClubCloud.Mijn.ControlTemplates
                 this.pnl_secure.Visible = true;
             }
         }
+
+        internal override void SetPageData()
+        {
+
+        }
     }
 }

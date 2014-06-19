@@ -14,11 +14,13 @@ namespace ClubCloud.KNLTB.ServIt.UserService
     public class UserServiceClient : ChannelFactory<ClubCloud.KNLTB.ServIt.UserService.IUserService>, IUserService// ClientBase<IUserService>, IUserService
 	{
         private static Uri serverUri = new Uri("https://servit.mijnknltb.nl/ISV/KNLTB.ServIT2/KNLTB/Services/UserService.svc");
+        private static BasicHttpsSecurity security = new BasicHttpsSecurity { Mode = BasicHttpsSecurityMode.Transport, Transport = new HttpTransportSecurity { ClientCredentialType = HttpClientCredentialType.Basic, Realm = "servit.mijnknltb.nl" } };
 
-        public UserServiceClient(CookieContainer cookiecontainer)
-            : this(new BasicHttpsBinding() { AllowCookies = true, HostNameComparisonMode = HostNameComparisonMode.WeakWildcard }, new EndpointAddress(serverUri))
+        public UserServiceClient(CookieContainer cookiecontainer, string bondsnummer)
+            : this(new BasicHttpsBinding() { Security = security, AllowCookies = true, HostNameComparisonMode = HostNameComparisonMode.WeakWildcard }, new EndpointAddress(serverUri))
 		{
             cookieContainer = cookiecontainer;
+            this.Credentials.UserName.UserName = bondsnummer;
 		}
 
         private UserServiceClient(Binding binding, EndpointAddress remoteAddress)

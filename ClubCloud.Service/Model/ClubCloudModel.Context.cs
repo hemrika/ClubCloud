@@ -13,8 +13,8 @@ namespace ClubCloud.Service.Model
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    
     
     public partial class ClubCloudModelContainer : DbContext
     {
@@ -28,7 +28,8 @@ namespace ClubCloud.Service.Model
     		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = false;
-    		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+    				this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+    		Database.SetInitializer<ClubCloudModelContainer>(new CreateDatabaseIfNotExists<ClubCloudModelContainer>());
         }
     	
         public ClubCloudModelContainer(string connectionString)
@@ -42,6 +43,7 @@ namespace ClubCloud.Service.Model
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = false;
     		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+    		Database.SetInitializer<ClubCloudModelContainer>(new CreateDatabaseIfNotExists<ClubCloudModelContainer>());
         }	
     	
         public ObjectContext ObjectContext
@@ -51,16 +53,37 @@ namespace ClubCloud.Service.Model
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-                modelBuilder.Entity<ClubCloud_Gebruiker>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-                modelBuilder.Entity<ClubCloud_Vereniging>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-                modelBuilder.Entity<ClubCloud_Tracking>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-                modelBuilder.Entity<ClubCloud_Setting>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-               //throw new UnintentionalCodeFirstException();
+    		modelBuilder.Entity<ClubCloud_Tracking>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		modelBuilder.Entity<ClubCloud_Gebruiker_Abonement>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		modelBuilder.Entity<ClubCloud_Abonnement>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+    
+    		modelBuilder.Entity<ClubCloud_Vereniging_Accomodatie>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		modelBuilder.Entity<ClubCloud_Gebruiker_Vereniging>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		modelBuilder.Entity<ClubCloud_Vereniging_BestuursLid>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+    
+    		modelBuilder.Entity<ClubCloud_Setting>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		modelBuilder.Entity<ClubCloud_Vereniging>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		modelBuilder.Entity<ClubCloud_Gebruiker>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		modelBuilder.Entity<ClubCloud_Accomodatie>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
         }
     
-        public virtual DbSet<ClubCloud_Gebruiker> ClubCloud_Gebruikers { get; set; }
-        public virtual DbSet<ClubCloud_Vereniging> ClubCloud_Verenigingen { get; set; }
         public virtual DbSet<ClubCloud_Tracking> ClubCloud_TrackingSet { get; set; }
+        public virtual DbSet<ClubCloud_Gebruiker_Abonement> ClubCloud_Gebruiker_Abonementen { get; set; }
+        public virtual DbSet<ClubCloud_Abonnement> ClubCloud_Abonnementen { get; set; }
+        public virtual DbSet<ClubCloud_Vereniging_Accomodatie> ClubCloud_Vereniging_Accomodaties { get; set; }
+        public virtual DbSet<ClubCloud_Gebruiker_Vereniging> ClubCloud_Gebruiker_Verenigingen { get; set; }
+        public virtual DbSet<ClubCloud_Vereniging_BestuursLid> ClubCloud_Vereniging_BestuursLeden { get; set; }
         public virtual DbSet<ClubCloud_Setting> ClubCloud_Settings { get; set; }
+        public virtual DbSet<ClubCloud_Vereniging> ClubCloud_Verenigingen { get; set; }
+        public virtual DbSet<ClubCloud_Gebruiker> ClubCloud_Gebruikers { get; set; }
+        public virtual DbSet<ClubCloud_Accomodatie> ClubCloud_Accomodaties { get; set; }
     }
 }

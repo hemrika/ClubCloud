@@ -127,16 +127,16 @@ namespace ClubCloud.Mijn.ControlTemplates {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_betaling;
+        protected global::System.Web.UI.WebControls.LinkButton btn_betaling;
         
         /// <summary>
-        /// financieel_error control.
+        /// vds_betalingen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary financieel_error;
+        protected global::System.Web.UI.WebControls.ValidationSummary vds_betalingen;
         
         /// <summary>
         /// udp_betalingen_progress control.

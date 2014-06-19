@@ -13,6 +13,7 @@ namespace ClubCloud.Service
     using Microsoft.SharePoint;
     using ClubCloud.Service.Model;
     using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// This is the class that is accessible to the Client callers (web parts, user controls, timer jobs, etc.).
@@ -159,6 +160,21 @@ namespace ClubCloud.Service
             return response;
         }
 
+        public async Task<ClubCloud_Setting> GetClubCloudSettingsAsync(string bondsnummer)
+        {
+            return await Task.Run(() => GetClubCloudSettings(bondsnummer));
+            /*
+            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                currentsettings = await Task.Run(() => GetClubCloudSettings(bondsnummer));
+            }
+            return currentsettings;
+            */
+        }
+
         public ClubCloud_Gebruiker GetClubCloudGebruiker(string bondsnummer, bool refresh = false)
         {
             ClubCloud_Gebruiker response = null;
@@ -188,9 +204,9 @@ namespace ClubCloud.Service
 
         }
 
-        public List<Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false)
+        public List<ClubCloud_Gebruiker_Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false)
         {
-            List<Vereniging> response = null;
+            List<ClubCloud_Gebruiker_Vereniging> response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
@@ -207,12 +223,16 @@ namespace ClubCloud.Service
         {
             ClubCloud_Vereniging response = null;
 
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetVerenigingById(bondsnummer, verenigingId, refresh);
-                },
-                false);
+            try
+            {
+                this.ExecuteOnChannel<IClubCloudApplicationService>(
+                    delegate(IClubCloudApplicationService channel)
+                    {
+                        response = channel.GetVerenigingById(bondsnummer, verenigingId, refresh);
+                    },
+                    false);
+            }
+            catch { }
 
             return response;
 
@@ -222,10 +242,65 @@ namespace ClubCloud.Service
         {
             ClubCloud_Vereniging response = null;
 
+            try
+            {
+                this.ExecuteOnChannel<IClubCloudApplicationService>(
+                    delegate(IClubCloudApplicationService channel)
+                    {
+                        response = channel.GetVerenigingByNummer(bondsnummer, vereniginsnummer, refresh);
+                    },
+                    false);
+
+            }
+            catch { }
+
+            return response;
+
+        }
+
+        public List<ClubCloud_Vereniging_BestuursLid> GetBestuurForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            List<ClubCloud_Vereniging_BestuursLid> response = null;
+
+            try
+            {
+                this.ExecuteOnChannel<IClubCloudApplicationService>(
+                    delegate(IClubCloudApplicationService channel)
+                    {
+                        response = channel.GetBestuurForVereniging(bondsnummer, verenigingId, refresh);
+                    },
+                    false);
+
+            }
+            catch { }
+
+            return response;
+
+        }
+
+        public ClubCloud_Vereniging_Accomodatie GetAccommodatieForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            ClubCloud_Vereniging_Accomodatie response = null;
+
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetVerenigingByNummer(bondsnummer, vereniginsnummer, refresh);
+                    response = channel.GetAccommodatieForVereniging(bondsnummer, verenigingId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public ClubCloud_Accomodatie GetAccomodatie(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            ClubCloud_Accomodatie response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetAccommodatie(bondsnummer, verenigingId, refresh);
                 },
                 false);
 
@@ -279,5 +354,19 @@ namespace ClubCloud.Service
         }
 
         #endregion
+
+        public bool SetClubCloudGebruiker(string bondsnummer, ClubCloud_Gebruiker gebruiker, bool refresh = false)
+        {
+            bool response = false;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetClubCloudGebruiker(bondsnummer, gebruiker, refresh);
+                },
+                false);
+
+            return response;
+        }
     }
 }

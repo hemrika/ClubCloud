@@ -13,11 +13,13 @@ namespace ClubCloud.KNLTB.ServIt.CompetitieService
     public class CompetitieServiceClient : ChannelFactory<ClubCloud.KNLTB.ServIt.CompetitieService.ICompetitieService>, ICompetitieService//ClientBase<ICompetitieService>, ICompetitieService
 	{
         private static Uri serverUri = new Uri("https://servit.mijnknltb.nl/ISV/KNLTB.ServIT2/KNLTB/Services/CompetitieService.svc");
+        private static BasicHttpsSecurity security = new BasicHttpsSecurity { Mode = BasicHttpsSecurityMode.Transport, Transport = new HttpTransportSecurity { ClientCredentialType = HttpClientCredentialType.Basic, Realm = "servit.mijnknltb.nl" } };
 
-		public CompetitieServiceClient(CookieContainer cookiecontainer)
-            : this(new BasicHttpsBinding() { AllowCookies = true, HostNameComparisonMode = HostNameComparisonMode.WeakWildcard }, new EndpointAddress(serverUri))
+        public CompetitieServiceClient(CookieContainer cookiecontainer, string bondsnummer)
+            : this(new BasicHttpsBinding() { Security = security, AllowCookies = true, HostNameComparisonMode = HostNameComparisonMode.WeakWildcard }, new EndpointAddress(serverUri))
 		{
             cookieContainer = cookiecontainer;
+            this.Credentials.UserName.UserName = bondsnummer;
 		}
 
         private CompetitieServiceClient(Binding binding, EndpointAddress remoteAddress)

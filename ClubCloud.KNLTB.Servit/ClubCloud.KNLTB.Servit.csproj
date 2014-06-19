@@ -5248,6 +5248,7 @@
     <Compile Include="MetadataService\WebServiceApiOrigin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\KNLTBContainer.cs" />
+    <Compile Include="ServitHttpsBinding.cs" />
     <Compile Include="UserService\HandleChangeEmailRequest.cs" />
     <Compile Include="UserService\HandleChangeEmailResponse.cs" />
     <Compile Include="UserService\HandleChangePasswordRequest.cs" />
