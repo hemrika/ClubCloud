@@ -15,14 +15,10 @@ namespace ClubCloud.Service.Model
     
     [DataContract(IsReference = true)]
     
-    public partial class ClubCloud_Abonnement
+    public partial class ClubCloud_Nationaliteit
     {
     	[DataMember]
         public System.Guid Id { get; set; }
-    	[DataMember]
-        public bool Aangevinkt { get; set; }
-    	[DataMember]
-        public string Beschrijving { get; set; }
     	[DataMember]
         public string Naam { get; set; }
     	[DataMember]

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/19/2014 22:21:47
+-- Date Created: 06/20/2014 21:56:04
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Service\Model\ClubCloudModel.edmx
 -- --------------------------------------------------
 
@@ -60,7 +60,10 @@ GO
 -- Creating table 'ClubCloud_TrackingSet'
 CREATE TABLE [dbo].[ClubCloud_TrackingSet] (
     [Id] uniqueidentifier  NOT NULL,
-    [Data] nvarchar(max)  NOT NULL
+    [Data] nvarchar(max)  NOT NULL,
+    [UserUpdate] datetime  NULL,
+    [ClubUpdate] datetime  NULL,
+    [ClubCloudUpdate] datetime  NULL
 );
 GO
 
@@ -76,6 +79,9 @@ GO
 -- Creating table 'ClubCloud_Abonnementen'
 CREATE TABLE [dbo].[ClubCloud_Abonnementen] (
     [Id] uniqueidentifier  NOT NULL,
+    [Aangevinkt] bit  NOT NULL,
+    [Beschrijving] nvarchar(max)  NOT NULL,
+    [Naam] nvarchar(max)  NOT NULL,
     [UserUpdate] datetime  NULL,
     [ClubUpdate] datetime  NULL,
     [ClubCloudUpdate] datetime  NULL
@@ -275,6 +281,38 @@ CREATE TABLE [dbo].[ClubCloud_Accomodaties] (
 );
 GO
 
+-- Creating table 'ClubCloud_Vereniging_Competities'
+CREATE TABLE [dbo].[ClubCloud_Vereniging_Competities] (
+    [Id] uniqueidentifier  NOT NULL,
+    [VerenigingId] uniqueidentifier  NOT NULL,
+    [AantalPloegen] int  NOT NULL,
+    [Naam] nvarchar(max)  NOT NULL,
+    [UserUpdate] datetime  NULL,
+    [ClubUpdate] datetime  NULL,
+    [ClubCloudUpdate] datetime  NULL
+);
+GO
+
+-- Creating table 'ClubCloud_Nationaliteiten'
+CREATE TABLE [dbo].[ClubCloud_Nationaliteiten] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Naam] nvarchar(max)  NOT NULL,
+    [UserUpdate] datetime  NULL,
+    [ClubUpdate] datetime  NULL,
+    [ClubCloudUpdate] datetime  NULL
+);
+GO
+
+-- Creating table 'ClubCloud_Vereniging_Toernooien'
+CREATE TABLE [dbo].[ClubCloud_Vereniging_Toernooien] (
+    [Id] uniqueidentifier  NOT NULL,
+    [VerenigingId] uniqueidentifier  NOT NULL,
+    [UserUpdate] datetime  NULL,
+    [ClubUpdate] datetime  NULL,
+    [ClubCloudUpdate] datetime  NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -336,6 +374,24 @@ GO
 -- Creating primary key on [Id] in table 'ClubCloud_Accomodaties'
 ALTER TABLE [dbo].[ClubCloud_Accomodaties]
 ADD CONSTRAINT [PK_ClubCloud_Accomodaties]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ClubCloud_Vereniging_Competities'
+ALTER TABLE [dbo].[ClubCloud_Vereniging_Competities]
+ADD CONSTRAINT [PK_ClubCloud_Vereniging_Competities]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ClubCloud_Nationaliteiten'
+ALTER TABLE [dbo].[ClubCloud_Nationaliteiten]
+ADD CONSTRAINT [PK_ClubCloud_Nationaliteiten]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ClubCloud_Vereniging_Toernooien'
+ALTER TABLE [dbo].[ClubCloud_Vereniging_Toernooien]
+ADD CONSTRAINT [PK_ClubCloud_Vereniging_Toernooien]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

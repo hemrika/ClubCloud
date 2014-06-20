@@ -16,6 +16,9 @@
     <EntitySet Name="ClubCloud_Verenigingen" EntityType="ClubCloudModel.Store.ClubCloud_Verenigingen" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Gebruikers" EntityType="ClubCloudModel.Store.ClubCloud_Gebruikers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Accomodaties" EntityType="ClubCloudModel.Store.ClubCloud_Accomodaties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Vereniging_Competities" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_Competities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Nationaliteiten" EntityType="ClubCloudModel.Store.ClubCloud_Nationaliteiten" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Vereniging_Toernooien" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_Toernooien" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
   <EntityType Name="ClubCloud_TrackingSet">
     <Key>
@@ -23,6 +26,9 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="ClubCloud_Gebruiker_Abonementen">
     <Key>
@@ -38,6 +44,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Aangevinkt" Type="bit" Nullable="false" />
+    <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UserUpdate" Type="datetime" Nullable="true" />
     <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
     <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
@@ -235,6 +244,38 @@
     <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
     <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
   </EntityType>
+  <EntityType Name="ClubCloud_Vereniging_Competities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AantalPloegen" Type="int" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Nationaliteiten">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Vereniging_Toernooien">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -250,6 +291,9 @@
           <EntitySet Name="ClubCloud_Verenigingen" EntityType="ClubCloudModel.ClubCloud_Vereniging" />
           <EntitySet Name="ClubCloud_Gebruikers" EntityType="ClubCloudModel.ClubCloud_Gebruiker" />
           <EntitySet Name="ClubCloud_Accomodaties" EntityType="ClubCloudModel.ClubCloud_Accomodatie" />
+          <EntitySet Name="ClubCloud_Vereniging_Competities" EntityType="ClubCloudModel.ClubCloud_Vereniging_Competitie" />
+          <EntitySet Name="ClubCloud_Nationaliteiten" EntityType="ClubCloudModel.ClubCloud_Nationaliteit" />
+          <EntitySet Name="ClubCloud_Vereniging_Toernooien" EntityType="ClubCloudModel.ClubCloud_Vereniging_Toernooi" />
         </EntityContainer>
         <EntityType Name="ClubCloud_Gebruiker">
           <Key>
@@ -323,6 +367,9 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
         </EntityType>
         <EnumType Name="Geslacht" IsFlags="true" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.Geslacht">
           </EnumType>
@@ -477,6 +524,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Aangevinkt" Type="Boolean" Nullable="false" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" />
+          <Property Name="Naam" Type="String" Nullable="false" />
           <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
           <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
           <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
@@ -486,6 +536,38 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Vereniging_Competitie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="false" />
+          <Property Name="AantalPloegen" Type="Int32" Nullable="false" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Nationaliteit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Vereniging_Toernooi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="false" />
           <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
           <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
           <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
@@ -501,6 +583,9 @@
         <MappingFragment StoreEntitySet="ClubCloud_TrackingSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -518,6 +603,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Abonnement)">
         <MappingFragment StoreEntitySet="ClubCloud_Abonnementen">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Aangevinkt" ColumnName="Aangevinkt" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
           <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
           <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
           <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
@@ -726,6 +814,41 @@
           <ScalarProperty Name="ValideParkeerplaatsen" ColumnName="ValideParkeerplaatsen" />
           <ScalarProperty Name="WasruimteClubhuisAanwezig" ColumnName="WasruimteClubhuisAanwezig" />
           <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Vereniging_Competities">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging_Competitie)">
+        <MappingFragment StoreEntitySet="ClubCloud_Vereniging_Competities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
+          <ScalarProperty Name="AantalPloegen" ColumnName="AantalPloegen" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Nationaliteiten">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Nationaliteit)">
+        <MappingFragment StoreEntitySet="ClubCloud_Nationaliteiten">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Vereniging_Toernooien">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging_Toernooi)">
+        <MappingFragment StoreEntitySet="ClubCloud_Vereniging_Toernooien">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
           <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
           <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
           <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />

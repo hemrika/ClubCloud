@@ -21,5 +21,11 @@ namespace ClubCloud.Service.Model
         public System.Guid Id { get; set; }
     	[DataMember]
         public string Data { get; set; }
+    	[DataMember]
+        public Nullable<System.DateTime> UserUpdate { get; set; }
+    	[DataMember]
+        public Nullable<System.DateTime> ClubUpdate { get; set; }
+    	[DataMember]
+        public Nullable<System.DateTime> ClubCloudUpdate { get; set; }
     }
 }

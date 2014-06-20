@@ -106,8 +106,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 		}
 		public CrmService()
 		{
-			this.Url = "https://servit.mijnknltb.nl/MSCrmServices/2007/CrmService.asmx";
-            //this.Url = "https://servit.mijnknltb.nl/KNLTB/MSCrmServices/2007/CrmService.asmx";
+			//this.Url = "https://servit.mijnknltb.nl/MSCrmServices/2007/CrmService.asmx";
+            this.Url = "https://servit.mijnknltb.nl/KNLTB/MSCrmServices/2007/CrmService.asmx";
 			if (this.IsLocalFileSystemWebService(this.Url))
 			{
 				this.UseDefaultCredentials = true;

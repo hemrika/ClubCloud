@@ -183,6 +183,9 @@
     <Compile Include="Model\ClubCloud_Gebruiker_Vereniging.cs">
       <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClubCloud_Nationaliteit.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ClubCloud_Setting.cs">
       <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
@@ -196,6 +199,12 @@
       <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClubCloud_Vereniging_BestuursLid.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Vereniging_Competitie.cs">
+      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Vereniging_Toernooi.cs">
       <DependentUpon>ClubCloudModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Facebook.cs">
