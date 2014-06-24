@@ -68,6 +68,7 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -105,12 +106,40 @@
     <Compile Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx.designer.cs">
       <DependentUpon>KNLTBUserControl.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnCompetitieUserControl.ascx.cs">
+      <DependentUpon>MijnCompetitieUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnCompetitieUserControl.ascx.designer.cs">
+      <DependentUpon>MijnCompetitieUserControl.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnGegevensUserControl.ascx.cs">
       <DependentUpon>MijnGegevensUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnGegevensUserControl.ascx.designer.cs">
       <DependentUpon>MijnGegevensUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnProfielUserControl.ascx.cs">
+      <DependentUpon>MijnProfielUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnProfielUserControl.ascx.designer.cs">
+      <DependentUpon>MijnProfielUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnResultatenUserControl.ascx.cs">
+      <DependentUpon>MijnResultatenUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnResultatenUserControl.ascx.designer.cs">
+      <DependentUpon>MijnResultatenUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnToernooienUserControl.ascx.cs">
+      <DependentUpon>MijnToernooienUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnToernooienUserControl.ascx.designer.cs">
+      <DependentUpon>MijnToernooienUserControl.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnVerenigingUserControl.ascx.cs">
       <DependentUpon>MijnVerenigingUserControl.ascx</DependentUpon>
@@ -119,6 +148,7 @@
     <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnVerenigingUserControl.ascx.designer.cs">
       <DependentUpon>MijnVerenigingUserControl.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\Months.cs" />
     <Compile Include="ControlTemplates\ClubCloud.Mijn\PrivacyUserControl.ascx.cs">
       <DependentUpon>PrivacyUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -217,7 +247,11 @@
     <Content Include="ControlTemplates\ClubCloud.Mijn\FaceBookAuthorize.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\FaceBookUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\MijnCompetitieUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\MijnGegevensUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\MijnProfielUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\MijnResultatenUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\MijnToernooienUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\MijnVerenigingUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\PrivacyUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\PromotedLinksDelegate.ascx" />

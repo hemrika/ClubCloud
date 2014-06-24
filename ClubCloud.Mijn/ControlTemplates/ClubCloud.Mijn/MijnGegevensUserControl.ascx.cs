@@ -36,32 +36,40 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         internal override void SetPageData()
         {
-            if (Settings != null)
+            if (Settings != null && Settings.mijnknltb_allow)
             {
                 ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
-                fvw_adres.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
-                fvw_adres.DataBind();
 
-                /*
-                if(fvw_adres.CurrentMode == FormViewMode.Edit)
+                if (gebruiker != null)
                 {
-                    //List<ClubCloud_Nationaliteit> nationaliteiten = Client.GetNationaliteiten(userId, false);
+
+                    fvw_adres.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
+                    fvw_adres.DataBind();
+
+                    /*
+                    if(fvw_adres.CurrentMode == FormViewMode.Edit)
+                    {
+                        //List<ClubCloud_Nationaliteit> nationaliteiten = Client.GetNationaliteiten(userId, false);
+                    }
+                    */
+
+                    fvw_afbeelding.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
+                    fvw_afbeelding.DataBind();
+
+                    fvw_contact.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
+                    fvw_contact.DataBind();
+
+                    fvw_persoon.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
+                    fvw_persoon.DataBind();
+
+                    Label knltbid = (Label)fvw_persoon.FindControl("knltbid");
+                    knltbid.Text = Settings.Id.ToString();
                 }
-                */
-
-                fvw_afbeelding.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
-                fvw_afbeelding.DataBind();
-
-                fvw_contact.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
-                fvw_contact.DataBind();
-
-                fvw_persoon.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
-                fvw_persoon.DataBind();
-
-                Label knltbid = (Label)fvw_persoon.FindControl("knltbid");
-                knltbid.Text = Settings.Id.ToString();
             }
-
+            else
+            {
+                pnl_authorize.Visible = true;
+            }
         }
 
         #region Contact

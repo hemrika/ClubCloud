@@ -129,6 +129,7 @@ namespace ClubCloud.Service
             return currentsettings;
         }
 
+        /*
         public async Task<ClubCloud_Setting> GetClubCloudSettingsTask(string bondsnummer)
         {
             ClubCloud_Setting currentsettings = new ClubCloud_Setting();
@@ -141,6 +142,7 @@ namespace ClubCloud.Service
             }
             return currentsettings;
         }
+        */
 
         public ClubCloud_Setting GetClubCloudSettings(string bondsnummer)
         {
@@ -184,9 +186,9 @@ namespace ClubCloud.Service
         }
 
 
-        public SpelerTracking GetTracking(string bondsnummer, bool refresh = false)
+        public ClubCloud_Tracking GetTracking(string bondsnummer, bool refresh = false)
         {
-            SpelerTracking tracking = new SpelerTracking();
+            ClubCloud_Tracking tracking = new ClubCloud_Tracking();
 
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
@@ -197,5 +199,10 @@ namespace ClubCloud.Service
             return tracking;
 
         }
+
+        #region Competitie
+
+
+        #endregion
     }
 }

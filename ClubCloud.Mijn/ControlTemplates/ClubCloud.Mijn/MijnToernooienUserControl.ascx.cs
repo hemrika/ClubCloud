@@ -6,7 +6,7 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace ClubCloud.Mijn.ControlTemplates
 {
-    public partial class FaceBookUserControl : ClubCloudUserControl
+    public partial class MijnToernooienUserControl : ClubCloudUserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,14 +17,25 @@ namespace ClubCloud.Mijn.ControlTemplates
             }
             else
             {
-                this.pnl_facebook.Visible = false;
+                this.pnl_toernooien.Visible = false;
                 this.pnl_secure.Visible = true;
             }
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+        }
+
         internal override void SetPageData()
         {
-
+            if (Settings != null && Settings.mijnknltb_allow)
+            {
+            }
+            else
+            {
+                pnl_authorize.Visible = true;
+            }
         }
     }
 }

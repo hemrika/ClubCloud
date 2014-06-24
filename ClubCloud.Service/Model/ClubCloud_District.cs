@@ -16,16 +16,12 @@ namespace ClubCloud.Service.Model
     [Serializable]
     [DataContract(IsReference = true)]
     
-    public partial class ClubCloud_Vereniging_Competitie
+    public partial class ClubCloud_District
     {
     	[DataMember]
         public System.Guid Id { get; set; }
     	[DataMember]
-        public System.Guid VerenigingId { get; set; }
-    	[DataMember]
-        public int AantalPloegen { get; set; }
-    	[DataMember]
-        public string Naam { get; set; }
+        public string DistrictNaam { get; set; }
     	[DataMember]
         public Nullable<System.DateTime> UserUpdate { get; set; }
     	[DataMember]

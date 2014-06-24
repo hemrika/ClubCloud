@@ -57,10 +57,6 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
-        Task<ClubCloud_Setting> GetClubCloudSettingsTask(string bondsnummer);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting GetClubCloudSettings(string bondsnummer);
 
         /// <summary>
@@ -78,8 +74,8 @@ namespace ClubCloud.Service
         SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool refresh = false);
 
         [OperationContract]
-        [ServiceKnownType(typeof(SpelerTracking))]
-        SpelerTracking GetTracking(string bondsnummer, bool refresh = false);
+        [ServiceKnownType(typeof(ClubCloud_Tracking))]
+        ClubCloud_Tracking GetTracking(string bondsnummer, bool refresh = false);
 
     }
 }

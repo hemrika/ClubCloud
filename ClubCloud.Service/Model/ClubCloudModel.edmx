@@ -19,6 +19,7 @@
     <EntitySet Name="ClubCloud_Vereniging_Competities" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_Competities" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Nationaliteiten" EntityType="ClubCloudModel.Store.ClubCloud_Nationaliteiten" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Vereniging_Toernooien" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_Toernooien" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Districten" EntityType="ClubCloudModel.Store.ClubCloud_Districten" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
   <EntityType Name="ClubCloud_TrackingSet">
     <Key>
@@ -276,6 +277,16 @@
     <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
     <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
   </EntityType>
+  <EntityType Name="ClubCloud_Districten">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DistrictNaam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
+  </EntityType>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -294,6 +305,7 @@
           <EntitySet Name="ClubCloud_Vereniging_Competities" EntityType="ClubCloudModel.ClubCloud_Vereniging_Competitie" />
           <EntitySet Name="ClubCloud_Nationaliteiten" EntityType="ClubCloudModel.ClubCloud_Nationaliteit" />
           <EntitySet Name="ClubCloud_Vereniging_Toernooien" EntityType="ClubCloudModel.ClubCloud_Vereniging_Toernooi" />
+          <EntitySet Name="ClubCloud_Districten" EntityType="ClubCloudModel.ClubCloud_District" />
         </EntityContainer>
         <EntityType Name="ClubCloud_Gebruiker">
           <Key>
@@ -568,6 +580,16 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="VerenigingId" Type="Guid" Nullable="false" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <EntityType Name="ClubCloud_District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="DistrictNaam" Type="String" Nullable="false" />
           <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
           <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
           <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
@@ -849,6 +871,17 @@
         <MappingFragment StoreEntitySet="ClubCloud_Vereniging_Toernooien">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
+          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Districten">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_District)">
+        <MappingFragment StoreEntitySet="ClubCloud_Districten">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DistrictNaam" ColumnName="DistrictNaam" />
           <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
           <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
           <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />

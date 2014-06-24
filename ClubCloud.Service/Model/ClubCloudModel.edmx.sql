@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/20/2014 21:56:04
+-- Date Created: 06/24/2014 09:52:08
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Service\Model\ClubCloudModel.edmx
 -- --------------------------------------------------
 
@@ -51,6 +51,15 @@ IF OBJECT_ID(N'[dbo].[ClubCloud_Gebruikers]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[ClubCloud_Accomodaties]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Accomodaties];
+GO
+IF OBJECT_ID(N'[dbo].[ClubCloud_Vereniging_Competities]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_Vereniging_Competities];
+GO
+IF OBJECT_ID(N'[dbo].[ClubCloud_Nationaliteiten]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_Nationaliteiten];
+GO
+IF OBJECT_ID(N'[dbo].[ClubCloud_Vereniging_Toernooien]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_Vereniging_Toernooien];
 GO
 
 -- --------------------------------------------------
@@ -313,6 +322,16 @@ CREATE TABLE [dbo].[ClubCloud_Vereniging_Toernooien] (
 );
 GO
 
+-- Creating table 'ClubCloud_Districten'
+CREATE TABLE [dbo].[ClubCloud_Districten] (
+    [Id] uniqueidentifier  NOT NULL,
+    [DistrictNaam] nvarchar(max)  NOT NULL,
+    [UserUpdate] datetime  NULL,
+    [ClubUpdate] datetime  NULL,
+    [ClubCloudUpdate] datetime  NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -392,6 +411,12 @@ GO
 -- Creating primary key on [Id] in table 'ClubCloud_Vereniging_Toernooien'
 ALTER TABLE [dbo].[ClubCloud_Vereniging_Toernooien]
 ADD CONSTRAINT [PK_ClubCloud_Vereniging_Toernooien]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ClubCloud_Districten'
+ALTER TABLE [dbo].[ClubCloud_Districten]
+ADD CONSTRAINT [PK_ClubCloud_Districten]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

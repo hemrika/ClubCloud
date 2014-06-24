@@ -13,6 +13,7 @@ namespace ClubCloud.Mijn.ControlTemplates
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            base.Page_Load(sender, e);
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 SetPageData();
@@ -31,7 +32,7 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         internal override void SetPageData()
         {
-            if (Settings != null)
+            if (Settings != null && Settings.mijnknltb_allow)
             {
                 List<ClubCloud_Gebruiker_Vereniging> verenigingen = Client.GetVerenigingen(userId,false);
                 lst_verenigingen.DataSource = verenigingen;
@@ -87,6 +88,10 @@ namespace ClubCloud.Mijn.ControlTemplates
                     }
                     catch { }
                 }
+            }
+            else
+            {
+                pnl_authorize.Visible = true;
             }
 
         }

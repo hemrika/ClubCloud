@@ -79,6 +79,8 @@ namespace ClubCloud.Service.Model
     
     		modelBuilder.Entity<ClubCloud_Vereniging_Toernooi>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		modelBuilder.Entity<ClubCloud_District>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
         }
     
         public virtual DbSet<ClubCloud_Tracking> ClubCloud_TrackingSet { get; set; }
@@ -94,5 +96,6 @@ namespace ClubCloud.Service.Model
         public virtual DbSet<ClubCloud_Vereniging_Competitie> ClubCloud_Vereniging_Competities { get; set; }
         public virtual DbSet<ClubCloud_Nationaliteit> ClubCloud_Nationaliteiten { get; set; }
         public virtual DbSet<ClubCloud_Vereniging_Toernooi> ClubCloud_Vereniging_Toernooien { get; set; }
+        public virtual DbSet<ClubCloud_District> ClubCloud_Districten { get; set; }
     }
 }

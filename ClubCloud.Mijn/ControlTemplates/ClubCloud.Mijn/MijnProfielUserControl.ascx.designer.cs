@@ -10,7 +10,7 @@
 namespace ClubCloud.Mijn.ControlTemplates {
     
     
-    public partial class MijnVerenigingUserControl {
+    public partial class MijnProfielUserControl {
         
         /// <summary>
         /// udp_verenigingen control.
@@ -58,66 +58,21 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.LinkButton Instellingen;
         
         /// <summary>
-        /// pnl_verenigingen control.
+        /// pnl_profiel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_verenigingen;
+        protected global::System.Web.UI.WebControls.Panel pnl_profiel;
         
         /// <summary>
-        /// lst_verenigingen control.
+        /// cht_profiel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lst_verenigingen;
-        
-        /// <summary>
-        /// fvw_vereniging control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView fvw_vereniging;
-        
-        /// <summary>
-        /// fvw_accomodatie control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView fvw_accomodatie;
-        
-        /// <summary>
-        /// fvw_bestuur control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView fvw_bestuur;
-        
-        /// <summary>
-        /// fvw_functionarissen control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView fvw_functionarissen;
-        
-        /// <summary>
-        /// udp_verenigingen_progress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress udp_verenigingen_progress;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart cht_profiel;
     }
 }

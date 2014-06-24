@@ -13,6 +13,7 @@ namespace ClubCloud.Service.Model
     using System.Runtime.Serialization;
     using System.Collections.Generic;
     
+    [Serializable]
     [DataContract(IsReference = true)]
     
     public partial class ClubCloud_Abonnement

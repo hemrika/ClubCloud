@@ -40,6 +40,24 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.LinkButton btn_login;
         
         /// <summary>
+        /// pnl_authorize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_authorize;
+        
+        /// <summary>
+        /// Instellingen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton Instellingen;
+        
+        /// <summary>
         /// pnl_profiel control.
         /// </summary>
         /// <remarks>

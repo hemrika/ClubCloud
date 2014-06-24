@@ -15,6 +15,19 @@
             <i class="icon-lock-1 special"></i>U moet ingelogd zijn om uw instellingen te kunnen wijzigen.
             <asp:LinkButton ID="btn_login" Text="Inloggen" OnClientClick="document.location.href ='https://mijn.clubcloud.nl/_zimbra/default.aspx'; return false" runat="server" /><br />
         </asp:panel>
+        <asp:panel runat="server" ID="pnl_authorize" Visible="False">
+            <div class="first">
+                <i class="icon-magic special"></i>
+                <div class="info">
+                <h3 class="lined">Toegang verlenen</h3>
+                    <p>
+                        Om uw gegevens te bekijken en te wijzigingen moet u toegang verlenen tot uw KNLTB gegevens onder instellingen.<br />
+                        Na het verlenen van de toegang, kunt u zelf al uw gegevens inzien en beheren.
+                    </p>
+                    <asp:LinkButton ID="Instellingen" Text="Instellingen" OnClientClick="document.location.href ='https://mijn.clubcloud.nl/instellingen.aspx'; return false" runat="server" CssClass="button small" /><br />
+                </div>
+            </div>  
+        </asp:panel>
         <fieldset>
         <asp:panel runat="server" ID="pnl_profiel" >
               <asp:FormView ID="fvw_afbeelding" RunAt="server" CssClass="one-half first" OnItemUpdated="fvw_afbeelding_ItemUpdated" OnItemUpdating="fvw_afbeelding_ItemUpdating" OnModeChanged="fvw_afbeelding_ModeChanged" OnModeChanging="fvw_afbeelding_ModeChanging" OnItemCommand="fvw_afbeelding_ItemCommand">

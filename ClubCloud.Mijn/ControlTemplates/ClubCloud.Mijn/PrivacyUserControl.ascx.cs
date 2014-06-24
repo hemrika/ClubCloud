@@ -12,6 +12,7 @@ namespace ClubCloud.Mijn.ControlTemplates
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            base.Page_Load(sender, e);
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 if (!IsPostBack)

@@ -23,7 +23,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 try
                 {
-                    return Page.Cache["ClubCloud_Setting"] as ClubCloud_Setting;
+                    return Page.Session["ClubCloud_Setting"] as ClubCloud_Setting;
 
                 }
                 catch { return null; }
@@ -33,12 +33,12 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 if (value == null)
                 {
-                    Page.Cache.Remove("ClubCloud_Setting");
+                    Page.Session.Remove("ClubCloud_Setting");
                 }
                 else
                 {
 
-                    Page.Cache["ClubCloud_Setting"] = value;
+                    Page.Session["ClubCloud_Setting"] = value;
                 }
             }
         }
@@ -50,7 +50,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                 bool loading = false;
                 try
                 {
-                    bool.TryParse(Page.Cache["ClubCloud_Setting_Loading"].ToString(), out loading);
+                    bool.TryParse(Page.Session["ClubCloud_Setting_Loading"].ToString(), out loading);
                 }
                 catch
                 {
@@ -60,7 +60,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             }
             set 
             {
-                    Page.Cache["ClubCloud_Setting_Loading"] = value;
+                Page.Session["ClubCloud_Setting_Loading"] = value;
             }
         }
 
@@ -98,6 +98,13 @@ namespace ClubCloud.Mijn.ControlTemplates
                         
                     }
                 //}
+            }
+            else
+            {
+                if (Settings != null)
+                {
+                    Settings = null;
+                }
             }
         }
 

@@ -14,6 +14,7 @@ namespace ClubCloud.Service
     using ClubCloud.Service.Model;
     using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
     using System.Threading.Tasks;
+    using ClubCloud.KNLTB.ServIt.CompetitieService;
 
     /// <summary>
     /// This is the class that is accessible to the Client callers (web parts, user controls, timer jobs, etc.).
@@ -160,21 +161,6 @@ namespace ClubCloud.Service
             return response;
         }
 
-        public async Task<ClubCloud_Setting> GetClubCloudSettingsAsync(string bondsnummer)
-        {
-            return await Task.Run(() => GetClubCloudSettings(bondsnummer));
-            /*
-            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
-
-            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
-            {
-                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                currentsettings = await Task.Run(() => GetClubCloudSettings(bondsnummer));
-            }
-            return currentsettings;
-            */
-        }
-
         public ClubCloud_Gebruiker GetClubCloudGebruiker(string bondsnummer, bool refresh = false)
         {
             ClubCloud_Gebruiker response = null;
@@ -308,9 +294,9 @@ namespace ClubCloud.Service
 
         }
 
-        public SpelerTracking GetTracking(string bondsnummer, bool refresh = false)
+        public ClubCloud_Tracking GetTracking(string bondsnummer, bool refresh = false)
         {
-            SpelerTracking response = null;
+            ClubCloud_Tracking response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
@@ -323,9 +309,9 @@ namespace ClubCloud.Service
 
         }
 
-        public List<District> GetDistricten(string user)
+        public List<ClubCloud_District> GetDistricten(string user)
         {
-            List<District> response = null;
+            List<ClubCloud_District> response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
@@ -368,5 +354,249 @@ namespace ClubCloud.Service
 
             return response;
         }
+
+        #region Competitie
+
+        public List<Competitie> GetCompetitiesAfgelopenJaar(string bondsnummer, bool refresh = false)
+        {
+            List<Competitie> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetCompetitiesAfgelopenJaar(bondsnummer, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Guid> GetCompetitiesForInschrijving(string bondsnummer, Guid verenigingId, Guid districtId, bool refresh = false)
+        {
+            List<Guid> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetCompetitiesForInschrijving(bondsnummer, verenigingId, districtId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<ClubCloud_Vereniging_Competitie> GetCompetitiesForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            List<ClubCloud_Vereniging_Competitie> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetCompetitiesForVereniging(bondsnummer,verenigingId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Competitie> GetCompetitiesMijnKnltb(string bondsnummer, bool refresh = false)
+        {
+            List<Competitie> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetCompetitiesMijnKnltb(bondsnummer, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Klassengroep> GetKlassengroepen(string bondsnummer, Guid competitieId, bool refresh = false)
+        {
+            List<Klassengroep> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetKlassengroepen(bondsnummer,competitieId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Klassengroep> GetKlassengroepenForInschrijvingGeopend(string bondsnummer, Guid verenigingId, Guid competitieId, bool refresh = false)
+        {
+            List<Klassengroep> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetKlassengroepenForInschrijvingGeopend(bondsnummer, verenigingId, competitieId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Klassengroep> GetKlassengroepenForInschrijvingGeopendEnGesloten(string bondsnummer, Guid verenigingId, Guid competitieId, bool refresh = false)
+        {
+            List<Klassengroep> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetKlassengroepenForInschrijvingGeopendEnGesloten(bondsnummer, verenigingId, competitieId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Partijresultaat> GetPartijresultaten(string bondsnummer, Guid wedstrijdgegevenId, bool refresh = false)
+        {
+            List<Partijresultaat> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetPartijresultaten(bondsnummer, wedstrijdgegevenId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Ploeg> GetPloegen(string bondsnummer, Guid competitieId, bool refresh = false)
+        {
+            List<Ploeg> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetPloegen(bondsnummer, competitieId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Stand> GetStandenByAfdeling(string bondsnummer, Guid afdelingId, Guid competitieId, bool refresh = false)
+        {
+            List<Stand> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetStandenByAfdeling(bondsnummer,afdelingId, competitieId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Stand> GetStandenByPloeg(string bondsnummer, Guid ploegId, Guid competitieId, bool refresh = false)
+        {
+            List<Stand> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetStandenByPloeg(bondsnummer, ploegId, competitieId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Stand> GetStandenByVereniging(string bondsnummer, Guid verenigingId, Guid competitieId, bool refresh = false)
+        {
+            List<Stand> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetStandenByVereniging(bondsnummer, verenigingId, competitieId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<UitslagAfdeling> GetUitslagenAfdeling(string bondsnummer, Guid afdelingId, Guid competitieId, Guid piramideId, bool refresh = false)
+        {
+            List<UitslagAfdeling> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetUitslagenAfdeling(bondsnummer, afdelingId,competitieId, piramideId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Wedstrijdgegevens> GetWedstrijdgegevensForAfdeling(string bondsnummer, Guid competitieId, Guid afdelingId, bool refresh = false)
+        {
+            List<Wedstrijdgegevens> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetWedstrijdgegevensForAfdeling(bondsnummer, competitieId, afdelingId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Wedstrijdgegevens> GetWedstrijdgegevensForVereniging(string bondsnummer, Guid competitieId, Guid verenigingId, bool refresh = false)
+        {
+            List<Wedstrijdgegevens> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetWedstrijdgegevensForVereniging(bondsnummer, competitieId, verenigingId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        public List<Wedstrijdgegevens> GetWedstrijdgegevensForWedstrijdgegeven(string bondsnummer, Guid competitieId, Guid wedstrijdgegevenId, bool refresh = false)
+        {
+            List<Wedstrijdgegevens> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetWedstrijdgegevensForWedstrijdgegeven(bondsnummer, competitieId, wedstrijdgegevenId, refresh);
+                },
+                false);
+
+            return response;
+
+        }
+
+        #endregion
     }
 }

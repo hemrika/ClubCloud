@@ -433,6 +433,7 @@ public class CodeStringGenerator
 	public string WriteEntityTypeSerializationInfo(EntityType type)
 	{
 		StringBuilder output = new StringBuilder();
+		output.AppendLine("[Serializable]");
 		output.AppendLine("[DataContract(IsReference = true)]");
 
 		List<String> typeList = new List<String>();

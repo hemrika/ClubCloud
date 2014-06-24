@@ -15,8 +15,21 @@
             <i class="icon-lock-1 special"></i>U moet ingelogd zijn om uw instellingen te kunnen wijzigen.
             <asp:LinkButton ID="btn_login" Text="Inloggen" OnClientClick="document.location.href ='https://mijn.clubcloud.nl/_zimbra/default.aspx'; return false" runat="server" /><br />
         </asp:panel>
+        <asp:panel runat="server" ID="pnl_authorize" Visible="False">
+            <div class="first">
+                <i class="icon-magic special"></i>
+                <div class="info">
+                <h3 class="lined">Toegang verlenen</h3>
+                    <p>
+                        Om uw gegevens te bekijken en te wijzigingen moet u toegang verlenen tot uw KNLTB gegevens onder instellingen.<br />
+                        Na het verlenen van de toegang, kunt u zelf al uw gegevens inzien en beheren.
+                    </p>
+                    <asp:LinkButton ID="Instellingen" Text="Instellingen" OnClientClick="document.location.href ='https://mijn.clubcloud.nl/instellingen.aspx'; return false" runat="server" CssClass="button small" /><br />
+                </div>
+            </div>  
+        </asp:panel>
         <fieldset>
-        <asp:panel runat="server" ID="pnl_verenigingen" GroupingText="Verenigingen :">
+        <asp:panel runat="server" ID="pnl_verenigingen" >
             <asp:ListView ID="lst_verenigingen" runat="server" DataKeyNames="VerenigingId" OnSelectedIndexChanged="lst_verenigingen_SelectedIndexChanged"  >
                 <GroupTemplate>
                     <ul class="clubs">
@@ -95,15 +108,31 @@
                         <i class="icon-home special"></i>
                         <div class="info">
                         <h3 class="lined">Accomodatie : <%# Eval("AccommodatieNaam")%></h3>
-                        <p>
-                            Bezoekadres : <asp:Label ID="lbl_Bezoekadres" runat="server" Text='<%# Eval("Bezoekadres")%>' /><br />
-                            PostAdres : <%#(String.IsNullOrWhiteSpace(Eval("PostAdres").ToString()) ? "onbekend" : Eval("PostAdres"))%><br />
-                            Minibanen : <asp:Label ID="lbl_Minibanen" runat="server" Text='<%# Eval("Minibanen")%>' /><br />
-                            Oefenmuren: <%#(String.IsNullOrWhiteSpace(Eval("Oefenmuren").ToString()) ? "onbekend" : Eval("Oefenmuren"))%><asp:Label ID="lbl_Oefenmuren" runat="server" Text='<%# Eval("Oefenmuren")%>' /><br />
-                            Ondergrond : <asp:Label ID="lbl_Ondergrond" runat="server" Text='<%# Eval("Ondergrond")%>' /><br />
-                            Playgrounds : <asp:Label ID="lbl_Playgrounds" runat="server" Text='<%# Eval("Playgrounds")%>' /><br />
-                            Speeltoestellen : <asp:Label ID="lbl_Speeltoestellen" runat="server" Text='<%# Eval("Speeltoestellen")%>' /><br />
-                            TelefoonNummer : <asp:Label ID="lbl_TelefoonNummer" runat="server" Text='<%# Eval("TelefoonNummer")%>' /><br />
+                        <p class="capitalize">
+                                Ondergrond : <b><%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Ondergrond")).ToLower() %></b> | Oefenmuren : <b><%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Oefenmuren")).ToLower() %></b>
+                        </p>
+                        <p class="capitalize">
+                            <b>Bezoek adres : </b><br />
+                            <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Bezoekadres.Straat")).ToLower() %> <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Bezoekadres.Huisnummer")).ToLower() %> <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Bezoekadres.Toevoeging")).ToLower() %><br />
+                            <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Bezoekadres.Postcode")).ToUpper() %>, <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Bezoekadres.Plaats")).ToLower() %><br />
+                            <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Bezoekadres.Gemeente")).ToLower() %><br />
+                        </p>
+                        <p class="capitalize">
+                            <b>Post adres : </b><br />
+                            <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "PostAdres.Straat")).ToLower() %> <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "PostAdres.Huisnummer")).ToLower() %> <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "PostAdres.Toevoeging")).ToLower() %><br />
+                            <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "PostAdres.Postcode")).ToUpper() %>, <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "PostAdres.Plaats")).ToLower() %><br />
+                            <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "PostAdres.Gemeente")).ToLower() %><br />
+                        </p>
+                        <p >
+                            <b>Contact : </b><br />
+                            TelefoonNummer : <a href='tel:<%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "TelefoonNummer")).ToLower() %>' ><%# DataBinder.Eval(Container.DataItem, "TelefoonNummer") %></a><br /> <br />
+                        </p>
+                        <p class="capitalize">
+                        <b>Faciliteiten : </b><br />
+                            Minibanen : <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Minibanen")).ToLower() %> <br />
+                            Oefenmuren: <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Oefenmuren")).ToLower() %> <br />
+                            Playgrounds : <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Playgrounds")).ToLower() %> <br />
+                            Speeltoestellen : <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Speeltoestellen")).ToLower() %> <br />
                         </p>
                         </div>
                     </div>
