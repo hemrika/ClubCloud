@@ -42,7 +42,7 @@ namespace ClubCloud.Zimbra.Global
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(createCosRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(createCalendarResourceRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(archiveSpec))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(createAccountRequest))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CreateAccountRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(checkRightRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(galContactInfo))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(checkGalConfigRequest))]

@@ -46,6 +46,10 @@ namespace ClubCloud.Zimbra.Administration
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         CreateDomainResponse CreateDomainRequest(CreateDomainRequest request);
 
+        [System.ServiceModel.OperationContractAttribute(Name = "CreateAccountRequest", Action = "AdminCreateAccountRequestMessage", ReplyAction = "AdminCreateAccountResponseMessage")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        CreateAccountResponse CreateAccountRequest(CreateAccountRequest request);
+
         [System.ServiceModel.OperationContractAttribute(Name = "GetCosRequest", Action = "AdminGetCosRequestMessage", ReplyAction = "AdminGetCosResponseMessage")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         GetCosResponse GetCosRequest(GetCosRequest request);

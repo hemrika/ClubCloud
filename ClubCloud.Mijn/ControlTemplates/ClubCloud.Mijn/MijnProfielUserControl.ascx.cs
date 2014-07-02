@@ -46,42 +46,58 @@ namespace ClubCloud.Mijn.ControlTemplates
 
                         ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
 
-                        ClubCloud_Tracking tracking = Client.GetTracking(userId, false);
-                        if (tracking != null && !string.IsNullOrWhiteSpace(tracking.Data))
+                        Series enkel = new Series { Name = "Enkel", Legend = "Enkel", AxisLabel = "Enkel", ChartType = SeriesChartType.SplineRange, XValueType = ChartValueType.String, YValueType = ChartValueType.Double };
+                        Series dubbel = new Series { Name = "Dubbel", Legend = "Dubbel", AxisLabel = "Dubbel", ChartType = SeriesChartType.SplineRange, XValueType = ChartValueType.String, YValueType = ChartValueType.Double };
+
+                        double maxrating = Math.Max(gebruiker.SpeelsterkteEnkel.Value,gebruiker.SpeelsterkteDubbel.Value)+1;
+                        double minrating = Math.Min(gebruiker.SpeelsterkteEnkel.Value, gebruiker.SpeelsterkteDubbel.Value)-1;
+
+                        cht_profiel.ChartAreas["cta_profiel"].AxisY.Minimum = minrating;
+                        cht_profiel.ChartAreas["cta_profiel"].AxisY.Maximum = maxrating;
+
+                        if (gebruiker != null)
                         {
-                            Series enkel = new Series { Name = "Enkel", ChartType = SeriesChartType.SplineRange, XValueType = ChartValueType.String, YValueType = ChartValueType.Double };
-                            Series dubbel = new Series { Name = "Enkel", ChartType = SeriesChartType.SplineRange, XValueType = ChartValueType.String, YValueType = ChartValueType.Double };
-
-                            for (int i = 0; i < 13; i++)
+                            for (int i = 0; i < 12; i++)
                             {
-                                enkel.Points.Insert(i, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), i), YValues = new double[2] { Convert.ToDouble(gebruiker.RatingEnkel), Convert.ToDouble(gebruiker.RatingEnkel) } });
-                                dubbel.Points.Insert(i, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), i), YValues = new double[2] { Convert.ToDouble(gebruiker.RatingDubbel), Convert.ToDouble(gebruiker.RatingDubbel) } });
+                                enkel.Points.Insert(i, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), i+1), YValues = new double[2] { Convert.ToDouble(gebruiker.SpeelsterkteEnkel), Convert.ToDouble(gebruiker.RatingEnkel) } });
+                                dubbel.Points.Insert(i, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), i+1), YValues = new double[2] { Convert.ToDouble(gebruiker.SpeelsterkteDubbel), Convert.ToDouble(gebruiker.RatingDubbel) } });
                             }
+                        }
 
-                            List<SpelersProfiel> profielen = (List<SpelersProfiel>)DeserializeObjectList<SpelersProfiel>(tracking.Data, "SpelersProfiel");
+                        try
+                        {
+                            ClubCloud_Tracking tracking = Client.GetTracking(userId, false);
 
-                            if (profielen != null)
+                            if (tracking != null && !string.IsNullOrWhiteSpace(tracking.Data))
                             {
-                                List<SpelersProfiel> profielenByDatum = profielen.OrderByDescending(o => o.DatumDSS).ToList();
-                                SpelersProfiel lastprofiel = profielenByDatum.LastOrDefault();
 
-                                foreach (SpelersProfiel profiel in profielenByDatum)
+                                List<SpelersProfiel> profielen = (List<SpelersProfiel>)DeserializeObjectList<SpelersProfiel>(tracking.Data, "SpelersProfiel");
+
+                                if (profielen != null)
                                 {
-                                    enkel.Points.RemoveAt(profiel.DatumDSS.Value.Month - 1);
-                                    enkel.Points.Insert(profiel.DatumDSS.Value.Month - 1, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), profiel.DatumDSS.Value.Month), YValues = new double[2] { Convert.ToDouble(profiel.EindejaarsratingEnkel.Value), Convert.ToDouble(profiel.RatingEnkel.Value) } });
-                                    dubbel.Points.RemoveAt(profiel.DatumDSS.Value.Month - 1);
-                                    dubbel.Points.Insert(profiel.DatumDSS.Value.Month - 1, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), profiel.DatumDSS.Value.Month), YValues = new double[2] { Convert.ToDouble(profiel.EindejaarsratingDubbel.Value), Convert.ToDouble(profiel.RatingDubbel.Value) } });
+                                    List<SpelersProfiel> profielenByDatum = profielen.OrderByDescending(o => o.DatumDSS).ToList();
+                                    SpelersProfiel lastprofiel = profielenByDatum.LastOrDefault();
+
+                                    foreach (SpelersProfiel profiel in profielenByDatum)
+                                    {
+                                        enkel.Points.RemoveAt(profiel.DatumDSS.Value.Month - 1);
+                                        enkel.Points.Insert(profiel.DatumDSS.Value.Month - 1, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), profiel.DatumDSS.Value.Month), YValues = new double[2] { Convert.ToDouble(profiel.EindejaarsratingEnkel.Value), Convert.ToDouble(profiel.PartijResultatenEnkelDss.Value) } });
+                                        dubbel.Points.RemoveAt(profiel.DatumDSS.Value.Month - 1);
+                                        dubbel.Points.Insert(profiel.DatumDSS.Value.Month - 1, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), profiel.DatumDSS.Value.Month), YValues = new double[2] { Convert.ToDouble(profiel.EindejaarsratingDubbel.Value), Convert.ToDouble(profiel.PartijResultatenDubbelDss.Value) } });
+                                    }
                                 }
                             }
-                            else
-                            {
-                            }
-                            cht_profiel.Series.Add(enkel);
-                            cht_profiel.Series.Add(dubbel);
-
                         }
+                        catch (Exception ex)
+                        {
+                            ex.ToString();
+                        }
+
+                        cht_profiel.Series.Add(enkel);
+                        cht_profiel.Series.Add(dubbel);
+
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         ex.ToString();
                     }

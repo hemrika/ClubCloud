@@ -69,6 +69,8 @@
     <Compile Include="Account\ZimbraAccountSoapClient.cs" />
     <Compile Include="Administration\AuthRequest.cs" />
     <Compile Include="Administration\AuthResponse.cs" />
+    <Compile Include="Administration\CreateAccountRequest.cs" />
+    <Compile Include="Administration\CreateAccountResponse.cs" />
     <Compile Include="Administration\CreateDomainRequest.cs" />
     <Compile Include="Administration\CreateDomainResponse.cs" />
     <Compile Include="Administration\Extended\zimbraAdminExt.cs" />

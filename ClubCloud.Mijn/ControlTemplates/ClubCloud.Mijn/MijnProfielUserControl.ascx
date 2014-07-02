@@ -29,9 +29,9 @@
         <fieldset>
             <asp:panel runat="server" ID="pnl_profiel">
             
-                <asp:Chart ID="cht_profiel" runat="server"  ImageStorageMode="UseHttpHandler" ImageType="Png" >
+                <asp:Chart ID="cht_profiel" runat="server" ImageStorageMode="UseHttpHandler" ImageType="Png" CssClass="first"  BackColor="Transparent" Width="600px" >
                     <chartareas>
-                        <asp:ChartArea Name="cta_profiel">
+                        <asp:ChartArea Name="cta_profiel"  BackColor="Transparent" >
                         </asp:ChartArea>
                     </chartareas>
                 </asp:Chart>

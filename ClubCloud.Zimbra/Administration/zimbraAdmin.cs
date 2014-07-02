@@ -2181,59 +2181,6 @@ namespace ClubCloud.Zimbra.Administration
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("CreateAccountRequest", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "createAccountRequest", Namespace = "urn:zimbraAdmin")]
-    public partial class createAccountRequest : adminAttrsImpl
-    {
-
-        private string _name;
-
-        private string _password;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                if (((this._name == null)
-                            || (_name.Equals(value) != true)))
-                {
-                    this._name = value;
-                    this.OnPropertyChanged("name");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string password
-        {
-            get
-            {
-                return this._password;
-            }
-            set
-            {
-                if (((this._password == null)
-                            || (_password.Equals(value) != true)))
-                {
-                    this._password = value;
-                    this.OnPropertyChanged("password");
-                }
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
     [System.Xml.Serialization.XmlRootAttribute("CheckRightRequest", Namespace = "urn:zimbraAdmin", IsNullable = false)]
     [System.Runtime.Serialization.DataContractAttribute(Name = "checkRightRequest", Namespace = "urn:zimbraAdmin")]
     public partial class checkRightRequest : adminAttrsImpl
@@ -13552,54 +13499,6 @@ namespace ClubCloud.Zimbra.Administration
                 {
                     this._num = value;
                     this.OnPropertyChanged("num");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("CreateAccountResponse", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "createAccountResponse", Namespace = "urn:zimbraAdmin")]
-    public partial class createAccountResponse : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private accountInfo _account;
-
-        public createAccountResponse()
-        {
-            this._account = new accountInfo();
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public accountInfo account
-        {
-            get
-            {
-                return this._account;
-            }
-            set
-            {
-                if (((this._account == null)
-                            || (_account.Equals(value) != true)))
-                {
-                    this._account = value;
-                    this.OnPropertyChanged("account");
                 }
             }
         }

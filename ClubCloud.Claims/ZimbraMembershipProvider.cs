@@ -1139,14 +1139,40 @@ namespace ClubCloud.Provider
 
         public override System.Web.Security.MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out System.Web.Security.MembershipCreateStatus status)
         {
-            ZimbraMembershipUser zuser = new ZimbraMembershipUser();
+            MembershipUser zuser = null;
+
             if (!Initialized)
             {
                 string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
                 throw new ProviderException(message);
             }
-            throw new NotImplementedException();
+
+            List<attrN> properties = new List<attrN>();
+
+            properties.Add(new attrN { name = "zimbraAccountStatus", Value = "active" });
+
+            if (username != email)
+            {
+                properties.Add(new attrN { name = "zimbraPrefMailLocalDeliveryDisabled", Value = "TRUE" });
+                properties.Add(new attrN { name = "zimbraPrefMailForwardingAddress", Value = email });
+            }
+
+            Zimbra.Administration.CreateAccountRequest create = new Zimbra.Administration.CreateAccountRequest { name = username, password = password, a = properties };
+            Zimbra.Administration.CreateAccountResponse created = zimbraServer.Message(create) as Zimbra.Administration.CreateAccountResponse;
+
+            if (created != null)
+            {
+                status = MembershipCreateStatus.Success;
+                zuser = GetUser(username, false);
+            }
+            else
+            {
+                status = MembershipCreateStatus.ProviderError;
+                zuser = null;
+            }
+
+            return zuser;
         }
 
         #endregion
