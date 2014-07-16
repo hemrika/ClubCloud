@@ -3,29 +3,51 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class sgt_toe_kwalificatiecode : BusinessEntity
 	{
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private CrmNumber importsequencenumberField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private Lookup organizationidField;
+
 		private CrmDateTime overriddencreatedonField;
+
 		private string sgt_beschrijvingField;
+
 		private string sgt_meervoudsnaamField;
+
 		private string sgt_omschrijvingField;
+
 		private string sgt_toe_kwalificatiecode1Field;
+
 		private Key sgt_toe_kwalificatiecodeidField;
+
 		private string sgt_verkorte_codeField;
+
 		private Sgt_toe_kwalificatiecodeStateInfo statecodeField;
+
 		private Status statuscodeField;
+
 		private CrmNumber timezoneruleversionnumberField;
+
 		private CrmNumber utcconversiontimezonecodeField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Lookup createdby
 		{
 			get
@@ -35,8 +57,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public CrmDateTime createdon
 		{
 			get
@@ -46,8 +71,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public CrmNumber importsequencenumber
 		{
 			get
@@ -57,8 +85,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importsequencenumberField = value;
+				base.RaisePropertyChanged("importsequencenumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public Lookup modifiedby
 		{
 			get
@@ -68,8 +99,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -79,8 +113,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public Lookup organizationid
 		{
 			get
@@ -90,8 +127,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.organizationidField = value;
+				base.RaisePropertyChanged("organizationid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public CrmDateTime overriddencreatedon
 		{
 			get
@@ -101,8 +141,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.overriddencreatedonField = value;
+				base.RaisePropertyChanged("overriddencreatedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public string sgt_beschrijving
 		{
 			get
@@ -112,8 +155,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_beschrijvingField = value;
+				base.RaisePropertyChanged("sgt_beschrijving");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public string sgt_meervoudsnaam
 		{
 			get
@@ -123,8 +169,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_meervoudsnaamField = value;
+				base.RaisePropertyChanged("sgt_meervoudsnaam");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public string sgt_omschrijving
 		{
 			get
@@ -134,9 +183,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_omschrijvingField = value;
+				base.RaisePropertyChanged("sgt_omschrijving");
 			}
 		}
-		[XmlElement("sgt_toe_kwalificatiecode")]
+
+		[XmlElement("sgt_toe_kwalificatiecode")] //, Order=10)]
 		public string sgt_toe_kwalificatiecode1
 		{
 			get
@@ -146,8 +197,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_toe_kwalificatiecode1Field = value;
+				base.RaisePropertyChanged("sgt_toe_kwalificatiecode1");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public Key sgt_toe_kwalificatiecodeid
 		{
 			get
@@ -157,8 +211,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_toe_kwalificatiecodeidField = value;
+				base.RaisePropertyChanged("sgt_toe_kwalificatiecodeid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public string sgt_verkorte_code
 		{
 			get
@@ -168,8 +225,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_verkorte_codeField = value;
+				base.RaisePropertyChanged("sgt_verkorte_code");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public Sgt_toe_kwalificatiecodeStateInfo statecode
 		{
 			get
@@ -179,8 +239,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statecodeField = value;
+				base.RaisePropertyChanged("statecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=14)]
 		public Status statuscode
 		{
 			get
@@ -190,8 +253,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statuscodeField = value;
+				base.RaisePropertyChanged("statuscode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public CrmNumber timezoneruleversionnumber
 		{
 			get
@@ -201,8 +267,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.timezoneruleversionnumberField = value;
+				base.RaisePropertyChanged("timezoneruleversionnumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=16)]
 		public CrmNumber utcconversiontimezonecode
 		{
 			get
@@ -212,7 +281,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.utcconversiontimezonecodeField = value;
+				base.RaisePropertyChanged("utcconversiontimezonecode");
 			}
+		}
+
+		public sgt_toe_kwalificatiecode()
+		{
 		}
 	}
 }

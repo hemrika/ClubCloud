@@ -50,8 +50,8 @@ namespace ClubCloud.Mijn.ControlTemplates
 
                     try
                     {
-                        ClubCloud_Vereniging_Accomodatie accomodatie = Client.GetAccommodatieForVereniging(userId, verenigingen[0].VerenigingId, false);
-                        fvw_accomodatie.DataSource = new List<ClubCloud_Vereniging_Accomodatie> { accomodatie };
+                        ClubCloud_Accomodatie accomodatie = Client.GetAccommodatieForVereniging(userId, verenigingen[0].VerenigingId, false);
+                        fvw_accomodatie.DataSource = new List<ClubCloud_Accomodatie> { accomodatie };
                         fvw_accomodatie.DataBind();
                     }
                     catch { }

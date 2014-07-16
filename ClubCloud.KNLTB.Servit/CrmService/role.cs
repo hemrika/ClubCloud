@@ -3,24 +3,41 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class role : BusinessEntity
 	{
 		private Lookup businessunitidField;
+
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private CrmNumber importsequencenumberField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private string nameField;
+
 		private UniqueIdentifier organizationidField;
+
 		private CrmDateTime overriddencreatedonField;
+
 		private Lookup parentroleidField;
+
 		private Key roleidField;
+
 		private Lookup roletemplateidField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Lookup businessunitid
 		{
 			get
@@ -30,8 +47,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.businessunitidField = value;
+				base.RaisePropertyChanged("businessunitid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public Lookup createdby
 		{
 			get
@@ -41,8 +61,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public CrmDateTime createdon
 		{
 			get
@@ -52,8 +75,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public CrmNumber importsequencenumber
 		{
 			get
@@ -63,8 +89,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importsequencenumberField = value;
+				base.RaisePropertyChanged("importsequencenumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public Lookup modifiedby
 		{
 			get
@@ -74,8 +103,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -85,8 +117,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public string name
 		{
 			get
@@ -96,8 +131,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.nameField = value;
+				base.RaisePropertyChanged("name");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public UniqueIdentifier organizationid
 		{
 			get
@@ -107,8 +145,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.organizationidField = value;
+				base.RaisePropertyChanged("organizationid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public CrmDateTime overriddencreatedon
 		{
 			get
@@ -118,8 +159,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.overriddencreatedonField = value;
+				base.RaisePropertyChanged("overriddencreatedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public Lookup parentroleid
 		{
 			get
@@ -129,8 +173,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.parentroleidField = value;
+				base.RaisePropertyChanged("parentroleid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public Key roleid
 		{
 			get
@@ -140,8 +187,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.roleidField = value;
+				base.RaisePropertyChanged("roleid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public Lookup roletemplateid
 		{
 			get
@@ -151,7 +201,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.roletemplateidField = value;
+				base.RaisePropertyChanged("roletemplateid");
 			}
+		}
+
+		public role()
+		{
 		}
 	}
 }

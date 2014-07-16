@@ -2,16 +2,23 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Web.Services.Protocols;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlRoot(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices", IsNullable = true), XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/CoreTypes")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	public class CallerOriginToken : SoapHeader
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/CoreTypes")]
+	public class CallerOriginToken : SoapHeader, INotifyPropertyChanged
 	{
-		private CallerOrigin callerOriginField;
-		public CallerOrigin CallerOrigin
+		private ClubCloud.KNLTB.ServIt.CrmService.CallerOrigin callerOriginField;
+
+		[XmlElement] //[XmlElement(Order=0)]
+		public ClubCloud.KNLTB.ServIt.CrmService.CallerOrigin CallerOrigin
 		{
 			get
 			{
@@ -20,7 +27,23 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.callerOriginField = value;
+				this.RaisePropertyChanged("CallerOrigin");
 			}
 		}
+
+		public CallerOriginToken()
+		{
+		}
+
+		protected void RaisePropertyChanged(string propertyName)
+		{
+			PropertyChangedEventHandler propertyChangedEventHandler = this.PropertyChanged;
+			if (propertyChangedEventHandler != null)
+			{
+				propertyChangedEventHandler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

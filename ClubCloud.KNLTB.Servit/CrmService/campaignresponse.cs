@@ -3,65 +3,123 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class campaignresponse : BusinessEntity
 	{
 		private Key activityidField;
+
 		private CrmNumber actualdurationminutesField;
+
 		private CrmDateTime actualendField;
+
 		private CrmDateTime actualstartField;
+
 		private string categoryField;
+
 		private Picklist channeltypecodeField;
+
 		private string companynameField;
+
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private activityparty[] customerField;
+
 		private string descriptionField;
+
 		private string emailaddressField;
+
 		private string faxField;
+
 		private string firstnameField;
+
 		private activityparty[] fromField;
+
 		private CrmNumber importsequencenumberField;
+
 		private CrmBoolean isbilledField;
+
 		private CrmBoolean isworkflowcreatedField;
+
 		private string lastnameField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private Lookup originatingactivityidField;
+
 		private CrmDateTime overriddencreatedonField;
+
 		private Owner owneridField;
+
 		private Lookup owningbusinessunitField;
+
 		private activityparty[] partnerField;
+
 		private Picklist prioritycodeField;
+
 		private string promotioncodenameField;
+
 		private CrmDateTime receivedonField;
+
 		private Lookup regardingobjectidField;
+
 		private Picklist responsecodeField;
+
 		private CrmNumber scheduleddurationminutesField;
+
 		private CrmDateTime scheduledendField;
+
 		private CrmDateTime scheduledstartField;
+
 		private Lookup serviceidField;
+
 		private Lookup sgt_formulier_antwoord_idField;
+
 		private Lookup sgt_ideal_betaling_gebeurtenisidField;
+
 		private CrmDateTime sgt_igm_voorkeur1Field;
+
 		private CrmDateTime sgt_igm_voorkeur2Field;
+
 		private CrmDateTime sgt_igm_voorkeur3Field;
+
 		private Lookup sgt_persoonidField;
+
 		private Lookup sgt_registered_byidField;
+
 		private CrmDateTime sgt_tijdstip_bevestigdField;
+
 		private CampaignResponseStateInfo statecodeField;
+
 		private Status statuscodeField;
+
 		private string subcategoryField;
+
 		private string subjectField;
+
 		private string telephoneField;
+
 		private CrmNumber timezoneruleversionnumberField;
+
 		private CrmNumber utcconversiontimezonecodeField;
+
 		private string yomicompanynameField;
+
 		private string yomifirstnameField;
+
 		private string yomilastnameField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Key activityid
 		{
 			get
@@ -71,8 +129,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.activityidField = value;
+				base.RaisePropertyChanged("activityid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public CrmNumber actualdurationminutes
 		{
 			get
@@ -82,8 +143,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.actualdurationminutesField = value;
+				base.RaisePropertyChanged("actualdurationminutes");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public CrmDateTime actualend
 		{
 			get
@@ -93,8 +157,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.actualendField = value;
+				base.RaisePropertyChanged("actualend");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public CrmDateTime actualstart
 		{
 			get
@@ -104,8 +171,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.actualstartField = value;
+				base.RaisePropertyChanged("actualstart");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public string category
 		{
 			get
@@ -115,8 +185,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.categoryField = value;
+				base.RaisePropertyChanged("category");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public Picklist channeltypecode
 		{
 			get
@@ -126,8 +199,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.channeltypecodeField = value;
+				base.RaisePropertyChanged("channeltypecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public string companyname
 		{
 			get
@@ -137,8 +213,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.companynameField = value;
+				base.RaisePropertyChanged("companyname");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public Lookup createdby
 		{
 			get
@@ -148,8 +227,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public CrmDateTime createdon
 		{
 			get
@@ -159,9 +241,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
-		[XmlArrayItem(IsNullable = false)]
+
+		[XmlArray] //[XmlArray(Order=9)]
+		[XmlArrayItem(IsNullable=false)]
 		public activityparty[] customer
 		{
 			get
@@ -171,8 +256,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.customerField = value;
+				base.RaisePropertyChanged("customer");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public string description
 		{
 			get
@@ -182,8 +270,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.descriptionField = value;
+				base.RaisePropertyChanged("description");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public string emailaddress
 		{
 			get
@@ -193,8 +284,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.emailaddressField = value;
+				base.RaisePropertyChanged("emailaddress");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public string fax
 		{
 			get
@@ -204,8 +298,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.faxField = value;
+				base.RaisePropertyChanged("fax");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public string firstname
 		{
 			get
@@ -215,10 +312,13 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.firstnameField = value;
+				base.RaisePropertyChanged("firstname");
 			}
 		}
-		[XmlArrayItem(IsNullable = false)]
-		public activityparty[] from
+
+		[XmlArray] //[XmlArray(Order=14)]
+		[XmlArrayItem(IsNullable=false)]
+		public activityparty[] @from
 		{
 			get
 			{
@@ -227,8 +327,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.fromField = value;
+				base.RaisePropertyChanged("from");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public CrmNumber importsequencenumber
 		{
 			get
@@ -238,8 +341,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importsequencenumberField = value;
+				base.RaisePropertyChanged("importsequencenumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=16)]
 		public CrmBoolean isbilled
 		{
 			get
@@ -249,8 +355,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.isbilledField = value;
+				base.RaisePropertyChanged("isbilled");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=17)]
 		public CrmBoolean isworkflowcreated
 		{
 			get
@@ -260,8 +369,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.isworkflowcreatedField = value;
+				base.RaisePropertyChanged("isworkflowcreated");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=18)]
 		public string lastname
 		{
 			get
@@ -271,8 +383,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.lastnameField = value;
+				base.RaisePropertyChanged("lastname");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=19)]
 		public Lookup modifiedby
 		{
 			get
@@ -282,8 +397,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=20)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -293,8 +411,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=21)]
 		public Lookup originatingactivityid
 		{
 			get
@@ -304,8 +425,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.originatingactivityidField = value;
+				base.RaisePropertyChanged("originatingactivityid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=22)]
 		public CrmDateTime overriddencreatedon
 		{
 			get
@@ -315,8 +439,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.overriddencreatedonField = value;
+				base.RaisePropertyChanged("overriddencreatedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=23)]
 		public Owner ownerid
 		{
 			get
@@ -326,8 +453,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owneridField = value;
+				base.RaisePropertyChanged("ownerid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=24)]
 		public Lookup owningbusinessunit
 		{
 			get
@@ -337,9 +467,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owningbusinessunitField = value;
+				base.RaisePropertyChanged("owningbusinessunit");
 			}
 		}
-		[XmlArrayItem(IsNullable = false)]
+
+		[XmlArray] //[XmlArray(Order=25)]
+		[XmlArrayItem(IsNullable=false)]
 		public activityparty[] partner
 		{
 			get
@@ -349,8 +482,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.partnerField = value;
+				base.RaisePropertyChanged("partner");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=26)]
 		public Picklist prioritycode
 		{
 			get
@@ -360,8 +496,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.prioritycodeField = value;
+				base.RaisePropertyChanged("prioritycode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=27)]
 		public string promotioncodename
 		{
 			get
@@ -371,8 +510,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.promotioncodenameField = value;
+				base.RaisePropertyChanged("promotioncodename");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=28)]
 		public CrmDateTime receivedon
 		{
 			get
@@ -382,8 +524,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.receivedonField = value;
+				base.RaisePropertyChanged("receivedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=29)]
 		public Lookup regardingobjectid
 		{
 			get
@@ -393,8 +538,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.regardingobjectidField = value;
+				base.RaisePropertyChanged("regardingobjectid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=30)]
 		public Picklist responsecode
 		{
 			get
@@ -404,8 +552,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.responsecodeField = value;
+				base.RaisePropertyChanged("responsecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=31)]
 		public CrmNumber scheduleddurationminutes
 		{
 			get
@@ -415,8 +566,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.scheduleddurationminutesField = value;
+				base.RaisePropertyChanged("scheduleddurationminutes");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=32)]
 		public CrmDateTime scheduledend
 		{
 			get
@@ -426,8 +580,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.scheduledendField = value;
+				base.RaisePropertyChanged("scheduledend");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=33)]
 		public CrmDateTime scheduledstart
 		{
 			get
@@ -437,8 +594,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.scheduledstartField = value;
+				base.RaisePropertyChanged("scheduledstart");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=34)]
 		public Lookup serviceid
 		{
 			get
@@ -448,8 +608,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.serviceidField = value;
+				base.RaisePropertyChanged("serviceid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=35)]
 		public Lookup sgt_formulier_antwoord_id
 		{
 			get
@@ -459,8 +622,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_formulier_antwoord_idField = value;
+				base.RaisePropertyChanged("sgt_formulier_antwoord_id");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=36)]
 		public Lookup sgt_ideal_betaling_gebeurtenisid
 		{
 			get
@@ -470,8 +636,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_ideal_betaling_gebeurtenisidField = value;
+				base.RaisePropertyChanged("sgt_ideal_betaling_gebeurtenisid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=37)]
 		public CrmDateTime sgt_igm_voorkeur1
 		{
 			get
@@ -481,8 +650,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_igm_voorkeur1Field = value;
+				base.RaisePropertyChanged("sgt_igm_voorkeur1");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=38)]
 		public CrmDateTime sgt_igm_voorkeur2
 		{
 			get
@@ -492,8 +664,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_igm_voorkeur2Field = value;
+				base.RaisePropertyChanged("sgt_igm_voorkeur2");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=39)]
 		public CrmDateTime sgt_igm_voorkeur3
 		{
 			get
@@ -503,8 +678,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_igm_voorkeur3Field = value;
+				base.RaisePropertyChanged("sgt_igm_voorkeur3");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=40)]
 		public Lookup sgt_persoonid
 		{
 			get
@@ -514,8 +692,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_persoonidField = value;
+				base.RaisePropertyChanged("sgt_persoonid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=41)]
 		public Lookup sgt_registered_byid
 		{
 			get
@@ -525,8 +706,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_registered_byidField = value;
+				base.RaisePropertyChanged("sgt_registered_byid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=42)]
 		public CrmDateTime sgt_tijdstip_bevestigd
 		{
 			get
@@ -536,8 +720,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_tijdstip_bevestigdField = value;
+				base.RaisePropertyChanged("sgt_tijdstip_bevestigd");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=43)]
 		public CampaignResponseStateInfo statecode
 		{
 			get
@@ -547,8 +734,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statecodeField = value;
+				base.RaisePropertyChanged("statecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=44)]
 		public Status statuscode
 		{
 			get
@@ -558,8 +748,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statuscodeField = value;
+				base.RaisePropertyChanged("statuscode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=45)]
 		public string subcategory
 		{
 			get
@@ -569,8 +762,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.subcategoryField = value;
+				base.RaisePropertyChanged("subcategory");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=46)]
 		public string subject
 		{
 			get
@@ -580,8 +776,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.subjectField = value;
+				base.RaisePropertyChanged("subject");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=47)]
 		public string telephone
 		{
 			get
@@ -591,8 +790,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.telephoneField = value;
+				base.RaisePropertyChanged("telephone");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=48)]
 		public CrmNumber timezoneruleversionnumber
 		{
 			get
@@ -602,8 +804,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.timezoneruleversionnumberField = value;
+				base.RaisePropertyChanged("timezoneruleversionnumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=49)]
 		public CrmNumber utcconversiontimezonecode
 		{
 			get
@@ -613,8 +818,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.utcconversiontimezonecodeField = value;
+				base.RaisePropertyChanged("utcconversiontimezonecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=50)]
 		public string yomicompanyname
 		{
 			get
@@ -624,8 +832,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.yomicompanynameField = value;
+				base.RaisePropertyChanged("yomicompanyname");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=51)]
 		public string yomifirstname
 		{
 			get
@@ -635,8 +846,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.yomifirstnameField = value;
+				base.RaisePropertyChanged("yomifirstname");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=52)]
 		public string yomilastname
 		{
 			get
@@ -646,7 +860,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.yomilastnameField = value;
+				base.RaisePropertyChanged("yomilastname");
 			}
+		}
+
+		public campaignresponse()
+		{
 		}
 	}
 }

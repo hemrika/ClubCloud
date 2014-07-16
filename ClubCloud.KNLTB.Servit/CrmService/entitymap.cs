@@ -3,20 +3,33 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class entitymap : BusinessEntity
 	{
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private Key entitymapidField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private Lookup organizationidField;
+
 		private string sourceentitynameField;
+
 		private string targetentitynameField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Lookup createdby
 		{
 			get
@@ -26,8 +39,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public CrmDateTime createdon
 		{
 			get
@@ -37,8 +53,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public Key entitymapid
 		{
 			get
@@ -48,8 +67,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.entitymapidField = value;
+				base.RaisePropertyChanged("entitymapid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public Lookup modifiedby
 		{
 			get
@@ -59,8 +81,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -70,8 +95,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public Lookup organizationid
 		{
 			get
@@ -81,8 +109,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.organizationidField = value;
+				base.RaisePropertyChanged("organizationid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public string sourceentityname
 		{
 			get
@@ -92,8 +123,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sourceentitynameField = value;
+				base.RaisePropertyChanged("sourceentityname");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public string targetentityname
 		{
 			get
@@ -103,7 +137,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.targetentitynameField = value;
+				base.RaisePropertyChanged("targetentityname");
 			}
+		}
+
+		public entitymap()
+		{
 		}
 	}
 }

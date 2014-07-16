@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.SiteDefinition" DefaultFile="onet.xml" SupportedTrustLevels="FullTrust" SupportedDeploymentScopes="Package" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Default.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="onet.xml" Target="SiteTemplates\Administratie\Xml\" Type="TemplateFile" />
+    <ProjectItemFile Source="webtemp_Administratie.xml" Target="1043\xml\" Type="TemplateFile" />
+    <ProjectItemFile Source="Rollen.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="Leden.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="Groepen.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="Facturatie.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="LidBekijken.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="LidBewerken.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="LidNieuw.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+  </Files>
+</ProjectItem>

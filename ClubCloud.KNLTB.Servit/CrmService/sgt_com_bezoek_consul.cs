@@ -3,32 +3,57 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class sgt_com_bezoek_consul : BusinessEntity
 	{
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private CrmNumber importsequencenumberField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private CrmDateTime overriddencreatedonField;
+
 		private Owner owneridField;
+
 		private Lookup owningbusinessunitField;
+
 		private Key sgt_com_bezoek_consulidField;
+
 		private string sgt_com_naamField;
+
 		private CrmDateTime sgt_datum_tmField;
+
 		private CrmDateTime sgt_datum_vanafField;
+
 		private Lookup sgt_persoonidField;
+
 		private Picklist sgt_soort_controleField;
+
 		private Lookup sgt_verenigingidField;
+
 		private Lookup sgt_wedstrijdgegevensidField;
+
 		private Sgt_com_bezoek_consulStateInfo statecodeField;
+
 		private Status statuscodeField;
+
 		private CrmNumber timezoneruleversionnumberField;
+
 		private CrmNumber utcconversiontimezonecodeField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Lookup createdby
 		{
 			get
@@ -38,8 +63,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public CrmDateTime createdon
 		{
 			get
@@ -49,8 +77,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public CrmNumber importsequencenumber
 		{
 			get
@@ -60,8 +91,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importsequencenumberField = value;
+				base.RaisePropertyChanged("importsequencenumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public Lookup modifiedby
 		{
 			get
@@ -71,8 +105,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -82,8 +119,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public CrmDateTime overriddencreatedon
 		{
 			get
@@ -93,8 +133,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.overriddencreatedonField = value;
+				base.RaisePropertyChanged("overriddencreatedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public Owner ownerid
 		{
 			get
@@ -104,8 +147,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owneridField = value;
+				base.RaisePropertyChanged("ownerid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public Lookup owningbusinessunit
 		{
 			get
@@ -115,8 +161,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owningbusinessunitField = value;
+				base.RaisePropertyChanged("owningbusinessunit");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public Key sgt_com_bezoek_consulid
 		{
 			get
@@ -126,8 +175,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_com_bezoek_consulidField = value;
+				base.RaisePropertyChanged("sgt_com_bezoek_consulid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public string sgt_com_naam
 		{
 			get
@@ -137,8 +189,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_com_naamField = value;
+				base.RaisePropertyChanged("sgt_com_naam");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public CrmDateTime sgt_datum_tm
 		{
 			get
@@ -148,8 +203,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_datum_tmField = value;
+				base.RaisePropertyChanged("sgt_datum_tm");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public CrmDateTime sgt_datum_vanaf
 		{
 			get
@@ -159,8 +217,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_datum_vanafField = value;
+				base.RaisePropertyChanged("sgt_datum_vanaf");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public Lookup sgt_persoonid
 		{
 			get
@@ -170,8 +231,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_persoonidField = value;
+				base.RaisePropertyChanged("sgt_persoonid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public Picklist sgt_soort_controle
 		{
 			get
@@ -181,8 +245,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_soort_controleField = value;
+				base.RaisePropertyChanged("sgt_soort_controle");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=14)]
 		public Lookup sgt_verenigingid
 		{
 			get
@@ -192,8 +259,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_verenigingidField = value;
+				base.RaisePropertyChanged("sgt_verenigingid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public Lookup sgt_wedstrijdgegevensid
 		{
 			get
@@ -203,8 +273,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_wedstrijdgegevensidField = value;
+				base.RaisePropertyChanged("sgt_wedstrijdgegevensid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=16)]
 		public Sgt_com_bezoek_consulStateInfo statecode
 		{
 			get
@@ -214,8 +287,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statecodeField = value;
+				base.RaisePropertyChanged("statecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=17)]
 		public Status statuscode
 		{
 			get
@@ -225,8 +301,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statuscodeField = value;
+				base.RaisePropertyChanged("statuscode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=18)]
 		public CrmNumber timezoneruleversionnumber
 		{
 			get
@@ -236,8 +315,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.timezoneruleversionnumberField = value;
+				base.RaisePropertyChanged("timezoneruleversionnumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=19)]
 		public CrmNumber utcconversiontimezonecode
 		{
 			get
@@ -247,7 +329,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.utcconversiontimezonecodeField = value;
+				base.RaisePropertyChanged("utcconversiontimezonecode");
 			}
+		}
+
+		public sgt_com_bezoek_consul()
+		{
 		}
 	}
 }

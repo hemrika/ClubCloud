@@ -3,40 +3,73 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class list : BusinessEntity
 	{
 		private CrmMoney costField;
+
 		private CrmMoney cost_baseField;
+
 		private Lookup createdbyField;
+
 		private Picklist createdfromcodeField;
+
 		private CrmDateTime createdonField;
+
 		private string descriptionField;
+
 		private CrmBoolean donotsendonoptoutField;
+
 		private CrmDecimal exchangerateField;
+
 		private CrmBoolean ignoreinactivelistmembersField;
+
 		private CrmNumber importsequencenumberField;
+
 		private CrmDateTime lastusedonField;
+
 		private Key listidField;
+
 		private string listnameField;
+
 		private CrmBoolean lockstatusField;
+
 		private CrmNumber membercountField;
+
 		private CrmNumber membertypeField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private CrmDateTime overriddencreatedonField;
+
 		private Owner owneridField;
+
 		private Lookup owningbusinessunitField;
+
 		private string purposeField;
+
 		private string sourceField;
+
 		private ListStateInfo statecodeField;
+
 		private Status statuscodeField;
+
 		private CrmNumber timezoneruleversionnumberField;
+
 		private Lookup transactioncurrencyidField;
+
 		private CrmNumber utcconversiontimezonecodeField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public CrmMoney cost
 		{
 			get
@@ -46,8 +79,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.costField = value;
+				base.RaisePropertyChanged("cost");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public CrmMoney cost_base
 		{
 			get
@@ -57,8 +93,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.cost_baseField = value;
+				base.RaisePropertyChanged("cost_base");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public Lookup createdby
 		{
 			get
@@ -68,8 +107,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public Picklist createdfromcode
 		{
 			get
@@ -79,8 +121,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdfromcodeField = value;
+				base.RaisePropertyChanged("createdfromcode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmDateTime createdon
 		{
 			get
@@ -90,8 +135,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public string description
 		{
 			get
@@ -101,8 +149,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.descriptionField = value;
+				base.RaisePropertyChanged("description");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public CrmBoolean donotsendonoptout
 		{
 			get
@@ -112,8 +163,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.donotsendonoptoutField = value;
+				base.RaisePropertyChanged("donotsendonoptout");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public CrmDecimal exchangerate
 		{
 			get
@@ -123,8 +177,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.exchangerateField = value;
+				base.RaisePropertyChanged("exchangerate");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public CrmBoolean ignoreinactivelistmembers
 		{
 			get
@@ -134,8 +191,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.ignoreinactivelistmembersField = value;
+				base.RaisePropertyChanged("ignoreinactivelistmembers");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public CrmNumber importsequencenumber
 		{
 			get
@@ -145,8 +205,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importsequencenumberField = value;
+				base.RaisePropertyChanged("importsequencenumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public CrmDateTime lastusedon
 		{
 			get
@@ -156,8 +219,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.lastusedonField = value;
+				base.RaisePropertyChanged("lastusedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public Key listid
 		{
 			get
@@ -167,8 +233,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.listidField = value;
+				base.RaisePropertyChanged("listid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public string listname
 		{
 			get
@@ -178,8 +247,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.listnameField = value;
+				base.RaisePropertyChanged("listname");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public CrmBoolean lockstatus
 		{
 			get
@@ -189,8 +261,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.lockstatusField = value;
+				base.RaisePropertyChanged("lockstatus");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=14)]
 		public CrmNumber membercount
 		{
 			get
@@ -200,8 +275,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.membercountField = value;
+				base.RaisePropertyChanged("membercount");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public CrmNumber membertype
 		{
 			get
@@ -211,8 +289,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.membertypeField = value;
+				base.RaisePropertyChanged("membertype");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=16)]
 		public Lookup modifiedby
 		{
 			get
@@ -222,8 +303,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=17)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -233,8 +317,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=18)]
 		public CrmDateTime overriddencreatedon
 		{
 			get
@@ -244,8 +331,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.overriddencreatedonField = value;
+				base.RaisePropertyChanged("overriddencreatedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=19)]
 		public Owner ownerid
 		{
 			get
@@ -255,8 +345,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owneridField = value;
+				base.RaisePropertyChanged("ownerid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=20)]
 		public Lookup owningbusinessunit
 		{
 			get
@@ -266,8 +359,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owningbusinessunitField = value;
+				base.RaisePropertyChanged("owningbusinessunit");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=21)]
 		public string purpose
 		{
 			get
@@ -277,8 +373,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.purposeField = value;
+				base.RaisePropertyChanged("purpose");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=22)]
 		public string source
 		{
 			get
@@ -288,8 +387,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sourceField = value;
+				base.RaisePropertyChanged("source");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=23)]
 		public ListStateInfo statecode
 		{
 			get
@@ -299,8 +401,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statecodeField = value;
+				base.RaisePropertyChanged("statecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=24)]
 		public Status statuscode
 		{
 			get
@@ -310,8 +415,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statuscodeField = value;
+				base.RaisePropertyChanged("statuscode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=25)]
 		public CrmNumber timezoneruleversionnumber
 		{
 			get
@@ -321,8 +429,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.timezoneruleversionnumberField = value;
+				base.RaisePropertyChanged("timezoneruleversionnumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=26)]
 		public Lookup transactioncurrencyid
 		{
 			get
@@ -332,8 +443,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.transactioncurrencyidField = value;
+				base.RaisePropertyChanged("transactioncurrencyid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=27)]
 		public CrmNumber utcconversiontimezonecode
 		{
 			get
@@ -343,7 +457,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.utcconversiontimezonecodeField = value;
+				base.RaisePropertyChanged("utcconversiontimezonecode");
 			}
+		}
+
+		public list()
+		{
 		}
 	}
 }

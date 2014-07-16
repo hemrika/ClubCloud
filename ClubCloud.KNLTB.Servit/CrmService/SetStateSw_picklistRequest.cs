@@ -3,15 +3,23 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class SetStateSw_picklistRequest : Request
 	{
 		private Guid entityIdField;
-		private Sw_picklistState sw_picklistStateField;
+
+		private ClubCloud.KNLTB.ServIt.CrmService.Sw_picklistState sw_picklistStateField;
+
 		private int sw_picklistStatusField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Guid EntityId
 		{
 			get
@@ -21,9 +29,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.entityIdField = value;
+				base.RaisePropertyChanged("EntityId");
 			}
 		}
-		public Sw_picklistState Sw_picklistState
+
+		[XmlElement] //[XmlElement(Order=1)]
+		public ClubCloud.KNLTB.ServIt.CrmService.Sw_picklistState Sw_picklistState
 		{
 			get
 			{
@@ -32,8 +43,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_picklistStateField = value;
+				base.RaisePropertyChanged("Sw_picklistState");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public int Sw_picklistStatus
 		{
 			get
@@ -43,7 +57,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_picklistStatusField = value;
+				base.RaisePropertyChanged("Sw_picklistStatus");
 			}
+		}
+
+		public SetStateSw_picklistRequest()
+		{
 		}
 	}
 }

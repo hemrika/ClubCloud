@@ -2,14 +2,37 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlInclude(typeof(PicklistProperty)), XmlInclude(typeof(StringProperty)), XmlInclude(typeof(StatusProperty)), XmlInclude(typeof(StateProperty)), XmlInclude(typeof(UniqueIdentifierProperty)), XmlInclude(typeof(OwnerProperty)), XmlInclude(typeof(LookupProperty)), XmlInclude(typeof(KeyProperty)), XmlInclude(typeof(EntityNameReferenceProperty)), XmlInclude(typeof(DynamicEntityArrayProperty)), XmlInclude(typeof(CustomerProperty)), XmlInclude(typeof(CrmNumberProperty)), XmlInclude(typeof(CrmMoneyProperty)), XmlInclude(typeof(CrmFloatProperty)), XmlInclude(typeof(CrmDecimalProperty)), XmlInclude(typeof(CrmDateTimeProperty)), XmlInclude(typeof(CrmBooleanProperty)), XmlType(Namespace = "http://schemas.microsoft.com/crm/2006/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	public abstract class Property
+	[XmlInclude(typeof(CrmBooleanProperty))]
+	[XmlInclude(typeof(CrmDateTimeProperty))]
+	[XmlInclude(typeof(CrmDecimalProperty))]
+	[XmlInclude(typeof(CrmFloatProperty))]
+	[XmlInclude(typeof(CrmMoneyProperty))]
+	[XmlInclude(typeof(CrmNumberProperty))]
+	[XmlInclude(typeof(CustomerProperty))]
+	[XmlInclude(typeof(DynamicEntityArrayProperty))]
+	[XmlInclude(typeof(EntityNameReferenceProperty))]
+	[XmlInclude(typeof(KeyProperty))]
+	[XmlInclude(typeof(LookupProperty))]
+	[XmlInclude(typeof(OwnerProperty))]
+	[XmlInclude(typeof(PicklistProperty))]
+	[XmlInclude(typeof(StateProperty))]
+	[XmlInclude(typeof(StatusProperty))]
+	[XmlInclude(typeof(StringProperty))]
+	[XmlInclude(typeof(UniqueIdentifierProperty))]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2006/WebServices")]
+	public abstract class Property : INotifyPropertyChanged
 	{
 		private string nameField;
+
 		[XmlAttribute]
 		public string Name
 		{
@@ -20,7 +43,23 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.nameField = value;
+				this.RaisePropertyChanged("Name");
 			}
 		}
+
+		protected Property()
+		{
+		}
+
+		protected void RaisePropertyChanged(string propertyName)
+		{
+			PropertyChangedEventHandler propertyChangedEventHandler = this.PropertyChanged;
+			if (propertyChangedEventHandler != null)
+			{
+				propertyChangedEventHandler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

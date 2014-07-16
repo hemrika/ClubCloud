@@ -1148,6 +1148,8 @@
     <Compile Include="CrmService\SetStateSgt_bo_voorkeur_testdagResponse.cs" />
     <Compile Include="CrmService\SetStateSgt_bo_vooropleidingRequest.cs" />
     <Compile Include="CrmService\SetStateSgt_bo_vooropleidingResponse.cs" />
+    <Compile Include="CrmService\SetStateSgt_com_aantal_afdelingenRequest.cs" />
+    <Compile Include="CrmService\SetStateSgt_com_aantal_afdelingenResponse.cs" />
     <Compile Include="CrmService\SetStateSgt_com_afdelingRequest.cs" />
     <Compile Include="CrmService\SetStateSgt_com_afdelingResponse.cs" />
     <Compile Include="CrmService\SetStateSgt_com_baan_gereserveerd_competitieRequest.cs" />
@@ -2032,6 +2034,9 @@
     <Compile Include="CrmService\sgt_bo_vooropleiding.cs" />
     <Compile Include="CrmService\Sgt_bo_vooropleidingState.cs" />
     <Compile Include="CrmService\Sgt_bo_vooropleidingStateInfo.cs" />
+    <Compile Include="CrmService\sgt_com_aantal_afdelingen.cs" />
+    <Compile Include="CrmService\Sgt_com_aantal_afdelingenState.cs" />
+    <Compile Include="CrmService\Sgt_com_aantal_afdelingenStateInfo.cs" />
     <Compile Include="CrmService\sgt_com_afdeling.cs" />
     <Compile Include="CrmService\Sgt_com_afdelingState.cs" />
     <Compile Include="CrmService\Sgt_com_afdelingStateInfo.cs" />
@@ -2933,6 +2938,7 @@
     <Compile Include="CrmService\TargetCreateSgt_bo_voorkeur_opleidingsgroep.cs" />
     <Compile Include="CrmService\TargetCreateSgt_bo_voorkeur_testdag.cs" />
     <Compile Include="CrmService\TargetCreateSgt_bo_vooropleiding.cs" />
+    <Compile Include="CrmService\TargetCreateSgt_com_aantal_afdelingen.cs" />
     <Compile Include="CrmService\TargetCreateSgt_com_afdeling.cs" />
     <Compile Include="CrmService\TargetCreateSgt_com_baan_gereserveerd_competitie.cs" />
     <Compile Include="CrmService\TargetCreateSgt_com_beslissingswedstrijd.cs" />
@@ -3405,6 +3411,7 @@
     <Compile Include="CrmService\TargetDeleteSgt_bo_voorkeur_opleidingsgroep.cs" />
     <Compile Include="CrmService\TargetDeleteSgt_bo_voorkeur_testdag.cs" />
     <Compile Include="CrmService\TargetDeleteSgt_bo_vooropleiding.cs" />
+    <Compile Include="CrmService\TargetDeleteSgt_com_aantal_afdelingen.cs" />
     <Compile Include="CrmService\TargetDeleteSgt_com_afdeling.cs" />
     <Compile Include="CrmService\TargetDeleteSgt_com_baan_gereserveerd_competitie.cs" />
     <Compile Include="CrmService\TargetDeleteSgt_com_beslissingswedstrijd.cs" />
@@ -4204,6 +4211,7 @@
     <Compile Include="CrmService\TargetRetrieveSgt_bo_voorkeur_opleidingsgroep.cs" />
     <Compile Include="CrmService\TargetRetrieveSgt_bo_voorkeur_testdag.cs" />
     <Compile Include="CrmService\TargetRetrieveSgt_bo_vooropleiding.cs" />
+    <Compile Include="CrmService\TargetRetrieveSgt_com_aantal_afdelingen.cs" />
     <Compile Include="CrmService\TargetRetrieveSgt_com_afdeling.cs" />
     <Compile Include="CrmService\TargetRetrieveSgt_com_baan_gereserveerd_competitie.cs" />
     <Compile Include="CrmService\TargetRetrieveSgt_com_beslissingswedstrijd.cs" />
@@ -4705,6 +4713,7 @@
     <Compile Include="CrmService\TargetUpdateSgt_bo_voorkeur_opleidingsgroep.cs" />
     <Compile Include="CrmService\TargetUpdateSgt_bo_voorkeur_testdag.cs" />
     <Compile Include="CrmService\TargetUpdateSgt_bo_vooropleiding.cs" />
+    <Compile Include="CrmService\TargetUpdateSgt_com_aantal_afdelingen.cs" />
     <Compile Include="CrmService\TargetUpdateSgt_com_afdeling.cs" />
     <Compile Include="CrmService\TargetUpdateSgt_com_baan_gereserveerd_competitie.cs" />
     <Compile Include="CrmService\TargetUpdateSgt_com_beslissingswedstrijd.cs" />

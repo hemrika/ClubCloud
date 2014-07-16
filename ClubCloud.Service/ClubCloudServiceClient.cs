@@ -253,7 +253,7 @@ namespace ClubCloud.Service
                 this.ExecuteOnChannel<IClubCloudApplicationService>(
                     delegate(IClubCloudApplicationService channel)
                     {
-                        response = channel.GetBestuurForVereniging(bondsnummer, verenigingId, refresh);
+                        //response = channel.GetBestuurForVereniging(bondsnummer, verenigingId, refresh);
                     },
                     false);
 
@@ -264,9 +264,9 @@ namespace ClubCloud.Service
 
         }
 
-        public ClubCloud_Vereniging_Accomodatie GetAccommodatieForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false)
+        public ClubCloud_Accomodatie GetAccommodatieForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
-            ClubCloud_Vereniging_Accomodatie response = null;
+            ClubCloud_Accomodatie response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
@@ -309,6 +309,7 @@ namespace ClubCloud.Service
 
         }
 
+        /*
         public List<ClubCloud_District> GetDistricten(string user)
         {
             List<ClubCloud_District> response = null;
@@ -323,6 +324,7 @@ namespace ClubCloud.Service
             return response;
 
         }
+        */
 
         public bool CreateClubCloudWebSite(string verenigingsnummer)
         {

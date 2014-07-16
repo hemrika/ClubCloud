@@ -97,6 +97,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
@@ -150,9 +151,6 @@
     <Compile Include="ClubCloudApplicationService.cs" />
     <Compile Include="IClubCloudClientService.cs" />
     <Compile Include="IClubCloudApplicationService.cs" />
-    <Compile Include="Model\Adres.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\ClubCloudModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,62 +166,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClubCloudModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\ClubCloud_Abonnement.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Accomodatie.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_District.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Gebruiker.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Gebruiker_Abonement.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Gebruiker_Vereniging.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Nationaliteit.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Setting.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Tracking.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Vereniging.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Vereniging_Accomodatie.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Vereniging_BestuursLid.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Vereniging_Competitie.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Vereniging_Toernooi.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Facebook.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Financieel.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Privacy.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\SpelersProfiel.cs" />
     <Compile Include="Model\SpelerTracking.cs" />
-    <Compile Include="Model\Twitter.cs">
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Powershell\NewClubCloudServiceApplication.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplicationProxy.cs" />
     <Compile Include="Powershell\RemoveClubCloudService.cs" />

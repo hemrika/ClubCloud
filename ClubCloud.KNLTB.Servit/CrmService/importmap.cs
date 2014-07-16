@@ -3,31 +3,55 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class importmap : BusinessEntity
 	{
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private string descriptionField;
+
 		private Key importmapidField;
+
 		private Picklist importmaptypeField;
+
 		private CrmBoolean isvalidforimportField;
+
 		private CrmBoolean iswizardcreatedField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private string nameField;
+
 		private Owner owneridField;
+
 		private Lookup owningbusinessunitField;
+
 		private string sourceField;
+
 		private string sourceuseridentifierforsourcecrmuserlinkField;
+
 		private string sourceuseridentifierforsourcedatasourceuserlinkField;
+
 		private ImportMapStateInfo statecodeField;
+
 		private Status statuscodeField;
+
 		private Picklist targetentityField;
+
 		private string targetuseridentifierforsourcecrmuserlinkField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Lookup createdby
 		{
 			get
@@ -37,8 +61,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public CrmDateTime createdon
 		{
 			get
@@ -48,8 +75,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public string description
 		{
 			get
@@ -59,8 +89,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.descriptionField = value;
+				base.RaisePropertyChanged("description");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public Key importmapid
 		{
 			get
@@ -70,8 +103,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importmapidField = value;
+				base.RaisePropertyChanged("importmapid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public Picklist importmaptype
 		{
 			get
@@ -81,8 +117,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importmaptypeField = value;
+				base.RaisePropertyChanged("importmaptype");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public CrmBoolean isvalidforimport
 		{
 			get
@@ -92,8 +131,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.isvalidforimportField = value;
+				base.RaisePropertyChanged("isvalidforimport");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public CrmBoolean iswizardcreated
 		{
 			get
@@ -103,8 +145,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.iswizardcreatedField = value;
+				base.RaisePropertyChanged("iswizardcreated");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public Lookup modifiedby
 		{
 			get
@@ -114,8 +159,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -125,8 +173,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public string name
 		{
 			get
@@ -136,8 +187,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.nameField = value;
+				base.RaisePropertyChanged("name");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public Owner ownerid
 		{
 			get
@@ -147,8 +201,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owneridField = value;
+				base.RaisePropertyChanged("ownerid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public Lookup owningbusinessunit
 		{
 			get
@@ -158,8 +215,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owningbusinessunitField = value;
+				base.RaisePropertyChanged("owningbusinessunit");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public string source
 		{
 			get
@@ -169,8 +229,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sourceField = value;
+				base.RaisePropertyChanged("source");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public string sourceuseridentifierforsourcecrmuserlink
 		{
 			get
@@ -180,8 +243,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sourceuseridentifierforsourcecrmuserlinkField = value;
+				base.RaisePropertyChanged("sourceuseridentifierforsourcecrmuserlink");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=14)]
 		public string sourceuseridentifierforsourcedatasourceuserlink
 		{
 			get
@@ -191,8 +257,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sourceuseridentifierforsourcedatasourceuserlinkField = value;
+				base.RaisePropertyChanged("sourceuseridentifierforsourcedatasourceuserlink");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public ImportMapStateInfo statecode
 		{
 			get
@@ -202,8 +271,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statecodeField = value;
+				base.RaisePropertyChanged("statecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=16)]
 		public Status statuscode
 		{
 			get
@@ -213,8 +285,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statuscodeField = value;
+				base.RaisePropertyChanged("statuscode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=17)]
 		public Picklist targetentity
 		{
 			get
@@ -224,8 +299,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.targetentityField = value;
+				base.RaisePropertyChanged("targetentity");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=18)]
 		public string targetuseridentifierforsourcecrmuserlink
 		{
 			get
@@ -235,7 +313,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.targetuseridentifierforsourcecrmuserlinkField = value;
+				base.RaisePropertyChanged("targetuseridentifierforsourcecrmuserlink");
 			}
+		}
+
+		public importmap()
+		{
 		}
 	}
 }

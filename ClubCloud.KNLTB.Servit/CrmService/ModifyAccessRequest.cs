@@ -3,14 +3,35 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class ModifyAccessRequest : Request
 	{
 		private TargetOwned targetField;
-		private PrincipalAccess principalAccessField;
+
+		private ClubCloud.KNLTB.ServIt.CrmService.PrincipalAccess principalAccessField;
+
+		[XmlElement] //[XmlElement(Order=1)]
+		public ClubCloud.KNLTB.ServIt.CrmService.PrincipalAccess PrincipalAccess
+		{
+			get
+			{
+				return this.principalAccessField;
+			}
+			set
+			{
+				this.principalAccessField = value;
+				base.RaisePropertyChanged("PrincipalAccess");
+			}
+		}
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public TargetOwned Target
 		{
 			get
@@ -20,18 +41,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.targetField = value;
+				base.RaisePropertyChanged("Target");
 			}
 		}
-		public PrincipalAccess PrincipalAccess
+
+		public ModifyAccessRequest()
 		{
-			get
-			{
-				return this.principalAccessField;
-			}
-			set
-			{
-				this.principalAccessField = value;
-			}
 		}
 	}
 }

@@ -25,8 +25,10 @@ namespace ClubCloud.Service
 
         #region MetaData
 
+        /*
         [OperationContract]
         string GetPostcode(string postcode, int huisnummer);
+        */
 
         [OperationContract]
         void CheckDatabaseExists();
@@ -99,21 +101,23 @@ namespace ClubCloud.Service
         ClubCloud_Vereniging GetVerenigingByNummer(string bondsnummer, string vereniginsnummer, bool refresh = false);
 
         [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Vereniging_Accomodatie))]
-        ClubCloud_Vereniging_Accomodatie GetAccommodatieForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false);
+        [ServiceKnownType(typeof(ClubCloud_Accomodatie))]
+        ClubCloud_Accomodatie GetAccommodatieForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Accomodatie))]
         ClubCloud_Accomodatie GetAccommodatie(string bondsnummer, Guid accommodatieId, bool refresh = false);
 
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging_BestuursLid))]
         List<ClubCloud_Vereniging_BestuursLid> GetBestuurForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false);
-
+        */
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_District))]
         List<ClubCloud_District> GetDistricten(string bondsnummer, bool refresh = false);
-
+        */
         #endregion
 
         #region Competitie

@@ -3,15 +3,23 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class SetStateSgt_toe_toernooiRequest : Request
 	{
 		private Guid entityIdField;
-		private Sgt_toe_toernooiState sgt_toe_toernooiStateField;
+
+		private ClubCloud.KNLTB.ServIt.CrmService.Sgt_toe_toernooiState sgt_toe_toernooiStateField;
+
 		private int sgt_toe_toernooiStatusField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Guid EntityId
 		{
 			get
@@ -21,9 +29,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.entityIdField = value;
+				base.RaisePropertyChanged("EntityId");
 			}
 		}
-		public Sgt_toe_toernooiState Sgt_toe_toernooiState
+
+		[XmlElement] //[XmlElement(Order=1)]
+		public ClubCloud.KNLTB.ServIt.CrmService.Sgt_toe_toernooiState Sgt_toe_toernooiState
 		{
 			get
 			{
@@ -32,8 +43,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_toe_toernooiStateField = value;
+				base.RaisePropertyChanged("Sgt_toe_toernooiState");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public int Sgt_toe_toernooiStatus
 		{
 			get
@@ -43,7 +57,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_toe_toernooiStatusField = value;
+				base.RaisePropertyChanged("Sgt_toe_toernooiStatus");
 			}
+		}
+
+		public SetStateSgt_toe_toernooiRequest()
+		{
 		}
 	}
 }

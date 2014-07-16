@@ -3,28 +3,49 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class wfprocess : BusinessEntity
 	{
 		private Lookup businessunitidField;
+
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private string descriptionField;
+
 		private string entitytypeField;
+
 		private Picklist eventtypecodeField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private string nameField;
+
 		private CrmNumber priorityField;
+
 		private Picklist processcodeField;
+
 		private Key processidField;
+
 		private Picklist processtypecodeField;
+
 		private CrmNumber processtypeversionField;
+
 		private WFProcessStateInfo statecodeField;
+
 		private Lookup usercontextField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Lookup businessunitid
 		{
 			get
@@ -34,8 +55,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.businessunitidField = value;
+				base.RaisePropertyChanged("businessunitid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public Lookup createdby
 		{
 			get
@@ -45,8 +69,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public CrmDateTime createdon
 		{
 			get
@@ -56,8 +83,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public string description
 		{
 			get
@@ -67,8 +97,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.descriptionField = value;
+				base.RaisePropertyChanged("description");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public string entitytype
 		{
 			get
@@ -78,8 +111,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.entitytypeField = value;
+				base.RaisePropertyChanged("entitytype");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public Picklist eventtypecode
 		{
 			get
@@ -89,8 +125,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.eventtypecodeField = value;
+				base.RaisePropertyChanged("eventtypecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public Lookup modifiedby
 		{
 			get
@@ -100,8 +139,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -111,8 +153,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public string name
 		{
 			get
@@ -122,8 +167,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.nameField = value;
+				base.RaisePropertyChanged("name");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public CrmNumber priority
 		{
 			get
@@ -133,8 +181,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.priorityField = value;
+				base.RaisePropertyChanged("priority");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public Picklist processcode
 		{
 			get
@@ -144,8 +195,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.processcodeField = value;
+				base.RaisePropertyChanged("processcode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public Key processid
 		{
 			get
@@ -155,8 +209,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.processidField = value;
+				base.RaisePropertyChanged("processid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public Picklist processtypecode
 		{
 			get
@@ -166,8 +223,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.processtypecodeField = value;
+				base.RaisePropertyChanged("processtypecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public CrmNumber processtypeversion
 		{
 			get
@@ -177,8 +237,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.processtypeversionField = value;
+				base.RaisePropertyChanged("processtypeversion");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=14)]
 		public WFProcessStateInfo statecode
 		{
 			get
@@ -188,8 +251,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statecodeField = value;
+				base.RaisePropertyChanged("statecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public Lookup usercontext
 		{
 			get
@@ -199,7 +265,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.usercontextField = value;
+				base.RaisePropertyChanged("usercontext");
 			}
+		}
+
+		public wfprocess()
+		{
 		}
 	}
 }

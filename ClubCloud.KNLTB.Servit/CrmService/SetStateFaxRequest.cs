@@ -3,15 +3,23 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class SetStateFaxRequest : Request
 	{
 		private Guid entityIdField;
-		private FaxState faxStateField;
+
+		private ClubCloud.KNLTB.ServIt.CrmService.FaxState faxStateField;
+
 		private int faxStatusField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Guid EntityId
 		{
 			get
@@ -21,9 +29,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.entityIdField = value;
+				base.RaisePropertyChanged("EntityId");
 			}
 		}
-		public FaxState FaxState
+
+		[XmlElement] //[XmlElement(Order=1)]
+		public ClubCloud.KNLTB.ServIt.CrmService.FaxState FaxState
 		{
 			get
 			{
@@ -32,8 +43,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.faxStateField = value;
+				base.RaisePropertyChanged("FaxState");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public int FaxStatus
 		{
 			get
@@ -43,7 +57,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.faxStatusField = value;
+				base.RaisePropertyChanged("FaxStatus");
 			}
+		}
+
+		public SetStateFaxRequest()
+		{
 		}
 	}
 }

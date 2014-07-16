@@ -1,10 +1,12 @@
 using System;
 using System.CodeDom.Compiler;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public enum EntityName
 	{
 		none,
@@ -269,6 +271,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 		sgt_bo_voorkeur_opleidingsgroep,
 		sgt_bo_voorkeur_testdag,
 		sgt_bo_vooropleiding,
+		sgt_com_aantal_afdelingen,
 		sgt_com_afdeling,
 		sgt_com_baan_gereserveerd_competitie,
 		sgt_com_beslissingswedstrijd,

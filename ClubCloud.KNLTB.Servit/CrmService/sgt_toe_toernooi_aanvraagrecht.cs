@@ -3,32 +3,57 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class sgt_toe_toernooi_aanvraagrecht : BusinessEntity
 	{
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private CrmNumber importsequencenumberField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private CrmDateTime overriddencreatedonField;
+
 		private Owner owneridField;
+
 		private Lookup owningbusinessunitField;
+
 		private Lookup sgt_aanvraagformulier_dagtoernooi_idField;
+
 		private Lookup sgt_aanvraagformulieridField;
+
 		private Lookup sgt_bondsorganisatieidField;
+
 		private string sgt_toe_toernooi_aanvraagrecht1Field;
+
 		private Key sgt_toe_toernooi_aanvraagrechtidField;
+
 		private Lookup sgt_toernooiorganisatieidField;
+
 		private Lookup sgt_toernooisoortidField;
+
 		private CrmBoolean sgt_vorig_jaarField;
+
 		private Sgt_toe_toernooi_aanvraagrechtStateInfo statecodeField;
+
 		private Status statuscodeField;
+
 		private CrmNumber timezoneruleversionnumberField;
+
 		private CrmNumber utcconversiontimezonecodeField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Lookup createdby
 		{
 			get
@@ -38,8 +63,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public CrmDateTime createdon
 		{
 			get
@@ -49,8 +77,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public CrmNumber importsequencenumber
 		{
 			get
@@ -60,8 +91,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importsequencenumberField = value;
+				base.RaisePropertyChanged("importsequencenumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public Lookup modifiedby
 		{
 			get
@@ -71,8 +105,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -82,8 +119,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public CrmDateTime overriddencreatedon
 		{
 			get
@@ -93,8 +133,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.overriddencreatedonField = value;
+				base.RaisePropertyChanged("overriddencreatedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public Owner ownerid
 		{
 			get
@@ -104,8 +147,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owneridField = value;
+				base.RaisePropertyChanged("ownerid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public Lookup owningbusinessunit
 		{
 			get
@@ -115,8 +161,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owningbusinessunitField = value;
+				base.RaisePropertyChanged("owningbusinessunit");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public Lookup sgt_aanvraagformulier_dagtoernooi_id
 		{
 			get
@@ -126,8 +175,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_aanvraagformulier_dagtoernooi_idField = value;
+				base.RaisePropertyChanged("sgt_aanvraagformulier_dagtoernooi_id");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public Lookup sgt_aanvraagformulierid
 		{
 			get
@@ -137,8 +189,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_aanvraagformulieridField = value;
+				base.RaisePropertyChanged("sgt_aanvraagformulierid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public Lookup sgt_bondsorganisatieid
 		{
 			get
@@ -148,9 +203,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_bondsorganisatieidField = value;
+				base.RaisePropertyChanged("sgt_bondsorganisatieid");
 			}
 		}
-		[XmlElement("sgt_toe_toernooi_aanvraagrecht")]
+
+		[XmlElement("sgt_toe_toernooi_aanvraagrecht")] //, Order=11)]
 		public string sgt_toe_toernooi_aanvraagrecht1
 		{
 			get
@@ -160,8 +217,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_toe_toernooi_aanvraagrecht1Field = value;
+				base.RaisePropertyChanged("sgt_toe_toernooi_aanvraagrecht1");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public Key sgt_toe_toernooi_aanvraagrechtid
 		{
 			get
@@ -171,8 +231,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_toe_toernooi_aanvraagrechtidField = value;
+				base.RaisePropertyChanged("sgt_toe_toernooi_aanvraagrechtid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public Lookup sgt_toernooiorganisatieid
 		{
 			get
@@ -182,8 +245,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_toernooiorganisatieidField = value;
+				base.RaisePropertyChanged("sgt_toernooiorganisatieid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=14)]
 		public Lookup sgt_toernooisoortid
 		{
 			get
@@ -193,8 +259,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_toernooisoortidField = value;
+				base.RaisePropertyChanged("sgt_toernooisoortid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public CrmBoolean sgt_vorig_jaar
 		{
 			get
@@ -204,8 +273,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_vorig_jaarField = value;
+				base.RaisePropertyChanged("sgt_vorig_jaar");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=16)]
 		public Sgt_toe_toernooi_aanvraagrechtStateInfo statecode
 		{
 			get
@@ -215,8 +287,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statecodeField = value;
+				base.RaisePropertyChanged("statecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=17)]
 		public Status statuscode
 		{
 			get
@@ -226,8 +301,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statuscodeField = value;
+				base.RaisePropertyChanged("statuscode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=18)]
 		public CrmNumber timezoneruleversionnumber
 		{
 			get
@@ -237,8 +315,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.timezoneruleversionnumberField = value;
+				base.RaisePropertyChanged("timezoneruleversionnumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=19)]
 		public CrmNumber utcconversiontimezonecode
 		{
 			get
@@ -248,7 +329,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.utcconversiontimezonecodeField = value;
+				base.RaisePropertyChanged("utcconversiontimezonecode");
 			}
+		}
+
+		public sgt_toe_toernooi_aanvraagrecht()
+		{
 		}
 	}
 }

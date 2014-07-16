@@ -3,32 +3,57 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class salesliteratureitem : BusinessEntity
 	{
 		private string abstractField;
+
 		private string attacheddocumenturlField;
+
 		private string authornameField;
+
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private string documentbodyField;
+
 		private string filenameField;
+
 		private CrmNumber filesizeField;
+
 		private Picklist filetypecodeField;
+
 		private CrmNumber importsequencenumberField;
+
 		private CrmBoolean iscustomerviewableField;
+
 		private string keywordsField;
+
 		private string mimetypeField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private UniqueIdentifier organizationidField;
+
 		private CrmDateTime overriddencreatedonField;
+
 		private Lookup salesliteratureidField;
+
 		private Key salesliteratureitemidField;
+
 		private string titleField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public string @abstract
 		{
 			get
@@ -38,8 +63,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.abstractField = value;
+				base.RaisePropertyChanged("abstract");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public string attacheddocumenturl
 		{
 			get
@@ -49,8 +77,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.attacheddocumenturlField = value;
+				base.RaisePropertyChanged("attacheddocumenturl");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public string authorname
 		{
 			get
@@ -60,8 +91,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.authornameField = value;
+				base.RaisePropertyChanged("authorname");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public Lookup createdby
 		{
 			get
@@ -71,8 +105,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmDateTime createdon
 		{
 			get
@@ -82,8 +119,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public string documentbody
 		{
 			get
@@ -93,8 +133,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.documentbodyField = value;
+				base.RaisePropertyChanged("documentbody");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public string filename
 		{
 			get
@@ -104,8 +147,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.filenameField = value;
+				base.RaisePropertyChanged("filename");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public CrmNumber filesize
 		{
 			get
@@ -115,8 +161,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.filesizeField = value;
+				base.RaisePropertyChanged("filesize");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public Picklist filetypecode
 		{
 			get
@@ -126,8 +175,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.filetypecodeField = value;
+				base.RaisePropertyChanged("filetypecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public CrmNumber importsequencenumber
 		{
 			get
@@ -137,8 +189,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importsequencenumberField = value;
+				base.RaisePropertyChanged("importsequencenumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public CrmBoolean iscustomerviewable
 		{
 			get
@@ -148,8 +203,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.iscustomerviewableField = value;
+				base.RaisePropertyChanged("iscustomerviewable");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public string keywords
 		{
 			get
@@ -159,8 +217,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.keywordsField = value;
+				base.RaisePropertyChanged("keywords");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public string mimetype
 		{
 			get
@@ -170,8 +231,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.mimetypeField = value;
+				base.RaisePropertyChanged("mimetype");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public Lookup modifiedby
 		{
 			get
@@ -181,8 +245,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=14)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -192,8 +259,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public UniqueIdentifier organizationid
 		{
 			get
@@ -203,8 +273,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.organizationidField = value;
+				base.RaisePropertyChanged("organizationid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=16)]
 		public CrmDateTime overriddencreatedon
 		{
 			get
@@ -214,8 +287,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.overriddencreatedonField = value;
+				base.RaisePropertyChanged("overriddencreatedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=17)]
 		public Lookup salesliteratureid
 		{
 			get
@@ -225,8 +301,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.salesliteratureidField = value;
+				base.RaisePropertyChanged("salesliteratureid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=18)]
 		public Key salesliteratureitemid
 		{
 			get
@@ -236,8 +315,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.salesliteratureitemidField = value;
+				base.RaisePropertyChanged("salesliteratureitemid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=19)]
 		public string title
 		{
 			get
@@ -247,7 +329,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.titleField = value;
+				base.RaisePropertyChanged("title");
 			}
+		}
+
+		public salesliteratureitem()
+		{
 		}
 	}
 }

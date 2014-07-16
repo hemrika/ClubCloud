@@ -3,51 +3,95 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class sw_lookuplabels : BusinessEntity
 	{
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private CrmNumber importsequencenumberField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private Lookup organizationidField;
+
 		private CrmDateTime overriddencreatedonField;
+
 		private Sw_lookuplabelsStateInfo statecodeField;
+
 		private Status statuscodeField;
+
 		private string sw_cancelField;
+
 		private string sw_canceltooltipField;
+
 		private string sw_dialogtitleField;
+
 		private string sw_findbuttontooltipField;
+
 		private string sw_headingField;
+
 		private CrmNumber sw_languageField;
+
 		private string sw_loadfirstpageField;
+
 		private string sw_loadnextpageField;
+
 		private string sw_loadpreviouspageField;
+
 		private string sw_lookforField;
+
 		private Key sw_lookuplabelsidField;
+
 		private string sw_nameField;
+
 		private string sw_newField;
+
 		private string sw_newtooltipField;
+
 		private string sw_okField;
+
 		private string sw_oktooltipField;
+
 		private string sw_pageField;
+
 		private string sw_propertiesField;
+
 		private string sw_propertiestooltipField;
+
 		private string sw_refreshtooltipField;
+
 		private string sw_removeField;
+
 		private string sw_removetooltipField;
+
 		private string sw_rtl_ofField;
+
 		private string sw_rtl_selectedField;
+
 		private string sw_searchforrecordsField;
+
 		private string sw_selectedrecordsField;
+
 		private string sw_selectionField;
+
 		private string sw_subheadingField;
+
 		private CrmNumber timezoneruleversionnumberField;
+
 		private CrmNumber utcconversiontimezonecodeField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Lookup createdby
 		{
 			get
@@ -57,8 +101,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public CrmDateTime createdon
 		{
 			get
@@ -68,8 +115,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public CrmNumber importsequencenumber
 		{
 			get
@@ -79,8 +129,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importsequencenumberField = value;
+				base.RaisePropertyChanged("importsequencenumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public Lookup modifiedby
 		{
 			get
@@ -90,8 +143,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -101,8 +157,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public Lookup organizationid
 		{
 			get
@@ -112,8 +171,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.organizationidField = value;
+				base.RaisePropertyChanged("organizationid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public CrmDateTime overriddencreatedon
 		{
 			get
@@ -123,8 +185,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.overriddencreatedonField = value;
+				base.RaisePropertyChanged("overriddencreatedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public Sw_lookuplabelsStateInfo statecode
 		{
 			get
@@ -134,8 +199,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statecodeField = value;
+				base.RaisePropertyChanged("statecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public Status statuscode
 		{
 			get
@@ -145,8 +213,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statuscodeField = value;
+				base.RaisePropertyChanged("statuscode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public string sw_cancel
 		{
 			get
@@ -156,8 +227,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_cancelField = value;
+				base.RaisePropertyChanged("sw_cancel");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public string sw_canceltooltip
 		{
 			get
@@ -167,8 +241,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_canceltooltipField = value;
+				base.RaisePropertyChanged("sw_canceltooltip");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public string sw_dialogtitle
 		{
 			get
@@ -178,8 +255,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_dialogtitleField = value;
+				base.RaisePropertyChanged("sw_dialogtitle");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public string sw_findbuttontooltip
 		{
 			get
@@ -189,8 +269,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_findbuttontooltipField = value;
+				base.RaisePropertyChanged("sw_findbuttontooltip");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public string sw_heading
 		{
 			get
@@ -200,8 +283,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_headingField = value;
+				base.RaisePropertyChanged("sw_heading");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=14)]
 		public CrmNumber sw_language
 		{
 			get
@@ -211,8 +297,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_languageField = value;
+				base.RaisePropertyChanged("sw_language");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public string sw_loadfirstpage
 		{
 			get
@@ -222,8 +311,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_loadfirstpageField = value;
+				base.RaisePropertyChanged("sw_loadfirstpage");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=16)]
 		public string sw_loadnextpage
 		{
 			get
@@ -233,8 +325,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_loadnextpageField = value;
+				base.RaisePropertyChanged("sw_loadnextpage");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=17)]
 		public string sw_loadpreviouspage
 		{
 			get
@@ -244,8 +339,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_loadpreviouspageField = value;
+				base.RaisePropertyChanged("sw_loadpreviouspage");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=18)]
 		public string sw_lookfor
 		{
 			get
@@ -255,8 +353,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_lookforField = value;
+				base.RaisePropertyChanged("sw_lookfor");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=19)]
 		public Key sw_lookuplabelsid
 		{
 			get
@@ -266,8 +367,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_lookuplabelsidField = value;
+				base.RaisePropertyChanged("sw_lookuplabelsid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=20)]
 		public string sw_name
 		{
 			get
@@ -277,8 +381,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_nameField = value;
+				base.RaisePropertyChanged("sw_name");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=21)]
 		public string sw_new
 		{
 			get
@@ -288,8 +395,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_newField = value;
+				base.RaisePropertyChanged("sw_new");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=22)]
 		public string sw_newtooltip
 		{
 			get
@@ -299,8 +409,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_newtooltipField = value;
+				base.RaisePropertyChanged("sw_newtooltip");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=23)]
 		public string sw_ok
 		{
 			get
@@ -310,8 +423,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_okField = value;
+				base.RaisePropertyChanged("sw_ok");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=24)]
 		public string sw_oktooltip
 		{
 			get
@@ -321,8 +437,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_oktooltipField = value;
+				base.RaisePropertyChanged("sw_oktooltip");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=25)]
 		public string sw_page
 		{
 			get
@@ -332,8 +451,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_pageField = value;
+				base.RaisePropertyChanged("sw_page");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=26)]
 		public string sw_properties
 		{
 			get
@@ -343,8 +465,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_propertiesField = value;
+				base.RaisePropertyChanged("sw_properties");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=27)]
 		public string sw_propertiestooltip
 		{
 			get
@@ -354,8 +479,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_propertiestooltipField = value;
+				base.RaisePropertyChanged("sw_propertiestooltip");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=28)]
 		public string sw_refreshtooltip
 		{
 			get
@@ -365,8 +493,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_refreshtooltipField = value;
+				base.RaisePropertyChanged("sw_refreshtooltip");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=29)]
 		public string sw_remove
 		{
 			get
@@ -376,8 +507,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_removeField = value;
+				base.RaisePropertyChanged("sw_remove");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=30)]
 		public string sw_removetooltip
 		{
 			get
@@ -387,8 +521,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_removetooltipField = value;
+				base.RaisePropertyChanged("sw_removetooltip");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=31)]
 		public string sw_rtl_of
 		{
 			get
@@ -398,8 +535,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_rtl_ofField = value;
+				base.RaisePropertyChanged("sw_rtl_of");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=32)]
 		public string sw_rtl_selected
 		{
 			get
@@ -409,8 +549,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_rtl_selectedField = value;
+				base.RaisePropertyChanged("sw_rtl_selected");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=33)]
 		public string sw_searchforrecords
 		{
 			get
@@ -420,8 +563,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_searchforrecordsField = value;
+				base.RaisePropertyChanged("sw_searchforrecords");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=34)]
 		public string sw_selectedrecords
 		{
 			get
@@ -431,8 +577,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_selectedrecordsField = value;
+				base.RaisePropertyChanged("sw_selectedrecords");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=35)]
 		public string sw_selection
 		{
 			get
@@ -442,8 +591,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_selectionField = value;
+				base.RaisePropertyChanged("sw_selection");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=36)]
 		public string sw_subheading
 		{
 			get
@@ -453,8 +605,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sw_subheadingField = value;
+				base.RaisePropertyChanged("sw_subheading");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=37)]
 		public CrmNumber timezoneruleversionnumber
 		{
 			get
@@ -464,8 +619,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.timezoneruleversionnumberField = value;
+				base.RaisePropertyChanged("timezoneruleversionnumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=38)]
 		public CrmNumber utcconversiontimezonecode
 		{
 			get
@@ -475,7 +633,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.utcconversiontimezonecodeField = value;
+				base.RaisePropertyChanged("utcconversiontimezonecode");
 			}
+		}
+
+		public sw_lookuplabels()
+		{
 		}
 	}
 }

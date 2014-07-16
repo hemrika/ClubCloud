@@ -3,26 +3,45 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class kbarticletemplate : BusinessEntity
 	{
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private string descriptionField;
+
 		private string formatxmlField;
+
 		private CrmNumber importsequencenumberField;
+
 		private CrmBoolean isactiveField;
+
 		private Key kbarticletemplateidField;
+
 		private CrmNumber languagecodeField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private Lookup organizationidField;
+
 		private CrmDateTime overriddencreatedonField;
+
 		private string structurexmlField;
+
 		private string titleField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Lookup createdby
 		{
 			get
@@ -32,8 +51,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public CrmDateTime createdon
 		{
 			get
@@ -43,8 +65,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public string description
 		{
 			get
@@ -54,8 +79,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.descriptionField = value;
+				base.RaisePropertyChanged("description");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public string formatxml
 		{
 			get
@@ -65,8 +93,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.formatxmlField = value;
+				base.RaisePropertyChanged("formatxml");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmNumber importsequencenumber
 		{
 			get
@@ -76,8 +107,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importsequencenumberField = value;
+				base.RaisePropertyChanged("importsequencenumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public CrmBoolean isactive
 		{
 			get
@@ -87,8 +121,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.isactiveField = value;
+				base.RaisePropertyChanged("isactive");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public Key kbarticletemplateid
 		{
 			get
@@ -98,8 +135,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.kbarticletemplateidField = value;
+				base.RaisePropertyChanged("kbarticletemplateid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public CrmNumber languagecode
 		{
 			get
@@ -109,8 +149,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.languagecodeField = value;
+				base.RaisePropertyChanged("languagecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public Lookup modifiedby
 		{
 			get
@@ -120,8 +163,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -131,8 +177,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public Lookup organizationid
 		{
 			get
@@ -142,8 +191,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.organizationidField = value;
+				base.RaisePropertyChanged("organizationid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public CrmDateTime overriddencreatedon
 		{
 			get
@@ -153,8 +205,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.overriddencreatedonField = value;
+				base.RaisePropertyChanged("overriddencreatedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public string structurexml
 		{
 			get
@@ -164,8 +219,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.structurexmlField = value;
+				base.RaisePropertyChanged("structurexml");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public string title
 		{
 			get
@@ -175,7 +233,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.titleField = value;
+				base.RaisePropertyChanged("title");
 			}
+		}
+
+		public kbarticletemplate()
+		{
 		}
 	}
 }

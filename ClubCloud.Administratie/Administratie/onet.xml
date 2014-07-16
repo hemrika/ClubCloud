@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Title="Administratie" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" HideSiteContentsLink="true" DisableWebDesignFeatures="true" EnableMinimalDownload="true" SiteLogoDescription="Administratie" SiteLogoUrl="/_layouts/15/images/ClubCloud.Administratie/siteIcon.png" >
+  <NavBars>
+  </NavBars>
+  <Configurations>
+    <Configuration ID="0" Name="Administratie" Description="ClubCloud Administratie Site" Hidden="false" Title="Administratie">
+      <Lists/>
+      <SiteFeatures>
+        <Feature ID="16c867c9-183b-49f1-b92b-096887b61d06" Name="ClubCloud Administratie WebParts" />
+      </SiteFeatures>
+      <WebFeatures>
+      </WebFeatures>
+      <Modules>
+        <Module Name="Administratie" />
+      </Modules>
+    </Configuration>
+  </Configurations>
+  <Modules>
+    <Module Name="Administratie" Url="" Path="">
+      <File Url="Default.aspx">
+      </File>
+      <File Path="Rollen.aspx" Url="Rollen.aspx" />
+      <File Path="Leden.aspx" Url="Leden.aspx" />
+      <File Path="Groepen.aspx" Url="Groepen.aspx" />
+      <File Path="Facturatie.aspx" Url="Facturatie.aspx" />
+      <File Path="LidBekijken.aspx" Url="LidBekijken.aspx" />
+      <File Path="LidBewerken.aspx" Url="LidBewerken.aspx" />
+      <File Path="LidNieuw.aspx" Url="LidNieuw.aspx" />
+    </Module>
+  </Modules>
+</Project>

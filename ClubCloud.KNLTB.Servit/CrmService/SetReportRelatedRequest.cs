@@ -3,38 +3,25 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class SetReportRelatedRequest : Request
 	{
 		private Guid reportIdField;
+
 		private int[] entitiesField;
+
 		private int[] categoriesField;
+
 		private int[] visibilityField;
-		public Guid ReportId
-		{
-			get
-			{
-				return this.reportIdField;
-			}
-			set
-			{
-				this.reportIdField = value;
-			}
-		}
-		public int[] Entities
-		{
-			get
-			{
-				return this.entitiesField;
-			}
-			set
-			{
-				this.entitiesField = value;
-			}
-		}
+
+		[XmlArray] //[XmlArray(Order=2)]
 		public int[] Categories
 		{
 			get
@@ -44,8 +31,39 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.categoriesField = value;
+				base.RaisePropertyChanged("Categories");
 			}
 		}
+
+		[XmlArray] //[XmlArray(Order=1)]
+		public int[] Entities
+		{
+			get
+			{
+				return this.entitiesField;
+			}
+			set
+			{
+				this.entitiesField = value;
+				base.RaisePropertyChanged("Entities");
+			}
+		}
+
+		[XmlElement] //[XmlElement(Order=0)]
+		public Guid ReportId
+		{
+			get
+			{
+				return this.reportIdField;
+			}
+			set
+			{
+				this.reportIdField = value;
+				base.RaisePropertyChanged("ReportId");
+			}
+		}
+
+		[XmlArray] //[XmlArray(Order=3)]
 		public int[] Visibility
 		{
 			get
@@ -55,7 +73,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.visibilityField = value;
+				base.RaisePropertyChanged("Visibility");
 			}
+		}
+
+		public SetReportRelatedRequest()
+		{
 		}
 	}
 }

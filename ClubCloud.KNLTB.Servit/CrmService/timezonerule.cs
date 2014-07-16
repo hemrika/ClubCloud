@@ -3,38 +3,69 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class timezonerule : BusinessEntity
 	{
 		private CrmNumber biasField;
+
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private CrmNumber daylightbiasField;
+
 		private CrmNumber daylightdayField;
+
 		private CrmNumber daylightdayofweekField;
+
 		private CrmNumber daylighthourField;
+
 		private CrmNumber daylightminuteField;
+
 		private CrmNumber daylightmonthField;
+
 		private CrmNumber daylightsecondField;
+
 		private CrmNumber daylightyearField;
+
 		private CrmDateTime effectivedatetimeField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private Lookup organizationidField;
+
 		private CrmNumber standardbiasField;
+
 		private CrmNumber standarddayField;
+
 		private CrmNumber standarddayofweekField;
+
 		private CrmNumber standardhourField;
+
 		private CrmNumber standardminuteField;
+
 		private CrmNumber standardmonthField;
+
 		private CrmNumber standardsecondField;
+
 		private CrmNumber standardyearField;
+
 		private Lookup timezonedefinitionidField;
+
 		private Key timezoneruleidField;
+
 		private CrmNumber timezoneruleversionnumberField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public CrmNumber bias
 		{
 			get
@@ -44,8 +75,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.biasField = value;
+				base.RaisePropertyChanged("bias");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public Lookup createdby
 		{
 			get
@@ -55,8 +89,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public CrmDateTime createdon
 		{
 			get
@@ -66,8 +103,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public CrmNumber daylightbias
 		{
 			get
@@ -77,8 +117,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.daylightbiasField = value;
+				base.RaisePropertyChanged("daylightbias");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmNumber daylightday
 		{
 			get
@@ -88,8 +131,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.daylightdayField = value;
+				base.RaisePropertyChanged("daylightday");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public CrmNumber daylightdayofweek
 		{
 			get
@@ -99,8 +145,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.daylightdayofweekField = value;
+				base.RaisePropertyChanged("daylightdayofweek");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public CrmNumber daylighthour
 		{
 			get
@@ -110,8 +159,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.daylighthourField = value;
+				base.RaisePropertyChanged("daylighthour");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public CrmNumber daylightminute
 		{
 			get
@@ -121,8 +173,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.daylightminuteField = value;
+				base.RaisePropertyChanged("daylightminute");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public CrmNumber daylightmonth
 		{
 			get
@@ -132,8 +187,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.daylightmonthField = value;
+				base.RaisePropertyChanged("daylightmonth");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public CrmNumber daylightsecond
 		{
 			get
@@ -143,8 +201,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.daylightsecondField = value;
+				base.RaisePropertyChanged("daylightsecond");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public CrmNumber daylightyear
 		{
 			get
@@ -154,8 +215,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.daylightyearField = value;
+				base.RaisePropertyChanged("daylightyear");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public CrmDateTime effectivedatetime
 		{
 			get
@@ -165,8 +229,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.effectivedatetimeField = value;
+				base.RaisePropertyChanged("effectivedatetime");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public Lookup modifiedby
 		{
 			get
@@ -176,8 +243,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -187,8 +257,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=14)]
 		public Lookup organizationid
 		{
 			get
@@ -198,8 +271,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.organizationidField = value;
+				base.RaisePropertyChanged("organizationid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public CrmNumber standardbias
 		{
 			get
@@ -209,8 +285,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.standardbiasField = value;
+				base.RaisePropertyChanged("standardbias");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=16)]
 		public CrmNumber standardday
 		{
 			get
@@ -220,8 +299,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.standarddayField = value;
+				base.RaisePropertyChanged("standardday");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=17)]
 		public CrmNumber standarddayofweek
 		{
 			get
@@ -231,8 +313,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.standarddayofweekField = value;
+				base.RaisePropertyChanged("standarddayofweek");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=18)]
 		public CrmNumber standardhour
 		{
 			get
@@ -242,8 +327,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.standardhourField = value;
+				base.RaisePropertyChanged("standardhour");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=19)]
 		public CrmNumber standardminute
 		{
 			get
@@ -253,8 +341,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.standardminuteField = value;
+				base.RaisePropertyChanged("standardminute");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=20)]
 		public CrmNumber standardmonth
 		{
 			get
@@ -264,8 +355,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.standardmonthField = value;
+				base.RaisePropertyChanged("standardmonth");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=21)]
 		public CrmNumber standardsecond
 		{
 			get
@@ -275,8 +369,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.standardsecondField = value;
+				base.RaisePropertyChanged("standardsecond");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=22)]
 		public CrmNumber standardyear
 		{
 			get
@@ -286,8 +383,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.standardyearField = value;
+				base.RaisePropertyChanged("standardyear");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=23)]
 		public Lookup timezonedefinitionid
 		{
 			get
@@ -297,8 +397,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.timezonedefinitionidField = value;
+				base.RaisePropertyChanged("timezonedefinitionid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=24)]
 		public Key timezoneruleid
 		{
 			get
@@ -308,8 +411,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.timezoneruleidField = value;
+				base.RaisePropertyChanged("timezoneruleid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=25)]
 		public CrmNumber timezoneruleversionnumber
 		{
 			get
@@ -319,7 +425,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.timezoneruleversionnumberField = value;
+				base.RaisePropertyChanged("timezoneruleversionnumber");
 			}
+		}
+
+		public timezonerule()
+		{
 		}
 	}
 }

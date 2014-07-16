@@ -3,14 +3,21 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class TargetCompoundQuote : TargetCompound
 	{
 		private quote quoteField;
+
 		private quotedetail[] quoteDetailsField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public quote Quote
 		{
 			get
@@ -20,9 +27,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.quoteField = value;
+				base.RaisePropertyChanged("Quote");
 			}
 		}
-		[XmlArrayItem(IsNullable = false)]
+
+		[XmlArray] //[XmlArray(Order=1)]
+		[XmlArrayItem(IsNullable=false)]
 		public quotedetail[] QuoteDetails
 		{
 			get
@@ -32,7 +42,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.quoteDetailsField = value;
+				base.RaisePropertyChanged("QuoteDetails");
 			}
+		}
+
+		public TargetCompoundQuote()
+		{
 		}
 	}
 }

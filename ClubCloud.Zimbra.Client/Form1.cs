@@ -22,7 +22,6 @@ using System.Collections;
 using Microsoft.Web.Administration;
 using System.Xml;
 using System.Net.Cache;
-using ClubCloud.KNLTB.Client;
 using ClubCloud.KNLTB.ServIt;
 using System.Web.Services.Protocols;
 using ClubCloud.KNLTB.ServIt.CrmService;
@@ -168,135 +167,15 @@ namespace ClubCloud.Zimbra.Client
                 if (cc == null)
                 {
                     ClubCloud.KNLTB.Security.KNLTBContainer container = new KNLTB.Security.KNLTBContainer();
-                    //container.MijnRequestAcces("12073385", "rjm557308453!");
-                    container.ServItRequestAcces("27908313", "SfRMTu4");
+                    container.MijnRequestAcces("12073385", "rjm557308453!");
+                    //container.ServItRequestAcces("27908313", "rjm557308453!");
 
                     while (container.Container == null) { }
                     cc = container.Container;
                 }
 
-                LedenadministratieServiceClient ledenadministratie = new LedenadministratieServiceClient(cc, "27908313");
-                CompetitieServiceClient competitieService = new CompetitieServiceClient(cc, "27908313");
-                //GetSpelersprofielResponse spelersprofiel = ledenadministratie.GetSpelersprofiel(new GetSpelersprofielRequest { Bondsnummer = "27908313" });
-                //GetSpelersProfielDetailResponse spelersprofieldetail = ledenadministratie.GetSpelersProfielDetail(new GetSpelersProfielDetailRequest { Bondsnummer = "27908313" });
-
-                //GetUserDistrictResponse district = ledenadministratie.GetUserDistrict(new GetUserDistrictRequest { Bondsnummer = "27908313" });
-                GetMijnVerenigingenResponse verenigingen = ledenadministratie.GetMijnVerenigingen(new GetMijnVerenigingenRequest { Bondsnummer = "27908313" });
-                foreach (ClubCloud.KNLTB.ServIt.LedenAdministratieService.Vereniging vereniging in verenigingen.Verenigingen)
-                {
-                    //GetVerenigingResponse verenigingdetails = ledenadministratie.GetVereniging(new KNLTB.ServIt.LedenAdministratieService.GetVerenigingRequest { Bondsnummer = "27908313", VerenigingId = vereniging.Id });
-                    GetCompetitiesForVerenigingResponse competities = ledenadministratie.GetCompetitiesForVereniging(new GetCompetitiesForVerenigingRequest { Bondsnummer = "27908313", VerenigingId = vereniging.Id });
-
-                    foreach (ClubCloud.KNLTB.ServIt.LedenAdministratieService.CompetitieForVereniging competitie in competities.Competities)
-                    {
-                        //GetAfdelingenResponse afdelingen = competitieService.GetAfdelingen(new GetAfdelingenRequest { CompetitieId = competitie.Id, Filter = GetAfdelingenFilter.AfdelingenWithIngedeeldePloeg });
-                        //foreach (Afdeling afdeling in afdelingen.Afdelingen)
-                        //{
-                            GetWedstrijdgegevensResponse wedstrijden = competitieService.GetWedstrijdgegevens(new GetWedstrijdgegevensRequest { CompetitieId = competitie.Id, AfdelingVerenigingWedstrijdgegevenId = vereniging.Id, Filter = GetWedstrijdgegevensFilter.WedstrijdgegevensForVereniging });
-
-                            foreach (Wedstrijdgegevens wedstrijd in wedstrijden.Wedstrijdgegevens)
-                            {
-                                GetPartijresultatenResponse partijen = competitieService.GetPartijresultaten(new GetPartijresultatenRequest { WedstrijdgegevenId = wedstrijd.Id });
-                                foreach (Partijresultaat partij in partijen.Partijresultaten)
-                                {
-                                    Console.WriteLine(partij.BondsnummerThuisspeler);
-                                    Console.WriteLine(partij.BondsnummerUitspeler);
-                                }
-                            }
-                        //}
-                        /*
-                        GetPloegenResponse ploegen = competitieService.GetPloegen(new GetPloegenRequest { CompetitieId = competitie.Id });
-                        foreach (Ploeg ploeg in ploegen.Ploegen)
-                        {
-                            ploeg.
-                            //partij.Partijresultaten[0].BondsnummerThuisspeler;
-                            GetStandenResponse standen = competitieService.GetStanden(new GetStandenRequest { AfdelingVerenigingPloegId = ploegen.Ploegen[0].Id, CompetitieId = competitie.Id, Filter = GetStandenRequestFilter.GetStandenForCompetitieAndPloeg });
-
-                            foreach (Stand stand in standen.Standen)
-                            {
-
-                                GetUitslagenAfdelingResponse uitslagen = competitieService.GetUitslagenAfdeling(new GetUitslagenAfdelingRequest { AfdelingId = stand.AfdelingId.Value, CompetitieId = competitie.Id, PiramideId = stand.PiramideId });
-                            }
-                        }
-                        */
-
-                        //Console.WriteLine(ploegen.Ploegen[0].Id);
-                        
-                        //competitieService.GetVerenigingen(new GetVerenigingenRequest { CompetitieId = competitie.Id, Filter = GetVerenigingenFilter.VerenigingenFromIngedeeldePloeg });
-                        
-                        Console.WriteLine(competitie.Id);
-                        Console.WriteLine(competitie.AantalPloegen);
-                        Console.WriteLine(competitie.Naam);
-                    }
-                }
 
 
-                
-                
-
-                /*
-                competitie.GetStanden(new GetStandenRequest { AfdelingVerenigingPloegId = new Guid(), CompetitieId = new Guid(), Filter = GetStandenRequestFilter.GetStandenForCompetitieAndAfdeling });
-                competitie.GetPloegen(new GetPloegenRequest { CompetitieId = new Guid() });
-                competitie.GetPartijresultaten(new GetPartijresultatenRequest { WedstrijdgegevenId = new Guid() });
-
-                GetCompetitiesResponse comps = competitie.GetCompetities(new GetCompetitiesRequest { Filter = GetCompetitiesFilter.CompetitiesMijnKnltb });
-                //competitie.GetStanden(new GetStandenRequest{ Filter = GetStandenRequestFilter.}.GetPloegen(new GetPloegenRequest{ })
-                foreach (ClubCloud.KNLTB.ServIt.CompetitieService.Competitie comp in comps.Competities)
-                {
-                    Console.WriteLine(comp.Id);
-                    Console.WriteLine(comp.Naam);
-                    Console.WriteLine(comp.Omschrijving);
-                }
-                */
-                /*
-                UserServiceClient client = new UserServiceClient(cc);
-                HasAccessToCrmResponse acces = client.HasAccessToCrm(new HasAccessToCrmRequest { UserName = "27908313" });
-
-                Console.WriteLine(acces.AccessPermitted);
-                */
-                /*
-                Uri serverUri = new Uri("https://servit.mijnknltb.nl/ISV/KNLTB.ServIT2/KNLTB/Services/LedenAdministratieService.svc");
-
-                ChannelFactory<ClubCloud.KNLTB.ServIt.LedenAdministratieService.ILedenadministratieService> factory = new ChannelFactory<ClubCloud.KNLTB.ServIt.LedenAdministratieService.ILedenadministratieService>(new BasicHttpsBinding() { AllowCookies = true, HostNameComparisonMode = HostNameComparisonMode.WeakWildcard }, new EndpointAddress(serverUri));
-                ClubCloud.KNLTB.ServIt.LedenAdministratieService.ILedenadministratieService client = factory.CreateChannel();
-                factory.GetProperty<IHttpCookieContainerManager>().CookieContainer = cc;
-
-                //ClubCloud.KNLTB.ServIt.UserService.UserServiceClient client = channel as UserServiceClient;
-                ClubCloud.KNLTB.ServIt.LedenAdministratieService.GetMijnVerenigingenResponse response = client.GetMijnVerenigingen(new KNLTB.ServIt.LedenAdministratieService.GetMijnVerenigingenRequest { Bondsnummer = "27908313" });
-                GetPersoonsgegevensResponse persoon = client.GetPersoonsgegevens(new GetPersoonsgegevensRequest { Bondsnummer = "27908313" });
-
-                GetUserDistrictResponse district = client.GetUserDistrict(new GetUserDistrictRequest { Bondsnummer = "27908313" });
-
-
-                Console.WriteLine(persoon.Persoonsgegevens.Geboortedatum);
-                foreach (KNLTB.ServIt.LedenAdministratieService.Vereniging vereniging in response.Verenigingen)
-                {
-                    Console.WriteLine(vereniging.Id);
-                    Console.WriteLine(vereniging.Naam);
-
-                    GetVerenigingResponse verenigingdetails = client.GetVereniging(new KNLTB.ServIt.LedenAdministratieService.GetVerenigingRequest { Bondsnummer = "27908313", VerenigingId = vereniging.Id });
-                    Console.WriteLine(verenigingdetails.Verenigingsnummer);                    
-                }
-
-                ((IChannel)client).Close();
-                factory.Close();
-                */
-
-                /*
-                Uri serverUri = new Uri("https://servit.mijnknltb.nl/ISV/KNLTB.ServIT2/KNLTB/Services/UserService.svc");
-
-                ChannelFactory<ClubCloud.KNLTB.ServIt.UserService.IUserService> factory = new ChannelFactory<ClubCloud.KNLTB.ServIt.UserService.IUserService>(new BasicHttpsBinding() { AllowCookies = true, HostNameComparisonMode = HostNameComparisonMode.WeakWildcard }, new EndpointAddress(serverUri));
-                ClubCloud.KNLTB.ServIt.UserService.IUserService client = factory.CreateChannel();
-                factory.GetProperty<IHttpCookieContainerManager>().CookieContainer = cc;
-
-                //ClubCloud.KNLTB.ServIt.UserService.UserServiceClient client = channel as UserServiceClient;
-                ClubCloud.KNLTB.ServIt.UserService.HasAccessToCrmResponse response = client.HasAccessToCrm(new KNLTB.ServIt.UserService.HasAccessToCrmRequest { UserName = "27908313" });
-                Console.WriteLine(response.AccessPermitted);
-                Console.WriteLine(response.ExtensionData);
-
-                ((IChannel)client).Close();
-                factory.Close();
-                */
 
                 /*
                 ClubCloud.KNLTB.ServIt.MetadataService.MetadataService service = new KNLTB.ServIt.MetadataService.MetadataService();
@@ -309,20 +188,39 @@ namespace ClubCloud.Zimbra.Client
                 WriteMetadata(metadata);
                 */
 
-                /*
-                ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService();
-                service.CallerOriginTokenValue = null; //new KNLTB.ServIt.CallerOriginToken{ CallerOrigin = new ClubCloud.KNLTB.ServIt.CallerOrigin{ }};
-                service.CorrelationTokenValue = null; //new KNLTB.ServIt.CorrelationToken{ CorrelationId = new Guid("00000000-0000-0000-0000-000000000000")};
-                service.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmService.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
-                service.CrmCookieContainer = cc;
 
-                WhoAmIResponse response = service.Execute(new WhoAmIRequest()) as WhoAmIResponse;
+                ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
+                //service.CallerOriginTokenValue = null; //new KNLTB.ServIt.CallerOriginToken{ CallerOrigin = new ClubCloud.KNLTB.ServIt.CallerOrigin{ }};
+                //service.CorrelationTokenValue = null; //new KNLTB.ServIt.CorrelationToken{ CorrelationId = new Guid("00000000-0000-0000-0000-000000000000")};
+                //service.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmService.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
+                //service.CrmCookieContainer = cc;
+
+                /*
+                WhoAmIResponse whoAmIResponse = service.Execute(new WhoAmIRequest()) as WhoAmIResponse;
+
                 
-                Console.WriteLine(response.BusinessUnitId);
-                Console.WriteLine(response.OrganizationId);
-                Console.WriteLine(response.UserId);
+                TargetRetrieveSgt_alg_lidmaatschap lidmaatschap = new TargetRetrieveSgt_alg_lidmaatschap{ EntityId = whoAmIResponse.OrganizationId };
+                RetrieveRequest lidmaatschaprequest = new RetrieveRequest { Target = lidmaatschap, ColumnSet = new AllColumns(), ReturnDynamicEntities = true };
+                Response response = service.Execute(lidmaatschaprequest);
                 */
-                //GetUsersUsingExecute(service);
+                /*
+                sgt_dss_spelersprofiel profiel = new sgt_dss_spelersprofiel();
+
+                TargetRetrieveSgt_dss_spelersprofiel profielRequest = new TargetRetrieveSgt_dss_spelersprofiel { };
+                RetrieveRequest request = new RetrieveRequest { Target = profielRequest, ColumnSet = new AllColumns(), ReturnDynamicEntities = true };
+                */
+
+                //WhoAmIResponse response = service.Execute(new WhoAmIRequest()) as WhoAmIResponse;
+                //QueryBase query = new QueryBase{ EntityName = "Actieve Lidmaatschappen", ColumnSet = new AllColumns()};
+                //service.RetrieveMultiple(new QueryBase { EntityName = "Actieve Lidmaatschappen", ColumnSet = new AllColumns() });
+
+                //string ts = response.ToString();
+                //Console.WriteLine(response.BusinessUnitId);
+                //Console.WriteLine(response.OrganizationId);
+                //Console.WriteLine(response.UserId);
+
+
+                GetUsersUsingExecute(service);
                 /*
                 service.ExecuteCompleted += service_ExecuteCompleted;
                 //BusinessUnitId = 3cea4b0b-595b-e311-a846-02bf0aead617
@@ -341,425 +239,7 @@ namespace ClubCloud.Zimbra.Client
                 //Console.WriteLine(response.UserId);
                 */
 
-                /*
-                string postData = "curl=Z2F&flags=0&forcedownlevel=0&formdir=12&trusted=0&username=12073385&password=rjm557308453%21&SubmitCreds=%C2%A0";
-                HttpWebRequest request = WebRequest.CreateHttp("https://www.mijnknltb.nl/CookieAuth.dll?Logon");
-                request.Method = "POST";
-                */
-                //request.Accept = "text/html, application/xhtml+xml, */*";
-                /*
-                request.Referer = "https://www.mijnknltb.nl/CookieAuth.dll?GetLogon?curl=Z2F&reason=2&formdir=12";
-                request.UserAgent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-                request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
-                request.Headers.Set(HttpRequestHeader.CacheControl, "no-cache");
-                byte[] data = Encoding.ASCII.GetBytes(postData);
-                request.ContentLength = data.Length;
-                request.KeepAlive = true;
-                Stream requestStream = request.GetRequestStream();
-                requestStream.Write(data, 0, data.Length);
-                requestStream.Close();
 
-                HttpWebResponse myHttpWebResponse = (HttpWebResponse)request.GetResponse();
-
-                int headcount = myHttpWebResponse.Headers.Count;
-                string header = myHttpWebResponse.GetResponseHeader("Set-Cookie");
-                int number = myHttpWebResponse.Cookies.Count;
-
-                Stream responseStream = myHttpWebResponse.GetResponseStream();
-
-                StreamReader myStreamReader = new StreamReader(responseStream, Encoding.Default);
-
-                string pageContent = myStreamReader.ReadToEnd();
-
-                myStreamReader.Close();
-                responseStream.Close();
-
-                myHttpWebResponse.Close();
-
-                string bogus = pageContent.ToString();
-                */
-                /*
-                HttpWebResponse  response = null;
-                string URLAuth = "https://" + "mail.clubcloud.nl" + ":7071/zimbraAdmin/";
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URLAuth);
-                request.AllowAutoRedirect = false;
-
-                request.KeepAlive = true;
-                */
-                //request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-                /*
-                request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17";
-
-                request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip,deflate,sdch");
-
-                request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US,en;q=0.8");
-
-                request.Headers.Set(HttpRequestHeader.AcceptCharset, "ISO-8859-1,utf-8;q=0.7,*;q=0.3");
-
-                response = (HttpWebResponse)request.GetResponse();
-                */
-                //ServerManager manager = new ServerManager();
-                //Site site = manager.Sites["SharePoint Web Services"];
-
-                //if (site != null)
-                //{
-                //    Configuration configuration = site.GetWebConfiguration();
-
-                //    //SectionGroupCollection sections = configuration.RootSectionGroup.SectionGroups;
-                //    SectionGroup zimbra = configuration.RootSectionGroup.SectionGroups.SingleOrDefault(section => section.Name == "Zimbra");
-
-                //    if(zimbra == null )
-                //    {
-                //        //XmlNode sectionGroupNode = ZimbrasectionGroup();
-                //        Microsoft.Web.Administration.Application root = site.Applications.SingleOrDefault(app => app.ApplicationPoolName == "SharePoint Web Services Root");
-                //        string rootPath = root.VirtualDirectories.SingleOrDefault().PhysicalPath;
-                //        XmlDocument rootConfig = GetWebConfig(rootPath + @"\web.config");
-
-                //        AppendSectionGroupZimbra(ref rootConfig);
-                //        rootConfig.Save(rootPath + @"\web.config");
-
-
-                //        //sections.AppendChild(ZimbrasectionGroup());
-
-                //        Microsoft.Web.Administration.Application sts = site.Applications.SingleOrDefault(app => app.ApplicationPoolName == "SecurityTokenServiceApplicationPool");
-                //        string stsPath = sts.VirtualDirectories.FirstOrDefault().PhysicalPath;
-                //        XmlDocument stsConfig = GetWebConfig(rootPath + @"\web.config");
-                //    }
-
-                //    /*
-                //    foreach (Microsoft.Web.Administration.Application app in apps)
-                //    {
-                //        //"SecurityTokenServiceApplicationPool"
-                //        //"SharePoint Web Services Root"
-                //        string name = app.ApplicationPoolName;
-                //        VirtualDirectoryCollection directories = app.VirtualDirectories;
-                //        foreach (VirtualDirectory directory in directories)
-                //        {
-                //            string path = directory.PhysicalPath;
-                //        }
-                //    }
-                //    */
-                //    /*
-                //    ConfigurationSection ZimbraSection = null;
-                //    try
-                //    {
-                //        SectionGroup effective = configuration.GetEffectiveSectionGroup();
-                //        SectionGroupCollection sections = configuration.RootSectionGroup.SectionGroups;
-                //        SectionGroup zimbra = sections.Single(section => Name == "Zimbra");
-
-
-                //        //ZimbraSection = configuration.GetSection("Zimbra/Configuration");
-                //    }
-                //    catch { }
-
-                //    if (ZimbraSection != null)
-                //    {
-
-                //        ConfigurationElementCollection elements = ZimbraSection.GetCollection();
-                //        foreach (ConfigurationElement element in elements)
-                //        {
-                //            string name = element.Attributes["name"].Value.ToString();
-                //        }
-                //    }
-                //    */
-                //}
-
-                /*
-                GetAccountMembershipRequest request = new GetAccountMembershipRequest { account = new accountSelector { by = accountBy.Name, Value = "12073385@clubcloud.nl" } };
-                GetAccountMembershipResponse response = server.Message(request) as GetAccountMembershipResponse;
-
-                List<Global.dlInfo> dls = response.dl;
-                foreach (Global.dlInfo dl in dls)
-                {
-                    string dl_id = dl.id;
-
-                    GetDistributionListRequest dlrequest = new GetDistributionListRequest { dl = new Global.distributionListSelector { by = Global.distributionListBy.id, Value = dl_id }, };
-                    GetDistributionListResponse dlresponse = server.Message(dlrequest) as GetDistributionListResponse;
-
-                    List<string> members = dlresponse.dl.dlm;
-                    int number = members.Count;
-
-                    
-                    List<Global.attrN> attributes = dlresponse.dl.a;
-                    string displayName = dlresponse.dl.name;
-                    foreach (Global.attrN attr in attributes)
-                    {
-                        if (attr.name == "displayName")
-                        {
-                            displayName = attr.Value;
-                            break;
-                        }
-                    }
-                    displayName = displayName.ToLower();
-                    
-                    string name = dl.name;
-
-                }
-                */
-                /*
-                StringBuilder returnUrl = new StringBuilder();
-                string url = "http://www.clubcloud.nl/pages/default.aspx";
-                Uri uri = new Uri(url);
-                if (uri.HostNameType == UriHostNameType.Dns)
-                {
-                    string[] parts = uri.DnsSafeHost.Split(new char[] { '.' });
-                    if (parts.Length > 0)
-                    {
-                        if (parts.Length == 2)
-                        {
-                            returnUrl.Append(parts[0] + "." + parts[1]);
-                        }
-
-                        if (parts.Length == 3)
-                        {
-                            if ((parts[1].ToLower() == "clubcloud") && (parts[0].ToLower() != "www"))
-                            {
-                                returnUrl.Append(parts[0] + "." + parts[2]);
-                            }
-                            else
-                            {
-                                returnUrl.Append(parts[1] + "." + parts[2]);
-                            }
-                        }
-                    }
-
-                }
-
-                GetAllAccountsRequest request = new GetAllAccountsRequest { domain = new domainSelector { by = domainBy.name, Value = returnUrl.ToString() }, server = null };
-                GetAllAccountsResponse response = server.Message(request) as GetAllAccountsResponse;
-
-                if (response != null)
-                {
-                    List<accountInfo> accounts = response.account;
-                }
-                */
-                /*
-                List<string> users = new List<string>();
-
-                SearchDirectoryRequest srequest = new SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = returnUrl.ToString(), limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", textBox1.Text);
-
-                SearchDirectoryResponse sresponse = server.Message(srequest) as SearchDirectoryResponse;
-                List<accountInfo> accounts = sresponse.Items.ConvertAll<accountInfo>(delegate (object o){return o as accountInfo;});
-
-                if (accounts.Count > 0)
-                {
-                    string dl_id = null;
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = returnUrl.ToString() } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = server.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
-
-                    if (response != null)
-                    {
-                        foreach (Zimbra.Global.distributionListInfo dl in response.dl)
-                        {
-                            if (dl.dynamic)
-                            {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                foreach (Zimbra.Global.attrN attr in attributes)
-                                {
-                                    if (attr.name == "displayName" && attr.Value == "Leden")
-                                    {
-                                        dl_id = dl.id;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(dl_id))
-                    {
-                        Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.distributionListSelector { by = Zimbra.Global.distributionListBy.id, Value = dl_id } };
-                        Zimbra.Administration.GetDistributionListResponse dlresponse = server.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
-
-                        if (dlresponse != null)
-                        {
-                            foreach (string member in dlresponse.dl.dlm)
-                            {
-                                accountInfo account = accounts.Find(a => a.name.Equals(member));
-                                if (account != null)
-                                {
-                                    users.Add(account.a.Single<attrN>(a => a.name == "displayName").Value);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                int total = users.Count;
-                */
-                /*
-                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = returnUrl.ToString() } };
-                Zimbra.Administration.GetAllDistributionListsResponse response = server.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
-
-                foreach (ClubCloud.Zimbra.Global.distributionListInfo dl in response.dl)
-                {
-                    List<Global.attrN> attributes = dl.a;
-                    List<string> members = dl.dlm;
-
-                    string displayName = dl.name;
-                    foreach (Global.attrN attr in attributes)
-                    {
-                        if (attr.name == "displayName")
-                        {
-                            displayName = attr.Value;
-                            break;
-                        }
-                    }
-                    displayName = displayName.ToLower();
-                    string name = dl.name;
-                    
-                }
-                */
-                /*
-                string zimbraId = null;
-
-                Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "info@clubcloud.nl" } };
-                Zimbra.Administration.GetAccountInfoResponse response = server.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
-                if (response != null)
-                {
-
-                    foreach (var item in response.a)
-                    {
-                        if (item.name == "zimbraId")
-                        {
-                            zimbraId = item.Value;
-                        }
-                    }
-                }
-                if (!string.IsNullOrWhiteSpace(zimbraId))
-                {
-                    List<attrN> password = new List<attrN>();
-                    password.Add(new attrN { name = "userPassword", Value = "rjm557308453!" });
-
-                    Zimbra.Administration.ModifyAccountRequest modify = new Zimbra.Administration.ModifyAccountRequest { id = zimbraId, a = password };
-                    Zimbra.Administration.ModifyAccountResponse modified = server.Message(modify) as Zimbra.Administration.ModifyAccountResponse;
-
-                    string id = modified.account.id;
-                }
-                */
-
-                //Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "12073385@clubcloud.nl" }, applyCos = true};//, attrs = "displayName" };
-                //Zimbra.Administration.GetAccountResponse response = server.Message(request) as Zimbra.Administration.GetAccountResponse;
-                //if (response != null)
-                //{
-                //    string name = response.account.a[0].Value;
-                //}
-
-                //Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "info@clubcloud.nl" } };
-                //Zimbra.Administration.GetAccountInfoResponse response = server.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
-                //if (response != null)
-                //{
-                //    string name = response.name;
-                //}
-
-                //zimbraPasswordMaxLength,zimbraPasswordMinLength,zimbraPasswordMinLowerCaseChars,zimbraPasswordMinAlphaChars,zimbraPasswordMinNumericChars,zimbraPasswordMinDigitsOrPuncs,zimbraPasswordMinPunctuationChars,zimbraPasswordMinUpperCaseChars,zimbraPasswordAllowedChars,zimbraPasswordAllowedPunctuationChars
-                //zimbraPasswordLockoutDuration,zimbraPasswordLockoutEnabled,zimbraPasswordLockoutMaxFailures
-
-                //GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = "clubcloud" }, attrs = "zimbraPasswordMaxLength,zimbraPasswordMinLength" };
-                //GetCosResponse response = server.Message(request) as GetCosResponse;
-
-                //foreach (var item in response.cos.a)
-                //{
-                //    PropertyInfo propertyInfo = this.GetType().GetProperty(item.name);
-                //    Type t = propertyInfo.PropertyType;
-
-                //    if (propertyInfo.PropertyType == typeof(string))// || t == typeof(Array))
-                //    {
-                //        propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
-                //    }
-                //    else
-                //    {
-                //        IList attr = (IList)propertyInfo.GetValue(this);
-                //        if (attr != null)
-                //        {
-                //            attr.Add("string");
-                //            if (attr.Contains("string"))
-                //            {
-                //                Console.Write("string found");
-                //            }
-
-                //            propertyInfo.SetValue(this, attr);
-                //            Console.Write(this.zimbraPasswordMaxLength);
-
-                //        }
-                //    }
-                //    //propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
-                //}
-
-                //int z = zimbraPasswordMinLength;
-                //string name = response.cos.name;
-
-                /*
-                Zimbra.Account.ChangePasswordRequest request = new Zimbra.Account.ChangePasswordRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username }, oldPassword = oldPassword, password = newPassword };
-                Zimbra.Account.ChangePasswordResponse response = clientServer.Message(request) as Zimbra.Account.ChangePasswordResponse;
-                string AuthToken = response.authToken;
-                */
-
-                /*
-                CreateDomainRequest createdomain = new CreateDomainRequest { name = "centralweb.nl" };
-                createdomain.a.Add(new attrN { name = "zimbraDomainType", Value = "alias" });
-                createdomain.a.Add(new attrN { name = "zimbraDomainAliasTargetId", Value = "5e69fe13-6ba0-45df-9135-e079c64b4521" });
-                createdomain.a.Add(new attrN { name = "description", Value = "domeinalias van clubcloud.nl" });
-                createdomain.a.Add(new attrN { name = "zimbraMailCatchAllAddress", Value = "@centralweb.nl" });
-                createdomain.a.Add(new attrN { name = "zimbraMailCatchAllForwardingAddress", Value = "@clubcloud.nl" });
-                createdomain.a.Add(new attrN { name = "zimbraSkinLogoURL", Value = "http://www.centralweb.nl" });
-
-                CreateDomainResponse createdomainresponse = server.Message(createdomain) as CreateDomainResponse;
-                string name = createdomainresponse.domain.name;
-                */
-                /*
-                Account.GetAccountInfoRequest message = new Account.GetAccountInfoRequest();
-                //message.account = new Global.accountSelector { Value = "d0ec1768-02dd-4fd3-b302-1da0cd6e868a", by = accountBy.Id };
-                message.account = new Global.accountSelector { Value = "info@clubcloud.nl", by = Global.accountBy.Name };
-
-                Account.GetAccountInfoResponse response = server.Message(message) as Account.GetAccountInfoResponse;
-                string publicURL = response.publicURL;
-                */
-                /*
-                GetDomainRequest domainrequest = new GetDomainRequest { domain = new domainSelector { by = domainBy.name, Value = "clubcloud.nl" } };
-                GetDomainResponse domainresponse = server.Message(domainrequest) as GetDomainResponse;
-
-                domainInfo domain = domainresponse.domain;
-                //string name = domain.name;
-                */
-
-                /*
-                ModifyDomainRequest modifyDomainrequest = new ModifyDomainRequest { id = "5e69fe13-6ba0-45df-9135-e079c64b4521" };
-                modifyDomainrequest.a.Add(new Global.attrN { name = "zimbraSkinLogoURL", Value = "http://www.clubcloud.nl" });
-                ModifyDomainResponse modifyDomainresponse = server.Message(modifyDomainrequest) as ModifyDomainResponse;
-
-                string name = modifyDomainresponse.domain.name;
-                */
-
-                /*
-                GetAllDomainsRequest domainsrequest = new GetAllDomainsRequest { applyConfig = false };
-                GetAllDomainsResponse domainsresponse = server.Message(domainsrequest) as GetAllDomainsResponse;
-
-                List<domainInfo> domains = domainsresponse.Domains;
-
-                foreach (domainInfo domain in domains)
-                {
-                    string id = domain.id;
-                    string name = domain.name;
-                    List<Global.attr> aa = domain.a;
-
-                    foreach (Global.attr a in aa)
-                    {
-                        string a_name = a.name;
-                        string a_value = a.Value;
-                        bool a_pd = a.pd;
-                    }
-                }
-                */
-                /*
-                GetInfoRequest info = new GetInfoRequest{ sections = infoSection.All.ToString() };
-                GetInfoResponse inforesponse = server.Message(info) as GetInfoResponse;
-                List<prop> props = inforesponse.props;
-                */
 
             }
             catch (FaultException fex)
@@ -770,12 +250,23 @@ namespace ClubCloud.Zimbra.Client
             {
                 Console.WriteLine(sex.Detail);
             }
+            catch (WebException wex)
+            {
+                Console.Write(wex.Message);
+            }
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
             }
             //Application.Exit();
 
+        }
+
+        private void FetchResult(CrmService service)
+        {
+            string fetchXml = "<fetch mapping=\"logical\" count=\"30\" version=\"1.0\"><entity name=\"sgt_alg_accommodatie\"><attribute name=\"sgt_aantal_minibanen\" /><attribute name=\"sgt_aantal_oefenmuren\" /><attribute name=\"sgt_aantal_playgrounds\" /><attribute name=\"sgt_alg_accommodatie\" /><attribute name=\"sgt_alg_accommodatieid\" /><attribute name=\"sgt_bezoekadres_gemeente\" /><attribute name=\"sgt_bezoekadres_huisnummer\" /><attribute name=\"sgt_bezoekadres_plaats\" /><attribute name=\"sgt_bezoekadres_postcode\" /><attribute name=\"sgt_bezoekadres_straat\" /><attribute name=\"sgt_bezoekadres_toevoeging\" /><attribute name=\"sgt_minibanen\" /><attribute name=\"sgt_oefenmuren\" /><attribute name=\"sgt_playgrounds\" /><attribute name=\"sgt_speeltoestellen\" /><attribute name=\"sgt_telefoon\" /><attribute name=\"sgt_tenniskids_huisstijl\" /><link-entity name=\"sgt_alg_soort_verlichting\" from=\"sgt_alg_soort_verlichtingid\" to=\"sgt_soortverlichtingid\" link-type=\"outer\"><attribute name=\"sgt_alg_soort_verlichting\" /></link-entity><link-entity name=\"sgt_alg_toplaag\" from=\"sgt_alg_toplaagid\" to=\"sgt_toplaag_minibanenid\" link-type=\"outer\"><attribute name=\"sgt_alg_toplaag\" /></link-entity><link-entity name=\"sgt_alg_toplaag\" from=\"sgt_alg_toplaagid\" to=\"sgt_toplaag_oefenmurenid\" link-type=\"outer\"><attribute name=\"sgt_alg_toplaag\" /></link-entity><link-entity name=\"sgt_alg_toplaag\" from=\"sgt_alg_toplaagid\" to=\"sgt_toplaag_playgroundid\" link-type=\"outer\"><attribute name=\"sgt_alg_toplaag\" /></link-entity><link-entity name=\"account\" from=\"sgt_hoofdaccomodatieid\" to=\"sgt_alg_accommodatieid\"><filter><condition attribute=\"accountid\" operator=\"eq\" value=\"{organisatieid}\" /><condition attribute=\"statecode\" operator=\"eq\" value=\"0\" /></filter></link-entity></entity></fetch>";
+            ExecuteFetchRequest request = new ExecuteFetchRequest { FetchXml = fetchXml };
+            ExecuteFetchResponse response = service.Execute(request) as ExecuteFetchResponse;
         }
 
         private void GetUsersUsingExecute(ClubCloud.KNLTB.ServIt.CrmService.CrmService service)
@@ -790,10 +281,56 @@ namespace ClubCloud.Zimbra.Client
                 //cols.Attributes = new string[] { "domainname", "systemuserid" };
 
                 // Create the FilterExpression.
-                FilterExpression filter = new FilterExpression();
+                //FilterExpression expression = new FilterExpression();
+
+                //contact
+                //sgt_bondsnummer
+                //contactid
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_bondsnummer", Operator = ConditionOperator.Equal, Values = new object[1] { "12073385" } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                //sgt_alg_baan_gereserveerd
+                //sgt_accomodatieid
+                //sgt_verenigingid
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_accomodatieid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("11029f99-522e-4fc4-a86d-694e003f8bb2") } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                //sgt_alg_baan_gereserveerd_vereniging
+                //sgt_accommodatieid
+                //sgt_verenigingid
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_accommodatieid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("11029f99-522e-4fc4-a86d-694e003f8bb2") } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                //sgt_alg_speciale_baan
+                //sgt_accommodatieid
+                //{118D1A88-00C9-461A-9ECB-7411D1AB0EA1}
+                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_accomodatieid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("118D1A88-00C9-461A-9ECB-7411D1AB0EA1") } };
+                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                //sgt_dss_tussentijdse_rating
+                //sgt_spelerid
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_spelerid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("3386b6cc-d942-47b1-af57-2acb607b6d5b") } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                //sgt_dss_spelersprofiel
+                //sgt_dss_bondsnummer
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_dss_bondsnummer", Operator = ConditionOperator.Equal, Values = new object[1] { "12073385" } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                //account
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "accountnumber", Operator = ConditionOperator.Equal, Values = new object[1] { "82503" } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                //customeraddress
+                //customeraddressid
+                //parentid 
+                
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "parentid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("02ada6c7-80f9-4671-91f9-898ea5da3ccd") } };
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "parentid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("0854eb0e-55e1-4c99-a9dd-eae141d944c0") } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
                 PagingInfo pageInfo = new PagingInfo();
-                pageInfo.Count = 100; // the number of rows in each batch
+                pageInfo.Count = 50; // the number of rows in each batch
                 pageInfo.PageNumber = pageNum;
 
                 // Create the QueryExpression.
@@ -811,9 +348,9 @@ namespace ClubCloud.Zimbra.Client
                 //sgt_alg_type_bestuursorgaan
                 //sgt_alg_district
                 //systemuser
-                query.EntityName = "systemuser";//EntityName.systemuser.ToString();
+                query.EntityName = "sgt_alg_speciale_baan";
                 query.ColumnSet = cols;
-                query.Criteria = filter;
+                query.Criteria = expression;
                 query.PageInfo = pageInfo;
                 query.Distinct = true;
 
@@ -826,12 +363,14 @@ namespace ClubCloud.Zimbra.Client
                 // Execute the request.
                 results = (RetrieveMultipleResponse)service.Execute(request);
 
+                
 
                 List<BusinessEntity> entities = results.BusinessEntityCollection.BusinessEntities.ToList<BusinessEntity>();
-                foreach (systemuser entity in entities)
+                foreach (sgt_alg_speciale_baan entity in entities)
                 {
-                    string sentity = SerializeObjectList<systemuser>(entity);
-                    WriteToXmlFile<systemuser>(@"C:\systemuser.xml", entity, true);
+                    //entity.sgt_spelerid
+                    string sentity = SerializeObjectList<sgt_alg_speciale_baan>(entity);
+                    WriteToXmlFile<sgt_alg_speciale_baan>(@"C:\sgt_alg_speciale_baan.xml", entity, true);
                 }
                 
                 /*

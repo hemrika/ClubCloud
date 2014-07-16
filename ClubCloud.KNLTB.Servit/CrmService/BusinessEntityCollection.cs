@@ -2,19 +2,30 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2006/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	public class BusinessEntityCollection
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2006/WebServices")]
+	public class BusinessEntityCollection : INotifyPropertyChanged
 	{
 		private BusinessEntity[] businessEntitiesField;
+
 		private string entityNameField;
+
 		private bool moreRecordsField;
+
 		private string pagingCookieField;
+
 		private string versionField;
-		[XmlArrayItem(IsNullable = false)]
+
+		[XmlArray] //[XmlArray(Order=0)]
+		[XmlArrayItem(IsNullable=false)]
 		public BusinessEntity[] BusinessEntities
 		{
 			get
@@ -24,8 +35,10 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.businessEntitiesField = value;
+				this.RaisePropertyChanged("BusinessEntities");
 			}
 		}
+
 		[XmlAttribute]
 		public string EntityName
 		{
@@ -36,8 +49,10 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.entityNameField = value;
+				this.RaisePropertyChanged("EntityName");
 			}
 		}
+
 		[XmlAttribute]
 		public bool MoreRecords
 		{
@@ -48,8 +63,10 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.moreRecordsField = value;
+				this.RaisePropertyChanged("MoreRecords");
 			}
 		}
+
 		[XmlAttribute]
 		public string PagingCookie
 		{
@@ -60,8 +77,10 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.pagingCookieField = value;
+				this.RaisePropertyChanged("PagingCookie");
 			}
 		}
+
 		[XmlAttribute]
 		public string Version
 		{
@@ -72,7 +91,23 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.versionField = value;
+				this.RaisePropertyChanged("Version");
 			}
 		}
+
+		public BusinessEntityCollection()
+		{
+		}
+
+		protected void RaisePropertyChanged(string propertyName)
+		{
+			PropertyChangedEventHandler propertyChangedEventHandler = this.PropertyChanged;
+			if (propertyChangedEventHandler != null)
+			{
+				propertyChangedEventHandler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

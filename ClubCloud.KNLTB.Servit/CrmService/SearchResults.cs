@@ -2,15 +2,23 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2006/Scheduling")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	public class SearchResults
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2006/Scheduling")]
+	public class SearchResults : INotifyPropertyChanged
 	{
 		private AppointmentProposal[] proposalsField;
-		private TraceInfo traceInfoField;
+
+		private ClubCloud.KNLTB.ServIt.CrmService.TraceInfo traceInfoField;
+
+		[XmlArray] //[XmlArray(Order=0)]
 		public AppointmentProposal[] Proposals
 		{
 			get
@@ -20,9 +28,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.proposalsField = value;
+				this.RaisePropertyChanged("Proposals");
 			}
 		}
-		public TraceInfo TraceInfo
+
+		[XmlElement] //[XmlElement(Order=1)]
+		public ClubCloud.KNLTB.ServIt.CrmService.TraceInfo TraceInfo
 		{
 			get
 			{
@@ -31,7 +42,23 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.traceInfoField = value;
+				this.RaisePropertyChanged("TraceInfo");
 			}
 		}
+
+		public SearchResults()
+		{
+		}
+
+		protected void RaisePropertyChanged(string propertyName)
+		{
+			PropertyChangedEventHandler propertyChangedEventHandler = this.PropertyChanged;
+			if (propertyChangedEventHandler != null)
+			{
+				propertyChangedEventHandler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

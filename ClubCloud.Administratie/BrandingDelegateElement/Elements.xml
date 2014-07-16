@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Control Id="SuiteBarBrandingDelegate" Sequence="9" ControlSrc="/_ControlTemplates/15/CustomSuiteBarBrandingDelegate/SuiteBarBrandingDelegateCtrl.ascx" ControlClass=""></Control>
+  <Control Id="SuiteLinksDelegate" Sequence="90" ControlSrc="/_ControlTemplates/15/CustomSuiteLinksDelegate/SuiteLinksDelegateCtrl.ascx"></Control>
+  <Control Id="PromotedActions" Sequence="91" ControlSrc="/_ControlTemplates/15/CustomPromotedActionsDelegate/PromotedActionsDelegateCtrl.ascx"></Control>
+</Elements>

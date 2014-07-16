@@ -4,385 +4,1003 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ClubCloudModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="ClubCloudModelStoreContainer">
-    <EntitySet Name="ClubCloud_TrackingSet" EntityType="ClubCloudModel.Store.ClubCloud_TrackingSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Gebruiker_Abonementen" EntityType="ClubCloudModel.Store.ClubCloud_Gebruiker_Abonementen" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Abonnementen" EntityType="ClubCloudModel.Store.ClubCloud_Abonnementen" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Vereniging_Accomodaties" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_Accomodaties" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Gebruiker_Verenigingen" EntityType="ClubCloudModel.Store.ClubCloud_Gebruiker_Verenigingen" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Vereniging_BestuursLeden" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_BestuursLeden" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Settings" EntityType="ClubCloudModel.Store.ClubCloud_Settings" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Verenigingen" EntityType="ClubCloudModel.Store.ClubCloud_Verenigingen" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Gebruikers" EntityType="ClubCloudModel.Store.ClubCloud_Gebruikers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Accomodaties" EntityType="ClubCloudModel.Store.ClubCloud_Accomodaties" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Vereniging_Competities" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_Competities" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Nationaliteiten" EntityType="ClubCloudModel.Store.ClubCloud_Nationaliteiten" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Vereniging_Toernooien" EntityType="ClubCloudModel.Store.ClubCloud_Vereniging_Toernooien" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Districten" EntityType="ClubCloudModel.Store.ClubCloud_Districten" store:Type="Tables" Schema="dbo" />
-  </EntityContainer>
-  <EntityType Name="ClubCloud_TrackingSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Gebruiker_Abonementen">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Abonnementen">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Aangevinkt" Type="bit" Nullable="false" />
-    <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Vereniging_Accomodaties">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AccommodatieNaam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekAdres_Straat" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Minibanen" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Oefenmuren" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Ondergrond" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Playgrounds" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Straat" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Speeltoestellen" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TelefoonNummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Gebruiker_Verenigingen">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="VerenigingNaam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Vereniging_BestuursLeden">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Emailadres" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Functie" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Orgaan" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Telefoon" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="VolledigeNaam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Settings">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="mijnknltb_Id" Type="uniqueidentifier" Nullable="true" />
-    <Property Name="mijnknltb_allow" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="mijnknltb_password" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="mijnknltb_tracking" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="twitter_allow" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="twitter_oauth_token" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="twitter_oauth_token_secret" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="twitter_setting" Type="int" Nullable="false" />
-    <Property Name="facebook_allow" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="facebook_access_token" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="facebook_setting" Type="int" Nullable="false" />
-    <Property Name="privacy" Type="int" Nullable="false" />
-    <Property Name="financieel" Type="int" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Verenigingen">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="BanknummerPlaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Bezoekadres" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekadresGemeente" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekadresPlaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BezoekadresPostcode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DatumOpgericht" Type="datetime" Nullable="true" />
-    <Property Name="District" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Emailadres" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IbanCode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="KvKnummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="KvKplaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Postadres" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostadresGemeente" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostadresPlaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostadresPostcode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Regio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TelefoonnummerAvond" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TelefoonnummerOverdag" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Verenigingsnummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Gebruikers">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Achternaam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DistrictNaam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Geboortedatum" Type="datetime" Nullable="true" />
-    <Property Name="Geboorteplaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Gemeente" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Geslacht" Type="int" Nullable="false" />
-    <Property Name="Huisnummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IsLid" Type="bit" Nullable="false" />
-    <Property Name="Mobiel" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="NationaliteitId" Type="uniqueidentifier" Nullable="true" />
-    <Property Name="OrganisatieNummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Plaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Postcode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="RatingDubbel" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="RatingEnkel" Type="decimal" Nullable="true" Precision="18" Scale="0" />
-    <Property Name="Roepnaam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SpeelsterkteDubbel" Type="int" Nullable="true" />
-    <Property Name="SpeelsterkteEnkel" Type="int" Nullable="true" />
-    <Property Name="Straat" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TelefoonAvond" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TelefoonOverdag" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Toevoeging" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Tussenvoegsel" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="VolledigeNaam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Voorletters" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Voornamen" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Accomodaties">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AccommodatieAdres_Straat" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AccommodatieAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AccommodatieAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AccommodatieAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AccommodatieAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AccommodatieAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AantalBinnenBanen" Type="int" Nullable="false" />
-    <Property Name="AantalBuitenBanen" Type="int" Nullable="false" />
-    <Property Name="Blaashal" Type="int" Nullable="true" />
-    <Property Name="BouwjaarClubhuis" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DatumKeuring" Type="datetime" Nullable="true" />
-    <Property Name="DistrictNaam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Faxnummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="GekeurdDoor" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="HalAanwezig" Type="int" Nullable="true" />
-    <Property Name="KleedruimteClubhuisAanwezig" Type="bit" Nullable="false" />
-    <Property Name="MetOVBereikbaar" Type="bit" Nullable="false" />
-    <Property Name="MinderValideParkeerplaatsen" Type="int" Nullable="true" />
-    <Property Name="Minibanen" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Oefenmuren" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Ondergrond" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="OppervlakteClubhuis" Type="int" Nullable="true" />
-    <Property Name="Overkapping" Type="int" Nullable="true" />
-    <Property Name="Playgrounds" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Straat" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="RegioNaam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Resultaatkeuring" Type="int" Nullable="true" />
-    <Property Name="RolStoeltoegankelijk" Type="bit" Nullable="false" />
-    <Property Name="SoortClubhuis" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Speeltoestellen" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Telefoonnummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TotaalAantalWasKleedruimte" Type="int" Nullable="true" />
-    <Property Name="ValideParkeerplaatsen" Type="int" Nullable="true" />
-    <Property Name="WasruimteClubhuisAanwezig" Type="bit" Nullable="false" />
-    <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Vereniging_Competities">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AantalPloegen" Type="int" Nullable="false" />
-    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Nationaliteiten">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Vereniging_Toernooien">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ClubCloud_Districten">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DistrictNaam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubUpdate" Type="datetime" Nullable="true" />
-    <Property Name="ClubCloudUpdate" Type="datetime" Nullable="true" />
-  </EntityType>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="ClubCloudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClubCloud_Accomodaties">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AccommodatieAdres_Straat" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccommodatieAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccommodatieAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccommodatieAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccommodatieAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccommodatieAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AantalBinnenBanen" Type="int" Nullable="false" />
+          <Property Name="AantalBuitenBanen" Type="int" Nullable="false" />
+          <Property Name="Blaashal" Type="int" />
+          <Property Name="BouwjaarClubhuis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DatumKeuring" Type="datetime" />
+          <Property Name="DistrictNaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Faxnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GekeurdDoor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HalAanwezig" Type="int" />
+          <Property Name="KleedruimteClubhuisAanwezig" Type="bit" Nullable="false" />
+          <Property Name="MetOVBereikbaar" Type="bit" Nullable="false" />
+          <Property Name="MinderValideParkeerplaatsen" Type="int" />
+          <Property Name="Minibanen" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Oefenmuren" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ondergrond" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OppervlakteClubhuis" Type="int" />
+          <Property Name="Overkapping" Type="int" />
+          <Property Name="Playgrounds" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Straat" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RegioNaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Resultaatkeuring" Type="int" />
+          <Property Name="RolStoeltoegankelijk" Type="bit" Nullable="false" />
+          <Property Name="SoortClubhuis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Speeltoestellen" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TotaalAantalWasKleedruimte" Type="int" />
+          <Property Name="ValideParkeerplaatsen" Type="int" />
+          <Property Name="WasruimteClubhuisAanwezig" Type="bit" Nullable="false" />
+          <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserUpdate" Type="datetime" />
+          <Property Name="ClubUpdate" Type="datetime" />
+          <Property Name="ClubCloudUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Addresses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="Stad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Provincie" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Postcode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Straat" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Land" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Fax" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Toevoeging" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Postbus" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonPrimair" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonSecundair" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonTertiair" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Bestuursorganen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VerenigingId" Type="uniqueidentifier" />
+          <Property Name="TypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Districten">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Omschrijving" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RegioId" Type="uniqueidentifier" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Functies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Meervoud" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Omschrijving" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Toegang" Type="bit" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Functionarissen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FunctieId" Type="uniqueidentifier" />
+          <Property Name="VerenigingId" Type="uniqueidentifier" />
+          <Property Name="GebruikerId" Type="uniqueidentifier" />
+          <Property Name="BestuursorgaanId" Type="uniqueidentifier" />
+          <Property Name="DistrictId" Type="uniqueidentifier" />
+          <Property Name="TermijnBegin" Type="datetime" Nullable="false" />
+          <Property Name="TermijnEinde" Type="datetime" />
+          <Property Name="Autorisatie" Type="bit" Nullable="false" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Gebruikers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Bondsnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Roepnaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Aanhef" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Voornaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Voornamen" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Achtervoegsel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tussenvoegsel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Achternaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Voorletters" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailGeheim" Type="bit" Nullable="false" />
+          <Property Name="EmailKNLTB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailWebSite" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailOverig" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonGeheim" Type="bit" Nullable="false" />
+          <Property Name="TelefoonAvond" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonOverdag" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonOverig" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Mobiel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Fax" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BankNummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BankIban" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BankPlaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Geslacht" Type="int" Nullable="false" />
+          <Property Name="Geboortedatum" Type="datetime" />
+          <Property Name="Geboorteplaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OverlijdensDatum" Type="datetime" />
+          <Property Name="NationaliteitId" Type="uniqueidentifier" />
+          <Property Name="AddressGeheim" Type="bit" Nullable="false" />
+          <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FTPsite" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Beroep" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Kinderen" Type="bit" Nullable="false" />
+          <Property Name="KinderenAantal" Type="int" Nullable="false" />
+          <Property Name="Partner" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AanhefBrief" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AanhefAttentie" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FotoId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VerenigingId" Type="uniqueidentifier" />
+          <Property Name="Volledigenaam" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Lidmaatschappen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SoortId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SoortNaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Begin" Type="datetime" Nullable="false" />
+          <Property Name="Einde" Type="datetime" />
+          <Property Name="Opzegging" Type="datetime" />
+          <Property Name="InternNummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GebruikerId" Type="uniqueidentifier" />
+          <Property Name="VerenigingId" Type="uniqueidentifier" />
+          <Property Name="PasTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PasTypeNaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PasDatum" Type="datetime" />
+          <Property Name="PasNoodDatum" Type="datetime" />
+          <Property Name="PasWedstrijd" Type="bit" Nullable="false" />
+          <Property Name="PasNieuw" Type="bit" Nullable="false" />
+          <Property Name="PasNood" Type="bit" Nullable="false" />
+          <Property Name="PasVolgnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SpeelsterkteDubbel" Type="int" Nullable="false" />
+          <Property Name="SpeelsterkteEnkel" Type="int" Nullable="false" />
+          <Property Name="Autorisatie" Type="bit" Nullable="false" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Nationaliteiten">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Profielen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Rechtsvormen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Omschrijving" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Meervoud" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Regios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="mijnknltb_Id" Type="uniqueidentifier" />
+          <Property Name="mijnknltb_allow" Type="bit" Nullable="false" />
+          <Property Name="mijnknltb_password" Type="nvarchar(max)" />
+          <Property Name="mijnknltb_tracking" Type="bit" Nullable="false" />
+          <Property Name="twitter_allow" Type="bit" Nullable="false" />
+          <Property Name="twitter_oauth_token" Type="nvarchar(max)" />
+          <Property Name="twitter_oauth_token_secret" Type="nvarchar(max)" />
+          <Property Name="twitter_setting" Type="int" Nullable="false" />
+          <Property Name="facebook_allow" Type="bit" Nullable="false" />
+          <Property Name="facebook_access_token" Type="nvarchar(max)" />
+          <Property Name="facebook_setting" Type="int" Nullable="false" />
+          <Property Name="privacy" Type="int" Nullable="false" />
+          <Property Name="financieel" Type="int" Nullable="false" />
+          <Property Name="UserUpdate" Type="datetime" />
+          <Property Name="ClubUpdate" Type="datetime" />
+          <Property Name="ClubCloudUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Verenigingen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DistrictId" Type="uniqueidentifier" />
+          <Property Name="RechtsvormId" Type="uniqueidentifier" />
+          <Property Name="AccomodatieId" Type="uniqueidentifier" />
+          <Property Name="RegioId" Type="uniqueidentifier" />
+          <Property Name="BankNummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BankIban" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BankPlaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KvKnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KvKplaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailKNLTB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailWebSite" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmailOverig" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Fax" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonAvond" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonOverdag" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefoonOverig" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FTPsite" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Oprichting" Type="datetime" />
+          <Property Name="Erkenning" Type="datetime" />
+          <Property Name="Gestopt" Type="datetime" />
+          <Property Name="Maanden" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClubCloudService_DB.dbo.Accomodatie' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Accomodatie">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="AccommodatieAdres_Straat" />
+            <PropertyRef Name="AccommodatieAdres_Huisnummer" />
+            <PropertyRef Name="AccommodatieAdres_Toevoeging" />
+            <PropertyRef Name="AccommodatieAdres_Postcode" />
+            <PropertyRef Name="AccommodatieAdres_Plaats" />
+            <PropertyRef Name="AccommodatieAdres_Gemeente" />
+            <PropertyRef Name="AantalBinnenBanen" />
+            <PropertyRef Name="AantalBuitenBanen" />
+            <PropertyRef Name="BouwjaarClubhuis" />
+            <PropertyRef Name="DistrictNaam" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Faxnummer" />
+            <PropertyRef Name="GekeurdDoor" />
+            <PropertyRef Name="KleedruimteClubhuisAanwezig" />
+            <PropertyRef Name="MetOVBereikbaar" />
+            <PropertyRef Name="Minibanen" />
+            <PropertyRef Name="Naam" />
+            <PropertyRef Name="Oefenmuren" />
+            <PropertyRef Name="Ondergrond" />
+            <PropertyRef Name="Playgrounds" />
+            <PropertyRef Name="PostAdres_Straat" />
+            <PropertyRef Name="PostAdres_Huisnummer" />
+            <PropertyRef Name="PostAdres_Toevoeging" />
+            <PropertyRef Name="PostAdres_Postcode" />
+            <PropertyRef Name="PostAdres_Plaats" />
+            <PropertyRef Name="PostAdres_Gemeente" />
+            <PropertyRef Name="RegioNaam" />
+            <PropertyRef Name="RolStoeltoegankelijk" />
+            <PropertyRef Name="SoortClubhuis" />
+            <PropertyRef Name="Speeltoestellen" />
+            <PropertyRef Name="Telefoonnummer" />
+            <PropertyRef Name="WasruimteClubhuisAanwezig" />
+            <PropertyRef Name="Website" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="Expr2" />
+            <PropertyRef Name="Nummer" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AccommodatieAdres_Straat" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccommodatieAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccommodatieAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccommodatieAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccommodatieAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccommodatieAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AantalBinnenBanen" Type="int" Nullable="false" />
+          <Property Name="AantalBuitenBanen" Type="int" Nullable="false" />
+          <Property Name="Blaashal" Type="int" />
+          <Property Name="BouwjaarClubhuis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DatumKeuring" Type="datetime" />
+          <Property Name="DistrictNaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Faxnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GekeurdDoor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HalAanwezig" Type="int" />
+          <Property Name="KleedruimteClubhuisAanwezig" Type="bit" Nullable="false" />
+          <Property Name="MetOVBereikbaar" Type="bit" Nullable="false" />
+          <Property Name="MinderValideParkeerplaatsen" Type="int" />
+          <Property Name="Minibanen" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Oefenmuren" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ondergrond" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OppervlakteClubhuis" Type="int" />
+          <Property Name="Overkapping" Type="int" />
+          <Property Name="Playgrounds" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Straat" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Huisnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Toevoeging" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Postcode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Plaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostAdres_Gemeente" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RegioNaam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Resultaatkeuring" Type="int" />
+          <Property Name="RolStoeltoegankelijk" Type="bit" Nullable="false" />
+          <Property Name="SoortClubhuis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Speeltoestellen" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TotaalAantalWasKleedruimte" Type="int" />
+          <Property Name="ValideParkeerplaatsen" Type="int" />
+          <Property Name="WasruimteClubhuisAanwezig" Type="bit" Nullable="false" />
+          <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserUpdate" Type="datetime" />
+          <Property Name="ClubUpdate" Type="datetime" />
+          <Property Name="ClubCloudUpdate" Type="datetime" />
+          <Property Name="Expr1" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Expr2" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nummer" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClubCloudService_DB.dbo.Functionaris' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Functionaris">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Functie" />
+            <PropertyRef Name="Orgaan" />
+            <PropertyRef Name="Disctict" />
+            <PropertyRef Name="Vereniging" />
+            <PropertyRef Name="Gebruiker" />
+            <PropertyRef Name="TermijnBegin" />
+            <PropertyRef Name="Autorisatie" />
+            <PropertyRef Name="Actief" />
+            <PropertyRef Name="VerenigingId" />
+            <PropertyRef Name="GebruikerId" />
+            <PropertyRef Name="BondsNummer" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Functie" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Orgaan" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Disctict" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Vereniging" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Gebruiker" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TermijnBegin" Type="datetime" Nullable="false" />
+          <Property Name="TermijnEinde" Type="datetime" />
+          <Property Name="Autorisatie" Type="bit" Nullable="false" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GebruikerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BondsNummer" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClubCloudService_DB.dbo.Vereniging' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Vereniging">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Naam" />
+            <PropertyRef Name="Nummer" />
+            <PropertyRef Name="BankNummer" />
+            <PropertyRef Name="BankIban" />
+            <PropertyRef Name="BankPlaats" />
+            <PropertyRef Name="KvKnummer" />
+            <PropertyRef Name="KvKplaats" />
+            <PropertyRef Name="Website" />
+            <PropertyRef Name="Actief" />
+            <PropertyRef Name="District" />
+            <PropertyRef Name="Rechtsvorm" />
+            <PropertyRef Name="Regio" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BankNummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BankIban" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BankPlaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KvKnummer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KvKplaats" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DatumOpgericht" Type="datetime" />
+          <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="District" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rechtsvorm" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Regio" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClubCloud_BestuursorgaanClubCloud_Vereniging">
+          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="0..1" />
+          <End Role="ClubCloud_Bestuursorganen" Type="Self.ClubCloud_Bestuursorganen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Verenigingen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Bestuursorganen">
+              <PropertyRef Name="VerenigingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_DistrictClubCloud_Regio">
+          <End Role="ClubCloud_Regios" Type="Self.ClubCloud_Regios" Multiplicity="0..1" />
+          <End Role="ClubCloud_Districten" Type="Self.ClubCloud_Districten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Regios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Districten">
+              <PropertyRef Name="RegioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_Functie_Functionaris">
+          <End Role="ClubCloud_Functies" Type="Self.ClubCloud_Functies" Multiplicity="0..1" />
+          <End Role="ClubCloud_Functionarissen" Type="Self.ClubCloud_Functionarissen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Functies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Functionarissen">
+              <PropertyRef Name="FunctieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_Functionaris_Bestuursorgaan">
+          <End Role="ClubCloud_Bestuursorganen" Type="Self.ClubCloud_Bestuursorganen" Multiplicity="0..1" />
+          <End Role="ClubCloud_Functionarissen" Type="Self.ClubCloud_Functionarissen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Bestuursorganen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Functionarissen">
+              <PropertyRef Name="BestuursorgaanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_Functionaris_Vereniging">
+          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="0..1" />
+          <End Role="ClubCloud_Functionarissen" Type="Self.ClubCloud_Functionarissen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Verenigingen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Functionarissen">
+              <PropertyRef Name="VerenigingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_FunctionarisClubCloud_District">
+          <End Role="ClubCloud_Districten" Type="Self.ClubCloud_Districten" Multiplicity="0..1" />
+          <End Role="ClubCloud_Functionarissen" Type="Self.ClubCloud_Functionarissen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Districten">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Functionarissen">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_GebruikerClubCloud_Address">
+          <End Role="ClubCloud_Gebruikers" Type="Self.ClubCloud_Gebruikers" Multiplicity="0..1" />
+          <End Role="ClubCloud_Addresses" Type="Self.ClubCloud_Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Gebruikers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Addresses">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_GebruikerClubCloud_Functionaris">
+          <End Role="ClubCloud_Gebruikers" Type="Self.ClubCloud_Gebruikers" Multiplicity="0..1" />
+          <End Role="ClubCloud_Functionarissen" Type="Self.ClubCloud_Functionarissen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Gebruikers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Functionarissen">
+              <PropertyRef Name="GebruikerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_GebruikerClubCloud_Lidmaatschap">
+          <End Role="ClubCloud_Gebruikers" Type="Self.ClubCloud_Gebruikers" Multiplicity="0..1" />
+          <End Role="ClubCloud_Lidmaatschappen" Type="Self.ClubCloud_Lidmaatschappen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Gebruikers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Lidmaatschappen">
+              <PropertyRef Name="GebruikerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_GebruikerClubCloud_Vereniging">
+          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="0..1" />
+          <End Role="ClubCloud_Gebruikers" Type="Self.ClubCloud_Gebruikers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Verenigingen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Gebruikers">
+              <PropertyRef Name="VerenigingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_Vereniging_District">
+          <End Role="ClubCloud_Districten" Type="Self.ClubCloud_Districten" Multiplicity="0..1" />
+          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Districten">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Verenigingen">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_Vereniging_Lidmaatschap">
+          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="0..1" />
+          <End Role="ClubCloud_Lidmaatschappen" Type="Self.ClubCloud_Lidmaatschappen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Verenigingen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Lidmaatschappen">
+              <PropertyRef Name="VerenigingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_VerenigingClubCloud_Accomodatie">
+          <End Role="ClubCloud_Accomodaties" Type="Self.ClubCloud_Accomodaties" Multiplicity="0..1" />
+          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Accomodaties">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Verenigingen">
+              <PropertyRef Name="AccomodatieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_VerenigingClubCloud_Address">
+          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="0..1" />
+          <End Role="ClubCloud_Addresses" Type="Self.ClubCloud_Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Verenigingen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Addresses">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_VerenigingClubCloud_Rechtsvorm">
+          <End Role="ClubCloud_Rechtsvormen" Type="Self.ClubCloud_Rechtsvormen" Multiplicity="0..1" />
+          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Rechtsvormen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Verenigingen">
+              <PropertyRef Name="RechtsvormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubCloud_VerenigingClubCloud_Regio">
+          <End Role="ClubCloud_Regios" Type="Self.ClubCloud_Regios" Multiplicity="0..1" />
+          <End Role="ClubCloud_Verenigingen" Type="Self.ClubCloud_Verenigingen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Regios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Verenigingen">
+              <PropertyRef Name="RegioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClubCloudModelStoreContainer">
+          <EntitySet Name="ClubCloud_Accomodaties" EntityType="Self.ClubCloud_Accomodaties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Addresses" EntityType="Self.ClubCloud_Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Bestuursorganen" EntityType="Self.ClubCloud_Bestuursorganen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Districten" EntityType="Self.ClubCloud_Districten" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Functies" EntityType="Self.ClubCloud_Functies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Functionarissen" EntityType="Self.ClubCloud_Functionarissen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Gebruikers" EntityType="Self.ClubCloud_Gebruikers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Lidmaatschappen" EntityType="Self.ClubCloud_Lidmaatschappen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Nationaliteiten" EntityType="Self.ClubCloud_Nationaliteiten" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Profielen" EntityType="Self.ClubCloud_Profielen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Rechtsvormen" EntityType="Self.ClubCloud_Rechtsvormen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Regios" EntityType="Self.ClubCloud_Regios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Settings" EntityType="Self.ClubCloud_Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubCloud_Verenigingen" EntityType="Self.ClubCloud_Verenigingen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accomodatie" EntityType="Self.Accomodatie" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Accomodatie].[Id] AS [Id], 
+    [Accomodatie].[AccommodatieAdres_Straat] AS [AccommodatieAdres_Straat], 
+    [Accomodatie].[AccommodatieAdres_Huisnummer] AS [AccommodatieAdres_Huisnummer], 
+    [Accomodatie].[AccommodatieAdres_Toevoeging] AS [AccommodatieAdres_Toevoeging], 
+    [Accomodatie].[AccommodatieAdres_Postcode] AS [AccommodatieAdres_Postcode], 
+    [Accomodatie].[AccommodatieAdres_Plaats] AS [AccommodatieAdres_Plaats], 
+    [Accomodatie].[AccommodatieAdres_Gemeente] AS [AccommodatieAdres_Gemeente], 
+    [Accomodatie].[AantalBinnenBanen] AS [AantalBinnenBanen], 
+    [Accomodatie].[AantalBuitenBanen] AS [AantalBuitenBanen], 
+    [Accomodatie].[Blaashal] AS [Blaashal], 
+    [Accomodatie].[BouwjaarClubhuis] AS [BouwjaarClubhuis], 
+    [Accomodatie].[DatumKeuring] AS [DatumKeuring], 
+    [Accomodatie].[DistrictNaam] AS [DistrictNaam], 
+    [Accomodatie].[Email] AS [Email], 
+    [Accomodatie].[Faxnummer] AS [Faxnummer], 
+    [Accomodatie].[GekeurdDoor] AS [GekeurdDoor], 
+    [Accomodatie].[HalAanwezig] AS [HalAanwezig], 
+    [Accomodatie].[KleedruimteClubhuisAanwezig] AS [KleedruimteClubhuisAanwezig], 
+    [Accomodatie].[MetOVBereikbaar] AS [MetOVBereikbaar], 
+    [Accomodatie].[MinderValideParkeerplaatsen] AS [MinderValideParkeerplaatsen], 
+    [Accomodatie].[Minibanen] AS [Minibanen], 
+    [Accomodatie].[Naam] AS [Naam], 
+    [Accomodatie].[Oefenmuren] AS [Oefenmuren], 
+    [Accomodatie].[Ondergrond] AS [Ondergrond], 
+    [Accomodatie].[OppervlakteClubhuis] AS [OppervlakteClubhuis], 
+    [Accomodatie].[Overkapping] AS [Overkapping], 
+    [Accomodatie].[Playgrounds] AS [Playgrounds], 
+    [Accomodatie].[PostAdres_Straat] AS [PostAdres_Straat], 
+    [Accomodatie].[PostAdres_Huisnummer] AS [PostAdres_Huisnummer], 
+    [Accomodatie].[PostAdres_Toevoeging] AS [PostAdres_Toevoeging], 
+    [Accomodatie].[PostAdres_Postcode] AS [PostAdres_Postcode], 
+    [Accomodatie].[PostAdres_Plaats] AS [PostAdres_Plaats], 
+    [Accomodatie].[PostAdres_Gemeente] AS [PostAdres_Gemeente], 
+    [Accomodatie].[RegioNaam] AS [RegioNaam], 
+    [Accomodatie].[Resultaatkeuring] AS [Resultaatkeuring], 
+    [Accomodatie].[RolStoeltoegankelijk] AS [RolStoeltoegankelijk], 
+    [Accomodatie].[SoortClubhuis] AS [SoortClubhuis], 
+    [Accomodatie].[Speeltoestellen] AS [Speeltoestellen], 
+    [Accomodatie].[Telefoonnummer] AS [Telefoonnummer], 
+    [Accomodatie].[TotaalAantalWasKleedruimte] AS [TotaalAantalWasKleedruimte], 
+    [Accomodatie].[ValideParkeerplaatsen] AS [ValideParkeerplaatsen], 
+    [Accomodatie].[WasruimteClubhuisAanwezig] AS [WasruimteClubhuisAanwezig], 
+    [Accomodatie].[Website] AS [Website], 
+    [Accomodatie].[UserUpdate] AS [UserUpdate], 
+    [Accomodatie].[ClubUpdate] AS [ClubUpdate], 
+    [Accomodatie].[ClubCloudUpdate] AS [ClubCloudUpdate], 
+    [Accomodatie].[Expr1] AS [Expr1], 
+    [Accomodatie].[Expr2] AS [Expr2], 
+    [Accomodatie].[Nummer] AS [Nummer]
+    FROM [dbo].[Accomodatie] AS [Accomodatie]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Functionaris" EntityType="Self.Functionaris" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Functionaris].[Id] AS [Id], 
+    [Functionaris].[Functie] AS [Functie], 
+    [Functionaris].[Orgaan] AS [Orgaan], 
+    [Functionaris].[Disctict] AS [Disctict], 
+    [Functionaris].[Vereniging] AS [Vereniging], 
+    [Functionaris].[Gebruiker] AS [Gebruiker], 
+    [Functionaris].[TermijnBegin] AS [TermijnBegin], 
+    [Functionaris].[TermijnEinde] AS [TermijnEinde], 
+    [Functionaris].[Autorisatie] AS [Autorisatie], 
+    [Functionaris].[Actief] AS [Actief], 
+    [Functionaris].[VerenigingId] AS [VerenigingId], 
+    [Functionaris].[GebruikerId] AS [GebruikerId], 
+    [Functionaris].[BondsNummer] AS [BondsNummer]
+    FROM [dbo].[Functionaris] AS [Functionaris]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Vereniging" EntityType="Self.Vereniging" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vereniging].[Id] AS [Id], 
+    [Vereniging].[Naam] AS [Naam], 
+    [Vereniging].[Nummer] AS [Nummer], 
+    [Vereniging].[BankNummer] AS [BankNummer], 
+    [Vereniging].[BankIban] AS [BankIban], 
+    [Vereniging].[BankPlaats] AS [BankPlaats], 
+    [Vereniging].[KvKnummer] AS [KvKnummer], 
+    [Vereniging].[KvKplaats] AS [KvKplaats], 
+    [Vereniging].[DatumOpgericht] AS [DatumOpgericht], 
+    [Vereniging].[Website] AS [Website], 
+    [Vereniging].[Actief] AS [Actief], 
+    [Vereniging].[District] AS [District], 
+    [Vereniging].[Rechtsvorm] AS [Rechtsvorm], 
+    [Vereniging].[Regio] AS [Regio]
+    FROM [dbo].[Vereniging] AS [Vereniging]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ClubCloud_BestuursorgaanClubCloud_Vereniging" Association="Self.FK_ClubCloud_BestuursorgaanClubCloud_Vereniging">
+            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_Bestuursorganen" EntitySet="ClubCloud_Bestuursorganen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_DistrictClubCloud_Regio" Association="Self.FK_ClubCloud_DistrictClubCloud_Regio">
+            <End Role="ClubCloud_Regios" EntitySet="ClubCloud_Regios" />
+            <End Role="ClubCloud_Districten" EntitySet="ClubCloud_Districten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_Functie_Functionaris" Association="Self.FK_ClubCloud_Functie_Functionaris">
+            <End Role="ClubCloud_Functies" EntitySet="ClubCloud_Functies" />
+            <End Role="ClubCloud_Functionarissen" EntitySet="ClubCloud_Functionarissen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_Functionaris_Bestuursorgaan" Association="Self.FK_ClubCloud_Functionaris_Bestuursorgaan">
+            <End Role="ClubCloud_Bestuursorganen" EntitySet="ClubCloud_Bestuursorganen" />
+            <End Role="ClubCloud_Functionarissen" EntitySet="ClubCloud_Functionarissen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_Functionaris_Vereniging" Association="Self.FK_ClubCloud_Functionaris_Vereniging">
+            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_Functionarissen" EntitySet="ClubCloud_Functionarissen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_FunctionarisClubCloud_District" Association="Self.FK_ClubCloud_FunctionarisClubCloud_District">
+            <End Role="ClubCloud_Districten" EntitySet="ClubCloud_Districten" />
+            <End Role="ClubCloud_Functionarissen" EntitySet="ClubCloud_Functionarissen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_GebruikerClubCloud_Address" Association="Self.FK_ClubCloud_GebruikerClubCloud_Address">
+            <End Role="ClubCloud_Gebruikers" EntitySet="ClubCloud_Gebruikers" />
+            <End Role="ClubCloud_Addresses" EntitySet="ClubCloud_Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_GebruikerClubCloud_Functionaris" Association="Self.FK_ClubCloud_GebruikerClubCloud_Functionaris">
+            <End Role="ClubCloud_Gebruikers" EntitySet="ClubCloud_Gebruikers" />
+            <End Role="ClubCloud_Functionarissen" EntitySet="ClubCloud_Functionarissen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_GebruikerClubCloud_Lidmaatschap" Association="Self.FK_ClubCloud_GebruikerClubCloud_Lidmaatschap">
+            <End Role="ClubCloud_Gebruikers" EntitySet="ClubCloud_Gebruikers" />
+            <End Role="ClubCloud_Lidmaatschappen" EntitySet="ClubCloud_Lidmaatschappen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_GebruikerClubCloud_Vereniging" Association="Self.FK_ClubCloud_GebruikerClubCloud_Vereniging">
+            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_Gebruikers" EntitySet="ClubCloud_Gebruikers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_Vereniging_District" Association="Self.FK_ClubCloud_Vereniging_District">
+            <End Role="ClubCloud_Districten" EntitySet="ClubCloud_Districten" />
+            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_Vereniging_Lidmaatschap" Association="Self.FK_ClubCloud_Vereniging_Lidmaatschap">
+            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_Lidmaatschappen" EntitySet="ClubCloud_Lidmaatschappen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_VerenigingClubCloud_Accomodatie" Association="Self.FK_ClubCloud_VerenigingClubCloud_Accomodatie">
+            <End Role="ClubCloud_Accomodaties" EntitySet="ClubCloud_Accomodaties" />
+            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_VerenigingClubCloud_Address" Association="Self.FK_ClubCloud_VerenigingClubCloud_Address">
+            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_Addresses" EntitySet="ClubCloud_Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_VerenigingClubCloud_Rechtsvorm" Association="Self.FK_ClubCloud_VerenigingClubCloud_Rechtsvorm">
+            <End Role="ClubCloud_Rechtsvormen" EntitySet="ClubCloud_Rechtsvormen" />
+            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubCloud_VerenigingClubCloud_Regio" Association="Self.FK_ClubCloud_VerenigingClubCloud_Regio">
+            <End Role="ClubCloud_Regios" EntitySet="ClubCloud_Regios" />
+            <End Role="ClubCloud_Verenigingen" EntitySet="ClubCloud_Verenigingen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ClubCloudModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="ClubCloudModelContainer" annotation:LazyLoadingEnabled="false">
-          <EntitySet Name="ClubCloud_TrackingSet" EntityType="ClubCloudModel.ClubCloud_Tracking" />
-          <EntitySet Name="ClubCloud_Gebruiker_Abonementen" EntityType="ClubCloudModel.ClubCloud_Gebruiker_Abonement" />
-          <EntitySet Name="ClubCloud_Abonnementen" EntityType="ClubCloudModel.ClubCloud_Abonnement" />
-          <EntitySet Name="ClubCloud_Vereniging_Accomodaties" EntityType="ClubCloudModel.ClubCloud_Vereniging_Accomodatie" />
-          <EntitySet Name="ClubCloud_Gebruiker_Verenigingen" EntityType="ClubCloudModel.ClubCloud_Gebruiker_Vereniging" />
-          <EntitySet Name="ClubCloud_Vereniging_BestuursLeden" EntityType="ClubCloudModel.ClubCloud_Vereniging_BestuursLid" />
           <EntitySet Name="ClubCloud_Settings" EntityType="ClubCloudModel.ClubCloud_Setting" />
           <EntitySet Name="ClubCloud_Verenigingen" EntityType="ClubCloudModel.ClubCloud_Vereniging" />
           <EntitySet Name="ClubCloud_Gebruikers" EntityType="ClubCloudModel.ClubCloud_Gebruiker" />
           <EntitySet Name="ClubCloud_Accomodaties" EntityType="ClubCloudModel.ClubCloud_Accomodatie" />
-          <EntitySet Name="ClubCloud_Vereniging_Competities" EntityType="ClubCloudModel.ClubCloud_Vereniging_Competitie" />
           <EntitySet Name="ClubCloud_Nationaliteiten" EntityType="ClubCloudModel.ClubCloud_Nationaliteit" />
-          <EntitySet Name="ClubCloud_Vereniging_Toernooien" EntityType="ClubCloudModel.ClubCloud_Vereniging_Toernooi" />
           <EntitySet Name="ClubCloud_Districten" EntityType="ClubCloudModel.ClubCloud_District" />
+          <EntitySet Name="ClubCloud_Functies" EntityType="ClubCloudModel.ClubCloud_Functie" />
+          <EntitySet Name="ClubCloud_Lidmaatschappen" EntityType="ClubCloudModel.ClubCloud_Lidmaatschap" />
+          <EntitySet Name="ClubCloud_Profielen" EntityType="ClubCloudModel.ClubCloud_Profiel" />
+          <EntitySet Name="ClubCloud_Functionarissen" EntityType="ClubCloudModel.ClubCloud_Functionaris" />
+          <AssociationSet Name="ClubCloud_Functionaris_Functie" Association="ClubCloudModel.ClubCloud_Functie_Functionaris">
+            <End Role="ClubCloud_Functie" EntitySet="ClubCloud_Functies" />
+            <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Functionaris_Vereniging" Association="ClubCloudModel.ClubCloud_Functionaris_Vereniging">
+            <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Functionaris_Gebruiker" Association="ClubCloudModel.ClubCloud_GebruikerClubCloud_Functionaris">
+            <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
+            <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Functionaris_District" Association="ClubCloudModel.ClubCloud_FunctionarisClubCloud_District">
+            <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
+            <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Vereniging_Lidmaatschap" Association="ClubCloudModel.ClubCloud_Vereniging_Lidmaatschap">
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_Lidmaatschap" EntitySet="ClubCloud_Lidmaatschappen" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Gebruiker_Lidmaatschap" Association="ClubCloudModel.ClubCloud_GebruikerClubCloud_Lidmaatschap">
+            <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
+            <End Role="ClubCloud_Lidmaatschap" EntitySet="ClubCloud_Lidmaatschappen" />
+          </AssociationSet>
+          <EntitySet Name="ClubCloud_Bestuursorganen" EntityType="ClubCloudModel.ClubCloud_Bestuursorgaan" />
+          <AssociationSet Name="ClubCloud_Functionaris_Bestuursorgaan" Association="ClubCloudModel.ClubCloud_Functionaris_Bestuursorgaan">
+            <End Role="ClubCloud_Bestuursorgaan" EntitySet="ClubCloud_Bestuursorganen" />
+            <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Vereniging_Bestuursorgaan" Association="ClubCloudModel.ClubCloud_BestuursorgaanClubCloud_Vereniging">
+            <End Role="ClubCloud_Bestuursorgaan" EntitySet="ClubCloud_Bestuursorganen" />
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Vereniging_District" Association="ClubCloudModel.ClubCloud_Vereniging_District">
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
+          </AssociationSet>
+          <EntitySet Name="ClubCloud_Rechtsvormen" EntityType="ClubCloudModel.ClubCloud_Rechtsvorm" />
+          <AssociationSet Name="ClubCloud_Vereniging_Rechtsvorm" Association="ClubCloudModel.ClubCloud_VerenigingClubCloud_Rechtsvorm">
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_Rechtsvorm" EntitySet="ClubCloud_Rechtsvormen" />
+          </AssociationSet>
+          <EntitySet Name="ClubCloud_Addresses" EntityType="ClubCloudModel.ClubCloud_Address" />
+          <AssociationSet Name="ClubCloud_Vereniging_Accomodatie" Association="ClubCloudModel.ClubCloud_VerenigingClubCloud_Accomodatie">
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_Accomodatie" EntitySet="ClubCloud_Accomodaties" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Vereniging_Address" Association="ClubCloudModel.ClubCloud_VerenigingClubCloud_Address">
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_Address" EntitySet="ClubCloud_Addresses" />
+          </AssociationSet>
+          <EntitySet Name="ClubCloud_Regios" EntityType="ClubCloudModel.ClubCloud_Regio" />
+          <AssociationSet Name="ClubCloud_Vereniging_Regio" Association="ClubCloudModel.ClubCloud_VerenigingClubCloud_Regio">
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+            <End Role="ClubCloud_Regio" EntitySet="ClubCloud_Regios" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_District_Regio" Association="ClubCloudModel.ClubCloud_DistrictClubCloud_Regio">
+            <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
+            <End Role="ClubCloud_Regio" EntitySet="ClubCloud_Regios" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Gebruiker_Address" Association="ClubCloudModel.ClubCloud_GebruikerClubCloud_Address">
+            <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
+            <End Role="ClubCloud_Address" EntitySet="ClubCloud_Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_GebruikerClubCloud_Vereniging" Association="ClubCloudModel.ClubCloud_GebruikerClubCloud_Vereniging">
+            <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+          </AssociationSet>
+          <EntitySet Name="Accomodaties" EntityType="ClubCloudModel.Accomodatie" />
+          <EntitySet Name="Functionarissen" EntityType="ClubCloudModel.Functionaris" />
+          <EntitySet Name="Verenigingen" EntityType="ClubCloudModel.Vereniging" />
+          <AssociationSet Name="ClubCloud_ProfielClubCloud_Gebruiker" Association="ClubCloudModel.ClubCloud_ProfielClubCloud_Gebruiker">
+            <End Role="ClubCloud_Profiel" EntitySet="ClubCloud_Profielen" />
+            <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
+          </AssociationSet>
+          <EntitySet Name="ClubCloud_Baansoorten" EntityType="ClubCloudModel.ClubCloud_Baansoort" />
+          <EntitySet Name="ClubCloud_Baantypes" EntityType="ClubCloudModel.ClubCloud_Baantype" />
+          <EntitySet Name="ClubCloud_Banen" EntityType="ClubCloudModel.ClubCloud_Baan" />
+          <EntitySet Name="ClubCloud_Bouwaarden" EntityType="ClubCloudModel.ClubCloud_Bouwaard" />
+          <EntitySet Name="ClubCloud_BanenSpeciaal" EntityType="ClubCloudModel.ClubCloud_BaanSpeciaal" />
+          <AssociationSet Name="ClubCloud_BaansoortClubCloud_Baantype" Association="ClubCloudModel.ClubCloud_BaansoortClubCloud_Baantype">
+            <End Role="ClubCloud_Baansoort" EntitySet="ClubCloud_Baansoorten" />
+            <End Role="ClubCloud_Baantype" EntitySet="ClubCloud_Baantypes" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_BaanSpeciaalClubCloud_Baansoort" Association="ClubCloudModel.ClubCloud_BaanSpeciaalClubCloud_Baansoort">
+            <End Role="ClubCloud_BaanSpeciaal" EntitySet="ClubCloud_BanenSpeciaal" />
+            <End Role="ClubCloud_Baansoort" EntitySet="ClubCloud_Baansoorten" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ClubCloud_Gebruiker">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="Achternaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="DistrictNaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Geboortedatum" Type="DateTime" Nullable="true" Precision="3" />
-          <Property Name="Geboorteplaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Gemeente" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Geslacht" Type="ClubCloudModel.Geslacht" Nullable="false" />
-          <Property Name="Huisnummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="IsLid" Type="Boolean" Nullable="false" />
-          <Property Name="Mobiel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="NationaliteitId" Type="Guid" Nullable="true" />
-          <Property Name="OrganisatieNummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Plaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="RatingDubbel" Type="Decimal" Nullable="true" Precision="18" Scale="0" />
-          <Property Name="RatingEnkel" Type="Decimal" Nullable="true" Precision="18" Scale="0" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Bondsnummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Roepnaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="SpeelsterkteDubbel" Type="Int32" Nullable="true" />
-          <Property Name="SpeelsterkteEnkel" Type="Int32" Nullable="true" />
-          <Property Name="Straat" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Aanhef" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voornaam" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voornamen" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Achtervoegsel" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tussenvoegsel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Achternaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Voorletters" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EmailGeheim" Type="Boolean" Nullable="false" />
+          <Property Name="EmailKNLTB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailWebSite" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailOverig" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelefoonGeheim" Type="Boolean" Nullable="false" />
           <Property Name="TelefoonAvond" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="TelefoonOverdag" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Toevoeging" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Tussenvoegsel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="VolledigeNaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Voorletters" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Voornamen" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="TelefoonOverig" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mobiel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Fax" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankNummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BankIban" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankPlaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Geslacht" Type="ClubCloudModel.Geslacht" Nullable="false" />
+          <Property Name="Geboortedatum" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="Geboorteplaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="OverlijdensDatum" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="NationaliteitId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="ClubCloud_Functionaris" Relationship="ClubCloudModel.ClubCloud_GebruikerClubCloud_Functionaris" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Functionaris" />
+          <NavigationProperty Name="ClubCloud_Lidmaatschap" Relationship="ClubCloudModel.ClubCloud_GebruikerClubCloud_Lidmaatschap" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Lidmaatschap" />
+          <NavigationProperty Name="ClubCloud_Address" Relationship="ClubCloudModel.ClubCloud_GebruikerClubCloud_Address" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Address" />
+          <Property Name="AddressGeheim" Type="Boolean" Nullable="false" />
+          <Property Name="Website" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FTPsite" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Beroep" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Kinderen" Type="Boolean" Nullable="false" />
+          <Property Name="KinderenAantal" Type="Int32" Nullable="false" />
+          <Property Name="Partner" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AanhefBrief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AanhefAttentie" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="FotoId" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="ClubCloudModel.ClubCloud_GebruikerClubCloud_Vereniging" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Vereniging" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="true" />
+          <Property Name="Volledigenaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubCloud_Profiel" Relationship="ClubCloudModel.ClubCloud_ProfielClubCloud_Gebruiker" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Profiel" />
         </EntityType>
         <EntityType Name="ClubCloud_Vereniging">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="BanknummerPlaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Bezoekadres" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="BezoekadresGemeente" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="BezoekadresPlaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="BezoekadresPostcode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="DatumOpgericht" Type="DateTime" Precision="3" Nullable="true" />
-          <Property Name="District" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Emailadres" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="IbanCode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nummer" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="Max" Unicode="true" FixedLength="false" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+          <Property Name="DistrictId" Type="Guid" Nullable="true" />
+          <Property Name="RechtsvormId" Type="Guid" Nullable="true" />
+          <Property Name="AccomodatieId" Type="Guid" Nullable="true" />
+          <Property Name="RegioId" Type="Guid" Nullable="true" />
+          <Property Name="BankNummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BankIban" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BankPlaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="KvKnummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="KvKplaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Postadres" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="PostadresGemeente" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="PostadresPlaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="PostadresPostcode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Regio" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="TelefoonnummerAvond" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="TelefoonnummerOverdag" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Verenigingsnummer" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EmailKNLTB" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EmailWebSite" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailOverig" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelefoonAvond" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TelefoonOverdag" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TelefoonOverig" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Website" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="FTPsite" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClubCloud_Functionaris" Relationship="ClubCloudModel.ClubCloud_Functionaris_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Functionaris" />
+          <NavigationProperty Name="ClubCloud_Lidmaatschap" Relationship="ClubCloudModel.ClubCloud_Vereniging_Lidmaatschap" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Lidmaatschap" />
+          <NavigationProperty Name="ClubCloud_Bestuursorgaan" Relationship="ClubCloudModel.ClubCloud_BestuursorgaanClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Bestuursorgaan" />
+          <NavigationProperty Name="ClubCloud_District" Relationship="ClubCloudModel.ClubCloud_Vereniging_District" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_District" />
+          <NavigationProperty Name="ClubCloud_Rechtsvorm" Relationship="ClubCloudModel.ClubCloud_VerenigingClubCloud_Rechtsvorm" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Rechtsvorm" />
+          <NavigationProperty Name="ClubCloud_Accomodatie" Relationship="ClubCloudModel.ClubCloud_VerenigingClubCloud_Accomodatie" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Accomodatie" />
+          <NavigationProperty Name="ClubCloud_Address" Relationship="ClubCloudModel.ClubCloud_VerenigingClubCloud_Address" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Address" />
+          <NavigationProperty Name="ClubCloud_Regio" Relationship="ClubCloudModel.ClubCloud_VerenigingClubCloud_Regio" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Regio" />
+          <Property Name="Oprichting" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="Erkenning" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="Gestopt" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="Maanden" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="ClubCloudModel.ClubCloud_GebruikerClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Gebruiker" />
           </EntityType>
-        <EntityType Name="ClubCloud_Tracking">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
-        </EntityType>
         <EnumType Name="Geslacht" IsFlags="true" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.Geslacht">
           </EnumType>
         <EntityType Name="ClubCloud_Setting">
@@ -403,9 +1021,9 @@
           <Property Name="facebook_setting" Type="ClubCloudModel.Facebook" Nullable="false" />
           <Property Name="privacy" Type="ClubCloudModel.Privacy" Nullable="false" />
           <Property Name="financieel" Type="ClubCloudModel.Financieel" Nullable="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="UserUpdate" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" Precision="3" />
         </EntityType>
         <EnumType Name="Twitter" IsFlags="true">
           <Member Name="None" Value="0" />
@@ -442,37 +1060,35 @@
           <Property Name="AantalBinnenBanen" Type="Int32" Nullable="false" />
           <Property Name="AantalBuitenBanen" Type="Int32" Nullable="false" />
           <Property Name="Blaashal" Type="ClubCloudModel.Blaashal" Nullable="true" />
-          <Property Name="BouwjaarClubhuis" Type="String" Nullable="false" />
-          <Property Name="DatumKeuring" Type="DateTime" Nullable="true" />
-          <Property Name="DistrictNaam" Type="String" Nullable="false" />
-          <Property Name="Email" Type="String" Nullable="false" />
-          <Property Name="Faxnummer" Type="String" Nullable="false" />
-          <Property Name="GekeurdDoor" Type="String" Nullable="false" />
+          <Property Name="BouwjaarClubhuis" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DatumKeuring" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="DistrictNaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Faxnummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GekeurdDoor" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="HalAanwezig" Type="ClubCloudModel.Hal" Nullable="true" />
           <Property Name="KleedruimteClubhuisAanwezig" Type="Boolean" Nullable="false" />
           <Property Name="MetOVBereikbaar" Type="Boolean" Nullable="false" />
           <Property Name="MinderValideParkeerplaatsen" Type="Int32" Nullable="true" />
-          <Property Name="Minibanen" Type="String" Nullable="false" />
-          <Property Name="Naam" Type="String" Nullable="false" />
-          <Property Name="Oefenmuren" Type="String" Nullable="false" />
-          <Property Name="Ondergrond" Type="String" Nullable="false" />
+          <Property Name="Minibanen" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Oefenmuren" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Ondergrond" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="OppervlakteClubhuis" Type="Int32" Nullable="true" />
           <Property Name="Overkapping" Type="ClubCloudModel.Overkapping" Nullable="true" />
-          <Property Name="Playgrounds" Type="String" Nullable="false" />
+          <Property Name="Playgrounds" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="PostAdres" Type="ClubCloudModel.Adres" Nullable="false" />
-          <Property Name="RegioNaam" Type="String" Nullable="false" />
+          <Property Name="RegioNaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Resultaatkeuring" Type="ClubCloudModel.ResultaatKeuring" Nullable="true" />
           <Property Name="RolStoeltoegankelijk" Type="Boolean" Nullable="false" />
-          <Property Name="SoortClubhuis" Type="String" Nullable="false" />
-          <Property Name="Speeltoestellen" Type="String" Nullable="false" />
-          <Property Name="Telefoonnummer" Type="String" Nullable="false" />
+          <Property Name="SoortClubhuis" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Speeltoestellen" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Telefoonnummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="TotaalAantalWasKleedruimte" Type="Int32" Nullable="true" />
           <Property Name="ValideParkeerplaatsen" Type="Int32" Nullable="true" />
           <Property Name="WasruimteClubhuisAanwezig" Type="Boolean" Nullable="false" />
-          <Property Name="Website" Type="String" Nullable="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="Website" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="ClubCloudModel.ClubCloud_VerenigingClubCloud_Accomodatie" FromRole="ClubCloud_Accomodatie" ToRole="ClubCloud_Vereniging" />
         </EntityType>
         <EnumType Name="Hal" IsFlags="true" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.TypeHal">
           </EnumType>
@@ -486,215 +1102,593 @@
           <Property Type="String" Name="Gemeente" Nullable="false" />
         </ComplexType>
         <EnumType Name="ResultaatKeuring" IsFlags="true" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.TypeResultaatKeuring" />
-        <EntityType Name="ClubCloud_Gebruiker_Vereniging">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="VerenigingId" Type="Guid" Nullable="false" />
-          <Property Name="VerenigingNaam" Type="String" Nullable="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
-        </EntityType>
-        <EntityType Name="ClubCloud_Vereniging_Accomodatie">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="AccommodatieNaam" Type="String" Nullable="false" />
-          <Property Name="BezoekAdres" Type="ClubCloudModel.Adres" Nullable="false" />
-          <Property Name="Minibanen" Type="String" Nullable="false" />
-          <Property Name="Oefenmuren" Type="String" Nullable="false" />
-          <Property Name="Ondergrond" Type="String" Nullable="false" />
-          <Property Name="Playgrounds" Type="String" Nullable="false" />
-          <Property Name="PostAdres" Type="ClubCloudModel.Adres" Nullable="false" />
-          <Property Name="Speeltoestellen" Type="String" Nullable="false" />
-          <Property Name="TelefoonNummer" Type="String" Nullable="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
-        </EntityType>
         <EnumType Name="Blaashal" IsFlags="true" cg:ExternalTypeName="ClubCloud.KNLTB.ServIt.LedenAdministratieService.Blaashal" />
-        <EntityType Name="ClubCloud_Vereniging_BestuursLid">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VerenigingId" Type="Guid" Nullable="false" />
-          <Property Name="Emailadres" Type="String" Nullable="false" />
-          <Property Name="Functie" Type="String" Nullable="false" />
-          <Property Name="Orgaan" Type="String" Nullable="false" />
-          <Property Name="Telefoon" Type="String" Nullable="false" />
-          <Property Name="VolledigeNaam" Type="String" Nullable="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
-        </EntityType>
-        <EntityType Name="ClubCloud_Abonnement">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Aangevinkt" Type="Boolean" Nullable="false" />
-          <Property Name="Beschrijving" Type="String" Nullable="false" />
-          <Property Name="Naam" Type="String" Nullable="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
-        </EntityType>
-        <EntityType Name="ClubCloud_Gebruiker_Abonement">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
-        </EntityType>
-        <EntityType Name="ClubCloud_Vereniging_Competitie">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="VerenigingId" Type="Guid" Nullable="false" />
-          <Property Name="AantalPloegen" Type="Int32" Nullable="false" />
-          <Property Name="Naam" Type="String" Nullable="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
-        </EntityType>
         <EntityType Name="ClubCloud_Nationaliteit">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="Naam" Type="String" Nullable="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
-        </EntityType>
-        <EntityType Name="ClubCloud_Vereniging_Toernooi">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="VerenigingId" Type="Guid" Nullable="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="ClubCloud_District">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="DistrictNaam" Type="String" Nullable="false" />
-          <Property Name="UserUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubUpdate" Type="DateTime" Nullable="true" />
-          <Property Name="ClubCloudUpdate" Type="DateTime" Nullable="true" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RegioId" Type="Guid" Nullable="true" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubCloud_Functionaris" Relationship="ClubCloudModel.ClubCloud_FunctionarisClubCloud_District" FromRole="ClubCloud_District" ToRole="ClubCloud_Functionaris" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="ClubCloudModel.ClubCloud_Vereniging_District" FromRole="ClubCloud_District" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Regio" Relationship="ClubCloudModel.ClubCloud_DistrictClubCloud_Regio" FromRole="ClubCloud_District" ToRole="ClubCloud_Regio" />
         </EntityType>
+        <EntityType Name="ClubCloud_Functie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Toegang" Type="Boolean" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubCloud_Functionaris" Relationship="ClubCloudModel.ClubCloud_Functie_Functionaris" FromRole="ClubCloud_Functie" ToRole="ClubCloud_Functionaris" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Lidmaatschap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="SoortId" Type="Guid" Nullable="false" />
+          <Property Name="SoortNaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Begin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Einde" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="Opzegging" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="InternNummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GebruikerId" Type="Guid" Nullable="true" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="true" />
+          <Property Name="PasTypeId" Type="Guid" Nullable="false" />
+          <Property Name="PasTypeNaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PasDatum" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="PasNoodDatum" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="PasWedstrijd" Type="Boolean" Nullable="false" />
+          <Property Name="PasNieuw" Type="Boolean" Nullable="false" />
+          <Property Name="PasNood" Type="Boolean" Nullable="false" />
+          <Property Name="PasVolgnummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SpeelsterkteDubbel" Type="Int32" Nullable="false" />
+          <Property Name="SpeelsterkteEnkel" Type="Int32" Nullable="false" />
+          <Property Name="Autorisatie" Type="Boolean" Nullable="false" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="ClubCloudModel.ClubCloud_Vereniging_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="ClubCloudModel.ClubCloud_GebruikerClubCloud_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCloud_Gebruiker" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Profiel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Bondsnummer" Type="String" Nullable="false" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="ClubCloudModel.ClubCloud_ProfielClubCloud_Gebruiker" FromRole="ClubCloud_Profiel" ToRole="ClubCloud_Gebruiker" />
+          <Property Name="GebruikerId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Functionaris">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="FunctieId" Type="Guid" Nullable="true" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="true" />
+          <Property Name="GebruikerId" Type="Guid" Nullable="true" />
+          <Property Name="BestuursorgaanId" Type="Guid" Nullable="true" />
+          <Property Name="DistrictId" Type="Guid" Nullable="true" />
+          <Property Name="TermijnBegin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TermijnEinde" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="Autorisatie" Type="Boolean" Nullable="false" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubCloud_Functie" Relationship="ClubCloudModel.ClubCloud_Functie_Functionaris" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Functie" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="ClubCloudModel.ClubCloud_Functionaris_Vereniging" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="ClubCloudModel.ClubCloud_GebruikerClubCloud_Functionaris" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_District" Relationship="ClubCloudModel.ClubCloud_FunctionarisClubCloud_District" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_District" />
+          <NavigationProperty Name="ClubCloud_Bestuursorgaan" Relationship="ClubCloudModel.ClubCloud_Functionaris_Bestuursorgaan" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Bestuursorgaan" />
+        </EntityType>
+        <Association Name="ClubCloud_Functie_Functionaris">
+          <End Type="ClubCloudModel.ClubCloud_Functie" Role="ClubCloud_Functie" Multiplicity="0..1" />
+          <End Type="ClubCloudModel.ClubCloud_Functionaris" Role="ClubCloud_Functionaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Functie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Functionaris">
+              <PropertyRef Name="FunctieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_Functionaris_Vereniging">
+          <End Type="ClubCloudModel.ClubCloud_Functionaris" Role="ClubCloud_Functionaris" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Vereniging">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Functionaris">
+              <PropertyRef Name="VerenigingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_GebruikerClubCloud_Functionaris">
+          <End Type="ClubCloudModel.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
+          <End Type="ClubCloudModel.ClubCloud_Functionaris" Role="ClubCloud_Functionaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Gebruiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Functionaris">
+              <PropertyRef Name="GebruikerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_FunctionarisClubCloud_District">
+          <End Type="ClubCloudModel.ClubCloud_Functionaris" Role="ClubCloud_Functionaris" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_District" Role="ClubCloud_District" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Functionaris">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_Vereniging_Lidmaatschap">
+          <End Type="ClubCloudModel.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
+          <End Type="ClubCloudModel.ClubCloud_Lidmaatschap" Role="ClubCloud_Lidmaatschap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Vereniging">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Lidmaatschap">
+              <PropertyRef Name="VerenigingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_GebruikerClubCloud_Lidmaatschap">
+          <End Type="ClubCloudModel.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
+          <End Type="ClubCloudModel.ClubCloud_Lidmaatschap" Role="ClubCloud_Lidmaatschap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Gebruiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Lidmaatschap">
+              <PropertyRef Name="GebruikerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClubCloud_Bestuursorgaan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="true" />
+          <Property Name="TypeId" Type="Guid" Nullable="false" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubCloud_Functionaris" Relationship="ClubCloudModel.ClubCloud_Functionaris_Bestuursorgaan" FromRole="ClubCloud_Bestuursorgaan" ToRole="ClubCloud_Functionaris" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="ClubCloudModel.ClubCloud_BestuursorgaanClubCloud_Vereniging" FromRole="ClubCloud_Bestuursorgaan" ToRole="ClubCloud_Vereniging" />
+        </EntityType>
+        <Association Name="ClubCloud_Functionaris_Bestuursorgaan">
+          <End Type="ClubCloudModel.ClubCloud_Bestuursorgaan" Role="ClubCloud_Bestuursorgaan" Multiplicity="0..1" />
+          <End Type="ClubCloudModel.ClubCloud_Functionaris" Role="ClubCloud_Functionaris" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Bestuursorgaan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Functionaris">
+              <PropertyRef Name="BestuursorgaanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_BestuursorgaanClubCloud_Vereniging">
+          <End Type="ClubCloudModel.ClubCloud_Bestuursorgaan" Role="ClubCloud_Bestuursorgaan" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Vereniging">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Bestuursorgaan">
+              <PropertyRef Name="VerenigingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_Vereniging_District">
+          <End Type="ClubCloudModel.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_District" Role="ClubCloud_District" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Vereniging">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClubCloud_Rechtsvorm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="ClubCloudModel.ClubCloud_VerenigingClubCloud_Rechtsvorm" FromRole="ClubCloud_Rechtsvorm" ToRole="ClubCloud_Vereniging" />
+        </EntityType>
+        <Association Name="ClubCloud_VerenigingClubCloud_Rechtsvorm">
+          <End Type="ClubCloudModel.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_Rechtsvorm" Role="ClubCloud_Rechtsvorm" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Rechtsvorm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Vereniging">
+              <PropertyRef Name="RechtsvormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClubCloud_Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ParentId" Type="Guid" Nullable="true" />
+          <Property Name="Stad" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Provincie" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Latitude" Type="Double" Nullable="true" />
+          <Property Name="Longitude" Type="Double" Nullable="true" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Straat" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Land" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Fax" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Toevoeging" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Postbus" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TelefoonPrimair" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TelefoonSecundair" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TelefoonTertiair" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="ClubCloudModel.ClubCloud_VerenigingClubCloud_Address" FromRole="ClubCloud_Address" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="ClubCloudModel.ClubCloud_GebruikerClubCloud_Address" FromRole="ClubCloud_Address" ToRole="ClubCloud_Gebruiker" />
+        </EntityType>
+        <Association Name="ClubCloud_VerenigingClubCloud_Accomodatie">
+          <End Type="ClubCloudModel.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_Accomodatie" Role="ClubCloud_Accomodatie" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Accomodatie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Vereniging">
+              <PropertyRef Name="AccomodatieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_VerenigingClubCloud_Address">
+          <End Type="ClubCloudModel.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
+          <End Type="ClubCloudModel.ClubCloud_Address" Role="ClubCloud_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Vereniging">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Address">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClubCloud_Regio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="ClubCloudModel.ClubCloud_VerenigingClubCloud_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_District" Relationship="ClubCloudModel.ClubCloud_DistrictClubCloud_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_District" />
+        </EntityType>
+        <Association Name="ClubCloud_VerenigingClubCloud_Regio">
+          <End Type="ClubCloudModel.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_Regio" Role="ClubCloud_Regio" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Regio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Vereniging">
+              <PropertyRef Name="RegioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_DistrictClubCloud_Regio">
+          <End Type="ClubCloudModel.ClubCloud_District" Role="ClubCloud_District" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_Regio" Role="ClubCloud_Regio" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Regio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_District">
+              <PropertyRef Name="RegioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_GebruikerClubCloud_Address">
+          <End Type="ClubCloudModel.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
+          <End Type="ClubCloudModel.ClubCloud_Address" Role="ClubCloud_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Gebruiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Address">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_GebruikerClubCloud_Vereniging">
+          <End Type="ClubCloudModel.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Vereniging">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Gebruiker">
+              <PropertyRef Name="VerenigingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Accomodatie">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="AccommodatieAdres_Straat" />
+            <PropertyRef Name="AccommodatieAdres_Huisnummer" />
+            <PropertyRef Name="AccommodatieAdres_Toevoeging" />
+            <PropertyRef Name="AccommodatieAdres_Postcode" />
+            <PropertyRef Name="AccommodatieAdres_Plaats" />
+            <PropertyRef Name="AccommodatieAdres_Gemeente" />
+            <PropertyRef Name="AantalBinnenBanen" />
+            <PropertyRef Name="AantalBuitenBanen" />
+            <PropertyRef Name="BouwjaarClubhuis" />
+            <PropertyRef Name="DistrictNaam" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Faxnummer" />
+            <PropertyRef Name="GekeurdDoor" />
+            <PropertyRef Name="KleedruimteClubhuisAanwezig" />
+            <PropertyRef Name="MetOVBereikbaar" />
+            <PropertyRef Name="Minibanen" />
+            <PropertyRef Name="Naam" />
+            <PropertyRef Name="Oefenmuren" />
+            <PropertyRef Name="Ondergrond" />
+            <PropertyRef Name="Playgrounds" />
+            <PropertyRef Name="PostAdres_Straat" />
+            <PropertyRef Name="PostAdres_Huisnummer" />
+            <PropertyRef Name="PostAdres_Toevoeging" />
+            <PropertyRef Name="PostAdres_Postcode" />
+            <PropertyRef Name="PostAdres_Plaats" />
+            <PropertyRef Name="PostAdres_Gemeente" />
+            <PropertyRef Name="RegioNaam" />
+            <PropertyRef Name="RolStoeltoegankelijk" />
+            <PropertyRef Name="SoortClubhuis" />
+            <PropertyRef Name="Speeltoestellen" />
+            <PropertyRef Name="Telefoonnummer" />
+            <PropertyRef Name="WasruimteClubhuisAanwezig" />
+            <PropertyRef Name="Website" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="Expr2" />
+            <PropertyRef Name="Nummer" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AccommodatieAdres_Straat" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccommodatieAdres_Huisnummer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccommodatieAdres_Toevoeging" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccommodatieAdres_Postcode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccommodatieAdres_Plaats" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccommodatieAdres_Gemeente" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AantalBinnenBanen" Type="Int32" Nullable="false" />
+          <Property Name="AantalBuitenBanen" Type="Int32" Nullable="false" />
+          <Property Name="Blaashal" Type="Int32" />
+          <Property Name="BouwjaarClubhuis" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatumKeuring" Type="DateTime" Precision="3" />
+          <Property Name="DistrictNaam" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Faxnummer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GekeurdDoor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HalAanwezig" Type="Int32" />
+          <Property Name="KleedruimteClubhuisAanwezig" Type="Boolean" Nullable="false" />
+          <Property Name="MetOVBereikbaar" Type="Boolean" Nullable="false" />
+          <Property Name="MinderValideParkeerplaatsen" Type="Int32" />
+          <Property Name="Minibanen" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Oefenmuren" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ondergrond" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OppervlakteClubhuis" Type="Int32" />
+          <Property Name="Overkapping" Type="Int32" />
+          <Property Name="Playgrounds" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostAdres_Straat" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostAdres_Huisnummer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostAdres_Toevoeging" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostAdres_Postcode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostAdres_Plaats" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostAdres_Gemeente" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegioNaam" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Resultaatkeuring" Type="Int32" />
+          <Property Name="RolStoeltoegankelijk" Type="Boolean" Nullable="false" />
+          <Property Name="SoortClubhuis" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Speeltoestellen" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefoonnummer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotaalAantalWasKleedruimte" Type="Int32" />
+          <Property Name="ValideParkeerplaatsen" Type="Int32" />
+          <Property Name="WasruimteClubhuisAanwezig" Type="Boolean" Nullable="false" />
+          <Property Name="Website" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserUpdate" Type="DateTime" Precision="3" />
+          <Property Name="ClubUpdate" Type="DateTime" Precision="3" />
+          <Property Name="ClubCloudUpdate" Type="DateTime" Precision="3" />
+          <Property Name="Expr1" Type="Guid" Nullable="false" />
+          <Property Name="Expr2" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nummer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Functionaris">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Functie" />
+            <PropertyRef Name="Orgaan" />
+            <PropertyRef Name="Disctict" />
+            <PropertyRef Name="Vereniging" />
+            <PropertyRef Name="Gebruiker" />
+            <PropertyRef Name="TermijnBegin" />
+            <PropertyRef Name="Autorisatie" />
+            <PropertyRef Name="Actief" />
+            <PropertyRef Name="VerenigingId" />
+            <PropertyRef Name="GebruikerId" />
+            <PropertyRef Name="BondsNummer" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Functie" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Orgaan" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Disctict" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Vereniging" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gebruiker" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TermijnBegin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TermijnEinde" Type="DateTime" Precision="3" />
+          <Property Name="Autorisatie" Type="Boolean" Nullable="false" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="false" />
+          <Property Name="GebruikerId" Type="Guid" Nullable="false" />
+          <Property Name="BondsNummer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Vereniging">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Naam" />
+            <PropertyRef Name="Nummer" />
+            <PropertyRef Name="BankNummer" />
+            <PropertyRef Name="BankIban" />
+            <PropertyRef Name="BankPlaats" />
+            <PropertyRef Name="KvKnummer" />
+            <PropertyRef Name="KvKplaats" />
+            <PropertyRef Name="Website" />
+            <PropertyRef Name="Actief" />
+            <PropertyRef Name="District" />
+            <PropertyRef Name="Rechtsvorm" />
+            <PropertyRef Name="Regio" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nummer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankNummer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankIban" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankPlaats" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KvKnummer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KvKplaats" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatumOpgericht" Type="DateTime" Precision="3" />
+          <Property Name="Website" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="District" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rechtsvorm" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Regio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="ClubCloud_ProfielClubCloud_Gebruiker">
+          <End Type="ClubCloudModel.ClubCloud_Profiel" Role="ClubCloud_Profiel" Multiplicity="1" />
+          <End Type="ClubCloudModel.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Profiel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Gebruiker">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClubCloud_Baansoort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="BaantypeId" Type="Guid" Nullable="false" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClubCloud_Baantype" Relationship="ClubCloudModel.ClubCloud_BaansoortClubCloud_Baantype" FromRole="ClubCloud_Baansoort" ToRole="ClubCloud_Baantype" />
+          <NavigationProperty Name="ClubCloud_BaanSpeciaal" Relationship="ClubCloudModel.ClubCloud_BaanSpeciaalClubCloud_Baansoort" FromRole="ClubCloud_Baansoort" ToRole="ClubCloud_BaanSpeciaal" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Baantype">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClubCloud_Baansoort" Relationship="ClubCloudModel.ClubCloud_BaansoortClubCloud_Baantype" FromRole="ClubCloud_Baantype" ToRole="ClubCloud_Baansoort" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Baan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+        </EntityType>
+        <EntityType Name="ClubCloud_Bouwaard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+        </EntityType>
+        <EntityType Name="ClubCloud_BaanSpeciaal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="AccomodatieId" Type="Guid" Nullable="true" />
+          <Property Name="BaansoortId" Type="String" Nullable="false" />
+          <NavigationProperty Name="ClubCloud_Baansoort" Relationship="ClubCloudModel.ClubCloud_BaanSpeciaalClubCloud_Baansoort" FromRole="ClubCloud_BaanSpeciaal" ToRole="ClubCloud_Baansoort" />
+        </EntityType>
+        <Association Name="ClubCloud_BaansoortClubCloud_Baantype">
+          <End Type="ClubCloudModel.ClubCloud_Baansoort" Role="ClubCloud_Baansoort" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_Baantype" Role="ClubCloud_Baantype" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Baantype">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Baansoort">
+              <PropertyRef Name="BaantypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_BaanSpeciaalClubCloud_Baansoort">
+          <End Type="ClubCloudModel.ClubCloud_BaanSpeciaal" Role="ClubCloud_BaanSpeciaal" Multiplicity="*" />
+          <End Type="ClubCloudModel.ClubCloud_Baansoort" Role="ClubCloud_Baansoort" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_BaanSpeciaal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Baansoort">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ClubCloudModelStoreContainer" CdmEntityContainer="ClubCloudModelContainer">
-    <EntitySetMapping Name="ClubCloud_TrackingSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Tracking)">
-        <MappingFragment StoreEntitySet="ClubCloud_TrackingSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Data" ColumnName="Data" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_Gebruiker_Abonementen">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Gebruiker_Abonement)">
-        <MappingFragment StoreEntitySet="ClubCloud_Gebruiker_Abonementen">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_Abonnementen">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Abonnement)">
-        <MappingFragment StoreEntitySet="ClubCloud_Abonnementen">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Aangevinkt" ColumnName="Aangevinkt" />
-          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
-          <ScalarProperty Name="Naam" ColumnName="Naam" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_Vereniging_Accomodaties">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging_Accomodatie)">
-        <MappingFragment StoreEntitySet="ClubCloud_Vereniging_Accomodaties">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="AccommodatieNaam" ColumnName="AccommodatieNaam" />
-          <ComplexProperty Name="BezoekAdres" TypeName="ClubCloudModel.Adres">
-            <ScalarProperty Name="Straat" ColumnName="BezoekAdres_Straat" />
-            <ScalarProperty Name="Huisnummer" ColumnName="BezoekAdres_Huisnummer" />
-            <ScalarProperty Name="Toevoeging" ColumnName="BezoekAdres_Toevoeging" />
-            <ScalarProperty Name="Postcode" ColumnName="BezoekAdres_Postcode" />
-            <ScalarProperty Name="Plaats" ColumnName="BezoekAdres_Plaats" />
-            <ScalarProperty Name="Gemeente" ColumnName="BezoekAdres_Gemeente" />
-          </ComplexProperty>
-          <ScalarProperty Name="Minibanen" ColumnName="Minibanen" />
-          <ScalarProperty Name="Oefenmuren" ColumnName="Oefenmuren" />
-          <ScalarProperty Name="Ondergrond" ColumnName="Ondergrond" />
-          <ScalarProperty Name="Playgrounds" ColumnName="Playgrounds" />
-          <ComplexProperty Name="PostAdres" TypeName="ClubCloudModel.Adres">
-            <ScalarProperty Name="Straat" ColumnName="PostAdres_Straat" />
-            <ScalarProperty Name="Huisnummer" ColumnName="PostAdres_Huisnummer" />
-            <ScalarProperty Name="Toevoeging" ColumnName="PostAdres_Toevoeging" />
-            <ScalarProperty Name="Postcode" ColumnName="PostAdres_Postcode" />
-            <ScalarProperty Name="Plaats" ColumnName="PostAdres_Plaats" />
-            <ScalarProperty Name="Gemeente" ColumnName="PostAdres_Gemeente" />
-          </ComplexProperty>
-          <ScalarProperty Name="Speeltoestellen" ColumnName="Speeltoestellen" />
-          <ScalarProperty Name="TelefoonNummer" ColumnName="TelefoonNummer" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_Gebruiker_Verenigingen">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Gebruiker_Vereniging)">
-        <MappingFragment StoreEntitySet="ClubCloud_Gebruiker_Verenigingen">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
-          <ScalarProperty Name="VerenigingNaam" ColumnName="VerenigingNaam" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_Vereniging_BestuursLeden">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging_BestuursLid)">
-        <MappingFragment StoreEntitySet="ClubCloud_Vereniging_BestuursLeden">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
-          <ScalarProperty Name="Emailadres" ColumnName="Emailadres" />
-          <ScalarProperty Name="Functie" ColumnName="Functie" />
-          <ScalarProperty Name="Orgaan" ColumnName="Orgaan" />
-          <ScalarProperty Name="Telefoon" ColumnName="Telefoon" />
-          <ScalarProperty Name="VolledigeNaam" ColumnName="VolledigeNaam" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ClubCloud_Settings">
       <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Setting)">
         <MappingFragment StoreEntitySet="ClubCloud_Settings">
@@ -722,30 +1716,32 @@
       <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging)">
         <MappingFragment StoreEntitySet="ClubCloud_Verenigingen">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="BanknummerPlaats" ColumnName="BanknummerPlaats" />
-          <ScalarProperty Name="Bezoekadres" ColumnName="Bezoekadres" />
-          <ScalarProperty Name="BezoekadresGemeente" ColumnName="BezoekadresGemeente" />
-          <ScalarProperty Name="BezoekadresPlaats" ColumnName="BezoekadresPlaats" />
-          <ScalarProperty Name="BezoekadresPostcode" ColumnName="BezoekadresPostcode" />
-          <ScalarProperty Name="DatumOpgericht" ColumnName="DatumOpgericht" />
-          <ScalarProperty Name="District" ColumnName="District" />
-          <ScalarProperty Name="Emailadres" ColumnName="Emailadres" />
-          <ScalarProperty Name="IbanCode" ColumnName="IbanCode" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="Nummer" ColumnName="Nummer" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="RechtsvormId" ColumnName="RechtsvormId" />
+          <ScalarProperty Name="AccomodatieId" ColumnName="AccomodatieId" />
+          <ScalarProperty Name="RegioId" ColumnName="RegioId" />
+          <ScalarProperty Name="BankNummer" ColumnName="BankNummer" />
+          <ScalarProperty Name="BankIban" ColumnName="BankIban" />
+          <ScalarProperty Name="BankPlaats" ColumnName="BankPlaats" />
           <ScalarProperty Name="KvKnummer" ColumnName="KvKnummer" />
           <ScalarProperty Name="KvKplaats" ColumnName="KvKplaats" />
-          <ScalarProperty Name="Naam" ColumnName="Naam" />
-          <ScalarProperty Name="Postadres" ColumnName="Postadres" />
-          <ScalarProperty Name="PostadresGemeente" ColumnName="PostadresGemeente" />
-          <ScalarProperty Name="PostadresPlaats" ColumnName="PostadresPlaats" />
-          <ScalarProperty Name="PostadresPostcode" ColumnName="PostadresPostcode" />
-          <ScalarProperty Name="Regio" ColumnName="Regio" />
-          <ScalarProperty Name="TelefoonnummerAvond" ColumnName="TelefoonnummerAvond" />
-          <ScalarProperty Name="TelefoonnummerOverdag" ColumnName="TelefoonnummerOverdag" />
-          <ScalarProperty Name="Verenigingsnummer" ColumnName="Verenigingsnummer" />
+          <ScalarProperty Name="EmailKNLTB" ColumnName="EmailKNLTB" />
+          <ScalarProperty Name="EmailWebSite" ColumnName="EmailWebSite" />
+          <ScalarProperty Name="EmailOverig" ColumnName="EmailOverig" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="TelefoonAvond" ColumnName="TelefoonAvond" />
+          <ScalarProperty Name="TelefoonOverdag" ColumnName="TelefoonOverdag" />
+          <ScalarProperty Name="TelefoonOverig" ColumnName="TelefoonOverig" />
           <ScalarProperty Name="Website" ColumnName="Website" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+          <ScalarProperty Name="FTPsite" ColumnName="FTPsite" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+          <ScalarProperty Name="Oprichting" ColumnName="Oprichting" />
+          <ScalarProperty Name="Erkenning" ColumnName="Erkenning" />
+          <ScalarProperty Name="Gestopt" ColumnName="Gestopt" />
+          <ScalarProperty Name="Maanden" ColumnName="Maanden" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -753,36 +1749,47 @@
       <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Gebruiker)">
         <MappingFragment StoreEntitySet="ClubCloud_Gebruikers">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
-          <ScalarProperty Name="DistrictNaam" ColumnName="DistrictNaam" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Geboortedatum" ColumnName="Geboortedatum" />
-          <ScalarProperty Name="Geboorteplaats" ColumnName="Geboorteplaats" />
-          <ScalarProperty Name="Gemeente" ColumnName="Gemeente" />
-          <ScalarProperty Name="Geslacht" ColumnName="Geslacht" />
-          <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
-          <ScalarProperty Name="IsLid" ColumnName="IsLid" />
-          <ScalarProperty Name="Mobiel" ColumnName="Mobiel" />
-          <ScalarProperty Name="NationaliteitId" ColumnName="NationaliteitId" />
-          <ScalarProperty Name="OrganisatieNummer" ColumnName="OrganisatieNummer" />
-          <ScalarProperty Name="Plaats" ColumnName="Plaats" />
-          <ScalarProperty Name="Postcode" ColumnName="Postcode" />
-          <ScalarProperty Name="RatingDubbel" ColumnName="RatingDubbel" />
-          <ScalarProperty Name="RatingEnkel" ColumnName="RatingEnkel" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="Bondsnummer" ColumnName="Bondsnummer" />
           <ScalarProperty Name="Roepnaam" ColumnName="Roepnaam" />
-          <ScalarProperty Name="SpeelsterkteDubbel" ColumnName="SpeelsterkteDubbel" />
-          <ScalarProperty Name="SpeelsterkteEnkel" ColumnName="SpeelsterkteEnkel" />
-          <ScalarProperty Name="Straat" ColumnName="Straat" />
+          <ScalarProperty Name="Aanhef" ColumnName="Aanhef" />
+          <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+          <ScalarProperty Name="Voornamen" ColumnName="Voornamen" />
+          <ScalarProperty Name="Achtervoegsel" ColumnName="Achtervoegsel" />
+          <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+          <ScalarProperty Name="Voorletters" ColumnName="Voorletters" />
+          <ScalarProperty Name="EmailGeheim" ColumnName="EmailGeheim" />
+          <ScalarProperty Name="EmailKNLTB" ColumnName="EmailKNLTB" />
+          <ScalarProperty Name="EmailWebSite" ColumnName="EmailWebSite" />
+          <ScalarProperty Name="EmailOverig" ColumnName="EmailOverig" />
+          <ScalarProperty Name="TelefoonGeheim" ColumnName="TelefoonGeheim" />
           <ScalarProperty Name="TelefoonAvond" ColumnName="TelefoonAvond" />
           <ScalarProperty Name="TelefoonOverdag" ColumnName="TelefoonOverdag" />
-          <ScalarProperty Name="Toevoeging" ColumnName="Toevoeging" />
-          <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
-          <ScalarProperty Name="VolledigeNaam" ColumnName="VolledigeNaam" />
-          <ScalarProperty Name="Voorletters" ColumnName="Voorletters" />
-          <ScalarProperty Name="Voornamen" ColumnName="Voornamen" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+          <ScalarProperty Name="TelefoonOverig" ColumnName="TelefoonOverig" />
+          <ScalarProperty Name="Mobiel" ColumnName="Mobiel" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="BankNummer" ColumnName="BankNummer" />
+          <ScalarProperty Name="BankIban" ColumnName="BankIban" />
+          <ScalarProperty Name="BankPlaats" ColumnName="BankPlaats" />
+          <ScalarProperty Name="Geslacht" ColumnName="Geslacht" />
+          <ScalarProperty Name="Geboortedatum" ColumnName="Geboortedatum" />
+          <ScalarProperty Name="Geboorteplaats" ColumnName="Geboorteplaats" />
+          <ScalarProperty Name="OverlijdensDatum" ColumnName="OverlijdensDatum" />
+          <ScalarProperty Name="NationaliteitId" ColumnName="NationaliteitId" />
+          <ScalarProperty Name="AddressGeheim" ColumnName="AddressGeheim" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="FTPsite" ColumnName="FTPsite" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+          <ScalarProperty Name="Beroep" ColumnName="Beroep" />
+          <ScalarProperty Name="Kinderen" ColumnName="Kinderen" />
+          <ScalarProperty Name="KinderenAantal" ColumnName="KinderenAantal" />
+          <ScalarProperty Name="Partner" ColumnName="Partner" />
+          <ScalarProperty Name="AanhefBrief" ColumnName="AanhefBrief" />
+          <ScalarProperty Name="AanhefAttentie" ColumnName="AanhefAttentie" />
+          <ScalarProperty Name="FotoId" ColumnName="FotoId" />
+          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
+          <ScalarProperty Name="Volledigenaam" ColumnName="Volledigenaam" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -836,23 +1843,7 @@
           <ScalarProperty Name="ValideParkeerplaatsen" ColumnName="ValideParkeerplaatsen" />
           <ScalarProperty Name="WasruimteClubhuisAanwezig" ColumnName="WasruimteClubhuisAanwezig" />
           <ScalarProperty Name="Website" ColumnName="Website" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_Vereniging_Competities">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging_Competitie)">
-        <MappingFragment StoreEntitySet="ClubCloud_Vereniging_Competities">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
-          <ScalarProperty Name="AantalPloegen" ColumnName="AantalPloegen" />
-          <ScalarProperty Name="Naam" ColumnName="Naam" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
-        </MappingFragment>
+          </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ClubCloud_Nationaliteiten">
@@ -860,20 +1851,6 @@
         <MappingFragment StoreEntitySet="ClubCloud_Nationaliteiten">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Naam" ColumnName="Naam" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_Vereniging_Toernooien">
-      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Vereniging_Toernooi)">
-        <MappingFragment StoreEntitySet="ClubCloud_Vereniging_Toernooien">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -881,13 +1858,229 @@
       <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_District)">
         <MappingFragment StoreEntitySet="ClubCloud_Districten">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DistrictNaam" ColumnName="DistrictNaam" />
-          <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
-          <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
-          <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="Omschrijving" ColumnName="Omschrijving" />
+          <ScalarProperty Name="RegioId" ColumnName="RegioId" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Functies">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Functie)">
+        <MappingFragment StoreEntitySet="ClubCloud_Functies">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="Meervoud" ColumnName="Meervoud" />
+          <ScalarProperty Name="Omschrijving" ColumnName="Omschrijving" />
+          <ScalarProperty Name="Toegang" ColumnName="Toegang" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Lidmaatschappen">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Lidmaatschap)">
+        <MappingFragment StoreEntitySet="ClubCloud_Lidmaatschappen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SoortId" ColumnName="SoortId" />
+          <ScalarProperty Name="SoortNaam" ColumnName="SoortNaam" />
+          <ScalarProperty Name="Begin" ColumnName="Begin" />
+          <ScalarProperty Name="Einde" ColumnName="Einde" />
+          <ScalarProperty Name="Opzegging" ColumnName="Opzegging" />
+          <ScalarProperty Name="InternNummer" ColumnName="InternNummer" />
+          <ScalarProperty Name="GebruikerId" ColumnName="GebruikerId" />
+          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
+          <ScalarProperty Name="PasTypeId" ColumnName="PasTypeId" />
+          <ScalarProperty Name="PasTypeNaam" ColumnName="PasTypeNaam" />
+          <ScalarProperty Name="PasDatum" ColumnName="PasDatum" />
+          <ScalarProperty Name="PasNoodDatum" ColumnName="PasNoodDatum" />
+          <ScalarProperty Name="PasWedstrijd" ColumnName="PasWedstrijd" />
+          <ScalarProperty Name="PasNieuw" ColumnName="PasNieuw" />
+          <ScalarProperty Name="PasNood" ColumnName="PasNood" />
+          <ScalarProperty Name="PasVolgnummer" ColumnName="PasVolgnummer" />
+          <ScalarProperty Name="SpeelsterkteDubbel" ColumnName="SpeelsterkteDubbel" />
+          <ScalarProperty Name="SpeelsterkteEnkel" ColumnName="SpeelsterkteEnkel" />
+          <ScalarProperty Name="Autorisatie" ColumnName="Autorisatie" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Profielen">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Profiel)">
+        <MappingFragment StoreEntitySet="ClubCloud_Profielen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Functionarissen">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Functionaris)">
+        <MappingFragment StoreEntitySet="ClubCloud_Functionarissen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FunctieId" ColumnName="FunctieId" />
+          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
+          <ScalarProperty Name="GebruikerId" ColumnName="GebruikerId" />
+          <ScalarProperty Name="BestuursorgaanId" ColumnName="BestuursorgaanId" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="TermijnBegin" ColumnName="TermijnBegin" />
+          <ScalarProperty Name="TermijnEinde" ColumnName="TermijnEinde" />
+          <ScalarProperty Name="Autorisatie" ColumnName="Autorisatie" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Bestuursorganen">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Bestuursorgaan)">
+        <MappingFragment StoreEntitySet="ClubCloud_Bestuursorganen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Rechtsvormen">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Rechtsvorm)">
+        <MappingFragment StoreEntitySet="ClubCloud_Rechtsvormen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Omschrijving" ColumnName="Omschrijving" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="Meervoud" ColumnName="Meervoud" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Addresses">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Address)">
+        <MappingFragment StoreEntitySet="ClubCloud_Addresses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Stad" ColumnName="Stad" />
+          <ScalarProperty Name="Provincie" ColumnName="Provincie" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+          <ScalarProperty Name="Straat" ColumnName="Straat" />
+          <ScalarProperty Name="Nummer" ColumnName="Nummer" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+          <ScalarProperty Name="Land" ColumnName="Land" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Toevoeging" ColumnName="Toevoeging" />
+          <ScalarProperty Name="Postbus" ColumnName="Postbus" />
+          <ScalarProperty Name="TelefoonPrimair" ColumnName="TelefoonPrimair" />
+          <ScalarProperty Name="TelefoonSecundair" ColumnName="TelefoonSecundair" />
+          <ScalarProperty Name="TelefoonTertiair" ColumnName="TelefoonTertiair" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Regios">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudModel.ClubCloud_Regio)">
+        <MappingFragment StoreEntitySet="ClubCloud_Regios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="Accomodaties">
+            <EntityTypeMapping TypeName="ClubCloudModel.Accomodatie">
+              <MappingFragment StoreEntitySet="Accomodatie">
+                <ScalarProperty Name="Nummer" ColumnName="Nummer" />
+                <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="ClubCloudUpdate" ColumnName="ClubCloudUpdate" />
+                <ScalarProperty Name="ClubUpdate" ColumnName="ClubUpdate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="WasruimteClubhuisAanwezig" ColumnName="WasruimteClubhuisAanwezig" />
+                <ScalarProperty Name="ValideParkeerplaatsen" ColumnName="ValideParkeerplaatsen" />
+                <ScalarProperty Name="TotaalAantalWasKleedruimte" ColumnName="TotaalAantalWasKleedruimte" />
+                <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
+                <ScalarProperty Name="Speeltoestellen" ColumnName="Speeltoestellen" />
+                <ScalarProperty Name="SoortClubhuis" ColumnName="SoortClubhuis" />
+                <ScalarProperty Name="RolStoeltoegankelijk" ColumnName="RolStoeltoegankelijk" />
+                <ScalarProperty Name="Resultaatkeuring" ColumnName="Resultaatkeuring" />
+                <ScalarProperty Name="RegioNaam" ColumnName="RegioNaam" />
+                <ScalarProperty Name="PostAdres_Gemeente" ColumnName="PostAdres_Gemeente" />
+                <ScalarProperty Name="PostAdres_Plaats" ColumnName="PostAdres_Plaats" />
+                <ScalarProperty Name="PostAdres_Postcode" ColumnName="PostAdres_Postcode" />
+                <ScalarProperty Name="PostAdres_Toevoeging" ColumnName="PostAdres_Toevoeging" />
+                <ScalarProperty Name="PostAdres_Huisnummer" ColumnName="PostAdres_Huisnummer" />
+                <ScalarProperty Name="PostAdres_Straat" ColumnName="PostAdres_Straat" />
+                <ScalarProperty Name="Playgrounds" ColumnName="Playgrounds" />
+                <ScalarProperty Name="Overkapping" ColumnName="Overkapping" />
+                <ScalarProperty Name="OppervlakteClubhuis" ColumnName="OppervlakteClubhuis" />
+                <ScalarProperty Name="Ondergrond" ColumnName="Ondergrond" />
+                <ScalarProperty Name="Oefenmuren" ColumnName="Oefenmuren" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Minibanen" ColumnName="Minibanen" />
+                <ScalarProperty Name="MinderValideParkeerplaatsen" ColumnName="MinderValideParkeerplaatsen" />
+                <ScalarProperty Name="MetOVBereikbaar" ColumnName="MetOVBereikbaar" />
+                <ScalarProperty Name="KleedruimteClubhuisAanwezig" ColumnName="KleedruimteClubhuisAanwezig" />
+                <ScalarProperty Name="HalAanwezig" ColumnName="HalAanwezig" />
+                <ScalarProperty Name="GekeurdDoor" ColumnName="GekeurdDoor" />
+                <ScalarProperty Name="Faxnummer" ColumnName="Faxnummer" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DistrictNaam" ColumnName="DistrictNaam" />
+                <ScalarProperty Name="DatumKeuring" ColumnName="DatumKeuring" />
+                <ScalarProperty Name="BouwjaarClubhuis" ColumnName="BouwjaarClubhuis" />
+                <ScalarProperty Name="Blaashal" ColumnName="Blaashal" />
+                <ScalarProperty Name="AantalBuitenBanen" ColumnName="AantalBuitenBanen" />
+                <ScalarProperty Name="AantalBinnenBanen" ColumnName="AantalBinnenBanen" />
+                <ScalarProperty Name="AccommodatieAdres_Gemeente" ColumnName="AccommodatieAdres_Gemeente" />
+                <ScalarProperty Name="AccommodatieAdres_Plaats" ColumnName="AccommodatieAdres_Plaats" />
+                <ScalarProperty Name="AccommodatieAdres_Postcode" ColumnName="AccommodatieAdres_Postcode" />
+                <ScalarProperty Name="AccommodatieAdres_Toevoeging" ColumnName="AccommodatieAdres_Toevoeging" />
+                <ScalarProperty Name="AccommodatieAdres_Huisnummer" ColumnName="AccommodatieAdres_Huisnummer" />
+                <ScalarProperty Name="AccommodatieAdres_Straat" ColumnName="AccommodatieAdres_Straat" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Functionarissen">
+            <EntityTypeMapping TypeName="ClubCloudModel.Functionaris">
+              <MappingFragment StoreEntitySet="Functionaris">
+                <ScalarProperty Name="BondsNummer" ColumnName="BondsNummer" />
+                <ScalarProperty Name="GebruikerId" ColumnName="GebruikerId" />
+                <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
+                <ScalarProperty Name="Autorisatie" ColumnName="Autorisatie" />
+                <ScalarProperty Name="TermijnEinde" ColumnName="TermijnEinde" />
+                <ScalarProperty Name="TermijnBegin" ColumnName="TermijnBegin" />
+                <ScalarProperty Name="Gebruiker" ColumnName="Gebruiker" />
+                <ScalarProperty Name="Vereniging" ColumnName="Vereniging" />
+                <ScalarProperty Name="Disctict" ColumnName="Disctict" />
+                <ScalarProperty Name="Orgaan" ColumnName="Orgaan" />
+                <ScalarProperty Name="Functie" ColumnName="Functie" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Verenigingen">
+            <EntityTypeMapping TypeName="ClubCloudModel.Vereniging">
+              <MappingFragment StoreEntitySet="Vereniging">
+                <ScalarProperty Name="Regio" ColumnName="Regio" />
+                <ScalarProperty Name="Rechtsvorm" ColumnName="Rechtsvorm" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="DatumOpgericht" ColumnName="DatumOpgericht" />
+                <ScalarProperty Name="KvKplaats" ColumnName="KvKplaats" />
+                <ScalarProperty Name="KvKnummer" ColumnName="KvKnummer" />
+                <ScalarProperty Name="BankPlaats" ColumnName="BankPlaats" />
+                <ScalarProperty Name="BankIban" ColumnName="BankIban" />
+                <ScalarProperty Name="BankNummer" ColumnName="BankNummer" />
+                <ScalarProperty Name="Nummer" ColumnName="Nummer" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

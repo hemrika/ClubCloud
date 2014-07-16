@@ -3,20 +3,33 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class bulkoperationlog : BusinessEntity
 	{
 		private string additionalinfoField;
+
 		private Lookup bulkoperationidField;
+
 		private Key bulkoperationlogidField;
+
 		private Lookup createdobjectidField;
+
 		private CrmNumber errornumberField;
+
 		private UniqueIdentifier owningbusinessunitField;
+
 		private UniqueIdentifier owninguserField;
+
 		private Lookup regardingobjectidField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public string additionalinfo
 		{
 			get
@@ -26,8 +39,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.additionalinfoField = value;
+				base.RaisePropertyChanged("additionalinfo");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public Lookup bulkoperationid
 		{
 			get
@@ -37,8 +53,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.bulkoperationidField = value;
+				base.RaisePropertyChanged("bulkoperationid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public Key bulkoperationlogid
 		{
 			get
@@ -48,8 +67,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.bulkoperationlogidField = value;
+				base.RaisePropertyChanged("bulkoperationlogid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public Lookup createdobjectid
 		{
 			get
@@ -59,8 +81,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdobjectidField = value;
+				base.RaisePropertyChanged("createdobjectid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmNumber errornumber
 		{
 			get
@@ -70,8 +95,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.errornumberField = value;
+				base.RaisePropertyChanged("errornumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public UniqueIdentifier owningbusinessunit
 		{
 			get
@@ -81,8 +109,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owningbusinessunitField = value;
+				base.RaisePropertyChanged("owningbusinessunit");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public UniqueIdentifier owninguser
 		{
 			get
@@ -92,8 +123,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owninguserField = value;
+				base.RaisePropertyChanged("owninguser");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public Lookup regardingobjectid
 		{
 			get
@@ -103,7 +137,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.regardingobjectidField = value;
+				base.RaisePropertyChanged("regardingobjectid");
 			}
+		}
+
+		public bulkoperationlog()
+		{
 		}
 	}
 }

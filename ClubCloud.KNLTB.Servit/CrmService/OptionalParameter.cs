@@ -2,12 +2,38 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlInclude(typeof(CreateDuplicatesOptionalParameter)), XmlInclude(typeof(RegardingObjectIdOptionalParameter)), XmlInclude(typeof(PersistInSyncOptionalParameter)), XmlInclude(typeof(OfflineDataOptionalParameter)), XmlInclude(typeof(ExportIdsOptionalParameter)), XmlInclude(typeof(RequestIdOptionalParameter)), XmlInclude(typeof(CallPriorityOptionalParameter)), XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	public abstract class OptionalParameter
+	[XmlInclude(typeof(CallPriorityOptionalParameter))]
+	[XmlInclude(typeof(CreateDuplicatesOptionalParameter))]
+	[XmlInclude(typeof(ExportIdsOptionalParameter))]
+	[XmlInclude(typeof(OfflineDataOptionalParameter))]
+	[XmlInclude(typeof(PersistInSyncOptionalParameter))]
+	[XmlInclude(typeof(RegardingObjectIdOptionalParameter))]
+	[XmlInclude(typeof(RequestIdOptionalParameter))]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
+	public abstract class OptionalParameter : INotifyPropertyChanged
 	{
+		protected OptionalParameter()
+		{
+		}
+
+		protected void RaisePropertyChanged(string propertyName)
+		{
+			PropertyChangedEventHandler propertyChangedEventHandler = this.PropertyChanged;
+			if (propertyChangedEventHandler != null)
+			{
+				propertyChangedEventHandler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

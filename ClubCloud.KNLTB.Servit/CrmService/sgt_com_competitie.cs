@@ -3,68 +3,131 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class sgt_com_competitie : BusinessEntity
 	{
 		private Lookup createdbyField;
+
 		private CrmDateTime createdonField;
+
 		private CrmNumber importsequencenumberField;
+
 		private Lookup modifiedbyField;
+
 		private CrmDateTime modifiedonField;
+
 		private CrmDateTime overriddencreatedonField;
+
 		private Owner owneridField;
+
 		private Lookup owningbusinessunitField;
+
 		private CrmNumber sgt_aantal_vrije_afdelingnummersField;
+
 		private Lookup sgt_accommodatieidField;
+
 		private Lookup sgt_administratieidField;
+
 		private CrmBoolean sgt_baancontroleField;
+
 		private CrmDateTime sgt_begindatumField;
+
 		private Picklist sgt_benodigde_banenField;
+
 		private CrmBoolean sgt_bericht_inschrijvingField;
+
 		private Lookup sgt_boeteidField;
+
 		private Lookup sgt_bondsorganisatieidField;
+
 		private string sgt_com_competitie1Field;
+
 		private Key sgt_com_competitieidField;
+
 		private Lookup sgt_competitie_kalenderidField;
+
 		private string sgt_competitie_omschrijvingField;
+
 		private Lookup sgt_competitietypeidField;
+
 		private CrmBoolean sgt_controle_vcl_certificaatField;
+
 		private CrmBoolean sgt_dispensatie_ander_parkField;
+
 		private CrmBoolean sgt_dispensatie_banenField;
+
 		private CrmBoolean sgt_dispensatie_geslachtField;
+
 		private CrmBoolean sgt_dispensatie_goedgekeurde_banenField;
+
 		private CrmBoolean sgt_dispensatie_leeftijdField;
+
 		private CrmDateTime sgt_einddatumField;
+
 		private CrmDateTime sgt_einde_inschrijvingField;
+
+		private CrmBoolean sgt_email_her_inschrijving_geopend_verstuurdField;
+
 		private CrmNumber sgt_herinnering_dagenField;
+
 		private CrmDateTime sgt_herinneringsdatumField;
+
 		private Lookup sgt_herkomst_competitieidField;
+
 		private Lookup sgt_inschrijfbijdrageidField;
+
 		private CrmBoolean sgt_inschrijven_niet_knltb_leden_toegestaanField;
+
 		private CrmBoolean sgt_kampioenschapField;
+
 		private CrmNumber sgt_max_ploegen_thuisField;
+
 		private Picklist sgt_max_te_spelen_setsField;
+
 		private CrmNumber sgt_min_ploegen_afdelingField;
+
 		private string sgt_plaatsField;
+
 		private CrmNumber sgt_ploegen_ingeschrevenField;
+
 		private Lookup sgt_post_naaridField;
+
 		private string sgt_postcodeField;
+
 		private CrmDateTime sgt_start_inschrijvingField;
+
 		private Picklist sgt_status_competitieField;
+
 		private Picklist sgt_status_mijnknltbField;
+
 		private CrmBoolean sgt_thuis_thuis_schemaField;
+
 		private Lookup sgt_tussentijdse_rating_peildatumidField;
+
 		private CrmNumber sgt_verenigingen_ingeschrevenField;
+
 		private Lookup sgt_verenigingidField;
+
 		private Picklist sgt_verlichting_noodzakelijkField;
+
 		private CrmDateTime sgt_wedstrijdprogramma_aangemaaktField;
+
 		private Sgt_com_competitieStateInfo statecodeField;
+
 		private Status statuscodeField;
+
 		private CrmNumber timezoneruleversionnumberField;
+
 		private CrmNumber utcconversiontimezonecodeField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Lookup createdby
 		{
 			get
@@ -74,8 +137,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdbyField = value;
+				base.RaisePropertyChanged("createdby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public CrmDateTime createdon
 		{
 			get
@@ -85,8 +151,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.createdonField = value;
+				base.RaisePropertyChanged("createdon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public CrmNumber importsequencenumber
 		{
 			get
@@ -96,8 +165,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.importsequencenumberField = value;
+				base.RaisePropertyChanged("importsequencenumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public Lookup modifiedby
 		{
 			get
@@ -107,8 +179,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedbyField = value;
+				base.RaisePropertyChanged("modifiedby");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public CrmDateTime modifiedon
 		{
 			get
@@ -118,8 +193,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.modifiedonField = value;
+				base.RaisePropertyChanged("modifiedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public CrmDateTime overriddencreatedon
 		{
 			get
@@ -129,8 +207,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.overriddencreatedonField = value;
+				base.RaisePropertyChanged("overriddencreatedon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public Owner ownerid
 		{
 			get
@@ -140,8 +221,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owneridField = value;
+				base.RaisePropertyChanged("ownerid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public Lookup owningbusinessunit
 		{
 			get
@@ -151,8 +235,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.owningbusinessunitField = value;
+				base.RaisePropertyChanged("owningbusinessunit");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public CrmNumber sgt_aantal_vrije_afdelingnummers
 		{
 			get
@@ -162,8 +249,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_aantal_vrije_afdelingnummersField = value;
+				base.RaisePropertyChanged("sgt_aantal_vrije_afdelingnummers");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public Lookup sgt_accommodatieid
 		{
 			get
@@ -173,8 +263,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_accommodatieidField = value;
+				base.RaisePropertyChanged("sgt_accommodatieid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public Lookup sgt_administratieid
 		{
 			get
@@ -184,8 +277,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_administratieidField = value;
+				base.RaisePropertyChanged("sgt_administratieid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public CrmBoolean sgt_baancontrole
 		{
 			get
@@ -195,8 +291,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_baancontroleField = value;
+				base.RaisePropertyChanged("sgt_baancontrole");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public CrmDateTime sgt_begindatum
 		{
 			get
@@ -206,8 +305,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_begindatumField = value;
+				base.RaisePropertyChanged("sgt_begindatum");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public Picklist sgt_benodigde_banen
 		{
 			get
@@ -217,8 +319,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_benodigde_banenField = value;
+				base.RaisePropertyChanged("sgt_benodigde_banen");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=14)]
 		public CrmBoolean sgt_bericht_inschrijving
 		{
 			get
@@ -228,8 +333,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_bericht_inschrijvingField = value;
+				base.RaisePropertyChanged("sgt_bericht_inschrijving");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=15)]
 		public Lookup sgt_boeteid
 		{
 			get
@@ -239,8 +347,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_boeteidField = value;
+				base.RaisePropertyChanged("sgt_boeteid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=16)]
 		public Lookup sgt_bondsorganisatieid
 		{
 			get
@@ -250,9 +361,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_bondsorganisatieidField = value;
+				base.RaisePropertyChanged("sgt_bondsorganisatieid");
 			}
 		}
-		[XmlElement("sgt_com_competitie")]
+
+		[XmlElement("sgt_com_competitie")] //, Order=17)]
 		public string sgt_com_competitie1
 		{
 			get
@@ -262,8 +375,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_com_competitie1Field = value;
+				base.RaisePropertyChanged("sgt_com_competitie1");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=18)]
 		public Key sgt_com_competitieid
 		{
 			get
@@ -273,8 +389,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_com_competitieidField = value;
+				base.RaisePropertyChanged("sgt_com_competitieid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=19)]
 		public Lookup sgt_competitie_kalenderid
 		{
 			get
@@ -284,8 +403,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_competitie_kalenderidField = value;
+				base.RaisePropertyChanged("sgt_competitie_kalenderid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=20)]
 		public string sgt_competitie_omschrijving
 		{
 			get
@@ -295,8 +417,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_competitie_omschrijvingField = value;
+				base.RaisePropertyChanged("sgt_competitie_omschrijving");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=21)]
 		public Lookup sgt_competitietypeid
 		{
 			get
@@ -306,8 +431,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_competitietypeidField = value;
+				base.RaisePropertyChanged("sgt_competitietypeid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=22)]
 		public CrmBoolean sgt_controle_vcl_certificaat
 		{
 			get
@@ -317,8 +445,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_controle_vcl_certificaatField = value;
+				base.RaisePropertyChanged("sgt_controle_vcl_certificaat");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=23)]
 		public CrmBoolean sgt_dispensatie_ander_park
 		{
 			get
@@ -328,8 +459,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_dispensatie_ander_parkField = value;
+				base.RaisePropertyChanged("sgt_dispensatie_ander_park");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=24)]
 		public CrmBoolean sgt_dispensatie_banen
 		{
 			get
@@ -339,8 +473,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_dispensatie_banenField = value;
+				base.RaisePropertyChanged("sgt_dispensatie_banen");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=25)]
 		public CrmBoolean sgt_dispensatie_geslacht
 		{
 			get
@@ -350,8 +487,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_dispensatie_geslachtField = value;
+				base.RaisePropertyChanged("sgt_dispensatie_geslacht");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=26)]
 		public CrmBoolean sgt_dispensatie_goedgekeurde_banen
 		{
 			get
@@ -361,8 +501,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_dispensatie_goedgekeurde_banenField = value;
+				base.RaisePropertyChanged("sgt_dispensatie_goedgekeurde_banen");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=27)]
 		public CrmBoolean sgt_dispensatie_leeftijd
 		{
 			get
@@ -372,8 +515,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_dispensatie_leeftijdField = value;
+				base.RaisePropertyChanged("sgt_dispensatie_leeftijd");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=28)]
 		public CrmDateTime sgt_einddatum
 		{
 			get
@@ -383,8 +529,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_einddatumField = value;
+				base.RaisePropertyChanged("sgt_einddatum");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=29)]
 		public CrmDateTime sgt_einde_inschrijving
 		{
 			get
@@ -394,8 +543,25 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_einde_inschrijvingField = value;
+				base.RaisePropertyChanged("sgt_einde_inschrijving");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=30)]
+		public CrmBoolean sgt_email_her_inschrijving_geopend_verstuurd
+		{
+			get
+			{
+				return this.sgt_email_her_inschrijving_geopend_verstuurdField;
+			}
+			set
+			{
+				this.sgt_email_her_inschrijving_geopend_verstuurdField = value;
+				base.RaisePropertyChanged("sgt_email_her_inschrijving_geopend_verstuurd");
+			}
+		}
+
+		[XmlElement] //[XmlElement(Order=31)]
 		public CrmNumber sgt_herinnering_dagen
 		{
 			get
@@ -405,8 +571,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_herinnering_dagenField = value;
+				base.RaisePropertyChanged("sgt_herinnering_dagen");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=32)]
 		public CrmDateTime sgt_herinneringsdatum
 		{
 			get
@@ -416,8 +585,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_herinneringsdatumField = value;
+				base.RaisePropertyChanged("sgt_herinneringsdatum");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=33)]
 		public Lookup sgt_herkomst_competitieid
 		{
 			get
@@ -427,8 +599,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_herkomst_competitieidField = value;
+				base.RaisePropertyChanged("sgt_herkomst_competitieid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=34)]
 		public Lookup sgt_inschrijfbijdrageid
 		{
 			get
@@ -438,8 +613,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_inschrijfbijdrageidField = value;
+				base.RaisePropertyChanged("sgt_inschrijfbijdrageid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=35)]
 		public CrmBoolean sgt_inschrijven_niet_knltb_leden_toegestaan
 		{
 			get
@@ -449,8 +627,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_inschrijven_niet_knltb_leden_toegestaanField = value;
+				base.RaisePropertyChanged("sgt_inschrijven_niet_knltb_leden_toegestaan");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=36)]
 		public CrmBoolean sgt_kampioenschap
 		{
 			get
@@ -460,8 +641,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_kampioenschapField = value;
+				base.RaisePropertyChanged("sgt_kampioenschap");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=37)]
 		public CrmNumber sgt_max_ploegen_thuis
 		{
 			get
@@ -471,8 +655,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_max_ploegen_thuisField = value;
+				base.RaisePropertyChanged("sgt_max_ploegen_thuis");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=38)]
 		public Picklist sgt_max_te_spelen_sets
 		{
 			get
@@ -482,8 +669,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_max_te_spelen_setsField = value;
+				base.RaisePropertyChanged("sgt_max_te_spelen_sets");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=39)]
 		public CrmNumber sgt_min_ploegen_afdeling
 		{
 			get
@@ -493,8 +683,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_min_ploegen_afdelingField = value;
+				base.RaisePropertyChanged("sgt_min_ploegen_afdeling");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=40)]
 		public string sgt_plaats
 		{
 			get
@@ -504,8 +697,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_plaatsField = value;
+				base.RaisePropertyChanged("sgt_plaats");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=41)]
 		public CrmNumber sgt_ploegen_ingeschreven
 		{
 			get
@@ -515,8 +711,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_ploegen_ingeschrevenField = value;
+				base.RaisePropertyChanged("sgt_ploegen_ingeschreven");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=42)]
 		public Lookup sgt_post_naarid
 		{
 			get
@@ -526,8 +725,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_post_naaridField = value;
+				base.RaisePropertyChanged("sgt_post_naarid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=43)]
 		public string sgt_postcode
 		{
 			get
@@ -537,8 +739,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_postcodeField = value;
+				base.RaisePropertyChanged("sgt_postcode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=44)]
 		public CrmDateTime sgt_start_inschrijving
 		{
 			get
@@ -548,8 +753,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_start_inschrijvingField = value;
+				base.RaisePropertyChanged("sgt_start_inschrijving");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=45)]
 		public Picklist sgt_status_competitie
 		{
 			get
@@ -559,8 +767,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_status_competitieField = value;
+				base.RaisePropertyChanged("sgt_status_competitie");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=46)]
 		public Picklist sgt_status_mijnknltb
 		{
 			get
@@ -570,8 +781,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_status_mijnknltbField = value;
+				base.RaisePropertyChanged("sgt_status_mijnknltb");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=47)]
 		public CrmBoolean sgt_thuis_thuis_schema
 		{
 			get
@@ -581,8 +795,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_thuis_thuis_schemaField = value;
+				base.RaisePropertyChanged("sgt_thuis_thuis_schema");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=48)]
 		public Lookup sgt_tussentijdse_rating_peildatumid
 		{
 			get
@@ -592,8 +809,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_tussentijdse_rating_peildatumidField = value;
+				base.RaisePropertyChanged("sgt_tussentijdse_rating_peildatumid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=49)]
 		public CrmNumber sgt_verenigingen_ingeschreven
 		{
 			get
@@ -603,8 +823,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_verenigingen_ingeschrevenField = value;
+				base.RaisePropertyChanged("sgt_verenigingen_ingeschreven");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=50)]
 		public Lookup sgt_verenigingid
 		{
 			get
@@ -614,8 +837,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_verenigingidField = value;
+				base.RaisePropertyChanged("sgt_verenigingid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=51)]
 		public Picklist sgt_verlichting_noodzakelijk
 		{
 			get
@@ -625,8 +851,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_verlichting_noodzakelijkField = value;
+				base.RaisePropertyChanged("sgt_verlichting_noodzakelijk");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=52)]
 		public CrmDateTime sgt_wedstrijdprogramma_aangemaakt
 		{
 			get
@@ -636,8 +865,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_wedstrijdprogramma_aangemaaktField = value;
+				base.RaisePropertyChanged("sgt_wedstrijdprogramma_aangemaakt");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=53)]
 		public Sgt_com_competitieStateInfo statecode
 		{
 			get
@@ -647,8 +879,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statecodeField = value;
+				base.RaisePropertyChanged("statecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=54)]
 		public Status statuscode
 		{
 			get
@@ -658,8 +893,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.statuscodeField = value;
+				base.RaisePropertyChanged("statuscode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=55)]
 		public CrmNumber timezoneruleversionnumber
 		{
 			get
@@ -669,8 +907,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.timezoneruleversionnumberField = value;
+				base.RaisePropertyChanged("timezoneruleversionnumber");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=56)]
 		public CrmNumber utcconversiontimezonecode
 		{
 			get
@@ -680,7 +921,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.utcconversiontimezonecodeField = value;
+				base.RaisePropertyChanged("utcconversiontimezonecode");
 			}
+		}
+
+		public sgt_com_competitie()
+		{
 		}
 	}
 }

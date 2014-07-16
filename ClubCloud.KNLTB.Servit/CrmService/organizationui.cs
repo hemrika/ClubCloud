@@ -3,26 +3,45 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class organizationui : BusinessEntity
 	{
 		private CrmNumber customizationlevelField;
+
 		private string fieldxmlField;
+
 		private Key formidField;
+
 		private UniqueIdentifier formiduniqueField;
+
 		private string formxmlField;
+
 		private string gridiconField;
+
 		private CrmBoolean inproductionField;
+
 		private string largeentityiconField;
+
 		private EntityNameReference objecttypecodeField;
+
 		private Lookup organizationidField;
+
 		private string outlookshortcuticonField;
+
 		private string previewcolumnsetxmlField;
+
 		private string previewxmlField;
+
 		private CrmNumber versionField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public CrmNumber customizationlevel
 		{
 			get
@@ -32,8 +51,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.customizationlevelField = value;
+				base.RaisePropertyChanged("customizationlevel");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public string fieldxml
 		{
 			get
@@ -43,8 +65,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.fieldxmlField = value;
+				base.RaisePropertyChanged("fieldxml");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public Key formid
 		{
 			get
@@ -54,8 +79,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.formidField = value;
+				base.RaisePropertyChanged("formid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=3)]
 		public UniqueIdentifier formidunique
 		{
 			get
@@ -65,8 +93,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.formiduniqueField = value;
+				base.RaisePropertyChanged("formidunique");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=4)]
 		public string formxml
 		{
 			get
@@ -76,8 +107,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.formxmlField = value;
+				base.RaisePropertyChanged("formxml");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=5)]
 		public string gridicon
 		{
 			get
@@ -87,8 +121,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.gridiconField = value;
+				base.RaisePropertyChanged("gridicon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=6)]
 		public CrmBoolean inproduction
 		{
 			get
@@ -98,8 +135,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.inproductionField = value;
+				base.RaisePropertyChanged("inproduction");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=7)]
 		public string largeentityicon
 		{
 			get
@@ -109,8 +149,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.largeentityiconField = value;
+				base.RaisePropertyChanged("largeentityicon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=8)]
 		public EntityNameReference objecttypecode
 		{
 			get
@@ -120,8 +163,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.objecttypecodeField = value;
+				base.RaisePropertyChanged("objecttypecode");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=9)]
 		public Lookup organizationid
 		{
 			get
@@ -131,8 +177,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.organizationidField = value;
+				base.RaisePropertyChanged("organizationid");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=10)]
 		public string outlookshortcuticon
 		{
 			get
@@ -142,8 +191,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.outlookshortcuticonField = value;
+				base.RaisePropertyChanged("outlookshortcuticon");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=11)]
 		public string previewcolumnsetxml
 		{
 			get
@@ -153,8 +205,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.previewcolumnsetxmlField = value;
+				base.RaisePropertyChanged("previewcolumnsetxml");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=12)]
 		public string previewxml
 		{
 			get
@@ -164,8 +219,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.previewxmlField = value;
+				base.RaisePropertyChanged("previewxml");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=13)]
 		public CrmNumber version
 		{
 			get
@@ -175,7 +233,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.versionField = value;
+				base.RaisePropertyChanged("version");
 			}
+		}
+
+		public organizationui()
+		{
 		}
 	}
 }

@@ -3,15 +3,23 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class SetStateSgt_com_klasseRequest : Request
 	{
 		private Guid entityIdField;
-		private Sgt_com_klasseState sgt_com_klasseStateField;
+
+		private ClubCloud.KNLTB.ServIt.CrmService.Sgt_com_klasseState sgt_com_klasseStateField;
+
 		private int sgt_com_klasseStatusField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public Guid EntityId
 		{
 			get
@@ -21,9 +29,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.entityIdField = value;
+				base.RaisePropertyChanged("EntityId");
 			}
 		}
-		public Sgt_com_klasseState Sgt_com_klasseState
+
+		[XmlElement] //[XmlElement(Order=1)]
+		public ClubCloud.KNLTB.ServIt.CrmService.Sgt_com_klasseState Sgt_com_klasseState
 		{
 			get
 			{
@@ -32,8 +43,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_com_klasseStateField = value;
+				base.RaisePropertyChanged("Sgt_com_klasseState");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=2)]
 		public int Sgt_com_klasseStatus
 		{
 			get
@@ -43,7 +57,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_com_klasseStatusField = value;
+				base.RaisePropertyChanged("Sgt_com_klasseStatus");
 			}
+		}
+
+		public SetStateSgt_com_klasseRequest()
+		{
 		}
 	}
 }

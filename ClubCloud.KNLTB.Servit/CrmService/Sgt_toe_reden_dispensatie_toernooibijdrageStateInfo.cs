@@ -2,15 +2,22 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	public class Sgt_toe_reden_dispensatie_toernooibijdrageStateInfo
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
+	public class Sgt_toe_reden_dispensatie_toernooibijdrageStateInfo : INotifyPropertyChanged
 	{
 		private string formattedvalueField;
+
 		private Sgt_toe_reden_dispensatie_toernooibijdrageState valueField;
+
 		[XmlAttribute]
 		public string formattedvalue
 		{
@@ -21,8 +28,10 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.formattedvalueField = value;
+				this.RaisePropertyChanged("formattedvalue");
 			}
 		}
+
 		[XmlText]
 		public Sgt_toe_reden_dispensatie_toernooibijdrageState Value
 		{
@@ -33,7 +42,23 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.valueField = value;
+				this.RaisePropertyChanged("Value");
 			}
 		}
+
+		public Sgt_toe_reden_dispensatie_toernooibijdrageStateInfo()
+		{
+		}
+
+		protected void RaisePropertyChanged(string propertyName)
+		{
+			PropertyChangedEventHandler propertyChangedEventHandler = this.PropertyChanged;
+			if (propertyChangedEventHandler != null)
+			{
+				propertyChangedEventHandler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

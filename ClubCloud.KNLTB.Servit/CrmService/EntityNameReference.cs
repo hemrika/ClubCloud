@@ -2,16 +2,24 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2006/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	public class EntityNameReference
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2006/WebServices")]
+	public class EntityNameReference : INotifyPropertyChanged
 	{
 		private bool isNullField;
+
 		private bool isNullFieldSpecified;
+
 		private string valueField;
+
 		[XmlAttribute]
 		public bool IsNull
 		{
@@ -22,8 +30,10 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.isNullField = value;
+				this.RaisePropertyChanged("IsNull");
 			}
 		}
+
 		[XmlIgnore]
 		public bool IsNullSpecified
 		{
@@ -34,8 +44,10 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.isNullFieldSpecified = value;
+				this.RaisePropertyChanged("IsNullSpecified");
 			}
 		}
+
 		[XmlText]
 		public string Value
 		{
@@ -46,7 +58,23 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.valueField = value;
+				this.RaisePropertyChanged("Value");
 			}
 		}
+
+		public EntityNameReference()
+		{
+		}
+
+		protected void RaisePropertyChanged(string propertyName)
+		{
+			PropertyChangedEventHandler propertyChangedEventHandler = this.PropertyChanged;
+			if (propertyChangedEventHandler != null)
+			{
+				propertyChangedEventHandler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

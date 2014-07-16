@@ -3,13 +3,19 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2007/WebServices")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public class TargetUpdateSgt_toe_ranglijst_deelgetal_dubbelspel : TargetUpdate
 	{
 		private sgt_toe_ranglijst_deelgetal_dubbelspel sgt_toe_ranglijst_deelgetal_dubbelspelField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public sgt_toe_ranglijst_deelgetal_dubbelspel Sgt_toe_ranglijst_deelgetal_dubbelspel
 		{
 			get
@@ -19,7 +25,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.sgt_toe_ranglijst_deelgetal_dubbelspelField = value;
+				base.RaisePropertyChanged("Sgt_toe_ranglijst_deelgetal_dubbelspel");
 			}
+		}
+
+		public TargetUpdateSgt_toe_ranglijst_deelgetal_dubbelspel()
+		{
 		}
 	}
 }

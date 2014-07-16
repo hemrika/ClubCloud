@@ -2,16 +2,25 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Xml.Serialization;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Xml", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, XmlType(Namespace = "http://schemas.microsoft.com/crm/2006/Query")]
+	[DebuggerStepThrough]
+	[DesignerCategory("code")]
+	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	public class ConditionExpression
+	[XmlType(Namespace="http://schemas.microsoft.com/crm/2006/Query")]
+	public class ConditionExpression : INotifyPropertyChanged
 	{
 		private string attributeNameField;
+
 		private ConditionOperator operatorField;
+
 		private object[] valuesField;
+
+		[XmlElement] //[XmlElement(Order=0)]
 		public string AttributeName
 		{
 			get
@@ -21,8 +30,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.attributeNameField = value;
+				this.RaisePropertyChanged("AttributeName");
 			}
 		}
+
+		[XmlElement] //[XmlElement(Order=1)]
 		public ConditionOperator Operator
 		{
 			get
@@ -32,8 +44,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.operatorField = value;
+				this.RaisePropertyChanged("Operator");
 			}
 		}
+
+		[XmlArray] //[XmlArray(Order=2)]
 		[XmlArrayItem("Value")]
 		public object[] Values
 		{
@@ -44,7 +59,23 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			set
 			{
 				this.valuesField = value;
+				this.RaisePropertyChanged("Values");
 			}
 		}
+
+		public ConditionExpression()
+		{
+		}
+
+		protected void RaisePropertyChanged(string propertyName)
+		{
+			PropertyChangedEventHandler propertyChangedEventHandler = this.PropertyChanged;
+			if (propertyChangedEventHandler != null)
+			{
+				propertyChangedEventHandler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

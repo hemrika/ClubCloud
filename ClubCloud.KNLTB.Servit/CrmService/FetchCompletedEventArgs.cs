@@ -2,12 +2,15 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
+
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Web.Services", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough]
+	[DebuggerStepThrough]
+	[GeneratedCode("System.ServiceModel", "4.0.0.0")]
 	public class FetchCompletedEventArgs : AsyncCompletedEventArgs
 	{
 		private object[] results;
+
 		public string Result
 		{
 			get
@@ -16,7 +19,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				return (string)this.results[0];
 			}
 		}
-		internal FetchCompletedEventArgs(object[] results, Exception exception, bool cancelled, object userState) : base(exception, cancelled, userState)
+
+		public FetchCompletedEventArgs(object[] results, Exception exception, bool cancelled, object userState) : base(exception, cancelled, userState)
 		{
 			this.results = results;
 		}

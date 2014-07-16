@@ -31,6 +31,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 		public event RetrieveCompletedEventHandler RetrieveCompleted;
 		public event RetrieveMultipleCompletedEventHandler RetrieveMultipleCompleted;
 		public event UpdateCompletedEventHandler UpdateCompleted;
+
 		public CrmAuthenticationToken CrmAuthenticationTokenValue
 		{
 			get
@@ -104,10 +105,14 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				this.useDefaultCredentialsSetExplicitly = true;
 			}
 		}
+
+        /// <summary>
+        /// https://servit.mijnknltb.nl/KNLTB/MSCrmServices/2007/CrmService.asmx
+        /// </summary>
 		public CrmService()
 		{
-			//this.Url = "https://servit.mijnknltb.nl/MSCrmServices/2007/CrmService.asmx";
-            this.Url = "https://servit.mijnknltb.nl/KNLTB/MSCrmServices/2007/CrmService.asmx";
+			this.Url = "https://servit.mijnknltb.nl/MSCrmServices/2007/CrmService.asmx";
+
 			if (this.IsLocalFileSystemWebService(this.Url))
 			{
 				this.UseDefaultCredentials = true;
@@ -118,6 +123,31 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				this.useDefaultCredentialsSetExplicitly = true;
 			}
 		}
+
+        /// <summary>
+        /// https://servit.mijnknltb.nl/KNLTB/MSCrmServices/2007/CrmService.asmx
+        /// </summary>
+        /// <param name="cc"></param>
+        public CrmService(System.Net.CookieContainer cc)
+        {
+            this.Url = "https://servit.mijnknltb.nl/MSCrmServices/2007/CrmService.asmx";
+
+            if (this.IsLocalFileSystemWebService(this.Url))
+            {
+                this.UseDefaultCredentials = true;
+                this.useDefaultCredentialsSetExplicitly = false;
+            }
+            else
+            {
+                this.useDefaultCredentialsSetExplicitly = true;
+            }
+
+            this.CallerOriginTokenValue = null;
+            this.CorrelationTokenValue = null;
+            this.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmService.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
+            this.CrmCookieContainer = cc;
+        }
+
 		[SoapDocumentMethod("http://schemas.microsoft.com/crm/2007/WebServices/Execute", RequestNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", ResponseNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped), SoapHeader("CorrelationTokenValue"), SoapHeader("CallerOriginTokenValue"), SoapHeader("CrmAuthenticationTokenValue")]
 		[return: XmlElement("Response")]
 		public Response Execute(Request Request)

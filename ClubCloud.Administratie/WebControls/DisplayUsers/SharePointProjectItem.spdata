@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.VisualWebPart" DefaultFile="DisplayUsersUserControl.ascx" SupportedTrustLevels="FullTrust" SupportedDeploymentScopes="Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="DisplayUsers\" Type="ElementManifest" />
+    <ProjectItemFile Source="DisplayUsers.webpart" Target="DisplayUsers\" Type="ElementFile" />
+    <ProjectItemFile Source="DisplayUsersUserControl.ascx" Target="CONTROLTEMPLATES\ClubCloud.Administratie.WebControls\DisplayUsers\" Type="TemplateFile" />
+  </Files>
+  <SafeControls>
+    <SafeControl Name="SafeControlEntry1" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Administratie.WebControls.DisplayUsers" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
+  </SafeControls>
+</ProjectItem>
