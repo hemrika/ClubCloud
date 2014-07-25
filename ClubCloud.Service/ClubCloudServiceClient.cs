@@ -175,6 +175,7 @@ namespace ClubCloud.Service
             return response;
         }
 
+        /*
         public SpelersProfiel GetSpelersProfiel(string bondsnummer, bool refresh = false)
         {
             SpelersProfiel response = null;
@@ -189,7 +190,9 @@ namespace ClubCloud.Service
             return response;
 
         }
+        */
 
+        /*
         public List<ClubCloud_Gebruiker_Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false)
         {
             List<ClubCloud_Gebruiker_Vereniging> response = null;
@@ -204,6 +207,7 @@ namespace ClubCloud.Service
             return response;
 
         }
+        */
 
         public ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
@@ -244,6 +248,7 @@ namespace ClubCloud.Service
 
         }
 
+        /*
         public List<ClubCloud_Vereniging_BestuursLid> GetBestuurForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
             List<ClubCloud_Vereniging_BestuursLid> response = null;
@@ -263,6 +268,7 @@ namespace ClubCloud.Service
             return response;
 
         }
+        */
 
         public ClubCloud_Accomodatie GetAccommodatieForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
@@ -294,6 +300,7 @@ namespace ClubCloud.Service
 
         }
 
+        /*
         public ClubCloud_Tracking GetTracking(string bondsnummer, bool refresh = false)
         {
             ClubCloud_Tracking response = null;
@@ -308,7 +315,7 @@ namespace ClubCloud.Service
             return response;
 
         }
-
+        */
         /*
         public List<ClubCloud_District> GetDistricten(string user)
         {
@@ -359,6 +366,7 @@ namespace ClubCloud.Service
 
         #region Competitie
 
+        /*
         public List<Competitie> GetCompetitiesAfgelopenJaar(string bondsnummer, bool refresh = false)
         {
             List<Competitie> response = null;
@@ -598,7 +606,7 @@ namespace ClubCloud.Service
             return response;
 
         }
-
+        */
         #endregion
     }
 }

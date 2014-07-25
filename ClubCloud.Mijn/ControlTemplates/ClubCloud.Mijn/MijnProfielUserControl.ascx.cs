@@ -36,9 +36,10 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         internal override void SetPageData()
         {
-            if (Settings != null && Settings.mijnknltb_allow)
+            if (Settings != null)//&& Settings.mijnknltb_allow)
             {
-                if (Settings.mijnknltb_tracking || !Settings.mijnknltb_tracking)
+                //if (Settings.mijnknltb_tracking || !Settings.mijnknltb_tracking)
+                if(true)
                 {
                     try
                     {
@@ -46,6 +47,7 @@ namespace ClubCloud.Mijn.ControlTemplates
 
                         ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
 
+                        /*
                         Series enkel = new Series { Name = "Enkel", Legend = "Enkel", AxisLabel = "Enkel", ChartType = SeriesChartType.SplineRange, XValueType = ChartValueType.String, YValueType = ChartValueType.Double };
                         Series dubbel = new Series { Name = "Dubbel", Legend = "Dubbel", AxisLabel = "Dubbel", ChartType = SeriesChartType.SplineRange, XValueType = ChartValueType.String, YValueType = ChartValueType.Double };
 
@@ -63,7 +65,8 @@ namespace ClubCloud.Mijn.ControlTemplates
                                 dubbel.Points.Insert(i, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), i+1), YValues = new double[2] { Convert.ToDouble(gebruiker.SpeelsterkteDubbel), Convert.ToDouble(gebruiker.RatingDubbel) } });
                             }
                         }
-
+                        */
+                        /*
                         try
                         {
                             ClubCloud_Tracking tracking = Client.GetTracking(userId, false);
@@ -92,9 +95,11 @@ namespace ClubCloud.Mijn.ControlTemplates
                         {
                             ex.ToString();
                         }
-
+                        */
+                        /*
                         cht_profiel.Series.Add(enkel);
                         cht_profiel.Series.Add(dubbel);
+                        */
 
                     }
                     catch (Exception ex)

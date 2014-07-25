@@ -43,7 +43,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             if (Settings != null)
             {
                 this.tbx_knltbid.Text = Settings.Id.ToString();
-                this.cbx_knltb.Checked = Settings.mijnknltb_allow;
+                this.cbx_knltb.Checked = Settings.Agree;
             }
 
         }
@@ -64,8 +64,8 @@ namespace ClubCloud.Mijn.ControlTemplates
 
                     if(!string.IsNullOrWhiteSpace(password) && cbx_knltb.Checked)
                     {
-                        Settings.mijnknltb_allow = cbx_knltb.Checked;
-                        Settings.mijnknltb_password = password;
+                        Settings.Agree = cbx_knltb.Checked;
+                        Settings.Password = password;
                         Settings = Client.SetMijnKNLTB(Settings);
                         //vds_knltb.Text = "Veranderingen opgeslagen";
 

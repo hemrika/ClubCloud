@@ -29,7 +29,7 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         internal override void SetPageData()
         {
-            if (Settings != null && Settings.mijnknltb_allow)
+            if (Settings != null )//&& Settings.mijnknltb_allow)
             {
             }
             else

@@ -190,6 +190,12 @@ namespace ClubCloud.Zimbra.Client
 
 
                 ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
+                GetUsersUsingExecute(service);
+                WhoAmIResponse response = service.Execute(new WhoAmIRequest()) as WhoAmIResponse;
+                Console.WriteLine(response.BusinessUnitId);
+                Console.WriteLine(response.OrganizationId);
+                Console.WriteLine(response.UserId);
+
                 //service.CallerOriginTokenValue = null; //new KNLTB.ServIt.CallerOriginToken{ CallerOrigin = new ClubCloud.KNLTB.ServIt.CallerOrigin{ }};
                 //service.CorrelationTokenValue = null; //new KNLTB.ServIt.CorrelationToken{ CorrelationId = new Guid("00000000-0000-0000-0000-000000000000")};
                 //service.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmService.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
@@ -220,7 +226,7 @@ namespace ClubCloud.Zimbra.Client
                 //Console.WriteLine(response.UserId);
 
 
-                GetUsersUsingExecute(service);
+                
                 /*
                 service.ExecuteCompleted += service_ExecuteCompleted;
                 //BusinessUnitId = 3cea4b0b-595b-e311-a846-02bf0aead617
@@ -252,6 +258,10 @@ namespace ClubCloud.Zimbra.Client
             }
             catch (WebException wex)
             {
+                WebExceptionStatus status = wex.Status;
+                HttpWebResponse response = wex.Response as HttpWebResponse;
+                HttpStatusCode code = response.StatusCode;
+
                 Console.Write(wex.Message);
             }
             catch (Exception ex)
@@ -304,8 +314,8 @@ namespace ClubCloud.Zimbra.Client
                 //sgt_alg_speciale_baan
                 //sgt_accommodatieid
                 //{118D1A88-00C9-461A-9ECB-7411D1AB0EA1}
-                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_accomodatieid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("118D1A88-00C9-461A-9ECB-7411D1AB0EA1") } };
-                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_accomodatieid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("118D1A88-00C9-461A-9ECB-7411D1AB0EA1") } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
                 //sgt_dss_tussentijdse_rating
                 //sgt_spelerid
@@ -319,14 +329,19 @@ namespace ClubCloud.Zimbra.Client
 
                 //account
                 //ConditionExpression condition = new ConditionExpression { AttributeName = "accountnumber", Operator = ConditionOperator.Equal, Values = new object[1] { "82503" } };
-                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                ConditionExpression condition = new ConditionExpression { AttributeName = "accountid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("02ada6c7-80f9-4671-91f9-898ea5da3ccd") } };
+                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
                 //customeraddress
                 //customeraddressid
                 //parentid 
                 
                 //ConditionExpression condition = new ConditionExpression { AttributeName = "parentid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("02ada6c7-80f9-4671-91f9-898ea5da3ccd") } };
-                //ConditionExpression condition = new ConditionExpression { AttributeName = "parentid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("0854eb0e-55e1-4c99-a9dd-eae141d944c0") } };
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "parentid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("11029f99-522e-4fc4-a86d-694e003f8bb2") } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                //sgt_alg_lidmaatschap
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_lidmaatschapid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("76760d7b-a9c9-e311-8e30-005056952140") } };
                 //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
                 PagingInfo pageInfo = new PagingInfo();
@@ -348,7 +363,7 @@ namespace ClubCloud.Zimbra.Client
                 //sgt_alg_type_bestuursorgaan
                 //sgt_alg_district
                 //systemuser
-                query.EntityName = "sgt_alg_speciale_baan";
+                query.EntityName = "account";
                 query.ColumnSet = cols;
                 query.Criteria = expression;
                 query.PageInfo = pageInfo;
@@ -366,11 +381,11 @@ namespace ClubCloud.Zimbra.Client
                 
 
                 List<BusinessEntity> entities = results.BusinessEntityCollection.BusinessEntities.ToList<BusinessEntity>();
-                foreach (sgt_alg_speciale_baan entity in entities)
+                foreach (account entity in entities)
                 {
                     //entity.sgt_spelerid
-                    string sentity = SerializeObjectList<sgt_alg_speciale_baan>(entity);
-                    WriteToXmlFile<sgt_alg_speciale_baan>(@"C:\sgt_alg_speciale_baan.xml", entity, true);
+                    string sentity = SerializeObjectList<account>(entity);
+                    WriteToXmlFile<account>(@"C:\account.xml", entity, true);
                 }
                 
                 /*

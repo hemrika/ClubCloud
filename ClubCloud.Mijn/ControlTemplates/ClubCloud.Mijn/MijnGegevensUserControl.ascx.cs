@@ -36,26 +36,22 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         internal override void SetPageData()
         {
-            if (Settings != null && Settings.mijnknltb_allow)
+            if (Settings != null)//&& Settings.mijnknltb_allow)
             {
                 ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
 
                 if (gebruiker != null)
                 {
-
+                    ClubCloud_Vereniging vereniging=Client.GetVerenigingById(userId, gebruiker.VerenigingId.Value);
+                    /*
                     fvw_adres.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
                     fvw_adres.DataBind();
-
-                    /*
-                    if(fvw_adres.CurrentMode == FormViewMode.Edit)
-                    {
-                        //List<ClubCloud_Nationaliteit> nationaliteiten = Client.GetNationaliteiten(userId, false);
-                    }
                     */
 
                     fvw_afbeelding.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
                     fvw_afbeelding.DataBind();
 
+                    //Client.GetAddresByGebruiker(userId, gebruiker.Id);
                     fvw_contact.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
                     fvw_contact.DataBind();
 
@@ -101,7 +97,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     gebruiker.TelefoonOverdag = e.NewValues["TelefoonOverdag"].ToString();
                     gebruiker.TelefoonAvond = e.NewValues["TelefoonAvond"].ToString();
                     gebruiker.Mobiel = e.NewValues["Mobiel"].ToString();
-                    gebruiker.Email = e.NewValues["Email"].ToString();
+                    gebruiker.EmailKNLTB = e.NewValues["Email"].ToString();
                     Client.SetClubCloudGebruiker(userId, gebruiker, false);
                 }
             }
@@ -139,6 +135,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 if (Settings != null)
                 {
+                    /*
                     ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
 
                     gebruiker.Straat = e.NewValues["Straat"].ToString();
@@ -147,6 +144,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     gebruiker.Plaats = e.NewValues["Plaats"].ToString();
                     gebruiker.Postcode = e.NewValues["Postcode"].ToString();
                     Client.SetClubCloudGebruiker(userId, gebruiker, false);
+                    */
                 }
             }
         }
@@ -199,7 +197,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     DropDownList NationaliteitId = (DropDownList)fvw_persoon.FindControl("NationaliteitId");
                     gebruiker.NationaliteitId = Guid.Parse(NationaliteitId.SelectedValue);
                     gebruiker.Roepnaam = e.NewValues["Roepnaam"].ToString();
-                    gebruiker.Toevoeging = e.NewValues["Toevoeging"].ToString();
+                    gebruiker.Achtervoegsel = e.NewValues["Toevoeging"].ToString();
                     gebruiker.Tussenvoegsel = e.NewValues["Tussenvoegsel"].ToString();
                     gebruiker.Voorletters = e.NewValues["Voorletters"].ToString();
                     gebruiker.Voornamen = e.NewValues["Voornamen"].ToString();
@@ -244,7 +242,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     gebruiker.TelefoonOverdag = e.NewValues["TelefoonOverdag"].ToString();
                     gebruiker.TelefoonAvond = e.NewValues["TelefoonAvond"].ToString();
                     gebruiker.Mobiel = e.NewValues["Mobiel"].ToString();
-                    gebruiker.Email = e.NewValues["Email"].ToString();
+                    gebruiker.EmailKNLTB = e.NewValues["Email"].ToString();
                     Client.SetClubCloudGebruiker(userId, gebruiker, false);
                 }
             }

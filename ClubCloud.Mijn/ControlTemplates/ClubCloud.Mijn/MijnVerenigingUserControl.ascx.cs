@@ -32,17 +32,17 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         internal override void SetPageData()
         {
-            if (Settings != null && Settings.mijnknltb_allow)
+            if (Settings != null )// && Settings.mijnknltb_allow)
             {
-                List<ClubCloud_Gebruiker_Vereniging> verenigingen = Client.GetVerenigingen(userId,false);
-                lst_verenigingen.DataSource = verenigingen;
+                ClubCloud_Vereniging vereniging = Client.GetVerenigingById(userId, Settings.VerenigingId.Value);
+                lst_verenigingen.DataSource = new List<ClubCloud_Vereniging> { vereniging }; ;
                 lst_verenigingen.DataBind();
 
-                if (verenigingen.Count == 1)
+                if (vereniging != null)
                 {
                     try
                     {
-                        ClubCloud_Vereniging vereniging = Client.GetVerenigingById(userId, verenigingen[0].VerenigingId, false);
+                        vereniging = Client.GetVerenigingById(userId, vereniging.Id);
                         fvw_vereniging.DataSource = new List<ClubCloud_Vereniging> { vereniging };
                         fvw_vereniging.DataBind();
                     }
@@ -50,12 +50,12 @@ namespace ClubCloud.Mijn.ControlTemplates
 
                     try
                     {
-                        ClubCloud_Accomodatie accomodatie = Client.GetAccommodatieForVereniging(userId, verenigingen[0].VerenigingId, false);
+                        ClubCloud_Accomodatie accomodatie = Client.GetAccommodatieForVereniging(userId, vereniging.Id);
                         fvw_accomodatie.DataSource = new List<ClubCloud_Accomodatie> { accomodatie };
                         fvw_accomodatie.DataBind();
                     }
                     catch { }
-
+                    /*
                     try
                     {
                         List<ClubCloud_Vereniging_BestuursLid> leden = Client.GetBestuurForVereniging(userId, verenigingen[0].VerenigingId, false);
@@ -87,6 +87,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                         }
                     }
                     catch { }
+                    */
                 }
             }
             else

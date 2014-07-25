@@ -75,22 +75,27 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         ClubCloud_Gebruiker GetClubCloudGebruiker(string bondsnummer, bool refresh = false);
 
-
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(SpelersProfiel))]
         SpelersProfiel GetSpelersProfiel(string bondsnummer, bool refresh = false);
+        */
 
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(SpelerTracking))]
         ClubCloud_Tracking GetTracking(string bondsnummer, bool refresh = false);
+        */
 
         #endregion
 
         #region Club
 
+        /*
         [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Gebruiker_Vereniging))]
-        List<ClubCloud_Gebruiker_Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false);
+        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
+        List<ClubCloud_Vereniging> GetVerenigingen(string bondsnummer, bool refresh = false);
+        */
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
@@ -124,6 +129,7 @@ namespace ClubCloud.Service
 
         [OperationContract]
         System.Collections.Generic.List<Guid> GetCompetitiesForInschrijving(string bondsnummer, Guid verenigingId, Guid districtId, bool refresh = false);
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging_Competitie))]
         System.Collections.Generic.List<ClubCloud.Service.Model.ClubCloud_Vereniging_Competitie> GetCompetitiesForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false);
@@ -169,6 +175,7 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(Wedstrijdgegevens))]
         System.Collections.Generic.List<ClubCloud.KNLTB.ServIt.CompetitieService.Wedstrijdgegevens> GetWedstrijdgegevensForWedstrijdgegeven(string bondsnummer, Guid competitieId, Guid wedstrijdgegevenId, bool refresh = false);
+        */
         #endregion
         [OperationContract]
         bool CreateClubCloudWebSite(string verenigingsummer);

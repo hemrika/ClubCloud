@@ -30,14 +30,14 @@
         </asp:panel>
         <fieldset>
         <asp:panel runat="server" ID="pnl_verenigingen" >
-            <asp:ListView ID="lst_verenigingen" runat="server" DataKeyNames="VerenigingId" OnSelectedIndexChanged="lst_verenigingen_SelectedIndexChanged"  >
+            <asp:ListView ID="lst_verenigingen" runat="server" DataKeyNames="Id" OnSelectedIndexChanged="lst_verenigingen_SelectedIndexChanged"  >
                 <GroupTemplate>
                     <ul class="clubs">
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
                     </ul>
                 </GroupTemplate>
                 <ItemTemplate>
-                    <li><asp:Label ID="lbl_Naam" runat="server" Text='<%# Eval("VerenigingNaam")%>' ></asp:Label></li> 
+                    <li><asp:Label ID="lbl_Naam" runat="server" Text='<%# Eval("Naam")%>' ></asp:Label></li> 
                 </ItemTemplate>
                 <EmptyItemTemplate>
                     <div>Geen gegevens gevonden.</div>
@@ -54,9 +54,9 @@
                       <div>
                         <i class="icon-address special"></i>
                         <div class="info">
-                        <h3 class="lined"><%# DataBinder.Eval(Container.DataItem, "Naam")%> ( <%# DataBinder.Eval(Container.DataItem, "Verenigingsnummer")%> )</h3>
+                        <h3 class="lined"><%# DataBinder.Eval(Container.DataItem, "Naam")%> ( <%# DataBinder.Eval(Container.DataItem, "Nummer")%> )</h3>
                             <p class="capitalize">
-                                District : <b><%# DataBinder.Eval(Container.DataItem, "District") %></b> | Regio : <b><%# DataBinder.Eval(Container.DataItem, "Regio") %></b> | Opgericht : <b><%# DataBinder.Eval(Container.DataItem, "DatumOpgericht","{0:yyyy}") %></b>
+                                District : <b><%# DataBinder.Eval(Container.DataItem, "District") %></b> | Regio : <b><%# DataBinder.Eval(Container.DataItem, "Regio") %></b> | Opgericht : <b><%# DataBinder.Eval(Container.DataItem, "Oprichting","{0:yyyy}") %></b>
                             </p>
                             <p class="capitalize">
                             <b>Bezoek adres : </b><br />

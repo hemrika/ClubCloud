@@ -76,7 +76,7 @@
                 <ItemTemplate>
                         <i class="icon-vcard special"></i>
                         <div class="info" style="min-height:420px;">
-                        <h3 class="lined"><%# DataBinder.Eval(Container.DataItem, "VolledigeNaam")%> ( <asp:Label ID="knltbid" runat="server" /> )</h3>
+                        <h3 class="lined"><%# DataBinder.Eval(Container.DataItem, "Volledigenaam")%> ( <asp:Label ID="knltbid" runat="server" /> )</h3>
                             <p class="capitalize">
                                 District : <b><%# DataBinder.Eval(Container.DataItem, "DistrictNaam") %></b> | Vereniging : <b><a href="vereniging.aspx"><%# DataBinder.Eval(Container.DataItem, "OrganisatieNummer") %></a></b> | Lid : <b><%# DataBinder.Eval(Container.DataItem, "IsLid") %></b>
                             </p>

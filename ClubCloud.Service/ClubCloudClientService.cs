@@ -171,7 +171,7 @@ namespace ClubCloud.Service
         }
 
 
-
+        /*
         public SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool refresh = false)
         {
             SpelersProfiel spelersprofiel = new SpelersProfiel();
@@ -184,8 +184,8 @@ namespace ClubCloud.Service
 
             return spelersprofiel;
         }
-
-
+        */
+        /*
         public ClubCloud_Tracking GetTracking(string bondsnummer, bool refresh = false)
         {
             ClubCloud_Tracking tracking = new ClubCloud_Tracking();
@@ -199,7 +199,7 @@ namespace ClubCloud.Service
             return tracking;
 
         }
-
+        */
         #region Competitie
 
 

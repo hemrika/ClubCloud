@@ -151,23 +151,109 @@
     <Compile Include="ClubCloudApplicationService.cs" />
     <Compile Include="IClubCloudClientService.cs" />
     <Compile Include="IClubCloudApplicationService.cs" />
-    <Compile Include="Model\ClubCloudModel.Context.cs">
+    <Compile Include="Model\BeheerClubCloud.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ClubCloudModel.Context.tt</DependentUpon>
+      <DependentUpon>BeheerClubCloud.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ClubCloudModel.cs">
+    <Compile Include="Model\BeheerClubCloud.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ClubCloudModel.tt</DependentUpon>
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ClubCloudModel.Designer.cs">
+    <Compile Include="Model\BeheerClubCloud.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ClubCloudModel.edmx</DependentUpon>
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Accomodatie.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Address.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Baan.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Baansoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_BaanSpeciaal.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Baantype.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Bestuursorgaan.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Bouwaard.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_District.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Functie.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Functionaris.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Gebruiker.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Lidmaatschap.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Nationaliteit.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Profiel.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Rechtsvorm.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Regio.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Setting.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Vereniging.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Facebook.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Financieel.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Mijn.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mijn.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Mijn.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mijn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MijnClubCloud.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MijnClubCloud.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BeheerInitializer.cs" />
+    <Compile Include="Model\MijnInitializer.cs" />
+    <Compile Include="Model\Privacy.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SpelersProfiel.cs" />
     <Compile Include="Model\SpelerTracking.cs" />
+    <Compile Include="Model\Twitter.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="Powershell\NewClubCloudServiceApplication.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplicationProxy.cs" />
     <Compile Include="Powershell\RemoveClubCloudService.cs" />
@@ -204,22 +290,39 @@
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{beb7ab35-f6fa-4edf-885d-f25a20af9004}</SharePointProjectItemId>
     </None>
-    <EntityDeploy Include="Model\ClubCloudModel.edmx">
+    <EntityDeploy Include="Model\BeheerClubCloud.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ClubCloudModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>BeheerClubCloud.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\ClubCloudModel.Context.tt">
+    <None Include="Model\BeheerClubCloud.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClubCloudModel.Context.cs</LastGenOutput>
-      <DependentUpon>ClubCloudModel.edmx</DependentUpon>
+      <LastGenOutput>BeheerClubCloud.Context.cs</LastGenOutput>
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
     </None>
-    <None Include="Model\ClubCloudModel.edmx.diagram">
-      <DependentUpon>ClubCloudModel.edmx</DependentUpon>
-    </None>
-    <None Include="Model\ClubCloudModel.tt">
+    <None Include="Model\BeheerClubCloud.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClubCloudModel.cs</LastGenOutput>
-      <DependentUpon>ClubCloudModel.edmx</DependentUpon>
+      <LastGenOutput>BeheerClubCloud.cs</LastGenOutput>
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="Model\BeheerClubCloud.edmx.diagram">
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Model\MijnClubCloud.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MijnClubCloud.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\Mijn.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MijnClubCloud.edmx</DependentUpon>
+      <LastGenOutput>Mijn.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Model\MijnClubCloud.edmx.diagram">
+      <DependentUpon>MijnClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="Model\Mijn.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MijnClubCloud.edmx</DependentUpon>
+      <LastGenOutput>Mijn.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Package\Package.package">
@@ -246,7 +349,7 @@
     <Content Include="Layouts\ClubCloud.Service\jquery.signalR.min.js" />
     <Content Include="Layouts\ClubCloud.Service\json2.js" />
     <Content Include="Layouts\ClubCloud.Service\json2.min.js" />
-    <Content Include="Model\ClubCloudModel.edmx.sql" />
+    <Content Include="Model\BeheerClubCloud.edmx.sql" />
     <Content Include="WebClients\ClubCloud.Service\client.config" />
     <None Include="WebClients\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{28dc8612-1ccf-4bab-a0bc-5aa788ef9f8b}</SharePointProjectItemId>

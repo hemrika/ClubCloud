@@ -51,9 +51,11 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting SetFinancieel(ClubCloud_Setting settings);
 
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting SetTracking(ClubCloud_Setting settings);
+        */
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
@@ -69,13 +71,15 @@ namespace ClubCloud.Service
         //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         ClubCloud_Gebruiker GetClubCloudGebruiker(bool refresh = false);
 
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(SpelersProfiel))]
         SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool refresh = false);
-
+        */
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Tracking))]
         ClubCloud_Tracking GetTracking(string bondsnummer, bool refresh = false);
-
+        */
     }
 }
