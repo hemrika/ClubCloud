@@ -187,6 +187,7 @@ namespace ClubCloud.Provider.IdentityModel
                 throw new ArgumentNullException("formsSignInControl");
             }
             SecurityToken securityToken = null;
+            //AAM settings must correnspond with the domain(s).
             SPIisSettings iisSettings = this.IisSettings;
             if (!iisSettings.UseClaimsAuthentication || !iisSettings.UseFormsClaimsAuthenticationProvider)
             {
@@ -198,6 +199,16 @@ namespace ClubCloud.Provider.IdentityModel
                 */
                 throw new InvalidOperationException();
             }
+
+            //Initialize Providers
+            try
+            {
+                ZimbraMembershipProvider z_membershipProvider = (ZimbraMembershipProvider)Membership.Providers["ZimbraMembershipProvider"];
+                ZimbraRoleProvider z_roleProvider = (ZimbraRoleProvider)Roles.Providers["ZimbraRoleProvider"];
+
+            }
+            catch { }
+
             if (this.IsLoginControlInValidState(formsSignInControl))
             {
                 //string str1 = null;
