@@ -198,7 +198,7 @@
                             Telefoon Overdag : <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "TelefoonOverdag")).ToLower() %><br />
                             Telefoon Avond : <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "TelefoonAvond")).ToLower() %><br />
                             Mobiel : <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Mobiel")).ToLower() %><br /> 
-                            Email : <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Email")).ToLower() %><br />
+                            Email : <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "EmailKNLTB")).ToLower() %><br />
                             </p>
                             <asp:LinkButton ID="btn_editcontact" Text="Wijzigen" CommandName="Edit" RunAt="server" CssClass="button small alignright last"/>
                         </div>

@@ -18,33 +18,58 @@ namespace ClubCloud.Service.Model
     
     public partial class BeheerContainer : DbContext
     {
+    	private static string NameOrConnectionString = "name=BeheerContainer";
+    
     	public BeheerContainer()
             : this(false) { }
     
         public BeheerContainer(bool proxyCreationEnabled)
-            : base("name=BeheerContainer")
+            : base(NameOrConnectionString)
         {
     				this.Configuration.LazyLoadingEnabled = false;
     		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = false;
     				this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
-    		Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
+    
+    		if (!Database.CompatibleWithModel(false))
+    		{
+    			Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
+    		}
+    		if (!Database.Exists(NameOrConnectionString))
+    		{
+    			Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
+    		}
+    
+    		//Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
+    		//Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
         }
     	
         public BeheerContainer(string connectionString)
-          : this(connectionString, false) { }
+          : this(connectionString, false) { NameOrConnectionString = connectionString; }
     	  
         public BeheerContainer(string connectionString, bool proxyCreationEnabled)
             : base(connectionString)
         {
+    			NameOrConnectionString = connectionString;
     				this.Configuration.LazyLoadingEnabled = false;
     		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = false;
     		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
-    		Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
-        }	
+    
+    		if (!Database.CompatibleWithModel(false))
+    		{
+    			Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
+    		}
+    		if (!Database.Exists(NameOrConnectionString))
+    		{
+    			Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
+    		}
+    
+    		//Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
+    		//Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
+    	}	
     	
         public ObjectContext ObjectContext
         {
@@ -53,43 +78,97 @@ namespace ClubCloud.Service.Model
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+    		//modelBuilder.Entity<ClubCloud_Setting>().MapToStoredProcedures();
+    
     		modelBuilder.Entity<ClubCloud_Setting>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Vereniging>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_Vereniging>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_Gebruiker>().MapToStoredProcedures();
+    
     		modelBuilder.Entity<ClubCloud_Gebruiker>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Accomodatie>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_Accomodatie>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_Nationaliteit>().MapToStoredProcedures();
+    
     		modelBuilder.Entity<ClubCloud_Nationaliteit>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_District>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_District>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_Functie>().MapToStoredProcedures();
+    
     		modelBuilder.Entity<ClubCloud_Functie>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Lidmaatschap>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_Lidmaatschap>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_Profiel>().MapToStoredProcedures();
+    
     		modelBuilder.Entity<ClubCloud_Profiel>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Functionaris>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_Functionaris>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_Bestuursorgaan>().MapToStoredProcedures();
+    
     		modelBuilder.Entity<ClubCloud_Bestuursorgaan>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Rechtsvorm>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_Rechtsvorm>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_Address>().MapToStoredProcedures();
+    
     		modelBuilder.Entity<ClubCloud_Address>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Regio>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_Regio>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_Baansoort>().MapToStoredProcedures();
+    
     		modelBuilder.Entity<ClubCloud_Baansoort>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Baantype>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_Baantype>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_Baan>().MapToStoredProcedures();
+    
     		modelBuilder.Entity<ClubCloud_Baan>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Bouwaard>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_Bouwaard>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_BaanSpeciaal>().MapToStoredProcedures();
+    
     		modelBuilder.Entity<ClubCloud_BaanSpeciaal>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Reservering>().MapToStoredProcedures();
+    
+    		modelBuilder.Entity<ClubCloud_Reservering>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Afhang>().MapToStoredProcedures();
+    
+    		modelBuilder.Entity<ClubCloud_Afhang>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Baanschema>().MapToStoredProcedures();
+    
+    		modelBuilder.Entity<ClubCloud_Baanschema>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Foto>().MapToStoredProcedures();
+    
+    		modelBuilder.Entity<ClubCloud_Foto>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
     		base.OnModelCreating(modelBuilder);
         }
@@ -113,5 +192,9 @@ namespace ClubCloud.Service.Model
         public virtual DbSet<ClubCloud_Baan> ClubCloud_Banen { get; set; }
         public virtual DbSet<ClubCloud_Bouwaard> ClubCloud_Bouwaarden { get; set; }
         public virtual DbSet<ClubCloud_BaanSpeciaal> ClubCloud_BanenSpeciaal { get; set; }
+        public virtual DbSet<ClubCloud_Reservering> ClubCloud_Reserveringen { get; set; }
+        public virtual DbSet<ClubCloud_Afhang> ClubCloud_Afhangen { get; set; }
+        public virtual DbSet<ClubCloud_Baanschema> ClubCloud_Baanschemas { get; set; }
+        public virtual DbSet<ClubCloud_Foto> ClubCloud_Foto { get; set; }
     }
 }

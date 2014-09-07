@@ -11,6 +11,7 @@ namespace ClubCloud.SignalR.Hubs
     [HubName("Afhangen")]
     public class AfhangenHub : Hub
     {
+
         public override Task OnConnected()
         {
             string name = Context.User.Identity.Name.ToUpper();

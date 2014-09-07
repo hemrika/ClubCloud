@@ -39,7 +39,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             if (Settings != null)//&& Settings.mijnknltb_allow)
             {
                 ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
-
+                
                 if (gebruiker != null)
                 {
                     ClubCloud_Vereniging vereniging=Client.GetVerenigingById(userId, gebruiker.VerenigingId.Value);
@@ -177,7 +177,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             if (e.NewMode == FormViewMode.Edit)
             {
                 DropDownList Geslacht = (DropDownList)fvw_persoon.FindControl("Geslacht");
-                Geslacht.Items.FindByText(((ClubCloud_Gebruiker)fvw_persoon.DataItem).Geslacht.ToString()).Selected = true;
+                //Geslacht.Items.FindByText(((ClubCloud_Gebruiker)fvw_persoon.DataItem).Geslacht.ToString()).Selected = true;
             }
         }
 
@@ -193,7 +193,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     gebruiker.Geboortedatum = DateTime.Parse(e.NewValues["Geboortedatum"].ToString());
                     gebruiker.Geboorteplaats = e.NewValues["Geboorteplaats"].ToString();
                     DropDownList Geslacht = (DropDownList)fvw_persoon.FindControl("Geslacht");
-                    gebruiker.Geslacht = (KNLTB.ServIt.LedenAdministratieService.Geslacht)Enum.Parse(typeof(KNLTB.ServIt.LedenAdministratieService.Geslacht), Geslacht.SelectedValue);
+                    //gebruiker.Geslacht = (KNLTB.ServIt.LedenAdministratieService.Geslacht)Enum.Parse(typeof(KNLTB.ServIt.LedenAdministratieService.Geslacht), Geslacht.SelectedValue);
                     DropDownList NationaliteitId = (DropDownList)fvw_persoon.FindControl("NationaliteitId");
                     gebruiker.NationaliteitId = Guid.Parse(NationaliteitId.SelectedValue);
                     gebruiker.Roepnaam = e.NewValues["Roepnaam"].ToString();

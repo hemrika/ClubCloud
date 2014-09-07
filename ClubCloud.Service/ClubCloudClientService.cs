@@ -16,7 +16,7 @@ namespace ClubCloud.Service
     using Microsoft.SharePoint;
     using ClubCloud.Service.Model;
     using System.Net;
-    using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
+    //using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -38,6 +38,8 @@ namespace ClubCloud.Service
             return container.Container;
         }
         */
+
+        #region Settings
 
         public string GetCurrentUser()
         {
@@ -129,20 +131,6 @@ namespace ClubCloud.Service
             return currentsettings;
         }
 
-        /*
-        public async Task<ClubCloud_Setting> GetClubCloudSettingsTask(string bondsnummer)
-        {
-            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
-
-            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
-            {
-                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                currentsettings = await Task.Run(() => GetClubCloudSettings(bondsnummer));
-                //currentsettings = client.GetClubCloudSettings(SPContext.Current.Web.CurrentUser.LoginName);
-            }
-            return currentsettings;
-        }
-        */
 
         public ClubCloud_Setting GetClubCloudSettings(string bondsnummer)
         {
@@ -170,39 +158,73 @@ namespace ClubCloud.Service
             return clubCloud_gebruiker;
         }
 
-
-        /*
-        public SpelersProfiel GetPersoonsprofiel(string bondsnummer, bool refresh = false)
+        public ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
         {
-            SpelersProfiel spelersprofiel = new SpelersProfiel();
+            ClubCloud_Gebruiker clubCloud_gebruiker = new ClubCloud_Gebruiker();
 
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                spelersprofiel = client.GetSpelersProfiel(SPContext.Current.Web.CurrentUser.LoginName, refresh);
+                clubCloud_gebruiker = client.GetClubCloudGebruiker(SPContext.Current.Web.CurrentUser.LoginName, refresh);
             }
 
-            return spelersprofiel;
+            return clubCloud_gebruiker;
         }
-        */
-        /*
-        public ClubCloud_Tracking GetTracking(string bondsnummer, bool refresh = false)
+
+        public ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
         {
-            ClubCloud_Tracking tracking = new ClubCloud_Tracking();
+            ClubCloud_Gebruiker clubCloud_gebruiker = new ClubCloud_Gebruiker();
 
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                tracking = client.GetTracking(SPContext.Current.Web.CurrentUser.LoginName, refresh);
+                clubCloud_gebruiker = client.GetClubCloudGebruiker(SPContext.Current.Web.CurrentUser.LoginName, refresh);
             }
 
-            return tracking;
-
+            return clubCloud_gebruiker;
         }
-        */
-        #region Competitie
 
+        public ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
+        {
+            ClubCloud_Foto clubCloud_foto = new ClubCloud_Foto();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                clubCloud_foto = client.GetFotoByNummer(SPContext.Current.Web.CurrentUser.LoginName, verenigingId, nummer, refresh);
+            }
+
+            return clubCloud_foto;
+        }
+
+        public ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
+        {
+            ClubCloud_Foto clubCloud_foto = new ClubCloud_Foto();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                clubCloud_foto = client.GetFotoById(SPContext.Current.Web.CurrentUser.LoginName, verenigingId, gebruikerId, refresh);
+            }
+
+            return clubCloud_foto;
+        }
 
         #endregion
+
+
+
+        public ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            ClubCloud_Vereniging vereniging = new ClubCloud_Vereniging();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                vereniging = client.GetVerenigingById(SPContext.Current.Web.CurrentUser.LoginName, verenigingId, refresh);
+            }
+
+            return vereniging;
+        }
     }
 }

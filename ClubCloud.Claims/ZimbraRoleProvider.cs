@@ -12,6 +12,7 @@ using System.Web.Hosting;
 using ClubCloud.Zimbra;
 using ClubCloud.Zimbra.Service;
 using System.Configuration;
+using System.Collections.Specialized;
 
 namespace ClubCloud.Provider
 {
@@ -34,11 +35,16 @@ namespace ClubCloud.Provider
 
         public ZimbraRoleProvider() : base()
         {
+            SetConfiguration();
+        }
+
+        private void SetConfiguration()
+        {
             try
             {
                 zimbraconfiguration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string messsage = ex.Message;
             }
@@ -76,9 +82,15 @@ namespace ClubCloud.Provider
             {
                 if (!Initialized)
                 {
-                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                    throw new ProviderException(message);
+                    SetConfiguration();
+                    Initialize(string.Empty, new NameValueCollection());
+
+                    if (!Initialized)
+                    {
+                        string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                        LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                        throw new ProviderException(message);
+                    }
                 }
 
                 return this.applicationName;
@@ -94,7 +106,11 @@ namespace ClubCloud.Provider
 
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
         {
-            base.Initialize(name, config); 
+            try
+            {
+                base.Initialize(name, config);
+            }
+            catch { }
 
             /*
             if (HostingEnvironment.IsHosted)
@@ -211,9 +227,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -291,9 +313,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -371,9 +399,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -423,9 +457,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -475,9 +515,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -523,9 +569,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -572,9 +624,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -635,9 +693,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -697,9 +761,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -749,9 +819,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -801,9 +877,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -828,9 +910,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -847,9 +935,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -869,9 +963,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -891,9 +991,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -912,9 +1018,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -984,9 +1096,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Role Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try

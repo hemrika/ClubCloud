@@ -46,12 +46,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\EntityFramework.dll</HintPath>
       <Private>True</Private>
-      <HintPath>..\ClubCloud.Zimbra\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
-      <HintPath>..\ClubCloud.Zimbra\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -143,14 +145,20 @@
       <DependentUpon>Properties.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="BaseServiceClient.cs" />
+    <Compile Include="ClubCloudAfhangenService.cs" />
     <Compile Include="ClubCloudClientService.cs" />
     <Compile Include="Features\ClubCloudServiceAdministration\ClubCloudServiceAdministration.EventReceiver.cs">
       <DependentUpon>ClubCloudServiceAdministration.feature</DependentUpon>
     </Compile>
     <Compile Include="ClubCloudServiceClient.cs" />
     <Compile Include="ClubCloudApplicationService.cs" />
+    <Compile Include="IClubCloudAfhangenService.cs" />
     <Compile Include="IClubCloudClientService.cs" />
     <Compile Include="IClubCloudApplicationService.cs" />
+    <Compile Include="Model\BaanSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BeheerConfiguration.cs" />
     <Compile Include="Model\BeheerClubCloud.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,7 +180,13 @@
     <Compile Include="Model\ClubCloud_Address.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClubCloud_Afhang.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ClubCloud_Baan.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Baanschema.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClubCloud_Baansoort.cs">
@@ -191,6 +205,9 @@
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClubCloud_District.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Foto.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClubCloud_Functie.cs">
@@ -217,10 +234,16 @@
     <Compile Include="Model\ClubCloud_Regio.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClubCloud_Reservering.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ClubCloud_Setting.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClubCloud_Vereniging.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Days.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Facebook.cs">
@@ -246,11 +269,12 @@
     </Compile>
     <Compile Include="Model\BeheerInitializer.cs" />
     <Compile Include="Model\MijnInitializer.cs" />
+    <Compile Include="Model\Month.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Privacy.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\SpelersProfiel.cs" />
-    <Compile Include="Model\SpelerTracking.cs" />
     <Compile Include="Model\Twitter.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
@@ -282,7 +306,9 @@
     <None Include="Features\ClubCloudServiceAdministration\ClubCloudServiceAdministration.feature">
       <FeatureId>{95303089-9602-4186-a353-cb5f1405a9ac}</FeatureId>
     </None>
+    <Content Include="ISAPI\ClubCloud.Afhangen\Afhangen.svc" />
     <Content Include="ISAPI\ClubCloud.Service\web.config" />
+    <Content Include="ISAPI\ClubCloud.Afhangen\web.config" />
     <None Include="ISAPI\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{c6486a53-a50c-430c-8820-347e87f19a2b}</SharePointProjectItemId>
     </None>
@@ -404,6 +430,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -155,6 +155,8 @@ namespace ClubCloud.Provider
         #region Initialisation
         public ZimbraMembershipProvider() : base()
         {
+            SetConfiguration();
+            /*
             try
             {
                 zimbraconfiguration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
@@ -168,6 +170,7 @@ namespace ClubCloud.Provider
             {
                 zimbraconfiguration = new ZimbraConfigurationSection();
             }
+            */
         }
 
         public override string Name
@@ -192,9 +195,15 @@ namespace ClubCloud.Provider
             {
                 if (!Initialized)
                 {
-                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                    throw new ProviderException(message);
+                    SetConfiguration();
+                    Initialize(string.Empty, new NameValueCollection());
+
+                    if (!Initialized)
+                    {
+                        string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                        LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                        throw new ProviderException(message);
+                    }
                 }
 
                 return this.applicationName;
@@ -210,7 +219,11 @@ namespace ClubCloud.Provider
 
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
         {
-            base.Initialize(name, config); 
+            try
+            {
+                base.Initialize(name, config);
+            }
+            catch { };
 
             /*
             if (HostingEnvironment.IsHosted)
@@ -313,6 +326,23 @@ namespace ClubCloud.Provider
             }
         }
 
+        private void SetConfiguration()
+        {
+            try
+            {
+                zimbraconfiguration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
+            }
+            catch (Exception ex)
+            {
+                string messsage = ex.Message;
+            }
+
+            if (zimbraconfiguration == null)
+            {
+                zimbraconfiguration = new ZimbraConfigurationSection();
+            }
+        }
+
         private void GetLockProperties()
         {
             GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = zimbraconfiguration.Server.ClassOfService }, attrs = "zimbraPasswordLockoutDuration,zimbraPasswordLockoutEnabled,zimbraPasswordLockoutMaxFailures,zimbraPasswordLockoutFailureLifetime" };
@@ -364,9 +394,15 @@ namespace ClubCloud.Provider
             bool changed = false;
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -442,9 +478,15 @@ namespace ClubCloud.Provider
 
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             string zimbraId = null;
@@ -489,10 +531,18 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
+
             throw new NotImplementedException();
         }
 
@@ -613,6 +663,19 @@ namespace ClubCloud.Provider
 
         public override System.Web.Security.MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
+            if (!Initialized)
+            {
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
+            }
+
             MembershipUserCollection users = new MembershipUserCollection();
 
             string[] parts = emailToMatch.Split('@');//.Last();
@@ -701,12 +764,18 @@ namespace ClubCloud.Provider
 
         public override System.Web.Security.MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
-            
+
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             MembershipUserCollection users = new MembershipUserCollection();
@@ -782,12 +851,18 @@ namespace ClubCloud.Provider
 
         public override System.Web.Security.MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
-            
+
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             MembershipUserCollection users = new MembershipUserCollection();
@@ -922,9 +997,15 @@ namespace ClubCloud.Provider
 
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                //throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -986,10 +1067,17 @@ namespace ClubCloud.Provider
 
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
+
             try
             {
 
@@ -1060,9 +1148,15 @@ namespace ClubCloud.Provider
 
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -1092,10 +1186,17 @@ namespace ClubCloud.Provider
             bool unlocked = false;
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
+
             //getUser and check lockoutstate
             if(zimbraPasswordLockoutEnabled) //&& usre.islockedout)
             {
@@ -1113,12 +1214,21 @@ namespace ClubCloud.Provider
         public bool LockUser(string userName)
         {
             bool unlocked = false;
+
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
+
+
             //getUser and check lockoutstate
             if (zimbraPasswordLockoutEnabled) //&& usre.islockedout)
             {
@@ -1143,9 +1253,15 @@ namespace ClubCloud.Provider
 
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             List<attrN> properties = new List<attrN>();
@@ -1183,9 +1299,15 @@ namespace ClubCloud.Provider
         {
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             //Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = "info@clubcloud.nl" } };
@@ -1207,9 +1329,15 @@ namespace ClubCloud.Provider
 
             if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message);
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
@@ -1302,16 +1430,22 @@ namespace ClubCloud.Provider
         {
             bool validated = false;
 
-            if(!Initialized)
+            if (!Initialized)
             {
-                string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                //throw new ProviderException(message);
-                validated = false;
+                SetConfiguration();
+                Initialize(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Provider {0}: {1}", this.applicationName, "The provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
             }
 
             try
             {
+
                 Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username } };
                 Zimbra.Administration.GetAccountInfoResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
                 if (response != null)

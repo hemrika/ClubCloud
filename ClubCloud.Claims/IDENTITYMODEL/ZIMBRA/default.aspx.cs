@@ -139,13 +139,14 @@ namespace ClubCloud.Provider.IdentityModel
 
             if (flag)
             {
+                try
+                {
                 Guid id = SPContext.Current.Site.ID;
                 SPSecurity.RunWithElevatedPrivileges(delegate()
                 {
                     using (SPWeb elevatedWeb = new SPSite(id).OpenWeb())
                     {
                         elevatedWeb.AllowUnsafeUpdates = true;
-
                         
                         GenericXmlSecurityToken xmlToken = securityToken as GenericXmlSecurityToken;
                         XmlDocument xmlDoc = new XmlDocument();
@@ -160,9 +161,16 @@ namespace ClubCloud.Provider.IdentityModel
                         elevatedWeb.Update();
                         elevatedWeb.AllowUnsafeUpdates = false;
                     }
-
-                    this.RedirectToSuccessUrl();
                 });
+
+                }
+                catch (Exception ex)
+                {
+                    //TODO Log failure
+                    string message = ex.Message;
+                }
+
+                this.RedirectToSuccessUrl();
             }
         }
 

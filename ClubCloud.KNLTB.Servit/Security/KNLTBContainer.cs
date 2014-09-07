@@ -57,7 +57,7 @@ namespace ClubCloud.KNLTB.Security
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_ServItLogonUrl);
             request.CookieContainer = _Container;
-            bool support = request.SupportsCookieContainer;
+            //bool support = request.SupportsCookieContainer;
             request.Method = "POST";
             request.Accept = "text/html, application/xhtml+xml, */*";
             request.Headers.Add(HttpRequestHeader.AcceptLanguage, "nl-NL,nl;q=0.8,en-US;q=0.6,en-GB;q=0.4,en;q=0.2");

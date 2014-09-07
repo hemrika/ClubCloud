@@ -3,15 +3,12 @@ using ClubCloud.Zimbra.Administration;
 using ClubCloud.Zimbra.Global;
 using ClubCloud.Zimbra.Service;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra
 {
@@ -26,6 +23,8 @@ namespace ClubCloud.Zimbra
 
         private static System.Nullable<bool> _authenticated;
         private static System.Nullable<bool> _authenticatedAdmin;
+        private static System.Nullable<long> _authenticatedLifetime;
+        private static System.Nullable<long> _authenticatedAdminLifetime;
 
         public ZimbraServer()
         {
@@ -101,7 +100,65 @@ namespace ClubCloud.Zimbra
                 }
             }
         }
-        
+
+        public System.Nullable<long> AuthenticatedLifetime
+        {
+            get
+            {
+                if (_authenticatedLifetime.HasValue)
+                {
+                    return _authenticatedLifetime.Value;
+                }
+                else
+                {
+                    return DateTime.Now.Ticks;
+                }
+            }
+            set
+            {
+                    _authenticatedLifetime = DateTime.Now.Ticks + value;
+                    OnPropertyChanged("AuthenticatedLifetime");
+            }
+        }
+
+        public System.Nullable<long> AuthenticatedAdminLifetime
+        {
+            get
+            {
+                if (_authenticatedAdminLifetime.HasValue)
+                {
+                    return _authenticatedAdminLifetime.Value;
+                }
+                else
+                {
+                    return DateTime.Now.Ticks;
+                }
+            }
+            set
+            {
+                _authenticatedAdminLifetime = DateTime.Now.Ticks + value;
+                OnPropertyChanged("AuthenticatedAdminLifetime");
+            }
+        }
+
+        public bool AuthenticationExpired
+        {
+            get
+            {
+                //return ((AuthenticatedLifetime - DateTime.Now.Ticks) < TimeSpan.TicksPerMinute);
+                return ((AuthenticatedLifetime < DateTime.Now.Ticks) == true);
+            }
+        }
+
+        public bool AuthenticationAdminExpired
+        {
+            get
+            {
+                //return ((AuthenticatedAdminLifetime - DateTime.Now.Ticks) < TimeSpan.TicksPerMinute);
+                return ((AuthenticatedAdminLifetime < DateTime.Now.Ticks) == true);
+            }
+        }
+
         public ZimbraServer(string ServerName)
         {
             try
@@ -175,10 +232,11 @@ namespace ClubCloud.Zimbra
                 if (!string.IsNullOrEmpty(response.authToken))
                 {
                     ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
-                    ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = false };
+                    ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = true };
                     ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
                     //ZimbraEndpointAddress.ZimbraHeaderContext.account.by = accountBy.name;
 
+                    AuthenticatedAdminLifetime = response.lifetime;
                     AuthenticatedAdmin = true;
                     AuthToken = response.authToken;
                 }
@@ -196,6 +254,7 @@ namespace ClubCloud.Zimbra
                 response = account.AccountAuth(request);
                 if (!string.IsNullOrEmpty(response.authToken))
                 {
+                    AuthenticatedLifetime = response.lifetime;
                     Authenticated = true;
                     AuthToken = response.authToken;
                 }
@@ -228,7 +287,7 @@ namespace ClubCloud.Zimbra
             catch { }
         }
 
-        private void GetVersioInfo(bool asAdmin = false)
+        private void GetVersionInfo(bool asAdmin = false)
         {
             if (asAdmin)
             {
@@ -274,8 +333,25 @@ namespace ClubCloud.Zimbra
         public ZimbraMessage Message(ZimbraMessage zimbraMessage)
         {
             ZimbraMessage message = null;
-            if(Authenticated.Value || AuthenticatedAdmin.Value)
+
+            try
             {
+                if (!Authenticated.Value && !AuthenticatedAdmin.Value)
+                {
+                    Authenticate();
+                }
+                /*
+                if (AuthenticationExpired && Authenticated.Value)
+                {
+                    Authenticate();
+                }
+
+                if (AuthenticationAdminExpired && AuthenticatedAdmin.Value)
+                {
+                    Authenticate();
+                }
+                */
+
                 string ns = zimbraMessage.GetType().Namespace;
 
                 switch (ns)
@@ -306,6 +382,26 @@ namespace ClubCloud.Zimbra
                             message = new ZimbraMessage();
                             break;
                         }
+                }
+            }
+            catch (TargetInvocationException tiex)
+            {
+                bool reauthenticate = false;
+                if(tiex.InnerException.GetType() == typeof(FaultException))
+                {
+                    if(tiex.InnerException.Message.Equals("no valid authtoken present", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        reauthenticate = true;
+                    }
+                }
+                if(reauthenticate)
+                {
+                    Authenticate();
+                    message = Message(zimbraMessage);
+                }
+                else
+                {
+                    throw tiex;
                 }
             }
 

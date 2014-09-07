@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------
 namespace ClubCloud.Service
 {
-    using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
+
     using ClubCloud.Service.Model;
     using Microsoft.SharePoint;
     using System;
@@ -17,11 +17,9 @@ namespace ClubCloud.Service
     ///
     /// </summary>
     [ServiceContract(Namespace = "http://clubcloud.nl/", Name = "ClubCloudService")]
-    [ServiceKnownType(typeof(Persoonsgegevens))]
 
     public interface IClubCloudClientService
     {
-        
         /// <summary>
         /// Gets the current User
         /// </summary>
@@ -51,12 +49,6 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting SetFinancieel(ClubCloud_Setting settings);
 
-        /*
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Setting))]
-        ClubCloud_Setting SetTracking(ClubCloud_Setting settings);
-        */
-
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting GetClubCloudSettings(string bondsnummer);
@@ -71,6 +63,31 @@ namespace ClubCloud.Service
         //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         ClubCloud_Gebruiker GetClubCloudGebruiker(bool refresh = false);
 
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
+        //[WebInvoke(UriTemplate = "/GetCurrentUserGegevens", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
+        //[WebInvoke(UriTemplate = "/GetCurrentUserGegevens", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Foto))]
+        //[WebInvoke(UriTemplate = "/GetCurrentUserGegevens", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Foto))]
+        //[WebInvoke(UriTemplate = "/GetCurrentUserGegevens", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
+
+
         /*
         [OperationContract]
         [ServiceKnownType(typeof(SpelersProfiel))]
@@ -81,5 +98,10 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Tracking))]
         ClubCloud_Tracking GetTracking(string bondsnummer, bool refresh = false);
         */
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
+        ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false);
+
     }
 }

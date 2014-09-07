@@ -57,11 +57,13 @@ using System.Linq;
 
 <#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext
 {
+	private static string NameOrConnectionString = "name=<#=container.Name#>";
+
 	public <#=code.Escape(container)#>()
         : this(false) { }
 
     public <#=code.Escape(container)#>(bool proxyCreationEnabled)
-        : base("name=<#=container.Name#>")
+        : base(NameOrConnectionString)
     {
 		<#
 		if (!loader.IsLazyLoadingEnabled(container))
@@ -87,15 +89,27 @@ using System.Linq;
 		}
 		#>
 		this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
-		Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
+
+		if (!Database.CompatibleWithModel(false))
+		{
+			Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());
+		}
+		if (!Database.Exists(NameOrConnectionString))
+		{
+			Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
+		}
+
+		//Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
+		//Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());
     }
 	
     public <#=code.Escape(container)#>(string connectionString)
-      : this(connectionString, false) { }
+      : this(connectionString, false) { NameOrConnectionString = connectionString; }
 	  
     public <#=code.Escape(container)#>(string connectionString, bool proxyCreationEnabled)
         : base(connectionString)
     {
+			NameOrConnectionString = connectionString;
 		<#
 		if (!loader.IsLazyLoadingEnabled(container))
 		{
@@ -120,8 +134,19 @@ using System.Linq;
 		}
 		#>
         this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
-		Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
-    }	
+
+		if (!Database.CompatibleWithModel(false))
+		{
+			Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());
+		}
+		if (!Database.Exists(NameOrConnectionString))
+		{
+			Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
+		}
+
+		//Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
+		//Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());
+	}	
 	
     public ObjectContext ObjectContext
     {
@@ -134,6 +159,7 @@ using System.Linq;
 	foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
     {
 #>
+		//<#=codeStringGenerator.DBGeneratedSPOption(entitySet)#>
 		<#=codeStringGenerator.DBGeneratedOption(entitySet)#>
 <#
     }
@@ -359,7 +385,15 @@ public class CodeStringGenerator
             edmFunction.Name,
             callParams);
     }
-    
+
+	public string DBGeneratedSPOption(EntitySet entitySet)
+	{
+		return string.Format(
+            CultureInfo.InvariantCulture,
+            "modelBuilder.Entity<{0}>().MapToStoredProcedures();{1}",
+            _typeMapper.GetTypeName(entitySet.ElementType), Environment.NewLine);
+	}    
+
 	public string DBGeneratedOption(EntitySet entitySet)
 	{
 		string annotationNamespace = "http://schemas.microsoft.com/ado/2009/02/edm/annotation";
