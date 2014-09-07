@@ -39,7 +39,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
@@ -184,6 +184,7 @@
     <None Include="Images\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{688dca0e-e0a2-4ac3-8e13-6a850e8f706c}</SharePointProjectItemId>
     </None>
+    <None Include="Package\Package.package" />
     <None Include="WebControls\DispayRoles\DispayRoles.webpart" />
     <None Include="WebControls\DispayRoles\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a6cde790-a257-4bd3-9d9a-d9e77f8bd1d3}</SharePointProjectItemId>
@@ -231,6 +232,9 @@
       <DependentUpon>Administratie WebParts.feature</DependentUpon>
     </Content>
     <Content Include="Images\ClubCloud.Administratie\SITEICON.PNG" />
+    <Content Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </Content>
     <Content Include="WebControls\DispayRoles\DispayRolesUserControl.ascx" />
     <Content Include="WebControls\DispayRoles\Elements.xml" />
     <Content Include="WebControls\DisplayBilling\DisplayBillingUserControl.ascx" />

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI;
-using System.Web.Security;
-using System.Web.UI;
-using System.Runtime.InteropServices;
+﻿using ClubCloud.Provider;
+using System;
 using System.Collections;
 using System.Data;
-using ClubCloud.Provider;
+using System.Web.Security;
+using System.Web.UI;
 
 namespace ClubCloud.Administratie.WebControls
 {

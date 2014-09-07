@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.SharePoint.Utilities;
 using System;
 using System.Collections;
-using System.Web.UI;
-using Microsoft.SharePoint.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Web.UI;
 
 namespace ClubCloud.Administratie.WebControls
 {
