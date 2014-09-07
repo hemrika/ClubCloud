@@ -233,13 +233,13 @@
       <Project>{b98cd37b-e5d0-49e4-a765-f8fba945e050}</Project>
       <Name>ClubCloud.KNLTB.Servit</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClubCloud.Provider\ClubCloud.Provider.csproj">
+      <Project>{b259747c-7741-4b61-b261-24fbbe284f05}</Project>
+      <Name>ClubCloud.Provider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
       <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
       <Name>ClubCloud.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ClubCloud.Social\ClubCloud.Social.csproj">
-      <Project>{f6f1ffac-cac1-4b6d-969a-3925ded726ca}</Project>
-      <Name>ClubCloud.Social</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
