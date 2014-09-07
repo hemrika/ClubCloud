@@ -184,12 +184,6 @@
     <None Include="Images\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{688dca0e-e0a2-4ac3-8e13-6a850e8f706c}</SharePointProjectItemId>
     </None>
-    <None Include="Package\Package.package">
-      <PackageId>{b3c7e0c2-5f5b-4796-ac47-aaefca623bbc}</PackageId>
-    </None>
-    <None Include="Package\Package.Template.xml">
-      <DependentUpon>Package.package</DependentUpon>
-    </None>
     <None Include="WebControls\DispayRoles\DispayRoles.webpart" />
     <None Include="WebControls\DispayRoles\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a6cde790-a257-4bd3-9d9a-d9e77f8bd1d3}</SharePointProjectItemId>
