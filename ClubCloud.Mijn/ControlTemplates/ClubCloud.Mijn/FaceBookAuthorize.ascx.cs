@@ -40,7 +40,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             get { return Request.QueryString["error_description"]; }
         }
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected new void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)

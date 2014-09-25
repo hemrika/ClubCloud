@@ -45,19 +45,12 @@
     <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ClubCloud\ClubCloud.Claims\bin\Debug\ClubCloud.Provider.dll</HintPath>
-    </Reference>
-    <Reference Include="ClubCloud.Zimbra, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ClubCloud\ClubCloud.Claims\bin\Debug\ClubCloud.Zimbra.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Selectors" />
@@ -103,10 +96,16 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebControls\ClubCloudDataSource.cs" />
+    <Compile Include="WebControls\ClubCloudDataSourceView.cs" />
     <Compile Include="WebControls\ClubCloudGroupsView.cs" />
     <Compile Include="WebControls\ClubCloudRolesView.cs" />
     <Compile Include="WebControls\ClubCloudBillingView.cs" />
-    <Compile Include="WebControls\ClubCloudUsersView.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenOud.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenNieuw.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenZoeken.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenSenior.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenJunior.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenAlle.cs" />
     <Compile Include="WebControls\DispayRoles\DispayRoles.cs" />
     <Compile Include="WebControls\DispayRoles\DispayRolesUserControl.ascx.cs">
       <DependentUpon>DispayRolesUserControl.ascx</DependentUpon>
@@ -184,7 +183,9 @@
     <None Include="Images\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{688dca0e-e0a2-4ac3-8e13-6a850e8f706c}</SharePointProjectItemId>
     </None>
-    <None Include="Package\Package.package" />
+    <None Include="Package\Package.package">
+      <PackageId>{792e76e2-1c7e-4377-b410-fc11315fb17f}</PackageId>
+    </None>
     <None Include="WebControls\DispayRoles\DispayRoles.webpart" />
     <None Include="WebControls\DispayRoles\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a6cde790-a257-4bd3-9d9a-d9e77f8bd1d3}</SharePointProjectItemId>
@@ -210,7 +211,6 @@
       <SharePointProjectItemId>{fa88bdcc-91db-49b1-b8b9-fb21437b8566}</SharePointProjectItemId>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Administratie\LidNieuw.aspx" />
     <Content Include="Administratie\LidBewerken.aspx" />
@@ -231,7 +231,49 @@
     <Content Include="Features\Administratie WebParts\Administratie WebParts.Template.xml">
       <DependentUpon>Administratie WebParts.feature</DependentUpon>
     </Content>
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_64.png" />
     <Content Include="Images\ClubCloud.Administratie\SITEICON.PNG" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_64.png" />
     <Content Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </Content>
@@ -247,6 +289,12 @@
     <Content Include="WebControls\DisplayUsers\Elements.xml" />
     <Content Include="WebControls\DisplayUser\DisplayUserUserControl.ascx" />
     <Content Include="WebControls\DisplayUser\Elements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
+      <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
+      <Name>ClubCloud.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

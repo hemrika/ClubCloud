@@ -10,6 +10,7 @@ namespace ClubCloud.Service.Model
         public BeheerConfiguration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Model.BeheerContainer context)

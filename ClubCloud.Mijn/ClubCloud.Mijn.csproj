@@ -202,7 +202,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ControlTemplates\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{69f2249b-1931-4708-b7c7-2e666040dddd}</SharePointProjectItemId>
     </None>
@@ -240,6 +242,10 @@
     <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
       <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
       <Name>ClubCloud.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClubCloud.Social\ClubCloud.Social.csproj">
+      <Project>{f6f1ffac-cac1-4b6d-969a-3925ded726ca}</Project>
+      <Name>ClubCloud.Social</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

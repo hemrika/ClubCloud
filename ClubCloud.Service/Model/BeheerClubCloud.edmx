@@ -354,10 +354,23 @@
   <EntityType Name="ClubCloud_Profielen">
     <Key>
       <PropertyRef Name="Id" />
+      <PropertyRef Name="Datum" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Datum" Type="datetime" Nullable="false" />
     <Property Name="Bondsnummer" Type="nvarchar(max)" Nullable="false" />
     <Property Name="GebruikerId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="Enkel_Aantal" Type="int" Nullable="false" />
+    <Property Name="Dubbel_aantal" Type="int" Nullable="false" />
+    <Property Name="Enkel_Speelsterkte" Type="int" Nullable="false" />
+    <Property Name="Enkel_Speelsterkte_Vorig" Type="int" Nullable="false" />
+    <Property Name="Dubbel_Speelsterkte" Type="int" Nullable="false" />
+    <Property Name="Dubbel_Speelsterkte_Vorig" Type="int" Nullable="false" />
+    <Property Name="Enkel_Rating_Eindejaar" Type="decimal" Nullable="false" />
+    <Property Name="Dubbel_Rating_Eindejaar" Type="decimal" Nullable="false" />
+    <Property Name="Enkel_Rating_Actueel" Type="decimal" Nullable="false" />
+    <Property Name="Dubbel_Rating_Actueel" Type="decimal" Nullable="false" />
+    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Functionarissen">
     <Key>
@@ -509,6 +522,7 @@
     <Property Name="Duur_Twee" Type="int" Nullable="false" DefaultValue="30" />
     <Property Name="Duur_Drie" Type="int" Nullable="false" DefaultValue="45" />
     <Property Name="Duur_Vier" Type="int" Nullable="false" DefaultValue="45" />
+    <Property Name="Duur_Precisie" Type="int" Nullable="false" DefaultValue="5" />
   </EntityType>
   <EntityType Name="ClubCloud_Baanschemas">
     <Key>
@@ -517,6 +531,8 @@
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="BaanId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Beschikbaar" Type="nvarchar(max)" Nullable="false" DefaultValue="True" />
+    <Property Name="MaandBegin" Type="int" Nullable="false" />
+    <Property Name="MaandEinde" Type="int" Nullable="false" />
     <Property Name="Dag" Type="int" Nullable="false" />
     <Property Name="DagBegin" Type="time" Nullable="false" />
     <Property Name="DagEinde" Type="time" Nullable="false" />
@@ -1305,11 +1321,24 @@
         <EntityType Name="ClubCloud_Profiel">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="Datum" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" />
           <Property Name="Bondsnummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_ProfielClubCloud_Gebruiker" FromRole="ClubCloud_Profiel" ToRole="ClubCloud_Gebruiker" />
           <Property Name="GebruikerId" Type="Guid" Nullable="true" />
+          <Property Name="Enkel_Aantal" Type="Int32" Nullable="false" />
+          <Property Name="Dubbel_aantal" Type="Int32" Nullable="false" />
+          <Property Name="Enkel_Speelsterkte" Type="Int32" Nullable="false" />
+          <Property Name="Enkel_Speelsterkte_Vorig" Type="Int32" Nullable="false" />
+          <Property Name="Dubbel_Speelsterkte" Type="Int32" Nullable="false" />
+          <Property Name="Dubbel_Speelsterkte_Vorig" Type="Int32" Nullable="false" />
+          <Property Name="Enkel_Rating_Eindejaar" Type="Decimal" Nullable="false" />
+          <Property Name="Dubbel_Rating_Eindejaar" Type="Decimal" Nullable="false" />
+          <Property Name="Enkel_Rating_Actueel" Type="Decimal" Nullable="false" />
+          <Property Name="Dubbel_Rating_Actueel" Type="Decimal" Nullable="false" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ClubCloud_Functionaris">
           <Key>
@@ -1811,6 +1840,7 @@
           <Property Name="Duur_Twee" Type="Int32" Nullable="false" DefaultValue="30" />
           <Property Name="Duur_Drie" Type="Int32" Nullable="false" DefaultValue="45" />
           <Property Name="Duur_Vier" Type="Int32" Nullable="false" DefaultValue="45" />
+          <Property Name="Duur_Precisie" Type="Int32" Nullable="false" DefaultValue="5" />
           </EntityType>
         <EnumType Name="Month" IsFlags="true">
           <Member Name="januari" Value="1" />
@@ -1858,6 +1888,8 @@
           <NavigationProperty Name="ClubCloud_Baan" Relationship="BeheerClubCloud.ClubCLoud_BaanschemaClubCloud_Baan" FromRole="ClubCLoud_Baanschema" ToRole="ClubCloud_Baan" />
           <Property Name="BaanId" Type="Guid" Nullable="true" />
           <Property Name="Beschikbaar" Type="String" Nullable="false" DefaultValue="True" />
+          <Property Name="MaandBegin" Type="BeheerClubCloud.Month" Nullable="false" />
+          <Property Name="MaandEinde" Type="BeheerClubCloud.Month" Nullable="false" />
           <Property Name="Dag" Type="BeheerClubCloud.Days" Nullable="false" />
           <Property Name="DagBegin" Type="Time" Nullable="false" />
           <Property Name="DagEinde" Type="Time" Nullable="false" />
@@ -2117,8 +2149,20 @@
       <EntityTypeMapping TypeName="IsTypeOf(BeheerClubCloud.ClubCloud_Profiel)">
         <MappingFragment StoreEntitySet="ClubCloud_Profielen">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
           <ScalarProperty Name="Bondsnummer" ColumnName="Bondsnummer" />
           <ScalarProperty Name="GebruikerId" ColumnName="GebruikerId" />
+          <ScalarProperty Name="Enkel_Aantal" ColumnName="Enkel_Aantal" />
+          <ScalarProperty Name="Dubbel_aantal" ColumnName="Dubbel_aantal" />
+          <ScalarProperty Name="Enkel_Speelsterkte" ColumnName="Enkel_Speelsterkte" />
+          <ScalarProperty Name="Enkel_Speelsterkte_Vorig" ColumnName="Enkel_Speelsterkte_Vorig" />
+          <ScalarProperty Name="Dubbel_Speelsterkte" ColumnName="Dubbel_Speelsterkte" />
+          <ScalarProperty Name="Dubbel_Speelsterkte_Vorig" ColumnName="Dubbel_Speelsterkte_Vorig" />
+          <ScalarProperty Name="Enkel_Rating_Eindejaar" ColumnName="Enkel_Rating_Eindejaar" />
+          <ScalarProperty Name="Dubbel_Rating_Eindejaar" ColumnName="Dubbel_Rating_Eindejaar" />
+          <ScalarProperty Name="Enkel_Rating_Actueel" ColumnName="Enkel_Rating_Actueel" />
+          <ScalarProperty Name="Dubbel_Rating_Actueel" ColumnName="Dubbel_Rating_Actueel" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2282,6 +2326,7 @@
           <ScalarProperty Name="Duur_Twee" ColumnName="Duur_Twee" />
           <ScalarProperty Name="Duur_Drie" ColumnName="Duur_Drie" />
           <ScalarProperty Name="Duur_Vier" ColumnName="Duur_Vier" />
+          <ScalarProperty Name="Duur_Precisie" ColumnName="Duur_Precisie" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2291,6 +2336,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BaanId" ColumnName="BaanId" />
           <ScalarProperty Name="Beschikbaar" ColumnName="Beschikbaar" />
+          <ScalarProperty Name="MaandBegin" ColumnName="MaandBegin" />
+          <ScalarProperty Name="MaandEinde" ColumnName="MaandEinde" />
           <ScalarProperty Name="Dag" ColumnName="Dag" />
           <ScalarProperty Name="DagBegin" ColumnName="DagBegin" />
           <ScalarProperty Name="DagEinde" ColumnName="DagEinde" />

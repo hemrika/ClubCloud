@@ -1,80 +1,166 @@
-﻿using ClubCloud.Provider;
+﻿using ClubCloud.Service.Model;
+using Microsoft.SharePoint;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Web.Security;
 using System.Web.UI;
 
 namespace ClubCloud.Administratie.WebControls
 {
-    public class ClubCloudGroupsView: DataSourceView
+    public class ClubCloudGroupsView : DataSourceView, IStateManager
     {
-        private string m_providerName = "ZimbraMembershipProvider";
 
-        public string ProviderName
+        private ClubCloud.Service.ClubCloudServiceClient _client = null;
+
+        public ClubCloud.Service.ClubCloudServiceClient Client
         {
             get
             {
-                return this.m_providerName;
-            }
-        }
-
-        private MembershipProvider m_membershipProvider;
-        public MembershipProvider Provider
-        {
-            get
-            {
-                if (this.m_membershipProvider == null)
+                if (_client == null)
                 {
-                    this.m_membershipProvider = Membership.Providers[this.ProviderName];
+                    _client = new Service.ClubCloudServiceClient(SPServiceContext.Current);
                 }
-                return this.m_membershipProvider;
+                return _client;
             }
         }
 
-        public ClubCloudGroupsView(IDataSource owner, string viewName) : base(owner, viewName) { }
+        public override bool CanRetrieveTotalRowCount
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public override bool CanPage
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public string ViewName
+        {
+            get
+            {
+                return "GroupsView";
+            }
+        }
+
+        //public ClubCloudGroupsView() : base(null, "GroupsView") { }
+
+        public ClubCloudGroupsView(IDataSource owner, string viewName = "GroupsView") : base(owner, viewName) { }
 
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]
         protected override IEnumerable ExecuteSelect(DataSourceSelectArguments selectArgs)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Username");
-            dt.Columns.Add("Email");
-            dt.Columns.Add("Description");
-            dt.Columns.Add("Active");
-            dt.Columns.Add("Locked");
-            dt.Columns.Add("Created");
-            dt.Columns.Add("LastLogin");
+            DataSet ds = new DataSet("result");
 
-            foreach (MembershipUser user in Membership.GetAllUsers())
+            string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+            ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+
+            ClubCloud_Gebruiker_DataView gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs);
+
+            selectArgs.TotalRowCount = gebruikers.TotalRowCount;
+
+            foreach (ClubCloud_Gebruiker gebruiker in gebruikers.ClubCloud_Gebruiker)
             {
-                ZimbraMembershipUser zuser = null;
-                if (user != null && user.GetType() == typeof(ZimbraMembershipUser))
-                {
-                    zuser = user as ZimbraMembershipUser;
-                }
 
-                //Add member to the data table
-                DataRow dr = dt.NewRow();
-                dr["Username"] = zuser.UserName;
-                dr["Email"] = zuser.Email;
-                dr["Description"] = zuser.Comment;
-                dr["Active"] = zuser.IsApproved ? "Yes" : "No";
-                dr["Locked"] = zuser.IsLockedOut ? "Yes" : "No";
-                dr["Created"] = zuser.CreationDate;
-                dr["LastLogin"] = zuser.LastLoginDate;
-                dt.Rows.Add(dr);
+                ObjectToTableConvert(gebruiker, ref ds, "Gebruikers");
             }
 
-            // sort if a sort expression available
-            DataView dataView = new DataView(dt);
+            DataView dataView = new DataView(ds.Tables["Gebruikers"]);
+
             if (selectArgs.SortExpression != String.Empty)
             {
                 dataView.Sort = selectArgs.SortExpression;
             }
 
-            // return as a DataList            
             return (IEnumerable)dataView;
+        }
+
+        private static void ObjectToTableConvert(Object p_obj, ref DataSet p_ds, String p_tableName)
+        {
+
+            Type t = p_obj.GetType();
+            PropertyInfo[] tmpP = t.GetProperties();
+            if (p_ds.Tables[p_tableName] == null)
+            {
+                p_ds.Tables.Add(p_tableName);
+
+                foreach (PropertyInfo xtemp2 in tmpP)
+                {
+                    p_ds.Tables[p_tableName].Columns.Add(xtemp2.Name, Nullable.GetUnderlyingType(xtemp2.PropertyType) ?? xtemp2.PropertyType);
+                }
+            }
+
+            Object[] tmpObj = new Object[tmpP.Length];
+
+            for (Int32 i = 0; i <= tmpObj.Length - 1; i++)
+            {
+                tmpObj[i] = t.InvokeMember(tmpP[i].Name, BindingFlags.GetProperty, null, p_obj, new object[0]);
+
+            }
+            p_ds.Tables[p_tableName].LoadDataRow(tmpObj, true);
+        }
+
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return Tracking; }
+        }
+
+        void IStateManager.LoadViewState(object state)
+        {
+            LoadViewState(state);
+        }
+
+        object IStateManager.SaveViewState()
+        {
+            return SaveViewState();
+        }
+
+        void IStateManager.TrackViewState()
+        {
+            TrackViewState();
+        }
+
+        private bool _tracking;
+        public bool Tracking
+        {
+            get
+            {
+                return _tracking;
+            }
+
+            set
+            {
+                _tracking = value;
+            }
+        }
+
+
+        protected virtual void LoadViewState(object savedState)
+        {
+            if (savedState != null)
+            {
+                ((IStateManager)this).LoadViewState(savedState);
+            }
+        }
+
+        protected virtual object SaveViewState()
+        {
+            return ((IStateManager)this).SaveViewState();
+        }
+
+        protected virtual void TrackViewState()
+        {
+            _tracking = true;
+
+            ((IStateManager)this).TrackViewState();
         }
     }
 }

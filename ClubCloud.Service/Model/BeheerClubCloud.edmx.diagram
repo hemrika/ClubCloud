@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f7cdba0088ea44ecbef833b4d217ff48" Name="KNLTB" ZoomLevel="97" >
+      <Diagram DiagramId="f7cdba0088ea44ecbef833b4d217ff48" Name="KNLTB" ZoomLevel="63" >
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Gebruiker" Width="2.25" PointX="0.75" PointY="10.625" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Vereniging" Width="2.25" PointX="6.875" PointY="11.625" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Setting" Width="2.625" PointX="0.5" PointY="0.5" />
@@ -36,7 +36,7 @@
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Address" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Vereniging" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_ProfielClubCloud_Gebruiker" />
-        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baansoort" Width="1.875" PointX="4" PointY="3.875" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baansoort" Width="1.875" PointX="4" PointY="5.25" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baantype" Width="2.125" PointX="6.375" PointY="3.75" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baan" Width="1.5" PointX="9.75" PointY="0.875" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Bouwaard" Width="2.5" PointX="11.25" PointY="4.75" />

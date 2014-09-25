@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Title="ClubCloud BaanBeheer" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" HideSiteContentsLink="true" DisableWebDesignFeatures="true" EnableMinimalDownload="true" SiteLogoDescription="Baan Beheer" SiteLogoUrl="/_layouts/15/images/ClubCloud.Baanbeheer/siteIcon.png">
+  <NavBars>
+    <NavBar ID="1002" Name="ClubCloud BaanBehee" >
+    </NavBar>
+  </NavBars>
+  <Configurations>
+    <Configuration ID="0" Name="ClubCloud BaanBeheer" Description="ClubCloud Baan Beheer Site" Hidden="false" Title="ClubCloud BaanBehee">
+      <Lists/>
+      <SiteFeatures>
+      </SiteFeatures>
+      <WebFeatures>
+      </WebFeatures>
+      <Modules>
+        <Module Name="Baanbeheer" />
+      </Modules>
+    </Configuration>
+  </Configurations>
+  <Modules>
+    <Module Name="Baanbeheer" Url="" Path="">
+      <File Url="default.aspx" Path="default.aspx">
+      </File>
+    </Module>
+  </Modules>
+</Project>

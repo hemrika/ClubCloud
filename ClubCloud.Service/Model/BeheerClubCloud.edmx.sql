@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/06/2014 22:34:05
+-- Date Created: 09/25/2014 11:50:07
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Service\Model\BeheerClubCloud.edmx
 -- --------------------------------------------------
 
@@ -390,8 +390,20 @@ GO
 -- Creating table 'ClubCloud_Profielen'
 CREATE TABLE [dbo].[ClubCloud_Profielen] (
     [Id] uniqueidentifier  NOT NULL,
+    [Datum] datetime  NOT NULL,
     [Bondsnummer] nvarchar(max)  NOT NULL,
-    [GebruikerId] uniqueidentifier  NULL
+    [GebruikerId] uniqueidentifier  NULL,
+    [Enkel_Aantal] int  NOT NULL,
+    [Dubbel_aantal] int  NOT NULL,
+    [Enkel_Speelsterkte] int  NOT NULL,
+    [Enkel_Speelsterkte_Vorig] int  NOT NULL,
+    [Dubbel_Speelsterkte] int  NOT NULL,
+    [Dubbel_Speelsterkte_Vorig] int  NOT NULL,
+    [Enkel_Rating_Eindejaar] decimal(18,0)  NOT NULL,
+    [Dubbel_Rating_Eindejaar] decimal(18,0)  NOT NULL,
+    [Enkel_Rating_Actueel] decimal(18,0)  NOT NULL,
+    [Dubbel_Rating_Actueel] decimal(18,0)  NOT NULL,
+    [Actief] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -542,7 +554,8 @@ CREATE TABLE [dbo].[ClubCloud_Afhangen] (
     [Duur_Een] int  NOT NULL,
     [Duur_Twee] int  NOT NULL,
     [Duur_Drie] int  NOT NULL,
-    [Duur_Vier] int  NOT NULL
+    [Duur_Vier] int  NOT NULL,
+    [Duur_Precisie] int  NOT NULL
 );
 GO
 
@@ -551,6 +564,8 @@ CREATE TABLE [dbo].[ClubCloud_Baanschemas] (
     [Id] uniqueidentifier  NOT NULL,
     [BaanId] uniqueidentifier  NULL,
     [Beschikbaar] nvarchar(max)  NOT NULL,
+    [MaandBegin] int  NOT NULL,
+    [MaandEinde] int  NOT NULL,
     [Dag] int  NOT NULL,
     [DagBegin] time  NOT NULL,
     [DagEinde] time  NOT NULL
@@ -619,10 +634,10 @@ ADD CONSTRAINT [PK_ClubCloud_Lidmaatschappen]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ClubCloud_Profielen'
+-- Creating primary key on [Id], [Datum] in table 'ClubCloud_Profielen'
 ALTER TABLE [dbo].[ClubCloud_Profielen]
 ADD CONSTRAINT [PK_ClubCloud_Profielen]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([Id], [Datum] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'ClubCloud_Functionarissen'

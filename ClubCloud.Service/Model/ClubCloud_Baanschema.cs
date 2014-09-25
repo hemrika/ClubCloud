@@ -31,6 +31,10 @@ namespace ClubCloud.Service.Model
     	[DataMember]
         public string Beschikbaar { get; set; }
     	[DataMember]
+        public Month MaandBegin { get; set; }
+    	[DataMember]
+        public Month MaandEinde { get; set; }
+    	[DataMember]
         public Days Dag { get; set; }
     	[DataMember]
         public System.TimeSpan DagBegin { get; set; }

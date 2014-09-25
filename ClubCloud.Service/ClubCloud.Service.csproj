@@ -147,6 +147,7 @@
     <Compile Include="BaseServiceClient.cs" />
     <Compile Include="ClubCloudAfhangenService.cs" />
     <Compile Include="ClubCloudClientService.cs" />
+    <Compile Include="ClubCloudHelpers.cs" />
     <Compile Include="Features\ClubCloudServiceAdministration\ClubCloudServiceAdministration.EventReceiver.cs">
       <DependentUpon>ClubCloudServiceAdministration.feature</DependentUpon>
     </Compile>
@@ -219,6 +220,7 @@
     <Compile Include="Model\ClubCloud_Gebruiker.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClubCloud_Gebruiker_DataView.cs" />
     <Compile Include="Model\ClubCloud_Lidmaatschap.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
@@ -386,7 +388,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClubCloud.Claims\ClubCloud.Provider.csproj">
+    <ProjectReference Include="..\ClubCloud.Provider\ClubCloud.Provider.csproj">
       <Project>{b259747c-7741-4b61-b261-24fbbe284f05}</Project>
       <Name>ClubCloud.Provider</Name>
       <Private>True</Private>

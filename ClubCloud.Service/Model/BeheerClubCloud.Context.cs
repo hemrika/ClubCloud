@@ -113,6 +113,7 @@ namespace ClubCloud.Service.Model
     		//modelBuilder.Entity<ClubCloud_Profiel>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_Profiel>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    modelBuilder.Entity<ClubCloud_Profiel>().Property(e => e.Datum).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
     		//modelBuilder.Entity<ClubCloud_Functionaris>().MapToStoredProcedures();
     

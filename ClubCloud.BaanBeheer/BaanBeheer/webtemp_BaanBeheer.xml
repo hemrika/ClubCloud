@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Templates xmlns:ows="Microsoft SharePoint">
+  <Template Name="ClubCloud BaanBeheer" ID="10002">
+    <Configuration ID="0" Title="ClubCloud BaanBeheer" Hidden="FALSE" ImageUrl="/_layouts/images/cloud.jpg" Description="ClubCloud Baan Beheer Site" DisplayCategory="ClubCloud">      
+    </Configuration>
+  </Template>
+</Templates>

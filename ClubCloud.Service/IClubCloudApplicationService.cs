@@ -11,6 +11,8 @@ namespace ClubCloud.Service
     using System.Collections.Generic;
     using System.ServiceModel;
     using System.ServiceModel.Description;
+    using System.Web.UI;
+    using System.Web.UI.WebControls;
 
     /// <summary>
     /// The Service Contract.
@@ -212,11 +214,11 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        ClubCloud.Service.Model.ClubCloud_Reservering GetReserveringByReserveringId(string bondsnummer, Guid reserveringId, bool refresh = false);
+        ClubCloud.Service.Model.ClubCloud_Reservering GetReserveringByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        System.Collections.Generic.List<ClubCloud.Service.Model.ClubCloud_Reservering> GetReserveringenByBaanId(string bondsnummer, Guid baanId, bool refresh = false);
+        System.Collections.Generic.List<ClubCloud.Service.Model.ClubCloud_Reservering> GetReserveringenByBaanId(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
@@ -260,5 +262,22 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Foto))]
         ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
 
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Address))]
+        List<ClubCloud_Address> GetAddressByGebruikerId(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baan))]
+        ClubCloud_Baan GetBaanById(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker_DataView))]
+        [ServiceKnownType(typeof(DataSourceSelectArguments))]
+        [ServiceKnownType(typeof(Parameter))]
+        ClubCloud_Gebruiker_DataView GetGebruikersByQuery(string bondsnummer, Guid verenigingId, DataSourceSelectArguments selectArgs = null, List<Parameter> parameters = null, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Afhang))]
+        ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, Guid verenigingId, bool refresh);
     }
 }

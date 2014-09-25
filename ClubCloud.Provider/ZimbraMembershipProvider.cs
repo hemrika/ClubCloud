@@ -1500,7 +1500,7 @@ namespace ClubCloud.Provider
 
         #endregion
 
-                #region helpers
+        #region helpers
 
         public static string GetZimbraDomain(string url)
         {
@@ -1519,7 +1519,7 @@ namespace ClubCloud.Provider
 
                     if (parts.Length == 3)
                     {
-                        if ((parts[1].ToLower() == "clubcloud") && ((parts[0].ToLower() != "www") && (parts[0].ToLower() != "mijn") && (parts[0].ToLower() != "development") ))
+                        if ((parts[1].ToLower() == "clubcloud") && ((parts[0].ToLower() != "www") && (parts[0].ToLower() != "mijn") && (parts[0].ToLower() != "afhangen") && (parts[0].ToLower() != "websites") && (parts[0].ToLower() != "development")))
                         {
                             returnUrl.Append(parts[0] + "." + parts[2]);
                         }

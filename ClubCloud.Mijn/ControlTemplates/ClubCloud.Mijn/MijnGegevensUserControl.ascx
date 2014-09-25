@@ -39,8 +39,10 @@
                         <i class="icon-picture special"></i>
                         <div class="info" style="min-height:420px;">
                         <h3 class="lined">Profiel Foto</h3>
-                            <p></p>
-                            <asp:LinkButton ID="btn_editafbeelding" Text="Wijzigen" CommandName="Edit" RunAt="server" CssClass="button small alignright last" />
+                            <p>
+                                <asp:Image ID="profielfoto" runat="server" Width="25%" />
+                            </p>
+                            <asp:LinkButton ID="btn_editafbeelding" Text="Wijzigen" CommandName="Edit" RunAt="server" CssClass="button small alignright last" Enabled="False" />
                         </div>
                     <div class="clear"></div>
                 </ItemTemplate>

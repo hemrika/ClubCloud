@@ -12,7 +12,7 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class MijnGegevensUserControl : ClubCloudUserControl
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected new void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender,e);
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
@@ -42,24 +42,36 @@ namespace ClubCloud.Mijn.ControlTemplates
                 
                 if (gebruiker != null)
                 {
-                    ClubCloud_Vereniging vereniging=Client.GetVerenigingById(userId, gebruiker.VerenigingId.Value);
+                    ClubCloud_Vereniging vereniging = Client.GetVerenigingById(userId, gebruiker.VerenigingId.Value);
                     /*
                     fvw_adres.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
                     fvw_adres.DataBind();
                     */
+                    ClubCloud_Foto foto = Client.GetFotoById(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false);
 
-                    fvw_afbeelding.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
+                    fvw_afbeelding.DataSource = new List<ClubCloud_Foto> { foto }; ;
                     fvw_afbeelding.DataBind();
 
+                    if (fvw_afbeelding.CurrentMode == FormViewMode.ReadOnly)
+                    {
+                        Image profielfoto = (Image)fvw_afbeelding.FindControl("profielfoto");
+                        if (profielfoto != null)
+                        {
+                            string base64String = Convert.ToBase64String(foto.ContentData, 0, foto.ContentData.Length);
+                            profielfoto.ImageUrl = "data:image/png;base64," + base64String;
+                        }
+                    }
+                    List<ClubCloud_Address> adressen = Client.GetAddressByGebruikerId(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false);
+                    /*
                     //Client.GetAddresByGebruiker(userId, gebruiker.Id);
                     fvw_contact.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
                     fvw_contact.DataBind();
 
                     fvw_persoon.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
                     fvw_persoon.DataBind();
-
-                    Label knltbid = (Label)fvw_persoon.FindControl("knltbid");
-                    knltbid.Text = Settings.Id.ToString();
+                    */
+                    //Label knltbid = (Label)fvw_persoon.FindControl("knltbid");
+                    //knltbid.Text = Settings.Id.ToString();
                 }
             }
             else

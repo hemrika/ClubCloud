@@ -25,6 +25,7 @@ namespace ClubCloud.Service.Model
             this.Duur_Twee = 30;
             this.Duur_Drie = 45;
             this.Duur_Vier = 45;
+            this.Duur_Precisie = 5;
         }
     
     	[DataMember]
@@ -47,6 +48,8 @@ namespace ClubCloud.Service.Model
         public int Duur_Drie { get; set; }
     	[DataMember]
         public int Duur_Vier { get; set; }
+    	[DataMember]
+        public int Duur_Precisie { get; set; }
     
     	[DataMember]
         public virtual ClubCloud_Vereniging ClubCloud_Vereniging { get; set; }

@@ -25,7 +25,7 @@
 -->
 <asp:UpdatePanel ID="udp_knltb" runat="server" >
     <ContentTemplate>
-        <asp:image imageurl="https://mijn.clubcloud.nl/_layouts/15/images/ClubCloud.Mijn/mijnknltb.png" runat="server" alt="MijnKNLTB" />
+        <asp:image imageurl="/_layouts/15/images/ClubCloud.Mijn/mijnknltb.png" runat="server" alt="MijnKNLTB" />
         <asp:panel runat="server" ID="pnl_secure" Visible="False">
             <i class="icon-lock-1 special"></i>U moet ingelogd zijn om uw instellingen te kunnen wijzigen.
             <asp:LinkButton ID="btn_login" Text="Inloggen" OnClientClick="document.location.href ='https://mijn.clubcloud.nl/_zimbra/default.aspx'; return false" runat="server" /><br />

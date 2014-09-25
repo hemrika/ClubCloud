@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="7c9688b7-de3c-454a-aa25-4cc1d13d64d6" solutionId="7c9688b7-de3c-454a-aa25-4cc1d13d64d6" resetWebServer="false" sharePointProductVersion="15.0" name="ClubCloud.BaanBeheer" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="50208e64-f223-42a4-b22d-41981ba8deca" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="1900207f-c383-451b-a13a-e36dba742a4c" />
+    <projectItemReference itemId="08ab24c1-be62-4db4-b845-919d9d37e803" />
+  </projectItems>
+</package>

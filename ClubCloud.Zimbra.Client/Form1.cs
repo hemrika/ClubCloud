@@ -27,12 +27,13 @@ using System.Web.Services.Protocols;
 using ClubCloud.KNLTB.ServIt.CrmService;
 using ClubCloud.KNLTB.ServIt.MetadataService;
 using System.ServiceModel.Channels;
+using Microsoft.SharePoint;
 
 namespace ClubCloud.Zimbra.Client
 {
     public partial class Form1 : Form
     {
-        private static ZimbraServer server;
+        //private static ZimbraServer server;
 
         private List<string> _zimbraPasswordMaxLength;
 
@@ -789,13 +790,21 @@ namespace ClubCloud.Zimbra.Client
 
         void server_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Console.Write(server.Authenticated.Value);
+            //Console.Write(server.Authenticated.Value);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Guid id = Guid.NewGuid();
-            MessageBox.Show(id.ToString());
+            using (SPSite site = new SPSite("http://development"))
+            {
+                // get the web in the impersonated context
+                using (SPWeb web = site.OpenWeb())
+                {
+                    //web.GetWebPartPageContent();
+                    // Your code goes here   
+
+                }
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace ClubCloud.Mijn.ControlTemplates
 
     public partial class KNLTBUserControl : ClubCloudUserControl
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected new void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
@@ -49,7 +49,7 @@ namespace ClubCloud.Mijn.ControlTemplates
         }
 
         private string password = string.Empty;
-        private string userId = string.Empty;
+        //private string userId = string.Empty;
 
         protected void btn_knltbpw_Click(object sender, EventArgs e)
         {

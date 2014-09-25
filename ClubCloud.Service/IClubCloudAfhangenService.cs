@@ -9,6 +9,7 @@ namespace ClubCloud.Service
     using ClubCloud.Service.Model;
     using Microsoft.SharePoint;
     using System;
+    using System.Collections.Generic;
     using System.ServiceModel;
     using System.ServiceModel.Web;
     using System.Threading.Tasks;
@@ -63,11 +64,11 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        ClubCloud.Service.Model.ClubCloud_Reservering GetReserveringByReserveringId(string bondsnummer, Guid reserveringId, bool refresh = false);
+        ClubCloud.Service.Model.ClubCloud_Reservering GetReserveringByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        System.Collections.Generic.List<ClubCloud.Service.Model.ClubCloud_Reservering> GetReserveringenByBaanId(string bondsnummer, Guid baanId, bool refresh = false);
+        System.Collections.Generic.List<ClubCloud.Service.Model.ClubCloud_Reservering> GetReserveringenByBaanId(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
@@ -84,6 +85,14 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
         ClubCloud.Service.Model.ClubCloud_Vereniging GetVerenigingByNummer(string bondsnummer, string verenigingNummer, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
+        ClubCloud.Service.Model.ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Afhang))]
+        ClubCloud.Service.Model.ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, Guid verenigingId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]

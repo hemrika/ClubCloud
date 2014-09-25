@@ -61,6 +61,7 @@
     <None Include="AfhangenClubCloud\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{bfee2197-44d4-4a92-b0a3-71e2d146b64e}</SharePointProjectItemId>
     </None>
+    <None Include="app.config" />
     <None Include="Package\Package.package">
       <PackageId>{36c458e8-6b78-4300-86e1-5656e6ff790c}</PackageId>
     </None>

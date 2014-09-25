@@ -13,7 +13,7 @@ namespace ClubCloud.Mijn.ControlTemplates
         //private string userId = string.Empty;
         //private ClubCloud_Setting settings;
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected new void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
