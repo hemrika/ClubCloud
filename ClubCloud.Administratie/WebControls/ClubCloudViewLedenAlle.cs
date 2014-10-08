@@ -66,7 +66,7 @@ namespace ClubCloud.Administratie.WebControls
                 collection.Add(where);
             }
 
-            ClubCloud_Gebruiker_DataView gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs,collection);
+            ClubCloud_Gebruiker_DataView gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs,collection,true);
 
             selectArgs.TotalRowCount = gebruikers.TotalRowCount;
 
