@@ -1,5 +1,4 @@
-﻿using ClubCloud.Service.Model;
-using Microsoft.SharePoint;
+﻿using Microsoft.SharePoint;
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -7,7 +6,7 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace ClubCloud.Mijn.ControlTemplates
 {
-    public partial class MijnResultatenUserControl : ClubCloudUserControl
+    public partial class MijnFacturenUserControl : ClubCloudUserControl
     {
         protected new void Page_Load(object sender, EventArgs e)
         {
@@ -47,9 +46,9 @@ namespace ClubCloud.Mijn.ControlTemplates
             }
         }
 
-        protected void tmr_loader_resultaten_Tick(object sender, EventArgs e)
+        protected void tmr_loader_facturen_Tick(object sender, EventArgs e)
         {
-            tmr_loader_resultaten.Enabled = false;
+            tmr_loader_facturen.Enabled = false;
 
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
@@ -57,10 +56,9 @@ namespace ClubCloud.Mijn.ControlTemplates
             }
             else
             {
-                this.pnl_resultaten.Visible = false;
+                this.pnl_facturen.Visible = false;
                 this.pnl_secure.Visible = true;
             }
-
         }
     }
 }

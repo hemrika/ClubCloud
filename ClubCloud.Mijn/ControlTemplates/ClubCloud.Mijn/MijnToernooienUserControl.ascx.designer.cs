@@ -13,13 +13,22 @@ namespace ClubCloud.Mijn.ControlTemplates {
     public partial class MijnToernooienUserControl {
         
         /// <summary>
-        /// udp_verenigingen control.
+        /// udp_toernooien control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udp_verenigingen;
+        protected global::System.Web.UI.UpdatePanel udp_toernooien;
+        
+        /// <summary>
+        /// tmr_loader_toernooien control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer tmr_loader_toernooien;
         
         /// <summary>
         /// pnl_secure control.
@@ -65,5 +74,14 @@ namespace ClubCloud.Mijn.ControlTemplates {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnl_toernooien;
+        
+        /// <summary>
+        /// udp_toernooien_progress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress udp_toernooien_progress;
     }
 }

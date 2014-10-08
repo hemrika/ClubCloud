@@ -69,7 +69,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                         Settings = Client.SetMijnKNLTB(Settings);
                         //vds_knltb.Text = "Veranderingen opgeslagen";
 
-                        Client.GetClubCloudGebruiker(userId, true);
+                        ClubCloud_Gebruiker gebruiker = Client.GetGebruikerByNummer(userId, Settings.VerenigingId.Value, userId, true);
                     }
                     else
                     {

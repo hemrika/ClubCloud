@@ -18,94 +18,95 @@ namespace ClubCloud.Mijn.ControlTemplates
         protected new void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
-            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
-            {
-                SetPageData();
-            }
-            else
-            {
-                this.pnl_profiel.Visible = false;
-                this.pnl_secure.Visible = true;
-            }
         }
-
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            this.EnsureChildControls();
         }
 
+        protected override void CreateChildControls()
+        {
+            base.CreateChildControls();
+
+        }
+
+        protected override void OnDataBinding(EventArgs e)
+        {
+            base.OnDataBinding(e);
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+        }
         internal override void SetPageData()
         {
             if (Settings != null)//&& Settings.mijnknltb_allow)
             {
-                //if (Settings.mijnknltb_tracking || !Settings.mijnknltb_tracking)
-                if(true)
+                ClubCloud_Gebruiker gebruiker = null;
+                try
                 {
+                    gebruiker = Client.GetGebruikerByNummer(userId, Settings.VerenigingId.Value, userId, false);
+
+                    /*
+                    Series enkel = new Series { Name = "Enkel", Legend = "Enkel", AxisLabel = "Enkel", ChartType = SeriesChartType.SplineRange, XValueType = ChartValueType.String, YValueType = ChartValueType.Double };
+                    Series dubbel = new Series { Name = "Dubbel", Legend = "Dubbel", AxisLabel = "Dubbel", ChartType = SeriesChartType.SplineRange, XValueType = ChartValueType.String, YValueType = ChartValueType.Double };
+
+                    double maxrating = Math.Max(gebruiker.SpeelsterkteEnkel.Value,gebruiker.SpeelsterkteDubbel.Value)+1;
+                    double minrating = Math.Min(gebruiker.SpeelsterkteEnkel.Value, gebruiker.SpeelsterkteDubbel.Value)-1;
+
+                    cht_profiel.ChartAreas["cta_profiel"].AxisY.Minimum = minrating;
+                    cht_profiel.ChartAreas["cta_profiel"].AxisY.Maximum = maxrating;
+
+                    if (gebruiker != null)
+                    {
+                        for (int i = 0; i < 12; i++)
+                        {
+                            enkel.Points.Insert(i, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), i+1), YValues = new double[2] { Convert.ToDouble(gebruiker.SpeelsterkteEnkel), Convert.ToDouble(gebruiker.RatingEnkel) } });
+                            dubbel.Points.Insert(i, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), i+1), YValues = new double[2] { Convert.ToDouble(gebruiker.SpeelsterkteDubbel), Convert.ToDouble(gebruiker.RatingDubbel) } });
+                        }
+                    }
+                    */
+                    /*
                     try
                     {
+                        ClubCloud_Tracking tracking = Client.GetTracking(userId, false);
 
-
-                        ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
-
-                        /*
-                        Series enkel = new Series { Name = "Enkel", Legend = "Enkel", AxisLabel = "Enkel", ChartType = SeriesChartType.SplineRange, XValueType = ChartValueType.String, YValueType = ChartValueType.Double };
-                        Series dubbel = new Series { Name = "Dubbel", Legend = "Dubbel", AxisLabel = "Dubbel", ChartType = SeriesChartType.SplineRange, XValueType = ChartValueType.String, YValueType = ChartValueType.Double };
-
-                        double maxrating = Math.Max(gebruiker.SpeelsterkteEnkel.Value,gebruiker.SpeelsterkteDubbel.Value)+1;
-                        double minrating = Math.Min(gebruiker.SpeelsterkteEnkel.Value, gebruiker.SpeelsterkteDubbel.Value)-1;
-
-                        cht_profiel.ChartAreas["cta_profiel"].AxisY.Minimum = minrating;
-                        cht_profiel.ChartAreas["cta_profiel"].AxisY.Maximum = maxrating;
-
-                        if (gebruiker != null)
+                        if (tracking != null && !string.IsNullOrWhiteSpace(tracking.Data))
                         {
-                            for (int i = 0; i < 12; i++)
+
+                            List<SpelersProfiel> profielen = (List<SpelersProfiel>)DeserializeObjectList<SpelersProfiel>(tracking.Data, "SpelersProfiel");
+
+                            if (profielen != null)
                             {
-                                enkel.Points.Insert(i, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), i+1), YValues = new double[2] { Convert.ToDouble(gebruiker.SpeelsterkteEnkel), Convert.ToDouble(gebruiker.RatingEnkel) } });
-                                dubbel.Points.Insert(i, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), i+1), YValues = new double[2] { Convert.ToDouble(gebruiker.SpeelsterkteDubbel), Convert.ToDouble(gebruiker.RatingDubbel) } });
-                            }
-                        }
-                        */
-                        /*
-                        try
-                        {
-                            ClubCloud_Tracking tracking = Client.GetTracking(userId, false);
+                                List<SpelersProfiel> profielenByDatum = profielen.OrderByDescending(o => o.DatumDSS).ToList();
+                                SpelersProfiel lastprofiel = profielenByDatum.LastOrDefault();
 
-                            if (tracking != null && !string.IsNullOrWhiteSpace(tracking.Data))
-                            {
-
-                                List<SpelersProfiel> profielen = (List<SpelersProfiel>)DeserializeObjectList<SpelersProfiel>(tracking.Data, "SpelersProfiel");
-
-                                if (profielen != null)
+                                foreach (SpelersProfiel profiel in profielenByDatum)
                                 {
-                                    List<SpelersProfiel> profielenByDatum = profielen.OrderByDescending(o => o.DatumDSS).ToList();
-                                    SpelersProfiel lastprofiel = profielenByDatum.LastOrDefault();
-
-                                    foreach (SpelersProfiel profiel in profielenByDatum)
-                                    {
-                                        enkel.Points.RemoveAt(profiel.DatumDSS.Value.Month - 1);
-                                        enkel.Points.Insert(profiel.DatumDSS.Value.Month - 1, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), profiel.DatumDSS.Value.Month), YValues = new double[2] { Convert.ToDouble(profiel.EindejaarsratingEnkel.Value), Convert.ToDouble(profiel.PartijResultatenEnkelDss.Value) } });
-                                        dubbel.Points.RemoveAt(profiel.DatumDSS.Value.Month - 1);
-                                        dubbel.Points.Insert(profiel.DatumDSS.Value.Month - 1, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), profiel.DatumDSS.Value.Month), YValues = new double[2] { Convert.ToDouble(profiel.EindejaarsratingDubbel.Value), Convert.ToDouble(profiel.PartijResultatenDubbelDss.Value) } });
-                                    }
+                                    enkel.Points.RemoveAt(profiel.DatumDSS.Value.Month - 1);
+                                    enkel.Points.Insert(profiel.DatumDSS.Value.Month - 1, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), profiel.DatumDSS.Value.Month), YValues = new double[2] { Convert.ToDouble(profiel.EindejaarsratingEnkel.Value), Convert.ToDouble(profiel.PartijResultatenEnkelDss.Value) } });
+                                    dubbel.Points.RemoveAt(profiel.DatumDSS.Value.Month - 1);
+                                    dubbel.Points.Insert(profiel.DatumDSS.Value.Month - 1, new DataPoint { AxisLabel = Enum.GetName(typeof(Months), profiel.DatumDSS.Value.Month), YValues = new double[2] { Convert.ToDouble(profiel.EindejaarsratingDubbel.Value), Convert.ToDouble(profiel.PartijResultatenDubbelDss.Value) } });
                                 }
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            ex.ToString();
-                        }
-                        */
-                        /*
-                        cht_profiel.Series.Add(enkel);
-                        cht_profiel.Series.Add(dubbel);
-                        */
-
                     }
                     catch (Exception ex)
                     {
                         ex.ToString();
                     }
+                    */
+                    /*
+                    cht_profiel.Series.Add(enkel);
+                    cht_profiel.Series.Add(dubbel);
+                    */
+                    this.pnl_profiel.Visible = false;
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
                 }
             }
             else
@@ -134,6 +135,21 @@ namespace ClubCloud.Mijn.ControlTemplates
                 }
             }
             return instances;
+        }
+
+        protected void tmr_loader_profiel_Tick(object sender, EventArgs e)
+        {
+            tmr_loader_profiel.Enabled = false;
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                SetPageData();
+            }
+            else
+            {
+                this.pnl_profiel.Visible = false;
+                this.pnl_secure.Visible = true;
+            }
         }
     }
 }

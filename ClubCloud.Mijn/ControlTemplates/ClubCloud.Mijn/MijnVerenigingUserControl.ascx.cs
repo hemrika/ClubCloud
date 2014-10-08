@@ -14,35 +14,54 @@ namespace ClubCloud.Mijn.ControlTemplates
         protected new void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
-            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
-            {
-                SetPageData();
-            }
-            else
-            {
-                this.pnl_verenigingen.Visible = false;
-                this.pnl_secure.Visible = true;
-            }
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            this.EnsureChildControls();
+        }
+
+        protected override void CreateChildControls()
+        {
+            base.CreateChildControls();
+        }
+
+        protected override void OnDataBinding(EventArgs e)
+        {
+            base.OnDataBinding(e);
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
         }
 
         internal override void SetPageData()
         {
             if (Settings != null )// && Settings.mijnknltb_allow)
             {
-                ClubCloud_Vereniging vereniging = Client.GetVerenigingById(userId, Settings.VerenigingId.Value);
-                lst_verenigingen.DataSource = new List<ClubCloud_Vereniging> { vereniging }; ;
-                lst_verenigingen.DataBind();
+                ClubCloud_Vereniging vereniging = null;
+                try
+                {
+                    vereniging = Client.GetVerenigingById(userId, Settings.VerenigingId.Value);
+                    vereniging.ClubCloud_Accomodatie = Client.GetAccommodatieForVereniging(userId, vereniging.Id);
+                    vereniging.ClubCloud_Lidmaatschap = Client.GetLidmaatschapByGebruikerId(userId, vereniging.Id, Settings.GebruikerId.Value, false);
+                }
+                catch { }
 
                 if (vereniging != null)
                 {
                     try
                     {
-                        vereniging = Client.GetVerenigingById(userId, vereniging.Id);
+                        //vereniging.ClubCloud_Lidmaatschap.First().VerenigingId
+                        lst_verenigingen.DataSource = vereniging.ClubCloud_Lidmaatschap;
+                        lst_verenigingen.DataBind();
+                    }
+                    catch { }
+
+                    try
+                    {
                         fvw_vereniging.DataSource = new List<ClubCloud_Vereniging> { vereniging };
                         fvw_vereniging.DataBind();
                     }
@@ -50,11 +69,11 @@ namespace ClubCloud.Mijn.ControlTemplates
 
                     try
                     {
-                        ClubCloud_Accomodatie accomodatie = Client.GetAccommodatieForVereniging(userId, vereniging.Id);
-                        fvw_accomodatie.DataSource = new List<ClubCloud_Accomodatie> { accomodatie };
+                        fvw_accomodatie.DataSource = new List<ClubCloud_Accomodatie> { vereniging.ClubCloud_Accomodatie };
                         fvw_accomodatie.DataBind();
                     }
                     catch { }
+
                     /*
                     try
                     {
@@ -105,6 +124,22 @@ namespace ClubCloud.Mijn.ControlTemplates
                 ClubCloud_Vereniging vereniging = Client.GetVerenigingById(userId,Id,false);
                 fvw_vereniging.DataSource = new List<ClubCloud_Vereniging> { vereniging };
                 fvw_vereniging.DataBind();
+            }
+
+        }
+
+        protected void tmr_loader_verenigingen_Tick(object sender, EventArgs e)
+        {
+            tmr_loader_verenigingen.Enabled = false;
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                SetPageData();
+            }
+            else
+            {
+                this.pnl_verenigingen.Visible = false;
+                this.pnl_secure.Visible = true;
             }
 
         }

@@ -13,13 +13,22 @@ namespace ClubCloud.Mijn.ControlTemplates {
     public partial class MijnProfielUserControl {
         
         /// <summary>
-        /// udp_verenigingen control.
+        /// udp_profiel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udp_verenigingen;
+        protected global::System.Web.UI.UpdatePanel udp_profiel;
+        
+        /// <summary>
+        /// tmr_loader_profiel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer tmr_loader_profiel;
         
         /// <summary>
         /// pnl_secure control.
@@ -67,12 +76,12 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.Panel pnl_profiel;
         
         /// <summary>
-        /// cht_profiel control.
+        /// udp_profiel_progress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart cht_profiel;
+        protected global::System.Web.UI.UpdateProgress udp_profiel_progress;
     }
 }

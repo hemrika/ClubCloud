@@ -15,63 +15,126 @@ namespace ClubCloud.Mijn.ControlTemplates
         protected new void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender,e);
-            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
-            {
-                if (!IsPostBack)
-                {
-                    SetPageData();
-                }
-            }
-            else
-            {
-                this.pnl_profiel.Visible = false;
-                this.pnl_secure.Visible = true;
-            }
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            this.EnsureChildControls();
+        }
+
+        protected override void CreateChildControls()
+        {
+            base.CreateChildControls();
+        }
+
+        protected override void OnDataBinding(EventArgs e)
+        {
+            base.OnDataBinding(e);
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
         }
 
         internal override void SetPageData()
         {
             if (Settings != null)//&& Settings.mijnknltb_allow)
             {
-                ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
-                
+                ClubCloud_Gebruiker gebruiker = null;
+
+                try
+                {
+                    gebruiker = Client.GetGebruikerByNummer(userId, Settings.VerenigingId.Value, userId, false);
+                }
+                catch { }
+
                 if (gebruiker != null)
                 {
-                    ClubCloud_Vereniging vereniging = Client.GetVerenigingById(userId, gebruiker.VerenigingId.Value);
-                    /*
-                    fvw_adres.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
-                    fvw_adres.DataBind();
-                    */
-                    ClubCloud_Foto foto = Client.GetFotoById(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false);
-
-                    fvw_afbeelding.DataSource = new List<ClubCloud_Foto> { foto }; ;
-                    fvw_afbeelding.DataBind();
-
-                    if (fvw_afbeelding.CurrentMode == FormViewMode.ReadOnly)
+                    try
                     {
-                        Image profielfoto = (Image)fvw_afbeelding.FindControl("profielfoto");
-                        if (profielfoto != null)
+                        gebruiker.ClubCloud_Vereniging = Client.GetVerenigingById(userId, gebruiker.VerenigingId.Value);
+
+                        //gebruiker.ClubCloud_Lidmaatschap = Client.GetLidaamschapByGebruikerId(userId, gebruiker.VerenigingId.Value);
+                        gebruiker.ClubCloud_Address = Client.GetAddressByGebruikerId(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false);
+                    }
+                    catch { }
+
+                    try
+                    {
+                        fvw_persoon.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
+                        fvw_persoon.DataBind();
+                    }
+                    catch (Exception ex)
+                    {
+                        lbl_result.Text += ex.Message + Environment.NewLine;
+                    }
+
+                    try
+                    {
+                        fvw_contact.DataSource = new List<ClubCloud_Gebruiker> { gebruiker };
+                        fvw_contact.DataBind();
+                    }
+                    catch (Exception ex)
+                    {
+                        lbl_result.Text += ex.Message + Environment.NewLine;
+                    }
+
+                    try
+                    {
+                        ClubCloud_Address first = gebruiker.ClubCloud_Address.First();
+                        if (string.IsNullOrWhiteSpace(first.Naam)) first.Naam = "Bezoekadres";
+                        fvw_adres.DataSource = new List<ClubCloud_Address> { first };
+                        fvw_adres.DataBind();
+                    }
+                    catch (Exception ex)
+                    {
+                        lbl_result.Text += ex.Message + Environment.NewLine;
+                    }
+
+                    //TODO second fvw_post
+                    /*
+                    try
+                    {
+                        ClubCloud_Address last = gebruiker.ClubCloud_Address.Last();
+                        if (string.IsNullOrWhiteSpace(last.Naam)) last.Naam = "Postadres";
+                        fvw_adres.DataSource = new List<ClubCloud_Address> { last };
+                        fvw_adres.DataBind();
+                    }
+                    catch (Exception ex)
+                    {
+                        lbl_result.Text += ex.Message + Environment.NewLine;
+                    }
+                    */
+
+                    try
+                    {
+
+                        ClubCloud_Foto foto = Client.GetFotoById(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false);
+
+                        fvw_afbeelding.DataSource = new List<ClubCloud_Foto> { foto }; ;
+                        fvw_afbeelding.DataBind();
+
+                        if (fvw_afbeelding.CurrentMode == FormViewMode.ReadOnly)
                         {
-                            string base64String = Convert.ToBase64String(foto.ContentData, 0, foto.ContentData.Length);
-                            profielfoto.ImageUrl = "data:image/png;base64," + base64String;
+                            Image profielfoto = (Image)fvw_afbeelding.FindControl("profielfoto");
+                            if (profielfoto != null)
+                            {
+                                string base64String = Convert.ToBase64String(foto.ContentData, 0, foto.ContentData.Length);
+                                profielfoto.ImageUrl = "data:image/png;base64," + base64String;
+                            }
                         }
                     }
-                    List<ClubCloud_Address> adressen = Client.GetAddressByGebruikerId(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false);
-                    /*
-                    //Client.GetAddresByGebruiker(userId, gebruiker.Id);
-                    fvw_contact.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
-                    fvw_contact.DataBind();
+                    catch (Exception ex)
+                    {
+                        lbl_result.Text += ex.Message + Environment.NewLine;
+                    }
 
-                    fvw_persoon.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
-                    fvw_persoon.DataBind();
-                    */
-                    //Label knltbid = (Label)fvw_persoon.FindControl("knltbid");
-                    //knltbid.Text = Settings.Id.ToString();
+
+                    Label knltbid = (Label)fvw_persoon.FindControl("knltbid");
+                    knltbid.Text = Settings.Id.ToString();
+
                 }
             }
             else
@@ -104,13 +167,19 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 if (Settings != null)
                 {
-                    ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
+                    ClubCloud_Gebruiker gebruiker = Client.GetGebruikerByNummer(userId, Settings.VerenigingId.Value, userId, false);
 
                     gebruiker.TelefoonOverdag = e.NewValues["TelefoonOverdag"].ToString();
                     gebruiker.TelefoonAvond = e.NewValues["TelefoonAvond"].ToString();
                     gebruiker.Mobiel = e.NewValues["Mobiel"].ToString();
-                    gebruiker.EmailKNLTB = e.NewValues["Email"].ToString();
-                    Client.SetClubCloudGebruiker(userId, gebruiker, false);
+                    CheckBox TelefoonGeheim = (CheckBox)fvw_adres.FindControl("TelefoonGeheim");
+                    gebruiker.TelefoonGeheim = TelefoonGeheim.Checked;
+                    gebruiker.EmailKNLTB = e.NewValues["EmailKNLTB"].ToString();
+                    gebruiker.EmailWebSite = e.NewValues["EmailWebSite"].ToString();
+                    gebruiker.EmailOverig = e.NewValues["EmailOverig"].ToString();
+                    CheckBox EmailGeheim = (CheckBox)fvw_adres.FindControl("EmailGeheim");
+                    gebruiker.EmailGeheim = EmailGeheim.Checked;
+                    Client.SetClubCloudGebruiker(userId, Settings.VerenigingId.Value, gebruiker, false);
                 }
             }
         }
@@ -147,16 +216,22 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 if (Settings != null)
                 {
-                    /*
-                    ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
+                    ClubCloud_Gebruiker gebruiker = Client.GetGebruikerByNummer(userId, Settings.VerenigingId.Value, userId, false);
+                    gebruiker.ClubCloud_Address = Client.GetAddressByGebruikerId(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false);
 
-                    gebruiker.Straat = e.NewValues["Straat"].ToString();
-                    gebruiker.Gemeente = e.NewValues["Gemeente"].ToString();
-                    gebruiker.Huisnummer = e.NewValues["Huisnummer"].ToString();
-                    gebruiker.Plaats = e.NewValues["Plaats"].ToString();
-                    gebruiker.Postcode = e.NewValues["Postcode"].ToString();
-                    Client.SetClubCloudGebruiker(userId, gebruiker, false);
-                    */
+                    gebruiker.ClubCloud_Address.First().Naam = "Bezoekadres";
+                    gebruiker.ClubCloud_Address.First().Gemeente = e.NewValues["Gemeente"].ToString();
+                    gebruiker.ClubCloud_Address.First().Nummer = e.NewValues["Nummer"].ToString();
+                    gebruiker.ClubCloud_Address.First().Postbus = e.NewValues["Postbus"].ToString();
+                    gebruiker.ClubCloud_Address.First().Postcode = e.NewValues["Postcode"].ToString();
+                    gebruiker.ClubCloud_Address.First().Provincie = e.NewValues["Provincie"].ToString();
+                    gebruiker.ClubCloud_Address.First().Stad = e.NewValues["Stad"].ToString();
+                    gebruiker.ClubCloud_Address.First().Straat = e.NewValues["Straat"].ToString();
+                    DropDownList Land = (DropDownList)fvw_adres.FindControl("Land");
+                    gebruiker.ClubCloud_Address.First().Land = Land.SelectedItem.Text;
+                    CheckBox AddressGeheim = (CheckBox)fvw_adres.FindControl("AddressGeheim");
+                    gebruiker.AddressGeheim = AddressGeheim.Checked;
+                    Client.SetClubCloudGebruiker(userId, Settings.VerenigingId.Value, gebruiker, false);
                 }
             }
         }
@@ -199,21 +274,22 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 if (Settings != null)
                 {
-                    ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
+                    ClubCloud_Gebruiker gebruiker = Client.GetGebruikerByNummer(userId, Settings.VerenigingId.Value, userId, false);
 
                     gebruiker.Achternaam = e.NewValues["Achternaam"].ToString();
                     gebruiker.Geboortedatum = DateTime.Parse(e.NewValues["Geboortedatum"].ToString());
                     gebruiker.Geboorteplaats = e.NewValues["Geboorteplaats"].ToString();
                     DropDownList Geslacht = (DropDownList)fvw_persoon.FindControl("Geslacht");
-                    //gebruiker.Geslacht = (KNLTB.ServIt.LedenAdministratieService.Geslacht)Enum.Parse(typeof(KNLTB.ServIt.LedenAdministratieService.Geslacht), Geslacht.SelectedValue);
+                    gebruiker.Geslacht = (GeslachtSoort)Enum.Parse(typeof(GeslachtSoort), Geslacht.SelectedValue);
                     DropDownList NationaliteitId = (DropDownList)fvw_persoon.FindControl("NationaliteitId");
                     gebruiker.NationaliteitId = Guid.Parse(NationaliteitId.SelectedValue);
                     gebruiker.Roepnaam = e.NewValues["Roepnaam"].ToString();
-                    gebruiker.Achtervoegsel = e.NewValues["Toevoeging"].ToString();
+                    gebruiker.Achtervoegsel = e.NewValues["Achtervoegsel"].ToString();
                     gebruiker.Tussenvoegsel = e.NewValues["Tussenvoegsel"].ToString();
                     gebruiker.Voorletters = e.NewValues["Voorletters"].ToString();
                     gebruiker.Voornamen = e.NewValues["Voornamen"].ToString();
-                    Client.SetClubCloudGebruiker(userId, gebruiker, false);
+                    gebruiker.Voornaam = e.NewValues["Voornaam"].ToString();
+                    Client.SetClubCloudGebruiker(userId, Settings.VerenigingId.Value, gebruiker, false);
                 }
             }
         }
@@ -249,13 +325,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 if (Settings != null)
                 {
-                    ClubCloud_Gebruiker gebruiker = Client.GetClubCloudGebruiker(userId, false);
 
-                    gebruiker.TelefoonOverdag = e.NewValues["TelefoonOverdag"].ToString();
-                    gebruiker.TelefoonAvond = e.NewValues["TelefoonAvond"].ToString();
-                    gebruiker.Mobiel = e.NewValues["Mobiel"].ToString();
-                    gebruiker.EmailKNLTB = e.NewValues["Email"].ToString();
-                    Client.SetClubCloudGebruiker(userId, gebruiker, false);
                 }
             }
         }
@@ -266,6 +336,23 @@ namespace ClubCloud.Mijn.ControlTemplates
         }
 
         #endregion
+
+        protected void tmr_loader_profiel_Tick(object sender, EventArgs e)
+        {
+            tmr_loader_profiel.Enabled = false;
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                    SetPageData();
+            }
+            else
+            {
+                this.pnl_profiel.Visible = false;
+                this.pnl_secure.Visible = true;
+            }
+
+            udp_profiel_progress.Visible = false;
+        }
 
     }
 }

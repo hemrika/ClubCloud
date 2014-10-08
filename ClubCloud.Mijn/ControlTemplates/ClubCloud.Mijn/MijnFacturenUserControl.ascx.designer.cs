@@ -7,37 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClubCloud.Mijn.ControlTemplates {
-    
-    
-    public partial class MijnGegevensUserControl {
+namespace ClubCloud.Mijn.ControlTemplates
+{
+
+
+    public partial class MijnFacturenUserControl
+    {
         
         /// <summary>
-        /// lbl_result control.
+        /// udp_facturen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_result;
+        protected global::System.Web.UI.UpdatePanel udp_facturen;
         
         /// <summary>
-        /// udp_profiel control.
+        /// tmr_loader_facturen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udp_profiel;
-        
-        /// <summary>
-        /// tmr_loader_profiel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.Timer tmr_loader_profiel;
+        protected global::System.Web.UI.Timer tmr_loader_facturen;
         
         /// <summary>
         /// pnl_secure control.
@@ -76,57 +69,21 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.LinkButton Instellingen;
         
         /// <summary>
-        /// pnl_profiel control.
+        /// pnl_facturen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_profiel;
+        protected global::System.Web.UI.WebControls.Panel pnl_facturen;
         
         /// <summary>
-        /// fvw_afbeelding control.
+        /// udp_facturen_progress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView fvw_afbeelding;
-        
-        /// <summary>
-        /// fvw_persoon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView fvw_persoon;
-        
-        /// <summary>
-        /// fvw_adres control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView fvw_adres;
-        
-        /// <summary>
-        /// fvw_contact control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView fvw_contact;
-        
-        /// <summary>
-        /// udp_profiel_progress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress udp_profiel_progress;
+        protected global::System.Web.UI.UpdateProgress udp_facturen_progress;
     }
 }

@@ -110,8 +110,8 @@ namespace ClubCloud.Mijn.ControlTemplates
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            EnsureVisitor();
-            LoadClubCloudSettings();
+            //EnsureVisitor();
+            //LoadClubCloudSettings();
         }
 
         internal virtual void SetPageData()

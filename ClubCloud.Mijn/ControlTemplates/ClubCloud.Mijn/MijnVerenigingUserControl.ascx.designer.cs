@@ -22,6 +22,15 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.UpdatePanel udp_verenigingen;
         
         /// <summary>
+        /// tmr_loader_verenigingen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer tmr_loader_verenigingen;
+        
+        /// <summary>
         /// pnl_secure control.
         /// </summary>
         /// <remarks>

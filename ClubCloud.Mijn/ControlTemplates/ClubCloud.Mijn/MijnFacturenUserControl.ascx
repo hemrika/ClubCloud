@@ -7,10 +7,10 @@
 <%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="Utilities" Namespace="Microsoft.SharePoint.Utilities" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MijnToernooienUserControl.ascx.cs" Inherits="ClubCloud.Mijn.ControlTemplates.MijnToernooienUserControl" %>
-<asp:UpdatePanel ID="udp_toernooien" runat="server">
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MijnFacturenUserControl.ascx.cs" Inherits="ClubCloud.Mijn.ControlTemplates.MijnFacturenUserControl" %>
+<asp:UpdatePanel ID="udp_facturen" runat="server">
     <contenttemplate>
-        <asp:Timer runat="server" ID="tmr_loader_toernooien" OnTick="tmr_loader_toernooien_Tick" interval="50" />
+        <asp:Timer runat="server" ID="tmr_loader_facturen" OnTick="tmr_loader_facturen_Tick" interval="50" />
         <asp:panel runat="server" ID="pnl_secure" Visible="False">
             <i class="icon-lock-1 special"></i>U moet ingelogd zijn om uw instellingen te kunnen wijzigen.
             <asp:LinkButton ID="btn_login" Text="Inloggen" OnClientClick="document.location.href ='https://mijn.clubcloud.nl/_zimbra/default.aspx'; return false" runat="server" /><br />
@@ -29,15 +29,15 @@
             </div>  
         </asp:panel>
         <fieldset>
-        <asp:panel runat="server" ID="pnl_toernooien" GroupingText="Competitie :">
+        <asp:panel runat="server" ID="pnl_facturen" GroupingText="Facturen :">
             </asp:panel>
             </fieldset>
         </contenttemplate>
     <triggers>
-             <asp:AsyncPostBackTrigger ControlID="tmr_loader_toernooien" EventName="Tick" />
+             <asp:AsyncPostBackTrigger ControlID="tmr_loader_facturen" EventName="Tick" />
     </triggers>
 </asp:UpdatePanel>
-<asp:UpdateProgress ID="udp_toernooien_progress" runat="server" AssociatedUpdatePanelID="udp_toernooien">
+<asp:UpdateProgress ID="udp_facturen_progress" runat="server" AssociatedUpdatePanelID="udp_facturen" DisplayAfter="50">
     <progresstemplate>
         <div class="bubbles">laden...</div>
 </progresstemplate>

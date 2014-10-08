@@ -11,6 +11,45 @@ namespace ClubCloud.Mijn.ControlTemplates
         protected new void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.EnsureChildControls();
+        }
+
+        protected override void CreateChildControls()
+        {
+            base.CreateChildControls();
+        }
+
+        protected override void OnDataBinding(EventArgs e)
+        {
+            base.OnDataBinding(e);
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+        }
+
+        internal override void SetPageData()
+        {
+            if (Settings != null)//&& Settings.mijnknltb_allow)
+            {
+                //Client.GetDistricten
+            }
+            else
+            {
+                pnl_authorize.Visible = true;
+            }
+        }
+
+        protected void tmr_loader_competitie_Tick(object sender, EventArgs e)
+        {
+            tmr_loader_competitie.Enabled = false;
+
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 SetPageData();
@@ -19,22 +58,6 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 this.pnl_competitie.Visible = false;
                 this.pnl_secure.Visible = true;
-            }
-        }
-
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-        }
-
-        internal override void SetPageData()
-        {
-            if (Settings != null )//&& Settings.mijnknltb_allow)
-            {
-            }
-            else
-            {
-                pnl_authorize.Visible = true;
             }
         }
     }
