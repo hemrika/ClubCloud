@@ -13,11 +13,14 @@
     <SharePoint:ProjectProperty Property="Title" runat="server"/>
 </asp:Content>
 
-<asp:Content ID="Content1" ContentPlaceHolderId="PlaceHolderMain" runat="server">
+<asp:Content ID="cnt_Header" ContentPlaceHolderId="PlaceHolderMain" runat="server">
 	<div class="inner light">
       <div class="aligncenter">
         <h1 id="pageTitle" class="lined">Mijn ClubCloud</h1>
         <p class="description">Mijn ClubCloud is een omgeving voor tennissers om al hun gegevens in te zien en te beheren.</p>
+          <!-- <Sharepoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly" Permissions="EmptyMask"> -->
+          <a href="https://mijn.clubcloud.nl/_zimbra/default.aspx" class="button big">Inloggen</a>
+          <!-- </SharePoint:SPSecurityTrimmedControl> -->
         </div>
     </div>
 
@@ -58,7 +61,7 @@
         <i class="icon-docs special"></i>
           <div class="info">
             <h3 class="lined">Uw toernooi uitslagen</h3>
-            <p>Donec elit non mi porta gravida at eget metus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum ligula porta felis cras ridiculus dapibus, aenean eu leo quam.</p>
+            <p>Volg uw toernooi en tegenstanders.</p>
             <a href="#" style="float:right;margin-right:30px;margin-bottom:20px;">Naar mijn uitslagen</a>
           </div>
         </div>
@@ -67,7 +70,7 @@
         <i class="icon-cloud special"></i>
           <div class="info">
             <h3 class="lined">Uw vereniging(en)</h3>
-            <p>Donec elit non mi porta gravida at eget metus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum ligula porta felis cras ridiculus dapibus, aenean eu leo quam.</p>
+            <p>Eenvoudig toegang tot de gegevens van uw eigen vereniging(en).</p>
             <a href="#" style="float:right;margin-right:30px;">Naar mijn vereniging(en)</a>
           </div>
         </div>
@@ -85,7 +88,8 @@
         <i class="icon-ccw special"></i>
           <div class="info">
             <h3 class="lined">Synchronisatie</h3>
-            <p>Mijn ClubCloud synchroniseert uw gegevens met die van uw club en KNLTB. </p>
+            <p>Mijn ClubCloud synchroniseert uw gegevens met die van de KNLTB. Dit zijn uw persoonlijke gegevens maar ook uw wedstrijden.
+            </p>
           </div>
         </div>
         <div class="one-half last">
@@ -106,26 +110,22 @@
     <div class="inner light">
 
         <div class="symple-column symple-two-third symple-column-first ">
-<h3>Read our FAQ</h3>
+<h3>Over Mijn ClubCloud</h3>
 <div class="symple-accordion ">
-<h3 class="symple-accordion-trigger "><a href="#">Why Choose this theme</a></h3><div>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</div>
+<h3 class="symple-accordion-trigger "><a href="#">Waarom is er Mijn ClubCloud ?</a></h3><div>ClubCloud werkt voor tennissers die recreatief of competitief tennissen in Nederland. Er worden een heleboel verplichtingen gesteld maar er zijn maar weinig baten. 
+    ClubCloud wil graag voor tennissers de baten!! Inzicht in uw eigen gegevens, uw competitie, uw toernooien, digital afhangen, controle over uw betalingen, sociale functionaliteiten.</div>
 <br/>
-<h3 class="symple-accordion-trigger "><a href="#">How it can benefit you</a></h3><div>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</div>
+<h3 class="symple-accordion-trigger "><a href="#">Voordelen van Mijn ClubCloud ?</a></h3><div>Wij proberen uw tennis plezier te verhogen door eerst aan de tennissers te denken. We hebben geen behoefte om u latsig te vallen met Sponsors, Toptennis of DavisCup. Wij geven u de controle over uw gegevens. <b>ClubCloud werkt voor alle moderne platformen en browsers en heeft diverse Apps voor SmartPhones en SmartDevices.</b></div>
 <br/>
-<h3 class="symple-accordion-trigger "><a href="#">How it actually works</a></h3><div>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.<br />
+<h3 class="symple-accordion-trigger "><a href="#">Hoe werkt Mijn ClubCloud ?</a></h3><div>Naast uw eigen gegevens halen wij, met uw toestemming, gegevens op bij de KNLTB. Met al deze gegevens proberen wij uw tennis plezier te vergroten. Snel informatie vinden en delen. Over uw informatie heeft u de controle en alle informatie wordt veilig bewaard.<br />
 </div>
 <br/>
-<h3 class="symple-accordion-trigger "><a href="#">it is the most awsome thing ever</a></h3><div>
-Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.<br />
+<h3 class="symple-accordion-trigger "><a href="#">Wat kost Mijn ClubCloud ?</a></h3><div>Mijn ClubCloud is helemaal gratis. Geen verplichtingen, gratis, open en transparant.<br />
 </div>
 </div>
 </div>
-
     <div class="clear"></div>
     </div>
-
-    <!-- End Custom Homepage -->
-
 </asp:Content>
 
 

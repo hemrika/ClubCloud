@@ -4,13 +4,13 @@
 <%@ Register Tagprefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register Tagprefix="ClubCloud" Namespace="ClubCloud.Mijn.ControlTemplates" Assembly="ClubCloud.Mijn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
-<%@ Register TagPrefix="ClubCloud" TagName="KNLTBUserControl" src="~/_controltemplates/ClubCloud.Mijn/KNLTBUserControl.ascx" %>
+<%@ Register TagPrefix="ClubCloud" TagName="MijnGegevensUserControl" src="~/_controltemplates/ClubCloud.Mijn/MijnGegevensUserControl.ascx" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Import Namespace="Microsoft.SharePoint.ApplicationPages" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ContentPlaceHolderId="PlaceHolderPageTitle" runat="server">
-    <SharePoint:ProjectProperty Property="Title" runat="server"/>
+    <SharePoint:ProjectProperty Property="Title" runat="server"/> Profiel
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderId="PlaceHolderMain" runat="server">
@@ -21,30 +21,27 @@
         </div>
     </div>
     <div class="inner dark">
-      <div class="services">
-
-        <div class="first">
-        <i class="icon-vcard special"></i>
-          <div class="info">
-            <h3 class="lined">Mijn eigen gegevens</h3>
-            <p>Dit zijn uw eigen gegevens. Indien uw vereniging ClubCloud gebruikt, worden deze gegevens automatisch overgenomen in de administratie.
+        <div class="services">
+            <!-- <Sharepoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly" Permissions="EmptyMask"> -->
+            <p>Alle infomatie die u nodig heeft van uw vereniging. De informatie wordt automatisch bijgehouden en is de actuele informatie zoals bekend bij de KNLTB.
             </p>
-            <p></p>
-          </div>
-        </div>
-        <div class="clear"></div>        
+            <!-- </SharePoint:SPSecurityTrimmedControl> -->
+            <clubcloud:MijnGegevensUserControl id="mijngegevens" runat="server"></clubcloud:MijnGegevensUserControl>
+        <!-- <Sharepoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AuthenticatedUsersOnly" Permissions="EmptyMask"> -->
+        <br />
         <div class="first">
-        <i class="icon-menu special"></i>
-          <div class="info">
-            <h3 class="lined">Mijn KNLTB gegevens</h3>
-            <p>Dit zijn uw gegevens vanuit de KNLTB. Deze gegevens kunt u helaas niet wijzigen.</p>
-            <p></p>
-          </div>
+            <i class="icon-info special"></i>
+            <div class="info">
+            <h3 class="lined">Incorrecte gegevens ?</h3>
+                <p>
+                        Als de informatie die u ziet volgens u niet correct is, dan kunt u deze hier meteen wijzigen. Via de ClubCloud Administratie kan u vereniging
+                        de wijzigen doorvoeren bij de KNLTB.
+                </p>
+            </div>
         </div>  
-        <div class="clear"></div>
-        <p>Via <a href="2bfef590" title="Instellingen">Instellingen</a> kunt aangeven welke gegevens andere ClubCloud gebruikers kunnen zien.</p>
-	</div>    
-   	<div class="clear"></div>
+        <!-- </SharePoint:SPSecurityTrimmedControl> -->
+   	        <div class="clear"></div>
+        </div>
     </div>
 </asp:Content>
 

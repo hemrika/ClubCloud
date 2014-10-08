@@ -53,6 +53,7 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting GetClubCloudSettings(string bondsnummer);
 
+        /*
         /// <summary>
         /// Gets the current User
         /// </summary>
@@ -62,6 +63,7 @@ namespace ClubCloud.Service
         //[WebInvoke(UriTemplate = "/GetCurrentUserGegevens", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         ClubCloud_Gebruiker GetClubCloudGebruiker(bool refresh = false);
+        */
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
@@ -86,7 +88,6 @@ namespace ClubCloud.Service
         //[WebInvoke(UriTemplate = "/GetCurrentUserGegevens", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
-
 
         /*
         [OperationContract]

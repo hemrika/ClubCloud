@@ -11,21 +11,20 @@ namespace ClubCloud.Service.Model
 {
     using System;
     using System.Runtime.Serialization;
+    using System.Collections.Generic;
     
-    [Flags]
-    public enum Month : int
+    [Serializable]
+    [DataContract(IsReference = true)]
+    
+    public partial class ClubCloud_BaanSpeciaal
     {
-        januari = 1,
-        februari = 2,
-        maart = 3,
-        april = 4,
-        mei = 5,
-        juni = 6,
-        juli = 7,
-        augustus = 8,
-        september = 9,
-        oktober = 10,
-        november = 11,
-        december = 12
+    	[DataMember]
+        public System.Guid Id { get; set; }
+    	[DataMember]
+        public string Naam { get; set; }
+    	[DataMember]
+        public Nullable<System.Guid> AccomodatieId { get; set; }
+    	[DataMember]
+        public string BaansoortId { get; set; }
     }
 }

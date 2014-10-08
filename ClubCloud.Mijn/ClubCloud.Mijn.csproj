@@ -113,6 +113,13 @@
     <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnCompetitieUserControl.ascx.designer.cs">
       <DependentUpon>MijnCompetitieUserControl.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnFacturenUserControl.ascx.cs">
+      <DependentUpon>MijnFacturenUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnFacturenUserControl.ascx.designer.cs">
+      <DependentUpon>MijnFacturenUserControl.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\ClubCloud.Mijn\MijnGegevensUserControl.ascx.cs">
       <DependentUpon>MijnGegevensUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -254,6 +261,7 @@
     <Content Include="ControlTemplates\ClubCloud.Mijn\FaceBookUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\KNLTBUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\MijnCompetitieUserControl.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Mijn\MijnFacturenUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\MijnGegevensUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\MijnProfielUserControl.ascx" />
     <Content Include="ControlTemplates\ClubCloud.Mijn\MijnResultatenUserControl.ascx" />
@@ -274,6 +282,13 @@
     </Content>
     <Content Include="Images\ClubCloud.Mijn\cloud.jpg" />
     <Content Include="Images\ClubCloud.Mijn\mijnknltb.png" />
+    <Content Include="MijnClubCloud\facturen.aspx" />
+    <Content Include="MijnClubCloud\factuur.aspx" />
+    <Content Include="MijnClubCloud\ideal.aspx" />
+    <Content Include="MijnClubCloud\machtiging.aspx" />
+    <Content Include="MijnClubCloud\mijnknltb.aspx" />
+    <Content Include="MijnClubCloud\mijnwachtwoord.aspx" />
+    <Content Include="MijnClubCloud\paypal.aspx" />
     <Content Include="MijnClubCloud\uitslagen.aspx" />
     <Content Include="MijnClubCloud\twitter.aspx" />
     <Content Include="MijnClubCloud\toernooi.aspx" />
@@ -283,6 +298,7 @@
     <Content Include="MijnClubCloud\afhangen.aspx" />
     <Content Include="MijnClubCloud\default.aspx" />
     <Content Include="MijnClubCloud\onet.xml" />
+    <Content Include="MijnClubCloud\vereniging.aspx" />
     <Content Include="MijnClubCloud\webtemp_MijnClubCloud.xml">
       <SubType>Designer</SubType>
     </Content>

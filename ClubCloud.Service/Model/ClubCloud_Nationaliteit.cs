@@ -11,12 +11,18 @@ namespace ClubCloud.Service.Model
 {
     using System;
     using System.Runtime.Serialization;
+    using System.Collections.Generic;
     
-    [Flags]
-    public enum BaanSoort : int
+    [Serializable]
+    [DataContract(IsReference = true)]
+    
+    public partial class ClubCloud_Nationaliteit
     {
-        Buiten = 1,
-        Binnen = 2,
-        Blaashal = 3
+    	[DataMember]
+        public System.Guid Id { get; set; }
+    	[DataMember]
+        public string Naam { get; set; }
+    	[DataMember]
+        public string Code { get; set; }
     }
 }

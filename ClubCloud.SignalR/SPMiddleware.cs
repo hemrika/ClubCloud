@@ -17,10 +17,12 @@ namespace ClubCloud.SignalR
 
         public override Task Invoke(IOwinContext context)
         {
+            /*
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
 
             }
+            */
             /*
             string username = context.Request.Headers.Get("username");
 

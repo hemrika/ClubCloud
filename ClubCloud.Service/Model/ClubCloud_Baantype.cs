@@ -15,33 +15,31 @@ namespace ClubCloud.Service.Model
     
     [Serializable]
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ClubCloud_Baan))]
+    [KnownType(typeof(ClubCloud_Baansoort))]
     
-    public partial class ClubCloud_Baanschema
+    public partial class ClubCloud_Baantype
     {
-        public ClubCloud_Baanschema()
+        public ClubCloud_Baantype()
         {
-            this.Beschikbaar = "True";
+            this.ClubCloud_Baansoort = new HashSet<ClubCloud_Baansoort>();
         }
     
     	[DataMember]
         public System.Guid Id { get; set; }
     	[DataMember]
-        public Nullable<System.Guid> BaanId { get; set; }
+        public string Naam { get; set; }
     	[DataMember]
-        public string Beschikbaar { get; set; }
+        public string Beschrijving { get; set; }
     	[DataMember]
-        public Month MaandBegin { get; set; }
+        public string Meervoud { get; set; }
     	[DataMember]
-        public Month MaandEinde { get; set; }
+        public string Omschrijving { get; set; }
     	[DataMember]
-        public Days Dag { get; set; }
+        public string Code { get; set; }
     	[DataMember]
-        public System.TimeSpan DagBegin { get; set; }
-    	[DataMember]
-        public System.TimeSpan DagEinde { get; set; }
+        public string Actief { get; set; }
     
     	[DataMember]
-        public virtual ClubCloud_Baan ClubCloud_Baan { get; set; }
+        public virtual ICollection<ClubCloud_Baansoort> ClubCloud_Baansoort { get; set; }
     }
 }

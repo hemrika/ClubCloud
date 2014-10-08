@@ -11,5 +11,13 @@
     <ProjectItemFile Source="toernooi.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
     <ProjectItemFile Source="twitter.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
     <ProjectItemFile Source="uitslagen.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="facturen.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="factuur.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="ideal.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="machtiging.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="mijnknltb.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="mijnwachtwoord.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="paypal.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
+    <ProjectItemFile Source="vereniging.aspx" Target="SiteTemplates\MijnClubCloud\" Type="TemplateFile" />
   </Files>
 </ProjectItem>

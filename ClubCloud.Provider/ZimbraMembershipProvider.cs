@@ -1,4 +1,5 @@
-﻿using ClubCloud.Zimbra.Administration;
+﻿using ClubCloud.Zimbra;
+using ClubCloud.Zimbra.Administration;
 using ClubCloud.Zimbra.Global;
 using ClubCloud.Zimbra.Service;
 using Microsoft.IdentityModel.Web;
@@ -217,7 +218,13 @@ namespace ClubCloud.Provider
             }
         }
 
+
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
+        {
+            Task.Run(async () => await InitializeAsync(name, config)).ConfigureAwait(true);
+        }
+
+        public async Task InitializeAsync(string name, System.Collections.Specialized.NameValueCollection config)
         {
             try
             {
@@ -298,7 +305,7 @@ namespace ClubCloud.Provider
                         }
                     }
 
-                    using (Zimbra.Administration.GetVersionInfoResponse response = zimbraServer.Message(new Zimbra.Administration.GetVersionInfoRequest()) as Zimbra.Administration.GetVersionInfoResponse)
+                    using (Zimbra.Administration.GetVersionInfoResponse response = await zimbraServer.Message(new Zimbra.Administration.GetVersionInfoRequest()) as Zimbra.Administration.GetVersionInfoResponse)
                     {
                         if (response != null)
                         {
@@ -318,9 +325,9 @@ namespace ClubCloud.Provider
                     throw new ProviderException(message, ex);
                 }
 
-                GetPasswordProperties();
+                await GetPasswordProperties();
 
-                GetLockProperties();
+                await GetLockProperties();
 
                 this.Initialized = true;
             }
@@ -343,10 +350,10 @@ namespace ClubCloud.Provider
             }
         }
 
-        private void GetLockProperties()
+        private async Task GetLockProperties()
         {
             GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = zimbraconfiguration.Server.ClassOfService }, attrs = "zimbraPasswordLockoutDuration,zimbraPasswordLockoutEnabled,zimbraPasswordLockoutMaxFailures,zimbraPasswordLockoutFailureLifetime" };
-            GetCosResponse response = zimbraServer.Message(request) as GetCosResponse;
+            GetCosResponse response = await zimbraServer.Message(request) as GetCosResponse;
 
             foreach (var item in response.cos.a)
             {
@@ -364,10 +371,10 @@ namespace ClubCloud.Provider
             }
         }
 
-        private void GetPasswordProperties()
+        private async Task GetPasswordProperties()
         {
             GetCosRequest request = new GetCosRequest { cos = new cosSelector { by = cosBy.name, Value = zimbraconfiguration.Server.ClassOfService }, attrs = "zimbraPasswordLocked,zimbraPasswordLocked,zimbraPasswordLockoutDuration,zimbraPasswordLockoutEnabled,zimbraPasswordLockoutMaxFailures" };
-            GetCosResponse response = zimbraServer.Message(request) as GetCosResponse;
+            GetCosResponse response = await zimbraServer.Message(request) as GetCosResponse;
 
             foreach (var item in response.cos.a)
             {
@@ -391,11 +398,16 @@ namespace ClubCloud.Provider
 
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
+            return Task.Run(async () => await ChangePasswordAsync(username, oldPassword, newPassword)).Result;
+        }
+
+        public async Task<bool> ChangePasswordAsync(string username, string oldPassword, string newPassword)
+        {
             bool changed = false;
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -412,13 +424,13 @@ namespace ClubCloud.Provider
                     if (string.IsNullOrEmpty(oldPassword) || string.IsNullOrWhiteSpace(oldPassword))
                     {
                         ClubCloud.Zimbra.Administration.SetPasswordRequest request = new SetPasswordRequest { id = username, newPassword = newPassword };
-                        SetPasswordResponse response = clientServer.Message(request) as SetPasswordResponse;
+                        SetPasswordResponse response = await clientServer.Message(request) as SetPasswordResponse;
                         string message = response.message;
                     }
                     else
                     {
                         ClubCloud.Zimbra.Account.ChangePasswordRequest request = new Zimbra.Account.ChangePasswordRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username }, oldPassword = oldPassword, password = newPassword };
-                        Zimbra.Account.ChangePasswordResponse response = clientServer.Message(request) as Zimbra.Account.ChangePasswordResponse;
+                        Zimbra.Account.ChangePasswordResponse response = await clientServer.Message(request) as Zimbra.Account.ChangePasswordResponse;
                         string AuthToken = response.authToken;
                         //ZimbraCookie(AuthToken);
                     }
@@ -474,12 +486,17 @@ namespace ClubCloud.Provider
 
         public override string ResetPassword(string username, string answer)
         {
+            return Task.Run(async () => await ResetPasswordAsync(username, answer)).Result;
+        }
+
+        public async Task<string> ResetPasswordAsync(string username, string answer)
+        {
             string resetPassword = null;
 
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -492,7 +509,7 @@ namespace ClubCloud.Provider
             string zimbraId = null;
 
             Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username } };
-            Zimbra.Administration.GetAccountInfoResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
+            Zimbra.Administration.GetAccountInfoResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
             if (response != null)
             {
                 
@@ -515,7 +532,7 @@ namespace ClubCloud.Provider
                 //Zimbra.Administration.ModifyAccountResponse modified = zimbraServer.Message(modify) as Zimbra.Administration.ModifyAccountResponse;
                 //TODO send message
                 Zimbra.Administration.SetPasswordRequest setpwrequest = new SetPasswordRequest { id = zimbraId, newPassword = resetPassword };
-                Zimbra.Administration.SetPasswordResponse setpwresponse = zimbraServer.Message(setpwrequest) as Zimbra.Administration.SetPasswordResponse;
+                Zimbra.Administration.SetPasswordResponse setpwresponse = await zimbraServer.Message(setpwrequest) as Zimbra.Administration.SetPasswordResponse;
             }
             else
             {
@@ -527,12 +544,29 @@ namespace ClubCloud.Provider
             return resetPassword;
         }
 
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="answer"></param>
+        /// <returns></returns>
         public override string GetPassword(string username, string answer)
+        {
+            return Task.Run(async () => await GetPasswordAsync(username, answer)).Result;
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="answer"></param>
+        /// <returns></returns>
+        public async Task<string> GetPasswordAsync(string username, string answer)
         {
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());        
 
                 if (!Initialized)
                 {
@@ -663,10 +697,20 @@ namespace ClubCloud.Provider
 
         public override System.Web.Security.MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
+            Tuple<int, System.Web.Security.MembershipUserCollection> result;
+            result = Task.Run(async () => await FindUsersByEmailAsync(emailToMatch, pageIndex, pageSize)).Result;
+            totalRecords = result.Item1;
+            return result.Item2;
+        }
+
+        public async Task<Tuple<int, System.Web.Security.MembershipUserCollection>> FindUsersByEmailAsync(string emailToMatch, int pageIndex, int pageSize)//, out int totalRecords)
+        {
+            int totalRecords = 0;
+
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -691,7 +735,7 @@ namespace ClubCloud.Provider
             else
             {
                 totalRecords = 0;
-                return users;
+                return new Tuple<int,MembershipUserCollection>(totalRecords, users);
             }
 
             if (!Initialized)
@@ -716,7 +760,7 @@ namespace ClubCloud.Provider
                 Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
                 srequest.query = String.Format("(|(mail=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", emailToMatch);
 
-                Zimbra.Administration.SearchDirectoryResponse sresponse = zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
                 List<Zimbra.Global.accountInfo> accounts = sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; });
 
                 totalRecords += accounts.Count;
@@ -757,18 +801,26 @@ namespace ClubCloud.Provider
                         users.Add(user);
                     }
                 }
-                return users;
+                return new Tuple<int,MembershipUserCollection>(totalRecords, users);
             }
-            return new MembershipUserCollection();
+            return new Tuple<int, MembershipUserCollection>(0, new MembershipUserCollection()); 
         }
 
         public override System.Web.Security.MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        {
+            Tuple<int, System.Web.Security.MembershipUserCollection> result;
+            result= Task.Run(async () => await FindUsersByNameAsync(usernameToMatch, pageIndex, pageSize)).Result;
+            totalRecords =result.Item1;
+            return result.Item2;
+        }
+
+        public async Task<Tuple<int, System.Web.Security.MembershipUserCollection>> FindUsersByNameAsync(string usernameToMatch, int pageIndex, int pageSize)//, out int totalRecords)
         {
 
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -781,7 +833,7 @@ namespace ClubCloud.Provider
             MembershipUserCollection users = new MembershipUserCollection();
             SPContext context = SPContext.Current;
             string domain = null;
-            totalRecords = 0;
+            int totalRecords = 0;
             if (context != null)
             {
                 domain = GetZimbraDomain(context.Site.Url);
@@ -796,7 +848,7 @@ namespace ClubCloud.Provider
                     Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts", attrs = "displayName,zimbraId,zimbraAliasTargetId,cn,sn,zimbraMailHost,uid,zimbraCOSId,zimbraAccountStatus,zimbraLastLogonTimestamp,description,zimbraIsSystemAccount,zimbraIsDelegatedAdminAccount,zimbraIsAdminAccount,zimbraIsSystemResource,zimbraAuthTokenValidityValue,zimbraIsExternalVirtualAccount,zimbraMailStatus,zimbraIsAdminGroup,zimbraCalResType,zimbraDomainType,zimbraDomainName,zimbraDomainStatus" };
                     srequest.query = String.Format("(|(uid=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(givenName=*{0}*))", usernameToMatch);
 
-                    Zimbra.Administration.SearchDirectoryResponse sresponse = zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
                     accounts = sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; });
                 }
                 catch (Exception)
@@ -844,18 +896,26 @@ namespace ClubCloud.Provider
                         
                     }
                 }
-                return users;
+                return new Tuple<int,MembershipUserCollection>(totalRecords, users);
             }
-            return new MembershipUserCollection();
+            return new Tuple<int, MembershipUserCollection>(0, new MembershipUserCollection());
         }
 
         public override System.Web.Security.MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
+            Tuple<int,System.Web.Security.MembershipUserCollection> result;
+            result = Task.Run(async () => await GetAllUsersAsync(pageIndex, pageSize)).Result;
+            totalRecords = result.Item1;
+            return result.Item2;
+        }
 
+        public async Task<Tuple<int, System.Web.Security.MembershipUserCollection>> GetAllUsersAsync(int pageIndex, int pageSize)//, out int totalRecords)
+        {
+            int totalRecords;
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -874,7 +934,7 @@ namespace ClubCloud.Provider
                 domain = GetZimbraDomain(context.Site.Url);
 
                 GetAllAccountsRequest request = new GetAllAccountsRequest { domain = new domainSelector { by = domainBy.name, Value = domain }, server = new serverSelector { by = serverBy.name, Value = zimbraconfiguration.Server.ServerName } };
-                GetAllAccountsResponse response = zimbraServer.Message(request) as GetAllAccountsResponse;
+                GetAllAccountsResponse response = await zimbraServer.Message(request) as GetAllAccountsResponse;
 
                 if (response != null)
                 {
@@ -945,9 +1005,9 @@ namespace ClubCloud.Provider
                         users.Add(user);
                     }
                 }
-                return users;
+                return new Tuple<int,MembershipUserCollection>(totalRecords, users);
             }
-            return users;
+            return new Tuple<int, MembershipUserCollection>(totalRecords, users); ;
         }
 
         /*
@@ -986,6 +1046,12 @@ namespace ClubCloud.Provider
 
         #region Get User
 
+        public async Task<ZimbraMembershipUser> GetZimbraUserAsync(string username, bool userIsOnline)
+        {
+            MembershipUser user = await this.GetUserAsync(username, userIsOnline);
+            return user as ZimbraMembershipUser;
+        }
+
         public ZimbraMembershipUser GetZimbraUser(string username, bool userIsOnline)
         {
             return this.GetUser(username, userIsOnline) as ZimbraMembershipUser;
@@ -993,12 +1059,17 @@ namespace ClubCloud.Provider
 
         public override System.Web.Security.MembershipUser GetUser(string username, bool userIsOnline)
         {
+            return Task.Run(async () => await GetUserAsync(username, userIsOnline)).Result;
+        }
+
+        public async Task<System.Web.Security.MembershipUser> GetUserAsync(string username, bool userIsOnline)
+        {
             ZimbraMembershipUser user = new ZimbraMembershipUser();
 
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -1011,7 +1082,7 @@ namespace ClubCloud.Provider
             try
             {
                 Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username }, applyCos = true };
-                Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
+                Zimbra.Administration.GetAccountResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
                 if (response != null)
                 {
                     Type tuser = user.GetType();
@@ -1061,6 +1132,11 @@ namespace ClubCloud.Provider
 
         public override System.Web.Security.MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
+            return Task.Run(async () => await GetUserAsync(providerUserKey, userIsOnline)).Result;
+        }
+
+        public async Task<System.Web.Security.MembershipUser> GetUserAsync(object providerUserKey, bool userIsOnline)
+        {
             ZimbraMembershipUser user = new ZimbraMembershipUser();
 
             string sddl = (providerUserKey as SecurityIdentifier).Value;
@@ -1068,7 +1144,7 @@ namespace ClubCloud.Provider
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -1082,7 +1158,7 @@ namespace ClubCloud.Provider
             {
 
                 Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Id, Value = providerUserKey.ToString() }, applyCos = true };
-                Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
+                Zimbra.Administration.GetAccountResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
                 if (response != null)
                 {
                     Type tuser = user.GetType();
@@ -1129,6 +1205,11 @@ namespace ClubCloud.Provider
 
         public override string GetUserNameByEmail(string email)
         {
+            return Task.Run(async () => await GetUserNameByEmailAsync(email)).Result;
+        }
+
+        public async Task<string> GetUserNameByEmailAsync(string email)
+        {
             string UserName = null;
 
             string[] parts = email.Split('@');//.Last();
@@ -1149,7 +1230,7 @@ namespace ClubCloud.Provider
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -1162,7 +1243,7 @@ namespace ClubCloud.Provider
             try
             {
                 Zimbra.Administration.GetAccountRequest request = new Zimbra.Administration.GetAccountRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = email }, applyCos = false, attrs = "displayName" };
-                Zimbra.Administration.GetAccountResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
+                Zimbra.Administration.GetAccountResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAccountResponse;
                 if (response != null)
                 {
                     UserName = response.account.a.Single<attrN>(a => a.name == "displayName").Value;
@@ -1181,13 +1262,28 @@ namespace ClubCloud.Provider
 
         #region Locking User
 
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public override bool UnlockUser(string userName)
+        {
+            return Task.Run(async () => await UnlockUserAsync(userName)).Result;
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public async Task<bool> UnlockUserAsync(string userName)
         {
             bool unlocked = false;
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -1211,14 +1307,19 @@ namespace ClubCloud.Provider
             return unlocked;
         }
 
-        public bool LockUser(string userName)
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public async Task<bool> LockUserAsync(string userName)
         {
             bool unlocked = false;
 
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -1249,12 +1350,21 @@ namespace ClubCloud.Provider
 
         public override System.Web.Security.MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out System.Web.Security.MembershipCreateStatus status)
         {
+            Tuple<System.Web.Security.MembershipCreateStatus, System.Web.Security.MembershipUser> result;
+            result = Task.Run(async () => await CreateUserAsync(username, password, email, passwordQuestion, passwordAnswer, isApproved, providerUserKey)).Result;
+            status = result.Item1;
+            return result.Item2;
+        }
+
+        public async Task<Tuple<System.Web.Security.MembershipCreateStatus, System.Web.Security.MembershipUser>> CreateUserAsync(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey)//, out System.Web.Security.MembershipCreateStatus status)
+        {
             MembershipUser zuser = null;
+            System.Web.Security.MembershipCreateStatus status;
 
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -1275,7 +1385,7 @@ namespace ClubCloud.Provider
             }
 
             Zimbra.Administration.CreateAccountRequest create = new Zimbra.Administration.CreateAccountRequest { name = username, password = password, a = properties };
-            Zimbra.Administration.CreateAccountResponse created = zimbraServer.Message(create) as Zimbra.Administration.CreateAccountResponse;
+            Zimbra.Administration.CreateAccountResponse created = await zimbraServer.Message(create) as Zimbra.Administration.CreateAccountResponse;
 
             if (created != null)
             {
@@ -1288,19 +1398,36 @@ namespace ClubCloud.Provider
                 zuser = null;
             }
 
-            return zuser;
+            return new Tuple<MembershipCreateStatus,MembershipUser>(status,zuser);
         }
 
         #endregion
 
         #region Delete Region
 
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="deleteAllRelatedData"></param>
+        /// <returns></returns>
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
+        {
+            return Task.Run(async () => await DeleteUserAsync(username, deleteAllRelatedData)).Result;
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="deleteAllRelatedData"></param>
+        /// <returns></returns>
+        public async Task<bool> DeleteUserAsync(string username, bool deleteAllRelatedData)
         {
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -1323,14 +1450,24 @@ namespace ClubCloud.Provider
         #endregion
 
         #region Update User
+
+        public async Task UpdateZimbraUserAsync(ZimbraMembershipUser zuser)
+        {
+            await UpdateUserAsync(zuser as MembershipUser);
+        }
         public override void UpdateUser(System.Web.Security.MembershipUser user)
+        {
+            Task.Run(async () => await UpdateUserAsync(user));
+        }
+
+        public async Task UpdateUserAsync(System.Web.Security.MembershipUser user)
         {
             ZimbraMembershipUser zuser = user as ZimbraMembershipUser;
 
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -1413,7 +1550,7 @@ namespace ClubCloud.Provider
                 if (!string.IsNullOrWhiteSpace(zimbraId) && properties.Count > 0)
                 {
                     Zimbra.Administration.ModifyAccountRequest modify = new Zimbra.Administration.ModifyAccountRequest { id = zimbraId, a = properties };
-                    Zimbra.Administration.ModifyAccountResponse modified = zimbraServer.Message(modify) as Zimbra.Administration.ModifyAccountResponse;
+                    Zimbra.Administration.ModifyAccountResponse modified = await zimbraServer.Message(modify) as Zimbra.Administration.ModifyAccountResponse;
                 }
             }
             catch(Exception ex)
@@ -1428,12 +1565,17 @@ namespace ClubCloud.Provider
 
         public override bool ValidateUser(string username, string password)
         {
+            return Task.Run(async () => await ValidateUserAsync(username, password)).Result;
+        }
+
+        public async Task<bool> ValidateUserAsync(string username, string password)
+        {
             bool validated = false;
 
             if (!Initialized)
             {
                 SetConfiguration();
-                Initialize(string.Empty, new NameValueCollection());
+                await InitializeAsync(string.Empty, new NameValueCollection());
 
                 if (!Initialized)
                 {
@@ -1447,7 +1589,7 @@ namespace ClubCloud.Provider
             {
 
                 Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username } };
-                Zimbra.Administration.GetAccountInfoResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
+                Zimbra.Administration.GetAccountInfoResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
                 if (response != null)
                 {
                     using (Zimbra.ZimbraServer clientServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName))

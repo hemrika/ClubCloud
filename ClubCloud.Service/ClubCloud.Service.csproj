@@ -254,6 +254,9 @@
     <Compile Include="Model\Financieel.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\GeslachtSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Mijn.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -275,6 +278,9 @@
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Privacy.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ReserveringSoort.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Twitter.cs">

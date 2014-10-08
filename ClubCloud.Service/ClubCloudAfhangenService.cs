@@ -155,7 +155,7 @@ namespace ClubCloud.Service
 
         public ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
         {
-            ClubCloud_Foto foto = new ClubCloud_Foto();
+            ClubCloud_Foto foto = null;
 
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
@@ -168,7 +168,7 @@ namespace ClubCloud.Service
 
         public ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
         {
-            ClubCloud_Foto foto = new ClubCloud_Foto();
+            ClubCloud_Foto foto = null;
 
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
@@ -269,14 +269,14 @@ namespace ClubCloud.Service
 
             return vereniging;
         }
-        public ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime tijd, bool final = false, bool push = false)
+        public ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime Datum,TimeSpan Tijd, TimeSpan Duur, ReserveringSoort Soort = ReserveringSoort.Afhangen, bool final = false, bool push = false, string Beschrijving = "")
         {
             ClubCloud_Reservering reservering = new ClubCloud_Reservering();
 
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                reservering = client.SetReservering(bondsnummer, verenigingId, baanId, gebruikers, tijd, final, push);
+                reservering = client.SetReservering(bondsnummer, verenigingId, baanId, gebruikers,Datum, Tijd, Duur,Soort, final, push, Beschrijving);
             }
 
             return reservering;

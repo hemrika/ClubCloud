@@ -29,16 +29,6 @@ namespace ClubCloud.Service
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
     public class ClubCloudClientService : IClubCloudClientService
     {
-        /*
-        private CookieContainer RequestContainer(string bondsnummer, string wachtwoord)
-        {
-            ClubCloud.KNLTB.Security.KNLTBContainer container = new KNLTB.Security.KNLTBContainer();
-            container.MijnRequestAcces(bondsnummer, wachtwoord);
-            while (container.Container == null) { }
-            return container.Container;
-        }
-        */
-
         #region Settings
 
         public string GetCurrentUser()
@@ -145,6 +135,7 @@ namespace ClubCloud.Service
             return currentsettings;
         }
 
+        /*
         public ClubCloud_Gebruiker GetClubCloudGebruiker(bool refresh = false)
         {
             ClubCloud_Gebruiker clubCloud_gebruiker = new ClubCloud_Gebruiker();
@@ -157,6 +148,7 @@ namespace ClubCloud.Service
 
             return clubCloud_gebruiker;
         }
+        */
 
         public ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
         {
@@ -165,7 +157,7 @@ namespace ClubCloud.Service
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                clubCloud_gebruiker = client.GetClubCloudGebruiker(SPContext.Current.Web.CurrentUser.LoginName, refresh);
+                clubCloud_gebruiker = client.GetGebruikerByNummer(SPContext.Current.Web.CurrentUser.LoginName,verenigingId, nummer, refresh);
             }
 
             return clubCloud_gebruiker;
@@ -178,7 +170,7 @@ namespace ClubCloud.Service
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                clubCloud_gebruiker = client.GetClubCloudGebruiker(SPContext.Current.Web.CurrentUser.LoginName, refresh);
+                clubCloud_gebruiker = client.GetGebruikerById(SPContext.Current.Web.CurrentUser.LoginName, verenigingId, gebruikerId, refresh);
             }
 
             return clubCloud_gebruiker;
@@ -186,7 +178,7 @@ namespace ClubCloud.Service
 
         public ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
         {
-            ClubCloud_Foto clubCloud_foto = new ClubCloud_Foto();
+            ClubCloud_Foto clubCloud_foto = null;
 
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
@@ -199,7 +191,7 @@ namespace ClubCloud.Service
 
         public ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
         {
-            ClubCloud_Foto clubCloud_foto = new ClubCloud_Foto();
+            ClubCloud_Foto clubCloud_foto = null;
 
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
@@ -211,8 +203,6 @@ namespace ClubCloud.Service
         }
 
         #endregion
-
-
 
         public ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
@@ -226,5 +216,6 @@ namespace ClubCloud.Service
 
             return vereniging;
         }
+
     }
 }

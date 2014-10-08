@@ -55,12 +55,12 @@ namespace ClubCloud.Service
         ClubCloud.Service.Model.ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
 
         [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
-        ClubCloud.Service.Model.ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
-
-        [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Foto))]
         ClubCloud.Service.Model.ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
+        ClubCloud.Service.Model.ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
@@ -96,7 +96,7 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        ClubCloud.Service.Model.ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime tijd, bool final = false, bool push = false);
+        ClubCloud.Service.Model.ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime Datum, TimeSpan Tijd, TimeSpan Duur, ReserveringSoort Soort = ReserveringSoort.Afhangen, bool final = false, bool push = false, string Beschrijving = "");
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]

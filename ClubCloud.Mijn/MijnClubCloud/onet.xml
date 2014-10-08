@@ -26,6 +26,14 @@
       <File Path="toernooi.aspx" Url="toernooi.aspx" />
       <File Path="twitter.aspx" Url="twitter.aspx" />
       <File Path="uitslagen.aspx" Url="uitslagen.aspx" />
+      <File Path="facturen.aspx" Url="facturen.aspx" />
+      <File Path="factuur.aspx" Url="factuur.aspx" />
+      <File Path="ideal.aspx" Url="ideal.aspx" />
+      <File Path="machtiging.aspx" Url="machtiging.aspx" />
+      <File Path="mijnknltb.aspx" Url="mijnknltb.aspx" />
+      <File Path="mijnwachtwoord.aspx" Url="mijnwachtwoord.aspx" />
+      <File Path="paypal.aspx" Url="paypal.aspx" />
+      <File Path="vereniging.aspx" Url="vereniging.aspx" />
     </Module>
   </Modules>
 </Project>

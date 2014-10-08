@@ -11,15 +11,16 @@ namespace ClubCloud.Service.Model
 {
     using System;
     using System.Runtime.Serialization;
+    using System.Collections.Generic;
     
-    public enum Days : int
+    [Serializable]
+    [DataContract(IsReference = true)]
+    
+    public partial class ClubCloud_Bouwaard
     {
-        maandag = 1,
-        dinsdag = 2,
-        woensdag = 3,
-        donderdag = 4,
-        vrijdag = 5,
-        zaterdag = 6,
-        zondag = 7
+    	[DataMember]
+        public System.Guid Id { get; set; }
+    	[DataMember]
+        public string Naam { get; set; }
     }
 }

@@ -161,6 +161,7 @@ namespace ClubCloud.Service
             return response;
         }
 
+        /*
         public ClubCloud_Gebruiker GetClubCloudGebruiker(string bondsnummer, bool refresh = false)
         {
             ClubCloud_Gebruiker response = null;
@@ -174,15 +175,16 @@ namespace ClubCloud.Service
 
             return response;
         }
+        */
 
-        public bool SetClubCloudGebruiker(string bondsnummer, ClubCloud_Gebruiker gebruiker, bool refresh = false)
+        public bool SetClubCloudGebruiker(string bondsnummer, Guid verenigingId, ClubCloud_Gebruiker gebruiker, bool refresh = false)
         {
             bool response = false;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.SetClubCloudGebruiker(bondsnummer, gebruiker, refresh);
+                    response = channel.SetClubCloudGebruiker(bondsnummer, verenigingId, gebruiker, refresh);
                 },
                 false);
 
@@ -217,7 +219,7 @@ namespace ClubCloud.Service
             return response;
         }
 
-        public ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh)
+        public ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
         {
             ClubCloud_Foto response = null;
 
@@ -231,7 +233,7 @@ namespace ClubCloud.Service
             return response;
         }
 
-        public ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh)
+        public ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
         {
             ClubCloud_Foto response = null;
 
@@ -245,7 +247,7 @@ namespace ClubCloud.Service
             return response;
         }
 
-        public List<ClubCloud_Address> GetAddressByGebruikerId(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh)
+        public List<ClubCloud_Address> GetAddressByGebruikerId(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
         {
             List<ClubCloud_Address> response = null;
 
@@ -253,6 +255,20 @@ namespace ClubCloud.Service
                 delegate(IClubCloudApplicationService channel)
                 {
                     response = channel.GetAddressByGebruikerId(bondsnummer, verenigingId, gebruikerId, refresh);
+                },
+                false);
+
+            return response;
+        }
+        
+        public List<ClubCloud_Lidmaatschap> GetLidmaatschapByGebruikerId(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
+        {
+            List<ClubCloud_Lidmaatschap> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetLidmaatschapByGebruikerId(bondsnummer, verenigingId, gebruikerId, refresh);
                 },
                 false);
 
@@ -839,14 +855,14 @@ namespace ClubCloud.Service
             return response;
         }
 
-        public ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime tijd, bool final = false, bool push = false)
+        public ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime Datum,TimeSpan Tijd, TimeSpan Duur, ReserveringSoort Soort = ReserveringSoort.Afhangen, bool final = false, bool push = false, string Beschrijving = "")
         {
             ClubCloud_Reservering response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.SetReservering(bondsnummer, verenigingId, baanId, gebruikers, tijd, final, push);
+                    response = channel.SetReservering(bondsnummer, verenigingId, baanId, gebruikers, Datum,Tijd,Duur,Soort,final, push, Beschrijving);
                 },
                 false);
 

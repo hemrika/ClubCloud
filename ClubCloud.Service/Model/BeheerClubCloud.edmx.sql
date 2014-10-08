@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/25/2014 11:50:07
+-- Date Created: 09/29/2014 02:30:40
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Service\Model\BeheerClubCloud.edmx
 -- --------------------------------------------------
 
@@ -202,7 +202,8 @@ CREATE TABLE [dbo].[ClubCloud_Settings] (
     [facebook_access_token] nvarchar(max)  NULL,
     [facebook_setting] int  NOT NULL,
     [privacy] int  NOT NULL,
-    [financieel] int  NOT NULL
+    [financieel] int  NOT NULL,
+    [Gewijzigd] datetime  NOT NULL
 );
 GO
 
@@ -234,7 +235,8 @@ CREATE TABLE [dbo].[ClubCloud_Verenigingen] (
     [Oprichting] datetime  NULL,
     [Erkenning] datetime  NULL,
     [Gestopt] datetime  NULL,
-    [Maanden] int  NOT NULL
+    [Maanden] int  NOT NULL,
+    [Gewijzigd] datetime  NOT NULL
 );
 GO
 
@@ -280,7 +282,9 @@ CREATE TABLE [dbo].[ClubCloud_Gebruikers] (
     [AanhefAttentie] nvarchar(max)  NOT NULL,
     [FotoId] int  NOT NULL,
     [VerenigingId] uniqueidentifier  NULL,
-    [Volledigenaam] nvarchar(max)  NOT NULL
+    [Volledigenaam] nvarchar(max)  NOT NULL,
+    [Geslacht] int  NOT NULL,
+    [Gewijzigd] datetime  NOT NULL
 );
 GO
 
@@ -325,7 +329,8 @@ CREATE TABLE [dbo].[ClubCloud_Accomodaties] (
     [WasruimteClubhuisAanwezig] bit  NOT NULL,
     [DistrictId] uniqueidentifier  NULL,
     [RegioId] uniqueidentifier  NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] nvarchar(max)  NOT NULL,
+    [Gewijzigd] datetime  NOT NULL
 );
 GO
 
@@ -383,7 +388,8 @@ CREATE TABLE [dbo].[ClubCloud_Lidmaatschappen] (
     [SpeelsterkteDubbel] int  NOT NULL,
     [SpeelsterkteEnkel] int  NOT NULL,
     [Autorisatie] bit  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] nvarchar(max)  NOT NULL,
+    [Gewijzigd] datetime  NOT NULL
 );
 GO
 
@@ -403,7 +409,8 @@ CREATE TABLE [dbo].[ClubCloud_Profielen] (
     [Dubbel_Rating_Eindejaar] decimal(18,0)  NOT NULL,
     [Enkel_Rating_Actueel] decimal(18,0)  NOT NULL,
     [Dubbel_Rating_Actueel] decimal(18,0)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] nvarchar(max)  NOT NULL,
+    [Gewijzigd] datetime  NOT NULL
 );
 GO
 
@@ -418,7 +425,8 @@ CREATE TABLE [dbo].[ClubCloud_Functionarissen] (
     [TermijnBegin] datetime  NULL,
     [TermijnEinde] datetime  NULL,
     [Autorisatie] bit  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] nvarchar(max)  NOT NULL,
+    [Gewijzigd] datetime  NOT NULL
 );
 GO
 
@@ -465,7 +473,10 @@ CREATE TABLE [dbo].[ClubCloud_Addresses] (
     [TelefoonPrimair] nvarchar(max)  NOT NULL,
     [TelefoonSecundair] nvarchar(max)  NOT NULL,
     [TelefoonTertiair] nvarchar(max)  NOT NULL,
-    [GeoLocation] geography  NULL
+    [GeoLocation] geography  NULL,
+    [Gewijzigd] datetime  NOT NULL,
+    [Gemeente] nvarchar(max)  NOT NULL,
+    [AddressGeheim] bit  NOT NULL
 );
 GO
 
@@ -535,6 +546,8 @@ CREATE TABLE [dbo].[ClubCloud_Reserveringen] (
     [Datum] datetime  NOT NULL,
     [Tijd] time  NOT NULL,
     [Duur] time  NOT NULL,
+    [Soort] int  NOT NULL,
+    [Beschrijving] nvarchar(max)  NOT NULL,
     [Gebruiker_Een] uniqueidentifier  NULL,
     [Gebruiker_Twee] uniqueidentifier  NULL,
     [Gebruiker_Drie] uniqueidentifier  NULL,
@@ -578,7 +591,8 @@ CREATE TABLE [dbo].[ClubCloud_Foto] (
     [FotoId] int  NOT NULL,
     [ContentData] varbinary(max)  NULL,
     [ContentType] nvarchar(max)  NOT NULL,
-    [ContentLength] float  NOT NULL
+    [ContentLength] float  NOT NULL,
+    [Gewijzigd] datetime  NOT NULL
 );
 GO
 

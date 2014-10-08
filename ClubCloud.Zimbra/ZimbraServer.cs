@@ -9,6 +9,7 @@ using System.Net;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra
 {
@@ -330,9 +331,10 @@ namespace ClubCloud.Zimbra
             }
         }
 
-        public ZimbraMessage Message(ZimbraMessage zimbraMessage)
+        public async Task<ZimbraMessage> Message(ZimbraMessage zimbraMessage)
         {
             ZimbraMessage message = null;
+            bool reauthenticate = false;
 
             try
             {
@@ -357,25 +359,25 @@ namespace ClubCloud.Zimbra
                 switch (ns)
                 {
                     case "ClubCloud.Zimbra.Account":
-                        message = ProcessAccountMessage(zimbraMessage);
+                        message = await ProcessAccountMessage(zimbraMessage);
                         break;
                     case "ClubCloud.Zimbra.Administration":
-                        message = ProcessAdministrationMessage(zimbraMessage);
+                        message = await ProcessAdministrationMessage(zimbraMessage);
                         break;
                     case "ClubCloud.Zimbra.Administration.Extended":
-                        message = ProcessAdministrationExtendedMessage(zimbraMessage);
+                        message = await ProcessAdministrationExtendedMessage(zimbraMessage);
                         break;
                     case "ClubCloud.Zimbra.Mail":
-                        message = ProcessMailMessage(zimbraMessage);
+                        message = await ProcessMailMessage(zimbraMessage);
                         break;
                     case "ClubCloud.Zimbra.Replication":
-                        message = ProcessReplicationMessage(zimbraMessage);
+                        message = await ProcessReplicationMessage(zimbraMessage);
                         break;
                     case "ClubCloud.Zimbra.Synchronization":
-                        message = ProcessSynchronizationMessage(zimbraMessage);
+                        message = await ProcessSynchronizationMessage(zimbraMessage);
                         break;
                     case "ClubCloud.Zimbra.Voice":
-                        message = ProcessVoiceMessage(zimbraMessage);
+                        message = await ProcessVoiceMessage(zimbraMessage);
                         break;
                     default:
                         {
@@ -386,30 +388,31 @@ namespace ClubCloud.Zimbra
             }
             catch (TargetInvocationException tiex)
             {
-                bool reauthenticate = false;
+                //bool reauthenticate = false;
                 if(tiex.InnerException.GetType() == typeof(FaultException))
                 {
                     if(tiex.InnerException.Message.Equals("no valid authtoken present", StringComparison.InvariantCultureIgnoreCase))
                     {
                         reauthenticate = true;
                     }
+                    else
+                    {
+                        throw tiex;
+                    }
                 }
-                if(reauthenticate)
-                {
-                    Authenticate();
-                    message = Message(zimbraMessage);
-                }
-                else
-                {
-                    throw tiex;
-                }
+            }
+
+            if (reauthenticate)
+            {
+                Authenticate();
+                message = await Message(zimbraMessage);
             }
 
             return message;
         }
 
         //private static ZimbraVoiceSoapClient voice = null;
-        private ZimbraMessage ProcessVoiceMessage(ZimbraMessage zimbraMessage)
+        private async Task<ZimbraMessage> ProcessVoiceMessage(ZimbraMessage zimbraMessage)
         {
             /*
             if (voice == null)
@@ -425,7 +428,7 @@ namespace ClubCloud.Zimbra
 
         //private static ZimbraSynchronizationSoapClient synchronization = null;
 
-        private ZimbraMessage ProcessSynchronizationMessage(ZimbraMessage zimbraMessage)
+        private async Task<ZimbraMessage> ProcessSynchronizationMessage(ZimbraMessage zimbraMessage)
         {
             /*
             if (synchronization == null)
@@ -441,7 +444,7 @@ namespace ClubCloud.Zimbra
 
         //private static ZimbraReplicationSoapClient replication = null;
 
-        private ZimbraMessage ProcessReplicationMessage(ZimbraMessage zimbraMessage)
+        private async Task<ZimbraMessage> ProcessReplicationMessage(ZimbraMessage zimbraMessage)
         {
             /*
             if (replication == null)
@@ -457,7 +460,7 @@ namespace ClubCloud.Zimbra
 
         //private static ZimbraMailSoapClient mail = null;
 
-        private ZimbraMessage ProcessMailMessage(ZimbraMessage zimbraMessage)
+        private async Task<ZimbraMessage> ProcessMailMessage(ZimbraMessage zimbraMessage)
         {
             /*
             if (mail == null)
@@ -473,7 +476,7 @@ namespace ClubCloud.Zimbra
 
         //private static ZimbraAdminExtSoapClient administrationExtended = null;
 
-        private ZimbraMessage ProcessAdministrationExtendedMessage(ZimbraMessage zimbraMessage)
+        private async Task<ZimbraMessage> ProcessAdministrationExtendedMessage(ZimbraMessage zimbraMessage)
         {
             /*
             if (administrationExtended == null)
@@ -488,36 +491,52 @@ namespace ClubCloud.Zimbra
 
         private static ZimbraAdminSoapClient administration = null;
 
-        private ZimbraMessage ProcessAdministrationMessage(ZimbraMessage zimbraMessage)
+        private async Task<ZimbraMessage> ProcessAdministrationMessage(ZimbraMessage zimbraMessage)
         {
             if(administration == null)
             {
                 administration = new ZimbraAdminSoapClient(binding, remoteAddressAdmin);
 
             }
-            return ProcessMessage(administration, zimbraMessage);
+            object message = await ProcessMessage(administration, zimbraMessage);
+            return message as ZimbraMessage;
         }
 
         private static ZimbraAccountSoapClient account = null;
 
-        private ZimbraMessage ProcessAccountMessage(ZimbraMessage zimbraMessage)
+        private async Task<ZimbraMessage> ProcessAccountMessage(ZimbraMessage zimbraMessage)
         {
             if(account == null)
             {
                 account = new ZimbraAccountSoapClient(binding, remoteAddress);
             }
-            
-            return ProcessMessage(account, zimbraMessage);
+            object message = await ProcessMessage(account, zimbraMessage);
+            return message as ZimbraMessage;
         }
 
-        private ZimbraMessage ProcessMessage(object client, ZimbraMessage zimbraMessage)
+        private delegate ZimbraMessage InvokeZimbra(object client, object[] args);
+
+        private async Task<object> ProcessMessage(object client, ZimbraMessage zimbraMessage)
         {
             try
             {
                 string name = zimbraMessage.GetType().Name;
                 MethodInfo methodInfo = client.GetType().GetMethod(name);
-                object response = methodInfo.Invoke(client, new object[] { zimbraMessage });
-                return (ZimbraMessage)response;
+                object[] parameters = new object[] { zimbraMessage };
+                object response = await Task.Run(async () => methodInfo.Invoke(client, parameters));
+
+                //System.Func<object,object[]> delegate = methodInfo.Invoke;
+                //delegate.BeginInvoke(client, new object[] { zimbraMessage });
+                //Func<ZimbraAdminSoapClient, ZimbraMessage[], ZimbraMessage> messageDelegate = (Func<ZimbraAdminSoapClient, ZimbraMessage[], ZimbraMessage>)Delegate.CreateDelegate(typeof(Func<ZimbraAdminSoapClient, ZimbraMessage[], ZimbraMessage>), methodInfo,);
+                
+                //invoke = new InvokeZimbra(client, messages);
+                //Delegate zimbraDelegate = InvokeZimbra.CreateDelegate(client.GetType(),methodInfo);
+                //Task<object> response = (Task<object>)zimbraDelegate.DynamicInvoke(messages);
+                //Task<object> response = (Task<object>)methodInfo.Invoke(client, new object[] { zimbraMessage });
+                //object response = methodInfo.Invoke(client, new object[] { zimbraMessage });
+                //return (ZimbraMessage)response;
+
+                return response;
             }
             catch (FaultException fex)
             {

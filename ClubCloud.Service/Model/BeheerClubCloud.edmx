@@ -169,6 +169,7 @@
     <Property Name="facebook_setting" Type="int" Nullable="false" />
     <Property Name="privacy" Type="int" Nullable="false" />
     <Property Name="financieel" Type="int" Nullable="false" />
+    <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Verenigingen">
     <Key>
@@ -201,6 +202,7 @@
     <Property Name="Erkenning" Type="datetime" Nullable="true" />
     <Property Name="Gestopt" Type="datetime" Nullable="true" />
     <Property Name="Maanden" Type="int" Nullable="false" />
+    <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Gebruikers">
     <Key>
@@ -247,6 +249,8 @@
     <Property Name="FotoId" Type="int" Nullable="false" />
     <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Volledigenaam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Geslacht" Type="int" Nullable="false" />
+    <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Accomodaties">
     <Key>
@@ -292,6 +296,7 @@
     <Property Name="DistrictId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="RegioId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Nationaliteiten">
     <Key>
@@ -350,6 +355,7 @@
     <Property Name="SpeelsterkteEnkel" Type="int" Nullable="false" />
     <Property Name="Autorisatie" Type="bit" Nullable="false" />
     <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Profielen">
     <Key>
@@ -371,6 +377,7 @@
     <Property Name="Enkel_Rating_Actueel" Type="decimal" Nullable="false" />
     <Property Name="Dubbel_Rating_Actueel" Type="decimal" Nullable="false" />
     <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Functionarissen">
     <Key>
@@ -386,6 +393,7 @@
     <Property Name="TermijnEinde" Type="datetime" Nullable="true" />
     <Property Name="Autorisatie" Type="bit" Nullable="false" />
     <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Bestuursorganen">
     <Key>
@@ -433,6 +441,9 @@
     <Property Name="TelefoonSecundair" Type="nvarchar(max)" Nullable="false" />
     <Property Name="TelefoonTertiair" Type="nvarchar(max)" Nullable="false" />
     <Property Name="GeoLocation" Type="geography" Nullable="true" SRID="4326" />
+    <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
+    <Property Name="Gemeente" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AddressGeheim" Type="bit" Nullable="false" DefaultValue="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Regios">
     <Key>
@@ -502,6 +513,8 @@
     <Property Name="Datum" Type="datetime" Nullable="false" />
     <Property Name="Tijd" Type="time" Nullable="false" />
     <Property Name="Duur" Type="time" Nullable="false" />
+    <Property Name="Soort" Type="int" Nullable="false" />
+    <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Gebruiker_Een" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Gebruiker_Twee" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Gebruiker_Drie" Type="uniqueidentifier" Nullable="true" />
@@ -546,6 +559,7 @@
     <Property Name="ContentData" Type="varbinary(max)" Nullable="true" />
     <Property Name="ContentType" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ContentLength" Type="float" Nullable="false" />
+    <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <Association Name="ClubCloud_Functie_Functionaris">
     <End Role="ClubCloud_Functie" Type="BeheerClubCloud.Store.ClubCloud_Functies" Multiplicity="0..1" />
@@ -1086,7 +1100,7 @@
           <Property Name="BankPlaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Geboortedatum" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Geboorteplaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="OverlijdensDatum" Type="DateTime" Nullable="true" Precision="3" />
+          <Property Name="OverlijdensDatum" Type="DateTime" Precision="3" Nullable="true" />
           <Property Name="NationaliteitId" Type="Guid" Nullable="true" />
           <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Functionaris" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Functionaris" />
           <NavigationProperty Name="ClubCloud_Lidmaatschap" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Lidmaatschap" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Lidmaatschap" />
@@ -1110,6 +1124,8 @@
           <NavigationProperty Name="ClubCloud_Reservering_Twee" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Twee" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
           <NavigationProperty Name="ClubCloud_Reservering_Drie" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Drie" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
           <NavigationProperty Name="ClubCloud_Reservering_Vier" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Vier" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
+          <Property Name="Geslacht" Type="BeheerClubCloud.GeslachtSoort" Nullable="false" />
+          <Property Name="Gewijzigd" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="ClubCloud_Vereniging">
           <Key>
@@ -1150,14 +1166,10 @@
           <Property Name="Erkenning" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Gestopt" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Maanden" Type="Int32" Nullable="false" />
+          <Property Name="Gewijzigd" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Gebruiker" />
           <NavigationProperty Name="ClubCloud_Afhangen" Relationship="BeheerClubCloud.ClubCloud_AfhangenClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Afhangen" />
           </EntityType>
-        <EnumType Name="Gender" IsFlags="true" cg:ExternalTypeName="">
-          <Member Name="Onbekend" Value="0" />
-          <Member Name="Man" Value="1" />
-          <Member Name="Vrouw" Value="2" />
-        </EnumType>
         <EntityType Name="ClubCloud_Setting">
           <Key>
             <PropertyRef Name="Id" />
@@ -1177,6 +1189,7 @@
           <Property Name="facebook_setting" Type="BeheerClubCloud.Facebook" Nullable="false" />
           <Property Name="privacy" Type="BeheerClubCloud.Privacy" Nullable="false" />
           <Property Name="financieel" Type="BeheerClubCloud.Financieel" Nullable="false" />
+          <Property Name="Gewijzigd" Type="DateTime" Nullable="false" />
           </EntityType>
         <EnumType Name="Twitter" IsFlags="true">
           <Member Name="None" Value="0" />
@@ -1249,6 +1262,7 @@
           <Property Name="DistrictId" Type="Guid" Nullable="true" />
           <Property Name="RegioId" Type="Guid" Nullable="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gewijzigd" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_AccomodatieClubCloud_District" FromRole="ClubCloud_Accomodatie" ToRole="ClubCloud_District" />
           <NavigationProperty Name="ClubCloud_Regio" Relationship="BeheerClubCloud.ClubCloud_AccomodatieClubCloud_Regio" FromRole="ClubCloud_Accomodatie" ToRole="ClubCloud_Regio" />
           <NavigationProperty Name="ClubCloud_Baan" Relationship="BeheerClubCloud.ClubCloud_BaanClubCloud_Accomodatie" FromRole="ClubCloud_Accomodatie" ToRole="ClubCloud_Baan" />
@@ -1315,6 +1329,7 @@
           <Property Name="SpeelsterkteEnkel" Type="Int32" Nullable="false" />
           <Property Name="Autorisatie" Type="Boolean" Nullable="false" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Gewijzigd" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCloud_Vereniging" />
           <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCloud_Gebruiker" />
         </EntityType>
@@ -1339,6 +1354,7 @@
           <Property Name="Enkel_Rating_Actueel" Type="Decimal" Nullable="false" />
           <Property Name="Dubbel_Rating_Actueel" Type="Decimal" Nullable="false" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gewijzigd" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="ClubCloud_Functionaris">
           <Key>
@@ -1354,6 +1370,7 @@
           <Property Name="TermijnEinde" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Autorisatie" Type="Boolean" Nullable="false" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Gewijzigd" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Functie" Relationship="BeheerClubCloud.ClubCloud_Functie_Functionaris" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Functie" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Functionaris_Vereniging" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Vereniging" />
           <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Functionaris" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Gebruiker" />
@@ -1531,6 +1548,9 @@
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Address" FromRole="ClubCloud_Address" ToRole="ClubCloud_Vereniging" />
           <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Address" FromRole="ClubCloud_Address" ToRole="ClubCloud_Gebruiker" />
           <Property Name="GeoLocation" Type="Geography" Nullable="true" />
+          <Property Name="Gewijzigd" Type="DateTime" Nullable="false" />
+          <Property Name="Gemeente" Type="String" Nullable="false" />
+          <Property Name="AddressGeheim" Type="Boolean" Nullable="false" DefaultValue="false" />
         </EntityType>
         <Association Name="ClubCloud_VerenigingClubCloud_Accomodatie">
           <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="*" />
@@ -1732,6 +1752,8 @@
           <Property Name="Tijd" Type="Time" Nullable="false" />
           <Property Name="Duur" Type="Time" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Gebruiker_Een" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Een" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
+          <Property Name="Soort" Type="BeheerClubCloud.ReserveringSoort" Nullable="false" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" />
           <Property Name="Gebruiker_Een" Type="Guid" Nullable="true" />
           <NavigationProperty Name="ClubCloud_Gebruiker_Twee" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Twee" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
           <Property Name="Gebruiker_Twee" Type="Guid" Nullable="true" />
@@ -1924,11 +1946,28 @@
           <Property Name="ContentData" Type="Binary" Nullable="true" FixedLength="false" MaxLength="Max" />
           <Property Name="ContentType" Type="String" Nullable="false" />
           <Property Name="ContentLength" Type="Double" Nullable="false" />
+          <Property Name="Gewijzigd" Type="DateTime" Nullable="false" />
         </EntityType>
         <EnumType Name="BaanSoort" IsFlags="true">
           <Member Name="Buiten" Value="1" />
           <Member Name="Binnen" Value="2" />
           <Member Name="Blaashal" Value="3" />
+        </EnumType>
+        <EnumType Name="ReserveringSoort" IsFlags="true">
+          <Member Name="Afhangen" Value="0" />
+          <Member Name="Les" Value="2" />
+          <Member Name="Competitie" Value="3" />
+          <Member Name="Toernooi" Value="4" />
+          <Member Name="Evenement" Value="5" />
+          <Member Name="Onderhoud" Value="6" />
+          <Member Name="Seizoen" Value="7" />
+          <Member Name="Mobiel" Value="1" />
+          <Member Name="Overig" Value="8" />
+        </EnumType>
+        <EnumType Name="GeslachtSoort" IsFlags="true">
+          <Member Name="Onbekend" Value="0" />
+          <Member Name="Man" Value="1" />
+          <Member Name="Vrouw" Value="2" />
         </EnumType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1954,6 +1993,7 @@
           <ScalarProperty Name="facebook_setting" ColumnName="facebook_setting" />
           <ScalarProperty Name="privacy" ColumnName="privacy" />
           <ScalarProperty Name="financieel" ColumnName="financieel" />
+          <ScalarProperty Name="Gewijzigd" ColumnName="Gewijzigd" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1987,6 +2027,7 @@
           <ScalarProperty Name="Erkenning" ColumnName="Erkenning" />
           <ScalarProperty Name="Gestopt" ColumnName="Gestopt" />
           <ScalarProperty Name="Maanden" ColumnName="Maanden" />
+          <ScalarProperty Name="Gewijzigd" ColumnName="Gewijzigd" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2034,6 +2075,8 @@
           <ScalarProperty Name="FotoId" ColumnName="FotoId" />
           <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
           <ScalarProperty Name="Volledigenaam" ColumnName="Volledigenaam" />
+          <ScalarProperty Name="Geslacht" ColumnName="Geslacht" />
+          <ScalarProperty Name="Gewijzigd" ColumnName="Gewijzigd" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2080,6 +2123,7 @@
           <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
           <ScalarProperty Name="RegioId" ColumnName="RegioId" />
           <ScalarProperty Name="Actief" ColumnName="Actief" />
+          <ScalarProperty Name="Gewijzigd" ColumnName="Gewijzigd" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2142,6 +2186,7 @@
           <ScalarProperty Name="SpeelsterkteEnkel" ColumnName="SpeelsterkteEnkel" />
           <ScalarProperty Name="Autorisatie" ColumnName="Autorisatie" />
           <ScalarProperty Name="Actief" ColumnName="Actief" />
+          <ScalarProperty Name="Gewijzigd" ColumnName="Gewijzigd" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2163,6 +2208,7 @@
           <ScalarProperty Name="Enkel_Rating_Actueel" ColumnName="Enkel_Rating_Actueel" />
           <ScalarProperty Name="Dubbel_Rating_Actueel" ColumnName="Dubbel_Rating_Actueel" />
           <ScalarProperty Name="Actief" ColumnName="Actief" />
+          <ScalarProperty Name="Gewijzigd" ColumnName="Gewijzigd" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2179,6 +2225,7 @@
           <ScalarProperty Name="TermijnEinde" ColumnName="TermijnEinde" />
           <ScalarProperty Name="Autorisatie" ColumnName="Autorisatie" />
           <ScalarProperty Name="Actief" ColumnName="Actief" />
+          <ScalarProperty Name="Gewijzigd" ColumnName="Gewijzigd" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2229,6 +2276,9 @@
           <ScalarProperty Name="TelefoonSecundair" ColumnName="TelefoonSecundair" />
           <ScalarProperty Name="TelefoonTertiair" ColumnName="TelefoonTertiair" />
           <ScalarProperty Name="GeoLocation" ColumnName="GeoLocation" />
+          <ScalarProperty Name="Gewijzigd" ColumnName="Gewijzigd" />
+          <ScalarProperty Name="Gemeente" ColumnName="Gemeente" />
+          <ScalarProperty Name="AddressGeheim" ColumnName="AddressGeheim" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2305,6 +2355,8 @@
           <ScalarProperty Name="Datum" ColumnName="Datum" />
           <ScalarProperty Name="Tijd" ColumnName="Tijd" />
           <ScalarProperty Name="Duur" ColumnName="Duur" />
+          <ScalarProperty Name="Soort" ColumnName="Soort" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
           <ScalarProperty Name="Gebruiker_Een" ColumnName="Gebruiker_Een" />
           <ScalarProperty Name="Gebruiker_Twee" ColumnName="Gebruiker_Twee" />
           <ScalarProperty Name="Gebruiker_Drie" ColumnName="Gebruiker_Drie" />
@@ -2352,6 +2404,7 @@
           <ScalarProperty Name="ContentData" ColumnName="ContentData" />
           <ScalarProperty Name="ContentType" ColumnName="ContentType" />
           <ScalarProperty Name="ContentLength" ColumnName="ContentLength" />
+          <ScalarProperty Name="Gewijzigd" ColumnName="Gewijzigd" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

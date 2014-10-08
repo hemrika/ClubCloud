@@ -24,6 +24,7 @@
     <div class="inner dark">
 		<ClubCloud:TwitterAuthorize ID="twitterauthorize" runat="server"></ClubCloud:TwitterAuthorize><br/>
     	<div class="clear"></div>
+        <a href="#" onclick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK)" class="button big" style="float:right;" >Sluiten</a>
     </div>
 </asp:Content>
 

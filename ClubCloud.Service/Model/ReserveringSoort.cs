@@ -11,22 +11,18 @@ namespace ClubCloud.Service.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
     
-    [Serializable]
-    [DataContract(IsReference = true)]
-    
-    public partial class ClubCloud_Foto
+    [Flags]
+    public enum ReserveringSoort : int
     {
-    	[DataMember]
-        public System.Guid Id { get; set; }
-    	[DataMember]
-        public int FotoId { get; set; }
-    	[DataMember]
-        public byte[] ContentData { get; set; }
-    	[DataMember]
-        public string ContentType { get; set; }
-    	[DataMember]
-        public double ContentLength { get; set; }
+        Afhangen = 0,
+        Les = 2,
+        Competitie = 3,
+        Toernooi = 4,
+        Evenement = 5,
+        Onderhoud = 6,
+        Seizoen = 7,
+        Mobiel = 1,
+        Overig = 8
     }
 }

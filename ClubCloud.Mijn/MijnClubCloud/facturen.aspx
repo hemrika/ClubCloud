@@ -4,7 +4,7 @@
 <%@ Register Tagprefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register Tagprefix="ClubCloud" Namespace="ClubCloud.Mijn.ControlTemplates" Assembly="ClubCloud.Mijn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
-<%@ Register TagPrefix="ClubCloud" TagName="MijnProfielUserControl" src="~/_controltemplates/ClubCloud.Mijn/MijnProfielUserControl.ascx" %>
+<%@ Register TagPrefix="ClubCloud" TagName="MijnFacturenUserControl" src="~/_controltemplates/ClubCloud.Mijn/MijnFacturenUserControl.ascx" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Import Namespace="Microsoft.SharePoint.ApplicationPages" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
@@ -13,20 +13,20 @@
     <SharePoint:ProjectProperty Property="Title" runat="server"/> Uitslagen
 </asp:Content>
 
-<asp:Content ID="Content1" ContentPlaceHolderId="PlaceHolderMain" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderId="PlaceHolderMain" runat="server">
 	<div class="inner light">
       <div class="aligncenter">
-        <h1 id="pageTitle" class="lined">Mijn ClubCloud uitslagen</h1>
-        <p class="description">Mijn ClubCloud uitslagen.</p>
+        <h1 id="pageTitle" class="lined">Mijn ClubCloud Facturen</h1>
+        <p class="description">Dit zijn de facturen van uw vereniging(en)</p>
         </div>
     </div>
     <div class="inner dark">
         <div class="services">
             <!-- <Sharepoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly" Permissions="EmptyMask"> -->
-            <p>De informatie wordt automatisch bijgehouden en is de actuele informatie zoals bekend bij de KNLTB.
+            <p>Dit zijn uw eigen facturen. Indien uw vereniging ClubCloud gebruikt, worden deze gegevens automatisch overgenomen in de administratie.
             </p>
             <!-- </SharePoint:SPSecurityTrimmedControl> -->
-            <clubcloud:MijnProfielUserControl id="mijnprofiel" runat="server"></clubcloud:MijnProfielUserControl>
+            <ClubCloud:MijnFacturenUserControl id="mijnfacturen" runat="server"></ClubCloud:MijnFacturenUserControl>
             <!-- <Sharepoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AuthenticatedUsersOnly" Permissions="EmptyMask"> -->
             <br />
             <div class="first">

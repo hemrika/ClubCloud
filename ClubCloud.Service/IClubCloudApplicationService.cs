@@ -68,7 +68,13 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
+        bool SetClubCloudGebruiker(string bondsnummer, Guid verenigingId, ClubCloud_Gebruiker gebruiker, bool refresh = false);
+
+        /*
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         ClubCloud_Gebruiker GetClubCloudGebruiker(string bondsnummer, bool refresh = false);
+        */
 
         /*
         [OperationContract]
@@ -179,13 +185,11 @@ namespace ClubCloud.Service
         */
         #endregion
 
-
+        /*
         [OperationContract]
         bool CreateClubCloudWebSite(string verenigingsummer);
+        */
         #endregion
-
-        [OperationContract]
-        bool SetClubCloudGebruiker(string bondsnummer, ClubCloud_Gebruiker gebruiker, bool refresh);
 
         #region Afhangen
 
@@ -238,7 +242,8 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        ClubCloud.Service.Model.ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime tijd, bool final = false, bool push = false);
+        [ServiceKnownType(typeof(ReserveringSoort))]
+        ClubCloud.Service.Model.ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime Datum, TimeSpan Tijd, TimeSpan Duur, ClubCloud.Service.Model.ReserveringSoort Soort = ReserveringSoort.Afhangen, bool final = false, bool push = false, string Beschrijving = "");
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
@@ -255,12 +260,13 @@ namespace ClubCloud.Service
         ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
 
         [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Foto))]
+        ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
+
+        [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
 
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Foto))]
-        ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Address))]
@@ -279,5 +285,10 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Afhang))]
         ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, Guid verenigingId, bool refresh);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Lidmaatschap))]
+        List<ClubCloud_Lidmaatschap> GetLidmaatschapByGebruikerId(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
+
     }
 }

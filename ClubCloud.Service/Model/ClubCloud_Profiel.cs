@@ -15,41 +15,44 @@ namespace ClubCloud.Service.Model
     
     [Serializable]
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ClubCloud_Baan))]
     [KnownType(typeof(ClubCloud_Gebruiker))]
     
-    public partial class ClubCloud_Reservering
+    public partial class ClubCloud_Profiel
     {
     	[DataMember]
         public System.Guid Id { get; set; }
     	[DataMember]
-        public Nullable<System.Guid> BaanId { get; set; }
-    	[DataMember]
         public System.DateTime Datum { get; set; }
     	[DataMember]
-        public System.TimeSpan Tijd { get; set; }
+        public string Bondsnummer { get; set; }
     	[DataMember]
-        public System.TimeSpan Duur { get; set; }
+        public Nullable<System.Guid> GebruikerId { get; set; }
     	[DataMember]
-        public Nullable<System.Guid> Gebruiker_Een { get; set; }
+        public int Enkel_Aantal { get; set; }
     	[DataMember]
-        public Nullable<System.Guid> Gebruiker_Twee { get; set; }
+        public int Dubbel_aantal { get; set; }
     	[DataMember]
-        public Nullable<System.Guid> Gebruiker_Drie { get; set; }
+        public int Enkel_Speelsterkte { get; set; }
     	[DataMember]
-        public Nullable<System.Guid> Gebruiker_Vier { get; set; }
+        public int Enkel_Speelsterkte_Vorig { get; set; }
     	[DataMember]
-        public bool Final { get; set; }
+        public int Dubbel_Speelsterkte { get; set; }
+    	[DataMember]
+        public int Dubbel_Speelsterkte_Vorig { get; set; }
+    	[DataMember]
+        public decimal Enkel_Rating_Eindejaar { get; set; }
+    	[DataMember]
+        public decimal Dubbel_Rating_Eindejaar { get; set; }
+    	[DataMember]
+        public decimal Enkel_Rating_Actueel { get; set; }
+    	[DataMember]
+        public decimal Dubbel_Rating_Actueel { get; set; }
+    	[DataMember]
+        public string Actief { get; set; }
+    	[DataMember]
+        public System.DateTime Gewijzigd { get; set; }
     
     	[DataMember]
-        public virtual ClubCloud_Baan ClubCloud_Baan { get; set; }
-    	[DataMember]
-        public virtual ClubCloud_Gebruiker ClubCloud_Gebruiker_Een { get; set; }
-    	[DataMember]
-        public virtual ClubCloud_Gebruiker ClubCloud_Gebruiker_Twee { get; set; }
-    	[DataMember]
-        public virtual ClubCloud_Gebruiker ClubCloud_Gebruiker_Drie { get; set; }
-    	[DataMember]
-        public virtual ClubCloud_Gebruiker ClubCloud_Gebruiker_Vier { get; set; }
+        public virtual ClubCloud_Gebruiker ClubCloud_Gebruiker { get; set; }
     }
 }
