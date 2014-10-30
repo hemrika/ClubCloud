@@ -10,12 +10,14 @@ namespace ClubCloud.Service
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using Microsoft.SharePoint;
+    using Microsoft.SharePoint.Client.Services;
 
     /// <summary>
     /// This class enables the WCF services to support claims authentication.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF Runtime automatically.")]
     [System.Runtime.InteropServices.Guid("22ae479b-a73f-4e7e-a5db-7a59fe34b514")]
+    [ServiceFactoryUsingAuthSchemeInEndpointAddress(UsingAuthSchemeInEndpointAddress = false)]
     internal sealed class ClubCloudServiceHostFactory : ServiceHostFactory
     {
         /// <summary>

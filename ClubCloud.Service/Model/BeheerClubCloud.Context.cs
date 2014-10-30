@@ -171,6 +171,10 @@ namespace ClubCloud.Service.Model
     
     		modelBuilder.Entity<ClubCloud_Foto>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_LidmaatschapSoort>().MapToStoredProcedures();
+    
+    		modelBuilder.Entity<ClubCloud_LidmaatschapSoort>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
     		base.OnModelCreating(modelBuilder);
         }
     
@@ -196,6 +200,7 @@ namespace ClubCloud.Service.Model
         public virtual DbSet<ClubCloud_Reservering> ClubCloud_Reserveringen { get; set; }
         public virtual DbSet<ClubCloud_Afhang> ClubCloud_Afhangen { get; set; }
         public virtual DbSet<ClubCloud_Baanschema> ClubCloud_Baanschemas { get; set; }
-        public virtual DbSet<ClubCloud_Foto> ClubCloud_Foto { get; set; }
+        public virtual DbSet<ClubCloud_Foto> ClubCloud_Fotos { get; set; }
+        public virtual DbSet<ClubCloud_LidmaatschapSoort> ClubCloud_LidmaatschapSoorten { get; set; }
     }
 }

@@ -1731,84 +1731,6 @@ namespace ClubCloud.Zimbra.Administration
         zimbra,
     }
 
-
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("CreateDistributionListRequest", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "createDistributionListRequest", Namespace = "urn:zimbraAdmin")]
-    public partial class createDistributionListRequest : adminAttrsImpl
-    {
-
-        private string _name;
-
-        private System.Nullable<bool> _dynamic;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                if (((this._name == null)
-                            || (_name.Equals(value) != true)))
-                {
-                    this._name = value;
-                    this.OnPropertyChanged("name");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool dynamic
-        {
-            get
-            {
-                if (this._dynamic.HasValue)
-                {
-                    return this._dynamic.Value;
-                }
-                else
-                {
-                    return default(bool);
-                }
-            }
-            set
-            {
-                if ((_dynamic.Equals(value) != true))
-                {
-                    this._dynamic = value;
-                    this.OnPropertyChanged("dynamic");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool dynamicSpecified
-        {
-            get
-            {
-                return this._dynamic.HasValue;
-            }
-            set
-            {
-                if (value == false)
-                {
-                    this._dynamic = null;
-                }
-            }
-        }
-    }
-
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2386,7 +2308,7 @@ namespace ClubCloud.Zimbra.Administration
     public partial class granteeSelector : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private System.Nullable<granteeType> _type;
+        private System.Nullable<GranteeType> _type;
 
         private System.Nullable<granteeBy> _by;
 
@@ -2398,7 +2320,7 @@ namespace ClubCloud.Zimbra.Administration
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public granteeType type
+        public GranteeType type
         {
             get
             {
@@ -2408,7 +2330,7 @@ namespace ClubCloud.Zimbra.Administration
                 }
                 else
                 {
-                    return default(granteeType);
+                    return default(GranteeType);
                 }
             }
             set
@@ -3472,97 +3394,6 @@ namespace ClubCloud.Zimbra.Administration
     [System.Xml.Serialization.XmlRootAttribute("AddDistributionListAliasResponse", Namespace = "urn:zimbraAdmin", IsNullable = false)]
     [System.Runtime.Serialization.DataContractAttribute(Name = "addDistributionListAliasResponse", Namespace = "urn:zimbraAdmin")]
     public partial class addDistributionListAliasResponse : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("AddDistributionListMemberRequest", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "addDistributionListMemberRequest", Namespace = "urn:zimbraAdmin")]
-    public partial class addDistributionListMemberRequest : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private List<string> _dlm;
-
-        private string _id;
-
-        public addDistributionListMemberRequest()
-        {
-            this._dlm = new List<string>();
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("dlm")]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<string> dlm
-        {
-            get
-            {
-                return this._dlm;
-            }
-            set
-            {
-                if (((this._dlm == null)
-                            || (_dlm.Equals(value) != true)))
-                {
-                    this._dlm = value;
-                    this.OnPropertyChanged("dlm");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                if (((this._id == null)
-                            || (_id.Equals(value) != true)))
-                {
-                    this._id = value;
-                    this.OnPropertyChanged("id");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("AddDistributionListMemberResponse", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "addDistributionListMemberResponse", Namespace = "urn:zimbraAdmin")]
-    public partial class addDistributionListMemberResponse : System.ComponentModel.INotifyPropertyChanged
     {
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
@@ -13820,57 +13651,7 @@ namespace ClubCloud.Zimbra.Administration
         }
     }
 
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("CreateDistributionListResponse", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "createDistributionListResponse", Namespace = "urn:zimbraAdmin")]
-    public partial class createDistributionListResponse : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private distributionListInfo _dl;
-
-        public createDistributionListResponse()
-        {
-            this._dl = new distributionListInfo();
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListInfo dl
-        {
-            get
-            {
-                return this._dl;
-            }
-            set
-            {
-                if (((this._dl == null)
-                            || (_dl.Equals(value) != true)))
-                {
-                    this._dl = value;
-                    this.OnPropertyChanged("dl");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -21909,11 +21690,11 @@ namespace ClubCloud.Zimbra.Administration
 
         private accountSelector _account;
 
-        private distributionListSelector _dl;
+        private DistributionListSelector _dl;
 
         public getAdminConsoleUICompRequest()
         {
-            this._dl = new distributionListSelector();
+            this._dl = new DistributionListSelector();
             this._account = new accountSelector();
         }
 
@@ -21938,7 +21719,7 @@ namespace ClubCloud.Zimbra.Administration
 
         [System.Xml.Serialization.XmlElementAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListSelector dl
+        public DistributionListSelector dl
         {
             get
             {
@@ -23739,19 +23520,19 @@ namespace ClubCloud.Zimbra.Administration
     public partial class getAllEffectiveRightsResponse : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private granteeInfo _grantee;
+        private GranteeInfo _grantee;
 
         private List<effectiveRightsTarget> _target;
 
         public getAllEffectiveRightsResponse()
         {
             this._target = new List<effectiveRightsTarget>();
-            this._grantee = new granteeInfo();
+            this._grantee = new GranteeInfo();
         }
 
         [System.Xml.Serialization.XmlElementAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public granteeInfo grantee
+        public GranteeInfo grantee
         {
             get
             {
@@ -29139,7 +28920,7 @@ namespace ClubCloud.Zimbra.Administration
     public partial class getDistributionListMembershipRequest : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private distributionListSelector _dl;
+        private DistributionListSelector _dl;
 
         private System.Nullable<int> _limit;
 
@@ -29147,12 +28928,12 @@ namespace ClubCloud.Zimbra.Administration
 
         public getDistributionListMembershipRequest()
         {
-            this._dl = new distributionListSelector();
+            this._dl = new DistributionListSelector();
         }
 
         [System.Xml.Serialization.XmlElementAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListSelector dl
+        public DistributionListSelector dl
         {
             get
             {
@@ -29641,18 +29422,18 @@ namespace ClubCloud.Zimbra.Administration
     public partial class getEffectiveRightsResponse : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private granteeInfo _grantee;
+        private GranteeInfo _grantee;
 
         private effectiveRightsTargetInfo _target;
 
         public getEffectiveRightsResponse()
         {
             this._target = new effectiveRightsTargetInfo();
-            this._grantee = new granteeInfo();
+            this._grantee = new GranteeInfo();
         }
 
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public granteeInfo grantee
+        public GranteeInfo grantee
         {
             get
             {
@@ -29992,14 +29773,14 @@ namespace ClubCloud.Zimbra.Administration
 
         private typeIdName _target;
 
-        private granteeInfo _grantee;
+        private GranteeInfo _grantee;
 
         private rightModifierInfo _right;
 
         public grantInfo()
         {
             this._right = new rightModifierInfo();
-            this._grantee = new granteeInfo();
+            this._grantee = new GranteeInfo();
             this._target = new typeIdName();
         }
 
@@ -30024,7 +29805,7 @@ namespace ClubCloud.Zimbra.Administration
 
         [System.Xml.Serialization.XmlElementAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public granteeInfo grantee
+        public GranteeInfo grantee
         {
             get
             {
@@ -39861,16 +39642,16 @@ namespace ClubCloud.Zimbra.Administration
     public partial class modifyDistributionListResponse : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private distributionListInfo _dl;
+        private DistributionListInfo _dl;
 
         public modifyDistributionListResponse()
         {
-            this._dl = new distributionListInfo();
+            this._dl = new DistributionListInfo();
         }
 
         [System.Xml.Serialization.XmlElementAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListInfo dl
+        public DistributionListInfo dl
         {
             get
             {
@@ -44293,97 +44074,6 @@ namespace ClubCloud.Zimbra.Administration
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("RemoveDistributionListMemberRequest", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "removeDistributionListMemberRequest", Namespace = "urn:zimbraAdmin")]
-    public partial class removeDistributionListMemberRequest : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private List<string> _dlm;
-
-        private string _id;
-
-        public removeDistributionListMemberRequest()
-        {
-            this._dlm = new List<string>();
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("dlm")]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<string> dlm
-        {
-            get
-            {
-                return this._dlm;
-            }
-            set
-            {
-                if (((this._dlm == null)
-                            || (_dlm.Equals(value) != true)))
-                {
-                    this._dlm = value;
-                    this.OnPropertyChanged("dlm");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                if (((this._id == null)
-                            || (_id.Equals(value) != true)))
-                {
-                    this._id = value;
-                    this.OnPropertyChanged("id");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
-    [System.Xml.Serialization.XmlRootAttribute("RemoveDistributionListMemberResponse", Namespace = "urn:zimbraAdmin", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "removeDistributionListMemberResponse", Namespace = "urn:zimbraAdmin")]
-    public partial class removeDistributionListMemberResponse : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAdmin")]
     [System.Xml.Serialization.XmlRootAttribute("RenameAccountRequest", Namespace = "urn:zimbraAdmin", IsNullable = false)]
     [System.Runtime.Serialization.DataContractAttribute(Name = "renameAccountRequest", Namespace = "urn:zimbraAdmin")]
     public partial class renameAccountRequest : System.ComponentModel.INotifyPropertyChanged
@@ -44787,16 +44477,16 @@ namespace ClubCloud.Zimbra.Administration
     public partial class renameDistributionListResponse : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private distributionListInfo _dl;
+        private DistributionListInfo _dl;
 
         public renameDistributionListResponse()
         {
-            this._dl = new distributionListInfo();
+            this._dl = new DistributionListInfo();
         }
 
         [System.Xml.Serialization.XmlElementAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListInfo dl
+        public DistributionListInfo dl
         {
             get
             {
@@ -46953,7 +46643,7 @@ namespace ClubCloud.Zimbra.Administration
         [System.Xml.Serialization.XmlElementAttribute("alias", typeof(aliasInfo))]
         [System.Xml.Serialization.XmlElementAttribute("calresource", typeof(calendarResourceInfo))]
         [System.Xml.Serialization.XmlElementAttribute("cos", typeof(cosInfo))]
-        [System.Xml.Serialization.XmlElementAttribute("dl", typeof(distributionListInfo))]
+        [System.Xml.Serialization.XmlElementAttribute("dl", typeof(DistributionListInfo))]
         [System.Xml.Serialization.XmlElementAttribute("domain", typeof(domainInfo))]
         [System.Runtime.Serialization.DataMemberAttribute()]
         public List<object> Items

@@ -12,17 +12,17 @@ namespace ClubCloud.Zimbra.Administration
     public partial class GetAllDistributionListsResponse : ZimbraMessage
     {
 
-        private List<distributionListInfo> _dl;
+        private List<DistributionListInfo> _dl;
 
         public GetAllDistributionListsResponse()
         {
-            this._dl = new List<distributionListInfo>();
+            this._dl = new List<DistributionListInfo>();
         }
 
         [System.Xml.Serialization.XmlElementAttribute("dl")]
         [System.Runtime.Serialization.DataMemberAttribute()]
         [MessageBodyMember]
-        public List<distributionListInfo> dl
+        public List<DistributionListInfo> dl
         {
             get
             {

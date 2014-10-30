@@ -29,7 +29,7 @@ namespace ClubCloud.Zimbra.Administration
         [System.Xml.Serialization.XmlElementAttribute("alias", typeof(aliasInfo))]
         [System.Xml.Serialization.XmlElementAttribute("calresource", typeof(calendarResourceInfo))]
         [System.Xml.Serialization.XmlElementAttribute("cos", typeof(cosInfo))]
-        [System.Xml.Serialization.XmlElementAttribute("dl", typeof(distributionListInfo))]
+        [System.Xml.Serialization.XmlElementAttribute("dl", typeof(DistributionListInfo))]
         [System.Xml.Serialization.XmlElementAttribute("domain", typeof(domainInfo))]
         [System.Runtime.Serialization.DataMemberAttribute()]
         [MessageBodyMember]

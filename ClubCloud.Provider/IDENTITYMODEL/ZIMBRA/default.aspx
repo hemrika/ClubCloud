@@ -13,36 +13,65 @@
 <asp:Content ContentPlaceHolderID="PlaceHolderAdditionalPageHead" runat="server">
     <style type="text/css">
         body {
-				background-color: #326696 !important;
-				margin: 0px !important;
-				overflow: hidden !important;
-				font-family:Monospace !important;
-				font-size:13px !important;
-				text-align:center !important;
-				font-weight: bold !important;
-				text-align:center !important;
-                width:100% !important;
+            background-color: #0072C6 !important;
+            margin: 0px !important;
+            overflow: hidden !important;
+            font-family: Monospace !important;
+            font-size: 13px !important;
+            text-align: center !important;
+            font-weight: bold !important;
+            text-align: center !important;
+            width: 100% !important;
         }
 
         a {
             color: #0078ff;
         }
 
-        #login{
-     position:absolute;
-     width:300px;
-     height:200px;
-     z-index:15;
-     top:50%;
-     left:50%;
-     margin:-100px 0 0 -150px;
-     background:red;
-}
-        #ms-error-header
-        {
+        #login {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            z-index: 15;
+            top: 50%;
+            left: 50%;
+            margin: -100px 0 0 -150px;
+            background: red;
+            border-radius: 1px;
+            border-color: #0072C6;
+            transition: all 300ms;
+        }
+
+        #ms-error-header {
             margin: 0px !important;
             min-height: 0px !important;
         }
+
+        input[type="text"].focus-5, input:focus, input[type="text"]:focus {
+            outline: 0 none;
+            box-shadow: 0 0 0 5px #0072C6;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            height: 40px;
+            border-color: #0072C6;
+            text-indent: 5px;
+            border-radius: 3px;
+            margin: 5px;
+            transition: all 300ms;
+        }
+
+        input[type="submit"] {
+            font-size: 24px;
+            color: #fff;
+            width: 100%;
+            margin: 10px;
+            border: none;
+            background-color: #0072C6;
+            border-radius: 3px;
+        }
+
     </style>
 
 </asp:Content>
@@ -224,7 +253,7 @@
 
              </script>
     <div id="login">
-    <div style="width: 330px; padding: 50px 35px; background: hsl(0, 0%, 100%); color: #326696; color: #326696; line-height: 18px !important; font: 500 12px/18px 'Futura', Arial, sans-serif; letter-spacing: 1px; text-align: center;" id="rome-error">
+    <div style="width: 400px; padding: 50px 35px; background: hsl(0, 0%, 100%); color: #0072C6; color: #0072C6; line-height: 18px !important; font: 500 12px/18px 'Futura', Arial, sans-serif; letter-spacing: 1px; text-align: center;" id="rome-error">
     <div id="SslWarning" style="color: red; display: none">
         <SharePoint:EncodedLiteral runat="server" EncodeMethod="HtmlEncode" ID="ClaimsFormsPageMessage" />
     </div>
@@ -243,21 +272,22 @@
                     <td nowrap="nowrap">
                         <SharePoint:EncodedLiteral runat="server" Text="<%$Resources:wss,login_pageUserName%>" EncodeMethod='HtmlEncode' /></td>
                     <td width="100%">
-                        <asp:TextBox ID="UserName" autocomplete="off" runat="server" class="ms-inputuserfield" Width="99%" /></td>
+                        <asp:TextBox ID="UserName" autocomplete="off" runat="server" class="ms-inputuserfield" Width="99%" placeholder="KNLTB Nummer" /></td>
                 </tr>
                 <tr>
                     <td nowrap="nowrap">
                         <SharePoint:EncodedLiteral runat="server" Text="<%$Resources:wss,login_pagePassword%>" EncodeMethod='HtmlEncode' /></td>
                     <td width="100%">
-                        <asp:TextBox ID="password" TextMode="Password" autocomplete="off" runat="server" class="ms-inputuserfield" Width="99%" /></td>
+                        <asp:TextBox ID="password" TextMode="Password" autocomplete="off" runat="server" class="ms-inputuserfield" Width="99%"  placeholder="Wachtwoord"/></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="right">
                         <asp:Button ID="login" CommandName="Login" Text="<%$Resources:wss,login_pagetitle%>" runat="server" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <asp:CheckBox ID="RememberMe" Text="<%$SPHtmlEncodedResources:wss,login_pageRememberMe%>" runat="server" /></td>
+                    <td colspan="2" class="controls-checkboxs radius">
+                        <asp:CheckBox ID="RememberMe" runat="server" Text="<%$SPHtmlEncodedResources:wss,login_pageRememberMe%>"  />
+                    </td>
                 </tr>
             </table>
         </LayoutTemplate>

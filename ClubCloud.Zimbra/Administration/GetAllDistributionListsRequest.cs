@@ -19,7 +19,7 @@ namespace ClubCloud.Zimbra.Administration
             this._domain = new domainSelector();
         }
 
-        [System.Xml.Serialization.XmlElementAttribute()]
+        //[System.Xml.Serialization.XmlElementAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
         [MessageBodyMember]
         public domainSelector domain

@@ -12,7 +12,7 @@ namespace ClubCloud.Zimbra.Administration
     public partial class GetDistributionListRequest : adminAttrsImpl
     {
 
-        private distributionListSelector _dl;
+        private DistributionListSelector _dl;
 
         private System.Nullable<int> _limit;
 
@@ -22,13 +22,13 @@ namespace ClubCloud.Zimbra.Administration
 
         public GetDistributionListRequest()
         {
-            this._dl = new distributionListSelector();
+            this._dl = new DistributionListSelector();
         }
 
         [System.Xml.Serialization.XmlElementAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
         [MessageBodyMember]
-        public distributionListSelector dl
+        public DistributionListSelector dl
         {
             get
             {

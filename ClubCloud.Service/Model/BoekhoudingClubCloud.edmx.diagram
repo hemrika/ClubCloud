@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bdefecbc556544d181663a0872d68e6d" Name="Boekhouding" ZoomLevel="74" >
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Ledger" Width="1.5" PointX="9.75" PointY="14.75" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.LedgerCategory" Width="1.625" PointX="12" PointY="20.75" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Invoice" Width="1.5" PointX="3" PointY="19.625" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.CostCenter" Width="1.5" PointX="12" PointY="12.75" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.FinancialYear" Width="1.5" PointX="12.75" PointY="16.375" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.JournalEntry" Width="1.5" PointX="5.25" PointY="19.625" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.JournalTransaction" Width="1.5" PointX="3" PointY="25.125" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.JournalType" Width="1.5" PointX="9.75" PointY="23.375" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.JournalYear" Width="1.5" PointX="7.5" PointY="23.25" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Journal" Width="1.5" PointX="7.5" PointY="18.5" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Tax" Width="1.5" PointX="5.25" PointY="34.125" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalJournalType" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalLedger" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.BankAccount" Width="1.5" PointX="9.75" PointY="26" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalBankAccount" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalYearFinancialYear" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalEntryJournal" />
+        <AssociationConnector Association="BoekhoudingClubCloud.InvoiceJournalEntry" />
+        <AssociationConnector Association="BoekhoudingClubCloud.LedgerLedgerCategory" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalTransactionLedger" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalTransactionJournalEntry" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalTransactionCostCenter" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.InvoiceEntry" Width="1.5" PointX="0.75" PointY="17.125" />
+        <AssociationConnector Association="BoekhoudingClubCloud.InvoiceEntryInvoice" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Relation" Width="1.5" PointX="5.25" PointY="30.75" />
+        <AssociationConnector Association="BoekhoudingClubCloud.InvoiceRelation" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Product" Width="1.5" PointX="3" PointY="33.875" />
+        <AssociationConnector Association="BoekhoudingClubCloud.ProductTax" />
+        <AssociationConnector Association="BoekhoudingClubCloud.InvoiceEntryProduct" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Payable" Width="1.5" PointX="3" PointY="14.875" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Receivable" Width="1.5" PointX="3" PointY="10.5" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Term" Width="1.5" PointX="5.25" PointY="27.875" />
+        <AssociationConnector Association="BoekhoudingClubCloud.InvoiceTerm" />
+        <AssociationConnector Association="BoekhoudingClubCloud.InvoiceEntryReceivable" />
+        <AssociationConnector Association="BoekhoudingClubCloud.InvoiceEntryPayable" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalEntryJournalYear" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalEntryLedger" />
+        <AssociationConnector Association="BoekhoudingClubCloud.JournalEntryCostCenter" />
+        <AssociationConnector Association="BoekhoudingClubCloud.LedgerCostCenter" />
+        <AssociationConnector Association="BoekhoudingClubCloud.PayableCostCenter" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Balance" Width="1.75" PointX="7.25" PointY="12.875" />
+        <AssociationConnector Association="BoekhoudingClubCloud.BalanceLedger" />
+        <AssociationConnector Association="BoekhoudingClubCloud.BalanceFinancialYear" />
+        <AssociationConnector Association="BoekhoudingClubCloud.BalanceCostCenter" />
+        <EntityTypeShape EntityType="BoekhoudingClubCloud.Result" Width="1.75" PointX="7.25" PointY="7.5" />
+        <AssociationConnector Association="BoekhoudingClubCloud.ResultLedger" />
+        <AssociationConnector Association="BoekhoudingClubCloud.ResultFinancialYear" />
+        <AssociationConnector Association="BoekhoudingClubCloud.ResultCostCenter" />
+        <AssociationConnector Association="BoekhoudingClubCloud.ReceivableLedger" />
+        <AssociationConnector Association="BoekhoudingClubCloud.ReceivableFinancialYear" />
+        <AssociationConnector Association="BoekhoudingClubCloud.ReceivableCostCenter" />
+        <AssociationConnector Association="BoekhoudingClubCloud.PayableLedger" />
+        <AssociationConnector Association="BoekhoudingClubCloud.PayableFinancialYear" />
+        <AssociationConnector Association="BoekhoudingClubCloud.PayableCostCenter1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

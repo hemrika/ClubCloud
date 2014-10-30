@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/29/2014 02:30:40
+-- Date Created: 10/10/2014 12:11:28
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Service\Model\BeheerClubCloud.edmx
 -- --------------------------------------------------
 
@@ -107,6 +107,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCLoud_BaanschemaClubCloud_Baan]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_Baanschemas] DROP CONSTRAINT [FK_ClubCLoud_BaanschemaClubCloud_Baan];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ClubCloud_Lidmaatschappen] DROP CONSTRAINT [FK_ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -180,6 +183,9 @@ IF OBJECT_ID(N'[dbo].[ClubCloud_Baanschemas]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[ClubCloud_Foto]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Foto];
+GO
+IF OBJECT_ID(N'[dbo].[ClubCLoud_LidmaatschapSoort]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCLoud_LidmaatschapSoort];
 GO
 
 -- --------------------------------------------------
@@ -369,8 +375,7 @@ GO
 -- Creating table 'ClubCloud_Lidmaatschappen'
 CREATE TABLE [dbo].[ClubCloud_Lidmaatschappen] (
     [Id] uniqueidentifier  NOT NULL,
-    [SoortId] uniqueidentifier  NOT NULL,
-    [SoortNaam] nvarchar(max)  NOT NULL,
+    [SoortId] uniqueidentifier  NULL,
     [Begin] datetime  NOT NULL,
     [Einde] datetime  NULL,
     [Opzegging] datetime  NULL,
@@ -596,6 +601,17 @@ CREATE TABLE [dbo].[ClubCloud_Foto] (
 );
 GO
 
+-- Creating table 'ClubCloud_LidmaatschapSoorten'
+CREATE TABLE [dbo].[ClubCloud_LidmaatschapSoorten] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Naam] nvarchar(max)  NOT NULL,
+    [Beschrijving] nvarchar(max)  NOT NULL,
+    [DagBegin] time  NOT NULL,
+    [DagEinde] time  NOT NULL,
+    [Tarief] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -735,6 +751,12 @@ GO
 -- Creating primary key on [Id] in table 'ClubCloud_Foto'
 ALTER TABLE [dbo].[ClubCloud_Foto]
 ADD CONSTRAINT [PK_ClubCloud_Foto]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ClubCloud_LidmaatschapSoorten'
+ALTER TABLE [dbo].[ClubCloud_LidmaatschapSoorten]
+ADD CONSTRAINT [PK_ClubCloud_LidmaatschapSoorten]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -1190,6 +1212,21 @@ GO
 CREATE INDEX [IX_FK_ClubCLoud_BaanschemaClubCloud_Baan]
 ON [dbo].[ClubCloud_Baanschemas]
     ([BaanId]);
+GO
+
+-- Creating foreign key on [SoortId] in table 'ClubCloud_Lidmaatschappen'
+ALTER TABLE [dbo].[ClubCloud_Lidmaatschappen]
+ADD CONSTRAINT [FK_ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap]
+    FOREIGN KEY ([SoortId])
+    REFERENCES [dbo].[ClubCloud_LidmaatschapSoorten]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap'
+CREATE INDEX [IX_FK_ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap]
+ON [dbo].[ClubCloud_Lidmaatschappen]
+    ([SoortId]);
 GO
 
 -- --------------------------------------------------

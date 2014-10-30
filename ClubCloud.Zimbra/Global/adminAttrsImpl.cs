@@ -36,7 +36,7 @@ namespace ClubCloud.Zimbra.Global
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(createLDAPEntryRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(createGalSyncAccountRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CreateDomainRequest))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(createDistributionListRequest))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(CreateDistributionListRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(dataSourceInfo))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(dataSourceSpecifier))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(createCosRequest))]

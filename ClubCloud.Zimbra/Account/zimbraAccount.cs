@@ -1136,7 +1136,7 @@ namespace ClubCloud.Zimbra.Account
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
     [System.Xml.Serialization.XmlRootAttribute("meta", Namespace = "urn:zimbraAccount", IsNullable = false)]
     [System.Runtime.Serialization.DataContractAttribute(Name = "accountCustomMetadata", Namespace = "urn:zimbraAccount")]
-    public partial class accountCustomMetadata : accountKeyValuePairs
+    public partial class accountCustomMetadata : AccountKeyValuePairs
     {
 
         private string _section;
@@ -1157,57 +1157,6 @@ namespace ClubCloud.Zimbra.Account
                     this._section = value;
                     this.OnPropertyChanged("section");
                 }
-            }
-        }
-    }
-
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(calendarResourceInfo))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(distributionListAction))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(createDistributionListRequest))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(accountCustomMetadata))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "accountKeyValuePairs", Namespace = "urn:zimbraAccount")]
-    public partial class accountKeyValuePairs : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private List<keyValuePair> _a;
-
-        public accountKeyValuePairs()
-        {
-            this._a = new List<keyValuePair>();
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("a")]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<keyValuePair> a
-        {
-            get
-            {
-                return this._a;
-            }
-            set
-            {
-                if (((this._a == null)
-                            || (_a.Equals(value) != true)))
-                {
-                    this._a = value;
-                    this.OnPropertyChanged("a");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -1399,7 +1348,7 @@ namespace ClubCloud.Zimbra.Account
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
     [System.Runtime.Serialization.DataContractAttribute(Name = "calendarResourceInfo", Namespace = "urn:zimbraAccount")]
-    public partial class calendarResourceInfo : accountKeyValuePairs
+    public partial class calendarResourceInfo : AccountKeyValuePairs
     {
 
         private string _name;
@@ -1450,295 +1399,22 @@ namespace ClubCloud.Zimbra.Account
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "distributionListAction", Namespace = "urn:zimbraAccount")]
-    public partial class distributionListAction : accountKeyValuePairs
-    {
-
-        private List<string> _dlm;
-
-        private string _newName;
-
-        private List<distributionListGranteeSelector> _owner;
-
-        private List<distributionListRightSpec> _right;
-
-        private distributionListSubscribeReq _subsReq;
-
-        private operation _op;
-
-        public distributionListAction()
-        {
-            this._subsReq = new distributionListSubscribeReq();
-            this._right = new List<distributionListRightSpec>();
-            this._owner = new List<distributionListGranteeSelector>();
-            this._dlm = new List<string>();
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("dlm")]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<string> dlm
-        {
-            get
-            {
-                return this._dlm;
-            }
-            set
-            {
-                if (((this._dlm == null)
-                            || (_dlm.Equals(value) != true)))
-                {
-                    this._dlm = value;
-                    this.OnPropertyChanged("dlm");
-                }
-            }
-        }
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string newName
-        {
-            get
-            {
-                return this._newName;
-            }
-            set
-            {
-                if (((this._newName == null)
-                            || (_newName.Equals(value) != true)))
-                {
-                    this._newName = value;
-                    this.OnPropertyChanged("newName");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("owner")]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<distributionListGranteeSelector> owner
-        {
-            get
-            {
-                return this._owner;
-            }
-            set
-            {
-                if (((this._owner == null)
-                            || (_owner.Equals(value) != true)))
-                {
-                    this._owner = value;
-                    this.OnPropertyChanged("owner");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("right")]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<distributionListRightSpec> right
-        {
-            get
-            {
-                return this._right;
-            }
-            set
-            {
-                if (((this._right == null)
-                            || (_right.Equals(value) != true)))
-                {
-                    this._right = value;
-                    this.OnPropertyChanged("right");
-                }
-            }
-        }
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListSubscribeReq subsReq
-        {
-            get
-            {
-                return this._subsReq;
-            }
-            set
-            {
-                if (((this._subsReq == null)
-                            || (_subsReq.Equals(value) != true)))
-                {
-                    this._subsReq = value;
-                    this.OnPropertyChanged("subsReq");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public operation op
-        {
-            get
-            {
-                return this._op;
-            }
-            set
-            {
-                if ((_op.Equals(value) != true))
-                {
-                    this._op = value;
-                    this.OnPropertyChanged("op");
-                }
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "distributionListGranteeSelector", Namespace = "urn:zimbraAccount")]
-    public partial class distributionListGranteeSelector : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private granteeType _type;
-
-        private distributionListGranteeBy _by;
-
-        private string _value;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public granteeType type
-        {
-            get
-            {
-                return this._type;
-            }
-            set
-            {
-                if ((_type.Equals(value) != true))
-                {
-                    this._type = value;
-                    this.OnPropertyChanged("type");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListGranteeBy by
-        {
-            get
-            {
-                return this._by;
-            }
-            set
-            {
-                if ((_by.Equals(value) != true))
-                {
-                    this._by = value;
-                    this.OnPropertyChanged("by");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this._value;
-            }
-            set
-            {
-                if (((this._value == null)
-                            || (_value.Equals(value) != true)))
-                {
-                    this._value = value;
-                    this.OnPropertyChanged("Value");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbra")]
-    public enum granteeType
-    {
-
-        /// <remarks/>
-        usr,
-
-        /// <remarks/>
-        grp,
-
-        /// <remarks/>
-        egp,
-
-        /// <remarks/>
-        all,
-
-        /// <remarks/>
-        dom,
-
-        /// <remarks/>
-        edom,
-
-        /// <remarks/>
-        gst,
-
-        /// <remarks/>
-        key,
-
-        /// <remarks/>
-        pub,
-
-        /// <remarks/>
-        email,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbra")]
-    public enum distributionListGranteeBy
-    {
-
-        /// <remarks/>
-        id,
-
-        /// <remarks/>
-        name,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
     [System.Runtime.Serialization.DataContractAttribute(Name = "distributionListRightSpec", Namespace = "urn:zimbraAccount")]
     public partial class distributionListRightSpec : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private List<distributionListGranteeSelector> _grantee;
+        private List<DistributionListGranteeSelector> _grantee;
 
         private string _right;
 
         public distributionListRightSpec()
         {
-            this._grantee = new List<distributionListGranteeSelector>();
+            this._grantee = new List<DistributionListGranteeSelector>();
         }
 
         [System.Xml.Serialization.XmlElementAttribute("grantee")]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<distributionListGranteeSelector> grantee
+        public List<DistributionListGranteeSelector> grantee
         {
             get
             {
@@ -1908,58 +1584,12 @@ namespace ClubCloud.Zimbra.Account
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
-    public enum operation
-    {
-
-        /// <remarks/>
-        delete,
-
-        /// <remarks/>
-        modify,
-
-        /// <remarks/>
-        rename,
-
-        /// <remarks/>
-        addOwners,
-
-        /// <remarks/>
-        removeOwners,
-
-        /// <remarks/>
-        setOwners,
-
-        /// <remarks/>
-        grantRights,
-
-        /// <remarks/>
-        revokeRights,
-
-        /// <remarks/>
-        setRights,
-
-        /// <remarks/>
-        addMembers,
-
-        /// <remarks/>
-        removeMembers,
-
-        /// <remarks/>
-        acceptSubsReq,
-
-        /// <remarks/>
-        rejectSubsReq,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
     [System.Xml.Serialization.XmlRootAttribute("CreateDistributionListRequest", Namespace = "urn:zimbraAccount", IsNullable = false)]
     [System.Runtime.Serialization.DataContractAttribute(Name = "createDistributionListRequest", Namespace = "urn:zimbraAccount")]
-    public partial class createDistributionListRequest : accountKeyValuePairs
+    public partial class createDistributionListRequest : AccountKeyValuePairs
     {
 
         private string _name;
@@ -2924,7 +2554,7 @@ namespace ClubCloud.Zimbra.Account
         }
     }
 
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(distributionListInfo))]
+    //[System.Xml.Serialization.XmlIncludeAttribute(typeof(distributionListInfo))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(dlInfo))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
@@ -3014,7 +2644,7 @@ namespace ClubCloud.Zimbra.Account
             }
         }
     }
-
+    /*
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -3227,157 +2857,7 @@ namespace ClubCloud.Zimbra.Account
             }
         }
     }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "distributionListGranteeInfo", Namespace = "urn:zimbraAccount")]
-    public partial class distributionListGranteeInfo : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private granteeType _type;
-
-        private string _id;
-
-        private string _name;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public granteeType type
-        {
-            get
-            {
-                return this._type;
-            }
-            set
-            {
-                if ((_type.Equals(value) != true))
-                {
-                    this._type = value;
-                    this.OnPropertyChanged("type");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                if (((this._id == null)
-                            || (_id.Equals(value) != true)))
-                {
-                    this._id = value;
-                    this.OnPropertyChanged("id");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                if (((this._name == null)
-                            || (_name.Equals(value) != true)))
-                {
-                    this._name = value;
-                    this.OnPropertyChanged("name");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "distributionListRightInfo", Namespace = "urn:zimbraAccount")]
-    public partial class distributionListRightInfo : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private List<distributionListGranteeInfo> _grantee;
-
-        private string _right;
-
-        public distributionListRightInfo()
-        {
-            this._grantee = new List<distributionListGranteeInfo>();
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("grantee")]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<distributionListGranteeInfo> grantee
-        {
-            get
-            {
-                return this._grantee;
-            }
-            set
-            {
-                if (((this._grantee == null)
-                            || (_grantee.Equals(value) != true)))
-                {
-                    this._grantee = value;
-                    this.OnPropertyChanged("grantee");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string right
-        {
-            get
-            {
-                return this._right;
-            }
-            set
-            {
-                if (((this._right == null)
-                            || (_right.Equals(value) != true)))
-                {
-                    this._right = value;
-                    this.OnPropertyChanged("right");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
+    */
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
@@ -3478,288 +2958,6 @@ namespace ClubCloud.Zimbra.Account
         }
     }
 
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(getDistributionListRequest))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(distributionListActionRequest))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(identity))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "attrsImpl", Namespace = "urn:zimbraAccount")]
-    public abstract partial class attrsImpl : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private List<attr> _a;
-
-        public attrsImpl()
-        {
-            this._a = new List<attr>();
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute("a")]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<attr> a
-        {
-            get
-            {
-                return this._a;
-            }
-            set
-            {
-                if (((this._a == null)
-                            || (_a.Equals(value) != true)))
-                {
-                    this._a = value;
-                    this.OnPropertyChanged("a");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
-    [System.Xml.Serialization.XmlRootAttribute("GetDistributionListRequest", Namespace = "urn:zimbraAccount", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "getDistributionListRequest", Namespace = "urn:zimbraAccount")]
-    public partial class getDistributionListRequest : attrsImpl
-    {
-
-        private distributionListSelector _dl;
-
-        private System.Nullable<bool> _needOwners;
-
-        private string _needRights;
-
-        public getDistributionListRequest()
-        {
-            this._dl = new distributionListSelector();
-        }
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListSelector dl
-        {
-            get
-            {
-                return this._dl;
-            }
-            set
-            {
-                if (((this._dl == null)
-                            || (_dl.Equals(value) != true)))
-                {
-                    this._dl = value;
-                    this.OnPropertyChanged("dl");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool needOwners
-        {
-            get
-            {
-                if (this._needOwners.HasValue)
-                {
-                    return this._needOwners.Value;
-                }
-                else
-                {
-                    return default(bool);
-                }
-            }
-            set
-            {
-                if ((_needOwners.Equals(value) != true))
-                {
-                    this._needOwners = value;
-                    this.OnPropertyChanged("needOwners");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool needOwnersSpecified
-        {
-            get
-            {
-                return this._needOwners.HasValue;
-            }
-            set
-            {
-                if (value == false)
-                {
-                    this._needOwners = null;
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string needRights
-        {
-            get
-            {
-                return this._needRights;
-            }
-            set
-            {
-                if (((this._needRights == null)
-                            || (_needRights.Equals(value) != true)))
-                {
-                    this._needRights = value;
-                    this.OnPropertyChanged("needRights");
-                }
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbra")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "distributionListSelector", Namespace = "urn:zimbraAccount")]
-    public partial class distributionListSelector : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private distributionListBy _by;
-
-        private string _value;
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListBy by
-        {
-            get
-            {
-                return this._by;
-            }
-            set
-            {
-                if ((_by.Equals(value) != true))
-                {
-                    this._by = value;
-                    this.OnPropertyChanged("by");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this._value;
-            }
-            set
-            {
-                if (((this._value == null)
-                            || (_value.Equals(value) != true)))
-                {
-                    this._value = value;
-                    this.OnPropertyChanged("Value");
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbra")]
-    public enum distributionListBy
-    {
-
-        /// <remarks/>
-        id,
-
-        /// <remarks/>
-        name,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
-    [System.Xml.Serialization.XmlRootAttribute("DistributionListActionRequest", Namespace = "urn:zimbraAccount", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "distributionListActionRequest", Namespace = "urn:zimbraAccount")]
-    public partial class distributionListActionRequest : attrsImpl
-    {
-
-        private distributionListSelector _dl;
-
-        private distributionListAction _action;
-
-        public distributionListActionRequest()
-        {
-            this._action = new distributionListAction();
-            this._dl = new distributionListSelector();
-        }
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListSelector dl
-        {
-            get
-            {
-                return this._dl;
-            }
-            set
-            {
-                if (((this._dl == null)
-                            || (_dl.Equals(value) != true)))
-                {
-                    this._dl = value;
-                    this.OnPropertyChanged("dl");
-                }
-            }
-        }
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListAction action
-        {
-            get
-            {
-                return this._action;
-            }
-            set
-            {
-                if (((this._action == null)
-                            || (_action.Equals(value) != true)))
-                {
-                    this._action = value;
-                    this.OnPropertyChanged("action");
-                }
-            }
-        }
-    }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.SerializableAttribute()]
@@ -5530,53 +4728,6 @@ namespace ClubCloud.Zimbra.Account
                 if (value == false)
                 {
                     this._total = null;
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "urn:zimbraAccount")]
-    [System.Xml.Serialization.XmlRootAttribute("GetDistributionListResponse", Namespace = "urn:zimbraAccount", IsNullable = false)]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "getDistributionListResponse", Namespace = "urn:zimbraAccount")]
-    public partial class getDistributionListResponse : System.ComponentModel.INotifyPropertyChanged
-    {
-
-        private distributionListInfo _dl;
-
-        public getDistributionListResponse()
-        {
-            this._dl = new distributionListInfo();
-        }
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListInfo dl
-        {
-            get
-            {
-                return this._dl;
-            }
-            set
-            {
-                if (((this._dl == null)
-                            || (_dl.Equals(value) != true)))
-                {
-                    this._dl = value;
-                    this.OnPropertyChanged("dl");
                 }
             }
         }
@@ -8034,7 +7185,7 @@ namespace ClubCloud.Zimbra.Account
 
         private string _zid;
 
-        private granteeType _gt;
+        private GranteeType _gt;
 
         private string _right;
 
@@ -8069,7 +7220,7 @@ namespace ClubCloud.Zimbra.Account
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public granteeType gt
+        public GranteeType gt
         {
             get
             {
@@ -11957,17 +11108,17 @@ namespace ClubCloud.Zimbra.Account
     public partial class subscribeDistributionListRequest : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private distributionListSelector _dl;
+        private DistributionListSelector _dl;
 
         private distributionListSubscribeOp _op;
 
         public subscribeDistributionListRequest()
         {
-            this._dl = new distributionListSelector();
+            this._dl = new DistributionListSelector();
         }
 
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListSelector dl
+        public DistributionListSelector dl
         {
             get
             {

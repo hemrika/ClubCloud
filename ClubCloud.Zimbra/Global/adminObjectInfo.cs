@@ -12,7 +12,7 @@ namespace ClubCloud.Zimbra.Global
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ucServiceInfo))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(serverInfo))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(domainInfo))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(distributionListInfo))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DistributionListInfo))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(calendarResourceInfo))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(accountInfo))]
     public partial class adminObjectInfo : System.ComponentModel.INotifyPropertyChanged

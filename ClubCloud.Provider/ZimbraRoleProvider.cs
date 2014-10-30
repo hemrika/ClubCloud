@@ -13,6 +13,7 @@ using ClubCloud.Zimbra;
 using ClubCloud.Zimbra.Service;
 using System.Configuration;
 using System.Collections.Specialized;
+using ClubCloud.Zimbra.Global;
 
 namespace ClubCloud.Provider
 {
@@ -69,11 +70,6 @@ namespace ClubCloud.Provider
             {
                 return "Zimbra Role Provider";
             }
-        }
-
-        public override void AddUsersToRoles(string[] usernames, string[] roleNames)
-        {
-            throw new NotImplementedException();
         }
 
         public override string ApplicationName
@@ -228,6 +224,8 @@ namespace ClubCloud.Provider
 
         #endregion
 
+        #region Find
+
         public async Task<string[]> FindUsersInGroup(string groupName, string usernameToMatch)
         {
             if (!Initialized)
@@ -266,7 +264,7 @@ namespace ClubCloud.Provider
 
                         if (response != null)
                         {
-                            foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                            foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                             {
                                 if (dl.dynamic)
                                 {
@@ -286,7 +284,7 @@ namespace ClubCloud.Provider
 
                         if (!string.IsNullOrEmpty(dl_id))
                         {
-                            Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.distributionListSelector { by = Zimbra.Global.distributionListBy.id, Value = dl_id } };
+                            Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl_id } };
                             Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
 
                             if (dlresponse != null)
@@ -357,7 +355,7 @@ namespace ClubCloud.Provider
 
                         if (response != null)
                         {
-                            foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                            foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                             {
                                 if (dl.dynamic)
                                 {
@@ -377,7 +375,7 @@ namespace ClubCloud.Provider
 
                         if (!string.IsNullOrEmpty(dl_id))
                         {
-                            Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.distributionListSelector { by = Zimbra.Global.distributionListBy.id, Value = dl_id } };
+                            Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl_id } };
                             Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
 
                             if (dlresponse != null)
@@ -404,6 +402,10 @@ namespace ClubCloud.Provider
             }
 
         }
+
+        #endregion
+
+        #region Get
 
         public async Task<string[]> GetAllGroups()
         {
@@ -432,7 +434,7 @@ namespace ClubCloud.Provider
 
                     if(response != null)
                     {
-                        foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                         {
                             if(dl.dynamic)
                             {
@@ -495,7 +497,7 @@ namespace ClubCloud.Provider
 
                     if (response != null)
                     {
-                        foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                         {
                             if (!dl.dynamic)
                             {
@@ -553,7 +555,7 @@ namespace ClubCloud.Provider
                 {
                     if (dl.dynamic)
                     {
-                        Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.distributionListSelector { by = Zimbra.Global.distributionListBy.id, Value = dl.id } };
+                        Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl.id } };
                         Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
 
                         List<Zimbra.Global.attrN> attributes = dlresponse.dl.a;
@@ -604,6 +606,7 @@ namespace ClubCloud.Provider
             {
                 List<string> userRoles = new List<string>();
                 userRoles.Add(AllAuthenticatedUsersRoleName);
+
                 Zimbra.Administration.GetAccountMembershipRequest request = new Zimbra.Administration.GetAccountMembershipRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username } };
                 Zimbra.Administration.GetAccountMembershipResponse respons = await zimbraServer.Message(request) as Zimbra.Administration.GetAccountMembershipResponse;
 
@@ -613,19 +616,22 @@ namespace ClubCloud.Provider
                 {
                     if (!dl.dynamic)
                     {
-                        Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.distributionListSelector { by = Zimbra.Global.distributionListBy.id, Value = dl.id } };
+                        Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl.id } };
                         Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
 
                         List<Zimbra.Global.attrN> attributes = dlresponse.dl.a;
                         string displayName = dlresponse.dl.name;
+                        displayName = attributes.SingleOrDefault(a => a.name == "displayName").Value;
+                        /*
                         foreach (Zimbra.Global.attrN attr in attributes)
                         {
                             if (attr.name == "displayName")
                             {
                                 displayName = attr.Value;
-                                break;
+                                //break;
                             }
                         }
+                        */
                         userRoles.Add(displayName);
                     }
                 }
@@ -639,6 +645,10 @@ namespace ClubCloud.Provider
                 return null;
             }
         }
+
+        #endregion
+
+        #region In
 
         public async Task<string[]> GetUsersInGroup(string groupName)
         {
@@ -668,7 +678,7 @@ namespace ClubCloud.Provider
 
                     if (response != null)
                     {
-                        foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                         {
                             if (dl.dynamic)
                             {
@@ -689,7 +699,7 @@ namespace ClubCloud.Provider
 
                 if(!string.IsNullOrEmpty(dl_id))
                 {
-                    Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.distributionListSelector { by = Zimbra.Global.distributionListBy.id, Value = dl_id } };
+                    Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl_id } };
                     Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
 
                     if (dlresponse != null)
@@ -742,7 +752,7 @@ namespace ClubCloud.Provider
 
                     if (response != null)
                     {
-                        foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                         {
                             if (!dl.dynamic)
                             {
@@ -763,7 +773,7 @@ namespace ClubCloud.Provider
 
                 if (!string.IsNullOrEmpty(dl_id))
                 {
-                    Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.distributionListSelector { by = Zimbra.Global.distributionListBy.id, Value = dl_id } };
+                    Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl_id } };
                     Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
 
                     if (dlresponse != null)
@@ -810,7 +820,7 @@ namespace ClubCloud.Provider
 
                     if (response != null)
                     {
-                        foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                         {
                             if (dl.dynamic)
                             {
@@ -873,7 +883,7 @@ namespace ClubCloud.Provider
 
                     if (response != null)
                     {
-                        foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                         {
                             if (!dl.dynamic)
                             {
@@ -903,12 +913,16 @@ namespace ClubCloud.Provider
 
         }
 
+        #endregion
+
+        #region Create
+
         /// <summary>
         /// TODO
         /// </summary>
         /// <param name="groupName"></param>
         /// <returns></returns>
-        public async Task CreateGroupAsync(string groupName)
+        public async Task CreateGroupAsync(string groupName, string groupDisplayName)
         {
             if (!Initialized)
             {
@@ -925,6 +939,51 @@ namespace ClubCloud.Provider
 
             try
             {
+                /*
+                <name xmlns="">ac@clubcloud.nl</name>
+                <a xmlns="" n="zimbraIsACLGroup">TRUE</a>
+                <a xmlns="" n="zimbraMailStatus">enabled</a>
+                <a xmlns="" n="displayName">Activiteiten Commissie</a>
+                <a xmlns="" n="zimbraHideInGal">TRUE</a>
+                <a xmlns="" n="zimbraDistributionListSubscriptionPolicy">ACCEPT</a>
+                <a xmlns="" n="zimbraDistributionListUnsubscriptionPolicy">ACCEPT</a>
+                <a xmlns="" n="zimbraPrefReplyToEnabled">TRUE</a>
+                <a xmlns="" n="zimbraPrefReplyToDisplay">Activiteiten Commissie</a>
+                <a xmlns="" n="zimbraPrefReplyToAddress">ac@clubcloud.nl</a>
+                */
+
+                SPContext context = SPContext.Current;
+                string domain = GetZimbraDomain(context.Site.Url);
+                string email = groupName+"@"+domain;
+
+                List<Zimbra.Global.attrN> attributes = new List<Zimbra.Global.attrN>(){
+                    new Zimbra.Global.attrN{ name = "zimbraIsACLGroup" , Value = "TRUE"},
+                    new Zimbra.Global.attrN{ name = "zimbraMailStatus" , Value = "enabled"},
+                    new Zimbra.Global.attrN{ name = "displayName" , Value = groupDisplayName},
+                    new Zimbra.Global.attrN{ name = "zimbraHideInGal" , Value = "TRUE"},
+                    new Zimbra.Global.attrN{ name = "zimbraDistributionListSubscriptionPolicy" , Value = "ACCEPT"},
+                    new Zimbra.Global.attrN{ name = "zimbraDistributionListUnsubscriptionPolicy" , Value = "ACCEPT"},
+                    new Zimbra.Global.attrN{ name = "zimbraPrefReplyToEnabled" , Value = "TRUE"},
+                    new Zimbra.Global.attrN{ name = "zimbraPrefReplyToDisplay" , Value = groupDisplayName},
+                    new Zimbra.Global.attrN{ name = "zimbraPrefReplyToAddress" , Value = groupName}
+                };
+                
+                Zimbra.Administration.CreateDistributionListRequest dlrequest = new Zimbra.Administration.CreateDistributionListRequest { dynamic = true, name = email, a = attributes };
+                Zimbra.Administration.CreateDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.CreateDistributionListResponse;
+
+                Zimbra.Account.DistributionListActionRequest acrequest = new Zimbra.Account.DistributionListActionRequest
+                {
+                    dl = new DistributionListSelector { by = DistributionListBy.id, Value = dlresponse.dl.id },
+                    action = new Zimbra.Global.DistributionListAction
+                    {
+                        op = Operation.addOwners,
+                        owner = new List<DistributionListGranteeSelector>{ 
+                            new DistributionListGranteeSelector{ by = DistributionListGranteeBy.name, type = GranteeType.usr, Value = context.Web.CurrentUser.Email }}
+                    }
+                };
+
+                Zimbra.Account.DistributionListActionResponse acresponse = await zimbraServer.Message(acrequest) as Zimbra.Account.DistributionListActionResponse;
+                
             }
             catch (Exception ex)
             {
@@ -979,6 +1038,10 @@ namespace ClubCloud.Provider
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
             }
         }
+
+        #endregion
+
+        #region Delete
 
         /// <summary>
         /// TODO
@@ -1059,6 +1122,10 @@ namespace ClubCloud.Provider
 
         }
 
+        #endregion
+
+        #region Remove
+
         /// <summary>
         /// TODO
         /// </summary>
@@ -1081,6 +1148,59 @@ namespace ClubCloud.Provider
 
             try
             {
+                List<DistributionListInfo> dls = new List<DistributionListInfo>();
+                List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
+
+                SPContext context = SPContext.Current;
+                if (context != null)
+                {
+                    string domain = GetZimbraDomain(context.Site.Url);
+                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                    if (response != null)
+                    {
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        {
+                            if (!dl.dynamic)
+                            {
+                                List<Zimbra.Global.attrN> attributes = dl.a;
+                                string displayName = dl.id;
+                                foreach (Zimbra.Global.attrN attr in attributes)
+                                {
+                                    if (attr.name == "displayName" && groupNames.Contains(attr.Value))
+                                    {
+                                        dls.Add(dl);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (string username in usernames)
+                    {
+                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                    }
+                }
+
+                if (dls.Count > 0 && accounts.Count > 0)
+                {
+                    List<string> dlm = new List<string>();
+                    foreach (accountInfo account in accounts)
+                    {
+                        dlm.Add(account.name);
+                    }
+
+                    foreach (DistributionListInfo dl in dls)
+                    {
+                        Zimbra.Administration.RemoveDistributionListMemberRequest dlrequest = new Zimbra.Administration.RemoveDistributionListMemberRequest { id = dl.id, dlm = dlm };
+                        Zimbra.Administration.RemoveDistributionListMemberResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.RemoveDistributionListMemberResponse;
+                    }
+                }
 
             }
             catch (Exception ex)
@@ -1124,6 +1244,60 @@ namespace ClubCloud.Provider
 
             try
             {
+                List<DistributionListInfo> dls = new List<DistributionListInfo>();
+                List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
+
+                SPContext context = SPContext.Current;
+                if (context != null)
+                {
+                    string domain = GetZimbraDomain(context.Site.Url);
+                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                    if (response != null)
+                    {
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        {
+                            if (!dl.dynamic)
+                            {
+                                List<Zimbra.Global.attrN> attributes = dl.a;
+                                string displayName = dl.id;
+                                foreach (Zimbra.Global.attrN attr in attributes)
+                                {
+                                    if (attr.name == "displayName" && roleNames.Contains(attr.Value))
+                                    {
+                                        dls.Add(dl);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (string username in usernames)
+                    {
+                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                    }
+                }
+
+                if (dls.Count > 0 && accounts.Count > 0)
+                {
+                    List<string> dlm = new List<string>();
+                    foreach (accountInfo account in accounts)
+                    {
+                        dlm.Add(account.name);
+                    }
+
+                    foreach (DistributionListInfo dl in dls)
+                    {
+                        Zimbra.Administration.RemoveDistributionListMemberRequest dlrequest = new Zimbra.Administration.RemoveDistributionListMemberRequest { id = dl.id, dlm = dlm };
+                        Zimbra.Administration.RemoveDistributionListMemberResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.RemoveDistributionListMemberResponse;
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -1132,8 +1306,192 @@ namespace ClubCloud.Provider
             }
 
         }
-        
 
+        #endregion
+
+        #region Add
+
+        public override void AddUsersToRoles(string[] usernames, string[] roleNames)
+        {
+            Task.Run(async () => await AddUsersToRolesAsync(usernames, roleNames));
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="usernames"></param>
+        /// <param name="roleNames"></param>
+        /// <returns></returns>
+        public async Task AddUsersToRolesAsync(string[] usernames, string[] roleNames)
+        {
+            if (!Initialized)
+            {
+                SetConfiguration();
+                await InitializeAsync(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
+            }
+
+            try
+            {
+                List<DistributionListInfo> dls = new List<DistributionListInfo>();
+                List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
+
+                SPContext context = SPContext.Current;
+                if (context != null)
+                {
+                    string domain = GetZimbraDomain(context.Site.Url);
+                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                    if (response != null)
+                    {
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        {
+                            if (!dl.dynamic)
+                            {
+                                List<Zimbra.Global.attrN> attributes = dl.a;
+                                string displayName = dl.id;
+                                foreach (Zimbra.Global.attrN attr in attributes)
+                                {
+                                    if (attr.name == "displayName" && roleNames.Contains(attr.Value))
+                                    {
+                                        dls.Add(dl);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (string username in usernames)
+                    {
+                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                    }
+                }
+
+                if (dls.Count > 0 && accounts.Count > 0)
+                {
+                    List<string> dlm = new List<string>();
+                    foreach (accountInfo account in accounts)
+                    {
+                        dlm.Add(account.name);
+                    }
+
+                    foreach (DistributionListInfo dl in dls)
+                    {
+                        Zimbra.Administration.AddDistributionListMemberRequest dlrequest = new Zimbra.Administration.AddDistributionListMemberRequest { id = dl.id, dlm = dlm };
+                        Zimbra.Administration.AddDistributionListMemberResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.AddDistributionListMemberResponse;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string message = String.Format("Role Provider {0}: {1}", this.applicationName, ex.Message);
+                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+            }
+
+        }
+
+        public async Task AddUsersToGroupsAsync(string[] usernames, string[] groupNames)
+        {
+            if (!Initialized)
+            {
+                SetConfiguration();
+                await InitializeAsync(string.Empty, new NameValueCollection());
+
+                if (!Initialized)
+                {
+                    string message = String.Format("Membership Role Provider {0}: {1}", this.applicationName, "The Role provider was not initialized.");
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message);
+                }
+            }
+
+            try
+            {
+                List<DistributionListInfo> dls = new List<DistributionListInfo>();
+                List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
+
+                SPContext context = SPContext.Current;
+                if (context != null)
+                {
+                    string domain = GetZimbraDomain(context.Site.Url);
+                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                    if (response != null)
+                    {
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        {
+                            if (!dl.dynamic)
+                            {
+                                List<Zimbra.Global.attrN> attributes = dl.a;
+                                string displayName = dl.id;
+                                foreach (Zimbra.Global.attrN attr in attributes)
+                                {
+                                    if (attr.name == "displayName" && groupNames.Contains(attr.Value))
+                                    {
+                                        dls.Add(dl);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (string username in usernames)
+                    {
+                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));                        
+                    }
+
+                }
+
+                if (dls.Count > 0 && accounts.Count > 0)
+                {
+                    List<string> dlm = new List<string>();
+                    foreach (accountInfo account in accounts)
+                    {
+                        dlm.Add(account.name);
+                    }
+
+                    foreach (DistributionListInfo dl in dls)
+                    {
+                        Zimbra.Administration.AddDistributionListMemberRequest dlrequest = new Zimbra.Administration.AddDistributionListMemberRequest { id = dl.id, dlm = dlm };
+                        Zimbra.Administration.AddDistributionListMemberResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.AddDistributionListMemberResponse;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string message = String.Format("Role Provider {0}: {1}", this.applicationName, ex.Message);
+                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+            }
+
+        }
+
+        #endregion
+
+        #region Exists
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="groupName"></param>
+        /// <returns></returns>
         public async Task<bool> GroupExistsAsync(string groupName)
         {
             if (!Initialized)
@@ -1162,7 +1520,7 @@ namespace ClubCloud.Provider
 
                     if (response != null)
                     {
-                        foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                         {
                             if (dl.dynamic)
                             {
@@ -1192,11 +1550,21 @@ namespace ClubCloud.Provider
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
         public override bool RoleExists(string roleName)
         {
             return Task.Run(async () => await RoleExistsAsync(roleName)).Result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
         public async Task<bool> RoleExistsAsync(string roleName)
         {
             if (!Initialized)
@@ -1225,7 +1593,7 @@ namespace ClubCloud.Provider
 
                     if (response != null)
                     {
-                        foreach (Zimbra.Global.distributionListInfo dl in response.dl)
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                         {
                             if (dl.dynamic)
                             {
@@ -1255,8 +1623,15 @@ namespace ClubCloud.Provider
 
         }
 
+        #endregion
+
         #region helpers
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static string GetZimbraDomain(string url)
         {
             StringBuilder returnUrl = new StringBuilder();

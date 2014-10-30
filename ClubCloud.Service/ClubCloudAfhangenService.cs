@@ -24,9 +24,10 @@ namespace ClubCloud.Service
     /// The REST Service.
     /// </summary>
     [BasicHttpBindingServiceMetadataExchangeEndpoint]
+    [ServiceFactoryUsingAuthSchemeInEndpointAddress( UsingAuthSchemeInEndpointAddress = true)]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     [System.Runtime.InteropServices.Guid("4d39ae1b-b9f8-4899-a6c7-2a50bff2351c")]
-    [ServiceBehavior(Namespace = "http://clubcloud.nl/", Name = "ClubCloudAfhangen")]
+    [ServiceBehavior(Namespace = "http://clubcloud.nl/", Name = "ClubCloudAfhangen", IncludeExceptionDetailInFaults = true)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
     public class ClubCloudAfhangenService : IClubCloudAfhangenService
     {
