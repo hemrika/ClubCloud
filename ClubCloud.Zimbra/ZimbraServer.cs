@@ -389,9 +389,9 @@ namespace ClubCloud.Zimbra
             catch (TargetInvocationException tiex)
             {
                 //bool reauthenticate = false;
-                if(tiex.InnerException.GetType() == typeof(FaultException))
+                if (tiex.InnerException.GetType() == typeof(FaultException))
                 {
-                    if(tiex.InnerException.Message.Equals("no valid authtoken present", StringComparison.InvariantCultureIgnoreCase))
+                    if (tiex.InnerException.Message.Equals("no valid authtoken present", StringComparison.InvariantCultureIgnoreCase))
                     {
                         reauthenticate = true;
                     }
@@ -399,6 +399,17 @@ namespace ClubCloud.Zimbra
                     {
                         throw tiex;
                     }
+                }
+            }
+            catch (FaultException fiex)
+            {
+                if (fiex.Message.Equals("no valid authtoken present", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    reauthenticate = true;
+                }
+                else
+                {
+                    throw fiex;
                 }
             }
 
@@ -544,7 +555,9 @@ namespace ClubCloud.Zimbra
             }
             catch (Exception ex)
             {
-
+                if(ex.InnerException != null && ex.InnerException.GetType() == typeof(FaultException))
+                    throw ex.InnerException;
+                
                 throw ex;
             }
         }

@@ -31,6 +31,15 @@ namespace ClubCloud.Zimbra.Account
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         ChangePasswordResponse ChangePasswordRequest(ChangePasswordRequest request);
 
+        /*
+        [System.ServiceModel.OperationContractAttribute(Name = "GetDistributionListRequest", Action = "AccountGetDistributionListRequest", ReplyAction = "AccountGetDistributionListResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        GetDistributionListResponse GetDistributionListRequest(GetDistributionListRequest request);
+        */
+
+        [System.ServiceModel.OperationContractAttribute(Name = "DistributionListActionRequest", Action = "AccountDistributionListActionRequestMessage", ReplyAction = "AccountDistributionListActionResponseMessage")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        DistributionListActionResponse DistributionListActionRequest(DistributionListActionRequest request);
     }
     
 }

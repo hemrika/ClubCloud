@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,47 +6,71 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Global
 {
-    public partial class DistributionListGranteeSelector : System.ComponentModel.INotifyPropertyChanged
+    public partial class DistributionListSubscribeReq : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private GranteeType _type;
+        private DistributionListSubscribeOp _op;
 
-        private DistributionListGranteeBy _by;
+        private System.Nullable<bool> _bccOwners;
 
         private string _value;
 
         //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GranteeType type
+        public DistributionListSubscribeOp op
         {
             get
             {
-                return this._type;
+                return this._op;
             }
             set
             {
-                if ((_type.Equals(value) != true))
+                if ((_op.Equals(value) != true))
                 {
-                    this._type = value;
-                    this.OnPropertyChanged("type");
+                    this._op = value;
+                    this.OnPropertyChanged("op");
                 }
             }
         }
 
         //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public DistributionListGranteeBy by
+        public bool bccOwners
         {
             get
             {
-                return this._by;
+                if (this._bccOwners.HasValue)
+                {
+                    return this._bccOwners.Value;
+                }
+                else
+                {
+                    return default(bool);
+                }
             }
             set
             {
-                if ((_by.Equals(value) != true))
+                if ((_bccOwners.Equals(value) != true))
                 {
-                    this._by = value;
-                    this.OnPropertyChanged("by");
+                    this._bccOwners = value;
+                    this.OnPropertyChanged("bccOwners");
+                }
+            }
+        }
+
+        //[System.Xml.Serialization.XmlIgnoreAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool bccOwnersSpecified
+        {
+            get
+            {
+                return this._bccOwners.HasValue;
+            }
+            set
+            {
+                if (value == false)
+                {
+                    this._bccOwners = null;
                 }
             }
         }

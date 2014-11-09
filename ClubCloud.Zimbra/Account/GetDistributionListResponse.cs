@@ -1,39 +1,42 @@
-﻿using ClubCloud.Zimbra.Global;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using ClubCloud.Zimbra.Global;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.ServiceModel;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace ClubCloud.Zimbra.Account
-{
-    [System.Runtime.Serialization.DataContractAttribute(Name = "GetDistributionListResponse", Namespace = "urn:zimbraAccount")]
-    public partial class GetDistributionListResponse : ZimbraMessage
-    {
+//namespace ClubCloud.Zimbra.Account
+//{
+//    [MessageContract(WrapperName = "GetDistributionListResponse", WrapperNamespace = "urn:zimbraAccount")]
+//    public partial class GetDistributionListResponse : ZimbraMessage
+//    {
 
-        private DistributionListInfo _dl;
+//        private DistributionListInfo _dl;
 
-        public GetDistributionListResponse()
-        {
-            this._dl = new DistributionListInfo();
-        }
+//        public GetDistributionListResponse()
+//        {
+//            this._dl = new DistributionListInfo();
+//        }
 
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public DistributionListInfo dl
-        {
-            get
-            {
-                return this._dl;
-            }
-            set
-            {
-                if (((this._dl == null)
-                            || (_dl.Equals(value) != true)))
-                {
-                    this._dl = value;
-                    this.OnPropertyChanged("dl");
-                }
-            }
-        }
-    }
-}
+//        [System.Xml.Serialization.XmlElementAttribute()]
+//        [System.Runtime.Serialization.DataMemberAttribute()]
+//        [MessageBodyMember]
+//        public DistributionListInfo dl
+//        {
+//            get
+//            {
+//                return this._dl;
+//            }
+//            set
+//            {
+//                if (((this._dl == null)
+//                            || (_dl.Equals(value) != true)))
+//                {
+//                    this._dl = value;
+//                    this.OnPropertyChanged("dl");
+//                }
+//            }
+//        }
+//    }
+//}

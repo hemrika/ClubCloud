@@ -16,21 +16,21 @@ namespace ClubCloud.Zimbra.Global
 
         private List<DistributionListGranteeSelector> _owner;
 
-        private List<distributionListRightSpec> _right;
+        private List<DistributionListRightSpec> _right;
 
-        private distributionListSubscribeReq _subsReq;
+        private DistributionListSubscribeReq _subsReq;
 
         private Operation _op;
 
         public DistributionListAction()
         {
-            this._subsReq = new distributionListSubscribeReq();
-            this._right = new List<distributionListRightSpec>();
+            this._subsReq = new DistributionListSubscribeReq();
+            this._right = new List<DistributionListRightSpec>();
             this._owner = new List<DistributionListGranteeSelector>();
             this._dlm = new List<string>();
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("dlm")]
+        //[System.Xml.Serialization.XmlElementAttribute("dlm")]
         [System.Runtime.Serialization.DataMemberAttribute()]
         public List<string> dlm
         {
@@ -67,7 +67,7 @@ namespace ClubCloud.Zimbra.Global
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("owner")]
+        //[System.Xml.Serialization.XmlElementAttribute("owner")]
         [System.Runtime.Serialization.DataMemberAttribute()]
         public List<DistributionListGranteeSelector> owner
         {
@@ -86,9 +86,9 @@ namespace ClubCloud.Zimbra.Global
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("right")]
+        //[System.Xml.Serialization.XmlElementAttribute("right")]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<distributionListRightSpec> right
+        public List<DistributionListRightSpec> right
         {
             get
             {
@@ -106,7 +106,7 @@ namespace ClubCloud.Zimbra.Global
         }
 
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public distributionListSubscribeReq subsReq
+        public DistributionListSubscribeReq subsReq
         {
             get
             {
@@ -123,7 +123,7 @@ namespace ClubCloud.Zimbra.Global
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
         public Operation op
         {

@@ -24,7 +24,14 @@ namespace ClubCloud.Zimbra.Account
 
         protected override zimbraAccountSoap CreateChannel()
         {
-            return base.CreateChannel();
+            try
+            {
+                return base.CreateChannel();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public AuthResponse AccountAuth(AuthRequest request)
@@ -50,6 +57,18 @@ namespace ClubCloud.Zimbra.Account
         public ChangePasswordResponse ChangePasswordRequest(ChangePasswordRequest request)
         {
             return base.Channel.ChangePasswordRequest(request);
+        }
+
+        /*
+        public GetDistributionListResponse GetDistributionListRequest(GetDistributionListRequest request)
+        {
+            return base.Channel.GetDistributionListRequest(request);
+        }
+        */
+
+        public DistributionListActionResponse DistributionListActionRequest(DistributionListActionRequest request)
+        {
+            return base.Channel.DistributionListActionRequest(request);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ClubCloud.Zimbra.Global
 
         private string _targetName;
 
-        private System.Nullable<targetType> _type;
+        private System.Nullable<TargetType> _type;
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -34,7 +34,7 @@ namespace ClubCloud.Zimbra.Global
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public targetType type
+        public TargetType type
         {
             get
             {
@@ -44,7 +44,7 @@ namespace ClubCloud.Zimbra.Global
                 }
                 else
                 {
-                    return default(targetType);
+                    return default(TargetType);
                 }
             }
             set

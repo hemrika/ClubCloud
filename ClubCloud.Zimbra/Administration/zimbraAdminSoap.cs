@@ -66,6 +66,18 @@ namespace ClubCloud.Zimbra.Administration
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         GetDistributionListResponse GetDistributionListRequest(GetDistributionListRequest request);
 
+        [System.ServiceModel.OperationContractAttribute(Name = "CreateDistributionListRequest", Action = "AdminCreateDistributionListRequest", ReplyAction = "AdminCreateDistributionListResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        CreateDistributionListResponse CreateDistributionListRequest(CreateDistributionListRequest request);
+
+        [System.ServiceModel.OperationContractAttribute(Name = "RemoveDistributionListMemberRequest", Action = "AdminRemoveDistributionListMemberRequest", ReplyAction = "AdminRemoveDistributionListMemberResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        RemoveDistributionListMemberResponse RemoveDistributionListMemberRequest(RemoveDistributionListMemberRequest request);
+
+        [System.ServiceModel.OperationContractAttribute(Name = "AddDistributionListMemberRequest", Action = "AdminAddDistributionListMemberRequest", ReplyAction = "AdminAddDistributionListMemberResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        AddDistributionListMemberResponse AddDistributionListMemberRequest(AddDistributionListMemberRequest request);
+
         [System.ServiceModel.OperationContractAttribute(Name = "SearchDirectoryRequest", Action = "AdminSearchDirectoryRequest", ReplyAction = "AdminSearchDirectoryResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         SearchDirectoryResponse SearchDirectoryRequest(SearchDirectoryRequest request);

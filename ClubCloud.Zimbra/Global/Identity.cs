@@ -4,41 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClubCloud.Zimbra.Administration
+namespace ClubCloud.Zimbra.Global
 {
-    [System.Runtime.Serialization.DataContractAttribute(Name = "AddDistributionListMemberRequest", Namespace = "urn:zimbraAdmin")]
-    public partial class AddDistributionListMemberRequest : ZimbraMessage
+    [System.Runtime.Serialization.DataContractAttribute(Name = "Identity", Namespace = "urn:zimbraAccount")]
+    public partial class Identity : attrsImpl
     {
 
-        private List<string> _dlm;
+        private string _name;
 
         private string _id;
 
-        public AddDistributionListMemberRequest()
-        {
-            this._dlm = new List<string>();
-        }
-
-        //[System.Xml.Serialization.XmlElementAttribute("dlm")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<string> dlm
+        public string name
         {
             get
             {
-                return this._dlm;
+                return this._name;
             }
             set
             {
-                if (((this._dlm == null)
-                            || (_dlm.Equals(value) != true)))
+                if (((this._name == null)
+                            || (_name.Equals(value) != true)))
                 {
-                    this._dlm = value;
-                    this.OnPropertyChanged("dlm");
+                    this._name = value;
+                    this.OnPropertyChanged("name");
                 }
             }
         }
 
-        //[System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string id
         {

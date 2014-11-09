@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace ClubCloud.Zimbra.Global
 {
-    public enum DistributionListGranteeBy
+    public enum DistributionListSubscribeOp
     {
 
         /// <remarks/>
-        [XmlEnum(Name = "id")]
-        id,
+        [XmlEnum(Name = "subscribe")]
+        subscribe,
 
         /// <remarks/>
-        [XmlEnum(Name = "name")]
-        name,
+        [XmlEnum(Name = "unsubscribe")]
+        unsubscribe,
     }
+
 }

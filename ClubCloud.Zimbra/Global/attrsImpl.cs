@@ -2,26 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Global
 {
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(GetDistributionListRequest))]
+    //[System.Xml.Serialization.XmlIncludeAttribute(typeof(GetDistributionListRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(DistributionListActionRequest))]
+    //[System.Xml.Serialization.XmlIncludeAttribute(typeof(Identity))]
+    [MessageContract]
     public abstract partial class attrsImpl : ZimbraMessage
     {
 
-        private List<attr> _a;
+        private List<attrA> _a;
 
         public attrsImpl()
         {
-            this._a = new List<attr>();
+            this._a = new List<attrA>();
         }
 
         [System.Xml.Serialization.XmlElementAttribute("a")]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public List<attr> a
+        [MessageBodyMember]
+        public List<attrA> a
         {
             get
             {

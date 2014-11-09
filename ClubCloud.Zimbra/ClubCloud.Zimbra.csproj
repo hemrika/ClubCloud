@@ -147,13 +147,17 @@
     <Compile Include="Global\DistributionListGranteeSelector.cs" />
     <Compile Include="Global\DistributionListInfo.cs" />
     <Compile Include="Global\DistributionListRightInfo.cs" />
+    <Compile Include="Global\DistributionListRightSpec.cs" />
     <Compile Include="Global\DistributionListSelector.cs" />
+    <Compile Include="Global\DistributionListSubscribeOp.cs" />
+    <Compile Include="Global\DistributionListSubscribeReq.cs" />
     <Compile Include="Global\dlInfo.cs" />
     <Compile Include="Global\domainBy.cs" />
     <Compile Include="Global\domainInfo.cs" />
     <Compile Include="Global\domainSelector.cs" />
     <Compile Include="Global\GranteeInfo.cs" />
     <Compile Include="Global\GranteeType.cs" />
+    <Compile Include="Global\Identity.cs" />
     <Compile Include="Global\infoSection.cs" />
     <Compile Include="Global\KeyValuePair.cs" />
     <Compile Include="Global\namedValue.cs" />
@@ -164,7 +168,7 @@
     <Compile Include="Global\serverInfo.cs" />
     <Compile Include="Global\serverSelector.cs" />
     <Compile Include="Global\session.cs" />
-    <Compile Include="Global\targetType.cs" />
+    <Compile Include="Global\TargetType.cs" />
     <Compile Include="Global\ucServiceInfo.cs" />
     <Compile Include="Global\userAgent.cs" />
     <Compile Include="Global\VersionInfo.cs" />

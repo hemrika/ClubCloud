@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Global
 {
-    public partial class DistributionListSelector : System.ComponentModel.INotifyPropertyChanged
+    public partial class DistributionListSelector
     {
 
         private System.Nullable<DistributionListBy> _by;
@@ -14,7 +14,7 @@ namespace ClubCloud.Zimbra.Global
         private string _value;
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = false, Name = "by", EmitDefaultValue = false)]
         public DistributionListBy by
         {
             get
@@ -33,30 +33,13 @@ namespace ClubCloud.Zimbra.Global
                 if ((_by.Equals(value) != true))
                 {
                     this._by = value;
-                    this.OnPropertyChanged("by");
-                }
-            }
-        }
-
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool bySpecified
-        {
-            get
-            {
-                return this._by.HasValue;
-            }
-            set
-            {
-                if (value == false)
-                {
-                    this._by = null;
+                    //this.OnPropertyChanged("by");
                 }
             }
         }
 
         [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = false, EmitDefaultValue = false)]
         public string Value
         {
             get
@@ -69,19 +52,8 @@ namespace ClubCloud.Zimbra.Global
                             || (_value.Equals(value) != true)))
                 {
                     this._value = value;
-                    this.OnPropertyChanged("Value");
+                    //this.OnPropertyChanged("Value");
                 }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null))
-            {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }

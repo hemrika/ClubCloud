@@ -14,6 +14,8 @@ namespace ClubCloud.Zimbra.Administration
 
         private DistributionListSelector _dl;
 
+        private string _name;
+
         private System.Nullable<int> _limit;
 
         private System.Nullable<int> _offset;
@@ -25,8 +27,8 @@ namespace ClubCloud.Zimbra.Administration
             this._dl = new DistributionListSelector();
         }
 
-        [System.Xml.Serialization.XmlElementAttribute()]
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired = false, EmitDefaultValue = false)]
+        [System.Xml.Serialization.XmlElement(ElementName = "dl", Namespace = "urn:zimbraAdmin")]
         [MessageBodyMember]
         public DistributionListSelector dl
         {
@@ -45,8 +47,29 @@ namespace ClubCloud.Zimbra.Administration
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [MessageBodyMember]
+        public string name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                if (((this._name == null)
+                            || (_name.Equals(value) != true)))
+                {
+                    this._name = value;
+                    this.OnPropertyChanged("name");
+                }
+            }
+        }
+
+        //[System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        [MessageBodyMember]
         public int limit
         {
             get
@@ -70,8 +93,9 @@ namespace ClubCloud.Zimbra.Administration
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [MessageBodyMember]
         public int offset
         {
             get
@@ -95,7 +119,7 @@ namespace ClubCloud.Zimbra.Administration
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
         public bool sortAscending
         {

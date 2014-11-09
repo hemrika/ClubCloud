@@ -30,6 +30,10 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
 
                 CreateVirtualDirectory(site);
                 SPWeb web = site.RootWeb;
+                ZimbraGroupEventReceiver.CreateReceiverDefinitions(web);
+                ZimbraRoleEventReceiver.CreateReceiverDefinitions(web);
+
+                /*
                 //Adding the GroupUserAdded event
                 SPEventReceiverDefinition grpUserAdded = web.EventReceivers.Add();
                 grpUserAdded.Name = "Zimbra User Added";
@@ -46,14 +50,18 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
                 grpUserAdding.Update();
 
                 web.Update();
+                */
             });
         }
 
         private void CreateVirtualDirectory(SPSite site)
         {
-            //TODO
-            string vDirPath = SPUtility.GetVersionedGenericSetupPath(@"TEMPLATE\IDENTITYMODEL\ZIMBRA",15);
-            ZimbraConfiguration.CreatevDir(site.WebApplication.ApplicationPool.Name, "_zimbra", vDirPath);
+            SPSecurity.RunWithElevatedPrivileges(delegate()
+            {
+                //TODO
+                string vDirPath = SPUtility.GetVersionedGenericSetupPath(@"TEMPLATE\IDENTITYMODEL\ZIMBRA", 15);
+                ZimbraConfiguration.CreatevDir(site.WebApplication.ApplicationPool.Name, "_zimbra", vDirPath);
+            });
         }
 
         public override void FeatureDeactivating(SPFeatureReceiverProperties properties)

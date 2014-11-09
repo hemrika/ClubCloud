@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace ClubCloud.Provider
 {
-    class ZimbraConfiguration
+    internal class ZimbraConfiguration
     {
         private static ServerManager manager = new ServerManager();
         private static Site SPServices = manager.Sites["SharePoint Web Services"];
@@ -34,6 +34,85 @@ namespace ClubCloud.Provider
         internal static string stsServicesConfigPath = stsServices.VirtualDirectories.FirstOrDefault().PhysicalPath + @"\web.config";
         internal static string caServicesConfigPath = caServices.VirtualDirectories.FirstOrDefault().PhysicalPath + @"\web.config";
 
+        /*
+        private static void CreateVirtualDirectories(string serverComment, SPProvisioningAssistant.VirtualDirectorySettings[] virtualDirectories, SPIisVirtualDirectory.AuthorizationFlags? additionalAuthorization)
+        {
+            if ((int)virtualDirectories.Length == 0)
+            {
+                return;
+            }
+            SPIisServerManager.CommitChanges((ServerManager manager) => {
+                Configuration applicationHostConfiguration = manager.GetApplicationHostConfiguration();
+                Site item = manager.Sites[serverComment];
+                Application application = item.Applications["/"];
+                string physicalPath = application.VirtualDirectories["/"].PhysicalPath;
+                SPProvisioningAssistant.VirtualDirectorySettings[] virtualDirectorySettingsArray = virtualDirectories;
+                for (int i = 0; i < (int)virtualDirectorySettingsArray.Length; i++)
+                {
+                    SPProvisioningAssistant.VirtualDirectorySettings virtualDirectorySetting = virtualDirectorySettingsArray[i];
+                    string str = virtualDirectorySetting.GetPhysicalPath(physicalPath);
+                    if (!(new DirectoryInfo(str)).Exists)
+                    {
+                        Directory.CreateDirectory(str);
+                    }
+                    Application applicationPoolName = item.Applications[virtualDirectorySetting.ApplicationPath];
+                    if (applicationPoolName != null)
+                    {
+                        VirtualDirectory virtualDirectory = applicationPoolName.VirtualDirectories[virtualDirectorySetting.VirtualDirectoryPath];
+                        if (virtualDirectory != null)
+                        {
+                            virtualDirectory.PhysicalPath = str;
+                        }
+                        else
+                        {
+                            ULS.SendTraceTag(959866485, ULSCat.msoulscat_WSS_Topology, ULSTraceLevel.Medium, "Creating the virtual directory {0} ({1}).", new object[] { virtualDirectorySetting.Url, str });
+                            applicationPoolName.VirtualDirectories.Add(virtualDirectorySetting.VirtualDirectoryPath, str);
+                        }
+                    }
+                    else
+                    {
+                        if (!string.Equals(virtualDirectorySetting.VirtualDirectoryPath, "/", StringComparison.OrdinalIgnoreCase))
+                        {
+                            throw new NotSupportedException();
+                        }
+                        ULS.SendTraceTag(959866488, ULSCat.msoulscat_WSS_Topology, ULSTraceLevel.Medium, "{0}", new object[] { "Creating a new application for the virtual directory." });
+                        applicationPoolName = item.Applications.Add(virtualDirectorySetting.ApplicationPath, str);
+                        if (!string.IsNullOrEmpty(virtualDirectorySetting.ApplicationPoolName))
+                        {
+                            applicationPoolName.ApplicationPoolName = virtualDirectorySetting.ApplicationPoolName;
+                        }
+                        else
+                        {
+                            applicationPoolName.ApplicationPoolName = application.ApplicationPoolName;
+                        }
+                    }
+                    string location = virtualDirectorySetting.GetLocation(serverComment);
+                    ULS.SendTraceTag(959866487, ULSCat.msoulscat_WSS_Topology, ULSTraceLevel.Medium, "Setting the virtual directory access flags to {0}.", new object[] { (int)virtualDirectorySetting.AccessFlags });
+                    SPProvisioningAssistant.SetAccessPolicy(applicationHostConfiguration, location, virtualDirectorySetting.AccessFlags);
+                    if (!virtualDirectorySetting.InheritParentAuthorizationFlags)
+                    {
+                        ULS.SendTraceTag(963864951, ULSCat.msoulscat_WSS_Topology, ULSTraceLevel.Medium, "{0}", new object[] { "Configuring the virtual directory to specific access." });
+                        SPIisVirtualDirectory.AuthorizationFlags value = (SPIisVirtualDirectory.AuthorizationFlags)0;
+                        if (additionalAuthorization.HasValue)
+                        {
+                            value = value | additionalAuthorization.Value;
+                        }
+                        SPProvisioningAssistant.SetAuthFlags(applicationHostConfiguration, location, value);
+                    }
+                    if (virtualDirectorySetting.AllowAnonymousAccess)
+                    {
+                        ULS.SendTraceTag(959866490, ULSCat.msoulscat_WSS_Topology, ULSTraceLevel.Medium, "{0}", new object[] { "Configuring the virtual directory to allow anonymous access." });
+                        SPProvisioningAssistant.SetAuthentication(applicationHostConfiguration, location, "anonymousAuthentication", true);
+                    }
+                    ULS.SendTraceTag(959866672, ULSCat.msoulscat_WSS_Topology, ULSTraceLevel.Medium, "{0}", new object[] { "Configuring the virtual directory content expiration." });
+                    ConfigurationElement childElement = applicationHostConfiguration.GetSection("system.webServer/staticContent", location).GetChildElement("clientCache");
+                    childElement.SetAttributeValue("cacheControlMode", "UseMaxAge");
+                    childElement.SetAttributeValue("cacheControlMaxAge", new TimeSpan(365, 0, 0, 0));
+                }
+                return true;
+            });
+        }
+        */
         internal static void CreatevDir(string applicationPoolName, string vDirName, string vDirPath)
         {
             try

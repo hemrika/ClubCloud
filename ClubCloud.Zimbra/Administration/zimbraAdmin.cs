@@ -2187,7 +2187,7 @@ namespace ClubCloud.Zimbra.Administration
     public partial class effectiveRightsTargetSelector : System.ComponentModel.INotifyPropertyChanged
     {
 
-        private targetType _type;
+        private TargetType _type;
 
         private System.Nullable<targetBy> _by;
 
@@ -2195,7 +2195,7 @@ namespace ClubCloud.Zimbra.Administration
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public targetType type
+        public TargetType type
         {
             get
             {
@@ -23595,7 +23595,7 @@ namespace ClubCloud.Zimbra.Administration
 
         private List<rightsEntriesInfo> _entries;
 
-        private targetType _type;
+        private TargetType _type;
 
         public effectiveRightsTarget()
         {
@@ -23663,7 +23663,7 @@ namespace ClubCloud.Zimbra.Administration
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public targetType type
+        public TargetType type
         {
             get
             {
@@ -24106,7 +24106,7 @@ namespace ClubCloud.Zimbra.Administration
     public partial class effectiveRightsTargetInfo : effectiveRightsInfo
     {
 
-        private targetType _type;
+        private TargetType _type;
 
         private string _id;
 
@@ -24114,7 +24114,7 @@ namespace ClubCloud.Zimbra.Administration
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public targetType type
+        public TargetType type
         {
             get
             {
@@ -28050,7 +28050,7 @@ namespace ClubCloud.Zimbra.Administration
 
         private List<namedElement> _a;
 
-        private targetType _type;
+        private TargetType _type;
 
         private string _id;
 
@@ -28082,7 +28082,7 @@ namespace ClubCloud.Zimbra.Administration
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public targetType type
+        public TargetType type
         {
             get
             {
@@ -39512,7 +39512,7 @@ namespace ClubCloud.Zimbra.Administration
 
         private List<constraintAttr> _a;
 
-        private targetType _type;
+        private TargetType _type;
 
         private string _id;
 
@@ -39544,7 +39544,7 @@ namespace ClubCloud.Zimbra.Administration
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public targetType type
+        public TargetType type
         {
             get
             {

@@ -99,6 +99,21 @@ namespace ClubCloud.Zimbra.Administration
             return base.Channel.GetDistributionListRequest(request);
         }
 
+        public CreateDistributionListResponse CreateDistributionListRequest(CreateDistributionListRequest request) 
+        {
+            return base.Channel.CreateDistributionListRequest(request);
+        }
+
+        public RemoveDistributionListMemberResponse RemoveDistributionListMemberRequest(RemoveDistributionListMemberRequest request)
+        {
+            return base.Channel.RemoveDistributionListMemberRequest(request);
+        }
+
+        public AddDistributionListMemberResponse AddDistributionListMemberRequest(AddDistributionListMemberRequest request) 
+        {
+            return base.Channel.AddDistributionListMemberRequest(request);
+        }
+
         public SearchDirectoryResponse SearchDirectoryRequest(SearchDirectoryRequest request)
         {
             try

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Account
 {
-    [MessageContract(WrapperName = "DistributionListActionResponse", WrapperNamespace = "urn:zimbraAdmin")]
+    [MessageContract(WrapperName = "DistributionListActionResponse", WrapperNamespace = "urn:zimbraAccount")]
     public class DistributionListActionResponse : ZimbraMessage
     {
     }

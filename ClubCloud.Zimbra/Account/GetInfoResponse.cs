@@ -48,7 +48,7 @@ namespace ClubCloud.Zimbra.Account
 
         private List<prop> _props;
 
-        private List<identity> _identities;
+        private List<Identity> _identities;
 
         private List<signature> _signatures;
 
@@ -77,7 +77,7 @@ namespace ClubCloud.Zimbra.Account
             this._childAccounts = new List<childAccount>();
             this._dataSources = new GetInfoResponseDataSources();
             this._signatures = new List<signature>();
-            this._identities = new List<identity>();
+            this._identities = new List<Identity>();
             this._props = new List<prop>();
             this._zimlets = new List<accountZimletInfo>();
             this._attrs = new List<attr>();
@@ -521,7 +521,7 @@ namespace ClubCloud.Zimbra.Account
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
         [System.Runtime.Serialization.DataMemberAttribute()]
         [MessageBodyMember]
-        public List<identity> identities
+        public List<Identity> identities
         {
             get
             {

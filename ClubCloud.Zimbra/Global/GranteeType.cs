@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace ClubCloud.Zimbra.Global
 {
+    [System.SerializableAttribute()]
     public enum GranteeType
     {
 

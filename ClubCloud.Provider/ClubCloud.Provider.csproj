@@ -67,6 +67,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Selectors" />
@@ -80,6 +81,10 @@
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CONTROLTEMPLATES\ClubCloud.Provider\ClaimSecurityTrimmedControl.cs" />
+    <Compile Include="CONTROLTEMPLATES\ClubCloud.Provider\ClaimsConverter.cs" />
+    <Compile Include="CONTROLTEMPLATES\ClubCloud.Provider\RolesConverter.cs" />
+    <Compile Include="CONTROLTEMPLATES\ClubCloud.Provider\RolesSecurityTrimmedControl.cs" />
     <Compile Include="Features\Zimbra Claims\Zimbra Claims.EventReceiver.cs">
       <DependentUpon>Zimbra Claims.feature</DependentUpon>
     </Compile>
@@ -156,6 +161,7 @@
     <Compile Include="ZimbraDiagnosticService.cs" />
     <Compile Include="ZimbraConfiguration.cs" />
     <Compile Include="ZimbraFieldId.cs" />
+    <Compile Include="ZimbraRoleEventReceiver.cs" />
     <Compile Include="ZimbraMembershipProvider.cs" />
     <Compile Include="ZimbraMembershipUser.cs" />
     <Compile Include="ZimbraMembershipUserCollection.cs" />
@@ -163,12 +169,15 @@
     <Compile Include="ZimbraProviderSettings.cs" />
     <Compile Include="ZimbraRoleProvider.cs" />
     <Compile Include="ZimbraModule.cs" />
-    <Compile Include="ZimbraSecurityEventReceiver.cs" />
+    <Compile Include="ZimbraGroupEventReceiver.cs" />
     <Compile Include="ZimbraUserIdentity.cs" />
     <Compile Include="ZimbraUserSettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <None Include="CONTROLTEMPLATES\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b589f0fe-2f3c-47c3-ae7e-6ae50d5f3935}</SharePointProjectItemId>
+    </None>
     <None Include="Features\Zimbra UserSettings\Zimbra UserSettings.feature">
       <FeatureId>{48f6970d-4eef-4245-b89f-3ee2a9c8bf9d}</FeatureId>
     </None>

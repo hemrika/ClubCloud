@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Zimbra.Account
 {
-    [MessageContract(WrapperName = "DistributionListActionRequest", WrapperNamespace = "urn:zimbraAdmin")]
+    [MessageContract(WrapperName = "DistributionListActionRequest", WrapperNamespace = "urn:zimbraAccount")]
     public class DistributionListActionRequest : attrsImpl
     {
 
@@ -22,7 +22,9 @@ namespace ClubCloud.Zimbra.Account
             this._dl = new DistributionListSelector();
         }
 
+        //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [MessageBodyMember]
         public DistributionListSelector dl
         {
             get
@@ -40,7 +42,9 @@ namespace ClubCloud.Zimbra.Account
             }
         }
 
+        //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [MessageBodyMember]
         public DistributionListAction action
         {
             get
