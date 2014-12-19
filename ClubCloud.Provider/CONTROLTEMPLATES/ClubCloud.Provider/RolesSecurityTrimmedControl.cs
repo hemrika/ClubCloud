@@ -137,16 +137,23 @@ namespace ClubCloud.Provider.Controls
                 if (!this.m_shouldRenderInitialized)
                 {
                     this.m_shouldRenderInitialized = true;
-                    string[] userRoles = RoleProvider.GetRolesForUser(SPContext.Current.Web.CurrentUser.UserId.NameId);
-                    this.m_shouldRender = (Roles.Intersect(userRoles).ToArray().Length > 0);
-                    //RoleProvider.IsUserInRole(SPContext.Current.Web.CurrentUser.LoginName, "All Authenticated Users");
-                    //this.m_shouldRender = (base.DesignMode ? true : Provider.IsUserInRole
-                    /*
-                    if (this.HideFromSearchCrawler)
+                    this.m_shouldRender = false;
+                    if (SPContext.Current.Web.CurrentUser != null && SPContext.Current.Web.CurrentUser.UserId.NameIdIssuer == "Forms:zimbramembershipprovider")
                     {
-                        this.m_shouldRender = (!this.m_shouldRender ? false : !SPUtility.IsSearchCrawlerRequest(this.Page.Request));
+                        if (RoleProvider != null)
+                        {
+                            string[] userRoles = RoleProvider.GetRolesForUser(SPContext.Current.Web.CurrentUser.UserId.NameId);
+                            this.m_shouldRender = (Roles.Intersect(userRoles).ToArray().Length > 0);
+                            //RoleProvider.IsUserInRole(SPContext.Current.Web.CurrentUser.LoginName, "All Authenticated Users");
+                            //this.m_shouldRender = (base.DesignMode ? true : Provider.IsUserInRole
+                            /*
+                            if (this.HideFromSearchCrawler)
+                            {
+                                this.m_shouldRender = (!this.m_shouldRender ? false : !SPUtility.IsSearchCrawlerRequest(this.Page.Request));
+                            }
+                            */
+                        }
                     }
-                    */
                 }
                 return this.m_shouldRender;
             }

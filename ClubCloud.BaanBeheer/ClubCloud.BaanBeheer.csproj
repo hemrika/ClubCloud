@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
@@ -66,6 +67,9 @@
     </None>
     <None Include="Images\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{08ab24c1-be62-4db4-b845-919d9d37e803}</SharePointProjectItemId>
+    </None>
+    <None Include="ModuleBaanBeheerInstellingen\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2453ed6b-3de0-4d14-b577-4524524ee723}</SharePointProjectItemId>
     </None>
     <None Include="Package\Package.package">
       <PackageId>{7c9688b7-de3c-454a-aa25-4cc1d13d64d6}</PackageId>
@@ -88,6 +92,8 @@
       <DependentUpon>Baan Beheer.feature</DependentUpon>
     </Content>
     <Content Include="Images\ClubCloud.BaanBeheer\SITEICON.PNG" />
+    <Content Include="ModuleBaanBeheerInstellingen\instellingen.aspx" />
+    <Content Include="ModuleBaanBeheerInstellingen\Elements.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

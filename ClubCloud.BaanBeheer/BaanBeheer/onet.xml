@@ -1,13 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Title="ClubCloud BaanBeheer" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" HideSiteContentsLink="true" DisableWebDesignFeatures="true" EnableMinimalDownload="true" SiteLogoDescription="Baan Beheer" SiteLogoUrl="/_layouts/15/images/ClubCloud.Baanbeheer/siteIcon.png">
   <NavBars>
-    <NavBar ID="1002" Name="ClubCloud BaanBehee" >
+    <NavBar Name="$Resources:core,category_Top;" Separator="&amp;nbsp;&amp;nbsp;&amp;nbsp;" Body="&lt;a ID='onettopnavbar#LABEL_ID#' href='#URL#' accesskey='J'&gt;#LABEL#&lt;/a&gt;" ID="1002" />
+    <NavBar Name="$Resources:core,nav_CentralAdministrationHome;" Prefix="&lt;table border='0' cellpadding='4' cellspacing='0'&gt;" Body="&lt;tr&gt;&lt;td&gt;&lt;table border='0' cellpadding='0' cellspacing='0'&gt;&lt;tr&gt;&lt;td&gt;&lt;img src='/_layouts/15/images/blank.gif' id='100' alt='' border='0'&gt;&amp;nbsp;&lt;/td&gt;&lt;td valign='top'&gt;&lt;a id='onetleftnavbar#LABEL_ID#' href='#URL#'&gt;#LABEL#&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;" Suffix="&lt;/table&gt;" ID="1001" Url="/default.aspx" />
+  </NavBars>
+
+  <NavBars>
+    <NavBar Name="$Resources:core,category_Top;" Separator="&amp;nbsp;&amp;nbsp;&amp;nbsp;" Body="&lt;a ID='onettopnavbar#LABEL_ID#' href='#URL#' accesskey='J'&gt;#LABEL#&lt;/a&gt;" ID="1002" />
+    <NavBar ID="1002" Name="ClubCloud BaanBeheer" >
     </NavBar>
   </NavBars>
   <Configurations>
-    <Configuration ID="0" Name="ClubCloud BaanBeheer" Description="ClubCloud Baan Beheer Site" Hidden="false" Title="ClubCloud BaanBehee">
+    <Configuration ID="-1" Name="NewWeb" MasterUrl="_catalogs/masterpage/seattle.master" />
+    <Configuration ID="0" Name="ClubCloud Baan Beheer" Description="ClubCloud Baan Beheer Site" Hidden="false" Title="ClubCloud Baan Beheer" MasterUrl="_catalogs/masterpage/seattle.master">
       <Lists/>
       <SiteFeatures>
+        <!-- BasicWebParts Feature -->
+        <Feature ID="00BFEA71-1C5E-4A24-B310-BA51C3EB7A57" />
+        <!-- Three-state Workflow Feature -->
+        <Feature ID="FDE5D850-671E-4143-950A-87B473922DC7" />
       </SiteFeatures>
       <WebFeatures>
       </WebFeatures>
@@ -18,7 +29,9 @@
   </Configurations>
   <Modules>
     <Module Name="Baanbeheer" Url="" Path="">
-      <File Url="default.aspx" Path="default.aspx">
+      <File Url="default.aspx" Path="default.aspx" NavBarHome="True">
+        <NavBarPage Name="$Resources:core,nav_Home;" Url="~site" ID="1002" Position="Start" />
+        <NavBarPage Name="$Resources:core,nav_Home;" ID="0" Position="Start" />
       </File>
     </Module>
   </Modules>

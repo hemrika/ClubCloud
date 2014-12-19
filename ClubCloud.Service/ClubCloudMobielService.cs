@@ -14,6 +14,7 @@ namespace ClubCloud.Service
     using Microsoft.SharePoint.IdentityModel;
     using System;
     using System.Collections.Generic;
+    using System.IdentityModel.Tokens;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.Web;
@@ -37,7 +38,7 @@ namespace ClubCloud.Service
     }
     /// <summary>
     /// The REST Service.
-    /// </summary>
+    /// </summary>    
     [BasicHttpBindingServiceMetadataExchangeEndpoint]
     [ServiceFactoryUsingAuthSchemeInEndpointAddress(UsingAuthSchemeInEndpointAddress = false)]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
@@ -64,6 +65,7 @@ namespace ClubCloud.Service
                 return result;
             }
 
+            result.ErrorCode = LoginErrorCode.NoError;
             result.CookieName = sessionAuthenticationModule.CookieHandler.Name;
             TimeSpan formsAuthenticationTimeout = TimeSpan.FromMinutes(30);
             result.TimeoutSeconds = (int)Math.Floor(formsAuthenticationTimeout.TotalSeconds);

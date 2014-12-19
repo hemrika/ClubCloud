@@ -802,6 +802,31 @@ namespace ClubCloud.Zimbra.Client
 
         private void button2_Click(object sender, EventArgs e)
         {
+            
+            contact contact= new KNLTB.ServIt.CrmService.contact{ };
+            TargetCreateContact ccontact = new TargetCreateContact { Contact = contact };
+
+            sgt_alg_lidmaatschap lidmaatschap = new sgt_alg_lidmaatschap { };
+            TargetCreateSgt_alg_lidmaatschap clidmaatschap = new TargetCreateSgt_alg_lidmaatschap{ Sgt_alg_lidmaatschap = lidmaatschap };
+
+            if (cc == null)
+            {
+                ClubCloud.KNLTB.Security.KNLTBContainer container = new KNLTB.Security.KNLTBContainer();
+                container.MijnRequestAcces("12073385", "rjm557308453!");
+                //container.ServItRequestAcces("27908313", "rjm557308453!");
+
+                while (container.Container == null) { }
+                cc = container.Container;
+            }
+
+            ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
+            CreateRequest request = new CreateRequest{ Target = ccontact};
+            CreateResponse response = service.Execute(request) as CreateResponse;
+            Guid id = response.id;
+
+
+
+            /*
             string serviceUrl = "https://mijn.clubcloud.nl/_vti_bin/ClubCloud.Mobiel/Mobiel.svc/GetVerenigingByNummer/12073385/82503/false";
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(serviceUrl));
             // include this otherwise you'll get 401 UNAUTHORIZED
@@ -826,6 +851,7 @@ namespace ClubCloud.Zimbra.Client
             //string response = response = client.DownloadString(serviceUrl);
 
             //int l = response.Length;
+            */
         }
     }
 }
