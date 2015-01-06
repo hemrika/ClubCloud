@@ -311,9 +311,9 @@ namespace ClubCloud.Zimbra.Client
                 //contact
                 //sgt_bondsnummer
                 //contactid
-                string bondnummer = "19949820";
-                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_bondsnummer", Operator = ConditionOperator.Equal, Values = new object[1] { bondnummer } };
-                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                //string bondnummer = "19949820";
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_bondsnummer", Operator = ConditionOperator.Equal, Values = new object[1] { bondnummer } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
                 //sgt_alg_baan_gereserveerd
                 //sgt_accomodatieid
@@ -358,6 +358,10 @@ namespace ClubCloud.Zimbra.Client
                 //ConditionExpression condition = new ConditionExpression { AttributeName = "accountid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("02ada6c7-80f9-4671-91f9-898ea5da3ccd") } };
                 //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
+                //account               
+                ConditionExpression condition = new ConditionExpression { AttributeName = "accountid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("39d9c302-aa0f-476c-b9d2-446309bb301b") } };
+                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
                 //customeraddress
                 //customeraddressid
                 //parentid 
@@ -390,9 +394,9 @@ namespace ClubCloud.Zimbra.Client
                 //sgt_alg_district
                 //systemuser
                 //FilterExpression expression = new FilterExpression();
-                query.EntityName = "contact";
+                query.EntityName = "account";
                 query.ColumnSet = cols;
-                query.Criteria = expression;
+                //query.Criteria = expression;
                 query.PageInfo = pageInfo;
                 query.Distinct = true;
 
@@ -411,11 +415,11 @@ namespace ClubCloud.Zimbra.Client
 
 
                     List<BusinessEntity> entities = results.BusinessEntityCollection.BusinessEntities.ToList<BusinessEntity>();
-                    foreach (contact entity in entities)
+                    foreach (account entity in entities)
                     {
                         //entity.sgt_spelerid
-                        string sentity = SerializeObjectList<contact>(entity);
-                        WriteToXmlFile<contact>(@"C:\contact.xml", entity, true);
+                        string sentity = SerializeObjectList<account>(entity);
+                        WriteToXmlFile<account>(@"C:\Grubbenvorst.xml", entity, true);
                     }
                 }
                 catch (Exception ex)

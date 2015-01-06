@@ -30,6 +30,7 @@ namespace ClubCloud.Service
     using System.ServiceModel.Activation;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Web.Security;
     using System.Xml;
     using System.Xml.Serialization;
 
@@ -1063,7 +1064,82 @@ namespace ClubCloud.Service
                             */
 
                         if (zuser != null)
-                            Provider.UpdateZimbraUserAsync(zuser);
+                            await Provider.UpdateZimbraUserAsync(zuser);
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private async Task<bool> UpdateMembershipuser(ClubCloud_Vereniging vereniging)
+        {
+            try
+            {
+                using (ClubCloud.Service.Model.BeheerContainer model = new Model.BeheerContainer(GetConnectionString()))
+                {
+
+                    ClubCloud_Setting updatesettings = model.ClubCloud_Settings.SingleOrDefault(g => g.VerenigingId == vereniging.Id);
+
+                    if (updatesettings != null)// && updatesettings.Id != null)
+                    {
+                        ZimbraMembershipUser zuser = await Provider.GetZimbraUserAsync(updatesettings.Id.ToString(), true);
+
+                        if (zuser == null)
+                        {
+                            MembershipCreateStatus status = MembershipCreateStatus.Success;
+                            MembershipUser nuser = Provider.CreateUser(vereniging.Nummer, "", vereniging.EmailKNLTB, "", "", true, null, out status);
+
+                            if(status != null && status == MembershipCreateStatus.Success)
+                            {
+                                zuser = nuser as ZimbraMembershipUser;
+                            }
+                            /*
+                            zuser.cn = vereniging.Naam;
+                            //zuser.co
+                            //zuser.Comment
+                            zuser.company = vereniging.Naam;
+                            //zuser.CreationDate
+                            zuser.departmentNumber = vereniging.KvKnummer;
+                            zuser.displayName = vereniging.Naam;
+                            zuser.Email = vereniging.Nummer + "@clubcloud.nl";
+                            //zuser.EmailForwarding = vereniging.EmailKNLTB;
+                            //zuser.EmailAlias
+                            zuser.employeeNumber = vereniging.Nummer;
+                            zuser.zimbraPrefMailForwardingAddress = vereniging.EmailKNLTB;
+                            */ 
+                        }
+
+                        /*
+                            zuser.cn = gebruiker.VolledigeNaam;
+                            zuser.co = gebruiker.NationaliteitId.ToString();
+                            zuser.company = gebruiker.OrganisatieNummer;
+                            zuser.departmentNumber = gebruiker.DistrictNaam;
+                            zuser.displayName = gebruiker.VolledigeNaam;
+                            zuser.employeeNumber = gebruiker.Id.ToString();
+                            zuser.givenName = gebruiker.Voornamen;
+                            zuser.homePhone = gebruiker.TelefoonAvond;
+                            zuser.homePostalAddress = gebruiker.Straat + " " + gebruiker.Huisnummer + " " + Environment.NewLine + gebruiker.Postcode + "," + gebruiker.Plaats + " " + Environment.NewLine + gebruiker.Gemeente;
+                            zuser.initials = gebruiker.Voorletters;
+                            zuser.l = gebruiker.Plaats;
+                            zuser.mobile = gebruiker.Mobiel;
+                            zuser.o = gebruiker.OrganisatieNummer;
+                            zuser.postalAddress = gebruiker.Straat + " " + gebruiker.Huisnummer + " " + Environment.NewLine + gebruiker.Postcode + "," + gebruiker.Plaats + " " + Environment.NewLine + gebruiker.Gemeente;
+                            zuser.postalCode = gebruiker.Postcode;
+                            zuser.sn = gebruiker.Achternaam;
+                            zuser.st = gebruiker.Gemeente;
+                            zuser.street = gebruiker.Straat + " " + gebruiker.Huisnummer;
+                            zuser.telephoneNumber = gebruiker.Mobiel;
+                            zuser.zimbraPrefMailForwardingAddress = gebruiker.Email;
+                            Provider.UpdateUser(zuser as MembershipUser);
+                            */
+
+                        if (zuser != null)
+                            await Provider.UpdateZimbraUserAsync(zuser);
                     }
                 }
 
@@ -2720,7 +2796,7 @@ namespace ClubCloud.Service
                                         entityToVereniging(entity, vereniging, bondsnummer,settings);
 
                                     }
-
+                                    GetClubCloudSettings(vereniging.Nummer);
                                     model.SaveChanges();
                                 }
                             }
@@ -2795,6 +2871,7 @@ namespace ClubCloud.Service
                                         entityToVereniging(entity, vereniging, bondsnummer,settings);
 
                                     }
+                                    GetClubCloudSettings(vereniging.Nummer);
                                     model.SaveChanges();
                                 }
                             }

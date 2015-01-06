@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5D62A596-80B9-44F5-A6B1-DBD69CC915B0}"
 	ProjectSection(SolutionItems) = preProject
@@ -67,9 +67,30 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.BaanBeheer", "Clu
 		{BC7CCE39-F470-4156-B67A-8A145841F43B} = {BC7CCE39-F470-4156-B67A-8A145841F43B}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Internet", "ClubCloud.Internet\ClubCloud.Internet.csproj", "{2CFBD8A0-5998-42BD-8028-047B13AA7703}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationConfiguration", "ApplicationConfiguration", "{CF842AE1-9486-4D6B-9DB6-A2F16F168299}"
+	ProjectSection(SolutionItems) = preProject
+		Application.config = Application.config
+		FxCop.targets = FxCop.targets
+		FxCopConsoleOutput.xsl = FxCopConsoleOutput.xsl
+		FxCopDictionary.xml = FxCopDictionary.xml
+		Settings.FxCop = Settings.FxCop
+		Settings.spruleset = Settings.spruleset
+		Settings.StyleCop = Settings.StyleCop
+		SharePointConfiguration.xml = SharePointConfiguration.xml
+		SPDisposeChecker.targets = SPDisposeChecker.targets
+		SPSF.targets = SPSF.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deployment", "Deployment\Deployment.csproj", "{D020C3CF-9E15-468C-9D65-43AE4DBF0ED7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2CFBD8A0-5998-42BD-8028-047B13AA7703} = {2CFBD8A0-5998-42BD-8028-047B13AA7703}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 13
+		SccNumberOfProjects = 15
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://hemrika.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -109,6 +130,12 @@ Global
 		SccProjectUniqueName12 = ClubCloud.BaanBeheer\\ClubCloud.BaanBeheer.csproj
 		SccProjectName12 = ClubCloud.BaanBeheer
 		SccLocalPath12 = ClubCloud.BaanBeheer
+		SccProjectUniqueName13 = ClubCloud.Internet\\ClubCloud.Internet.csproj
+		SccProjectName13 = ClubCloud.Internet
+		SccLocalPath13 = ClubCloud.Internet
+		SccProjectUniqueName14 = Deployment\\Deployment.csproj
+		SccProjectName14 = Deployment
+		SccLocalPath14 = Deployment
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -177,6 +204,16 @@ Global
 		{AD85F97C-F475-41CC-A98E-F8056D918F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD85F97C-F475-41CC-A98E-F8056D918F4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD85F97C-F475-41CC-A98E-F8056D918F4A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2CFBD8A0-5998-42BD-8028-047B13AA7703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CFBD8A0-5998-42BD-8028-047B13AA7703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CFBD8A0-5998-42BD-8028-047B13AA7703}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2CFBD8A0-5998-42BD-8028-047B13AA7703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CFBD8A0-5998-42BD-8028-047B13AA7703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CFBD8A0-5998-42BD-8028-047B13AA7703}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D020C3CF-9E15-468C-9D65-43AE4DBF0ED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D020C3CF-9E15-468C-9D65-43AE4DBF0ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D020C3CF-9E15-468C-9D65-43AE4DBF0ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D020C3CF-9E15-468C-9D65-43AE4DBF0ED7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
