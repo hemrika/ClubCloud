@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="0ea4a42f-71b7-41a1-998c-7e94113c346a" solutionId="0ea4a42f-71b7-41a1-998c-7e94113c346a" resetWebServer="false" sharePointProductVersion="15.0" name="ClubCloud.Common" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <customAssembly location="Syncfusion.EJ.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\..\..\Program Files (x86)\Syncfusion\Essential Studio\12.4.0.24\Assemblies\4.5\Syncfusion.EJ.dll">
+      <safeControls>
+        <safeControl assemblyName="Syncfusion.EJ" namespaceName="Syncfusion.JavaScript.Web" typeName="*" isSafeAgainstScript="true" />
+      </safeControls>
+    </customAssembly>
+    <customAssembly location="Syncfusion.EJ.Web.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\..\..\Program Files (x86)\Syncfusion\Essential Studio\12.4.0.24\Assemblies\4.5\Syncfusion.EJ.Web.dll">
+      <safeControls>
+        <safeControl assemblyName="Syncfusion.EJ.Web" namespaceName="Syncfusion.JavaScript.Web" typeName="*" isSafeAgainstScript="true" />
+      </safeControls>
+    </customAssembly>
+    <customAssembly location="AjaxControlToolkit.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\AjaxControlToolkit.7.1213\lib\45\AjaxControlToolkit.dll">
+      <safeControls>
+        <safeControl assemblyName="AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" namespaceName="AjaxControlToolkit" typeName="*" isSafeAgainstScript="true" />
+      </safeControls>
+    </customAssembly>
+    <customAssembly location="AjaxMin.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\AjaxMin.4.97.4951.28483\lib\net40\AjaxMin.dll">
+      <safeControls>
+        <safeControl assemblyName="AjaxMin, Version=4.97.4951.28478, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f" namespaceName="Microsoft.Ajax.Utilities" typeName="*" isSafeAgainstScript="true" />
+      </safeControls>
+    </customAssembly>
+    <customAssembly location="HtmlAgilityPack.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll">
+      <safeControls>
+        <safeControl assemblyName="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a" namespaceName="HtmlAgilityPack" typeName="*" isSafeAgainstScript="true" />
+      </safeControls>
+    </customAssembly>
+  </assemblies>
+  <features>
+    <featureReference itemId="8fdabc4b-381d-400c-b93f-332b6cdb246a" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="1534ef90-6909-416c-ad94-b970d9d15409" />
+  </projectItems>
+</package>
