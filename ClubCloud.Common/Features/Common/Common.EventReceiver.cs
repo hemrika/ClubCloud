@@ -38,8 +38,6 @@ namespace ClubCloud.Common.Features.Common
                     {
                         webApp.WebConfigModifications.Add(mod);
                         SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Add(mod);
-                        
-                        //SPWebService.ContentService.WebApplications[webApp.Id].WebService.ApplyWebConfigModifications();
                     }
                     catch { };
                 }
@@ -49,43 +47,13 @@ namespace ClubCloud.Common.Features.Common
                     webApp.Update();
 
                     SPWebService.ContentService.WebApplications[webApp.Id].Update();
-                    //SPWebService.ContentService.WebApplications[webApp.Id].WebService.ApplyWebConfigModifications();
-                    webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
-                }
-                catch { };
-
-                /*
-                foreach (SPWebConfigModification mod in ClubCloud.Common.Common.Modifications)
-                {
-                    webApp.WebConfigModifications.Add(mod);
-                    SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Add(mod);
-                }
-
-                foreach (SPWebConfigModification mod in Syncfusion.Modifications)
-                {
-                    webApp.WebConfigModifications.Add(mod);
-                    SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Add(mod);
-                }
-
-                foreach (SPWebConfigModification mod in Ajax.Modifications)
-                {
-                    webApp.WebConfigModifications.Add(mod);
-                    SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Add(mod);
-                }
-
-                try
-                {
-                    webApp.Update();
-                    SPWebService.ContentService.WebApplications[webApp.Id].Update();
                     SPWebService.ContentService.WebApplications[webApp.Id].WebService.ApplyWebConfigModifications();
+                    //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
                 }
                 catch { };
-                */
             }
         }
 
-
-        // Uncomment the method below to handle the event raised before a feature is deactivated.
 
         public override void FeatureDeactivating(SPFeatureReceiverProperties properties)
         {
@@ -97,19 +65,14 @@ namespace ClubCloud.Common.Features.Common
                 process.AddRange(ClubCloud.Common.Common.Modifications);
                 process.AddRange(Syncfusion.Modifications);
                 process.AddRange(Ajax.Modifications);
-                //process.AddRange(CrossSiteScripting.Modifications);
+                process.AddRange(CrossSiteScripting.Modifications);
 
                 foreach (SPWebConfigModification mod in process)
                 {
                     try
                     {
-                        webApp.WebConfigModifications.Remove(mod);
-                        
-
+                        webApp.WebConfigModifications.Remove(mod);                        
                         SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Remove(mod);
-                        
-                        //SPWebService.ContentService.WebApplications[webApp.Id].WebService.ApplyWebConfigModifications();
-
                     }
                     catch { };
                 }
@@ -118,8 +81,8 @@ namespace ClubCloud.Common.Features.Common
                 {
                     webApp.Update();
                     SPWebService.ContentService.WebApplications[webApp.Id].Update();
-                    //SPWebService.ContentService.WebApplications[webApp.Id].WebService.ApplyWebConfigModifications();
-                    webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
+                    SPWebService.ContentService.WebApplications[webApp.Id].WebService.ApplyWebConfigModifications();
+                    //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
                 }
                 catch { };
 
@@ -144,7 +107,7 @@ namespace ClubCloud.Common.Features.Common
                 */
                 
                 //List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
-
+                /*
                 foreach (SPWebConfigModification mod in webApp.WebConfigModifications)
                 {
                     string name = mod.Name;
@@ -162,24 +125,44 @@ namespace ClubCloud.Common.Features.Common
                     }
 
                 }
-
-                foreach (SPWebConfigModification mod in SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications)
+                */
+                /*
+                foreach (SPWebApplication wap in SPWebService.ContentService.WebApplications)
                 {
-                    string name = mod.Name;
-                    string owner = mod.Owner;
-                    string path = mod.Path;
-                    Microsoft.SharePoint.Administration.SPWebConfigModification.SPWebConfigModificationType type = mod.Type;
-                    string value = mod.Value;
-
-                    if (mod.Name == "ClubCloudSaveControls")
+                    try
                     {
-                        mod.Name = "SafeControl[@Assembly='ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e'][@Namespace='ClubCloud.Common.Controls'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']";
-                        mod.Value = "<SafeControl Assembly='ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e' Namespace='ClubCloud.Common.Controls' TypeName='*' Safe='True' SafeAgainstScript='True' />";
 
-                        //toDelete.Add(mod);
+                        Console.WriteLine(wap.Name);
+                        Console.WriteLine("==========================================================");
+                        foreach (SPWebConfigModification mod in wap.WebConfigModifications)
+                        {
+                            string name = mod.Name;
+                            string owner = mod.Owner;
+                            string path = mod.Path;
+                            Microsoft.SharePoint.Administration.SPWebConfigModification.SPWebConfigModificationType type = mod.Type;
+                            string value = mod.Value;
+
+                            Console.WriteLine(mod.ToString());
+                            if (mod.Owner == "ClubCloudSaveControls" || mod.Owner == "ClubCloudCommonSaveControls" || mod.Owner == "ClubCloudCommonControls")
+                            {
+                                mod.Name = "SafeControl[@Assembly='ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e'][@Namespace='ClubCloud.Common.Controls'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']";
+                                mod.Value = "<SafeControl Assembly='ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e' Namespace='ClubCloud.Common.Controls' TypeName='*' Safe='True' SafeAgainstScript='True' />";
+
+                                //toDelete.Add(mod);
+                            }
+                        }
+
+                        SPWebService.ContentService.WebApplications[wap.Id].Update();
+                        SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
+
+
+                        Console.WriteLine("==========================================================");
+
                     }
+                    catch { }
+
                 }
-                
+                */
                 /*
                 foreach (SPWebConfigModification mod in toDelete)
                 {
@@ -197,7 +180,6 @@ namespace ClubCloud.Common.Features.Common
                 }
                 catch { };
                 */
-
             }
         }
 

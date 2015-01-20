@@ -1,9 +1,5 @@
 ﻿using Microsoft.SharePoint.Administration;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClubCloud.Common
 {
@@ -15,13 +11,14 @@ namespace ClubCloud.Common
 
         public static List<SPWebConfigModification> Modifications
         {
-            get {
+            get
+            {
                 _modifications = new List<SPWebConfigModification>();
 
                 AddPageCompressionHandler();
                 AddAssemblies();
 
-                return _modifications; 
+                return _modifications;
             }
         }
 
@@ -30,8 +27,6 @@ namespace ClubCloud.Common
             var configModSyncfusionPageCompressionHandlerWeb = new SPWebConfigModification
             {
                 Name = "add[@name='HttpCompressModule'][type='Syncfusion.Web.UI.WebControls.Handler.PageCompressHandler, Syncfusion.Shared.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89']",
-                //Name = "add[@name='HttpCompressModule' type='Syncfusion.Web.UI.WebControls.Handler.PageCompressHandler, Syncfusion.Shared.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89']",
-                //Name = "PageCompressionHandler",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/httpModules",
@@ -44,8 +39,6 @@ namespace ClubCloud.Common
             var configModSyncfusionPageCompressionHandlerwebServer = new SPWebConfigModification
             {
                 Name = "add[@name='HttpCompressModule'][type='Syncfusion.Web.UI.WebControls.Handler.PageCompressHandler, Syncfusion.Shared.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89']",
-                //Name = "add[@name='HttpCompressModule' type='Syncfusion.Web.UI.WebControls.Handler.PageCompressHandler, Syncfusion.Shared.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89']",
-                //Name = "SyncfusionPageCompressionHandlerwebServer",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.webServer/modules",
@@ -61,13 +54,11 @@ namespace ClubCloud.Common
             var configModSyncfusionAssembliesEJ = new SPWebConfigModification
             {
                 Name = "add[@assembly='Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89']",
-                //Name = "add[@assembly='Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89']",
-                //Name = "SyncfusionAssembliesEJ",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/compilation/assemblies",
                 Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
-                Value = "<add Assembly='Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' />"
+                Value = "<add assembly='Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' />"
 
             };
             _modifications.Add(configModSyncfusionAssembliesEJ);
@@ -75,13 +66,11 @@ namespace ClubCloud.Common
             var configModSyncfusionAssembliesEJWeb = new SPWebConfigModification
             {
                 Name = "add[@assembly='Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89']",
-                //Name = "add[@assembly='Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89']",
-                //Name = "SyncfusionAssembliesEJWeb",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/compilation/assemblies",
                 Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
-                Value = "<SafeControl Assembly='Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' />"
+                Value = "<add assembly='Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' />"
 
             };
             _modifications.Add(configModSyncfusionAssembliesEJWeb);
