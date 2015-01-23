@@ -20,7 +20,7 @@ namespace ClubCloud.Provider.Controls
     [SharePointPermission(SecurityAction.InheritanceDemand, ObjectModel = true)]
     [SharePointPermission(SecurityAction.LinkDemand, ObjectModel = true)]
     //[ToolboxData("<{0}:CCTrimmmedControl runat=server></{0}:CCTrimmmedControl>")]
-    public class ClaimSecurityTrimmedControl : WebControl, IDesignerEventAccessor
+    public class ZimbraClaimSecurityTrimmedControl : WebControl, IDesignerEventAccessor
     {
         private readonly static string ClaimsKeyName = "Claims";
         
@@ -30,11 +30,11 @@ namespace ClubCloud.Provider.Controls
 
         private bool m_shouldRender;
 
-        public ClaimSecurityTrimmedControl()
+        public ZimbraClaimSecurityTrimmedControl()
         {
         }
 
-        internal ClaimSecurityTrimmedControl(HtmlTextWriterTag tag)
+        internal ZimbraClaimSecurityTrimmedControl(HtmlTextWriterTag tag)
             : base(tag)
         {
         }
@@ -82,7 +82,7 @@ namespace ClubCloud.Provider.Controls
         }
 
         /// <summary>Gets or sets the Roles.</summary>
-        [TypeConverter(typeof(ClaimsConverter))]
+        [TypeConverter(typeof(ZimbraClaimsConverter))]
         [Category("Important")]
         //[DefaultValue( new List<Microsoft.IdentityModel.Claims.Claim>() { new Microsoft.IdentityModel.Claims.Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "All Authenticated Users", "http://www.w3.org/2001/XMLSchema#string", "SharePoint", "Forms:ZimbraRoleProvider")})]
         [DefaultValue("")]

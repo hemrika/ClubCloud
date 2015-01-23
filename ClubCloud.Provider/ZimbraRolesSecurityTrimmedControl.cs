@@ -19,7 +19,7 @@ namespace ClubCloud.Provider.Controls
     [SharePointPermission(SecurityAction.InheritanceDemand, ObjectModel = true)]
     [SharePointPermission(SecurityAction.LinkDemand, ObjectModel = true)]
     //[ToolboxData("<{0}:CCTrimmmedControl runat=server></{0}:CCTrimmmedControl>")]
-    public class RolesSecurityTrimmedControl : WebControl, IDesignerEventAccessor
+    public class ZimbraRolesSecurityTrimmedControl : WebControl, IDesignerEventAccessor
     {
         private readonly static string RolesKeyName = "Roles";
         
@@ -29,11 +29,11 @@ namespace ClubCloud.Provider.Controls
 
         private bool m_shouldRender;
 
-        public RolesSecurityTrimmedControl()
+        public ZimbraRolesSecurityTrimmedControl()
         {
         }
 
-        internal RolesSecurityTrimmedControl(HtmlTextWriterTag tag)
+        internal ZimbraRolesSecurityTrimmedControl(HtmlTextWriterTag tag)
             : base(tag)
         {
         }
@@ -89,6 +89,7 @@ namespace ClubCloud.Provider.Controls
         }
 
         #endregion
+
         [Category("Behavior")]
         [DefaultValue(false)]
         public bool EmitDiv
@@ -98,7 +99,7 @@ namespace ClubCloud.Provider.Controls
         }
 
         /// <summary>Gets or sets the Roles.</summary>
-        [TypeConverter(typeof(RolesConverter))]
+        [TypeConverter(typeof(ZimbraRolesConverter))]
         [Category("Important")]
         [DefaultValue("")]
         public List<string> Roles

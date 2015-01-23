@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClubCloud.Provider.Controls
 {
-    public class ClaimsConverter : StringConverter
+    public class ZimbraRolesConverter : StringConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {

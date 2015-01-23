@@ -26,31 +26,35 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
         {
             SPSecurity.RunWithElevatedPrivileges(delegate()
             {
-                SPSite site = properties.Feature.Parent as SPSite;
+                if (properties.Feature.Parent.GetType() == typeof(SPSite))
+                {
+                    SPSite site = properties.Feature.Parent as SPSite;
 
-                CreateVirtualDirectory(site);
-                SPWeb web = site.RootWeb;
-                ZimbraGroupEventReceiver.CreateReceiverDefinitions(web);
-                ZimbraRoleEventReceiver.CreateReceiverDefinitions(web);
+                    CreateVirtualDirectory(site);
+                    SPWeb web = site.RootWeb;
+                    ZimbraGroupEventReceiver.CreateReceiverDefinitions(web);
+                    ZimbraRoleEventReceiver.CreateReceiverDefinitions(web);
 
-                /*
-                //Adding the GroupUserAdded event
-                SPEventReceiverDefinition grpUserAdded = web.EventReceivers.Add();
-                grpUserAdded.Name = "Zimbra User Added";
-                grpUserAdded.Type = SPEventReceiverType.GroupUserAdded;
-                grpUserAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
-                grpUserAdded.Class = "ClubCloud.Provider.ZimbraSecurityEventReceiver";
-                grpUserAdded.Update();
 
-                SPEventReceiverDefinition grpUserAdding = web.EventReceivers.Add();
-                grpUserAdding.Name = "Zimbra User Adding";
-                grpUserAdding.Type = SPEventReceiverType.GroupUserAdding;
-                grpUserAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
-                grpUserAdding.Class = "ClubCloud.Provider.ZimbraSecurityEventReceiver";
-                grpUserAdding.Update();
+                    /*
+                    //Adding the GroupUserAdded event
+                    SPEventReceiverDefinition grpUserAdded = web.EventReceivers.Add();
+                    grpUserAdded.Name = "Zimbra User Added";
+                    grpUserAdded.Type = SPEventReceiverType.GroupUserAdded;
+                    grpUserAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    grpUserAdded.Class = "ClubCloud.Provider.ZimbraSecurityEventReceiver";
+                    grpUserAdded.Update();
 
-                web.Update();
-                */
+                    SPEventReceiverDefinition grpUserAdding = web.EventReceivers.Add();
+                    grpUserAdding.Name = "Zimbra User Adding";
+                    grpUserAdding.Type = SPEventReceiverType.GroupUserAdding;
+                    grpUserAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    grpUserAdding.Class = "ClubCloud.Provider.ZimbraSecurityEventReceiver";
+                    grpUserAdding.Update();
+
+                    web.Update();
+                    */
+                }
             });
         }
 

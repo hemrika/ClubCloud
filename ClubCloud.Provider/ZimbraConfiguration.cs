@@ -34,6 +34,8 @@ namespace ClubCloud.Provider
         internal static string stsServicesConfigPath = stsServices.VirtualDirectories.FirstOrDefault().PhysicalPath + @"\web.config";
         internal static string caServicesConfigPath = caServices.VirtualDirectories.FirstOrDefault().PhysicalPath + @"\web.config";
 
+        #region Zimbra Virtual Directory
+
         /*
         private static void CreateVirtualDirectories(string serverComment, SPProvisioningAssistant.VirtualDirectorySettings[] virtualDirectories, SPIisVirtualDirectory.AuthorizationFlags? additionalAuthorization)
         {
@@ -120,7 +122,6 @@ namespace ClubCloud.Provider
                 
                 foreach (Site site in manager.Sites)
                 {
-
                     Microsoft.Web.Administration.Application siteServices = site.Applications.SingleOrDefault(app => app.ApplicationPoolName == applicationPoolName);
 
                     if (siteServices != null && siteServices.ApplicationPoolName == applicationPoolName)
@@ -149,23 +150,36 @@ namespace ClubCloud.Provider
             catch { return; }
         }
 
+        #endregion
+
+        #region Web.Config
+
+        /// <summary>
+        /// Loads web.config into reference XMLDocument from the given path.
+        /// </summary>
+        /// <param name="configFilePath"></param>
+        /// <param name="webConfig"></param>
         internal static void GetWebConfig(string configFilePath, ref XmlDocument webConfig)
         {
-            //var webConfig = new XmlDocument();
             webConfig.Load(configFilePath);
-            //webConfig.Save(configFilePath.ToLower().Replace("web.config", "web_" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_Zimbra.config"));
-            //return webConfig;
         }
 
+        /// <summary>
+        /// Creates a backup and saves the referenced XMLDocument to the given path 
+        /// </summary>
+        /// <param name="configFilePath"></param>
+        /// <param name="webConfig"></param>
         internal static void SetWebConfig(string configFilePath, ref XmlDocument webConfig)
         {
             XmlDocument currentConfig = new XmlDocument();
             currentConfig.Load(configFilePath);
             currentConfig.Save(configFilePath.ToLower().Replace("web.config", "web_" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_Zimbra.config"));
-
             webConfig.Save(configFilePath);
-            //return webConfig;
         }
+
+        #endregion
+
+        #region Zimbra Section
 
         internal static void AppendSectionGroupZimbra(ref XmlDocument webConfig)
         {
@@ -245,6 +259,10 @@ namespace ClubCloud.Provider
             }
         }
 
+        #endregion
+
+        #region Zimbra Provider
+
         internal static void AppendProviderZimbra(ref XmlDocument webConfig)
         {
             string fullname = Assembly.GetExecutingAssembly().FullName;
@@ -317,27 +335,6 @@ namespace ClubCloud.Provider
         }
 
 
-        internal static bool ContainsNode(string Key, string Name, string path, ref XmlDocument webConfig)
-        {
-            XmlNode baseNode = webConfig.SelectSingleNode(path);
-            if(baseNode != null)
-            {
-                foreach (XmlNode node in baseNode.ChildNodes)
-                {
-                    XmlAttribute attrib = node.Attributes[Key];
-                    if (attrib != null)
-                    {
-                        if (attrib.Value == Name)
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
-        }
-
         internal static void RemoveProviderZimbra(ref XmlDocument webConfig)
         {
             XmlNode PeoplePickerWildcards = webConfig.SelectSingleNode("/configuration/SharePoint/PeoplePickerWildcards");
@@ -406,6 +403,10 @@ namespace ClubCloud.Provider
                 membership.RemoveChild(membernode);
             }
         }
+
+        #endregion
+
+        #region Zimbra Module
 
         internal static void AppendModuleZimbra(ref XmlDocument webConfig)
         {
@@ -481,5 +482,32 @@ namespace ClubCloud.Provider
                 }
             }
         }
+
+        #endregion
+
+        #region Zimbra Helper functions
+
+        internal static bool ContainsNode(string Key, string Name, string path, ref XmlDocument webConfig)
+        {
+            XmlNode baseNode = webConfig.SelectSingleNode(path);
+            if (baseNode != null)
+            {
+                foreach (XmlNode node in baseNode.ChildNodes)
+                {
+                    XmlAttribute attrib = node.Attributes[Key];
+                    if (attrib != null)
+                    {
+                        if (attrib.Value == Name)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        #endregion
     }
 }

@@ -82,10 +82,10 @@
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CONTROLTEMPLATES\ClubCloud.Provider\ClaimSecurityTrimmedControl.cs" />
-    <Compile Include="CONTROLTEMPLATES\ClubCloud.Provider\ClaimsConverter.cs" />
-    <Compile Include="CONTROLTEMPLATES\ClubCloud.Provider\RolesConverter.cs" />
-    <Compile Include="CONTROLTEMPLATES\ClubCloud.Provider\RolesSecurityTrimmedControl.cs" />
+    <Compile Include="ZimbraClaimSecurityTrimmedControl.cs" />
+    <Compile Include="ZimbraClaimsConverter.cs" />
+    <Compile Include="ZimbraRolesConverter.cs" />
+    <Compile Include="ZimbraRolesSecurityTrimmedControl.cs" />
     <Compile Include="Features\Zimbra Claims\Zimbra Claims.EventReceiver.cs">
       <DependentUpon>Zimbra Claims.feature</DependentUpon>
     </Compile>
@@ -242,7 +242,9 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="CONTROLTEMPLATES\ClubCloud.Provider\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Features\Zimbra UserSettings\Zimbra UserSettings.Template.xml">
       <DependentUpon>Zimbra UserSettings.feature</DependentUpon>
