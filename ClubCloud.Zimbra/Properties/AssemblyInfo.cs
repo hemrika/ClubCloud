@@ -8,15 +8,15 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ClubCloud Zimbra API")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ClubCloud Zimbra")]
+[assembly: AssemblyDescription("ClubCloud Zimbra Services")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Hemrika")]
 [assembly: AssemblyProduct("ClubCloud")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

@@ -22,6 +22,8 @@ namespace ClubCloud.Common.Controls
 
         private bool _isTracking;
 
+        //Removed for external dependency
+        /*
         private ClubCloud.Service.ClubCloudServiceClient _client = null;
 
         public ClubCloud.Service.ClubCloudServiceClient Client
@@ -35,6 +37,7 @@ namespace ClubCloud.Common.Controls
                 return _client;
             }
         }
+        */
 
         public static void ObjectToTableConvert(Object p_obj, ref DataSet p_ds, String p_tableName)
         {

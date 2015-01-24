@@ -106,11 +106,13 @@ namespace ClubCloud.Service
         [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "DeleteReservering/{verenigingId}/{reserveringId}")]
         ClubCloud.Service.Model.ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false);
         */
-        /*
+        
         [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Afhang))]
-        ClubCloud.Service.Model.ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, Guid verenigingId, bool refresh = false);
+        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
+        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingSettings/{bondsnummer}/{verenigingId}")]
+        ClubCloud.Service.Model.ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, string verenigingId);
 
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
         ClubCloud.Service.Model.ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime Datum, TimeSpan Tijd, TimeSpan Duur, ReserveringSoort Soort = ReserveringSoort.Afhangen, bool final = false, bool push = false, string Beschrijving = "");

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.VisualWebPart" DefaultFile="AfhangenUserControl.ascx" SupportedTrustLevels="FullTrust" SupportedDeploymentScopes="Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Afhangen\" Type="ElementManifest" />
+    <ProjectItemFile Source="Afhangen.webpart" Target="Afhangen\" Type="ElementFile" />
+    <ProjectItemFile Source="AfhangenUserControl.ascx" Target="CONTROLTEMPLATES\ClubCloud\Afhangen\" Type="TemplateFile" />
+  </Files>
+  <SafeControls>
+    <SafeControl Name="ClubCLoudAfhangen" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Afhangen" TypeName="*" IsSafe="true" IsSafeAgainstScript="true" />
+  </SafeControls>
+</ProjectItem>

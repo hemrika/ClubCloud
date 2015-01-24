@@ -15,13 +15,17 @@ namespace ClubCloud.Common
             {
                 _modifications = new List<SPWebConfigModification>();
 
-                AddPageCompressionHandler();
+                //AddPageCompressionHandler();
                 AddAssemblies();
+                AddSaveControls();
 
                 return _modifications;
             }
         }
 
+        /// <summary>
+        /// Incompatible with AjaxControlToolkit
+        /// </summary>
         private static void AddPageCompressionHandler()
         {
             var configModSyncfusionPageCompressionHandlerWeb = new SPWebConfigModification
@@ -74,6 +78,45 @@ namespace ClubCloud.Common
 
             };
             _modifications.Add(configModSyncfusionAssembliesEJWeb);
+        }
+        private static void AddSaveControls()
+        {
+            var configModSyncfusionSharedWeb = new SPWebConfigModification
+            {
+                Name = "SafeControl[@Assembly='Syncfusion.Shared.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89'][@Namespace='Syncfusion.Web.UI.WebControls.Shared'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']",
+                Owner = "ClubCloud",
+                Sequence = 0,
+                Path = "configuration/SharePoint/SafeControls",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<SafeControl Assembly='Syncfusion.Shared.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' Namespace='Syncfusion.Web.UI.WebControls.Shared' TypeName='*' Safe='True' SafeAgainstScript='True' />"
+
+            };
+            _modifications.Add(configModSyncfusionSharedWeb);
+
+            var configModSyncfusionEJ = new SPWebConfigModification
+            {
+                Name = "SafeControl[@Assembly='Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89'][@Namespace='Syncfusion.JavaScript.Web'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']",
+                Owner = "ClubCloud",
+                Sequence = 0,
+                Path = "configuration/SharePoint/SafeControls",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<SafeControl Assembly='Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' Namespace='Syncfusion.JavaScript.Web' TypeName='*' Safe='True' SafeAgainstScript='True' />"
+
+            };
+            _modifications.Add(configModSyncfusionEJ);
+
+            var configModSyncfusionEJWeb = new SPWebConfigModification
+            {
+                Name = "SafeControl[@Assembly='Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89'][@Namespace='Syncfusion.JavaScript.Web'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']",
+                Owner = "ClubCloud",
+                Sequence = 0,
+                Path = "configuration/SharePoint/SafeControls",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<SafeControl Assembly='Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' Namespace='Syncfusion.JavaScript.Web' TypeName='*' Safe='True' SafeAgainstScript='True' />"
+
+            };
+            _modifications.Add(configModSyncfusionEJWeb);
+
         }
         #endregion
     }

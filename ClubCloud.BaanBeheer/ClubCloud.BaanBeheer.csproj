@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="BaanBeheer\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{1900207f-c383-451b-a13a-e36dba742a4c}</SharePointProjectItemId>
     </None>

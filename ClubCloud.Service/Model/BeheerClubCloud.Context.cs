@@ -15,10 +15,16 @@ namespace ClubCloud.Service.Model
     using System.Data.Entity.Infrastructure;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Interception;
     
     public partial class BeheerContainer : DbContext
     {
     	private static string NameOrConnectionString = "name=BeheerContainer";
+    
+    	static BeheerContainer ()
+    	{
+            DbInterception.Add(new BeheerFullTextInterceptor());
+        }
     
     	public BeheerContainer()
             : this(false) { }

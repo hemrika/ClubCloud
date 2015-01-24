@@ -54,7 +54,12 @@ namespace ClubCloud.Provider.Features.Zimbra_Claims
 
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
-            base.FeatureActivated(properties);
+            try
+            {
+                base.FeatureActivated(properties);
+            }
+            catch { }
+
         }
 
         public override void FeatureDeactivating(SPFeatureReceiverProperties properties)

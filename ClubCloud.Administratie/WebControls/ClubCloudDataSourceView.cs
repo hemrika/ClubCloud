@@ -1,4 +1,5 @@
-﻿using Microsoft.SharePoint;
+﻿/*
+using Microsoft.SharePoint;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -144,3 +145,4 @@ namespace ClubCloud.Administratie.WebControls
         }
     }
 }
+*/

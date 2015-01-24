@@ -20,7 +20,11 @@ namespace ClubCloud.Provider.Features.Zimbra_UserSettings
 
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
-            base.FeatureActivated(properties);
+            try
+            {
+                base.FeatureActivated(properties);
+            }
+            catch { }
         }
 
 

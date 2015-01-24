@@ -13,6 +13,7 @@ namespace ClubCloud.Administratie.WebControls
         protected void Page_Load(object sender, EventArgs e)
         {
             UserDataSource.ViewName = this.ViewName;
+            UserDataSource.Assembly = typeof(DisplayUsersUserControl).Assembly;
         }
 
         //

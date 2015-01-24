@@ -58,6 +58,8 @@
     <Reference Include="System.identitymodel.services" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -158,6 +160,7 @@
     <Compile Include="WebControls\SPDisposeCheckIgnoreAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="ClubCloudDataSet.xsc">
       <DependentUpon>ClubCloudDataSet.xsd</DependentUpon>
     </None>
@@ -292,9 +295,15 @@
     <Content Include="WebControls\DisplayUser\Elements.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClubCloud.Common\ClubCloud.Common.csproj">
+      <Project>{90fe486f-d24e-4290-8e0b-633fa72e5314}</Project>
+      <Name>ClubCloud.Common</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
       <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
       <Name>ClubCloud.Service</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

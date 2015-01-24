@@ -2012,6 +2012,19 @@ namespace ClubCloud.Service
             return true;
         }
 
+
+        public List<ClubCloud_Gebruiker> GetGebruikersBySearch(string bondsnummer, string prefixText, int count, bool refresh = false)
+        {
+            string fts = BeheerFullTextInterceptor.Fts(prefixText);
+
+            using (ClubCloud.Service.Model.BeheerContainer model = new Model.BeheerContainer(GetConnectionString()))
+            {
+                List<ClubCloud_Gebruiker> gebruikers = model.ClubCloud_Gebruikers.Where(g => g.Volledigenaam.Contains(fts)).Take(count).ToList();
+                return gebruikers;
+            }
+            return new List<ClubCloud_Gebruiker>();
+        }
+
         #endregion
 
         #region Beheer
@@ -2887,6 +2900,69 @@ namespace ClubCloud.Service
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="bondsnummer"></param>
+        /// <param name="verenigingNummer"></param>
+        /// <param name="refresh"></param>
+        /// <param name="settings"></param>
+        public void VerenigingenUpdate(string bondsnummer, bool refresh = false)
+        {
+            CheckDatabase();
+
+            using (ClubCloud.Service.Model.BeheerContainer model = new Model.BeheerContainer(GetConnectionString()))
+            {
+                ClubCloud_Setting settings = GetSettings(bondsnummer);
+
+                if (settings != null && settings.Access && !string.IsNullOrWhiteSpace(settings.Password))
+                {
+                    CookieContainer cc = RequestContainer(settings.Id.ToString(), settings.Password);
+
+                    if (cc != null)
+                    {
+                        ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
+
+                        bool moreRecords = true;
+                        int pageNum = 1;
+                        while (moreRecords)
+                        {
+                            //ConditionExpression condition = new ConditionExpression { AttributeName = "accountnumber", Operator = ConditionOperator.Equal, Values = new object[1] { verenigingNummer } };
+                            //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                            List<BusinessEntity> entities = RetrieveMultiple(service, "account", out moreRecords, ref pageNum);
+
+                            foreach (account entity in entities)
+                            {
+                                ClubCloud_Vereniging vereniging = model.ClubCloud_Verenigingen.Find(entity.accountid.Value);
+
+                                if (vereniging == null)
+                                {
+                                    vereniging = model.ClubCloud_Verenigingen.Create();
+                                    vereniging.Id = entity.accountid.Value;
+
+                                    entityToVereniging(entity, vereniging, bondsnummer, settings);
+
+                                    model.ClubCloud_Verenigingen.Add(vereniging);
+
+                                }
+                                else
+                                {
+                                    entityToVereniging(entity, vereniging, bondsnummer, settings);
+
+                                }
+
+                                model.SaveChanges();
+
+                                BestuursOrgaanByVereniging(bondsnummer, vereniging.Id, true, settings);
+                                FunctionarissenByVereniging(bondsnummer, vereniging.Id, true, settings);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="entity"></param>
         /// <param name="vereniging"></param>
         /// <param name="bondsnummer"></param>
@@ -3664,11 +3740,15 @@ namespace ClubCloud.Service
                         {
                             ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
 
+                            ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_basisorganisatieid", Operator = ConditionOperator.Equal, Values = new object[1] { VerenigingId } };
+                            FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
                             bool moreRecords = true;
                             int pageNum = 1;
                             while (moreRecords)
                             {
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_functionaris", out moreRecords, ref pageNum);
+
+                                List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_functionaris", out moreRecords, ref pageNum, expression);
 
                                 foreach (sgt_alg_functionaris entity in entities)
                                 {
@@ -6220,6 +6300,7 @@ namespace ClubCloud.Service
             return gebruiker;
         }
 
+
         /*
         /// <summary>
         /// contact
@@ -6771,5 +6852,6 @@ namespace ClubCloud.Service
             return succeed;
         }
         #endregion
+
     }
 }

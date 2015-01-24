@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.VisualWebPart" DefaultFile="AanmeldenUserControl.ascx" SupportedTrustLevels="FullTrust" SupportedDeploymentScopes="Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Aanmelden\" Type="ElementManifest" />
+    <ProjectItemFile Source="Aanmelden.webpart" Target="Aanmelden\" Type="ElementFile" />
+    <ProjectItemFile Source="AanmeldenUserControl.ascx" Target="CONTROLTEMPLATES\ClubCloud\Internet\" Type="TemplateFile" />
+  </Files>
+  <SafeControls>
+    <SafeControl Name="AanmeldenEntry" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="ClubCloud.Internet" TypeName="*" IsSafe="true" IsSafeAgainstScript="true" />
+  </SafeControls>
+</ProjectItem>

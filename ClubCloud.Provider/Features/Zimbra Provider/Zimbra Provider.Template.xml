@@ -1,3 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Feature xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Properties>
+    <Property Key="Name" Value="ClubCloud"/>    
+    <Property Key="ServerName" Value="mail.clubcloud.nl"/>
+    <Property Key="UserName" Value="admin@clubcloud.nl"/>
+    <Property Key="Password" Value="rjm557308453!"/>
+    <Property Key="IsAdmin" Value="true"/>
+    <Property Key="Encoded" Value="false"/>
+    <Property Key="MaxReceivedMessageSize" Value="2147483647"/>
+  </Properties>
 </Feature>

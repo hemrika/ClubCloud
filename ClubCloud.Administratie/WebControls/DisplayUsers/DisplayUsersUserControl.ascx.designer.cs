@@ -73,7 +73,7 @@ namespace ClubCloud.Administratie.WebControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ClubCloud.Administratie.WebControls.ClubCloudDataSource UserDataSource;
+        protected global::ClubCloud.Common.Controls.ClubCloudDataSource UserDataSource;
         
         /// <summary>
         /// spgvpager_top control.

@@ -496,6 +496,7 @@ namespace ClubCloud.Provider
             get { return true; }
         }
 
+        /*
         #region ULS
 
         public static void LogToULS(string message, TraceSeverity traceSeverity, EventSeverity eventSeverity)
@@ -512,5 +513,6 @@ namespace ClubCloud.Provider
         }
 
         #endregion
+        */
     }
 }

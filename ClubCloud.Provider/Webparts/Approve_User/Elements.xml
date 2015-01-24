@@ -2,7 +2,7 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/" >
   <Module Name="Approve_User" List="113" Url="_catalogs/wp">
     <File Path="Approve_User\Approve_User.webpart" Url="ClubCloud.Provider_Approve_User.webpart" Type="GhostableInLibrary" >
-      <Property Name="Group" Value="Custom" />
+      <Property Name="Group" Value="Zimbra" />
     </File>
   </Module>
 </Elements>

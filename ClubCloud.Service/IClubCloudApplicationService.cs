@@ -101,8 +101,9 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
         ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false);
-        
 
+        [OperationContract]
+        void VerenigingenUpdate(string bondsnummer, bool refresh = false);
         /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
@@ -290,5 +291,8 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Lidmaatschap))]
         List<ClubCloud_Lidmaatschap> GetLidmaatschapByGebruikerId(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
 
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
+        List<ClubCloud_Gebruiker> GetGebruikersBySearch(string bondsnummer, string prefixText, int count, bool refresh = false);
     }
 }

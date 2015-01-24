@@ -88,9 +88,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deployment", "Deployment\De
 		{2CFBD8A0-5998-42BD-8028-047B13AA7703} = {2CFBD8A0-5998-42BD-8028-047B13AA7703}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Common", "ClubCloud.Common\ClubCloud.Common.csproj", "{90FE486F-D24E-4290-8E0B-633FA72E5314}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 15
+		SccNumberOfProjects = 16
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://hemrika.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -136,6 +138,9 @@ Global
 		SccProjectUniqueName14 = Deployment\\Deployment.csproj
 		SccProjectName14 = Deployment
 		SccLocalPath14 = Deployment
+		SccProjectUniqueName15 = ClubCloud.Common\\ClubCloud.Common.csproj
+		SccProjectName15 = ClubCloud.Common
+		SccLocalPath15 = ClubCloud.Common
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -214,6 +219,12 @@ Global
 		{D020C3CF-9E15-468C-9D65-43AE4DBF0ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D020C3CF-9E15-468C-9D65-43AE4DBF0ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D020C3CF-9E15-468C-9D65-43AE4DBF0ED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90FE486F-D24E-4290-8E0B-633FA72E5314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90FE486F-D24E-4290-8E0B-633FA72E5314}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90FE486F-D24E-4290-8E0B-633FA72E5314}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{90FE486F-D24E-4290-8E0B-633FA72E5314}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90FE486F-D24E-4290-8E0B-633FA72E5314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90FE486F-D24E-4290-8E0B-633FA72E5314}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

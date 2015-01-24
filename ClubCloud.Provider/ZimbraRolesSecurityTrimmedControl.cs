@@ -99,7 +99,7 @@ namespace ClubCloud.Provider.Controls
         }
 
         /// <summary>Gets or sets the Roles.</summary>
-        [TypeConverter(typeof(ZimbraRolesConverter))]
+        [TypeConverter(typeof(ZimbraRoleConverter))]
         [Category("Important")]
         [DefaultValue("")]
         public List<string> Roles

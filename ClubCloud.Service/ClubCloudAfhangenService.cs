@@ -19,6 +19,8 @@ namespace ClubCloud.Service
     //using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
     using System.Threading.Tasks;
     using System.Collections.Generic;
+    using System.Web.Script.Serialization;
+    using System.Web.UI;
 
     /// <summary>
     /// The REST Service.
@@ -27,7 +29,7 @@ namespace ClubCloud.Service
     [ServiceFactoryUsingAuthSchemeInEndpointAddress( UsingAuthSchemeInEndpointAddress = true)]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     [System.Runtime.InteropServices.Guid("4d39ae1b-b9f8-4899-a6c7-2a50bff2351c")]
-    [ServiceBehavior(Namespace = "http://clubcloud.nl/", Name = "ClubCloudAfhangen", IncludeExceptionDetailInFaults = true)]
+    [ServiceBehavior(Namespace = "http://clubcloud.nl/", Name = "ClubCloudAfhangen", IncludeExceptionDetailInFaults = true, AddressFilterMode = AddressFilterMode.Any )]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
     public class ClubCloudAfhangenService : IClubCloudAfhangenService
     {
@@ -311,6 +313,62 @@ namespace ClubCloud.Service
 
             return afhang;
 
+        }
+
+        public string[] GetGebruikerAutoComplete(string prefixText, int count, string contextKey)
+        {
+            List<string> customers = new List<string>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+
+                List<ClubCloud_Gebruiker> gebruikers = client.GetGebruikersBySearch(SPContext.Current.Web.CurrentUser.LoginName, prefixText, count, true);
+
+                if(gebruikers != null && gebruikers.Count > 0)
+                {
+                    foreach (ClubCloud_Gebruiker gebruiker in gebruikers)
+                    {
+                        customers.Add((new JavaScriptSerializer()).Serialize(new Pair(string.Format("{0} - {1}", gebruiker.Bondsnummer, gebruiker.Volledigenaam), gebruiker.Bondsnummer)));
+                    }
+                    
+                    return customers.ToArray();
+
+                }
+                else
+                {
+                    return default(string[]);
+                }
+            }
+            else
+            {
+                return default(string[]);
+            }           
+        }
+
+
+        public string[] GetVereniningen(string prefixText, int count, string contextKey)
+        {
+            List<string> verenigingen = new List<string>();
+            try
+            {
+                //if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+                //{
+                    ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+
+                    //TextBox verenigingsnummer = (TextBox)fvw_vereniging.FindControl("tbx_verenigingsnummer");
+                    ClubCloud_Vereniging vereniging = client.GetVerenigingByNummer("00000000", prefixText, true);
+
+                    if (vereniging != null)
+                    {
+                        verenigingen.Add((new JavaScriptSerializer()).Serialize(new Pair(string.Format("{0} - {1}",vereniging.Nummer, vereniging.Naam), vereniging.Nummer)));
+                        return verenigingen.ToArray();
+                    }
+                //}
+            }
+            catch { };
+
+            return default(string[]);
         }
     }
 }

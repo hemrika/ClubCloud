@@ -53,7 +53,10 @@ namespace ClubCloud.Provider.IdentityModel
                 //ZimbraRoleProvider z_roleProvider = (ZimbraRoleProvider)Roles.Providers["ZimbraRoleProvider"];
 
             }
-            catch { }
+            catch (Exception ex)
+            {
+                ProviderLogging.LogError(ex);
+            }
         }
 
         protected override void OnLoad(EventArgs e)
@@ -127,7 +130,7 @@ namespace ClubCloud.Provider.IdentityModel
                     }
                     catch (Exception ex)
                     {
-                        string message = ex.Message;
+                        ProviderLogging.LogError(ex);
                     }
                 }
                 else
@@ -166,8 +169,7 @@ namespace ClubCloud.Provider.IdentityModel
                 }
                 catch (Exception ex)
                 {
-                    //TODO Log failure
-                    string message = ex.Message;
+                    ProviderLogging.LogError(ex);
                 }
 
                 this.RedirectToSuccessUrl();
@@ -215,7 +217,10 @@ namespace ClubCloud.Provider.IdentityModel
                 ZimbraRoleProvider z_roleProvider = (ZimbraRoleProvider)Roles.Providers["ZimbraRoleProvider"];
 
             }
-            catch { }
+            catch (Exception ex)
+            {
+                ProviderLogging.LogError(ex);
+            }
 
             if (this.IsLoginControlInValidState(formsSignInControl))
             {

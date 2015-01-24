@@ -1,4 +1,5 @@
 ﻿using Microsoft.SharePoint;
+using Microsoft.SharePoint.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,77 +16,100 @@ namespace ClubCloud.Provider
         {
             SPSecurity.RunWithElevatedPrivileges(delegate()
             {
-                SPEventReceiverDefinition GroupAdded = web.EventReceivers.Add();
-                GroupAdded.Name = "Zimbra Group Added";
-                GroupAdded.Type = SPEventReceiverType.GroupAdded;
-                GroupAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
-                GroupAdded.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
-                GroupAdded.Update();
+                using (new SPMonitoredScope("Create GroupEventReceivers Zimbra"))
+                {
 
-                SPEventReceiverDefinition GroupAdding = web.EventReceivers.Add();
-                GroupAdding.Name = "Zimbra Group Adding";
-                GroupAdding.Type = SPEventReceiverType.GroupAdding;
-                GroupAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
-                GroupAdding.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
-                GroupAdding.Update();
+                    SPEventReceiverDefinition GroupAdded = web.EventReceivers.Add();
+                    GroupAdded.Name = "Zimbra Group Added";
+                    GroupAdded.Type = SPEventReceiverType.GroupAdded;
+                    GroupAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    GroupAdded.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
+                    GroupAdded.Update();
 
-                SPEventReceiverDefinition GroupDeleted = web.EventReceivers.Add();
-                GroupDeleted.Name = "Zimbra Group Deleted";
-                GroupDeleted.Type = SPEventReceiverType.GroupDeleted;
-                GroupDeleted.Assembly = Assembly.GetExecutingAssembly().FullName;
-                GroupDeleted.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
-                GroupDeleted.Update();
+                    SPEventReceiverDefinition GroupAdding = web.EventReceivers.Add();
+                    GroupAdding.Name = "Zimbra Group Adding";
+                    GroupAdding.Type = SPEventReceiverType.GroupAdding;
+                    GroupAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    GroupAdding.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
+                    GroupAdding.Update();
 
-                SPEventReceiverDefinition GroupDeleting = web.EventReceivers.Add();
-                GroupDeleting.Name = "Zimbra Group Deleting";
-                GroupDeleting.Type = SPEventReceiverType.GroupDeleting;
-                GroupDeleting.Assembly = Assembly.GetExecutingAssembly().FullName;
-                GroupDeleting.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
-                GroupDeleting.Update();
+                    SPEventReceiverDefinition GroupDeleted = web.EventReceivers.Add();
+                    GroupDeleted.Name = "Zimbra Group Deleted";
+                    GroupDeleted.Type = SPEventReceiverType.GroupDeleted;
+                    GroupDeleted.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    GroupDeleted.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
+                    GroupDeleted.Update();
 
-                SPEventReceiverDefinition GroupUpdated = web.EventReceivers.Add();
-                GroupUpdated.Name = "Zimbra Group Updated";
-                GroupUpdated.Type = SPEventReceiverType.GroupUpdated;
-                GroupUpdated.Assembly = Assembly.GetExecutingAssembly().FullName;
-                GroupUpdated.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
-                GroupUpdated.Update();
+                    SPEventReceiverDefinition GroupDeleting = web.EventReceivers.Add();
+                    GroupDeleting.Name = "Zimbra Group Deleting";
+                    GroupDeleting.Type = SPEventReceiverType.GroupDeleting;
+                    GroupDeleting.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    GroupDeleting.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
+                    GroupDeleting.Update();
 
-                SPEventReceiverDefinition GroupUpdating = web.EventReceivers.Add();
-                GroupUpdating.Name = "Zimbra Group Updating";
-                GroupUpdating.Type = SPEventReceiverType.GroupUpdating;
-                GroupUpdating.Assembly = Assembly.GetExecutingAssembly().FullName;
-                GroupUpdating.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
-                GroupUpdating.Update();
+                    SPEventReceiverDefinition GroupUpdated = web.EventReceivers.Add();
+                    GroupUpdated.Name = "Zimbra Group Updated";
+                    GroupUpdated.Type = SPEventReceiverType.GroupUpdated;
+                    GroupUpdated.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    GroupUpdated.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
+                    GroupUpdated.Update();
 
-                SPEventReceiverDefinition GroupUserAdded = web.EventReceivers.Add();
-                GroupUserAdded.Name = "Zimbra Group User Added";
-                GroupUserAdded.Type = SPEventReceiverType.GroupUserAdded;
-                GroupUserAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
-                GroupUserAdded.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
-                GroupUserAdded.Update();
+                    SPEventReceiverDefinition GroupUpdating = web.EventReceivers.Add();
+                    GroupUpdating.Name = "Zimbra Group Updating";
+                    GroupUpdating.Type = SPEventReceiverType.GroupUpdating;
+                    GroupUpdating.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    GroupUpdating.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
+                    GroupUpdating.Update();
 
-                SPEventReceiverDefinition GroupUserAdding = web.EventReceivers.Add();
-                GroupUserAdding.Name = "Zimbra Group User Adding";
-                GroupUserAdding.Type = SPEventReceiverType.GroupUserAdding;
-                GroupUserAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
-                GroupUserAdding.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
-                GroupUserAdding.Update();
+                    SPEventReceiverDefinition GroupUserAdded = web.EventReceivers.Add();
+                    GroupUserAdded.Name = "Zimbra Group User Added";
+                    GroupUserAdded.Type = SPEventReceiverType.GroupUserAdded;
+                    GroupUserAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    GroupUserAdded.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
+                    GroupUserAdded.Update();
 
-                SPEventReceiverDefinition GroupUserDeleted = web.EventReceivers.Add();
-                GroupUserDeleted.Name = "Zimbra Group User Deleted";
-                GroupUserDeleted.Type = SPEventReceiverType.GroupUserDeleted;
-                GroupUserDeleted.Assembly = Assembly.GetExecutingAssembly().FullName;
-                GroupUserDeleted.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
-                GroupUserDeleted.Update();
+                    SPEventReceiverDefinition GroupUserAdding = web.EventReceivers.Add();
+                    GroupUserAdding.Name = "Zimbra Group User Adding";
+                    GroupUserAdding.Type = SPEventReceiverType.GroupUserAdding;
+                    GroupUserAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    GroupUserAdding.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
+                    GroupUserAdding.Update();
 
-                SPEventReceiverDefinition GroupUserDeleting = web.EventReceivers.Add();
-                GroupUserDeleting.Name = "Zimbra Group User Deleting";
-                GroupUserDeleting.Type = SPEventReceiverType.GroupUserDeleting;
-                GroupUserDeleting.Assembly = Assembly.GetExecutingAssembly().FullName;
-                GroupUserDeleting.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
-                GroupUserDeleting.Update();
+                    SPEventReceiverDefinition GroupUserDeleted = web.EventReceivers.Add();
+                    GroupUserDeleted.Name = "Zimbra Group User Deleted";
+                    GroupUserDeleted.Type = SPEventReceiverType.GroupUserDeleted;
+                    GroupUserDeleted.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    GroupUserDeleted.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
+                    GroupUserDeleted.Update();
 
-                web.Update();
+                    SPEventReceiverDefinition GroupUserDeleting = web.EventReceivers.Add();
+                    GroupUserDeleting.Name = "Zimbra Group User Deleting";
+                    GroupUserDeleting.Type = SPEventReceiverType.GroupUserDeleting;
+                    GroupUserDeleting.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    GroupUserDeleting.Class = "ClubCloud.Provider.ZimbraGroupEventReceiver";
+                    GroupUserDeleting.Update();
+
+                    web.Update();
+                }
+            });
+        }
+
+        internal static void RemoveReceiverDefinitions(SPWeb web)
+        {
+            SPSecurity.RunWithElevatedPrivileges(delegate()
+            {
+                using (new SPMonitoredScope("Remove GroupEventReceivers Zimbra"))
+                {
+
+                    foreach (SPEventReceiverDefinition definition in web.EventReceivers)
+                    {
+                        if (definition.Class == "ClubCloud.Provider.ZimbraGroupEventReceiver")
+                        {
+                            definition.Delete();
+                        }
+                    }
+                    web.Update();
+                }
             });
         }
 

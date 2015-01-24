@@ -46,13 +46,13 @@
     <!-- Optional: AfterUpdate="[true|false]" Run actions after update (default: false) -->
     <Actions AfterDeploy="true" AfterRetract="true" AfterUpdate="true">
       <!-- Restart SPTimerV4 Service on this/all servers with the Application role in the farm -->
-      <RestartService Name="SPTimerV4" Force="false" />
+      <RestartService Name="SPTimerV4" Force="true" />
 
       <!-- Restart SPAdminV4 Service on this/all servers in the farm -->
-      <RestartService Name="SPAdminV4" Force="false" />
+      <RestartService Name="SPAdminV4" Force="true" />
 
       <!-- Restart SPUserCodeV4 Service on this/all servers in the farm -->
-      <RestartService Name="SPUserCodeV4" Force="false" />
+      <RestartService Name="SPUserCodeV4" Force="true" />
 
       <!-- Restart custom Service on this/all servers in the farm -->
       <!--
@@ -60,7 +60,7 @@
       -->
 
       <!-- Perform IIS reset on this/all servers in the farm -->
-      <ResetIIS Force="false" />
+      <ResetIIS Force="true" />
 
       <!-- Recycles all IIS application pools the servers in the farm -->
       <!-- Can be used alternatively to the ResetIIS action -->

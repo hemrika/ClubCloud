@@ -1,4 +1,5 @@
 ﻿using Microsoft.SharePoint;
+using Microsoft.SharePoint.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,77 +16,100 @@ namespace ClubCloud.Provider
         {
             SPSecurity.RunWithElevatedPrivileges(delegate()
             {
-                SPEventReceiverDefinition RoleAssignmentAdded = web.EventReceivers.Add();
-                RoleAssignmentAdded.Name = "Zimbra RoleAssignment Added";
-                RoleAssignmentAdded.Type = SPEventReceiverType.RoleAssignmentAdded;
-                RoleAssignmentAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
-                RoleAssignmentAdded.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
-                RoleAssignmentAdded.Update();
+                using (new SPMonitoredScope("Append RoleEventReceiver Zimbra"))
+                {
 
-                SPEventReceiverDefinition RoleAssignmentAdding = web.EventReceivers.Add();
-                RoleAssignmentAdding.Name = "Zimbra RoleAssignment Adding";
-                RoleAssignmentAdding.Type = SPEventReceiverType.RoleAssignmentAdding;
-                RoleAssignmentAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
-                RoleAssignmentAdding.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
-                RoleAssignmentAdding.Update();
+                    SPEventReceiverDefinition RoleAssignmentAdded = web.EventReceivers.Add();
+                    RoleAssignmentAdded.Name = "Zimbra RoleAssignment Added";
+                    RoleAssignmentAdded.Type = SPEventReceiverType.RoleAssignmentAdded;
+                    RoleAssignmentAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    RoleAssignmentAdded.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
+                    RoleAssignmentAdded.Update();
 
-                SPEventReceiverDefinition RoleAssignmentDeleted = web.EventReceivers.Add();
-                RoleAssignmentDeleted.Name = "Zimbra RoleAssignment Deleted";
-                RoleAssignmentDeleted.Type = SPEventReceiverType.RoleAssignmentDeleted;
-                RoleAssignmentDeleted.Assembly = Assembly.GetExecutingAssembly().FullName;
-                RoleAssignmentDeleted.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
-                RoleAssignmentDeleted.Update();
+                    SPEventReceiverDefinition RoleAssignmentAdding = web.EventReceivers.Add();
+                    RoleAssignmentAdding.Name = "Zimbra RoleAssignment Adding";
+                    RoleAssignmentAdding.Type = SPEventReceiverType.RoleAssignmentAdding;
+                    RoleAssignmentAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    RoleAssignmentAdding.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
+                    RoleAssignmentAdding.Update();
 
-                SPEventReceiverDefinition RoleAssignmentDeleting = web.EventReceivers.Add();
-                RoleAssignmentDeleting.Name = "Zimbra RoleAssignment Deleting";
-                RoleAssignmentDeleting.Type = SPEventReceiverType.RoleAssignmentDeleting;
-                RoleAssignmentDeleting.Assembly = Assembly.GetExecutingAssembly().FullName;
-                RoleAssignmentDeleting.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
-                RoleAssignmentDeleting.Update();
+                    SPEventReceiverDefinition RoleAssignmentDeleted = web.EventReceivers.Add();
+                    RoleAssignmentDeleted.Name = "Zimbra RoleAssignment Deleted";
+                    RoleAssignmentDeleted.Type = SPEventReceiverType.RoleAssignmentDeleted;
+                    RoleAssignmentDeleted.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    RoleAssignmentDeleted.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
+                    RoleAssignmentDeleted.Update();
 
-                SPEventReceiverDefinition RoleDefinitionAdded = web.EventReceivers.Add();
-                RoleDefinitionAdded.Name = "Zimbra RoleDefinition Added";
-                RoleDefinitionAdded.Type = SPEventReceiverType.RoleDefinitionAdded;
-                RoleDefinitionAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
-                RoleDefinitionAdded.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
-                RoleDefinitionAdded.Update();
+                    SPEventReceiverDefinition RoleAssignmentDeleting = web.EventReceivers.Add();
+                    RoleAssignmentDeleting.Name = "Zimbra RoleAssignment Deleting";
+                    RoleAssignmentDeleting.Type = SPEventReceiverType.RoleAssignmentDeleting;
+                    RoleAssignmentDeleting.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    RoleAssignmentDeleting.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
+                    RoleAssignmentDeleting.Update();
 
-                SPEventReceiverDefinition RoleDefinitionAdding = web.EventReceivers.Add();
-                RoleDefinitionAdding.Name = "Zimbra RoleDefinition Adding";
-                RoleDefinitionAdding.Type = SPEventReceiverType.RoleDefinitionAdding;
-                RoleDefinitionAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
-                RoleDefinitionAdding.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
-                RoleDefinitionAdding.Update();
+                    SPEventReceiverDefinition RoleDefinitionAdded = web.EventReceivers.Add();
+                    RoleDefinitionAdded.Name = "Zimbra RoleDefinition Added";
+                    RoleDefinitionAdded.Type = SPEventReceiverType.RoleDefinitionAdded;
+                    RoleDefinitionAdded.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    RoleDefinitionAdded.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
+                    RoleDefinitionAdded.Update();
 
-                SPEventReceiverDefinition RoleDefinitionDeleted = web.EventReceivers.Add();
-                RoleDefinitionDeleted.Name = "Zimbra RoleDefinition Deleted";
-                RoleDefinitionDeleted.Type = SPEventReceiverType.RoleDefinitionDeleted;
-                RoleDefinitionDeleted.Assembly = Assembly.GetExecutingAssembly().FullName;
-                RoleDefinitionDeleted.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
-                RoleDefinitionDeleted.Update();
+                    SPEventReceiverDefinition RoleDefinitionAdding = web.EventReceivers.Add();
+                    RoleDefinitionAdding.Name = "Zimbra RoleDefinition Adding";
+                    RoleDefinitionAdding.Type = SPEventReceiverType.RoleDefinitionAdding;
+                    RoleDefinitionAdding.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    RoleDefinitionAdding.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
+                    RoleDefinitionAdding.Update();
 
-                SPEventReceiverDefinition RoleDefinitionDeleting = web.EventReceivers.Add();
-                RoleDefinitionDeleting.Name = "Zimbra RoleDefinition Deleting";
-                RoleDefinitionDeleting.Type = SPEventReceiverType.RoleDefinitionDeleting;
-                RoleDefinitionDeleting.Assembly = Assembly.GetExecutingAssembly().FullName;
-                RoleDefinitionDeleting.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
-                RoleDefinitionDeleting.Update();
+                    SPEventReceiverDefinition RoleDefinitionDeleted = web.EventReceivers.Add();
+                    RoleDefinitionDeleted.Name = "Zimbra RoleDefinition Deleted";
+                    RoleDefinitionDeleted.Type = SPEventReceiverType.RoleDefinitionDeleted;
+                    RoleDefinitionDeleted.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    RoleDefinitionDeleted.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
+                    RoleDefinitionDeleted.Update();
 
-                SPEventReceiverDefinition RoleDefinitionUpdated = web.EventReceivers.Add();
-                RoleDefinitionUpdated.Name = "Zimbra RoleDefinition Updated";
-                RoleDefinitionUpdated.Type = SPEventReceiverType.RoleDefinitionUpdated;
-                RoleDefinitionUpdated.Assembly = Assembly.GetExecutingAssembly().FullName;
-                RoleDefinitionUpdated.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
-                RoleDefinitionUpdated.Update();
+                    SPEventReceiverDefinition RoleDefinitionDeleting = web.EventReceivers.Add();
+                    RoleDefinitionDeleting.Name = "Zimbra RoleDefinition Deleting";
+                    RoleDefinitionDeleting.Type = SPEventReceiverType.RoleDefinitionDeleting;
+                    RoleDefinitionDeleting.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    RoleDefinitionDeleting.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
+                    RoleDefinitionDeleting.Update();
 
-                SPEventReceiverDefinition RoleDefinitionUpdating = web.EventReceivers.Add();
-                RoleDefinitionUpdating.Name = "Zimbra RoleDefinition Updating";
-                RoleDefinitionUpdating.Type = SPEventReceiverType.RoleDefinitionUpdating;
-                RoleDefinitionUpdating.Assembly = Assembly.GetExecutingAssembly().FullName;
-                RoleDefinitionUpdating.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
-                RoleDefinitionUpdating.Update();
+                    SPEventReceiverDefinition RoleDefinitionUpdated = web.EventReceivers.Add();
+                    RoleDefinitionUpdated.Name = "Zimbra RoleDefinition Updated";
+                    RoleDefinitionUpdated.Type = SPEventReceiverType.RoleDefinitionUpdated;
+                    RoleDefinitionUpdated.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    RoleDefinitionUpdated.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
+                    RoleDefinitionUpdated.Update();
 
-                web.Update();
+                    SPEventReceiverDefinition RoleDefinitionUpdating = web.EventReceivers.Add();
+                    RoleDefinitionUpdating.Name = "Zimbra RoleDefinition Updating";
+                    RoleDefinitionUpdating.Type = SPEventReceiverType.RoleDefinitionUpdating;
+                    RoleDefinitionUpdating.Assembly = Assembly.GetExecutingAssembly().FullName;
+                    RoleDefinitionUpdating.Class = "ClubCloud.Provider.ZimbraRoleEventReceiver";
+                    RoleDefinitionUpdating.Update();
+
+                    web.Update();
+                }
+            });
+        }
+
+        internal static void RemoveReceiverDefinitions(SPWeb web)
+        {
+            SPSecurity.RunWithElevatedPrivileges(delegate()
+            {
+                using (new SPMonitoredScope("Remove RoleEventReceiver Zimbra"))
+                {
+
+                    foreach (SPEventReceiverDefinition definition in web.EventReceivers)
+                    {
+                        if (definition.Class == "ClubCloud.Provider.ZimbraRoleEventReceiver")
+                        {
+                            definition.Delete();
+                        }
+                    }
+                    web.Update();
+                }
             });
         }
 

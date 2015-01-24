@@ -46,23 +46,63 @@
     <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AjaxControlToolkit.7.1213\lib\45\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxMin, Version=4.57.4561.28951, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AjaxMin.4.97.4951.28483\lib\net40\AjaxMin.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfhangenView.cs" />
+    <Compile Include="Afhangen\Afhangen.cs" />
+    <Compile Include="Afhangen\AfhangenUserControl.ascx.cs">
+      <DependentUpon>AfhangenUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Afhangen\AfhangenUserControl.ascx.designer.cs">
+      <DependentUpon>AfhangenUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Afhangen\Afhangen.EventReceiver.cs">
+      <DependentUpon>Afhangen.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AfhangenClubCloud\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{bfee2197-44d4-4a92-b0a3-71e2d146b64e}</SharePointProjectItemId>
+    <None Include="Afhangen\Afhangen.webpart" />
+    <None Include="Afhangen\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{c0a6c1cc-5514-4b58-b554-0cd7433a8f5e}</SharePointProjectItemId>
     </None>
     <None Include="app.config" />
+    <None Include="Features\Afhangen\Afhangen.feature">
+      <FeatureId>{31f23044-4006-4ff4-84da-283292892fda}</FeatureId>
+    </None>
+    <None Include="Layouts\ClubCloud\Afhangen\common-images\ejicons.eot" />
+    <None Include="Layouts\ClubCloud\Afhangen\common-images\ejicons.ttf" />
+    <None Include="Layouts\ClubCloud\Afhangen\common-images\ejicons.woff" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{eedf7251-1ed2-40e4-8c96-8cfdc59111f9}</SharePointProjectItemId>
+    </None>
+    <None Include="packages.config" />
     <None Include="Package\Package.package">
       <PackageId>{36c458e8-6b78-4300-86e1-5656e6ff790c}</PackageId>
     </None>
@@ -71,12 +111,71 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\" />
+    <ProjectReference Include="..\ClubCloud.Common\ClubCloud.Common.csproj">
+      <Project>{90fe486f-d24e-4290-8e0b-633fa72e5314}</Project>
+      <Name>ClubCloud.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
+      <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
+      <Name>ClubCloud.Service</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AfhangenClubCloud\default.aspx" />
-    <Content Include="AfhangenClubCloud\onet.xml" />
-    <Content Include="AfhangenClubCloud\webtemp_AfhangenClubCloud.xml" />
+    <Content Include="Afhangen\AfhangenUserControl.ascx" />
+    <Content Include="Layouts\ClubCloud\Afhangen\bootstrap.min.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\clubcloud.afhangen.js" />
+    <Content Include="Layouts\ClubCloud\Afhangen\common-images\ejicons.svg" />
+    <Content Include="Layouts\ClubCloud\Afhangen\common-images\icons-black.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\common-images\icons-gray.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\common-images\icons-halfwhite.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\common-images\icons-white.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\common-images\Rotate.cur" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\bootstrap.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\bootstrap.min.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\default-responsive.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\default.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\ej.olappager.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\ej.theme.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\ej.theme.min.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\ej.web.all.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\ej.web.all.min.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\ej.widgets.all.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\ej.widgets.all.min.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\ej.widgets.core.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\ajax-loader.gif" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\arrow-hover.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\checkedtick.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\dot.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\drop-sibling.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\gradient.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\olap-gridbutton.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\olap-kpi.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\olap-toolbar.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\olap-treeview.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\palette-arrow.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\rating-star.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\rotator-icon.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\tgarrow.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\toggle-text.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\toolbar_icons.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\ui-icon.png" />
+    <Content Include="Layouts\ClubCloud\Afhangen\default-theme\images\waitingpopup.gif" />
+    <Content Include="Layouts\ClubCloud\Afhangen\ej.icons.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\ej.widgets.core.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\ej.widgets.core.min.css" />
+    <Content Include="Layouts\ClubCloud\Afhangen\ej\ej.unobtrusive.min.js" />
+    <Content Include="Layouts\ClubCloud\Afhangen\ej\ej.web.all.min.js" />
+    <Content Include="Layouts\ClubCloud\Afhangen\ej\ej.webform.min.js" />
+    <Content Include="Layouts\ClubCloud\Afhangen\ej\ej.widget.angular.min.js" />
+    <Content Include="Layouts\ClubCloud\Afhangen\ej\ej.widget.ko.min.js" />
+    <Content Include="Afhangen\Elements.xml" />
+    <Content Include="Layouts\ClubCloud\Afhangen\jquery.plugin.calendar.all.js" />
+    <Content Include="Layouts\ClubCloud\Afhangen\jquery.plugins.extensions.js" />
+    <Content Include="Layouts\ClubCloud\Afhangen\jsrender.min.js" />
+    <Content Include="Features\Afhangen\Afhangen.Template.xml">
+      <DependentUpon>Afhangen.feature</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

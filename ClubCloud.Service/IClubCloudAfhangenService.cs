@@ -51,6 +51,14 @@ namespace ClubCloud.Service
         ClubCloud.Service.Model.ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string[] GetGebruikerAutoComplete(string prefixText, int count, string contextKey);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string[] GetVereniningen(string prefixText, int count, string contextKey);
+
+        [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Foto))]
         ClubCloud.Service.Model.ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
 

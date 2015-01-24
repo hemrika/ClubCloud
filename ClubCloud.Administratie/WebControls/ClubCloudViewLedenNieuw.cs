@@ -12,6 +12,7 @@ using ClubCloud.Service.Model;
 using Microsoft.SharePoint;
 using System.Reflection;
 using System.Web.UI.WebControls;
+using ClubCloud.Common.Controls;
 
 namespace ClubCloud.Administratie.WebControls
 {
@@ -40,6 +41,20 @@ namespace ClubCloud.Administratie.WebControls
             get
             {
                 return true;
+            }
+        }
+
+        private ClubCloud.Service.ClubCloudServiceClient _client = null;
+
+        public ClubCloud.Service.ClubCloudServiceClient Client
+        {
+            get
+            {
+                if (_client == null)
+                {
+                    _client = new Service.ClubCloudServiceClient(SPServiceContext.Current);
+                }
+                return _client;
             }
         }
 

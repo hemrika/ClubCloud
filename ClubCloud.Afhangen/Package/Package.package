@@ -1,6 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="36c458e8-6b78-4300-86e1-5656e6ff790c" solutionId="36c458e8-6b78-4300-86e1-5656e6ff790c" resetWebServer="false" sharePointProductVersion="15.0" name="ClubCloud.Afhangen" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <customAssembly location="AjaxControlToolkit.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\AjaxControlToolkit.7.1213\lib\45\AjaxControlToolkit.dll">
+      <safeControls>
+        <safeControl assemblyName="AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" namespaceName="AjaxControlToolkit" typeName="*" isSafeAgainstScript="true" />
+      </safeControls>
+    </customAssembly>
+    <customAssembly location="AjaxMin.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\AjaxMin.4.97.4951.28483\lib\net40\AjaxMin.dll">
+      <safeControls>
+        <safeControl assemblyName="AjaxMin, Version=4.97.4951.28478, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f" namespaceName="Microsoft.Ajax.Utilities" typeName="*" isSafeAgainstScript="true" />
+      </safeControls>
+    </customAssembly>
+    <customAssembly location="HtmlAgilityPack.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll">
+      <safeControls>
+        <safeControl assemblyName="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a" namespaceName="HtmlAgilityPack" typeName="*" isSafeAgainstScript="true" />
+      </safeControls>
+    </customAssembly>
+  </assemblies>
+  <features>
+    <featureReference itemId="31f23044-4006-4ff4-84da-283292892fda" />
+  </features>
   <projectItems>
-    <projectItemReference itemId="bfee2197-44d4-4a92-b0a3-71e2d146b64e" />
+    <projectItemReference itemId="eedf7251-1ed2-40e4-8c96-8cfdc59111f9" />
   </projectItems>
 </package>

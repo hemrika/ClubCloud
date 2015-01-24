@@ -63,7 +63,7 @@ namespace ClubCloud.Mijn.ControlTemplates
 
                     try
                     {
-                        fvw_persoon.DataSource = new List<ClubCloud_Gebruiker> { gebruiker }; ;
+                        fvw_persoon.DataSource = new List<ClubCloud_Gebruiker> { gebruiker };
                         fvw_persoon.DataBind();
                     }
                     catch (Exception ex)
@@ -172,12 +172,12 @@ namespace ClubCloud.Mijn.ControlTemplates
                     gebruiker.TelefoonOverdag = e.NewValues["TelefoonOverdag"].ToString();
                     gebruiker.TelefoonAvond = e.NewValues["TelefoonAvond"].ToString();
                     gebruiker.Mobiel = e.NewValues["Mobiel"].ToString();
-                    CheckBox TelefoonGeheim = (CheckBox)fvw_adres.FindControl("TelefoonGeheim");
+                    CheckBox TelefoonGeheim = (CheckBox)fvw_contact.FindControl("TelefoonGeheim");
                     gebruiker.TelefoonGeheim = TelefoonGeheim.Checked;
                     gebruiker.EmailKNLTB = e.NewValues["EmailKNLTB"].ToString();
                     gebruiker.EmailWebSite = e.NewValues["EmailWebSite"].ToString();
                     gebruiker.EmailOverig = e.NewValues["EmailOverig"].ToString();
-                    CheckBox EmailGeheim = (CheckBox)fvw_adres.FindControl("EmailGeheim");
+                    CheckBox EmailGeheim = (CheckBox)fvw_contact.FindControl("EmailGeheim");
                     gebruiker.EmailGeheim = EmailGeheim.Checked;
                     Client.SetClubCloudGebruiker(userId, Settings.VerenigingId.Value, gebruiker, false);
                 }

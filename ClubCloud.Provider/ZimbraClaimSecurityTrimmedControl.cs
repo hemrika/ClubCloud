@@ -82,7 +82,7 @@ namespace ClubCloud.Provider.Controls
         }
 
         /// <summary>Gets or sets the Roles.</summary>
-        [TypeConverter(typeof(ZimbraClaimsConverter))]
+        [TypeConverter(typeof(ZimbraClaimConverter))]
         [Category("Important")]
         //[DefaultValue( new List<Microsoft.IdentityModel.Claims.Claim>() { new Microsoft.IdentityModel.Claims.Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "All Authenticated Users", "http://www.w3.org/2001/XMLSchema#string", "SharePoint", "Forms:ZimbraRoleProvider")})]
         [DefaultValue("")]

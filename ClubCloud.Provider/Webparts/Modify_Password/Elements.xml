@@ -2,7 +2,7 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/" >
   <Module Name="Modify_Password" List="113" Url="_catalogs/wp">
     <File Path="Modify_Password\Modify_Password.webpart" Url="ClubCloud.Provider_Modify_Password.webpart" Type="GhostableInLibrary" >
-      <Property Name="Group" Value="Custom" />
+      <Property Name="Group" Value="Zimbra" />
     </File>
   </Module>
 </Elements>

@@ -48,13 +48,36 @@
     <Reference Include="AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AjaxControlToolkit.7.1213\lib\45\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="AjaxMin, Version=4.57.4561.28951, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AjaxMin.4.97.4951.28483\lib\net40\AjaxMin.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Core, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Linq.Base, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Base, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -69,6 +92,13 @@
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlTemplates\ClubCloud\Common\SyncFusionDelegate.ascx.cs">
+      <DependentUpon>SyncFusionDelegate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Common\SyncFusionDelegate.ascx.designer.cs">
+      <DependentUpon>SyncFusionDelegate.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="CrossSiteScripting.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Controls\ClubCloudDataSource.cs" />
@@ -82,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ControlTemplates\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2f64c58b-f739-4375-8008-bd79060b47c9}</SharePointProjectItemId>
+    </None>
     <None Include="Features\Common\Common.feature">
       <FeatureId>{8fdabc4b-381d-400c-b93f-332b6cdb246a}</FeatureId>
     </None>
@@ -94,16 +127,7 @@
     <None Include="Layouts\ClubCloud\Common\external\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Layouts\ClubCloud\Common\external\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Layouts\ClubCloud\Common\external\fonts\glyphicons-halflings-regular.woff2" />
-    <None Include="Layouts\ClubCloud\Common\external\jquery-1.11.2.min.js.map">
-      <DependentUpon>jquery-1.11.2.min.js</DependentUpon>
-    </None>
-    <None Include="Layouts\ClubCloud\Common\external\jquery-2.1.3.min.js.map">
-      <DependentUpon>jquery-2.1.3.min.js</DependentUpon>
-    </None>
     <None Include="Layouts\ClubCloud\Common\external\jquery.easing.1.3.min.js.map" />
-    <None Include="Layouts\ClubCloud\Common\external\qunit-1.17.0.min.js.map">
-      <DependentUpon>qunit-1.17.0.min.js</DependentUpon>
-    </None>
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{1534ef90-6909-416c-ad94-b970d9d15409}</SharePointProjectItemId>
     </None>
@@ -114,14 +138,21 @@
       <DependentUpon>Package.package</DependentUpon>
       <SubType>Designer</SubType>
     </None>
+    <None Include="SyncFusionHeader\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d38c1d55-4dcf-4b73-ae19-8018bc1d4ca2}</SharePointProjectItemId>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
-      <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
-      <Name>ClubCloud.Service</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Assemblies\AjaxControlToolkit.dll" />
+    <None Include="Assemblies\AjaxMin.dll" />
+    <None Include="Assemblies\Syncfusion.Core.dll" />
+    <None Include="Assemblies\Syncfusion.EJ.dll" />
+    <None Include="Assemblies\Syncfusion.EJ.Web.dll" />
+    <None Include="Assemblies\Syncfusion.Linq.Base.dll" />
+    <None Include="Assemblies\Syncfusion.Shared.Base.dll" />
+    <None Include="Assemblies\Syncfusion.Shared.Web.dll" />
+    <None Include="Assemblies\HtmlAgilityPack.dll" />
+    <Content Include="ControlTemplates\ClubCloud\Common\SyncFusionDelegate.ascx" />
     <Content Include="Features\Common\Common.Template.xml">
       <DependentUpon>Common.feature</DependentUpon>
     </Content>
@@ -1193,21 +1224,20 @@
     <Content Include="Layouts\ClubCloud\Common\external\cultures\unminified\globalize.culture.zu.js" />
     <Content Include="Layouts\ClubCloud\Common\external\cultures\unminified\globalize.cultures.js" />
     <Content Include="Layouts\ClubCloud\Common\external\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Layouts\ClubCloud\Common\external\jquery-1.11.2.js" />
-    <Content Include="Layouts\ClubCloud\Common\external\jquery-1.11.2.min.js" />
-    <Content Include="Layouts\ClubCloud\Common\external\jquery-2.1.3.js" />
-    <Content Include="Layouts\ClubCloud\Common\external\jquery-2.1.3.min.js" />
+    <Content Include="Layouts\ClubCloud\Common\external\jquery.1.11.2.js" />
+    <Content Include="Layouts\ClubCloud\Common\external\jquery.1.11.2.min.js" />
+    <Content Include="Layouts\ClubCloud\Common\external\jquery.2.1.3.js" />
+    <Content Include="Layouts\ClubCloud\Common\external\jquery.2.1.3.min.js" />
     <Content Include="Layouts\ClubCloud\Common\external\jquery.easing.1.3.js" />
     <Content Include="Layouts\ClubCloud\Common\external\jquery.easing.1.3.min.js" />
     <Content Include="Layouts\ClubCloud\Common\external\jquery.globalize.js" />
+    <Content Include="Layouts\ClubCloud\Common\external\modernizr.2.8.3.js" />
+    <Content Include="SyncFusionHeader\Elements.xml" />
     <None Include="Layouts\ClubCloud\Common\external\jsrender.min.js.map" />
     <Content Include="Layouts\ClubCloud\Common\external\jsrender.min.js" />
     <Content Include="Layouts\ClubCloud\Common\external\jsrender.js" />
     <Content Include="Layouts\ClubCloud\Common\external\jsviews.js" />
-    <Content Include="Layouts\ClubCloud\Common\external\qunit-1.17.0.js" />
-    <Content Include="Layouts\ClubCloud\Common\external\qunit-1.17.0.min.js">
-      <DependentUpon>qunit-1.17.0.js</DependentUpon>
-    </Content>
+    <Content Include="Layouts\ClubCloud\Common\external\qunit.1.17.0.js" />
     <Content Include="Layouts\ClubCloud\Common\external\_references.js" />
     <Content Include="Layouts\ClubCloud\Common\scripts\common\ej.core.min.js" />
     <Content Include="Layouts\ClubCloud\Common\scripts\common\ej.data.min.js" />

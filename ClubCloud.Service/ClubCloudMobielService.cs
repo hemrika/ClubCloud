@@ -333,8 +333,9 @@ namespace ClubCloud.Service
         {
             ClubCloud_Reservering Ureservering = new ClubCloud_Reservering();
 
-            if (SPContext.Current != null && SPContext.Current.Web != null)
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
+                string LoginName = SPContext.Current.Web.CurrentUser.LoginName;
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
                 Ureservering = client.UpdateReservering(bondsnummer, verenigingId, reservering, final, push);
             }
@@ -345,14 +346,15 @@ namespace ClubCloud.Service
         #endregion
 
 
-        public ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, Guid verenigingId, bool refresh = false)
+        public ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, string verenigingId)
         {
             ClubCloud_Afhang afhang = new ClubCloud_Afhang();
 
-            if (SPContext.Current != null && SPContext.Current.Web != null)
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
+                string LoginName = SPContext.Current.Web.CurrentUser.LoginName;
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                afhang = client.GetVerenigingSettings(bondsnummer, verenigingId, refresh);
+                afhang = client.GetVerenigingSettings(bondsnummer, Guid.Parse(verenigingId), false);
             }
 
             return afhang;

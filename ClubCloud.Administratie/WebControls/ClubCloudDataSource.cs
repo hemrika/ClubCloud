@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -94,12 +95,12 @@ namespace ClubCloud.Administratie.WebControls
                         if (constructor != null)
                         {
                             _view = constructor.Invoke(parameters) as ClubCloudDataSourceView;
-                            /*
-                            if (base.IsTrackingViewState)
-                            {
-                                ((IStateManager)_view).TrackViewState();
-                            }
-                            */
+                            //
+                            //if (base.IsTrackingViewState)
+                            //{
+                            //    ((IStateManager)_view).TrackViewState();
+                            //}
+                            //
                         }
                     }
                 }
@@ -152,3 +153,4 @@ namespace ClubCloud.Administratie.WebControls
     }
 
 }
+*/

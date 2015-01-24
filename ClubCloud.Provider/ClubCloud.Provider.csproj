@@ -82,9 +82,13 @@
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Zimbra Receivers\Zimbra Receivers.EventReceiver.cs">
+      <DependentUpon>Zimbra Receivers.feature</DependentUpon>
+    </Compile>
     <Compile Include="ZimbraClaimSecurityTrimmedControl.cs" />
-    <Compile Include="ZimbraClaimsConverter.cs" />
-    <Compile Include="ZimbraRolesConverter.cs" />
+    <Compile Include="ZimbraClaimConverter.cs" />
+    <Compile Include="ProviderLogging.cs" />
+    <Compile Include="ZimbraRoleConverter.cs" />
     <Compile Include="ZimbraRolesSecurityTrimmedControl.cs" />
     <Compile Include="Features\Zimbra Claims\Zimbra Claims.EventReceiver.cs">
       <DependentUpon>Zimbra Claims.feature</DependentUpon>
@@ -175,9 +179,8 @@
     <Compile Include="ZimbraUserSettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="CONTROLTEMPLATES\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{b589f0fe-2f3c-47c3-ae7e-6ae50d5f3935}</SharePointProjectItemId>
+    <None Include="Features\Zimbra Receivers\Zimbra Receivers.feature">
+      <FeatureId>{9bd79f05-45a1-482e-9e92-acefec276c57}</FeatureId>
     </None>
     <None Include="Features\Zimbra UserSettings\Zimbra UserSettings.feature">
       <FeatureId>{48f6970d-4eef-4245-b89f-3ee2a9c8bf9d}</FeatureId>
@@ -242,10 +245,11 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="CONTROLTEMPLATES\ClubCloud.Provider\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Features\Zimbra Receivers\Zimbra Receivers.Template.xml">
+      <DependentUpon>Zimbra Receivers.feature</DependentUpon>
+    </Content>
     <Content Include="Features\Zimbra UserSettings\Zimbra UserSettings.Template.xml">
       <DependentUpon>Zimbra UserSettings.feature</DependentUpon>
     </Content>

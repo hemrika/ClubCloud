@@ -14,7 +14,9 @@ namespace ClubCloud.Common
             get
             {
                 _modifications = new List<SPWebConfigModification>();
+
                 AddSaveControls();
+
                 return _modifications;
             }
         }
@@ -34,6 +36,7 @@ namespace ClubCloud.Common
             _modifications.Add(configModSaveControls);
 
         }
+
         #endregion
     }
 }

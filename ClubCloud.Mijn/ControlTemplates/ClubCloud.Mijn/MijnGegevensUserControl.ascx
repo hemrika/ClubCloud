@@ -32,12 +32,13 @@
         </asp:panel>
         <fieldset>
         <asp:panel runat="server" ID="pnl_profiel" >
-              <asp:FormView ID="fvw_afbeelding" RunAt="server" CssClass="one-half first" OnItemUpdated="fvw_afbeelding_ItemUpdated" OnItemUpdating="fvw_afbeelding_ItemUpdating" OnModeChanged="fvw_afbeelding_ModeChanged" OnModeChanging="fvw_afbeelding_ModeChanging" OnItemCommand="fvw_afbeelding_ItemCommand">
+              <asp:FormView ID="fvw_afbeelding" RunAt="server" RenderOuterTable="false" OnItemUpdated="fvw_afbeelding_ItemUpdated" OnItemUpdating="fvw_afbeelding_ItemUpdating" OnModeChanged="fvw_afbeelding_ModeChanged" OnModeChanging="fvw_afbeelding_ModeChanging" OnItemCommand="fvw_afbeelding_ItemCommand">
                 <HeaderStyle backcolor="#f9f9f9" 
                   forecolor="#616161" />
                 <RowStyle backcolor="#f9f9f9"/>         
                 <EditRowStyle backcolor="#f9f9f9"/>
                 <ItemTemplate>
+                            <div class="one-half first">
                         <i class="icon-picture special"></i>
                         <div class="info" style="min-height:420px;">
                         <h3 class="lined">Profiel Foto</h3>
@@ -46,7 +47,7 @@
                             </p>
                             <asp:LinkButton ID="btn_editafbeelding" Text="Wijzigen" CommandName="Edit" RunAt="server" CssClass="button small alignright last" Enabled="False" />
                         </div>
-                    <div class="clear"></div>
+                                </div>
                 </ItemTemplate>
                 <EditItemTemplate>                       
                     <i class="icon-picture special" style="color:#0072C6;"></i>
@@ -74,12 +75,13 @@
                 </EmptyDataTemplate>
               </asp:FormView>
 
-              <asp:FormView ID="fvw_persoon" RunAt="server" CssClass="one-half last" OnItemUpdated="fvw_persoon_ItemUpdated" OnItemUpdating="fvw_persoon_ItemUpdating" OnModeChanged="fvw_persoon_ModeChanged" OnModeChanging="fvw_persoon_ModeChanging" OnItemCommand="fvw_persoon_ItemCommand" DataKeyNames="Id">
+              <asp:FormView ID="fvw_persoon" RunAt="server" RenderOuterTable="false" OnItemUpdated="fvw_persoon_ItemUpdated" OnItemUpdating="fvw_persoon_ItemUpdating" OnModeChanged="fvw_persoon_ModeChanged" OnModeChanging="fvw_persoon_ModeChanging" OnItemCommand="fvw_persoon_ItemCommand" DataKeyNames="Id">
                 <HeaderStyle backcolor="#f9f9f9" 
                   forecolor="#616161" />
                 <RowStyle backcolor="#f9f9f9"/>         
                 <EditRowStyle backcolor="#f9f9f9"/>
                 <ItemTemplate>
+                    <div class="one-half last">
                         <i class="icon-vcard special"></i>
                         <div class="info" style="min-height:420px;">
                         <h3 class="lined"><%# DataBinder.Eval(Container.DataItem, "Volledigenaam")%> ( <asp:Label ID="knltbid" runat="server" /> )</h3>
@@ -97,6 +99,7 @@
                             Nationaliteit : Nederlandse <!-- <%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "NationaliteitId")).ToLower() %><br /> -->
                             </p>
                             <asp:LinkButton ID="btn_editpersoon" Text="Wijzigen" CommandName="Edit" RunAt="server" CssClass="button small alignright last"/>
+                        </div>
                         </div>
                     <div class="clear"></div>
                 </ItemTemplate>
@@ -143,12 +146,13 @@
                 </EmptyDataTemplate>
               </asp:FormView>
 
-              <asp:FormView ID="fvw_adres" RunAt="server" CssClass="one-half first" OnItemUpdated="fvw_adres_ItemUpdated" OnItemUpdating="fvw_adres_ItemUpdating" OnModeChanged="fvw_adres_ModeChanged" OnModeChanging="fvw_adres_ModeChanging" OnItemCommand="fvw_adres_ItemCommand" DataKeyNames="Id">
+              <asp:FormView ID="fvw_adres" RunAt="server" RenderOuterTable="false" OnItemUpdated="fvw_adres_ItemUpdated" OnItemUpdating="fvw_adres_ItemUpdating" OnModeChanged="fvw_adres_ModeChanged" OnModeChanging="fvw_adres_ModeChanging" OnItemCommand="fvw_adres_ItemCommand" DataKeyNames="Id">
                 <HeaderStyle backcolor="#f9f9f9" 
                   forecolor="#616161" />
                 <RowStyle backcolor="#f9f9f9"/>         
                 <EditRowStyle backcolor="#f9f9f9"/>
                 <ItemTemplate>
+                    <div class="one-half first">
                         <i class="icon-address special"></i>
                         <div class="info" style="min-height:270px;">
                         <h3 class="lined"><%# String.Format("{0}",DataBinder.Eval(Container.DataItem, "Naam")).ToLower() %></h3>
@@ -161,6 +165,7 @@
                             </p>
                             Geheim Adres : <%# Boolean.Parse(String.Format("{0}",DataBinder.Eval(Container.DataItem, "AddressGeheim")).ToLower()) ? "Ja" : "Nee" %><br /> 
                             <asp:LinkButton ID="btn_editadres" Text="Wijzigen" CommandName="Edit" RunAt="server" CssClass="button small alignright last"/>
+                        </div>
                         </div>
                 </ItemTemplate>
                 <EditItemTemplate>
@@ -199,12 +204,13 @@
                 </EmptyDataTemplate>
               </asp:FormView>
 
-              <asp:FormView ID="fvw_contact" RunAt="server" CssClass="one-half last" OnItemUpdated="fvw_contact_ItemUpdated" DataKeyNames="Id" OnModeChanging="fvw_contact_ModeChanging" OnItemUpdating="fvw_contact_ItemUpdating" OnModeChanged="fvw_contact_ModeChanged" OnItemCommand="fvw_contact_ItemCommand">
+              <asp:FormView ID="fvw_contact" RunAt="server" RenderOuterTable="false" OnItemUpdated="fvw_contact_ItemUpdated" DataKeyNames="Id" OnModeChanging="fvw_contact_ModeChanging" OnItemUpdating="fvw_contact_ItemUpdating" OnModeChanged="fvw_contact_ModeChanged" OnItemCommand="fvw_contact_ItemCommand">
                 <HeaderStyle backcolor="#f9f9f9" 
                   forecolor="#616161" />
                 <RowStyle backcolor="#f9f9f9"/>         
                 <EditRowStyle backcolor="#f9f9f9"/>
                 <ItemTemplate>
+                    <div class="one-half last">
                         <i class="icon-mail special"></i>
                         <div class="info" style="min-height:270px;">
                         <h3 class="lined">Contact gegevens</h3>
@@ -219,6 +225,7 @@
                             Geheime Adressen : <%# Boolean.Parse(String.Format("{0}",DataBinder.Eval(Container.DataItem, "EmailGeheim")).ToLower()) ? "Ja" : "Nee" %><br /> 
                             </p>
                             <asp:LinkButton ID="btn_editcontact" Text="Wijzigen" CommandName="Edit" RunAt="server" CssClass="button small alignright last"/>
+                        </div>
                         </div>
                     <div class="clear"></div>
                 </ItemTemplate>
@@ -264,6 +271,8 @@
 </asp:UpdatePanel>
 <asp:UpdateProgress ID="udp_profiel_progress" runat="server" AssociatedUpdatePanelID="udp_profiel" DisplayAfter="50">
     <progresstemplate>
-        <div class="bubbles">laden...</div>
+        <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity=80); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; z-index: 10000;">
+        <div class="bubbles aligncenter" style="top:48%;">laden...</div>
+        </div>
 </progresstemplate>
 </asp:UpdateProgress>

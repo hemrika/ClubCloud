@@ -929,5 +929,31 @@ namespace ClubCloud.Service
 
             return response;
         }
+
+        public void VerenigingenUpdate(string bondsnummer, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.VerenigingenUpdate(bondsnummer, refresh);
+                },
+                false);
+
+            return;
+        }
+
+        public List<ClubCloud_Gebruiker> GetGebruikersBySearch(string bondsnummer, string prefixText, int count, bool refresh)
+        {
+            List<ClubCloud_Gebruiker> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetGebruikersBySearch(bondsnummer, prefixText, count, refresh);
+                },
+                false);
+
+            return response;
+        }
     }
 }

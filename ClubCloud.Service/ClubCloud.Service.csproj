@@ -47,14 +47,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\EntityFramework.dll</HintPath>
       <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -95,6 +93,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Management" />
@@ -308,6 +307,7 @@
     <Compile Include="Model\Financieel.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\BeheerFullTextInterceptor.cs" />
     <Compile Include="Model\GeslachtSoort.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
@@ -434,6 +434,12 @@
     <None Include="Model\BeheerClubCloud.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BeheerClubCloud.Context.cs</LastGenOutput>
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="Model\beheerclubcloud.edmx.compareOptions">
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="Model\beheerclubcloud.edmx.namePrefs">
       <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
     </None>
     <None Include="Model\BeheerClubCloud.tt">

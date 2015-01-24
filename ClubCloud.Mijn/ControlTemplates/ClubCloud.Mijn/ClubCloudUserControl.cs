@@ -164,6 +164,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             //this.ExtendScript();
 
         }
+
         /*
         private void ExtendScript()
         {

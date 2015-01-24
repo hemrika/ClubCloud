@@ -29,8 +29,8 @@
             </div>  
         </asp:panel>
         <fieldset>
-        <asp:panel runat="server" ID="pnl_verenigingen" >
-            <asp:ListView ID="lst_verenigingen" runat="server" DataKeyNames="Id" OnSelectedIndexChanged="lst_verenigingen_SelectedIndexChanged"  >
+        <asp:panel runat="server" ID="pnl_verenigingen" CssClass="one-half first" >
+            <asp:ListView ID="lst_verenigingen" runat="server" DataKeyNames="Id" OnSelectedIndexChanged="lst_verenigingen_SelectedIndexChanged" >
                 <GroupTemplate>
                     <ul class="clubs">
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
@@ -45,7 +45,7 @@
             </asp:ListView>
             <hr />
 
-            <asp:FormView ID="fvw_vereniging" RunAt="server" CssClass="one-half first">
+            <asp:FormView ID="fvw_vereniging" RunAt="server" RenderOuterTable="False">
                 <HeaderStyle backcolor="#f9f9f9" 
                   forecolor="#616161" />
                 <RowStyle backcolor="#f9f9f9"/>         
@@ -98,7 +98,7 @@
                     <div class="clear"></div>
                 </EmptyDataTemplate>
               </asp:FormView>
-              <asp:FormView ID="fvw_accomodatie" RunAt="server" CssClass="one-half last">
+              <asp:FormView ID="fvw_accomodatie" RunAt="server" RenderOuterTable="False">
                 <HeaderStyle backcolor="#f9f9f9" 
                   forecolor="#616161" />
                 <RowStyle backcolor="#f9f9f9"/>         
@@ -151,7 +151,7 @@
                     <div class="clear"></div>
                 </EmptyDataTemplate>
               </asp:FormView>
-              <asp:FormView ID="fvw_bestuur" RunAt="server" CssClass="one-half first">
+              <asp:FormView ID="fvw_bestuur" RunAt="server" RenderOuterTable="False">
                 <HeaderStyle backcolor="#f9f9f9" 
                   forecolor="#616161" />
                 <RowStyle backcolor="#f9f9f9"/>         
@@ -180,7 +180,7 @@
                     <div class="clear"></div>
                 </EmptyDataTemplate>
               </asp:FormView>
-              <asp:FormView ID="fvw_functionarissen" RunAt="server" CssClass="one-half last" >
+              <asp:FormView ID="fvw_functionarissen" RunAt="server" RenderOuterTable="False">
                 <HeaderStyle backcolor="#f9f9f9" 
                   forecolor="#616161" />
                 <RowStyle backcolor="#f9f9f9"/>         
@@ -221,6 +221,8 @@
 </asp:UpdatePanel>
 <asp:UpdateProgress ID="udp_verenigingen_progress" runat="server" AssociatedUpdatePanelID="udp_verenigingen" DisplayAfter="50">
     <progresstemplate>
-        <div class="bubbles">laden...</div>
+        <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity=80); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; z-index: 10000;">
+        <div class="bubbles aligncenter" style="top:48%;">laden...</div>
+        </div>
 </progresstemplate>
 </asp:UpdateProgress>
