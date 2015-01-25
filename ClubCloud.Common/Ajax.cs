@@ -85,24 +85,24 @@ namespace ClubCloud.Common
 
             var configModAjaxMin = new SPWebConfigModification
             {
-                Name = "SafeControl[@Assembly='AjaxMin, Version=4.97.4951.28478, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f'][@Namespace='Microsoft.Ajax.Utilities'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']",
+                Name = "SafeControl[@Assembly='AjaxMin, Version=5.13.5463.15277, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f'][@Namespace='Microsoft.Ajax.Utilities'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/SharePoint/SafeControls",
                 Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
-                Value = "<SafeControl Assembly='AjaxMin, Version=4.97.4951.28478, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f' Namespace='Microsoft.Ajax.Utilities' TypeName='*' Safe='True' SafeAgainstScript='True' />"
+                Value = "<SafeControl Assembly='AjaxMin, Version=5.13.5463.15277, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f' Namespace='Microsoft.Ajax.Utilities' TypeName='*' Safe='True' SafeAgainstScript='True' />"
 
             };
             _modifications.Add(configModAjaxMin);
 
             var configModHtmlAgilityPack = new SPWebConfigModification
             {
-                Name = "SafeControl[@Assembly='HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a'][@Namespace='HtmlAgilityPack'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']",
+                Name = "SafeControl[@Assembly='HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a'][@Namespace='HtmlAgilityPack'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/SharePoint/SafeControls",
                 Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
-                Value = "<SafeControl Assembly='HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a' Namespace='HtmlAgilityPack' TypeName='*' Safe='True' SafeAgainstScript='True' />"
+                Value = "<SafeControl Assembly='HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a' Namespace='HtmlAgilityPack' TypeName='*' Safe='True' SafeAgainstScript='True' />"
 
             };
             _modifications.Add(configModHtmlAgilityPack);

@@ -1,15 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="0ea4a42f-71b7-41a1-998c-7e94113c346a" solutionId="0ea4a42f-71b7-41a1-998c-7e94113c346a" resetWebServer="false" title="ClubCloud Common" description="ClubCloud Common Elements" resetWebServerModeOnUpgrade="Recycle" sharePointProductVersion="15.0" name="ClubCloud Common" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <assemblies>
-    <customAssembly location="AjaxControlToolkit.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="Assemblies\AjaxControlToolkit.dll" />
-    <customAssembly location="AjaxMin.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="Assemblies\AjaxMin.dll" />
-    <customAssembly location="Syncfusion.Core.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="Assemblies\Syncfusion.Core.dll" />
-    <customAssembly location="Syncfusion.EJ.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="Assemblies\Syncfusion.EJ.dll" />
-    <customAssembly location="Syncfusion.EJ.Web.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="Assemblies\Syncfusion.EJ.Web.dll" />
-    <customAssembly location="Syncfusion.Linq.Base.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="Assemblies\Syncfusion.Linq.Base.dll" />
-    <customAssembly location="Syncfusion.Shared.Base.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="Assemblies\Syncfusion.Shared.Base.dll" />
-    <customAssembly location="Syncfusion.Shared.Web.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="Assemblies\Syncfusion.Shared.Web.dll" />
-    <customAssembly location="HtmlAgilityPack.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="Assemblies\HtmlAgilityPack.dll" />
+    <customAssembly location="AjaxControlToolkit.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\AjaxControlToolkit.dll" />
+    <customAssembly location="AjaxMin.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\AjaxMin.dll" />
+    <customAssembly location="Syncfusion.Core.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.Core.dll" />
+    <customAssembly location="Syncfusion.EJ.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.EJ.dll" />
+    <customAssembly location="Syncfusion.EJ.Web.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.EJ.Web.dll" />
+    <customAssembly location="Syncfusion.Linq.Base.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.Linq.Base.dll" />
+    <customAssembly location="Syncfusion.Shared.Base.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.Shared.Base.dll" />
+    <customAssembly location="Syncfusion.Shared.Web.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.Shared.Web.dll" />
+    <customAssembly location="HtmlAgilityPack.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\HtmlAgilityPack.dll" />
   </assemblies>
   <features>
     <featureReference itemId="8fdabc4b-381d-400c-b93f-332b6cdb246a" />
