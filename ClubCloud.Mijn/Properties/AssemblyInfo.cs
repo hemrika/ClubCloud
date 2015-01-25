@@ -7,11 +7,16 @@ using System.Security;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ClubCloud.Mijn")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ClubCloud.Mijn")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+[assembly: AssemblyDescription("ClubCloud Mijn - Debug")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+[assembly: AssemblyDescription("ClubCloud Mijn")]
+#endif
+[assembly: AssemblyCompany("Hemrika")]
+[assembly: AssemblyProduct("ClubCloud")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

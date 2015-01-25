@@ -7,8 +7,13 @@ using System.Security;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ClubCloud Provider")]
-[assembly: AssemblyDescription("ClubCloud Provider for Zimbra")]
-[assembly: AssemblyConfiguration("")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+[assembly: AssemblyDescription("ClubCloud Provider - Debug")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+[assembly: AssemblyDescription("ClubCloud Provider")]
+#endif
 [assembly: AssemblyCompany("Hemrika")]
 [assembly: AssemblyProduct("ClubCloud")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]

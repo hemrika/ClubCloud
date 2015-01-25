@@ -6,12 +6,17 @@ using System.Security;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ClubCloud.BaanBeheer")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ClubCloud.BaanBeheer")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyTitle("ClubCloud BaanBeheer")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+[assembly: AssemblyDescription("ClubCloud Baan Beheer - Debug")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+[assembly: AssemblyDescription("ClubCloud Baan Beheer")]
+#endif
+[assembly: AssemblyCompany("Hemrika")]
+[assembly: AssemblyProduct("ClubCloud")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
