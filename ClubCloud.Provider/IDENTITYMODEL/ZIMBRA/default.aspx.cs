@@ -251,6 +251,7 @@ namespace ClubCloud.Provider.IdentityModel
                     ULS.SendTraceTag(1430979, uLSCat, ULSTraceLevel.Verbose, str2, objArray);
                     */
                     securityToken = null;
+                    //SPSecurityContext.SecurityTokenForContext
                 }
             }
             else

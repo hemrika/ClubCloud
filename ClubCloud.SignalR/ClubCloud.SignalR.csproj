@@ -131,11 +131,16 @@
       <HintPath>..\Common\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SignalR.cs" />
     <Compile Include="Connections\StreamingConnection.cs" />
+    <Compile Include="Features\SignalR\SignalR.EventReceiver.cs">
+      <DependentUpon>SignalR.feature</DependentUpon>
+    </Compile>
     <Compile Include="Hubs\AfhangenHub.cs" />
     <Compile Include="Hubs\MijnHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -145,9 +150,20 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Layouts\ClubCloud.SignalR\jquery.min.map" />
+    <None Include="Features\SignalR\SignalR.feature">
+      <FeatureId>{b5888a00-346b-4d2f-9205-9a2b18a9cb8c}</FeatureId>
+    </None>
+    <None Include="Layouts\ClubCloud\SignalR\jquery.signalR.min.js.map">
+      <DependentUpon>jquery.signalR.min.js</DependentUpon>
+    </None>
+    <None Include="Layouts\ClubCloud\SignalR\json2.min.js.map">
+      <DependentUpon>json2.min.js</DependentUpon>
+    </None>
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b3e4aa11-cc73-4537-a378-7184f93d773f}</SharePointProjectItemId>
+    </None>
+    <None Include="SignalR\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{7e6c9c36-a01c-4841-b474-0526eabd101b}</SharePointProjectItemId>
     </None>
     <None Include="Package\Package.package">
       <PackageId>{7112ac8b-61c3-451e-a145-0c245dcb4b38}</PackageId>
@@ -157,18 +173,20 @@
     </None>
     <Compile Include="Startup.SignalR.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Features\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Layouts\ClubCloud.SignalR\jquery-vsdoc.js" />
-    <Content Include="Layouts\ClubCloud.SignalR\jquery.intellisense.js" />
-    <Content Include="Layouts\ClubCloud.SignalR\jquery.js" />
-    <Content Include="Layouts\ClubCloud.SignalR\jquery.min.js" />
-    <Content Include="Layouts\ClubCloud.SignalR\jquery.signalR.js" />
-    <Content Include="Layouts\ClubCloud.SignalR\jquery.signalR.min.js" />
-    <Content Include="Layouts\ClubCloud.SignalR\json2.js" />
-    <Content Include="Layouts\ClubCloud.SignalR\json2.min.js" />
+    <Content Include="Features\SignalR\SignalR.Template.xml">
+      <DependentUpon>SignalR.feature</DependentUpon>
+    </Content>
+    <Content Include="Layouts\ClubCloud\SignalR\jquery.signalR.js" />
+    <Content Include="Layouts\ClubCloud\SignalR\jquery.signalR.min.js">
+      <DependentUpon>jquery.signalR.js</DependentUpon>
+    </Content>
+    <Content Include="Layouts\ClubCloud\SignalR\json2.js" />
+    <Content Include="Layouts\ClubCloud\SignalR\json2.min.js">
+      <DependentUpon>json2.js</DependentUpon>
+    </Content>
+    <Content Include="SignalR\Elements.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
