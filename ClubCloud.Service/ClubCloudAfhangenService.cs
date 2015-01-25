@@ -10,13 +10,9 @@ namespace ClubCloud.Service
     using System.ServiceModel.Activation;
     using Microsoft.SharePoint.Administration;
     using Microsoft.SharePoint.Client.Services;
-    using Microsoft.AspNet.SignalR.Infrastructure;
-    using Microsoft.AspNet.SignalR;
-    using ClubCloud.SignalR.Hubs;
     using Microsoft.SharePoint;
     using ClubCloud.Service.Model;
     using System.Net;
-    //using ClubCloud.KNLTB.ServIt.LedenAdministratieService;
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using System.Web.Script.Serialization;

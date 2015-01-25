@@ -8,7 +8,13 @@ namespace ClubCloud.Common
         #region Modifications
 
         private static List<SPWebConfigModification> _modifications;
+        private static string _owner = "ClubCloud";
 
+        public static string Owner
+        {
+            get { return CrossSiteScripting._owner; }
+            set { CrossSiteScripting._owner = value; }
+        }
         public static List<SPWebConfigModification> Modifications
         {
             get
@@ -28,7 +34,7 @@ namespace ClubCloud.Common
                 Name = "add[@name='Access-Control-Allow-Origin'][@value='*']",
                 Owner = "ClubCloud",
                 Path = "configuration/system.webServer/httpProtocol/customHeaders",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<add tagPrefix='ajaxToolkit' assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e' namespace='AjaxControlToolkit' />"
 
             };
@@ -40,7 +46,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.webServer/httpProtocol/customHeaders",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<add name='Access-Control-Request-Method' value='GET,POST,HEAD,OPTIONS' />"
 
             };
@@ -52,7 +58,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.webServer/httpProtocol/customHeaders",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<add tagPrefix='ajaxToolkit' assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e' namespace='AjaxControlToolkit' />"
 
             };
@@ -64,7 +70,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.webServer/httpProtocol/customHeaders",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<add name='Access-Control-Allow-Credentials' value='true' />"
 
             };

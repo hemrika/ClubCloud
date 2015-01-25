@@ -13,6 +13,14 @@ namespace ClubCloud.Common
 
         private static List<SPWebConfigModification> _modifications;
 
+        private static string _owner = "ClubCloud";
+
+        public static string Owner
+        {
+            get { return Ajax._owner; }
+            set { Ajax._owner = value; }
+        }
+
         public static List<SPWebConfigModification> Modifications
         {
             get {
@@ -36,7 +44,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/pages/controls",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<add tagPrefix='ajaxToolkit' assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e' namespace='AjaxControlToolkit' />"
 
             };
@@ -54,7 +62,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/compilation/assemblies",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<add assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e' />"
 
             };
@@ -69,7 +77,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/SharePoint/SafeControls",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<SafeControl Assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e' Namespace='AjaxControlToolkit' TypeName='*' Safe='True' SafeAgainstScript='True' />"
 
             };
@@ -81,7 +89,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/SharePoint/SafeControls",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<SafeControl Assembly='AjaxMin, Version=4.97.4951.28478, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f' Namespace='Microsoft.Ajax.Utilities' TypeName='*' Safe='True' SafeAgainstScript='True' />"
 
             };
@@ -93,7 +101,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/SharePoint/SafeControls",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<SafeControl Assembly='HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a' Namespace='HtmlAgilityPack' TypeName='*' Safe='True' SafeAgainstScript='True' />"
 
             };

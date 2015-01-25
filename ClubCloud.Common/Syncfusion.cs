@@ -8,7 +8,13 @@ namespace ClubCloud.Common
         #region Modifications
 
         private static List<SPWebConfigModification> _modifications;
+        private static string _owner = "ClubCloud";
 
+        public static string Owner
+        {
+            get { return Syncfusion._owner; }
+            set { Syncfusion._owner = value; }
+        }
         public static List<SPWebConfigModification> Modifications
         {
             get
@@ -34,7 +40,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/httpModules",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<add name='HttpCompressModule' type='Syncfusion.Web.UI.WebControls.Handler.PageCompressHandler, Syncfusion.Shared.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' />"
 
             };
@@ -46,7 +52,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.webServer/modules",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<add name='HttpCompressModule' type='Syncfusion.Web.UI.WebControls.Handler.PageCompressHandler,Syncfusion.Shared.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' />"
 
             };
@@ -61,7 +67,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/compilation/assemblies",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<add assembly='Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' />"
 
             };
@@ -73,7 +79,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/compilation/assemblies",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<add assembly='Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' />"
 
             };
@@ -87,7 +93,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/SharePoint/SafeControls",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<SafeControl Assembly='Syncfusion.Shared.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' Namespace='Syncfusion.Web.UI.WebControls.Shared' TypeName='*' Safe='True' SafeAgainstScript='True' />"
 
             };
@@ -99,7 +105,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/SharePoint/SafeControls",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<SafeControl Assembly='Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' Namespace='Syncfusion.JavaScript.Web' TypeName='*' Safe='True' SafeAgainstScript='True' />"
 
             };
@@ -111,7 +117,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/SharePoint/SafeControls",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
                 Value = "<SafeControl Assembly='Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89' Namespace='Syncfusion.JavaScript.Web' TypeName='*' Safe='True' SafeAgainstScript='True' />"
 
             };

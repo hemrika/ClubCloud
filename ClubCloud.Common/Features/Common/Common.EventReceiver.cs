@@ -22,7 +22,8 @@ namespace ClubCloud.Common.Features.Common
 
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
-            
+            ClubCloud.Common.RemoteAdministrator.Enable();
+
             if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
             {
                 webApp = properties.Feature.Parent as SPWebApplication;
@@ -66,6 +67,8 @@ namespace ClubCloud.Common.Features.Common
 
         public override void FeatureDeactivating(SPFeatureReceiverProperties properties)
         {
+            ClubCloud.Common.RemoteAdministrator.Enable();
+
             if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
             {
                 webApp = properties.Feature.Parent as SPWebApplication;
@@ -196,6 +199,8 @@ namespace ClubCloud.Common.Features.Common
         /// <param name="properties"></param>
         public override void FeatureUninstalling(SPFeatureReceiverProperties properties)
         {
+            ClubCloud.Common.RemoteAdministrator.Enable();
+
             foreach (SPWebApplication wap in SPWebService.ContentService.WebApplications)
             {
                 List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
