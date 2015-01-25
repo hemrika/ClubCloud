@@ -58,6 +58,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5D62A5
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B39FDC5A-2583-4EEC-9562-1E9742FA2055}"
+	ProjectSection(SolutionItems) = preProject
+		Common\Scripts\jquery.signalR.js = Common\Scripts\jquery.signalR.js
+		Common\Scripts\jquery.signalR.min.js = Common\Scripts\jquery.signalR.min.js
+		Common\Scripts\jquery.signalR.min.js.map = Common\Scripts\jquery.signalR.min.js.map
+		Common\Scripts\json2.js = Common\Scripts\json2.js
+		Common\Scripts\json2.min.js = Common\Scripts\json2.min.js
+		Common\Scripts\json2.min.js.map = Common\Scripts\json2.min.js.map
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Administratie", "ClubCloud.Administratie\ClubCloud.Administratie.csproj", "{DB188B7A-705D-49DD-B842-9EAFBA850C83}"
 EndProject
