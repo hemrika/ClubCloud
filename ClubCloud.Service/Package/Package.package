@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="736bbba5-7259-465e-9e0e-032a6e290998" solutionId="736bbba5-7259-465e-9e0e-032a6e290998" resetWebServer="false" title="ClubCloud Service" description="Installs the ClubCloud Service Application" sharePointProductVersion="15.0" name="ClubCloud Service" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <assemblies>
-    <projectOutputAssembly location="ClubCloud.KNLTB.ServIt.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.KNLTB.Servit\ClubCloud.KNLTB.Servit.csproj" />
+    <projectOutputAssembly location="ClubCloud.KNLTB.ServIt.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.KNLTB.Servit\ClubCloud.KNLTB.csproj" />
     <customAssembly location="EntityFramework.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\EntityFramework.dll" />
     <customAssembly location="EntityFramework.SqlServer.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\EntityFramework.SqlServer.dll" />
   </assemblies>

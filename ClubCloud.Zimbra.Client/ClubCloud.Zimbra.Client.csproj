@@ -87,9 +87,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClubCloud.KNLTB.Servit\ClubCloud.KNLTB.Servit.csproj">
+    <ProjectReference Include="..\ClubCloud.KNLTB.Servit\ClubCloud.KNLTB.csproj">
       <Project>{b98cd37b-e5d0-49e4-a765-f8fba945e050}</Project>
-      <Name>ClubCloud.KNLTB.Servit</Name>
+      <Name>ClubCloud.KNLTB</Name>
     </ProjectReference>
     <ProjectReference Include="..\ClubCloud.Zimbra\ClubCloud.Zimbra.csproj">
       <Project>{04f1320b-7fd4-4429-985c-b3946ed2f519}</Project>

@@ -239,9 +239,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClubCloud.KNLTB.Servit\ClubCloud.KNLTB.Servit.csproj">
+    <ProjectReference Include="..\ClubCloud.KNLTB.Servit\ClubCloud.KNLTB.csproj">
       <Project>{b98cd37b-e5d0-49e4-a765-f8fba945e050}</Project>
-      <Name>ClubCloud.KNLTB.Servit</Name>
+      <Name>ClubCloud.KNLTB</Name>
     </ProjectReference>
     <ProjectReference Include="..\ClubCloud.Provider\ClubCloud.Provider.csproj">
       <Project>{b259747c-7741-4b61-b261-24fbbe284f05}</Project>

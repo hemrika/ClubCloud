@@ -2,7 +2,6 @@
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="feeca0b7-26ac-459f-83de-82e1943f195c" solutionId="feeca0b7-26ac-459f-83de-82e1943f195c" resetWebServer="true" title="ClubCloud Provider" description="ClubCloud Provider" sharePointProductVersion="15.0" name="ClubCloud Provider" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <assemblies>
     <projectOutputAssembly location="ClubCloud.Zimbra.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.Zimbra\ClubCloud.Zimbra.csproj" />
-    <projectOutputAssembly location="ClubCloud.KNLTB.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.KNLTB\ClubCloud.KNLTB.csproj" />
   </assemblies>
   <features>
     <featureReference itemId="51918dfa-cf18-4d78-a092-98d7ef773613" />

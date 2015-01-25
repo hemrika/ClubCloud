@@ -7,8 +7,8 @@
     <ProjectGuid>{B98CD37B-E5D0-49E4-A765-F8FBA945E050}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClubCloud.KNLTB.ServIt</RootNamespace>
-    <AssemblyName>ClubCloud.KNLTB.ServIt</AssemblyName>
+    <RootNamespace>ClubCloud.KNLTB</RootNamespace>
+    <AssemblyName>ClubCloud.KNLTB</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
