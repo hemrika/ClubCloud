@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{68CAE0A5-9672-48DE-8047-3904A4B840B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClubCloud.KNLTB</RootNamespace>
+    <AssemblyName>ClubCloud.KNLTB</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\CalWedstrijd.cs" />
+    <Compile Include="Client\Competitie.cs" />
+    <Compile Include="Client\Ledenpas.cs" />
+    <Compile Include="Client\MKTeam.cs" />
+    <Compile Include="Client\Partij.cs" />
+    <Compile Include="Client\PartijResult.cs" />
+    <Compile Include="Client\PartijSpeler.cs" />
+    <Compile Include="Client\Pasfoto.cs" />
+    <Compile Include="Client\Persoon.cs" />
+    <Compile Include="Client\PouleStanden.cs" />
+    <Compile Include="Client\PouleWedstrijd.cs" />
+    <Compile Include="Client\Set.cs" />
+    <Compile Include="Client\SlideShowItem.cs" />
+    <Compile Include="Client\Speler.cs" />
+    <Compile Include="Client\SpelersPas.cs" />
+    <Compile Include="Client\Spelersprofiel.cs" />
+    <Compile Include="Client\SpelersprofielTotaal.cs" />
+    <Compile Include="Client\Team.cs" />
+    <Compile Include="Client\Vereniging.cs" />
+    <Compile Include="Client\Wedstrijd.cs" />
+    <Compile Include="Client\ZoekPersoon.cs" />
+    <Compile Include="KNLTBService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\KNLTBContainer.cs" />
+    <Compile Include="Service\KNLTBBinding.cs" />
+    <Compile Include="Service\KNLTBEndpointAddress.cs" />
+    <Compile Include="Service\KNLTBHeaderContext.cs" />
+    <Compile Include="Service\KNLTBSoap.cs" />
+    <Compile Include="Service\KNLTBSoapChannel.cs" />
+    <Compile Include="Service\KNLTBSoapClient.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

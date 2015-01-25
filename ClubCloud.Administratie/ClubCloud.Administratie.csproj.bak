@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DB188B7A-705D-49DD-B842-9EAFBA850C83}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClubCloud.Administratie</RootNamespace>
+    <AssemblyName>ClubCloud.Administratie</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetOfficeVersion>15.0</TargetOfficeVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SandboxedSolution>False</SandboxedSolution>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <IncludeAssemblyInPackage>True</IncludeAssemblyInPackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Selectors" />
+    <Reference Include="System.identitymodel.services" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+    <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClubCloudDataSet.cs">
+      <DependentUpon>ClubCloudDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ClubCloudDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloudDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Administratie\PromotedLinksDelegate.ascx.cs">
+      <DependentUpon>PromotedLinksDelegate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Administratie\PromotedLinksDelegate.ascx.designer.cs">
+      <DependentUpon>PromotedLinksDelegate.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Administratie\SuiteBarBrandingDelegate.ascx.cs">
+      <DependentUpon>SuiteBarBrandingDelegate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Administratie\SuiteBarBrandingDelegate.ascx.designer.cs">
+      <DependentUpon>SuiteBarBrandingDelegate.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Administratie\SuiteLinksDelegate.ascx.cs">
+      <DependentUpon>SuiteLinksDelegate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud.Administratie\SuiteLinksDelegate.ascx.designer.cs">
+      <DependentUpon>SuiteLinksDelegate.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebControls\ClubCloudDataSource.cs" />
+    <Compile Include="WebControls\ClubCloudDataSourceView.cs" />
+    <Compile Include="WebControls\ClubCloudGroupsView.cs" />
+    <Compile Include="WebControls\ClubCloudRolesView.cs" />
+    <Compile Include="WebControls\ClubCloudBillingView.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenOud.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenNieuw.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenZoeken.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenSenior.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenJunior.cs" />
+    <Compile Include="WebControls\ClubCloudViewLedenAlle.cs" />
+    <Compile Include="WebControls\DispayRoles\DispayRoles.cs" />
+    <Compile Include="WebControls\DispayRoles\DispayRolesUserControl.ascx.cs">
+      <DependentUpon>DispayRolesUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\DispayRoles\DispayRolesUserControl.ascx.designer.cs">
+      <DependentUpon>DispayRolesUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\DisplayBilling\DisplayBilling.cs" />
+    <Compile Include="WebControls\DisplayBilling\DisplayBillingUserControl.ascx.cs">
+      <DependentUpon>DisplayBillingUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\DisplayBilling\DisplayBillingUserControl.ascx.designer.cs">
+      <DependentUpon>DisplayBillingUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\DisplayBill\DisplayBill.cs" />
+    <Compile Include="WebControls\DisplayBill\DisplayBillUserControl.ascx.cs">
+      <DependentUpon>DisplayBillUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\DisplayBill\DisplayBillUserControl.ascx.designer.cs">
+      <DependentUpon>DisplayBillUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\DisplayGroups\DisplayGroups.cs" />
+    <Compile Include="WebControls\DisplayGroups\DisplayGroupsUserControl.ascx.cs">
+      <DependentUpon>DisplayGroupsUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\DisplayGroups\DisplayGroupsUserControl.ascx.designer.cs">
+      <DependentUpon>DisplayGroupsUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\DisplayUsers\DisplayUsers.cs" />
+    <Compile Include="WebControls\DisplayUsers\DisplayUsersUserControl.ascx.cs">
+      <DependentUpon>DisplayUsersUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\DisplayUsers\DisplayUsersUserControl.ascx.designer.cs">
+      <DependentUpon>DisplayUsersUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\DisplayUser\DisplayUser.cs" />
+    <Compile Include="WebControls\DisplayUser\DisplayUserUserControl.ascx.cs">
+      <DependentUpon>DisplayUserUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\DisplayUser\DisplayUserUserControl.ascx.designer.cs">
+      <DependentUpon>DisplayUserUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\SPDisposeCheckIgnoreAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClubCloudDataSet.xsc">
+      <DependentUpon>ClubCloudDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ClubCloudDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ClubCloudDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ClubCloudDataSet.xss">
+      <DependentUpon>ClubCloudDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Administratie\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{53789977-244e-4b5f-b58d-492e8c8b7c3e}</SharePointProjectItemId>
+    </None>
+    <None Include="BrandingDelegateElement\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{402677ac-9663-4ddc-b9ef-f50281ca8657}</SharePointProjectItemId>
+    </None>
+    <None Include="ControlTemplates\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{152aa947-fc0b-48bd-a24d-333852848fa1}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\Administratie WebParts\Administratie WebParts.feature">
+      <FeatureId>{a040ce4e-2c2e-4251-8485-97e72e28e081}</FeatureId>
+    </None>
+    <None Include="Images\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{688dca0e-e0a2-4ac3-8e13-6a850e8f706c}</SharePointProjectItemId>
+    </None>
+    <None Include="Package\Package.package">
+      <PackageId>{792e76e2-1c7e-4377-b410-fc11315fb17f}</PackageId>
+    </None>
+    <None Include="WebControls\DispayRoles\DispayRoles.webpart" />
+    <None Include="WebControls\DispayRoles\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a6cde790-a257-4bd3-9d9a-d9e77f8bd1d3}</SharePointProjectItemId>
+    </None>
+    <None Include="WebControls\DisplayBilling\DisplayBilling.webpart" />
+    <None Include="WebControls\DisplayBilling\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a7a87ed0-be49-4cc7-b29b-603bdc06cb09}</SharePointProjectItemId>
+    </None>
+    <None Include="WebControls\DisplayBill\DisplayBill.webpart" />
+    <None Include="WebControls\DisplayBill\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{7344074f-6c81-428b-bc11-6f8caab07486}</SharePointProjectItemId>
+    </None>
+    <None Include="WebControls\DisplayGroups\DisplayGroups.webpart" />
+    <None Include="WebControls\DisplayGroups\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{fda25665-15c0-485f-abdb-37cf0e117bfe}</SharePointProjectItemId>
+    </None>
+    <None Include="WebControls\DisplayUsers\DisplayUsers.webpart" />
+    <None Include="WebControls\DisplayUsers\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3c372116-8224-4c0f-9831-7078dfab2d23}</SharePointProjectItemId>
+    </None>
+    <None Include="WebControls\DisplayUser\DisplayUser.webpart" />
+    <None Include="WebControls\DisplayUser\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{fa88bdcc-91db-49b1-b8b9-fb21437b8566}</SharePointProjectItemId>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Administratie\LidNieuw.aspx" />
+    <Content Include="Administratie\LidBewerken.aspx" />
+    <Content Include="Administratie\LidBekijken.aspx" />
+    <Content Include="Administratie\Leden.aspx" />
+    <Content Include="Administratie\Groepen.aspx" />
+    <Content Include="Administratie\Facturatie.aspx" />
+    <Content Include="Administratie\Rollen.aspx" />
+    <Content Include="Administratie\Default.aspx" />
+    <Content Include="Administratie\onet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Administratie\webtemp_Administratie.xml" />
+    <Content Include="BrandingDelegateElement\Elements.xml" />
+    <Content Include="ControlTemplates\ClubCloud.Administratie\PromotedLinksDelegate.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Administratie\SuiteBarBrandingDelegate.ascx" />
+    <Content Include="ControlTemplates\ClubCloud.Administratie\SuiteLinksDelegate.ascx" />
+    <Content Include="Features\Administratie WebParts\Administratie WebParts.Template.xml">
+      <DependentUpon>Administratie WebParts.feature</DependentUpon>
+    </Content>
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\Search\Search_64.png" />
+    <Content Include="Images\ClubCloud.Administratie\SITEICON.PNG" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_128.png" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_16.png" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_256.png" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_32.png" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_512.png" />
+    <Content Include="Images\ClubCloud.Administratie\User\User_64.png" />
+    <Content Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </Content>
+    <Content Include="WebControls\DispayRoles\DispayRolesUserControl.ascx" />
+    <Content Include="WebControls\DispayRoles\Elements.xml" />
+    <Content Include="WebControls\DisplayBilling\DisplayBillingUserControl.ascx" />
+    <Content Include="WebControls\DisplayBilling\Elements.xml" />
+    <Content Include="WebControls\DisplayBill\DisplayBillUserControl.ascx" />
+    <Content Include="WebControls\DisplayBill\Elements.xml" />
+    <Content Include="WebControls\DisplayGroups\DisplayGroupsUserControl.ascx" />
+    <Content Include="WebControls\DisplayGroups\Elements.xml" />
+    <Content Include="WebControls\DisplayUsers\DisplayUsersUserControl.ascx" />
+    <Content Include="WebControls\DisplayUsers\Elements.xml" />
+    <Content Include="WebControls\DisplayUser\DisplayUserUserControl.ascx" />
+    <Content Include="WebControls\DisplayUser\Elements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
+      <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
+      <Name>ClubCloud.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>

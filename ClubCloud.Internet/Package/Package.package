@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="c8918724-a19a-46d4-8300-2e8d88798c37" solutionId="c8918724-a19a-46d4-8300-2e8d88798c37" resetWebServer="false" sharePointProductVersion="15.0" name="ClubCloud.Internet" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="7e69b3b7-b4ef-42a8-9d19-6315d3cd67f5" />
+  </features>
+</package>
