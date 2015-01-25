@@ -150,6 +150,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CONFIG\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{001b9938-8d5c-4053-b534-17f81fd89211}</SharePointProjectItemId>
+    </None>
     <None Include="Features\SignalR\SignalR.feature">
       <FeatureId>{b5888a00-346b-4d2f-9205-9a2b18a9cb8c}</FeatureId>
     </None>
@@ -173,8 +176,14 @@
     </None>
     <Compile Include="Startup.SignalR.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\ClubCloud.Common\ClubCloud.Common.csproj">
+      <Project>{90fe486f-d24e-4290-8e0b-633fa72e5314}</Project>
+      <Name>ClubCloud.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CONFIG\webconfig.signalr.xml" />
     <Content Include="Features\SignalR\SignalR.Template.xml">
       <DependentUpon>SignalR.feature</DependentUpon>
     </Content>

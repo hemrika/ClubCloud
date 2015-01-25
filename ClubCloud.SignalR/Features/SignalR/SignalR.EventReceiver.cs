@@ -4,6 +4,7 @@ using System.Security.Permissions;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using System.Collections.Generic;
+using ClubCloud.Common;
 
 namespace ClubCloud.SignalR.Features.SignalR
 {
@@ -22,16 +23,14 @@ namespace ClubCloud.SignalR.Features.SignalR
 
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
+            ClubCloud.Common.RemoteAdministrator.Enable();
 
             if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
             {
                 webApp = properties.Feature.Parent as SPWebApplication;
 
                 List<SPWebConfigModification> process = new List<SPWebConfigModification>();
-                //process.AddRange(ClubCloud.Common.Common.Modifications);
-                //process.AddRange(Syncfusion.Modifications);
-                //process.AddRange(Ajax.Modifications);
-                //process.AddRange(CrossSiteScripting.Modifications);
+                process.AddRange(ClubCloud.SignalR.SignalR.Modifications);
 
                 foreach (SPWebConfigModification mod in process)
                 {
@@ -66,15 +65,14 @@ namespace ClubCloud.SignalR.Features.SignalR
 
         public override void FeatureDeactivating(SPFeatureReceiverProperties properties)
         {
+            ClubCloud.Common.RemoteAdministrator.Enable();
+
             if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
             {
                 webApp = properties.Feature.Parent as SPWebApplication;
 
                 List<SPWebConfigModification> process = new List<SPWebConfigModification>();
-                //process.AddRange(ClubCloud.Common.Common.Modifications);
-                //process.AddRange(Syncfusion.Modifications);
-                //process.AddRange(Ajax.Modifications);
-                //process.AddRange(CrossSiteScripting.Modifications);
+                process.AddRange(ClubCloud.SignalR.SignalR.Modifications);
 
                 foreach (SPWebConfigModification mod in process)
                 {
@@ -117,6 +115,9 @@ namespace ClubCloud.SignalR.Features.SignalR
         /// <param name="properties"></param>
         public override void FeatureUninstalling(SPFeatureReceiverProperties properties)
         {
+
+            ClubCloud.Common.RemoteAdministrator.Enable();
+
             foreach (SPWebApplication wap in SPWebService.ContentService.WebApplications)
             {
                 List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
