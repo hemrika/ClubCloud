@@ -71,8 +71,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Administratie", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Afhangen", "ClubCloud.Afhangen\ClubCloud.Afhangen.csproj", "{BDF54BF1-9C01-40FA-9337-96E1490FE192}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.KNLTB", "ClubCloud.KNLTB.Servit\ClubCloud.KNLTB.csproj", "{B98CD37B-E5D0-49E4-A765-F8FBA945E050}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Mijn", "ClubCloud.Mijn\ClubCloud.Mijn.csproj", "{718DE400-472A-4F4D-A91C-3C6C9503D365}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Service", "ClubCloud.Service\ClubCloud.Service.csproj", "{BC7CCE39-F470-4156-B67A-8A145841F43B}"
@@ -114,6 +112,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deployment", "Deployment\De
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Common", "ClubCloud.Common\ClubCloud.Common.csproj", "{90FE486F-D24E-4290-8E0B-633FA72E5314}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.KNLTB", "ClubCloud.KNLTB\ClubCloud.KNLTB.csproj", "{B98CD37B-E5D0-49E4-A765-F8FBA945E050}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -160,9 +160,9 @@ Global
 		SccProjectUniqueName13 = ClubCloud.Common\\ClubCloud.Common.csproj
 		SccProjectName13 = ClubCloud.Common
 		SccLocalPath13 = ClubCloud.Common
-		SccProjectUniqueName14 = ClubCloud.KNLTB.Servit\\ClubCloud.KNLTB.csproj
-		SccProjectName14 = ClubCloud.KNLTB.Servit
-		SccLocalPath14 = ClubCloud.KNLTB.Servit
+		SccProjectUniqueName14 = ClubCloud.KNLTB\\ClubCloud.KNLTB.csproj
+		SccProjectName14 = ClubCloud.KNLTB
+		SccLocalPath14 = ClubCloud.KNLTB
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,10 +181,6 @@ Global
 		{BDF54BF1-9C01-40FA-9337-96E1490FE192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDF54BF1-9C01-40FA-9337-96E1490FE192}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BDF54BF1-9C01-40FA-9337-96E1490FE192}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Release|Any CPU.Build.0 = Release|Any CPU
 		{718DE400-472A-4F4D-A91C-3C6C9503D365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{718DE400-472A-4F4D-A91C-3C6C9503D365}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{718DE400-472A-4F4D-A91C-3C6C9503D365}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -243,6 +239,10 @@ Global
 		{90FE486F-D24E-4290-8E0B-633FA72E5314}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90FE486F-D24E-4290-8E0B-633FA72E5314}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90FE486F-D24E-4290-8E0B-633FA72E5314}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ClubCloud KNLTB")]
+[assembly: AssemblyTitle("ClubCloud KNLTB Servit")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
-[assembly: AssemblyDescription("ClubCloud KNLTB Services - Debug")]
+[assembly: AssemblyDescription("ClubCloud KNLTB Servit - Debug")]
 #else
 [assembly: AssemblyConfiguration("Release")]
-[assembly: AssemblyDescription("ClubCloud KNLTB Services")]
+[assembly: AssemblyDescription("ClubCloud KNLTB Servit")]
 #endif
 [assembly: AssemblyCompany("Hemrika")]
 [assembly: AssemblyProduct("ClubCloud")]
@@ -19,15 +19,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-
-
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9d3f1089-e845-4674-9397-43a504458118")]
+[assembly: Guid("c2baba93-3525-4e94-a807-571a4d7e3c81")]
 
 // Version information for an assembly consists of the following four values:
 //
