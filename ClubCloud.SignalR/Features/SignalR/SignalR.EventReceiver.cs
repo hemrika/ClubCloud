@@ -14,7 +14,6 @@ namespace ClubCloud.SignalR.Features.SignalR
     /// <remarks>
     /// The GUID attached to this class may be used during packaging and should not be modified.
     /// </remarks>
-
     [Guid("f4869fab-87a8-435b-a5c9-a3aee99703ec")]
     public class SignalREventReceiver : SPFeatureReceiver
     {

@@ -7,6 +7,7 @@
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <!-- <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="$SharePoint.Project.AssemblyFullName$" %> -->
+<%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
@@ -25,7 +26,7 @@
     <SharePoint:MenuItemTemplate ID="Groepen" runat="server" Text="Groepen van %ROEPNAAM%" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Groepen/Groepen_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'LedenGroepen.aspx?Bondsnummer=%BONDSNUMMER%'});" Title="Groepen van %BONDSNUMMERVOLLEDIGENAAM%" ></SharePoint:MenuItemTemplate>
     <SharePoint:MenuItemTemplate ID="Email" runat="server" Text="Email versturen naar %ROEPNAAM%" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Mail/Mail_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'LedenEmail.aspx?Bondsnummer=%BONDSNUMMER%'});" Title="Emailen naar %VOLLEDIGENAAM%"></SharePoint:MenuItemTemplate>
 </SharePoint:MenuTemplate>
-<Administratie:ClubCloudDataSource runat="server" ID="UserDataSource" />
+<Common:ClubCloudDataSource runat="server" ID="UserDataSource" />
 <SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="MemberGrid" runat="server" />
 <br />
 <SharePoint:SPGridView
@@ -77,3 +78,4 @@
 <p>
     <asp:Label runat="server" ID="lblMessage" ForeColor="Red" />
 </p>
+

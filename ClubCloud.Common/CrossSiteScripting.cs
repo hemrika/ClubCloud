@@ -34,7 +34,7 @@ namespace ClubCloud.Common
                 Name = "add[@name='Access-Control-Allow-Origin'][@value='*']",
                 Owner = "ClubCloud",
                 Path = "configuration/system.webServer/httpProtocol/customHeaders",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
                 Value = "<add tagPrefix='ajaxToolkit' assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e' namespace='AjaxControlToolkit' />"
 
             };
@@ -46,7 +46,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.webServer/httpProtocol/customHeaders",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
                 Value = "<add name='Access-Control-Request-Method' value='GET,POST,HEAD,OPTIONS' />"
 
             };
@@ -58,7 +58,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.webServer/httpProtocol/customHeaders",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
                 Value = "<add tagPrefix='ajaxToolkit' assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e' namespace='AjaxControlToolkit' />"
 
             };
@@ -70,7 +70,7 @@ namespace ClubCloud.Common
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.webServer/httpProtocol/customHeaders",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
                 Value = "<add name='Access-Control-Allow-Credentials' value='true' />"
 
             };

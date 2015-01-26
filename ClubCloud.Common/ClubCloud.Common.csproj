@@ -114,7 +114,6 @@
     <Compile Include="Syncfusion.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="ControlTemplates\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2f64c58b-f739-4375-8008-bd79060b47c9}</SharePointProjectItemId>
     </None>

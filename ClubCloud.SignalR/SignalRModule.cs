@@ -1,13 +1,6 @@
-﻿using System.Web;
+﻿using Owin;
+using System.Web;
 using System.Web.Hosting;
-using System.Web.Routing;
-using Microsoft.AspNet.SignalR;
-using Microsoft.SharePoint.Administration;
-using Microsoft.Owin;
-using Owin;
-using Microsoft.Owin.Cors;
-using Microsoft.SharePoint;
-using System;
 
 namespace ClubCloud.SignalR
 {

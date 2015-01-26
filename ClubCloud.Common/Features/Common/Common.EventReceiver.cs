@@ -104,7 +104,8 @@ namespace ClubCloud.Common.Features.Common
                     //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
                 }
                 catch { };
-                
+
+                //FeatureUninstalling(properties);
                 //List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
                 /*
                 foreach (SPWebConfigModification mod in webApp.WebConfigModifications)
@@ -221,8 +222,10 @@ namespace ClubCloud.Common.Features.Common
                         SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
                     }
 
+                    wap.Update();
                     SPWebService.ContentService.WebApplications[wap.Id].Update();
                     SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
+                    
                 }
                 catch { }
             }

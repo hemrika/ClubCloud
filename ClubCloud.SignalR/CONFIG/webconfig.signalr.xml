@@ -1,42 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <actions>
- <add path="configuration/runtime/ns:assemblyBinding" >
+ <add path="configuration/runtime/ns:assemblyBinding" id="{81348B5A-6394-4146-84FC-42C0A2B1157B}" >
     <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
       <assemblyIdentity name="Microsoft.AspNet.SignalR.Core" publicKeyToken="31bf3856ad364e35" culture="neutral" />
       <bindingRedirect oldVersion="0.0.0.0-2.2.0.0" newVersion="2.2.0.0" />
     </dependentAssembly>
  </add>
-  <add path="configuration/runtime/ns:assemblyBinding">
+  <add path="configuration/runtime/ns:assemblyBinding" id="{7D8A01B1-729D-4111-80E9-ECC5D9048DEB}" >
     <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
       <assemblyIdentity name="Microsoft.Owin" publicKeyToken="31bf3856ad364e35" culture="neutral" />
       <bindingRedirect oldVersion="0.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
     </dependentAssembly>
   </add>
- <add path="configuration/runtime/ns:assemblyBinding" >
+ <add path="configuration/runtime/ns:assemblyBinding" id="{6AD1EF31-504B-4CBC-A661-549CE049403E}" >
     <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
       <assemblyIdentity name="System.Web.Cors" publicKeyToken="31bf3856ad364e35" culture="neutral" />
       <bindingRedirect oldVersion="0.0.0.0-5.2.2.0" newVersion="5.2.2.0" />
     </dependentAssembly>
  </add>
-  <add path="configuration/runtime/ns:assemblyBinding" >
+  <add path="configuration/runtime/ns:assemblyBinding" id="{BB2DDE35-0FF4-419C-A849-E7BEE3122424}" >
     <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
       <assemblyIdentity name="Microsoft.Owin.Security" publicKeyToken="31bf3856ad364e35" culture="neutral" />
       <bindingRedirect oldVersion="0.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
     </dependentAssembly>
   </add>
-  <add path="configuration/runtime/ns:assemblyBinding" >
+  <add path="configuration/runtime/ns:assemblyBinding" id="{36D028E6-6675-475B-A124-C221C43C7B60}" >
     <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
       <assemblyIdentity name="Microsoft.ServiceBus" publicKeyToken="31bf3856ad364e35" culture="neutral" />
       <bindingRedirect oldVersion="0.0.0.0-2.5.0.0" newVersion="2.5.0.0" />
     </dependentAssembly>
   </add>
-  <add path="configuration/runtime/ns:assemblyBinding" >
+  <add path="configuration/runtime/ns:assemblyBinding" id="{FB426A17-023F-44B6-8689-1B18EE33ADE4}" >
     <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
       <assemblyIdentity name="Microsoft.Owin.Security.OAuth" publicKeyToken="31bf3856ad364e35" culture="neutral" />
       <bindingRedirect oldVersion="0.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
     </dependentAssembly>
   </add>
-  <add path="configuration/runtime/ns:assemblyBinding" >
+  <add path="configuration/runtime/ns:assemblyBinding" id="{414D088C-711D-4C30-9E6F-EFAEEA6AE404}" >
     <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
       <assemblyIdentity name="Microsoft.Owin.Security.Cookies" publicKeyToken="31bf3856ad364e35" culture="neutral" />
       <bindingRedirect oldVersion="0.0.0.0-3.0.0.0" newVersion="3.0.0.0" />

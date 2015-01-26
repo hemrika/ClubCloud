@@ -883,11 +883,6 @@ namespace ClubCloud.Service
             return response;
         }
 
-
-        #endregion
-
-
-
         public ClubCloud_Baan GetBaanById(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false)
         {
             ClubCloud_Baan response = null;
@@ -930,6 +925,8 @@ namespace ClubCloud.Service
             return response;
         }
 
+        #endregion
+
         public void VerenigingenUpdate(string bondsnummer, bool refresh)
         {
             this.ExecuteOnChannel<IClubCloudApplicationService>(
@@ -950,6 +947,20 @@ namespace ClubCloud.Service
                 delegate(IClubCloudApplicationService channel)
                 {
                     response = channel.GetGebruikersBySearch(bondsnummer, prefixText, count, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        internal string ScaleOutConnection(string catalog)
+        {
+            string response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.ScaleOutConnection(catalog);
                 },
                 false);
 

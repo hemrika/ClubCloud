@@ -1,38 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="7112ac8b-61c3-451e-a145-0c245dcb4b38" solutionId="7112ac8b-61c3-451e-a145-0c245dcb4b38" resetWebServer="false" title="ClubCloud SignalR" sharePointProductVersion="15.0" name="ClubCloud SignalR" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="7112ac8b-61c3-451e-a145-0c245dcb4b38" solutionId="7112ac8b-61c3-451e-a145-0c245dcb4b38" resetWebServer="true" title="ClubCloud SignalR" sharePointProductVersion="15.0" name="ClubCloud SignalR" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <assemblies>
-    <customAssembly location="Microsoft.AspNet.Identity.Core.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.AspNet.Identity.Core.dll" />
-    <customAssembly location="Microsoft.AspNet.Identity.Owin.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.AspNet.Identity.Owin.dll" />
+    <customAssembly location="Microsoft.AspNet.Identity.Core.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.AspNet.Identity.Core.dll" />
+    <customAssembly location="Microsoft.AspNet.Identity.Owin.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.AspNet.Identity.Owin.dll" />
+    <customAssembly location="Microsoft.AspNet.SignalR.Client.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.AspNet.SignalR.Client.dll" />
     <customAssembly location="Microsoft.AspNet.SignalR.Core.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.AspNet.SignalR.Core.dll" />
-    <customAssembly location="Microsoft.AspNet.SignalR.Owin.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.AspNet.SignalR.Owin.dll" />
-    <customAssembly location="Microsoft.AspNet.SignalR.ServiceBus.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.AspNet.SignalR.ServiceBus.dll" />
-    <customAssembly location="Microsoft.AspNet.SignalR.SqlServer.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.AspNet.SignalR.SqlServer.dll" />
-    <customAssembly location="Microsoft.AspNet.SignalR.SystemWeb.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.AspNet.SignalR.SystemWeb.dll" />
+    <customAssembly location="Microsoft.AspNet.SignalR.Owin.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.AspNet.SignalR.Owin.dll" />
+    <customAssembly location="Microsoft.AspNet.SignalR.ServiceBus.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.AspNet.SignalR.ServiceBus.dll" />
+    <customAssembly location="Microsoft.AspNet.SignalR.SqlServer.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.AspNet.SignalR.SqlServer.dll" />
+    <customAssembly location="Microsoft.AspNet.SignalR.SystemWeb.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.AspNet.SignalR.SystemWeb.dll" />
     <customAssembly location="Microsoft.Owin.Cors.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Cors.dll" />
-    <customAssembly location="Microsoft.Owin.Diagnostics.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Diagnostics.dll" />
+    <customAssembly location="Microsoft.Owin.Diagnostics.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.Owin.Diagnostics.dll" />
     <customAssembly location="Microsoft.Owin.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.dll" />
-    <customAssembly location="Microsoft.Owin.Host.HttpListener.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Host.HttpListener.dll" />
+    <customAssembly location="Microsoft.Owin.Host.HttpListener.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.Owin.Host.HttpListener.dll" />
     <customAssembly location="Microsoft.Owin.Host.SystemWeb.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Host.SystemWeb.dll" />
-    <customAssembly location="Microsoft.Owin.Hosting.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Hosting.dll" />
-    <customAssembly location="Microsoft.Owin.Security.ActiveDirectory.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Security.ActiveDirectory.dll" />
-    <customAssembly location="Microsoft.Owin.Security.Cookies.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Security.Cookies.dll" />
-    <customAssembly location="Microsoft.Owin.Security.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Security.dll" />
-    <customAssembly location="Microsoft.Owin.Security.Jwt.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Security.Jwt.dll" />
-    <customAssembly location="Microsoft.Owin.Security.OAuth.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Owin.Security.OAuth.dll" />
-    <customAssembly location="Microsoft.Web.Infrastructure.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Microsoft.Web.Infrastructure.dll" />
-    <customAssembly location="Newtonsoft.Json.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Newtonsoft.Json.dll" />
+    <customAssembly location="Microsoft.Owin.Hosting.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.Owin.Hosting.dll" />
+    <customAssembly location="Microsoft.Owin.Security.ActiveDirectory.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.Owin.Security.ActiveDirectory.dll" />
+    <customAssembly location="Microsoft.Owin.Security.Cookies.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.Owin.Security.Cookies.dll" />
+    <customAssembly location="Microsoft.Owin.Security.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.Owin.Security.dll" />
+    <customAssembly location="Microsoft.Owin.Security.Jwt.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.Owin.Security.Jwt.dll" />
+    <customAssembly location="Microsoft.Owin.Security.OAuth.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.Owin.Security.OAuth.dll" />
+    <customAssembly location="Microsoft.ServiceBus.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.ServiceBus.dll" />
+    <customAssembly location="Microsoft.Web.Infrastructure.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Microsoft.Web.Infrastructure.dll" />
+    <customAssembly location="Newtonsoft.Json.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Newtonsoft.Json.dll" />
     <customAssembly location="Owin.dll" deploymentTarget="WebApplication" sourcePath="..\Common\Owin.dll" />
-    <customAssembly location="System.IdentityModel.Tokens.Jwt.dll" deploymentTarget="WebApplication" sourcePath="..\Common\System.IdentityModel.Tokens.Jwt.dll" />
-    <customAssembly location="System.Net.Http.Extensions.dll" deploymentTarget="WebApplication" sourcePath="..\Common\System.Net.Http.Extensions.dll" />
-    <customAssembly location="System.Net.Http.Primitives.dll" deploymentTarget="WebApplication" sourcePath="..\Common\System.Net.Http.Primitives.dll" />
-    <customAssembly location="System.Web.Cors.dll" deploymentTarget="WebApplication" sourcePath="..\Common\System.Web.Cors.dll" />
-    <customAssembly location="System.Web.Http.Cors.dll" deploymentTarget="WebApplication" sourcePath="..\Common\System.Web.Http.Cors.dll" />
-    <customAssembly location="System.Web.Http.dll" deploymentTarget="WebApplication" sourcePath="..\Common\System.Web.Http.dll" />
+    <customAssembly location="System.IdentityModel.Tokens.Jwt.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\System.IdentityModel.Tokens.Jwt.dll" />
+    <customAssembly location="System.Net.Http.Extensions.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\System.Net.Http.Extensions.dll" />
+    <customAssembly location="System.Net.Http.Formatting.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\System.Net.Http.Formatting.dll" />
+    <customAssembly location="System.Net.Http.Primitives.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\System.Net.Http.Primitives.dll" />
+    <customAssembly location="System.Web.Cors.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\System.Web.Cors.dll" />
+    <customAssembly location="System.Web.Http.Cors.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\System.Web.Http.Cors.dll" />
+    <customAssembly location="System.Web.Http.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\System.Web.Http.dll" />
+    <customAssembly location="System.Web.Http.Owin.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\System.Web.Http.Owin.dll" />
   </assemblies>
   <features>
     <featureReference itemId="b5888a00-346b-4d2f-9205-9a2b18a9cb8c" />
   </features>
   <projectItems>
     <projectItemReference itemId="b3e4aa11-cc73-4537-a378-7184f93d773f" />
+    <projectItemReference itemId="001b9938-8d5c-4053-b534-17f81fd89211" />
   </projectItems>
 </package>

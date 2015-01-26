@@ -122,6 +122,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			{
 				this.useDefaultCredentialsSetExplicitly = true;
 			}
+
+            this.CallerOriginTokenValue = null;
+            this.CorrelationTokenValue = null;
+            this.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmService.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
+
 		}
 
         /// <summary>
@@ -158,10 +163,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			});
 			return (Response)results[0];
 		}
+
 		public void ExecuteAsync(Request Request)
 		{
 			this.ExecuteAsync(Request, null);
 		}
+
 		public void ExecuteAsync(Request Request, object userState)
 		{
 			if (this.ExecuteOperationCompleted == null)
@@ -173,6 +180,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				Request
 			}, this.ExecuteOperationCompleted, userState);
 		}
+
 		private void OnExecuteOperationCompleted(object arg)
 		{
 			if (this.ExecuteCompleted != null)
@@ -181,6 +189,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				this.ExecuteCompleted(this, new ExecuteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
 			}
 		}
+
 		[SoapDocumentMethod("http://schemas.microsoft.com/crm/2007/WebServices/Fetch", RequestNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", ResponseNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped), SoapHeader("CallerOriginTokenValue"), SoapHeader("CorrelationTokenValue"), SoapHeader("CrmAuthenticationTokenValue")]
 		public string Fetch(string fetchXml)
 		{
@@ -190,10 +199,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			});
 			return (string)results[0];
 		}
+
 		public void FetchAsync(string fetchXml)
 		{
 			this.FetchAsync(fetchXml, null);
 		}
+
 		public void FetchAsync(string fetchXml, object userState)
 		{
 			if (this.FetchOperationCompleted == null)
@@ -205,6 +216,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				fetchXml
 			}, this.FetchOperationCompleted, userState);
 		}
+
 		private void OnFetchOperationCompleted(object arg)
 		{
 			if (this.FetchCompleted != null)
@@ -213,6 +225,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				this.FetchCompleted(this, new FetchCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
 			}
 		}
+
 		[SoapDocumentMethod("http://schemas.microsoft.com/crm/2007/WebServices/Create", RequestNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", ResponseNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped), SoapHeader("CorrelationTokenValue"), SoapHeader("CallerOriginTokenValue"), SoapHeader("CrmAuthenticationTokenValue")]
 		public Guid Create(BusinessEntity entity)
 		{
@@ -222,10 +235,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			});
 			return (Guid)results[0];
 		}
+
 		public void CreateAsync(BusinessEntity entity)
 		{
 			this.CreateAsync(entity, null);
 		}
+
 		public void CreateAsync(BusinessEntity entity, object userState)
 		{
 			if (this.CreateOperationCompleted == null)
@@ -237,6 +252,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				entity
 			}, this.CreateOperationCompleted, userState);
 		}
+
 		private void OnCreateOperationCompleted(object arg)
 		{
 			if (this.CreateCompleted != null)
@@ -245,6 +261,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				this.CreateCompleted(this, new CreateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
 			}
 		}
+
 		[SoapDocumentMethod("http://schemas.microsoft.com/crm/2007/WebServices/Delete", RequestNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", ResponseNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped), SoapHeader("CrmAuthenticationTokenValue"), SoapHeader("CorrelationTokenValue"), SoapHeader("CallerOriginTokenValue")]
 		public void Delete(string entityName, Guid id)
 		{
@@ -254,10 +271,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				id
 			});
 		}
+
 		public void DeleteAsync(string entityName, Guid id)
 		{
 			this.DeleteAsync(entityName, id, null);
 		}
+
 		public void DeleteAsync(string entityName, Guid id, object userState)
 		{
 			if (this.DeleteOperationCompleted == null)
@@ -270,6 +289,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				id
 			}, this.DeleteOperationCompleted, userState);
 		}
+
 		private void OnDeleteOperationCompleted(object arg)
 		{
 			if (this.DeleteCompleted != null)
@@ -278,6 +298,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				this.DeleteCompleted(this, new AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
 			}
 		}
+
 		[SoapDocumentMethod("http://schemas.microsoft.com/crm/2007/WebServices/Retrieve", RequestNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", ResponseNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped), SoapHeader("CallerOriginTokenValue"), SoapHeader("CorrelationTokenValue"), SoapHeader("CrmAuthenticationTokenValue")]
 		public BusinessEntity Retrieve(string entityName, Guid id, ColumnSetBase columnSet)
 		{
@@ -289,10 +310,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			});
 			return (BusinessEntity)results[0];
 		}
+
 		public void RetrieveAsync(string entityName, Guid id, ColumnSetBase columnSet)
 		{
 			this.RetrieveAsync(entityName, id, columnSet, null);
 		}
+
 		public void RetrieveAsync(string entityName, Guid id, ColumnSetBase columnSet, object userState)
 		{
 			if (this.RetrieveOperationCompleted == null)
@@ -306,6 +329,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				columnSet
 			}, this.RetrieveOperationCompleted, userState);
 		}
+
 		private void OnRetrieveOperationCompleted(object arg)
 		{
 			if (this.RetrieveCompleted != null)
@@ -314,6 +338,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				this.RetrieveCompleted(this, new RetrieveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
 			}
 		}
+
 		[SoapDocumentMethod("http://schemas.microsoft.com/crm/2007/WebServices/RetrieveMultiple", RequestNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", ResponseNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped), SoapHeader("CorrelationTokenValue"), SoapHeader("CrmAuthenticationTokenValue"), SoapHeader("CallerOriginTokenValue")]
 		public BusinessEntityCollection RetrieveMultiple(QueryBase query)
 		{
@@ -323,10 +348,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			});
 			return (BusinessEntityCollection)results[0];
 		}
+
 		public void RetrieveMultipleAsync(QueryBase query)
 		{
 			this.RetrieveMultipleAsync(query, null);
 		}
+
 		public void RetrieveMultipleAsync(QueryBase query, object userState)
 		{
 			if (this.RetrieveMultipleOperationCompleted == null)
@@ -338,6 +365,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				query
 			}, this.RetrieveMultipleOperationCompleted, userState);
 		}
+
 		private void OnRetrieveMultipleOperationCompleted(object arg)
 		{
 			if (this.RetrieveMultipleCompleted != null)
@@ -346,6 +374,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				this.RetrieveMultipleCompleted(this, new RetrieveMultipleCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
 			}
 		}
+
 		[SoapDocumentMethod("http://schemas.microsoft.com/crm/2007/WebServices/Update", RequestNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", ResponseNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped), SoapHeader("CorrelationTokenValue"), SoapHeader("CrmAuthenticationTokenValue"), SoapHeader("CallerOriginTokenValue")]
 		public void Update(BusinessEntity entity)
 		{
@@ -354,10 +383,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				entity
 			});
 		}
+
 		public void UpdateAsync(BusinessEntity entity)
 		{
 			this.UpdateAsync(entity, null);
 		}
+
 		public void UpdateAsync(BusinessEntity entity, object userState)
 		{
 			if (this.UpdateOperationCompleted == null)
@@ -369,6 +400,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				entity
 			}, this.UpdateOperationCompleted, userState);
 		}
+
 		private void OnUpdateOperationCompleted(object arg)
 		{
 			if (this.UpdateCompleted != null)
@@ -377,10 +409,12 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 				this.UpdateCompleted(this, new AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
 			}
 		}
+
 		public new void CancelAsync(object userState)
 		{
 			base.CancelAsync(userState);
 		}
+
 		private bool IsLocalFileSystemWebService(string url)
 		{
 			bool result;

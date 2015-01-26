@@ -24,10 +24,10 @@ namespace ClubCloud.Service
         #region Methods    
 
         #region MetaData
-
+        /*
         [OperationContract]
         void CheckDatabaseExists();
-
+        */
         #endregion
 
         #region Gebruiker
@@ -294,5 +294,8 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         List<ClubCloud_Gebruiker> GetGebruikersBySearch(string bondsnummer, string prefixText, int count, bool refresh = false);
+
+        [OperationContract]
+        string ScaleOutConnection(string catalog);
     }
 }

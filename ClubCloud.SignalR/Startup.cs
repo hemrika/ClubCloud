@@ -1,23 +1,12 @@
-﻿using ClubCloud.SignalR;
-using ClubCloud.SignalR.Connections;
-using ClubCloud.SignalR.Hubs;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
-using System.Web.Routing;
-using Microsoft.Owin.Security.OAuth;
 
 [assembly: OwinStartupAttribute(typeof(ClubCloud.SignalR.Startup), "Configuration")]
 [assembly: PreApplicationStartMethodAttribute(typeof(ClubCloud.SignalR.Startup), "Start")]
-
 namespace ClubCloud.SignalR
 {
     public partial class Startup

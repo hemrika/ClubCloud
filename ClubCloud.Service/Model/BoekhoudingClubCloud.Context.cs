@@ -28,14 +28,21 @@ namespace ClubCloud.Service.Model
         {
     				this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
     
-    		if (!Database.CompatibleWithModel(false))
-    		{
-    			Database.SetInitializer<BoekhoudingContainer>(new MigrateDatabaseToLatestVersion<BoekhoudingContainer, BoekhoudingConfiguration>());
-    		}
     		if (!Database.Exists(NameOrConnectionString))
     		{
     			Database.SetInitializer<BoekhoudingContainer>(new CreateDatabaseIfNotExists<BoekhoudingContainer>());
     		}
+    
+    		try
+    		{
+    			if (!Database.CompatibleWithModel(false))
+    			{
+    				Database.SetInitializer<BoekhoudingContainer>(new MigrateDatabaseToLatestVersion<BoekhoudingContainer, BoekhoudingConfiguration>());
+    			}
+    		}
+    		catch { }
+    
+    		Database.Initialize(false);
     
     		//Database.SetInitializer<BoekhoudingContainer>(new CreateDatabaseIfNotExists<BoekhoudingContainer>());
     		//Database.SetInitializer<BoekhoudingContainer>(new MigrateDatabaseToLatestVersion<BoekhoudingContainer, BoekhoudingConfiguration>());
@@ -50,14 +57,21 @@ namespace ClubCloud.Service.Model
     			NameOrConnectionString = connectionString;
     		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
     
-    		if (!Database.CompatibleWithModel(false))
-    		{
-    			Database.SetInitializer<BoekhoudingContainer>(new MigrateDatabaseToLatestVersion<BoekhoudingContainer, BoekhoudingConfiguration>());
-    		}
     		if (!Database.Exists(NameOrConnectionString))
     		{
     			Database.SetInitializer<BoekhoudingContainer>(new CreateDatabaseIfNotExists<BoekhoudingContainer>());
     		}
+    
+    		try
+    		{
+    			if (!Database.CompatibleWithModel(false))
+    			{
+    				Database.SetInitializer<BoekhoudingContainer>(new MigrateDatabaseToLatestVersion<BoekhoudingContainer, BoekhoudingConfiguration>());
+    			}
+    		}
+    		catch { }
+    
+    		Database.Initialize(false);
     
     		//Database.SetInitializer<BoekhoudingContainer>(new CreateDatabaseIfNotExists<BoekhoudingContainer>());
     		//Database.SetInitializer<BoekhoudingContainer>(new MigrateDatabaseToLatestVersion<BoekhoudingContainer, BoekhoudingConfiguration>());

@@ -47,12 +47,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -165,6 +165,23 @@
     <Compile Include="Model\BankAccount.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SignalRClubCloud.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SignalRClubCloud.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SignalRClubCloud.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SignalRClubCloud.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SignalRInitializer.cs" />
+    <Compile Include="Model\SignalRConfiguration.cs" />
     <Compile Include="Model\BeheerConfiguration.cs" />
     <Compile Include="Model\BeheerClubCloud.Context.cs">
       <AutoGen>True</AutoGen>
@@ -456,6 +473,24 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BoekhoudingClubCloud.cs</LastGenOutput>
     </None>
+    <EntityDeploy Include="Model\SignalRClubCloud.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SignalRClubCloud.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\SignalRClubCloud.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+      <LastGenOutput>SignalRClubCloud.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Model\SignalRClubCloud.edmx.diagram">
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="Model\SignalRClubCloud.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+      <LastGenOutput>SignalRClubCloud.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
     <None Include="Package\Package.package">
       <PackageId>{a4c0cf73-d541-41c3-a1ef-0f71fd8e03ac}</PackageId>
     </None>
@@ -482,6 +517,7 @@
     </Content>
     <Content Include="Model\BeheerClubCloud.edmx.sql" />
     <Content Include="Model\BoekhoudingClubCloud.edmx.sql" />
+    <Content Include="Model\SignalRClubCloud.edmx.sql" />
     <Content Include="WebClients\ClubCloud.Service\client.config" />
     <None Include="WebClients\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{28dc8612-1ccf-4bab-a0bc-5aa788ef9f8b}</SharePointProjectItemId>

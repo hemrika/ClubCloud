@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using ClubCloud.Service;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using Microsoft.SharePoint;
 using System;
-using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
 namespace ClubCloud.SignalR
 {
@@ -14,8 +14,23 @@ namespace ClubCloud.SignalR
         public static void ConfigureSignalR(IDependencyResolver dependencyResolver, IHubPipeline hubPipeline)
         {
             // Uncomment the following line to enable scale-out using SQL Server
-            //dependencyResolver.UseSqlServer(System.Configuration.ConfigurationManager.ConnectionStrings["SignalRSamples"].ConnectionString);
+            //SignalRScaleOutDatabase(ref dependencyResolver);
+            string connection = string.Empty;
+            try
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                connection = client.ScaleOutConnection("ClubCloudService_SignalR");
+            }
+            catch { }
+            finally
+            {
+                if (string.IsNullOrWhiteSpace(connection))
+                {
+                    dependencyResolver.UseSqlServer(connection);
+                }
+            }
 
+            // Any connection or hub wire up and configuration should go here
             hubPipeline.AddModule(new ClubCloudPipelineModule());
         }
 
@@ -31,6 +46,62 @@ namespace ClubCloud.SignalR
             {
                 Debug.WriteLine("<= Invoking " + context.Invocation.Method + " on client hub " + context.Invocation.Hub);
                 return base.OnBeforeOutgoing(context);
+            }
+        }
+
+        /// <summary>
+        /// No SPContext available...
+        /// </summary>
+        /// <param name="dependencyResolver"></param>
+        private static void SignalRScaleOutDatabase(ref IDependencyResolver dependencyResolver)
+        {
+
+            Guid siteId = SPContext.GetContext(HttpContext.Current).Site.ID;//.Current.Site.ID;
+            string key = "ClubCloudService_SignalR";
+            string value = string.Empty;
+            SPSecurity.RunWithElevatedPrivileges(delegate()
+            {
+                using (SPSite currentSiteCollection = new SPSite(siteId))
+                {
+                    using (SPWeb currentWeb = currentSiteCollection.OpenWeb())
+                    {
+                        currentWeb.AllowUnsafeUpdates = true;
+
+
+
+                        if (!currentWeb.AllProperties.ContainsKey(key))
+                        {
+                            ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                            value = client.ScaleOutConnection(key);
+                            currentWeb.Properties.Add(key, value);
+                            currentWeb.Properties.Update();
+                        }
+                        else
+                        {
+                            value = currentWeb.AllProperties[key].ToString();
+                            SqlConnectionStringBuilder builder = null;
+                            using (SqlConnection connection = new SqlConnection(value))
+                            {
+                                builder = new SqlConnectionStringBuilder(connection.ConnectionString);
+
+                                if (!builder.InitialCatalog.Equals(key, StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                                    value = client.ScaleOutConnection(key);
+                                    currentWeb.AllProperties[key] = value;
+                                    currentWeb.Properties.Update();
+                                }
+                            }
+                        }
+
+                        currentWeb.AllowUnsafeUpdates = false;
+                    }
+                }
+            });
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                dependencyResolver.UseSqlServer(value);
             }
         }
     }

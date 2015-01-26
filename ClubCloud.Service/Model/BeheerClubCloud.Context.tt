@@ -62,7 +62,7 @@ using System.Linq;
 
 	static <#=code.Escape(container)#> ()
 	{
-        DbInterception.Add(new BeheerFullTextInterceptor());
+        //DbInterception.Add(new BeheerFullTextInterceptor());
     }
 
 	public <#=code.Escape(container)#>()
@@ -96,14 +96,21 @@ using System.Linq;
 		#>
 		this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
 
-		if (!Database.CompatibleWithModel(false))
-		{
-			Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());
-		}
 		if (!Database.Exists(NameOrConnectionString))
 		{
 			Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
 		}
+
+		try
+		{
+			if (!Database.CompatibleWithModel(false))
+			{
+				Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());
+			}
+		}
+		catch { }
+
+		Database.Initialize(false);
 
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());
@@ -141,14 +148,21 @@ using System.Linq;
 		#>
         this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
 
-		if (!Database.CompatibleWithModel(false))
-		{
-			Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());
-		}
 		if (!Database.Exists(NameOrConnectionString))
 		{
 			Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
 		}
+
+		try
+		{
+			if (!Database.CompatibleWithModel(false))
+			{
+				Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());
+			}
+		}
+		catch { }
+
+		Database.Initialize(false);
 
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());

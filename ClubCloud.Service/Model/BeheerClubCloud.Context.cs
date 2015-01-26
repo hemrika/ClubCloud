@@ -23,7 +23,7 @@ namespace ClubCloud.Service.Model
     
     	static BeheerContainer ()
     	{
-            DbInterception.Add(new BeheerFullTextInterceptor());
+            //DbInterception.Add(new BeheerFullTextInterceptor());
         }
     
     	public BeheerContainer()
@@ -38,14 +38,21 @@ namespace ClubCloud.Service.Model
     		this.Configuration.ValidateOnSaveEnabled = false;
     				this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
     
-    		if (!Database.CompatibleWithModel(false))
-    		{
-    			Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
-    		}
     		if (!Database.Exists(NameOrConnectionString))
     		{
     			Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
     		}
+    
+    		try
+    		{
+    			if (!Database.CompatibleWithModel(false))
+    			{
+    				Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
+    			}
+    		}
+    		catch { }
+    
+    		Database.Initialize(false);
     
     		//Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
     		//Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
@@ -64,14 +71,21 @@ namespace ClubCloud.Service.Model
     		this.Configuration.ValidateOnSaveEnabled = false;
     		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
     
-    		if (!Database.CompatibleWithModel(false))
-    		{
-    			Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
-    		}
     		if (!Database.Exists(NameOrConnectionString))
     		{
     			Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
     		}
+    
+    		try
+    		{
+    			if (!Database.CompatibleWithModel(false))
+    			{
+    				Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
+    			}
+    		}
+    		catch { }
+    
+    		Database.Initialize(false);
     
     		//Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
     		//Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());

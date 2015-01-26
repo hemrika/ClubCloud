@@ -90,14 +90,21 @@ using System.Linq;
 		#>
 		this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
 
-		if (!Database.CompatibleWithModel(false))
-		{
-			Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BoekhoudingConfiguration>());
-		}
 		if (!Database.Exists(NameOrConnectionString))
 		{
 			Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
 		}
+
+		try
+		{
+			if (!Database.CompatibleWithModel(false))
+			{
+				Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BoekhoudingConfiguration>());
+			}
+		}
+		catch { }
+
+		Database.Initialize(false);
 
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BoekhoudingConfiguration>());
@@ -135,14 +142,21 @@ using System.Linq;
 		#>
         this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
 
-		if (!Database.CompatibleWithModel(false))
-		{
-			Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BoekhoudingConfiguration>());
-		}
 		if (!Database.Exists(NameOrConnectionString))
 		{
 			Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
 		}
+
+		try
+		{
+			if (!Database.CompatibleWithModel(false))
+			{
+				Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BoekhoudingConfiguration>());
+			}
+		}
+		catch { }
+
+		Database.Initialize(false);
 
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BoekhoudingConfiguration>());

@@ -26,6 +26,7 @@ namespace ClubCloud.SignalR
                 _modifications = new List<SPWebConfigModification>();
 
                 AddSignalRHandler();
+                AddAssemblies();
                 AddRuntimeAssemblyBinding();
                 AddOwinAppSettings();
 
@@ -36,6 +37,7 @@ namespace ClubCloud.SignalR
 
         private static void AddSignalRHandler()
         {
+            /*
             var configModSyncfusionPageCompressionHandlerWeb = new SPWebConfigModification
             {
                 //<add name="SignalR" type="ClubCloud.SignalR.SignalRModule, ClubCloud.SignalR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" />
@@ -48,6 +50,7 @@ namespace ClubCloud.SignalR
 
             };
             _modifications.Add(configModSyncfusionPageCompressionHandlerWeb);
+            */
 
             var configModSyncfusionPageCompressionHandlerwebServer = new SPWebConfigModification
             {
@@ -60,6 +63,23 @@ namespace ClubCloud.SignalR
 
             };
             _modifications.Add(configModSyncfusionPageCompressionHandlerwebServer);
+        }
+
+        private static void AddAssemblies()
+        {
+            var configModClubCloudSignalR = new SPWebConfigModification
+            {
+                Name = "add[@Assembly='ClubCloud.SignalR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e']",
+                //Name = "add[@assembly=\"AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e\"]",
+                //Name = "AjaxControlToolkit",
+                Owner = Owner,
+                Sequence = 0,
+                Path = "configuration/system.web/compilation/assemblies",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<add assembly='ClubCloud.SignalR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e' />"
+
+            };
+            _modifications.Add(configModClubCloudSignalR);
         }
 
         private static void AddRuntimeAssemblyBinding()
@@ -78,19 +98,19 @@ namespace ClubCloud.SignalR
 
                   </dependentAssembly>
             */
-            /*
+
             var configModMicrosoftAspNetSignalRCore = new SPWebConfigModification
             {
-                Name = "add[@name='SignalR'][type='ClubCloud.SignalR.SignalRModule, ClubCloud.SignalR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e']",
+                Name = "*[local-name()='dependentAssembly'][*/@name='Microsoft.AspNet.SignalR.Core'][*/@publicKeyToken='31bf3856ad364e35'][*/@culture='neutral']",
                 Owner = Owner,
                 Sequence = 0,
-                Path = "configuration/runtime/assemblyBinding",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
-                Value = "<add name='SignalR' type='ClubCloud.SignalR.SignalRModule, ClubCloud.SignalR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e' />"
+                Path = "configuration/runtime/*[local-name()='assemblyBinding' and namespace-uri()='urn:schemas-microsoft-com:asm.v1']",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<dependentAssembly><assemblyIdentity name='Microsoft.AspNet.SignalR.Core' publicKeyToken='31bf3856ad364e35' culture='neutral' /><bindingRedirect oldVersion='0.0.0.0-2.2.0.0' newVersion='2.2.0.0' /></dependentAssembly>"
 
             };
             _modifications.Add(configModMicrosoftAspNetSignalRCore);
-            */
+
             /*
                   <dependentAssembly>
 
@@ -100,6 +120,19 @@ namespace ClubCloud.SignalR
 
                   </dependentAssembly>
             */
+
+            var configModMicrosoftOwin = new SPWebConfigModification
+            {
+                Name = "*[local-name()='dependentAssembly'][*/@name='Microsoft.Owin'][*/@publicKeyToken='31bf3856ad364e35'][*/@culture='neutral']",
+                Owner = Owner,
+                Sequence = 0,
+                Path = "configuration/runtime/*[local-name()='assemblyBinding' and namespace-uri()='urn:schemas-microsoft-com:asm.v1']",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<dependentAssembly><assemblyIdentity name='Microsoft.Owin' publicKeyToken='31bf3856ad364e35' culture='neutral' /><bindingRedirect oldVersion='0.0.0.0-3.0.0.0' newVersion='3.0.0.0' /></dependentAssembly>"
+
+            };
+            _modifications.Add(configModMicrosoftOwin);
+
             /*
                   <dependentAssembly>
 
@@ -109,6 +142,19 @@ namespace ClubCloud.SignalR
 
                   </dependentAssembly>
             */
+
+            var configModSystemWebCors = new SPWebConfigModification
+            {
+                Name = "*[local-name()='dependentAssembly'][*/@name='System.Web.Cors'][*/@publicKeyToken='31bf3856ad364e35'][*/@culture='neutral']",
+                Owner = Owner,
+                Sequence = 0,
+                Path = "configuration/runtime/*[local-name()='assemblyBinding' and namespace-uri()='urn:schemas-microsoft-com:asm.v1']",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<dependentAssembly><assemblyIdentity name='System.Web.Cors' publicKeyToken='31bf3856ad364e35' culture='neutral' /><bindingRedirect oldVersion='0.0.0.0-5.2.2.0' newVersion='5.2.2.0' /></dependentAssembly>"
+
+            };
+            _modifications.Add(configModSystemWebCors);
+
             /*
                   <dependentAssembly>
 
@@ -118,6 +164,19 @@ namespace ClubCloud.SignalR
 
                   </dependentAssembly>
             */
+
+            var configModMicrosoftOwinSecurity = new SPWebConfigModification
+            {
+                Name = "*[local-name()='dependentAssembly'][*/@name='Microsoft.Owin.Security'][*/@publicKeyToken='31bf3856ad364e35'][*/@culture='neutral']",
+                Owner = Owner,
+                Sequence = 0,
+                Path = "configuration/runtime/*[local-name()='assemblyBinding' and namespace-uri()='urn:schemas-microsoft-com:asm.v1']",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<dependentAssembly><assemblyIdentity name='Microsoft.Owin.Security' publicKeyToken='31bf3856ad364e35' culture='neutral' /><bindingRedirect oldVersion='0.0.0.0-3.0.0.0' newVersion='3.0.0.0' /></dependentAssembly>"
+
+            };
+            _modifications.Add(configModMicrosoftOwinSecurity);
+
             /*
                   <dependentAssembly>
 
@@ -127,6 +186,19 @@ namespace ClubCloud.SignalR
 
                   </dependentAssembly>
             */
+
+            var configModMicrosofServiceBus = new SPWebConfigModification
+            {
+                Name = "*[local-name()='dependentAssembly'][*/@name='Microsoft.ServiceBus'][*/@publicKeyToken='31bf3856ad364e35'][*/@culture='neutral']",
+                Owner = Owner,
+                Sequence = 0,
+                Path = "configuration/runtime/*[local-name()='assemblyBinding' and namespace-uri()='urn:schemas-microsoft-com:asm.v1']",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<dependentAssembly><assemblyIdentity name='Microsoft.ServiceBus' publicKeyToken='31bf3856ad364e35' culture='neutral' /><bindingRedirect oldVersion='0.0.0.0-2.5.0.0' newVersion='2.5.0.0' /></dependentAssembly>"
+
+            };
+            _modifications.Add(configModMicrosofServiceBus);
+
             /*
                   <dependentAssembly>
 
@@ -136,6 +208,19 @@ namespace ClubCloud.SignalR
 
                   </dependentAssembly>
             */
+
+            var configModMicrosoftOwinSecurityOAuth = new SPWebConfigModification
+            {
+                Name = "*[local-name()='dependentAssembly'][*/@name='Microsoft.Owin.Security.OAuth'][*/@publicKeyToken='31bf3856ad364e35'][*/@culture='neutral']",
+                Owner = Owner,
+                Sequence = 0,
+                Path = "configuration/runtime/*[local-name()='assemblyBinding' and namespace-uri()='urn:schemas-microsoft-com:asm.v1']",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<dependentAssembly><assemblyIdentity name='Microsoft.Owin.Security.OAuth' publicKeyToken='31bf3856ad364e35' culture='neutral' /><bindingRedirect oldVersion='0.0.0.0-3.0.0.0' newVersion='3.0.0.0' /></dependentAssembly>"
+
+            };
+            _modifications.Add(configModMicrosoftOwinSecurityOAuth);
+
             /*
                   <dependentAssembly>
 
@@ -145,6 +230,19 @@ namespace ClubCloud.SignalR
 
                   </dependentAssembly>
             */
+
+            var configModMicrosoftOwinSecurityCookies = new SPWebConfigModification
+            {
+                Name = "*[local-name()='dependentAssembly'][*/@name='Microsoft.Owin.Security.Cookies'][*/@publicKeyToken='31bf3856ad364e35'][*/@culture='neutral']",
+                Owner = Owner,
+                Sequence = 0,
+                Path = "configuration/runtime/*[local-name()='assemblyBinding' and namespace-uri()='urn:schemas-microsoft-com:asm.v1']",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<dependentAssembly><assemblyIdentity name='Microsoft.Owin.Security.Cookies' publicKeyToken='31bf3856ad364e35' culture='neutral' /><bindingRedirect oldVersion='0.0.0.0-3.0.0.0' newVersion='3.0.0.0' /></dependentAssembly>"
+
+            };
+            _modifications.Add(configModMicrosoftOwinSecurityCookies);
+
             /*
                 </assemblyBinding>
 
@@ -172,11 +270,11 @@ namespace ClubCloud.SignalR
                 Owner = Owner,
                 Sequence = 1,
                 Path = "configuration/runtime/appSettings",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
                 Value = "<add key='owin:AppStartup' type='ClubCloud.SignalR.Startup, ClubCloud.SignalR' />"
 
             };
-            _modifications.Add(configModappSettings);
+            _modifications.Add(configModowinAppStartup);
 
             var configModowinAutomaticAppStartup = new SPWebConfigModification
             {
@@ -184,7 +282,7 @@ namespace ClubCloud.SignalR
                 Owner = Owner,
                 Sequence = 2,
                 Path = "configuration/runtime/appSettings",
-                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
                 Value = "<add key='owin:AutomaticAppStartup' type='true' />"
 
             };
