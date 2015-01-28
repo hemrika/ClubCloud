@@ -24,7 +24,7 @@ namespace ClubCloud.SignalR
             catch { }
             finally
             {
-                if (string.IsNullOrWhiteSpace(connection))
+                if (!string.IsNullOrWhiteSpace(connection))
                 {
                     dependencyResolver.UseSqlServer(connection);
                 }

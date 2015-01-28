@@ -28,6 +28,7 @@ namespace ClubCloud.Common
 
                 AddajaxToolkit();
                 AddAssemblies();
+                AddRuntimeAssemblyBinding();
                 AddSaveControls();
 
                 return _modifications; 
@@ -39,8 +40,6 @@ namespace ClubCloud.Common
             var configModajaxToolkit = new SPWebConfigModification
             {
                 Name = "add[@tagPrefix='ajaxToolkit'][@assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e'][@namespace='AjaxControlToolkit']",
-                //Name = "add[@tagPrefix=\"ajaxToolkit\" assembly=\"AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e\" namespace=\"AjaxControlToolkit\"]",
-                //Name = "ajaxToolkit",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/pages/controls",
@@ -56,9 +55,7 @@ namespace ClubCloud.Common
         {
             var configModAjaxControlToolkit = new SPWebConfigModification
             {
-                Name = "add[@Assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e']",
-                //Name = "add[@assembly=\"AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e\"]",
-                //Name = "AjaxControlToolkit",
+                Name = "add[@assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e']",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/compilation/assemblies",
@@ -67,6 +64,28 @@ namespace ClubCloud.Common
 
             };
             _modifications.Add(configModAjaxControlToolkit);
+        }
+
+        private static void AddRuntimeAssemblyBinding()
+        {
+            /*
+            <dependentAssembly>
+            <assemblyIdentity name="AjaxMin" publicKeyToken="21ef50ce11b5d80f" culture="neutral" />
+            <bindingRedirect oldVersion="0.0.0.0-5.13.5463.15277" newVersion="5.13.5463.15277" />
+            </dependentAssembly>
+            */
+
+            var configModAjaxMin = new SPWebConfigModification
+            {
+                Name = "*[local-name()='dependentAssembly'][*/@name='AjaxMin'][*/@publicKeyToken='21ef50ce11b5d80f'][*/@culture='neutral']",
+                Owner = Owner,
+                Sequence = 0,
+                Path = "configuration/runtime/*[local-name()='assemblyBinding' and namespace-uri()='urn:schemas-microsoft-com:asm.v1']",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<dependentAssembly><assemblyIdentity name='AjaxMin' publicKeyToken='21ef50ce11b5d80f' culture='neutral' /><bindingRedirect oldVersion='0.0.0.0-5.13.5463.15277' newVersion='5.13.5463.15277' /></dependentAssembly>"
+
+            };
+            _modifications.Add(configModAjaxMin);
         }
 
         private static void AddSaveControls()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
@@ -15,34 +16,105 @@ namespace ClubCloud.Internet
 {
     public partial class AanmeldenUserControl : UserControl, IWebPart
     {
+        [Browsable(true)]
+        public string ViewName { get; set; }
+
+
+        private ClubCloud.Service.ClubCloudServiceClient _client = null;
+
+        public ClubCloud.Service.ClubCloudServiceClient Client
+        {
+            get
+            {
+                if (_client == null)
+                {
+                    _client = new Service.ClubCloudServiceClient(SPServiceContext.Current);
+                }
+                return _client;
+            }
+        }
+
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            //this.EnsureScriptManager();
             this.EnsureUpdatePanelFixups();
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //wzd_aanmelden.PreRender += new EventHandler(Wizard1_PreRender); 
-            //fvw_vereniging.DataSource = new List<ClubCloud_Vereniging> { new ClubCloud_Vereniging { } };
-            //fvw_vereniging.DataBind();
+            if (!IsPostBack || !Page.IsCallback)
+            {
 
-            AanmeldenDataSource.ViewName = this.ViewName;
-            AanmeldenDataSource.Assembly = typeof(AanmeldenUserControl).Assembly;
-
+                VerenigingDataSource.ViewName = "VerenigingView";// this.ViewName;
+                VerenigingDataSource.Assembly = typeof(AanmeldenUserControl).Assembly;
+                
+            }
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            //wzd_aanmelden.PreRender += new EventHandler(wzd_aanmelden_PreRender); 
         }
+
+        /// <summary>
+        /// Fixups for update panel
+        /// </summary>
+        private void EnsureUpdatePanelFixups()
+        {
+            if (this.Page.Form != null)
+            {
+                string formOnSubmitAtt = this.Page.Form.Attributes["onsubmit"];
+                if (formOnSubmitAtt == "return _spFormOnSubmitWrapper();")
+                {
+                    this.Page.Form.Attributes["onsubmit"] = "_spFormOnSubmitWrapper();";
+                }
+            }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdatePanelFixup", "_spOriginalFormAction = document.forms[0].action; _spSuppressFormOnSubmitWrapper=true;", true);
+        }
+
+        protected void tmr_loader_aanmelden_Tick(object sender, EventArgs e)
+        {
+            tmr_loader_aanmelden.Enabled = false;
+            pnl_vereniging.Visible = true;
+            VerenigingDataSource.View.WhereParameters.Clear();
+            udp_progress.Visible = false;
+        }
+
         protected void wzd_aanmelden_PreRender(object sender, EventArgs e)
         {
             Repeater SideBarList = wzd_aanmelden.FindControl("HeaderContainer").FindControl("SideBarList") as Repeater;
-            SideBarList.DataSource = wzd_aanmelden.WizardSteps;
+            IEnumerable<WizardStep> steps = wzd_aanmelden.WizardSteps.Cast<WizardStep>().Where(w => w.StepType != WizardStepType.Complete);
+            SideBarList.DataSource = steps;// wzd_aanmelden.WizardSteps;
             SideBarList.DataBind();
+        }
+
+        protected void wzd_aanmelden_Load(object sender, EventArgs e)
+        {
+            //wzd_aanmelden.ActiveStep.
+        }
+
+
+        protected void SideBarList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            wzd_aanmelden.ActiveStepIndex = e.Item.ItemIndex;
+        }
+
+        protected void wzd_aanmelden_FinishButtonClick(object sender, WizardNavigationEventArgs e)
+        {
+            FormViewRow row = fvw_aanmelden.Row;
+            TextBox tbx_naam = (TextBox)fvw_aanmelden.FindControl("Naam");
+            string naam = tbx_naam.Text;
+
+        }
+
+
+        protected void wzd_aanmelden_ActiveStepChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void wzd_aanmelden_NextButtonClick(object sender, WizardNavigationEventArgs e)
+        {
 
         }
 
@@ -70,20 +142,6 @@ namespace ClubCloud.Internet
             }
         }
 
-        protected void SideBarList_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-            wzd_aanmelden.ActiveStepIndex = e.Item.ItemIndex;
-        }
-
-        protected void tmr_loader_aanmelden_Tick(object sender, EventArgs e)
-        {
-            tmr_loader_aanmelden.Enabled = false;
-            
-            pnl_vereniging.Visible = true;
-            //wzd_aanmelden.PreRender += new EventHandler(wzd_aanmelden_PreRender); 
-            udp_progress.Visible = false;
-        }
-
         protected void tbx_verenigingsnummer_TextChanged(object sender, EventArgs e)
         {
             string lookup = tbx_verenigingsnummer.Text;
@@ -100,28 +158,32 @@ namespace ClubCloud.Internet
                 number = lookup;
             }
 
-            if(!string.IsNullOrWhiteSpace(number))
+            if (!string.IsNullOrWhiteSpace(number))
             {
                 //AanmeldenDataSource.ViewName = this.ViewName;
 
                 //AanmeldenDataSource.Assembly = typeof(AanmeldenView).Assembly; //Assembly.GetCallingAssembly();
 
-                //AanmeldenDataSource.View.WhereParameters.Clear();
+                VerenigingDataSource.View.WhereParameters.Clear();
 
-                AanmeldenDataSource.View.WhereParameters.Add(new Parameter { Name = "nummer", DefaultValue = number, DbType = System.Data.DbType.String });
+                VerenigingDataSource.View.WhereParameters.Add(new Parameter { Name = "nummer", DefaultValue = number, DbType = System.Data.DbType.String });
+                fvw_aanmelden.DataSourceID = "VerenigingDataSource";
             }
             else
             {
                 //AanmeldenDataSource.ViewName = this.ViewName;
 
                 //AanmeldenDataSource.Assembly = typeof(AanmeldenView).Assembly; //Assembly.GetCallingAssembly();
-
-                AanmeldenDataSource.View.WhereParameters.Clear();
+                fvw_aanmelden.DataSourceID = string.Empty;
+                VerenigingDataSource.View.WhereParameters.Clear();
             }
-            
+
             //this.AanmeldenDataSource.RaiseViewChanged();
-            AanmeldenDataSource.DataBind();
-            fvw_aanmelden.DataBind();            
+            //AanmeldenDataSource.DataBind();
+
+            //fvw_aanmelden.DataSourceID = "AanmeldenDataSource";
+            //fvw_aanmelden.DataBind();
+            //udp_aanmelden.Update();
             //this.AanmeldenDataSource.DataBind();
 
             /*
@@ -161,58 +223,6 @@ namespace ClubCloud.Internet
             }
             */
 
-        }
-
-        private ClubCloud.Service.ClubCloudServiceClient _client = null;
-
-        public ClubCloud.Service.ClubCloudServiceClient Client
-        {
-            get
-            {
-                if (_client == null)
-                {
-                    _client = new Service.ClubCloudServiceClient(SPServiceContext.Current);
-                }
-                return _client;
-            }
-        }
-
-        [Browsable(true)]
-        public string ViewName { get; set; }
-
-        /// <summary>
-        /// Ensures that the scriptmanager exists
-        /// </summary>
-        private void EnsureScriptManager()
-        {
-            ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
-
-            if (scriptManager == null)
-            {
-                scriptManager = new ScriptManager();
-                scriptManager.EnablePartialRendering = true;
-
-                if (Page.Form != null)
-                {
-                    Page.Form.Controls.AddAt(0, scriptManager);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Fixups for update panel
-        /// </summary>
-        private void EnsureUpdatePanelFixups()
-        {
-            if (this.Page.Form != null)
-            {
-                string formOnSubmitAtt = this.Page.Form.Attributes["onsubmit"];
-                if (formOnSubmitAtt == "return _spFormOnSubmitWrapper();")
-                {
-                    this.Page.Form.Attributes["onsubmit"] = "_spFormOnSubmitWrapper();";
-                }
-            }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdatePanelFixup", "_spOriginalFormAction = document.forms[0].action; _spSuppressFormOnSubmitWrapper=true;", true);
         }
 
         #region IWebpart
@@ -268,15 +278,7 @@ namespace ClubCloud.Internet
 
         #endregion
 
-        protected void wzd_aanmelden_FinishButtonClick(object sender, WizardNavigationEventArgs e)
-        {
 
-        }
-
-        protected void wzd_aanmelden_Load(object sender, EventArgs e)
-        {
-
-        }
 
     }
 }

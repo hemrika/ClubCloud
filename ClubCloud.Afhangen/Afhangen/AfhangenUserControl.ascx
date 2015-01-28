@@ -10,8 +10,8 @@
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AfhangenUserControl.ascx.cs" Inherits="ClubCloud.Afhangen.AfhangenUserControl" %>
 <%@ Register Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls" TagPrefix="cc1" %>
-<%@ Register Assembly="Syncfusion.EJ, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" Namespace="Syncfusion.JavaScript.Web" TagPrefix="ej" %>
-<%@ Register Assembly="Syncfusion.EJ.Web, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" Namespace="Syncfusion.JavaScript.Web" TagPrefix="ej" %>
+<%@ Register Assembly="Syncfusion.EJ, Version=12.4451.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" Namespace="Syncfusion.JavaScript.Web" TagPrefix="ej" %>
+<%@ Register Assembly="Syncfusion.EJ.Web, Version=12.4451.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" Namespace="Syncfusion.JavaScript.Web" TagPrefix="ej" %>
 
 
 <style>
@@ -124,7 +124,7 @@
                 <i class="icon-vcard special"></i>
                 <div class="info lined">
                     <ej:DatePicker ID="DatePicker" runat="server" OnSelect="DatePicker_Select"></ej:DatePicker>
-                    <ej:TimePicker ID="TimePicker" runat="server" OnSelect="TimePicker_Select"></ej:TimePicker>
+                    <ej:TimePicker ID="TimePicker" runat="server" OnSelect="TimePicker_Select" Locale="nl-NL" TimeFormat="hh:mm tttt"></ej:TimePicker>
 
                     <h3 class="lined">Gegevens</h3>
                     <label>Spelers</label><br />

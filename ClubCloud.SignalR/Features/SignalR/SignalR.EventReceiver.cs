@@ -24,9 +24,12 @@ namespace ClubCloud.SignalR.Features.SignalR
         {
             ClubCloud.Common.RemoteAdministrator.Enable();
 
+            FeatureCleaning(properties);
+
             if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
             {
                 webApp = properties.Feature.Parent as SPWebApplication;
+                SPWebApplication wap = SPWebService.ContentService.WebApplications[webApp.Id];
 
                 List<SPWebConfigModification> process = new List<SPWebConfigModification>();
                 process.AddRange(ClubCloud.SignalR.SignalR.Modifications);
@@ -35,14 +38,14 @@ namespace ClubCloud.SignalR.Features.SignalR
                 {
                     try
                     {
-                        if (!webApp.WebConfigModifications.Contains(mod))
+                        if (!wap.WebConfigModifications.Contains(mod))
                         {
-                            webApp.WebConfigModifications.Add(mod);
+                            wap.WebConfigModifications.Add(mod);
                         }
 
-                        if (!SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Contains(mod))
+                        if (!SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Contains(mod))
                         {
-                            SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Add(mod);
+                            SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Add(mod);
                         }
                     }
                     catch { };
@@ -50,10 +53,9 @@ namespace ClubCloud.SignalR.Features.SignalR
 
                 try
                 {
-                    webApp.Update();
-
-                    SPWebService.ContentService.WebApplications[webApp.Id].Update();
-                    SPWebService.ContentService.WebApplications[webApp.Id].WebService.ApplyWebConfigModifications();
+                    wap.Update();
+                    SPWebService.ContentService.WebApplications[wap.Id].Update();
+                    SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
                     //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
                 }
                 catch { };
@@ -66,9 +68,12 @@ namespace ClubCloud.SignalR.Features.SignalR
         {
             ClubCloud.Common.RemoteAdministrator.Enable();
 
+            FeatureCleaning(properties);
+
             if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
             {
                 webApp = properties.Feature.Parent as SPWebApplication;
+                SPWebApplication wap = SPWebService.ContentService.WebApplications[webApp.Id];
 
                 List<SPWebConfigModification> process = new List<SPWebConfigModification>();
                 process.AddRange(ClubCloud.SignalR.SignalR.Modifications);
@@ -77,14 +82,14 @@ namespace ClubCloud.SignalR.Features.SignalR
                 {
                     try
                     {
-                        if (webApp.WebConfigModifications.Contains(mod))
+                        if (wap.WebConfigModifications.Contains(mod))
                         {
-                            webApp.WebConfigModifications.Remove(mod);
+                            wap.WebConfigModifications.Remove(mod);
                         }
 
-                        if (SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Contains(mod))
+                        if (SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Contains(mod))
                         {
-                            SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Remove(mod);
+                            SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
                         }
                     }
                     catch { };
@@ -92,9 +97,9 @@ namespace ClubCloud.SignalR.Features.SignalR
 
                 try
                 {
-                    webApp.Update();
-                    SPWebService.ContentService.WebApplications[webApp.Id].Update();
-                    SPWebService.ContentService.WebApplications[webApp.Id].WebService.ApplyWebConfigModifications();
+                    wap.Update();
+                    SPWebService.ContentService.WebApplications[wap.Id].Update();
+                    SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
                     //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
                 }
                 catch { };
@@ -117,9 +122,11 @@ namespace ClubCloud.SignalR.Features.SignalR
 
             ClubCloud.Common.RemoteAdministrator.Enable();
 
+            bool found = false;
             foreach (SPWebApplication wap in SPWebService.ContentService.WebApplications)
             {
                 List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
+
                 try
                 {
 
@@ -128,6 +135,7 @@ namespace ClubCloud.SignalR.Features.SignalR
                         if (mod.Owner.Contains("SignalR"))
                         {
                             toDelete.Add(mod);
+                            found = true;
                         }
                     }
 
@@ -137,10 +145,17 @@ namespace ClubCloud.SignalR.Features.SignalR
                         SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
                     }
 
-                    SPWebService.ContentService.WebApplications[wap.Id].Update();
+                    wap.Update(false);
+                    SPWebService.ContentService.WebApplications[wap.Id].Update(false);
                     SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
+
                 }
-                catch { }
+                catch { found = true; }
+            }
+
+            if (found)
+            {
+                FeatureUninstalling(properties);
             }
         }
 
@@ -149,5 +164,47 @@ namespace ClubCloud.SignalR.Features.SignalR
         //public override void FeatureUpgrading(SPFeatureReceiverProperties properties, string upgradeActionName, System.Collections.Generic.IDictionary<string, string> parameters)
         //{
         //}
+
+        private void FeatureCleaning(SPFeatureReceiverProperties properties)
+        {
+            if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
+            {
+                webApp = properties.Feature.Parent as SPWebApplication;
+                SPWebApplication wap = SPWebService.ContentService.WebApplications[webApp.Id];
+
+                List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
+                bool found = false;
+                try
+                {
+
+                    foreach (SPWebConfigModification mod in wap.WebConfigModifications)
+                    {
+                        if (mod.Owner.Contains("SignalR"))
+                        {
+                            toDelete.Add(mod);
+                            found = true;
+                        }
+                    }
+
+                    foreach (SPWebConfigModification mod in toDelete)
+                    {
+                        wap.WebConfigModifications.Remove(mod);
+                        SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
+                    }
+
+                    wap.Update();
+                    SPWebService.ContentService.WebApplications[wap.Id].Update();
+                    SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
+
+                }
+                catch { found = true; }
+                finally { toDelete = new List<SPWebConfigModification>(); }
+
+                if (found)
+                {
+                    FeatureUninstalling(properties);
+                }
+            }
+        }
     }
 }

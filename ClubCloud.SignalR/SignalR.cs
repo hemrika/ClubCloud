@@ -69,7 +69,7 @@ namespace ClubCloud.SignalR
         {
             var configModClubCloudSignalR = new SPWebConfigModification
             {
-                Name = "add[@Assembly='ClubCloud.SignalR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e']",
+                Name = "add[@assembly='ClubCloud.SignalR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e']",
                 //Name = "add[@assembly=\"AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e\"]",
                 //Name = "AjaxControlToolkit",
                 Owner = Owner,

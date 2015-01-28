@@ -13,9 +13,9 @@ using System.Web.UI.WebControls;
 
 namespace ClubCloud.Internet
 {
-    public class AanmeldenView : ClubCloudDataSourceView, IQueryableDataSource
+    public class VerenigingView : ClubCloudDataSourceView, IQueryableDataSource
     {
-        public AanmeldenView(IDataSource owner, string viewName) : base(owner, viewName) { }
+        public VerenigingView(IDataSource owner, string viewName) : base(owner, viewName) { }
 
         private ClubCloud.Service.ClubCloudServiceClient _client = null;
 
@@ -33,11 +33,12 @@ namespace ClubCloud.Internet
 
         protected override System.Collections.IEnumerable ExecuteSelect(System.Web.UI.DataSourceSelectArguments arguments)
         {
-            DataSet ds = new DataSet("result");
-            DataView dataView = new DataView();
 
             if (this.WhereParameters.Count > 0)
             {
+                DataSet ds = new DataSet("result");
+                DataView dataView = new DataView();
+
                 string number = this.WhereParameters[0].DefaultValue;
                 ClubCloud_Vereniging vereniging = Client.GetVerenigingByNummer("00000000", number, false);
 
@@ -47,9 +48,9 @@ namespace ClubCloud.Internet
 
                     dataView = new DataView(ds.Tables["Verenigingen"]);
                 }
+                return (IEnumerable)dataView;
             }
-
-            return (IEnumerable)dataView;
+            return null;
         }
 
         public void RaiseViewChanged()

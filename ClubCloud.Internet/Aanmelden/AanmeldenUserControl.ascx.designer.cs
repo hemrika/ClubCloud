@@ -13,15 +13,6 @@ namespace ClubCloud.Internet {
     public partial class AanmeldenUserControl {
         
         /// <summary>
-        /// AanmeldenDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ClubCloud.Common.Controls.ClubCloudDataSource AanmeldenDataSource;
-        
-        /// <summary>
         /// udp_progress control.
         /// </summary>
         /// <remarks>
@@ -94,22 +85,13 @@ namespace ClubCloud.Internet {
         protected global::AjaxControlToolkit.AutoCompleteExtender Verenigingsnummer_AutoCompleteExtender;
         
         /// <summary>
-        /// lbl_verenigingsnummer control.
+        /// fvw_aanmelden control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_verenigingsnummer;
-        
-        /// <summary>
-        /// lbl_verenigingsnaam control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_verenigingsnaam;
+        protected global::System.Web.UI.WebControls.FormView fvw_aanmelden;
         
         /// <summary>
         /// wzd_gegevens control.
@@ -121,13 +103,13 @@ namespace ClubCloud.Internet {
         protected global::System.Web.UI.WebControls.WizardStep wzd_gegevens;
         
         /// <summary>
-        /// fvw_aanmelden control.
+        /// wzd_opties control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView fvw_aanmelden;
+        protected global::System.Web.UI.WebControls.WizardStep wzd_opties;
         
         /// <summary>
         /// wzd_voorwaarden control.
@@ -146,6 +128,33 @@ namespace ClubCloud.Internet {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.WizardStep wzd_afronden;
+        
+        /// <summary>
+        /// wzd_klaar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.WizardStep wzd_klaar;
+        
+        /// <summary>
+        /// VerenigingDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ClubCloud.Common.Controls.ClubCloudDataSource VerenigingDataSource;
+        
+        /// <summary>
+        /// GridView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
         /// lbl_result control.
