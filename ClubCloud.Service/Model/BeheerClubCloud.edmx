@@ -28,8 +28,10 @@
     <EntitySet Name="ClubCloud_Reserveringen" EntityType="BeheerClubCloud.Store.ClubCloud_Reserveringen" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Afhangen" EntityType="BeheerClubCloud.Store.ClubCloud_Afhangen" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Baanschemas" EntityType="BeheerClubCloud.Store.ClubCloud_Baanschemas" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_Foto" EntityType="BeheerClubCloud.Store.ClubCloud_Foto" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Fotos" EntityType="BeheerClubCloud.Store.ClubCloud_Fotos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_LidmaatschapSoorten" EntityType="BeheerClubCloud.Store.ClubCloud_LidmaatschapSoorten" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Sponsoren" EntityType="BeheerClubCloud.Store.ClubCloud_Sponsoren" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Sponsor_Afbeeldingen" EntityType="BeheerClubCloud.Store.ClubCloud_Sponsor_Afbeeldingen" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ClubCloud_Functionaris_Functie" Association="BeheerClubCloud.Store.ClubCloud_Functie_Functionaris">
       <End Role="ClubCloud_Functie" EntitySet="ClubCloud_Functies" />
       <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
@@ -153,6 +155,14 @@
     <AssociationSet Name="ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap" Association="BeheerClubCloud.Store.ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap">
       <End Role="ClubCLoud_LidmaatschapSoort" EntitySet="ClubCloud_LidmaatschapSoorten" />
       <End Role="ClubCloud_Lidmaatschap" EntitySet="ClubCloud_Lidmaatschappen" />
+    </AssociationSet>
+    <AssociationSet Name="ClubCloud_SponsorClubCloud_Vereniging" Association="BeheerClubCloud.Store.ClubCloud_SponsorClubCloud_Vereniging">
+      <End Role="ClubCloud_Sponsor" EntitySet="ClubCloud_Sponsoren" />
+      <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+    </AssociationSet>
+    <AssociationSet Name="ClubCloud_SponsorClubCloud_Sponsor_Afbeelding" Association="BeheerClubCloud.Store.ClubCloud_SponsorClubCloud_Sponsor_Afbeelding">
+      <End Role="ClubCloud_Sponsor" EntitySet="ClubCloud_Sponsoren" />
+      <End Role="ClubCloud_Sponsor_Afbeelding" EntitySet="ClubCloud_Sponsor_Afbeeldingen" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ClubCloud_Settings">
@@ -554,7 +564,7 @@
     <Property Name="DagBegin" Type="time" Nullable="false" />
     <Property Name="DagEinde" Type="time" Nullable="false" />
   </EntityType>
-  <EntityType Name="ClubCloud_Foto">
+  <EntityType Name="ClubCloud_Fotos">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -575,6 +585,23 @@
     <Property Name="DagBegin" Type="time" Nullable="false" />
     <Property Name="DagEinde" Type="time" Nullable="false" />
     <Property Name="Tarief" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Sponsoren">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AfbeeldingId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tekst" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClubCloud_Sponsor_Afbeeldingen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Afbeelding" Type="varbinary(max)" Nullable="false" />
   </EntityType>
   <Association Name="ClubCloud_Functie_Functionaris">
     <End Role="ClubCloud_Functie" Type="BeheerClubCloud.Store.ClubCloud_Functies" Multiplicity="0..1" />
@@ -948,6 +975,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ClubCloud_SponsorClubCloud_Vereniging">
+    <End Role="ClubCloud_Sponsor" Type="BeheerClubCloud.Store.ClubCloud_Sponsoren" Multiplicity="*" />
+    <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Vereniging">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Sponsor">
+        <PropertyRef Name="VerenigingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClubCloud_SponsorClubCloud_Sponsor_Afbeelding">
+    <End Role="ClubCloud_Sponsor" Type="BeheerClubCloud.Store.ClubCloud_Sponsoren" Multiplicity="*" />
+    <End Role="ClubCloud_Sponsor_Afbeelding" Type="BeheerClubCloud.Store.ClubCloud_Sponsor_Afbeeldingen" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Sponsor_Afbeelding">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Sponsor">
+        <PropertyRef Name="AfbeeldingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1101,6 +1152,16 @@
             <End Role="ClubCLoud_LidmaatschapSoort" EntitySet="ClubCloud_LidmaatschapSoorten" />
             <End Role="ClubCloud_Lidmaatschap" EntitySet="ClubCloud_Lidmaatschappen" />
           </AssociationSet>
+          <EntitySet Name="ClubCloud_Sponsoren" EntityType="BeheerClubCloud.ClubCloud_Sponsor" />
+          <AssociationSet Name="ClubCloud_SponsorClubCloud_Vereniging" Association="BeheerClubCloud.ClubCloud_SponsorClubCloud_Vereniging">
+            <End Role="ClubCloud_Sponsor" EntitySet="ClubCloud_Sponsoren" />
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+          </AssociationSet>
+          <EntitySet Name="ClubCloud_Sponsor_Afbeeldingen" EntityType="BeheerClubCloud.ClubCloud_Sponsor_Afbeelding" />
+          <AssociationSet Name="ClubCloud_SponsorClubCloud_Sponsor_Afbeelding" Association="BeheerClubCloud.ClubCloud_SponsorClubCloud_Sponsor_Afbeelding">
+            <End Role="ClubCloud_Sponsor" EntitySet="ClubCloud_Sponsoren" />
+            <End Role="ClubCloud_Sponsor_Afbeelding" EntitySet="ClubCloud_Sponsor_Afbeeldingen" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ClubCloud_Gebruiker">
           <Key>
@@ -1201,6 +1262,7 @@
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Gebruiker" />
           <NavigationProperty Name="ClubCloud_Afhangen" Relationship="BeheerClubCloud.ClubCloud_AfhangenClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Afhangen" />
+          <NavigationProperty Name="ClubCloud_Sponsor" Relationship="BeheerClubCloud.ClubCloud_SponsorClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Sponsor" />
           </EntityType>
         <EntityType Name="ClubCloud_Setting">
           <Key>
@@ -2025,6 +2087,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ClubCloud_Sponsor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_SponsorClubCloud_Vereniging" FromRole="ClubCloud_Sponsor" ToRole="ClubCloud_Vereniging" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="false" />
+          <Property Name="AfbeeldingId" Type="Guid" Nullable="true" />
+          <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="Tekst" Type="String" />
+          <NavigationProperty Name="ClubCloud_Sponsor_Afbeelding" Relationship="BeheerClubCloud.ClubCloud_SponsorClubCloud_Sponsor_Afbeelding" FromRole="ClubCloud_Sponsor" ToRole="ClubCloud_Sponsor_Afbeelding" />
+        </EntityType>
+        <Association Name="ClubCloud_SponsorClubCloud_Vereniging">
+          <End Type="BeheerClubCloud.ClubCloud_Sponsor" Role="ClubCloud_Sponsor" Multiplicity="*" />
+          <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Vereniging">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Sponsor">
+              <PropertyRef Name="VerenigingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClubCloud_Sponsor_Afbeelding">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="ClubCloud_Sponsor" Relationship="BeheerClubCloud.ClubCloud_SponsorClubCloud_Sponsor_Afbeelding" FromRole="ClubCloud_Sponsor_Afbeelding" ToRole="ClubCloud_Sponsor" />
+          <Property Name="Afbeelding" Type="Binary" Nullable="false" />
+        </EntityType>
+        <Association Name="ClubCloud_SponsorClubCloud_Sponsor_Afbeelding">
+          <End Type="BeheerClubCloud.ClubCloud_Sponsor" Role="ClubCloud_Sponsor" Multiplicity="*" />
+          <End Type="BeheerClubCloud.ClubCloud_Sponsor_Afbeelding" Role="ClubCloud_Sponsor_Afbeelding" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Sponsor_Afbeelding">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Sponsor">
+              <PropertyRef Name="AfbeeldingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2453,7 +2559,7 @@
     </EntitySetMapping>
     <EntitySetMapping Name="ClubCloud_Fotos">
       <EntityTypeMapping TypeName="IsTypeOf(BeheerClubCloud.ClubCloud_Foto)">
-        <MappingFragment StoreEntitySet="ClubCloud_Foto">
+        <MappingFragment StoreEntitySet="ClubCloud_Fotos">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FotoId" ColumnName="FotoId" />
           <ScalarProperty Name="ContentData" ColumnName="ContentData" />
@@ -2472,6 +2578,25 @@
           <ScalarProperty Name="DagBegin" ColumnName="DagBegin" />
           <ScalarProperty Name="DagEinde" ColumnName="DagEinde" />
           <ScalarProperty Name="Tarief" ColumnName="Tarief" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Sponsoren">
+      <EntityTypeMapping TypeName="IsTypeOf(BeheerClubCloud.ClubCloud_Sponsor)">
+        <MappingFragment StoreEntitySet="ClubCloud_Sponsoren">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
+          <ScalarProperty Name="AfbeeldingId" ColumnName="AfbeeldingId" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Tekst" ColumnName="Tekst" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubCloud_Sponsor_Afbeeldingen">
+      <EntityTypeMapping TypeName="IsTypeOf(BeheerClubCloud.ClubCloud_Sponsor_Afbeelding)">
+        <MappingFragment StoreEntitySet="ClubCloud_Sponsor_Afbeeldingen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Afbeelding" ColumnName="Afbeelding" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

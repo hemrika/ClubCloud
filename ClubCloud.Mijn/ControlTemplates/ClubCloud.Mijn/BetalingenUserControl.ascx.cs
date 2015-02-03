@@ -53,9 +53,9 @@ namespace ClubCloud.Mijn.ControlTemplates
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 vds_betalingen.ShowSummary = false;
-                Settings = new ClubCloud_Setting();
+                //Settings = new ClubCloud_Setting();
 
-                Settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
+                //Settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
                 Settings.financieel = Financieel.None;
 
                 if (betalingen_overboeking.Checked)
@@ -78,14 +78,8 @@ namespace ClubCloud.Mijn.ControlTemplates
                     Settings.financieel |= Financieel.PayPal;
                 }
 
-                if (Settings.financieel != Financieel.None)
-                {
-                    Settings = Client.SetFinancieel(Settings);
-                }
-                else
-                {
-                    vds_betalingen.ShowSummary = true;
-                }
+                Settings = Client.SetClubCloudSettings(Settings);
+                vds_betalingen.ShowSummary = true;
             }
         }
     }

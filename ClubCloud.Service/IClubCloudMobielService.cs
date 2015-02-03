@@ -110,7 +110,7 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
         [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingSettings/{bondsnummer}/{verenigingId}")]
-        ClubCloud.Service.Model.ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, string verenigingId);
+        ClubCloud.Service.Model.ClubCloud_Afhang GetVerenigingAfhangSettings(string bondsnummer, string verenigingId);
 
         /*
         [OperationContract]

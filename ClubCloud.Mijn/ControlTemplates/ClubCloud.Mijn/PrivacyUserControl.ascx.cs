@@ -46,9 +46,9 @@ namespace ClubCloud.Mijn.ControlTemplates
         {
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
-                Settings = new ClubCloud_Setting();
+                //Settings = new ClubCloud_Setting();
 
-                Settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
+                //Settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
                 Settings.privacy = Privacy.None;
 
                 if (privacy_leden_club.Checked)
@@ -81,7 +81,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     Settings.privacy |= Privacy.toernooi_leden;
                 }
 
-                Settings = Client.SetPrivacy(Settings);
+                Settings = Client.SetClubCloudSettings(Settings);
             }     
         }
     }

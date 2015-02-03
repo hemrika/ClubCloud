@@ -24,7 +24,7 @@ namespace ClubCloud.Common.Features.Common
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
             ClubCloud.Common.RemoteAdministrator.Enable();
-
+             
             FeatureCleaning(properties);
             SetCustomPages(properties);
 
@@ -35,7 +35,7 @@ namespace ClubCloud.Common.Features.Common
 
                 List<SPWebConfigModification> process = new List<SPWebConfigModification>();
                 process.AddRange(ClubCloud.Common.Common.Modifications);
-                //process.AddRange(Syncfusion.Modifications);
+                process.AddRange(Syncfusion.Modifications);
                 process.AddRange(Ajax.Modifications);
                 //process.AddRange(CrossSiteScripting.Modifications);
 
@@ -62,6 +62,8 @@ namespace ClubCloud.Common.Features.Common
                     SPWebService.ContentService.WebApplications[wap.Id].Update(false);
                     SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
                     //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
+                    wap.WebConfigModifications.Clear();
+                    wap.Update(false);
                 }
                 catch { };
             }
@@ -73,7 +75,7 @@ namespace ClubCloud.Common.Features.Common
         {
             ClubCloud.Common.RemoteAdministrator.Enable();
             
-            FeatureCleaning(properties);
+            //FeatureCleaning(properties);
             
             if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
             {
@@ -82,7 +84,7 @@ namespace ClubCloud.Common.Features.Common
                 
                 List<SPWebConfigModification> process = new List<SPWebConfigModification>();
                 process.AddRange(ClubCloud.Common.Common.Modifications);
-                //process.AddRange(Syncfusion.Modifications);
+                process.AddRange(Syncfusion.Modifications);
                 process.AddRange(Ajax.Modifications);
                 //process.AddRange(CrossSiteScripting.Modifications);
 
@@ -109,6 +111,8 @@ namespace ClubCloud.Common.Features.Common
                     SPWebService.ContentService.WebApplications[wap.Id].Update(false);
                     SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
                     //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
+                    wap.WebConfigModifications.Clear();
+                    wap.Update();
                 }
                 catch { };
                 
@@ -202,9 +206,10 @@ namespace ClubCloud.Common.Features.Common
 
         // Uncomment the method below to handle the event raised after a feature has been installed.
 
-        //public override void FeatureInstalled(SPFeatureReceiverProperties properties)
-        //{
-        //}
+        public override void FeatureInstalled(SPFeatureReceiverProperties properties)
+        {
+            SPWebService.AdministrationService.ApplyApplicationContentToLocalServer();
+        }
 
         /// <summary>
         /// ClubCloud Common deinstallation, clear all modification owned by this feature.
@@ -287,7 +292,8 @@ namespace ClubCloud.Common.Features.Common
                     wap.Update(false);
                     SPWebService.ContentService.WebApplications[wap.Id].Update(false);
                     SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
-
+                    wap.WebConfigModifications.Clear();
+                    wap.Update();
                 }
                 catch { found = true; }
                 finally { toDelete = new List<SPWebConfigModification>(); }

@@ -30,22 +30,48 @@ namespace ClubCloud.Service
         */
         #endregion
 
-        #region Gebruiker
+        #region Mijn
 
-        /*
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
-        ClubCloud_Gebruiker GetClubCloudUser(string user, bool refresh = false);
-        */
+        #region Set
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
-        ClubCloud_Setting SetPrivacy(ClubCloud_Setting settings);
+        ClubCloud_Setting SetClubCloudSettings(ClubCloud_Setting settings);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting SetMijnKNLTB(ClubCloud_Setting settings);
 
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
+        bool SetClubCloudGebruiker(string bondsnummer, Guid verenigingId, ClubCloud_Gebruiker gebruiker, bool refresh = false);
+
+
+        #endregion
+
+        #region Get
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting GetClubCloudSettings(string bondsnummer);
+
+        #endregion
+
+
+
+
+
+        #endregion
+        #region Gebruiker
+
+        /*
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        ClubCloud_Setting SetPrivacy(ClubCloud_Setting settings);
+        */
+
+
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting SetTwitter(ClubCloud_Setting settings);
@@ -61,14 +87,8 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting SetTracking(ClubCloud_Setting settings);
+        */
 
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Setting))]
-        ClubCloud_Setting GetClubCloudSettings(string bondsnummer);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
-        bool SetClubCloudGebruiker(string bondsnummer, Guid verenigingId, ClubCloud_Gebruiker gebruiker, bool refresh = false);
 
         /*
         [OperationContract]
@@ -257,14 +277,6 @@ namespace ClubCloud.Service
         ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
 
         [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Foto))]
-        ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Foto))]
-        ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
-
-        [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
 
@@ -285,7 +297,11 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Afhang))]
-        ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, Guid verenigingId, bool refresh);
+        ClubCloud_Afhang GetVerenigingAfhangSettings(string bondsnummer, Guid verenigingId, bool refresh);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Afhang))]
+        ClubCloud_Afhang SetVerenigingAfhangSettings(string bondsnummer, Guid verenigingId, ClubCloud_Afhang afhang, bool refresh);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Lidmaatschap))]
@@ -297,5 +313,77 @@ namespace ClubCloud.Service
 
         [OperationContract]
         string ScaleOutConnection(string catalog);
+
+        #region Foto
+
+        #region Get
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Foto))]
+        ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Foto))]
+        ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
+
+        #endregion
+
+        #region Set
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Foto))]
+        ClubCloud_Foto UpdateFoto(string bondsnummer, Guid verenigingId, ClubCloud_Foto foto);
+
+        #endregion
+
+        #endregion
+
+        #region Sponsor
+
+        #region Get
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor))]
+        List<ClubCloud_Sponsor> GetSponsorenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor))]
+        ClubCloud_Sponsor GetSponsorById(string bondsnummer, Guid verenigingId, Guid sponsorId, bool refresh);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor_Afbeelding))]
+        ClubCloud_Sponsor_Afbeelding GetSponsorImageById(string bondsnummer, Guid verenigingId, Guid afbeeldingId, bool refresh);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor))]
+        List<ClubCloud_Sponsor> GetSponsorImageUsageById(string bondsnummer, Guid verenigingId, Guid imageId, bool refresh);
+
+        #endregion
+
+        #region Set
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor))]
+        ClubCloud_Sponsor SetSponsor(ClubCloud_Sponsor sponsor);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor_Afbeelding))]
+        ClubCloud_Sponsor_Afbeelding SetSponsorImage(ClubCloud_Sponsor_Afbeelding afbeelding);
+
+        #endregion
+
+        #region Delete
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor))]
+        bool DeleteSponsor(ClubCloud_Sponsor sponsor);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor_Afbeelding))]
+        bool DeleteSponsorImage(ClubCloud_Sponsor_Afbeelding afbeelding);
+
+        #endregion
+
+        #endregion
+
     }
 }

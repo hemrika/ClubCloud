@@ -25,6 +25,7 @@ namespace ClubCloud.Service.Model
     [KnownType(typeof(ClubCloud_Regio))]
     [KnownType(typeof(ClubCloud_Gebruiker))]
     [KnownType(typeof(ClubCloud_Afhang))]
+    [KnownType(typeof(ClubCloud_Sponsor))]
     
     public partial class ClubCloud_Vereniging
     {
@@ -36,6 +37,7 @@ namespace ClubCloud.Service.Model
             this.ClubCloud_Address = new HashSet<ClubCloud_Address>();
             this.ClubCloud_Gebruiker = new HashSet<ClubCloud_Gebruiker>();
             this.ClubCloud_Afhangen = new HashSet<ClubCloud_Afhang>();
+            this.ClubCloud_Sponsor = new HashSet<ClubCloud_Sponsor>();
         }
     
     	[DataMember]
@@ -115,5 +117,7 @@ namespace ClubCloud.Service.Model
         public virtual ICollection<ClubCloud_Gebruiker> ClubCloud_Gebruiker { get; set; }
     	[DataMember]
         public virtual ICollection<ClubCloud_Afhang> ClubCloud_Afhangen { get; set; }
+    	[DataMember]
+        public virtual ICollection<ClubCloud_Sponsor> ClubCloud_Sponsor { get; set; }
     }
 }

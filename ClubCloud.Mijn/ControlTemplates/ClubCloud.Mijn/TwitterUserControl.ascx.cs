@@ -63,9 +63,9 @@ namespace ClubCloud.Mijn.ControlTemplates
             {
                 try
                 {
-                    Settings = new ClubCloud_Setting();
+                    //Settings = new ClubCloud_Setting();
 
-                    Settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
+                    //Settings.Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId);
                     Settings.twitter_allow = twitter_allow.Checked;
                     Settings.twitter_setting = Twitter.None;
 
@@ -90,7 +90,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                         Settings.twitter_setting |= Twitter.Toernooi;
                     }
 
-                    Settings = Client.SetTwitter(Settings);
+                    Settings = Client.SetClubCloudSettings(Settings);
 
                     lbl_result.Text = "Wijzigingen opgeslagen.";
                     lbl_result.ForeColor = Color.Green;

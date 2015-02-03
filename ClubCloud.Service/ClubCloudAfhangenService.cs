@@ -297,20 +297,64 @@ namespace ClubCloud.Service
         #endregion
 
 
-        public ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, Guid verenigingId, bool refresh = false)
+        public ClubCloud_Afhang GetVerenigingAfhangSettings(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
             ClubCloud_Afhang afhang = new ClubCloud_Afhang();
 
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                afhang = client.GetVerenigingSettings(bondsnummer, verenigingId, refresh);
+                afhang = client.GetVerenigingAfhangSettings(bondsnummer, verenigingId, refresh);
             }
 
             return afhang;
 
         }
 
+        #region Sponsor
+
+        public List<ClubCloud_Sponsor> GetSponsorenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            List<ClubCloud_Sponsor> sponsoren = new List<ClubCloud_Sponsor>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                sponsoren = client.GetSponsorenByVerenigingId(bondsnummer, verenigingId, refresh);
+            }
+
+            return sponsoren;
+        }
+
+        public ClubCloud_Sponsor GetSponsorById(string bondsnummer, Guid verenigingId, Guid sponsorId, bool refresh = false)
+        {
+            ClubCloud_Sponsor sponsor = new ClubCloud_Sponsor();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                sponsor = client.GetSponsorById(bondsnummer, verenigingId, sponsorId, refresh);
+            }
+
+            return sponsor;
+        }
+
+        public ClubCloud_Sponsor_Afbeelding GetSponsorImageById(string bondsnummer, Guid verenigingId, Guid afbeeldingId, bool refresh = false)
+        {
+            ClubCloud_Sponsor_Afbeelding afbeelding = new ClubCloud_Sponsor_Afbeelding();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                afbeelding = client.GetSponsorImageById(bondsnummer, verenigingId, afbeeldingId, refresh);
+            }
+
+            return afbeelding;
+        }
+
+        #endregion
+
+        /*
         public string[] GetGebruikerAutoComplete(string prefixText, int count, string contextKey)
         {
             List<string> customers = new List<string>();
@@ -366,5 +410,9 @@ namespace ClubCloud.Service
 
             return default(string[]);
         }
+        */
+
+
+
     }
 }

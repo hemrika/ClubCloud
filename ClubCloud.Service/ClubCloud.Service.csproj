@@ -166,6 +166,21 @@
     <Compile Include="Model\BankAccount.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClubCloud_Sponsor.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Sponsor_Afbeelding.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Messages_0.cs">
+      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Messages_0_Id.cs">
+      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Schema.cs">
+      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SignalRClubCloud.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

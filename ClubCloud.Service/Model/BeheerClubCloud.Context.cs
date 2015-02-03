@@ -52,7 +52,7 @@ namespace ClubCloud.Service.Model
     		}
     		catch { }
     
-    		Database.Initialize(false);
+    		Database.Initialize(true);
     
     		//Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
     		//Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
@@ -195,6 +195,14 @@ namespace ClubCloud.Service.Model
     
     		modelBuilder.Entity<ClubCloud_LidmaatschapSoort>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_Sponsor>().MapToStoredProcedures();
+    
+    		modelBuilder.Entity<ClubCloud_Sponsor>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
+    		//modelBuilder.Entity<ClubCloud_Sponsor_Afbeelding>().MapToStoredProcedures();
+    
+    		modelBuilder.Entity<ClubCloud_Sponsor_Afbeelding>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
     		base.OnModelCreating(modelBuilder);
         }
     
@@ -222,5 +230,7 @@ namespace ClubCloud.Service.Model
         public virtual DbSet<ClubCloud_Baanschema> ClubCloud_Baanschemas { get; set; }
         public virtual DbSet<ClubCloud_Foto> ClubCloud_Fotos { get; set; }
         public virtual DbSet<ClubCloud_LidmaatschapSoort> ClubCloud_LidmaatschapSoorten { get; set; }
+        public virtual DbSet<ClubCloud_Sponsor> ClubCloud_Sponsoren { get; set; }
+        public virtual DbSet<ClubCloud_Sponsor_Afbeelding> ClubCloud_Sponsor_Afbeeldingen { get; set; }
     }
 }

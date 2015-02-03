@@ -42,7 +42,7 @@ namespace ClubCloud.Service.Model
     		}
     		catch { }
     
-    		Database.Initialize(false);
+    		Database.Initialize(true);
     
     		//Database.SetInitializer<BoekhoudingContainer>(new CreateDatabaseIfNotExists<BoekhoudingContainer>());
     		//Database.SetInitializer<BoekhoudingContainer>(new MigrateDatabaseToLatestVersion<BoekhoudingContainer, BoekhoudingConfiguration>());

@@ -51,7 +51,7 @@ function OnClientCompleted(sender, e) {
                                 <h3 class="lined">Verenigingsnummer</h3>
                                 <p>
                                     <asp:TextBox ID="tbx_verenigingsnummer" TextMode="SingleLine" runat="server" AutoPostBack="true" OnTextChanged="tbx_verenigingsnummer_TextChanged" type="number" Width="100%"/>
-                                    <ajaxToolkit:AutoCompleteExtender ID="Verenigingsnummer_AutoCompleteExtender" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetVereniningen" ServicePath="//mijn.clubcloud.nl/_vti_bin/ClubCloud.Afhangen/Afhangen.svc/Script" TargetControlID="tbx_verenigingsnummer" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="5" CompletionInterval="1000" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating">
+                                    <ajaxToolkit:AutoCompleteExtender ID="Verenigingsnummer_AutoCompleteExtender" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetVereniningen" ServicePath="//mijn.clubcloud.nl/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" TargetControlID="tbx_verenigingsnummer" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="5" CompletionInterval="1000" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating">
                                         <Animations>
                                        <OnShow><Sequence><OpacityAction Opacity="0" /><HideAction Visible="true" /><Parallel Duration=".4"><FadeIn /></Parallel></Sequence></OnShow>
                                        <OnHide><Parallel Duration=".4"><FadeOut /></Parallel></OnHide>
@@ -64,8 +64,8 @@ function OnClientCompleted(sender, e) {
                                             Naam :
                                             <asp:TextBox ID="Naam" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "Naam") %>' /><br />
                                             Kvk :
-                                            <asp:TextBox ID="KvKNummer" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "KvKnummer") %> te <%# Bind(Container.DataItem, "KvKplaats") %>'  Width="40%"/> te
-                                            <asp:TextBox ID="KvKPlaats" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "KvKnummer") %> te <%# Bind(Container.DataItem, "KvKplaats") %>'  Width="40%"/><br />
+                                            <asp:TextBox ID="KvKNummer" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "KvKnummer") %>'  Width="40%"/> te
+                                            <asp:TextBox ID="KvKPlaats" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "KvKplaats") %>'  Width="40%"/><br />
                                             IBAN :
                                             <asp:TextBox ID="TextBox1" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "BankIban") %>' /><br />
                                         </ItemTemplate>

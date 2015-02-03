@@ -49,15 +49,7 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         ClubCloud.Service.Model.ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
-
-        [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string[] GetGebruikerAutoComplete(string prefixText, int count, string contextKey);
-
-        [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string[] GetVereniningen(string prefixText, int count, string contextKey);
-
+ 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Foto))]
         ClubCloud.Service.Model.ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
@@ -100,7 +92,7 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Afhang))]
-        ClubCloud.Service.Model.ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, Guid verenigingId, bool refresh = false);
+        ClubCloud.Service.Model.ClubCloud_Afhang GetVerenigingAfhangSettings(string bondsnummer, Guid verenigingId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
@@ -110,7 +102,36 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
         ClubCloud.Service.Model.ClubCloud_Reservering UpdateReservering(string bondsnummer, Guid verenigingId, ClubCloud.Service.Model.ClubCloud_Reservering reservering, bool final = false, bool push = false);
 
+        #region Sponsor
+
+        #region Get
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor))]
+        System.Collections.Generic.List<ClubCloud.Service.Model.ClubCloud_Sponsor> GetSponsorenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor))]
+        ClubCloud.Service.Model.ClubCloud_Sponsor GetSponsorById(string bondsnummer, Guid verenigingId, Guid sponsorId, bool refresh = false);
+
+        
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Sponsor_Afbeelding))]
+        ClubCloud.Service.Model.ClubCloud_Sponsor_Afbeelding GetSponsorImageById(string bondsnummer, Guid verenigingId, Guid afbeeldingId, bool refresh = false);
         #endregion
+
+        #endregion
+
+        #endregion
+
+        /*
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string[] GetGebruikerAutoComplete(string prefixText, int count, string contextKey);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string[] GetVereniningen(string prefixText, int count, string contextKey);
+        */
 
     }
 }

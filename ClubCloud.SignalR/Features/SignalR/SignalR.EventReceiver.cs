@@ -53,10 +53,12 @@ namespace ClubCloud.SignalR.Features.SignalR
 
                 try
                 {
-                    wap.Update();
-                    SPWebService.ContentService.WebApplications[wap.Id].Update();
+                    wap.Update(false);
+                    SPWebService.ContentService.WebApplications[wap.Id].Update(false);
                     SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
                     //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
+                    wap.WebConfigModifications.Clear();
+                    wap.Update(false);
                 }
                 catch { };
             }
@@ -68,7 +70,7 @@ namespace ClubCloud.SignalR.Features.SignalR
         {
             ClubCloud.Common.RemoteAdministrator.Enable();
 
-            FeatureCleaning(properties);
+            //FeatureCleaning(properties);
 
             if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
             {
@@ -97,8 +99,8 @@ namespace ClubCloud.SignalR.Features.SignalR
 
                 try
                 {
-                    wap.Update();
-                    SPWebService.ContentService.WebApplications[wap.Id].Update();
+                    wap.Update(false);
+                    SPWebService.ContentService.WebApplications[wap.Id].Update(false);
                     SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
                     //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
                 }
@@ -109,9 +111,10 @@ namespace ClubCloud.SignalR.Features.SignalR
 
         // Uncomment the method below to handle the event raised after a feature has been installed.
 
-        //public override void FeatureInstalled(SPFeatureReceiverProperties properties)
-        //{
-        //}
+        public override void FeatureInstalled(SPFeatureReceiverProperties properties)
+        {
+            SPWebService.AdministrationService.ApplyApplicationContentToLocalServer();
+        }
 
         /// <summary>
         /// ClubCloud Common deinstallation, clear all modification owned by this feature.

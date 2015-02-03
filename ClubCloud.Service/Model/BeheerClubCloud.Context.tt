@@ -110,7 +110,7 @@ using System.Linq;
 		}
 		catch { }
 
-		Database.Initialize(false);
+		Database.Initialize(true);
 
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BeheerConfiguration>());

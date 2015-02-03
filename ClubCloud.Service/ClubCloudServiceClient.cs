@@ -63,19 +63,25 @@ namespace ClubCloud.Service
 
         #region Mijn
 
-        public ClubCloud_Setting SetPrivacy(ClubCloud_Setting settings)
+        #region Afhangen
+
+        public List<ClubCloud_Gebruiker> GetGebruikersBySearch(string bondsnummer, string prefixText, int count, bool refresh)
         {
-            ClubCloud_Setting response = null;
+            List<ClubCloud_Gebruiker> response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.SetPrivacy(settings);
+                    response = channel.GetGebruikersBySearch(bondsnummer, prefixText, count, refresh);
                 },
                 false);
 
             return response;
         }
+
+        #endregion
+
+        #region Settings
 
         public ClubCloud_Setting SetMijnKNLTB(ClubCloud_Setting settings)
         {
@@ -89,6 +95,49 @@ namespace ClubCloud.Service
                 false);
 
             return response;
+        }
+
+        public ClubCloud_Setting SetClubCloudSettings(ClubCloud_Setting settings)
+        {
+            ClubCloud_Setting response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetClubCloudSettings(settings);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Setting GetClubCloudSettings(string bondsnummer)
+        {
+            ClubCloud_Setting response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetClubCloudSettings(bondsnummer);
+                },
+                false);
+
+            return response;
+        }
+
+        /*
+        public ClubCloud_Setting SetPrivacy(ClubCloud_Setting settings)
+        {
+        ClubCloud_Setting response = null;
+
+        this.ExecuteOnChannel<IClubCloudApplicationService>(
+        delegate(IClubCloudApplicationService channel)
+        {
+            response = channel.SetPrivacy(settings);
+        },
+        false);
+
+        return response;
         }
 
         public ClubCloud_Setting SetTwitter(ClubCloud_Setting settings)
@@ -146,36 +195,9 @@ namespace ClubCloud.Service
 
             return response;
         }
-
-        public ClubCloud_Setting GetClubCloudSettings(string bondsnummer)
-        {
-            ClubCloud_Setting response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetClubCloudSettings(bondsnummer);
-                },
-                false);
-
-            return response;
-        }
-
-        /*
-        public ClubCloud_Gebruiker GetClubCloudGebruiker(string bondsnummer, bool refresh = false)
-        {
-            ClubCloud_Gebruiker response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetClubCloudGebruiker(bondsnummer, refresh);
-                },
-                false);
-
-            return response;
-        }
         */
+
+        #endregion
 
         public bool SetClubCloudGebruiker(string bondsnummer, Guid verenigingId, ClubCloud_Gebruiker gebruiker, bool refresh = false)
         {
@@ -213,34 +235,6 @@ namespace ClubCloud.Service
                 delegate(IClubCloudApplicationService channel)
                 {
                     response = channel.GetGebruikerById(bondsnummer, verenigingId, gebruikerId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
-        {
-            ClubCloud_Foto response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetFotoByNummer(bondsnummer, verenigingId, nummer, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
-        {
-            ClubCloud_Foto response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetFotoById(bondsnummer, verenigingId, gebruikerId, refresh);
                 },
                 false);
 
@@ -439,6 +433,370 @@ namespace ClubCloud.Service
 
         #endregion
 
+
+        #region Afhangen
+
+        public bool DeleteReservering(string bondsnummer, Guid verenigingId, Guid reserveringId, bool push = false)
+        {
+            bool response = false;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.DeleteReservering(bondsnummer, verenigingId, reserveringId, push);
+                },
+                false);
+
+            return response;
+        }
+
+        public List<ClubCloud_Baanschema> GetBaanSchemaByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false)
+        {
+            List<ClubCloud_Baanschema> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetBaanSchemaByAccommodatieId(bondsnummer, verenigingId, accommodatieId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public List<ClubCloud_Baanschema> GetBaanSchemaByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            List<ClubCloud_Baanschema> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetBaanSchemaByVerenigingId(bondsnummer, verenigingId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public List<ClubCloud_Baan> GetBanenByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false)
+        {
+            List<ClubCloud_Baan> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetBanenByAccommodatieId(bondsnummer, verenigingId, accommodatieId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public List<ClubCloud_Baan> GetBanenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            List<ClubCloud_Baan> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetBanenByVerenigingId(bondsnummer, verenigingId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public List<ClubCloud_Gebruiker> GetGebruikersByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false)
+        {
+            List<ClubCloud_Gebruiker> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetGebruikersByReserveringId(bondsnummer, verenigingId, reserveringId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Reservering GetReserveringByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false) 
+        {
+            ClubCloud_Reservering response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetReserveringByReserveringId(bondsnummer, verenigingId, reserveringId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public List<ClubCloud_Reservering> GetReserveringenByBaanId(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false)
+        {
+            List<ClubCloud_Reservering> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetReserveringenByBaanId(bondsnummer, verenigingId, baanId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public List<ClubCloud_Reservering> GetReserveringenByBondsnummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
+        {
+            List<ClubCloud_Reservering> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetReserveringenByBondsnummer(bondsnummer, verenigingId, nummer, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public List<ClubCloud_Reservering> GetReserveringenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            List<ClubCloud_Reservering> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetReserveringenByVerenigingId(bondsnummer, verenigingId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Vereniging GetVerenigingByLocation(string bondsnummer, double Latitude, double Longitude, bool refresh = false)
+        {
+            ClubCloud_Vereniging response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetVerenigingByLocation(bondsnummer, Latitude, Longitude, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Vereniging GetVerenigingByNummer(string bondsnummer, string verenigingNummer, bool refresh = false)
+        {
+            ClubCloud_Vereniging response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetVerenigingByNummer(bondsnummer, verenigingNummer, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime Datum,TimeSpan Tijd, TimeSpan Duur, ReserveringSoort Soort = ReserveringSoort.Afhangen, bool final = false, bool push = false, string Beschrijving = "")
+        {
+            ClubCloud_Reservering response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetReservering(bondsnummer, verenigingId, baanId, gebruikers, Datum,Tijd,Duur,Soort,final, push, Beschrijving);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Reservering UpdateReservering(string bondsnummer, Guid verenigingId, ClubCloud.Service.Model.ClubCloud_Reservering reservering, bool final = false, bool push = false)
+        {
+            ClubCloud_Reservering response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.UpdateReservering(bondsnummer, verenigingId, reservering, final, push);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Baan GetBaanById(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false)
+        {
+            ClubCloud_Baan response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetBaanById(bondsnummer, verenigingId, baanId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Gebruiker_DataView GetGebruikersByQuery(string bondsnummer, Guid verenigingId, DataSourceSelectArguments selectArgs = null, List<Parameter> parameters = null, bool refresh = false)
+        {
+            ClubCloud_Gebruiker_DataView response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetGebruikersByQuery(bondsnummer, verenigingId, selectArgs, parameters, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Afhang GetVerenigingAfhangSettings(string bondsnummer, Guid verenigingId, bool refresh)
+        {
+            ClubCloud_Afhang response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetVerenigingAfhangSettings(bondsnummer, verenigingId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        #endregion
+
+        public void VerenigingenUpdate(string bondsnummer, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.VerenigingenUpdate(bondsnummer, refresh);
+                },
+                false);
+
+            return;
+        }
+
+        #region SignalR
+
+        internal string ScaleOutConnection(string catalog)
+        {
+            string response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.ScaleOutConnection(catalog);
+                },
+                false);
+
+            return response;
+        }
+
+        #endregion
+
+        #region Foto
+
+        public ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
+        {
+            ClubCloud_Foto response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetFotoByNummer(bondsnummer, verenigingId, nummer, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
+        {
+            ClubCloud_Foto response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetFotoById(bondsnummer, verenigingId, gebruikerId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Foto UpdateFoto(string bondsnummer, Guid verenigingId, ClubCloud_Foto foto)
+        {
+            ClubCloud_Foto response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.UpdateFoto(bondsnummer, verenigingId, foto);
+                },
+                false);
+
+            return response;
+        }
+
+        #endregion
+
+        #region Sponsor
+
+        public List<ClubCloud_Sponsor> GetSponsorenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh)
+        {
+            List<ClubCloud_Sponsor> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetSponsorenByVerenigingId(bondsnummer, verenigingId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Sponsor GetSponsorById(string bondsnummer, Guid verenigingId, Guid sponsorId, bool refresh)
+        {
+            ClubCloud_Sponsor response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetSponsorById(bondsnummer, verenigingId, sponsorId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        public ClubCloud_Sponsor_Afbeelding GetSponsorImageById(string bondsnummer, Guid verenigingId, Guid afbeeldingId, bool refresh)
+        {
+            ClubCloud_Sponsor_Afbeelding response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetSponsorImageById(bondsnummer, verenigingId, afbeeldingId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        #endregion
 
         #region Competitie
 
@@ -685,286 +1043,5 @@ namespace ClubCloud.Service
         */
         #endregion
 
-        #region Afhangen
-
-        public bool DeleteReservering(string bondsnummer, Guid verenigingId, Guid reserveringId, bool push = false)
-        {
-            bool response = false;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.DeleteReservering(bondsnummer, verenigingId, reserveringId, push);
-                },
-                false);
-
-            return response;
-        }
-
-        public List<ClubCloud_Baanschema> GetBaanSchemaByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false)
-        {
-            List<ClubCloud_Baanschema> response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetBaanSchemaByAccommodatieId(bondsnummer, verenigingId, accommodatieId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public List<ClubCloud_Baanschema> GetBaanSchemaByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
-        {
-            List<ClubCloud_Baanschema> response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetBaanSchemaByVerenigingId(bondsnummer, verenigingId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public List<ClubCloud_Baan> GetBanenByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false)
-        {
-            List<ClubCloud_Baan> response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetBanenByAccommodatieId(bondsnummer, verenigingId, accommodatieId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public List<ClubCloud_Baan> GetBanenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
-        {
-            List<ClubCloud_Baan> response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetBanenByVerenigingId(bondsnummer, verenigingId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public List<ClubCloud_Gebruiker> GetGebruikersByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false)
-        {
-            List<ClubCloud_Gebruiker> response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetGebruikersByReserveringId(bondsnummer, verenigingId, reserveringId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public ClubCloud_Reservering GetReserveringByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false) 
-        {
-            ClubCloud_Reservering response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetReserveringByReserveringId(bondsnummer, verenigingId, reserveringId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public List<ClubCloud_Reservering> GetReserveringenByBaanId(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false)
-        {
-            List<ClubCloud_Reservering> response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetReserveringenByBaanId(bondsnummer, verenigingId, baanId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public List<ClubCloud_Reservering> GetReserveringenByBondsnummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
-        {
-            List<ClubCloud_Reservering> response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetReserveringenByBondsnummer(bondsnummer, verenigingId, nummer, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public List<ClubCloud_Reservering> GetReserveringenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
-        {
-            List<ClubCloud_Reservering> response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetReserveringenByVerenigingId(bondsnummer, verenigingId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public ClubCloud_Vereniging GetVerenigingByLocation(string bondsnummer, double Latitude, double Longitude, bool refresh = false)
-        {
-            ClubCloud_Vereniging response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetVerenigingByLocation(bondsnummer, Latitude, Longitude, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public ClubCloud_Vereniging GetVerenigingByNummer(string bondsnummer, string verenigingNummer, bool refresh = false)
-        {
-            ClubCloud_Vereniging response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetVerenigingByNummer(bondsnummer, verenigingNummer, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime Datum,TimeSpan Tijd, TimeSpan Duur, ReserveringSoort Soort = ReserveringSoort.Afhangen, bool final = false, bool push = false, string Beschrijving = "")
-        {
-            ClubCloud_Reservering response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.SetReservering(bondsnummer, verenigingId, baanId, gebruikers, Datum,Tijd,Duur,Soort,final, push, Beschrijving);
-                },
-                false);
-
-            return response;
-        }
-
-        public ClubCloud_Reservering UpdateReservering(string bondsnummer, Guid verenigingId, ClubCloud.Service.Model.ClubCloud_Reservering reservering, bool final = false, bool push = false)
-        {
-            ClubCloud_Reservering response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.UpdateReservering(bondsnummer, verenigingId, reservering, final, push);
-                },
-                false);
-
-            return response;
-        }
-
-        public ClubCloud_Baan GetBaanById(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false)
-        {
-            ClubCloud_Baan response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetBaanById(bondsnummer, verenigingId, baanId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public ClubCloud_Gebruiker_DataView GetGebruikersByQuery(string bondsnummer, Guid verenigingId, DataSourceSelectArguments selectArgs = null, List<Parameter> parameters = null, bool refresh = false)
-        {
-            ClubCloud_Gebruiker_DataView response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetGebruikersByQuery(bondsnummer, verenigingId, selectArgs, parameters, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        public ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, Guid verenigingId, bool refresh)
-        {
-            ClubCloud_Afhang response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetVerenigingSettings(bondsnummer, verenigingId, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        #endregion
-
-        public void VerenigingenUpdate(string bondsnummer, bool refresh)
-        {
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    channel.VerenigingenUpdate(bondsnummer, refresh);
-                },
-                false);
-
-            return;
-        }
-
-        public List<ClubCloud_Gebruiker> GetGebruikersBySearch(string bondsnummer, string prefixText, int count, bool refresh)
-        {
-            List<ClubCloud_Gebruiker> response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.GetGebruikersBySearch(bondsnummer, prefixText, count, refresh);
-                },
-                false);
-
-            return response;
-        }
-
-        internal string ScaleOutConnection(string catalog)
-        {
-            string response = null;
-
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    response = channel.ScaleOutConnection(catalog);
-                },
-                false);
-
-            return response;
-        }
     }
 }

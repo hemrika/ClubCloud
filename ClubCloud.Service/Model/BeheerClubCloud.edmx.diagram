@@ -52,7 +52,7 @@
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Twee" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Drie" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Vier" />
-        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Afhang" Width="1.5" PointX="19.125" PointY="2.75" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Afhang" Width="2.75" PointX="19.125" PointY="2.75" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_AfhangenClubCloud_Vereniging" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanClubCloud_Baansoort" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baanschema" Width="2" PointX="14" PointY="4.125" />
@@ -60,6 +60,10 @@
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Foto" Width="1.5" PointX="3.625" PointY="20.125" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_LidmaatschapSoort" Width="1.5" PointX="13.125" PointY="8.125" />
         <AssociationConnector Association="BeheerClubCloud.ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Sponsor" Width="2.75" PointX="15.75" PointY="7.875" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_SponsorClubCloud_Vereniging" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Sponsor_Afbeelding" Width="1.5" PointX="19.25" PointY="8.5" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_SponsorClubCloud_Sponsor_Afbeelding" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -159,7 +159,7 @@ namespace ClubCloud.Mijn.ControlTemplates
         {
             base.OnInit(e);
             this.EnsureVisitor();
-            this.EnsureScriptManager();
+            //this.EnsureScriptManager();
             this.EnsureUpdatePanelFixups();
             //this.ExtendScript();
 
@@ -217,6 +217,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             }
         }
 
+        /*
         /// <summary>
         /// Ensures that the scriptmanager exists
         /// </summary>
@@ -235,6 +236,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                 }
             }
         }
+        */
 
         /// <summary>
         /// Fixups for update panel

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/10/2014 12:11:28
+-- Date Created: 02/03/2015 11:26:01
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Service\Model\BeheerClubCloud.edmx
 -- --------------------------------------------------
 
@@ -110,6 +110,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_Lidmaatschappen] DROP CONSTRAINT [FK_ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ClubCloud_SponsorClubCloud_Vereniging]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ClubCloud_Sponsoren] DROP CONSTRAINT [FK_ClubCloud_SponsorClubCloud_Vereniging];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ClubCloud_SponsorClubCloud_Sponsor_Afbeelding]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ClubCloud_Sponsoren] DROP CONSTRAINT [FK_ClubCloud_SponsorClubCloud_Sponsor_Afbeelding];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -181,11 +187,17 @@ GO
 IF OBJECT_ID(N'[dbo].[ClubCloud_Baanschemas]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Baanschemas];
 GO
-IF OBJECT_ID(N'[dbo].[ClubCloud_Foto]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ClubCloud_Foto];
+IF OBJECT_ID(N'[dbo].[ClubCloud_Fotos]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_Fotos];
 GO
-IF OBJECT_ID(N'[dbo].[ClubCLoud_LidmaatschapSoort]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ClubCLoud_LidmaatschapSoort];
+IF OBJECT_ID(N'[dbo].[ClubCloud_LidmaatschapSoorten]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_LidmaatschapSoorten];
+GO
+IF OBJECT_ID(N'[dbo].[ClubCloud_Sponsoren]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_Sponsoren];
+GO
+IF OBJECT_ID(N'[dbo].[ClubCloud_Sponsor_Afbeeldingen]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_Sponsor_Afbeeldingen];
 GO
 
 -- --------------------------------------------------
@@ -590,8 +602,8 @@ CREATE TABLE [dbo].[ClubCloud_Baanschemas] (
 );
 GO
 
--- Creating table 'ClubCloud_Foto'
-CREATE TABLE [dbo].[ClubCloud_Foto] (
+-- Creating table 'ClubCloud_Fotos'
+CREATE TABLE [dbo].[ClubCloud_Fotos] (
     [Id] uniqueidentifier  NOT NULL,
     [FotoId] int  NOT NULL,
     [ContentData] varbinary(max)  NULL,
@@ -609,6 +621,23 @@ CREATE TABLE [dbo].[ClubCloud_LidmaatschapSoorten] (
     [DagBegin] time  NOT NULL,
     [DagEinde] time  NOT NULL,
     [Tarief] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'ClubCloud_Sponsoren'
+CREATE TABLE [dbo].[ClubCloud_Sponsoren] (
+    [Id] uniqueidentifier  NOT NULL,
+    [VerenigingId] uniqueidentifier  NOT NULL,
+    [AfbeeldingId] uniqueidentifier  NULL,
+    [Naam] nvarchar(max)  NOT NULL,
+    [Tekst] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'ClubCloud_Sponsor_Afbeeldingen'
+CREATE TABLE [dbo].[ClubCloud_Sponsor_Afbeeldingen] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Afbeelding] varbinary(max)  NOT NULL
 );
 GO
 
@@ -748,15 +777,27 @@ ADD CONSTRAINT [PK_ClubCloud_Baanschemas]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ClubCloud_Foto'
-ALTER TABLE [dbo].[ClubCloud_Foto]
-ADD CONSTRAINT [PK_ClubCloud_Foto]
+-- Creating primary key on [Id] in table 'ClubCloud_Fotos'
+ALTER TABLE [dbo].[ClubCloud_Fotos]
+ADD CONSTRAINT [PK_ClubCloud_Fotos]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'ClubCloud_LidmaatschapSoorten'
 ALTER TABLE [dbo].[ClubCloud_LidmaatschapSoorten]
 ADD CONSTRAINT [PK_ClubCloud_LidmaatschapSoorten]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ClubCloud_Sponsoren'
+ALTER TABLE [dbo].[ClubCloud_Sponsoren]
+ADD CONSTRAINT [PK_ClubCloud_Sponsoren]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ClubCloud_Sponsor_Afbeeldingen'
+ALTER TABLE [dbo].[ClubCloud_Sponsor_Afbeeldingen]
+ADD CONSTRAINT [PK_ClubCloud_Sponsor_Afbeeldingen]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -1227,6 +1268,36 @@ GO
 CREATE INDEX [IX_FK_ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap]
 ON [dbo].[ClubCloud_Lidmaatschappen]
     ([SoortId]);
+GO
+
+-- Creating foreign key on [VerenigingId] in table 'ClubCloud_Sponsoren'
+ALTER TABLE [dbo].[ClubCloud_Sponsoren]
+ADD CONSTRAINT [FK_ClubCloud_SponsorClubCloud_Vereniging]
+    FOREIGN KEY ([VerenigingId])
+    REFERENCES [dbo].[ClubCloud_Verenigingen]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_SponsorClubCloud_Vereniging'
+CREATE INDEX [IX_FK_ClubCloud_SponsorClubCloud_Vereniging]
+ON [dbo].[ClubCloud_Sponsoren]
+    ([VerenigingId]);
+GO
+
+-- Creating foreign key on [AfbeeldingId] in table 'ClubCloud_Sponsoren'
+ALTER TABLE [dbo].[ClubCloud_Sponsoren]
+ADD CONSTRAINT [FK_ClubCloud_SponsorClubCloud_Sponsor_Afbeelding]
+    FOREIGN KEY ([AfbeeldingId])
+    REFERENCES [dbo].[ClubCloud_Sponsor_Afbeeldingen]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_SponsorClubCloud_Sponsor_Afbeelding'
+CREATE INDEX [IX_FK_ClubCloud_SponsorClubCloud_Sponsor_Afbeelding]
+ON [dbo].[ClubCloud_Sponsoren]
+    ([AfbeeldingId]);
 GO
 
 -- --------------------------------------------------

@@ -67,7 +67,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                         token = client.GetRequestToken();
                         Settings.twitter_oauth_token = token.Token;
                         Settings.twitter_oauth_token_secret = token.TokenSecret;
-                        Client.SetTwitter(Settings);
+                        Client.SetClubCloudSettings(Settings);
 
                         Response.Redirect(token.AuthorizeUrl);
                     }
@@ -95,7 +95,7 @@ namespace ClubCloud.Mijn.ControlTemplates
 
                             }
 
-                            Client.SetTwitter(Settings);
+                            Client.SetClubCloudSettings(Settings);
                         }
 
                     }

@@ -78,7 +78,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                                 string userAccessToken = client.GetAccessTokenFromAuthCode(AuthCode);
                                 Settings.facebook_access_token = userAccessToken;
                                 Settings.facebook_allow = true;
-                                Client.SetFaceBook(Settings);
+                                Client.SetClubCloudSettings(Settings);
                             }
                             catch (Exception ex)
                             {

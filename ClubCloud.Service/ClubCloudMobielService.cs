@@ -346,7 +346,7 @@ namespace ClubCloud.Service
         #endregion
 
 
-        public ClubCloud_Afhang GetVerenigingSettings(string bondsnummer, string verenigingId)
+        public ClubCloud_Afhang GetVerenigingAfhangSettings(string bondsnummer, string verenigingId)
         {
             ClubCloud_Afhang afhang = new ClubCloud_Afhang();
 
@@ -354,7 +354,7 @@ namespace ClubCloud.Service
             {
                 string LoginName = SPContext.Current.Web.CurrentUser.LoginName;
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                afhang = client.GetVerenigingSettings(bondsnummer, Guid.Parse(verenigingId), false);
+                afhang = client.GetVerenigingAfhangSettings(bondsnummer, Guid.Parse(verenigingId), false);
             }
 
             return afhang;

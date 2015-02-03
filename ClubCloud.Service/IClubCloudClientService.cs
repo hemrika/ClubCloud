@@ -20,6 +20,7 @@ namespace ClubCloud.Service
 
     public interface IClubCloudClientService
     {
+        /*
         /// <summary>
         /// Gets the current User
         /// </summary>
@@ -52,7 +53,7 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
         ClubCloud_Setting GetClubCloudSettings(string bondsnummer);
-
+        */
         /*
         /// <summary>
         /// Gets the current User
@@ -64,7 +65,7 @@ namespace ClubCloud.Service
         //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         ClubCloud_Gebruiker GetClubCloudGebruiker(bool refresh = false);
         */
-
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         //[WebInvoke(UriTemplate = "/GetCurrentUserGegevens", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
@@ -88,6 +89,7 @@ namespace ClubCloud.Service
         //[WebInvoke(UriTemplate = "/GetCurrentUserGegevens", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
         //[WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
+        */
 
         /*
         [OperationContract]
@@ -99,10 +101,18 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Tracking))]
         ClubCloud_Tracking GetTracking(string bondsnummer, bool refresh = false);
         */
-
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
         ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false);
+        */
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string[] GetGebruikerAutoComplete(string prefixText, int count, string contextKey);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string[] GetVereniningen(string prefixText, int count, string contextKey);
 
     }
 }
