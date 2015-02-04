@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="0ea4a42f-71b7-41a1-998c-7e94113c346a" solutionId="0ea4a42f-71b7-41a1-998c-7e94113c346a" resetWebServer="false" title="ClubCloud Common" description="ClubCloud Common Elements" resetWebServerModeOnUpgrade="Recycle" sharePointProductVersion="15.0" name="ClubCloud Common" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <assemblies>
     <customAssembly location="AjaxControlToolkit.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\AjaxControlToolkit.dll" />

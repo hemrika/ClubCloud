@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClubCloud.Service</RootNamespace>
     <AssemblyName>ClubCloud.Service</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetOfficeVersion>15.0</TargetOfficeVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -19,6 +19,7 @@
     <SccProvider>SAK</SccProvider>
     <SandboxedSolution>False</SandboxedSolution>
     <IncludeAssemblyInPackage>True</IncludeAssemblyInPackage>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,26 +48,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\EntityFramework.dll</HintPath>
       <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\Microsoft.AspNet.SignalR.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SqlServer, Version=2.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\Microsoft.AspNet.SignalR.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -95,6 +82,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Management" />
@@ -178,6 +166,38 @@
     <Compile Include="Model\BankAccount.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClubCloud_Sponsor.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClubCloud_Sponsor_Afbeelding.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Messages_0.cs">
+      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Messages_0_Id.cs">
+      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Schema.cs">
+      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SignalRClubCloud.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SignalRClubCloud.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SignalRClubCloud.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SignalRClubCloud.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SignalRInitializer.cs" />
+    <Compile Include="Model\SignalRConfiguration.cs" />
     <Compile Include="Model\BeheerConfiguration.cs" />
     <Compile Include="Model\BeheerClubCloud.Context.cs">
       <AutoGen>True</AutoGen>
@@ -308,6 +328,7 @@
     <Compile Include="Model\Financieel.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\BeheerFullTextInterceptor.cs" />
     <Compile Include="Model\GeslachtSoort.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
@@ -423,7 +444,12 @@
     <None Include="ISAPI\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{c6486a53-a50c-430c-8820-347e87f19a2b}</SharePointProjectItemId>
     </None>
-    <None Include="Layouts\ClubCloud.Service\jquery.min.map" />
+    <None Include="Layouts\ClubCloud.Service\jquery.signalR.min.js.map">
+      <DependentUpon>jquery.signalR.min.js</DependentUpon>
+    </None>
+    <None Include="Layouts\ClubCloud.Service\json2.min.js.map">
+      <DependentUpon>json2.min.js</DependentUpon>
+    </None>
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{beb7ab35-f6fa-4edf-885d-f25a20af9004}</SharePointProjectItemId>
     </None>
@@ -434,6 +460,12 @@
     <None Include="Model\BeheerClubCloud.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BeheerClubCloud.Context.cs</LastGenOutput>
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="Model\beheerclubcloud.edmx.compareOptions">
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="Model\beheerclubcloud.edmx.namePrefs">
       <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
     </None>
     <None Include="Model\BeheerClubCloud.tt">
@@ -457,6 +489,23 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BoekhoudingClubCloud.cs</LastGenOutput>
     </None>
+    <EntityDeploy Include="Model\SignalRClubCloud.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SignalRClubCloud.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\SignalRClubCloud.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+      <LastGenOutput>SignalRClubCloud.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Model\SignalRClubCloud.edmx.diagram">
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="Model\SignalRClubCloud.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+      <LastGenOutput>SignalRClubCloud.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Package\Package.package">
       <PackageId>{a4c0cf73-d541-41c3-a1ef-0f71fd8e03ac}</PackageId>
@@ -474,16 +523,17 @@
       <SharePointProjectItemId>{9c10b425-f593-48c9-96c1-714998bc48f6}</SharePointProjectItemId>
     </None>
     <Content Include="ISAPI\ClubCloud.Service\ClubCloud.svc" />
-    <Content Include="Layouts\ClubCloud.Service\jquery-vsdoc.js" />
-    <Content Include="Layouts\ClubCloud.Service\jquery.intellisense.js" />
-    <Content Include="Layouts\ClubCloud.Service\jquery.js" />
-    <Content Include="Layouts\ClubCloud.Service\jquery.min.js" />
     <Content Include="Layouts\ClubCloud.Service\jquery.signalR.js" />
-    <Content Include="Layouts\ClubCloud.Service\jquery.signalR.min.js" />
+    <Content Include="Layouts\ClubCloud.Service\jquery.signalR.min.js">
+      <DependentUpon>jquery.signalR.js</DependentUpon>
+    </Content>
     <Content Include="Layouts\ClubCloud.Service\json2.js" />
-    <Content Include="Layouts\ClubCloud.Service\json2.min.js" />
+    <Content Include="Layouts\ClubCloud.Service\json2.min.js">
+      <DependentUpon>json2.js</DependentUpon>
+    </Content>
     <Content Include="Model\BeheerClubCloud.edmx.sql" />
     <Content Include="Model\BoekhoudingClubCloud.edmx.sql" />
+    <Content Include="Model\SignalRClubCloud.edmx.sql" />
     <Content Include="WebClients\ClubCloud.Service\client.config" />
     <None Include="WebClients\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{28dc8612-1ccf-4bab-a0bc-5aa788ef9f8b}</SharePointProjectItemId>
@@ -494,22 +544,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClubCloud.KNLTB\ClubCloud.KNLTB.csproj">
+      <Project>{b98cd37b-e5d0-49e4-a765-f8fba945e050}</Project>
+      <Name>ClubCloud.KNLTB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClubCloud.Provider\ClubCloud.Provider.csproj">
       <Project>{b259747c-7741-4b61-b261-24fbbe284f05}</Project>
       <Name>ClubCloud.Provider</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\ClubCloud.KNLTB.Servit\ClubCloud.KNLTB.Servit.csproj">
-      <Project>{b98cd37b-e5d0-49e4-a765-f8fba945e050}</Project>
-      <Name>ClubCloud.KNLTB.Servit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ClubCloud.SignalR\ClubCloud.SignalR.csproj">
-      <Project>{f2138894-1b9e-4ee4-954b-2414a1c74051}</Project>
-      <Name>ClubCloud.SignalR</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\ClubCloud.Zimbra\ClubCloud.Zimbra.csproj">
       <Project>{04f1320b-7fd4-4429-985c-b3946ed2f519}</Project>
       <Name>ClubCloud.Zimbra</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -553,4 +600,8 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(SolutionDir)\SPSF.targets" Condition="!Exists('$(MSBuildProjectDirectory)\..\SPSF.targets')" />
+  <Import Project="$(MSBuildProjectDirectory)\..\SPSF.targets" Condition="Exists('$(MSBuildProjectDirectory)\..\SPSF.targets')" />
+  <Target Name="BeforeBuild" DependsOnTargets="$(BeforeBuildDependsOn)" />
+  <Target Name="AfterBuild" DependsOnTargets="$(AfterBuildDependsOn)" />
 </Project>

@@ -23,7 +23,7 @@ function OnClientCompleted(sender, e) {
 <div class="first dark">
 <asp:UpdateProgress ID="udp_progress" runat="server" AssociatedUpdatePanelID="udp_aanmelden">
     <ProgressTemplate>
-        <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity=80); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; z-index: 10000;">
+        <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0; left: 0; width: 100%; height: 100%;  -moz-opacity: 0.8; opacity: 0.8; filter: alpha(opacity=80); -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)'; z-index: 10000;">
         <div class="bubbles aligncenter" style="top:48%; z-index: 10000;">laden...</div>
         </div>
     </ProgressTemplate>
@@ -43,49 +43,111 @@ function OnClientCompleted(sender, e) {
                 <StepStyle CssClass="button big" />
                 <WizardSteps>
                     <asp:WizardStep ID="wzd_vereniging" runat="server" Title="Uw vereniging" StepType="Start">
-                        <asp:Panel runat="server" ID="pnl_vereniging">
+                        <asp:Panel runat="server" ID="pnl_vereniging" CssClass="forms">
                             <br />
-                            <i class="icon-address special"></i>
-                            <div class="three-fourth info">
-
-                                <h3 class="lined">Verenigingsnummer</h3>
-                                <p>
-                                    <asp:TextBox ID="tbx_verenigingsnummer" TextMode="SingleLine" runat="server" AutoPostBack="true" OnTextChanged="tbx_verenigingsnummer_TextChanged" type="number" Width="100%"/>
-                                    <ajaxToolkit:AutoCompleteExtender ID="Verenigingsnummer_AutoCompleteExtender" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetVereniningen" ServicePath="//mijn.clubcloud.nl/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" TargetControlID="tbx_verenigingsnummer" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="5" CompletionInterval="1000" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating">
-                                        <Animations>
+                            <div class="three-fourth info ">
+                                <fieldset>
+                                    <legend style="width:100%" ><i class="icon-address special"></i><h2>Vereniging</h2></legend>
+                                    <br />
+                                    <p>
+                                        <label>Verenigingsnummer : </label>
+                                        <asp:TextBox ID="tbx_verenigingsnummer" TextMode="SingleLine" runat="server" AutoPostBack="true" OnTextChanged="tbx_verenigingsnummer_TextChanged" Width="80%" placeholder="Uw verenigingsnummer" />
+                                        <ajaxToolkit:AutoCompleteExtender ID="Verenigingsnummer_AutoCompleteExtender" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetVereniningen" ServicePath="//mijn.clubcloud.nl/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" TargetControlID="tbx_verenigingsnummer" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="5" CompletionInterval="1000" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating">
+                                            <Animations>
                                        <OnShow><Sequence><OpacityAction Opacity="0" /><HideAction Visible="true" /><Parallel Duration=".4"><FadeIn /></Parallel></Sequence></OnShow>
                                        <OnHide><Parallel Duration=".4"><FadeOut /></Parallel></OnHide>
-                                        </Animations>
-                                    </ajaxToolkit:AutoCompleteExtender>
-                                </p>
-                                <p class="capitalize">
-                                    <asp:FormView ID="fvw_aanmelden" runat="server" RenderOuterTable="false" DataKeyNames="Id">
-                                        <ItemTemplate>
-                                            Naam :
-                                            <asp:TextBox ID="Naam" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "Naam") %>' /><br />
-                                            Kvk :
-                                            <asp:TextBox ID="KvKNummer" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "KvKnummer") %>'  Width="40%"/> te
-                                            <asp:TextBox ID="KvKPlaats" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "KvKplaats") %>'  Width="40%"/><br />
-                                            IBAN :
-                                            <asp:TextBox ID="TextBox1" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "BankIban") %>' /><br />
-                                        </ItemTemplate>
-                                    </asp:FormView>
+                                            </Animations>
+                                        </ajaxToolkit:AutoCompleteExtender>
+                                        <asp:FormView ID="fvw_vereniging" runat="server" RenderOuterTable="false" DataKeyNames="Id">
+                                            <ItemTemplate>
+                                                <label>Naam : </label>
+                                                <asp:TextBox ID="Naam" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "Naam") %>' Width="80%" />
+                                                <label>Kvk : </label>
+                                                <asp:TextBox ID="KvKNummer" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "KvKnummer") %>' Width="20%" />
+                                                te 
+                                                <asp:TextBox ID="KvKPlaats" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "KvKplaats") %>' Width="57%" /><br />
+                                                <label>Bankrekening: </label>
+                                                <asp:TextBox ID="BankNummer" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "BankNummer") %>' Width="20%" />
+                                                IBAN : 
+                                                <asp:TextBox ID="BankIban" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "BankIban") %>' Width="26%" />
+                                                te 
+                                                <asp:TextBox ID="BankPlaats" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "BankPlaats") %>' Width="26%" /><br />
+                                                <label>Telefoon Overdag : </label>
+                                                <asp:TextBox ID="TelefoonOverdag" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "TelefoonOverdag") %>' Width="80%" /><br />
+                                                <label>Telefoon Avond </label>
+                                                <asp:TextBox ID="TelefoonAvond" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "TelefoonAvond") %>' Width="80%" /><br />
+                                                <label>Email </label>
+                                                <asp:TextBox ID="Email" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "EmailKNLTB") %>' Width="80%" /><br />
+                                            </ItemTemplate>
+                                        </asp:FormView>
+                                    </p>
+                                </fieldset>
+                            </div>
+                        </asp:Panel>
+                    </asp:WizardStep>
+                    <asp:WizardStep ID="wzd_gegevens" runat="server" Title="Gegevens" StepType="Step">
+                        <asp:Panel runat="server" ID="pnl_gegevens" CssClass="forms">
+                            <br />
+                            <div class="three-fourth info ">
+                                <fieldset>
+                                    <legend style="width:100%" ><i class="icon-user special"></i>
+                                        <h2>Uw gegevens</h2>
+                                    </legend>
+                                    <br />
+                                    <p>
+                                        <asp:FormView ID="fvw_persoon" runat="server" RenderOuterTable="false" DefaultMode="Insert">
+                                            <InsertItemTemplate>
+                                                <label>Bondsnummer : </label>
+                                                <asp:TextBox ID="KNLTBNummer" TextMode="SingleLine" runat="server" Width="80%" placeholder="KNLTB nummer" />
+                                                <label>Naam : </label>
+                                                <asp:TextBox ID="Naam" TextMode="SingleLine" runat="server" Width="80%" placeholder="Uw Naam"/>
+                                                <label>Telefoon Overdag : </label>
+                                                <asp:TextBox ID="TelefoonOverdag" TextMode="SingleLine" runat="server" Width="80%" placeholder="Telefoon overdag"/><br />
+                                                <label>Telefoon Avond </label>
+                                                <asp:TextBox ID="TelefoonAvond" TextMode="SingleLine" runat="server" Width="80%" placeholder="Telefoon avond"/><br />
+                                                <label>Email </label>
+                                                <asp:TextBox ID="Email" TextMode="SingleLine" runat="server" Width="80%" placeholder="Uw email"/><br />
+                                            </InsertItemTemplate>
+                                        </asp:FormView>
+                                    </p>
+                                </fieldset>
+                            </div>
+                        </asp:Panel>
+                    </asp:WizardStep>
+                    <asp:WizardStep ID="wzd_opties" runat="server" Title="Opties" StepType="Step">
+                        <asp:Panel runat="server" ID="pnl_opties" CssClass="forms">
+                            <br />
+                            <i class="icon-user special"></i>
+                            <div class="three-fourth info ">
+                                <h3 class="lined">Opties</h3>
+                                <p>
                                 </p>
                             </div>
                         </asp:Panel>
                     </asp:WizardStep>
-                    <asp:WizardStep ID="wzd_gegevens" runat="server" Title="Uw gegevens" StepType="Step">
-                        <div class="content">This is Step Gegevens</div>
-                        </div>
-                    </asp:WizardStep>
-                    <asp:WizardStep ID="wzd_opties" runat="server" Title="De Opties" StepType="Step">
-                        <div class="content">This is Step Opties</div>
-                    </asp:WizardStep>
-                    <asp:WizardStep ID="wzd_voorwaarden" runat="server" Title="De voorwaarden" StepType="Step">
-                        <div class="content">This is Step Voorwaarden</div>
+                    <asp:WizardStep ID="wzd_voorwaarden" runat="server" Title="Voorwaarden" StepType="Step">
+                        <asp:Panel runat="server" ID="pnl_voorwaarden" CssClass="forms">
+                            <br />
+                            <i class="icon-user special"></i>
+                            <div class="three-fourth info ">
+                                <h3 class="lined">voorwaarden</h3>
+                                <p>
+                                    Op alle aanbiedingen en overeenkomsten zijn de Nederland ICT Voorwaarden van toepassing, gedeponeerd bij de Kamer van Koophandel te Midden-Nederland onder nummer 30174840.<br />
+                                    <a href="https://onedrive.live.com/embed?cid=E2EF8A57AA853CB3&resid=E2EF8A57AA853CB3%21128&authkey=AFHwySTc3F1Vxi0&em=2" target="_blank">Voorwaarden lezen</a>
+                                </p>
+                            </div>
+                        </asp:Panel>
                     </asp:WizardStep>
                     <asp:WizardStep ID="wzd_afronden" runat="server" Title="Aanmelden" StepType="Finish">
-                        <div class="content">This is Step Finish</div>
+                        <asp:Panel runat="server" ID="pnl_aanmelden" CssClass="forms">
+                            <br />
+                            <i class="icon-user special"></i>
+                            <div class="three-fourth info ">
+                                <h3 class="lined">Afronden</h3>
+                                <p>
+                                </p>
+                            </div>
+                        </asp:Panel>
                     </asp:WizardStep>
                     <asp:WizardStep ID="wzd_klaar" runat="server" Title="Vervolg" StepType="Complete">
                         <i class="icon-info special"></i>
@@ -115,7 +177,6 @@ function OnClientCompleted(sender, e) {
                 </HeaderTemplate>
             </asp:Wizard>
             <ClubCloud:ClubCloudDataSource ID="VerenigingDataSource" runat="server" />
-            <asp:GridView ID="GridView1" runat="server" DataSourceID="VerenigingDataSource"></asp:GridView>
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="tmr_loader_aanmelden" EventName="Tick" />

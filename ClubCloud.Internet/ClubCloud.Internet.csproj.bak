@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClubCloud.Internet</RootNamespace>
     <AssemblyName>ClubCloud.Internet</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetOfficeVersion>15.0</TargetOfficeVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -19,6 +19,7 @@
     <SccProvider>SAK</SccProvider>
     <SandboxedSolution>False</SandboxedSolution>
     <IncludeAssemblyInPackage>True</IncludeAssemblyInPackage>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,23 +44,57 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxMin, Version=4.57.4561.28951, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\AjaxMin.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aanmelden\AanmeldenWebPart.cs" />
+    <Compile Include="Aanmelden\AanmeldenUserControl.ascx.cs">
+      <DependentUpon>AanmeldenUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aanmelden\AanmeldenUserControl.ascx.designer.cs">
+      <DependentUpon>AanmeldenUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Aanmelden\AanmeldenView.cs" />
+    <Compile Include="Features\Aanmelden\Aanmelden.EventReceiver.cs">
+      <DependentUpon>Aanmelden.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="key.snk" />
+    <None Include="Aanmelden\Aanmelden.webpart" />
+    <None Include="Aanmelden\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{89a077e4-692e-45e7-9455-b4a7cdfe01f0}</SharePointProjectItemId>
+    </None>
+    <None Include="app.config" />
+    <None Include="Features\Aanmelden\Aanmelden.feature">
+      <FeatureId>{7e69b3b7-b4ef-42a8-9d19-6315d3cd67f5}</FeatureId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{c8918724-a19a-46d4-8300-2e8d88798c37}</PackageId>
     </None>
@@ -68,7 +103,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\" />
+    <ProjectReference Include="..\ClubCloud.Common\ClubCloud.Common.csproj">
+      <Project>{90fe486f-d24e-4290-8e0b-633fa72e5314}</Project>
+      <Name>ClubCloud.Common</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
+      <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
+      <Name>ClubCloud.Service</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Aanmelden\AanmeldenUserControl.ascx" />
+    <Content Include="Aanmelden\Elements.xml" />
+    <Content Include="Features\Aanmelden\Aanmelden.Template.xml">
+      <DependentUpon>Aanmelden.feature</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

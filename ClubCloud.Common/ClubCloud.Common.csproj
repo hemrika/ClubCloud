@@ -19,6 +19,7 @@
     <SccProvider>SAK</SccProvider>
     <SandboxedSolution>False</SandboxedSolution>
     <TargetFrameworkProfile />
+    <IncludeAssemblyInPackage>True</IncludeAssemblyInPackage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1352,4 +1353,8 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(SolutionDir)\SPSF.targets" Condition="!Exists('$(MSBuildProjectDirectory)\..\SPSF.targets')" />
+  <Import Project="$(MSBuildProjectDirectory)\..\SPSF.targets" Condition="Exists('$(MSBuildProjectDirectory)\..\SPSF.targets')" />
+  <Target Name="BeforeBuild" DependsOnTargets="$(BeforeBuildDependsOn)" />
+  <Target Name="AfterBuild" DependsOnTargets="$(AfterBuildDependsOn)" />
 </Project>

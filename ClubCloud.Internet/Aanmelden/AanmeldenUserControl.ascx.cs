@@ -101,8 +101,8 @@ namespace ClubCloud.Internet
 
         protected void wzd_aanmelden_FinishButtonClick(object sender, WizardNavigationEventArgs e)
         {
-            FormViewRow row = fvw_aanmelden.Row;
-            TextBox tbx_naam = (TextBox)fvw_aanmelden.FindControl("Naam");
+            FormViewRow row = fvw_vereniging.Row;
+            TextBox tbx_naam = (TextBox)fvw_vereniging.FindControl("Naam");
             string naam = tbx_naam.Text;
 
         }
@@ -146,12 +146,12 @@ namespace ClubCloud.Internet
         {
             string lookup = tbx_verenigingsnummer.Text;
             string number = string.Empty;
-            bool complete = false;
+            //bool complete = false;
 
             if (lookup.IndexOf('-') > 0)
             {
                 number = lookup.Split('-')[0].Trim();
-                complete = true;
+                //complete = true;
             }
             else
             {
@@ -167,14 +167,14 @@ namespace ClubCloud.Internet
                 VerenigingDataSource.View.WhereParameters.Clear();
 
                 VerenigingDataSource.View.WhereParameters.Add(new Parameter { Name = "nummer", DefaultValue = number, DbType = System.Data.DbType.String });
-                fvw_aanmelden.DataSourceID = "VerenigingDataSource";
+                fvw_vereniging.DataSourceID = "VerenigingDataSource";
             }
             else
             {
                 //AanmeldenDataSource.ViewName = this.ViewName;
 
                 //AanmeldenDataSource.Assembly = typeof(AanmeldenView).Assembly; //Assembly.GetCallingAssembly();
-                fvw_aanmelden.DataSourceID = string.Empty;
+                fvw_vereniging.DataSourceID = string.Empty;
                 VerenigingDataSource.View.WhereParameters.Clear();
             }
 

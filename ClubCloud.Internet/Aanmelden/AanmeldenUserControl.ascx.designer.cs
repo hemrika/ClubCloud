@@ -85,13 +85,13 @@ namespace ClubCloud.Internet {
         protected global::AjaxControlToolkit.AutoCompleteExtender Verenigingsnummer_AutoCompleteExtender;
         
         /// <summary>
-        /// fvw_aanmelden control.
+        /// fvw_vereniging control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView fvw_aanmelden;
+        protected global::System.Web.UI.WebControls.FormView fvw_vereniging;
         
         /// <summary>
         /// wzd_gegevens control.
@@ -103,6 +103,24 @@ namespace ClubCloud.Internet {
         protected global::System.Web.UI.WebControls.WizardStep wzd_gegevens;
         
         /// <summary>
+        /// pnl_gegevens control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_gegevens;
+        
+        /// <summary>
+        /// fvw_persoon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FormView fvw_persoon;
+        
+        /// <summary>
         /// wzd_opties control.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,15 @@ namespace ClubCloud.Internet {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.WizardStep wzd_opties;
+        
+        /// <summary>
+        /// pnl_opties control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_opties;
         
         /// <summary>
         /// wzd_voorwaarden control.
@@ -121,6 +148,15 @@ namespace ClubCloud.Internet {
         protected global::System.Web.UI.WebControls.WizardStep wzd_voorwaarden;
         
         /// <summary>
+        /// pnl_voorwaarden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_voorwaarden;
+        
+        /// <summary>
         /// wzd_afronden control.
         /// </summary>
         /// <remarks>
@@ -128,6 +164,15 @@ namespace ClubCloud.Internet {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.WizardStep wzd_afronden;
+        
+        /// <summary>
+        /// pnl_aanmelden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_aanmelden;
         
         /// <summary>
         /// wzd_klaar control.
@@ -146,15 +191,6 @@ namespace ClubCloud.Internet {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ClubCloud.Common.Controls.ClubCloudDataSource VerenigingDataSource;
-        
-        /// <summary>
-        /// GridView1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
         /// lbl_result control.

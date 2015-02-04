@@ -20,6 +20,7 @@ namespace ClubCloud.Service
     using System.Data.Entity.Spatial;
     using System.Data.SqlClient;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Globalization;
     using System.IO;
@@ -310,7 +311,7 @@ namespace ClubCloud.Service
 #if DEBUG
             pageInfo.Count = 10;
 #else
-            pageINfo.Count = 50;
+            pageInfo.Count = 50;
 #endif
             pageInfo.PageNumber = pageNum;
             QueryExpression query = new QueryExpression();
@@ -2286,7 +2287,7 @@ namespace ClubCloud.Service
             List<ClubCloud_Gebruiker> gebruikers = beheerModel.ClubCloud_Gebruikers.Where(g => g.Volledigenaam.Contains(fts)).Take(count).ToList();
             return gebruikers;
             //}
-            return new List<ClubCloud_Gebruiker>();
+            //return new List<ClubCloud_Gebruiker>();
         }
 
         #endregion
@@ -3410,6 +3411,7 @@ namespace ClubCloud.Service
         {
             AddressById(bondsnummer, addressId, false, settings);
         }
+        
 
         /// <summary>
         /// 
