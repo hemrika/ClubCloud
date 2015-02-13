@@ -1,4 +1,4 @@
-﻿using ClubCloud.Service.Model;
+﻿using ClubCloud.Model;
 using Microsoft.SharePoint;
 using System;
 using System.Linq;
@@ -45,7 +45,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                 try
                 {
                     vereniging = Client.GetVerenigingById(userId, Settings.VerenigingId.Value);
-                    vereniging.ClubCloud_Accomodatie = Client.GetAccommodatieForVereniging(userId, vereniging.Id);
+                    vereniging.ClubCloud_Accommodatie = Client.GetAccommodatieForVereniging(userId, vereniging.Id);
                     vereniging.ClubCloud_Lidmaatschap = Client.GetLidmaatschapByGebruikerId(userId, vereniging.Id, Settings.GebruikerId.Value, false);
                 }
                 catch { }
@@ -69,7 +69,7 @@ namespace ClubCloud.Mijn.ControlTemplates
 
                     try
                     {
-                        fvw_accomodatie.DataSource = new List<ClubCloud_Accomodatie> { vereniging.ClubCloud_Accomodatie };
+                        fvw_accomodatie.DataSource = new List<ClubCloud_Accommodatie> { vereniging.ClubCloud_Accommodatie };
                         fvw_accomodatie.DataBind();
                     }
                     catch { }

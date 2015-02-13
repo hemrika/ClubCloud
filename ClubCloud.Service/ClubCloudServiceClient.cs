@@ -11,7 +11,7 @@ namespace ClubCloud.Service
     using System.Linq;
     using System.Text;
     using Microsoft.SharePoint;
-    using ClubCloud.Service.Model;
+    using ClubCloud.Model;
     using System.Threading.Tasks;
     using System.Web.UI;
     using System.Web.UI.WebControls;
@@ -289,9 +289,9 @@ namespace ClubCloud.Service
 
         }
 
-        public ClubCloud_Accomodatie GetAccommodatieForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false)
+        public ClubCloud_Accommodatie GetAccommodatieForVereniging(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
-            ClubCloud_Accomodatie response = null;
+            ClubCloud_Accommodatie response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
@@ -304,9 +304,9 @@ namespace ClubCloud.Service
 
         }
 
-        public ClubCloud_Accomodatie GetAccomodatie(string bondsnummer, Guid verenigingId, bool refresh = false)
+        public ClubCloud_Accommodatie GetAccomodatie(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
-            ClubCloud_Accomodatie response = null;
+            ClubCloud_Accommodatie response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
@@ -432,7 +432,6 @@ namespace ClubCloud.Service
         */
 
         #endregion
-
 
         #region Afhangen
 
@@ -618,7 +617,7 @@ namespace ClubCloud.Service
             return response;
         }
 
-        public ClubCloud_Reservering UpdateReservering(string bondsnummer, Guid verenigingId, ClubCloud.Service.Model.ClubCloud_Reservering reservering, bool final = false, bool push = false)
+        public ClubCloud_Reservering UpdateReservering(string bondsnummer, Guid verenigingId, ClubCloud.Model.ClubCloud_Reservering reservering, bool final = false, bool push = false)
         {
             ClubCloud_Reservering response = null;
 
@@ -675,18 +674,6 @@ namespace ClubCloud.Service
         }
 
         #endregion
-
-        public void VerenigingenUpdate(string bondsnummer, bool refresh)
-        {
-            this.ExecuteOnChannel<IClubCloudApplicationService>(
-                delegate(IClubCloudApplicationService channel)
-                {
-                    channel.VerenigingenUpdate(bondsnummer, refresh);
-                },
-                false);
-
-            return;
-        }
 
         #region SignalR
 
@@ -790,6 +777,136 @@ namespace ClubCloud.Service
                 delegate(IClubCloudApplicationService channel)
                 {
                     response = channel.GetSponsorImageById(bondsnummer, verenigingId, afbeeldingId, refresh);
+                },
+                false);
+
+            return response;
+        }
+
+        #endregion
+
+        #region Administratie
+
+        public void VerenigingenUpdate(string bondsnummer, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.VerenigingenUpdate(bondsnummer, refresh);
+                },
+                false);
+
+            return;
+        }
+
+        public void LidmaatschappenUpdate(string bondsnummer, Guid verenigingId, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.LidmaatschappenUpdate(bondsnummer, verenigingId, refresh);
+                },
+                false);
+
+            return;
+        }
+
+        public void NationaliteitenUpdate(string bondsnummer, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.NationaliteitenUpdate(bondsnummer, refresh);
+                },
+                false);
+
+            return;
+        }
+
+        public void DistrictenUpdate(string bondsnummer, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.DistrictenUpdate(bondsnummer, refresh);
+                },
+                false);
+
+            return;
+        }
+
+        public void RechtsvormenUpdate(string bondsnummer, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.RechtsvormenUpdate(bondsnummer, refresh);
+                },
+                false);
+
+            return;
+        }
+
+        public void FunctiesUpdate(string bondsnummer, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.FunctiesUpdate(bondsnummer, refresh);
+                },
+                false);
+
+            return;
+        }
+
+        public void VerenigingZimbra(string bondsnummer, ClubCloud_Vereniging vereniging)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.VerenigingZimbra(bondsnummer, vereniging);
+                },
+                true);
+
+            return;
+
+        }
+
+        public void GebruikerZimbra(string bondsnummer, ClubCloud_Gebruiker gebruiker)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.GebruikerZimbra(bondsnummer, gebruiker);
+                },
+                true);
+
+            return;
+
+        }
+
+        public List<ClubCloud_Functionaris> GetFunctionarissen()
+        {
+            List<ClubCloud_Functionaris> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetFunctionarissen();
+                },
+                false);
+
+            return response;
+        }
+
+        public List<ClubCloud_Vereniging> GetVerenigingen()
+        {
+            List<ClubCloud_Vereniging> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetVerenigingen();
                 },
                 false);
 

@@ -9,7 +9,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Runtime.InteropServices;
 using Microsoft.SharePoint;
-using ClubCloud.Service.Model;
+using ClubCloud.Model;
 using System.Reflection;
 
 namespace ClubCloud.Administratie.WebControls

@@ -213,9 +213,9 @@ namespace ClubCloud.Zimbra
 
         public string Authenticate(string UserName, string Password, bool IsAdmin = false)
         {
-            configuration.Server.UserName = UserName;
-            configuration.Server.Password = Password;
-            configuration.Server.IsAdmin = IsAdmin;
+            //configuration.Server.UserName = UserName;
+            //configuration.Server.Password = Password;
+            //configuration.Server.IsAdmin = IsAdmin;
 
             string AuthToken = string.Empty;
 

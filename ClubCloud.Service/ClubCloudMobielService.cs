@@ -6,7 +6,7 @@
 namespace ClubCloud.Service
 {
     using ClubCloud.Provider;
-    using ClubCloud.Service.Model;
+    using ClubCloud.Model;
     using Microsoft.IdentityModel.Web;
     using Microsoft.SharePoint;
     using Microsoft.SharePoint.Administration;

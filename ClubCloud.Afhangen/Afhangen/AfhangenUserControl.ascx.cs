@@ -1,5 +1,5 @@
 ﻿using AjaxControlToolkit;
-using ClubCloud.Service.Model;
+using ClubCloud.Model;
 using Microsoft.SharePoint;
 using System;
 using System.Web.UI;
@@ -136,7 +136,7 @@ namespace ClubCloud.Afhangen
         {
 
             ClubCloud_Vereniging vereniging = Client.GetVerenigingByNummer("0000000", "82503", false);
-            ClubCloud_Afhang settings = Client.GetVerenigingSettings("00000000", vereniging.Id, false);
+            ClubCloud_Afhang settings = Client.GetVerenigingAfhangSettings("00000000", vereniging.Id, false);
             //Client.VerenigingenUpdate("12073385", true);
         }
 

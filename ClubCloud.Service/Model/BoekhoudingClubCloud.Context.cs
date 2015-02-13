@@ -19,6 +19,11 @@ namespace ClubCloud.Service.Model
     public partial class BoekhoudingContainer : DbContext
     {
     	private static string NameOrConnectionString = "name=BoekhoudingContainer";
+    	
+    	static BoekhoudingContainer ()
+    	{
+            //DbInterception.Add(new BeheerFullTextInterceptor());
+        }
     
     	public BoekhoudingContainer()
             : this(false) { }
@@ -42,7 +47,7 @@ namespace ClubCloud.Service.Model
     		}
     		catch { }
     
-    		Database.Initialize(true);
+    		Database.Initialize(false);
     
     		//Database.SetInitializer<BoekhoudingContainer>(new CreateDatabaseIfNotExists<BoekhoudingContainer>());
     		//Database.SetInitializer<BoekhoudingContainer>(new MigrateDatabaseToLatestVersion<BoekhoudingContainer, BoekhoudingConfiguration>());

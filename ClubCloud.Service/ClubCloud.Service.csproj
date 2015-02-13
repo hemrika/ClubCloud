@@ -115,6 +115,27 @@
     <Compile Include="ADMIN\ClubCloud.Service\CreateApplication.aspx.designer.cs">
       <DependentUpon>CreateApplication.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ADMIN\ClubCloud.Service\CreateUser.aspx.cs">
+      <DependentUpon>CreateUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ADMIN\ClubCloud.Service\CreateUser.aspx.designer.cs">
+      <DependentUpon>CreateUser.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ADMIN\ClubCloud.Service\ManageMetaData.aspx.cs">
+      <DependentUpon>ManageMetaData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ADMIN\ClubCloud.Service\ManageMetaData.aspx.designer.cs">
+      <DependentUpon>ManageMetaData.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ADMIN\ClubCloud.Service\ManageUsers.aspx.cs">
+      <DependentUpon>ManageUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ADMIN\ClubCloud.Service\ManageUsers.aspx.designer.cs">
+      <DependentUpon>ManageUsers.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ADMIN\ClubCloud.Service\DatabaseSettings.aspx.cs">
       <DependentUpon>DatabaseSettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -157,253 +178,6 @@
     <Compile Include="IClubCloudAfhangenService.cs" />
     <Compile Include="IClubCloudClientService.cs" />
     <Compile Include="IClubCloudApplicationService.cs" />
-    <Compile Include="Model\BaanSoort.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Balance.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BankAccount.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Sponsor.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Sponsor_Afbeelding.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Messages_0.cs">
-      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Messages_0_Id.cs">
-      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Schema.cs">
-      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SignalRClubCloud.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SignalRClubCloud.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SignalRClubCloud.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SignalRClubCloud.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SignalRInitializer.cs" />
-    <Compile Include="Model\SignalRConfiguration.cs" />
-    <Compile Include="Model\BeheerConfiguration.cs" />
-    <Compile Include="Model\BeheerClubCloud.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BeheerClubCloud.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BeheerClubCloud.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BeheerClubCloud.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BoekhoudingClubCloud.Context.cs">
-      <DependentUpon>BoekhoudingClubCloud.Context.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Model\BoekhoudingClubCloud.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Model\BoekhoudingClubCloud.Designer.cs">
-      <DependentUpon>BoekhoudingClubCloud.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Model\BoekhoudingConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Model\BoekhoudingInitializer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Accomodatie.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Address.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Afhang.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Baan.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Baanschema.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Baansoort.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_BaanSpeciaal.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Baantype.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Bestuursorgaan.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Bouwaard.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_District.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Foto.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Functie.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Functionaris.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Gebruiker.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Gebruiker_DataView.cs" />
-    <Compile Include="Model\BeheerInitializer.cs" />
-    <Compile Include="Model\ClubCloud_Lidmaatschap.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_LidmaatschapSoort.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Nationaliteit.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Profiel.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Rechtsvorm.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Regio.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Reservering.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Setting.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ClubCloud_Vereniging.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\CostCenter.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Days.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DirectionType.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Facebook.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\FinancialYear.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Financieel.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BeheerFullTextInterceptor.cs" />
-    <Compile Include="Model\GeslachtSoort.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Invoice.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\InvoiceEntry.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\InvoiceState.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\InvoiceType.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Journal.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\JournalEntry.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\JournalTransaction.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\JournalType.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\JournalYear.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Ledger.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\LedgerCategory.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\LedgerType.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Month.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Payable.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Privacy.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Product.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Receivable.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Relation.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ReserveringSoort.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Result.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ResultType.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Tax.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Term.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Twitter.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
     <Compile Include="Powershell\NewClubCloudServiceApplication.cs" />
     <Compile Include="Powershell\NewClubCloudServiceApplicationProxy.cs" />
     <Compile Include="Powershell\RemoveClubCloudService.cs" />
@@ -419,10 +193,6 @@
     <Compile Include="ClubCloudServiceProxy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Model\BoekhoudingClubCloud.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BoekhoudingClubCloud.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="AdministrationActions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3c023b27-e77a-4c0b-836e-546474e0b74e}</SharePointProjectItemId>
     </None>
@@ -436,6 +206,9 @@
     <None Include="Features\ClubCloudServiceAdministration\ClubCloudServiceAdministration.feature">
       <FeatureId>{95303089-9602-4186-a353-cb5f1405a9ac}</FeatureId>
     </None>
+    <Content Include="ADMIN\ClubCloud.Service\CreateUser.aspx" />
+    <Content Include="ADMIN\ClubCloud.Service\ManageMetaData.aspx" />
+    <Content Include="ADMIN\ClubCloud.Service\ManageUsers.aspx" />
     <Content Include="ISAPI\ClubCloud.Mobiel\Mobiel.svc" />
     <Content Include="ISAPI\ClubCloud.Afhangen\Afhangen.svc" />
     <Content Include="ISAPI\ClubCloud.Service\web.config" />
@@ -452,59 +225,6 @@
     </None>
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{beb7ab35-f6fa-4edf-885d-f25a20af9004}</SharePointProjectItemId>
-    </None>
-    <EntityDeploy Include="Model\BeheerClubCloud.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BeheerClubCloud.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\BeheerClubCloud.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BeheerClubCloud.Context.cs</LastGenOutput>
-      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
-    </None>
-    <None Include="Model\beheerclubcloud.edmx.compareOptions">
-      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
-    </None>
-    <None Include="Model\beheerclubcloud.edmx.namePrefs">
-      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
-    </None>
-    <None Include="Model\BeheerClubCloud.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BeheerClubCloud.cs</LastGenOutput>
-      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
-    </None>
-    <None Include="Model\BeheerClubCloud.edmx.diagram">
-      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
-    </None>
-    <None Include="Model\BoekhoudingClubCloud.Context.tt">
-      <DependentUpon>BoekhoudingClubCloud.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BoekhoudingClubCloud.Context.cs</LastGenOutput>
-    </None>
-    <None Include="Model\BoekhoudingClubCloud.edmx.diagram">
-      <DependentUpon>BoekhoudingClubCloud.edmx</DependentUpon>
-    </None>
-    <None Include="Model\BoekhoudingClubCloud.tt">
-      <DependentUpon>BoekhoudingClubCloud.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BoekhoudingClubCloud.cs</LastGenOutput>
-    </None>
-    <EntityDeploy Include="Model\SignalRClubCloud.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SignalRClubCloud.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\SignalRClubCloud.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
-      <LastGenOutput>SignalRClubCloud.Context.cs</LastGenOutput>
-    </None>
-    <None Include="Model\SignalRClubCloud.edmx.diagram">
-      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
-    </None>
-    <None Include="Model\SignalRClubCloud.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
-      <LastGenOutput>SignalRClubCloud.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Package\Package.package">
@@ -531,9 +251,6 @@
     <Content Include="Layouts\ClubCloud.Service\json2.min.js">
       <DependentUpon>json2.js</DependentUpon>
     </Content>
-    <Content Include="Model\BeheerClubCloud.edmx.sql" />
-    <Content Include="Model\BoekhoudingClubCloud.edmx.sql" />
-    <Content Include="Model\SignalRClubCloud.edmx.sql" />
     <Content Include="WebClients\ClubCloud.Service\client.config" />
     <None Include="WebClients\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{28dc8612-1ccf-4bab-a0bc-5aa788ef9f8b}</SharePointProjectItemId>
@@ -547,6 +264,10 @@
     <ProjectReference Include="..\ClubCloud.KNLTB\ClubCloud.KNLTB.csproj">
       <Project>{b98cd37b-e5d0-49e4-a765-f8fba945e050}</Project>
       <Name>ClubCloud.KNLTB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClubCloud.Model\ClubCloud.Model.csproj">
+      <Project>{97cb96d6-3b6b-4879-a961-9166a73c7614}</Project>
+      <Name>ClubCloud.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\ClubCloud.Provider\ClubCloud.Provider.csproj">
       <Project>{b259747c-7741-4b61-b261-24fbbe284f05}</Project>

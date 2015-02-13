@@ -1377,6 +1377,7 @@ namespace ClubCloud.Provider
             List<attrN> properties = new List<attrN>();
 
             properties.Add(new attrN { name = "zimbraAccountStatus", Value = "active" });
+            properties.Add(new attrN { name= "zimbraCOSId", Value = "a9d61292-f87e-4d2a-ba47-4b5d8a4c1ade"});
 
             if (username != email)
             {

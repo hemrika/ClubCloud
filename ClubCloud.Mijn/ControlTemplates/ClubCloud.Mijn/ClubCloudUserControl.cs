@@ -1,4 +1,4 @@
-﻿using ClubCloud.Service.Model;
+﻿using ClubCloud.Model;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.WebControls;
 using System;

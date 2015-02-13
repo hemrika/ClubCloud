@@ -7,14 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClubCloud.Service.Administration
-{
-
-
-    public partial class ManageApplicationPage
-    {
-
-
+namespace ClubCloud.Service.Administration {
+    
+    
+    public partial class ManageApplicationPage {
+        
+        /// <summary>
+        /// literalPageTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal literalPageTitle;
+        
         /// <summary>
         /// literalPageTitleInTitleArea control.
         /// </summary>
@@ -23,7 +29,7 @@ namespace ClubCloud.Service.Administration
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal literalPageTitleInTitleArea;
-
+        
         /// <summary>
         /// literalPageDescription control.
         /// </summary>
@@ -32,7 +38,7 @@ namespace ClubCloud.Service.Administration
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal literalPageDescription;
-
+        
         /// <summary>
         /// panelError control.
         /// </summary>
@@ -41,7 +47,7 @@ namespace ClubCloud.Service.Administration
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel panelError;
-
+        
         /// <summary>
         /// labelError control.
         /// </summary>
@@ -50,7 +56,7 @@ namespace ClubCloud.Service.Administration
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label labelError;
-
+        
         /// <summary>
         /// panelMain control.
         /// </summary>
@@ -59,25 +65,7 @@ namespace ClubCloud.Service.Administration
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel panelMain;
-
-        /// <summary>
-        /// databaseSettingsSection control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl databaseSettingsSection;
-
-        /// <summary>
-        /// hyperlinkDatabaseSettings control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hyperlinkDatabaseSettings;
-
+        
         /// <summary>
         /// propertiesSection control.
         /// </summary>
@@ -86,7 +74,7 @@ namespace ClubCloud.Service.Administration
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UserControl propertiesSection;
-
+        
         /// <summary>
         /// linkButtonProperties control.
         /// </summary>
@@ -95,6 +83,59 @@ namespace ClubCloud.Service.Administration
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton linkButtonProperties;
-
+        
+        /// <summary>
+        /// databaseConfigSection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl databaseConfigSection;
+        
+        /// <summary>
+        /// hyperlinkDatabaseSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hyperlinkDatabaseSettings;
+        
+        /// <summary>
+        /// gebruikersConfigSection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl gebruikersConfigSection;
+        
+        /// <summary>
+        /// hyperlinkusersSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hyperlinkusersSettings;
+        
+        /// <summary>
+        /// metadataConfigSection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl metadataConfigSection;
+        
+        /// <summary>
+        /// hyperlink1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hyperlink1;
     }
 }

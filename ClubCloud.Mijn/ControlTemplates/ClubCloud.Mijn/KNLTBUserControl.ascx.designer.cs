@@ -85,6 +85,15 @@ namespace ClubCloud.Mijn.ControlTemplates {
         protected global::System.Web.UI.WebControls.TextBox tbx_knltbpw;
         
         /// <summary>
+        /// rfv_password control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_password;
+        
+        /// <summary>
         /// cbx_knltb control.
         /// </summary>
         /// <remarks>
@@ -101,6 +110,15 @@ namespace ClubCloud.Mijn.ControlTemplates {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btn_knltbpw;
+        
+        /// <summary>
+        /// rfv_button control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_button;
         
         /// <summary>
         /// vds_knltb control.

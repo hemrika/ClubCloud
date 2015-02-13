@@ -74,9 +74,11 @@ namespace ClubCloud.Provider
         protected override void FillClaimsForEntity(Uri context, SPClaim entity, SPClaimProviderContext claimProviderContext, List<SPClaim> claims)
         {
             //base.FillClaimsForEntity(context, entity, claimProviderContext, claims);
-
+            string provider = entity.OriginalIssuer.ToLower();
             //if (entity.Value.Contains("zimbramembershipprovider") || entity.Value.Contains("zimbraroleprovider"))
-            if((entity.OriginalIssuer.Contains("ZimbraClaimProvider")) || (entity.Value.Contains("zimbramembershipprovider")) || (entity.Value.Contains("zimbraroleprovider")))
+            //if((entity.OriginalIssuer.Contains("ZimbraClaimProvider")) || (entity.Value.Contains("zimbramembershipprovider")) || (entity.Value.Contains("zimbraroleprovider")))
+            //if (provider.Contains("zimbramembershipprovider") || provider.Contains("zimbraroleprovider") || provider.Contains("zimbraclaimprovider") || provider.Contains("securitytokenservice"))
+            if (provider.Contains("zimbraclaimprovider") || (provider.Contains("securitytokenservice") && entity.Value.Contains("zimbraclaimprovider")))
             {
                 //0#.f|zimbramembershipprovider|12073385
                 string identifier = entity.Value.Split('|').Last();
@@ -208,7 +210,11 @@ namespace ClubCloud.Provider
 
         protected override void FillClaimsForEntity(Uri context, Microsoft.SharePoint.Administration.Claims.SPClaim entity, List<Microsoft.SharePoint.Administration.Claims.SPClaim> claims)
         {
-            if ((entity.OriginalIssuer.Contains("ZimbraClaimProvider")) || (entity.OriginalIssuer.Contains("ZimbraMembershipProvider")) || (entity.OriginalIssuer.Contains("ZimbraRoleProvider")))
+            string provider = entity.OriginalIssuer.ToLower();
+
+            //if ((entity.OriginalIssuer.Contains("ZimbraClaimProvider")) || (entity.OriginalIssuer.Contains("ZimbraMembershipProvider")) || (entity.OriginalIssuer.Contains("ZimbraRoleProvider")))
+            //if (provider.Contains("zimbramembershipprovider") || provider.Contains("zimbraroleprovider") || provider.Contains("zimbraclaimprovider"))
+            if (provider.Contains("zimbraclaimprovider"))
             {
                 string identifier = entity.Value.Split('|').Last();
                 MembershipUser user;
@@ -298,10 +304,12 @@ namespace ClubCloud.Provider
             //PickerEntity[] baseResolved = base.Resolve(context, entityTypes, resolveInput);
             //List<SPClaim> claims = base.GetClaimsForEntity(context,resolveInput).ToList<SPClaim>();
             //FillClaimsForEntity(context, resolveInput, claims);
-
-            if (resolveInput.OriginalIssuer.Contains("zimbramembershipprovider") || resolveInput.OriginalIssuer.Contains("zimbraroleprovider"))
+            string provider = resolveInput.OriginalIssuer.ToLower();
+            //if (resolveInput.OriginalIssuer.Contains("zimbramembershipprovider") || resolveInput.OriginalIssuer.Contains("zimbraroleprovider") || resolveInput.OriginalIssuer.Contains("zimbraclaimprovider"))
+            //if (provider.Contains("zimbramembershipprovider") || provider.Contains("zimbraroleprovider") || provider.Contains("zimbraclaimprovider"))
+            if (provider.Contains("zimbraclaimprovider"))
             {
-                if (resolved.Count > 0)// || resolved.Count == 1)
+                if (resolved.Count == 0)// || resolved.Count == 1)
                 {
                     string identifier = resolveInput.Value.Split('|').Last();
                     MembershipUser user;
@@ -324,17 +332,19 @@ namespace ClubCloud.Provider
                     if (zuser != null)
                     {
                         PickerEntity pe = CreatePickerEntity();
+                        //pe.Claim = base.CreateClaim(SPClaimTypes.UserLogonName, zuser.uid, "http://www.w3.org/2001/XMLSchema#string");
                         pe.Claim = resolveInput;
-                        //pe.ProviderName = resolveInput.OriginalIssuer;
-                        //pe.Description = resolveInput.OriginalIssuer + ":" + zuser.displayName;
                         pe.DisplayText = zuser.displayName;
                         pe.EntityType = SPClaimEntityTypes.User;
                         pe.IsResolved = true;
-                        //pe.EntityGroupName = "Leden";
                         pe.EntityData[PeopleEditorEntityDataKeys.DisplayName] = zuser.displayName;
                         pe.EntityData[PeopleEditorEntityDataKeys.Email] = zuser.Email;
+                        pe.EntityData[PeopleEditorEntityDataKeys.SIPAddress] = zuser.Email;
                         pe.EntityData[PeopleEditorEntityDataKeys.UserId] = zuser.uid;
                         pe.EntityData[PeopleEditorEntityDataKeys.AccountName] = zuser.uid;
+                        //pe.ProviderName = resolveInput.OriginalIssuer;
+                        //pe.Description = resolveInput.OriginalIssuer + ":" + zuser.displayName;
+                        List<SPClaim> claims = base.GetClaimsForEntity(context, pe.Claim).ToList<SPClaim>();
                         resolved.Add(pe);
 
                     }
@@ -348,39 +358,42 @@ namespace ClubCloud.Provider
         {
             if (resolved.Count == 0)// || resolved.Count == 1)
             {
-                string identifier = resolveInput.Split('|').Last();
-                MembershipUser user;
-                if (!string.IsNullOrWhiteSpace(identifier))
+                if (resolveInput.Contains("zimbraclaimprovider"))
                 {
-                    user = Provider.GetUser(identifier, false);
-                }
-                else
-                {
-                    user = Provider.GetUser(resolveInput, false);
-                }
+                    string identifier = resolveInput.Split('|').Last();
+                    MembershipUser user;
+                    if (!string.IsNullOrWhiteSpace(identifier))
+                    {
+                        user = Provider.GetUser(identifier, false);
+                    }
+                    else
+                    {
+                        user = Provider.GetUser(resolveInput, false);
+                    }
 
-                ZimbraMembershipUser zuser = null;
-                if (user != null && user.GetType() == typeof(ZimbraMembershipUser))
-                {
-                    zuser = user as ZimbraMembershipUser;
-                }
+                    ZimbraMembershipUser zuser = null;
+                    if (user != null && user.GetType() == typeof(ZimbraMembershipUser))
+                    {
+                        zuser = user as ZimbraMembershipUser;
+                    }
 
-                if (zuser != null)
-                {
-                    PickerEntity pe = CreatePickerEntity();
-                    pe.Claim = base.CreateClaim(SPClaimTypes.UserLogonName,zuser.uid, "http://www.w3.org/2001/XMLSchema#string");
-                    pe.DisplayText = zuser.displayName;
-                    pe.EntityType = SPClaimEntityTypes.User;
-                    pe.IsResolved = true;
-                    pe.EntityData[PeopleEditorEntityDataKeys.DisplayName] = zuser.displayName;
-                    pe.EntityData[PeopleEditorEntityDataKeys.Email] = zuser.Email;
-                    pe.EntityData[PeopleEditorEntityDataKeys.SIPAddress] = zuser.Email;
-                    pe.EntityData[PeopleEditorEntityDataKeys.UserId] = zuser.uid;
-                    pe.EntityData[PeopleEditorEntityDataKeys.AccountName] = zuser.uid;
-                    resolved.Add(pe);
+                    if (zuser != null)
+                    {
+                        PickerEntity pe = CreatePickerEntity();
+                        pe.Claim = base.CreateClaim(SPClaimTypes.UserLogonName, zuser.uid, "http://www.w3.org/2001/XMLSchema#string");
+                        pe.DisplayText = zuser.displayName;
+                        pe.EntityType = SPClaimEntityTypes.User;
+                        pe.IsResolved = true;
+                        pe.EntityData[PeopleEditorEntityDataKeys.DisplayName] = zuser.displayName;
+                        pe.EntityData[PeopleEditorEntityDataKeys.Email] = zuser.Email;
+                        pe.EntityData[PeopleEditorEntityDataKeys.SIPAddress] = zuser.Email;
+                        pe.EntityData[PeopleEditorEntityDataKeys.UserId] = zuser.uid;
+                        pe.EntityData[PeopleEditorEntityDataKeys.AccountName] = zuser.uid;
+                        resolved.Add(pe);
 
-                    List<SPClaim> claims = base.GetClaimsForEntity(context, pe.Claim).ToList<SPClaim>();
-                    //FillClaimsForEntity(context, pe.Claim, claims);
+                        List<SPClaim> claims = base.GetClaimsForEntity(context, pe.Claim).ToList<SPClaim>();
+                        //FillClaimsForEntity(context, pe.Claim, claims);
+                    }
                 }
             }
             //MembershipUser user = Provider.GetUser(resolveInput, true);

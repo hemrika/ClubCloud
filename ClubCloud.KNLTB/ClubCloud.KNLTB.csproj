@@ -4968,6 +4968,16 @@
     <Compile Include="CrmService\workflowlog.cs" />
     <Compile Include="CrmService\WorkflowState.cs" />
     <Compile Include="CrmService\WorkflowStateInfo.cs" />
+    <Compile Include="DuplicaatPersonen\DuplicaatpersonenFoundCompletedEventArgs.cs" />
+    <Compile Include="DuplicaatPersonen\DuplicaatpersonenFoundRequest.cs" />
+    <Compile Include="DuplicaatPersonen\DuplicaatpersonenFoundResponse.cs" />
+    <Compile Include="DuplicaatPersonen\DuplicaatPersonenService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DuplicaatPersonen\DuplicaatPersonenServiceSoap.cs" />
+    <Compile Include="DuplicaatPersonen\DuplicaatPersonenServiceSoapChannel.cs" />
+    <Compile Include="DuplicaatPersonen\DuplicaatPersonenServiceSoapClient.cs" />
+    <Compile Include="DuplicaatPersonen\OrganizationHeader.cs" />
     <Compile Include="MetadataService\ApplicationOrigin.cs" />
     <Compile Include="MetadataService\AssociatedMenuBehavior.cs" />
     <Compile Include="MetadataService\AssociatedMenuGroup.cs" />

@@ -14,6 +14,7 @@ namespace ClubCloud.Service.Administration
     using Microsoft.SharePoint.ApplicationPages;
     using Microsoft.SharePoint.Utilities;
     using ClubCloud.Service;
+    using Microsoft.SharePoint;
 
     /// <summary>
     /// Base class for administrative pages to inherit from.
@@ -57,6 +58,20 @@ namespace ClubCloud.Service.Administration
                 }
 
                 return this.serviceApplication;
+            }
+        }
+
+        private ClubCloud.Service.ClubCloudServiceClient _ServiceClient = null;
+
+        public ClubCloud.Service.ClubCloudServiceClient ServiceClient
+        {
+            get
+            {
+                if (_ServiceClient == null)
+                {
+                    _ServiceClient = new Service.ClubCloudServiceClient(SPServiceContext.Current);
+                }
+                return _ServiceClient;
             }
         }
 

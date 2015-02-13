@@ -48,6 +48,24 @@
                 </wssuc:InputFormControl>
             </template_inputformcontrols>
         </wssuc:InputFormSection>
+        <wssuc:InputFormSection Title='<%$ Resources: ClubCloud.Service.ServiceAdminResources, ApplicationManagementUsersSettingsSectionTitle %>' ID="gebruikersConfigSection" runat="server" Description='<%$ Resources:ClubCloud.Service.ServiceAdminResources, ApplicationManagementUsersSettingsSectionDescription %>'>
+            <template_inputformcontrols>
+                <wssuc:InputFormControl LabelText="" runat="server">
+                    <Template_control>
+                        <asp:HyperLink ID="hyperlinkusersSettings" runat="server" NavigateUrl='<%# GenerateLink("ManageUsers.aspx") %>' Text='<%$ Resources: ClubCloud.Service.ServiceAdminResources, ApplicationManagementUsersSettingsButtonText %>'></asp:HyperLink>
+                    </Template_control>
+                </wssuc:InputFormControl>
+            </template_inputformcontrols>
+        </wssuc:InputFormSection>
+                <wssuc:InputFormSection Title='<%$ Resources: ClubCloud.Service.ServiceAdminResources, ApplicationManagementMetaDataSettingsSectionTitle %>' ID="metadataConfigSection" runat="server" Description='<%$ Resources:ClubCloud.Service.ServiceAdminResources, ApplicationManagementMetaDataSettingsSectionDescription %>'>
+            <template_inputformcontrols>
+                <wssuc:InputFormControl LabelText="" runat="server">
+                    <Template_control>
+                        <asp:HyperLink ID="hyperlink1" runat="server" NavigateUrl='<%# GenerateLink("ManageMetaData.aspx") %>' Text='<%$ Resources: ClubCloud.Service.ServiceAdminResources, ApplicationManagementMetaDataSettingsButtonText %>'></asp:HyperLink>
+                    </Template_control>
+                </wssuc:InputFormControl>
+            </template_inputformcontrols>
+        </wssuc:InputFormSection>
     </table>
 </asp:Panel>
 </asp:Content>

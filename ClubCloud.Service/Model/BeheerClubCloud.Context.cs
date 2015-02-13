@@ -10,6 +10,7 @@
 namespace ClubCloud.Service.Model
 {
     using System;
+    using System.Data.Entity.Core;
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -52,7 +53,7 @@ namespace ClubCloud.Service.Model
     		}
     		catch { }
     
-    		Database.Initialize(true);
+    		Database.Initialize(false);
     
     		//Database.SetInitializer<BeheerContainer>(new CreateDatabaseIfNotExists<BeheerContainer>());
     		//Database.SetInitializer<BeheerContainer>(new MigrateDatabaseToLatestVersion<BeheerContainer, BeheerConfiguration>());
@@ -94,6 +95,61 @@ namespace ClubCloud.Service.Model
         public ObjectContext ObjectContext
         {
           get { return ((IObjectContextAdapter)this).ObjectContext; }
+        }
+    
+    	public override int SaveChanges()
+        {
+            bool saved = false;
+    
+            do
+            {
+                try
+                {
+                    base.SaveChanges();
+                    saved = true;
+                }
+                catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+                {
+                    UpdateException uex = null;
+    
+                    if(e.InnerException != null && e.InnerException.GetType() == typeof(UpdateException))
+                    {
+                        uex = e.InnerException as UpdateException;
+                    }
+    
+                    foreach (DbEntityEntry entry in e.Entries)
+                    {
+    
+                        switch (entry.State)
+                        {
+                            case EntityState.Deleted:
+                                entry.Reload();
+                                entry.State = EntityState.Deleted;
+                                break;
+                            case EntityState.Modified:
+                                DbPropertyValues currentValues = entry.CurrentValues.Clone();
+                                entry.Reload();
+                                if (entry.State == EntityState.Detached)
+                                    Set(ObjectContext.GetObjectType(entry.Entity.GetType())).Add(entry.Entity);
+                                else
+                                {
+                                    entry.Reload();
+                                    entry.CurrentValues.SetValues(currentValues);
+                                }
+                                break;
+                            case EntityState.Added:
+                                //entry.State = EntityState.Unchanged;
+                                //entry.Reload();
+                                break;
+                            default:
+                                entry.Reload();
+                                break;
+                        }
+                    }
+                }
+            }
+            while (!saved);
+            return base.SaveChanges();
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -203,6 +259,10 @@ namespace ClubCloud.Service.Model
     
     		modelBuilder.Entity<ClubCloud_Sponsor_Afbeelding>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//modelBuilder.Entity<ClubCloud_Baanblok>().MapToStoredProcedures();
+    
+    		modelBuilder.Entity<ClubCloud_Baanblok>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
     		base.OnModelCreating(modelBuilder);
         }
     
@@ -232,5 +292,6 @@ namespace ClubCloud.Service.Model
         public virtual DbSet<ClubCloud_LidmaatschapSoort> ClubCloud_LidmaatschapSoorten { get; set; }
         public virtual DbSet<ClubCloud_Sponsor> ClubCloud_Sponsoren { get; set; }
         public virtual DbSet<ClubCloud_Sponsor_Afbeelding> ClubCloud_Sponsor_Afbeeldingen { get; set; }
+        public virtual DbSet<ClubCloud_Baanblok> ClubCloud_Baanblokken { get; set; }
     }
 }

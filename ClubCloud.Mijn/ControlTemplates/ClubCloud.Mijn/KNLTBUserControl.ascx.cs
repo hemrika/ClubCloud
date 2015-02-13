@@ -1,4 +1,4 @@
-﻿using ClubCloud.Service.Model;
+﻿using ClubCloud.Model;
 using Microsoft.SharePoint;
 using System;
 using System.IO;
@@ -59,21 +59,22 @@ namespace ClubCloud.Mijn.ControlTemplates
                 if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
                 {
                     userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                    Settings = new ClubCloud_Setting();
-                    Settings.Id = int.Parse(userId);
 
-                    if(!string.IsNullOrWhiteSpace(password) && cbx_knltb.Checked)
+                    if(!string.IsNullOrWhiteSpace(password) && cbx_knltb.Checked && Settings != null)
                     {
                         Settings.Agree = cbx_knltb.Checked;
                         Settings.Password = password;
                         Settings = Client.SetMijnKNLTB(Settings);
-                        //vds_knltb.Text = "Veranderingen opgeslagen";
 
-                        ClubCloud_Gebruiker gebruiker = Client.GetGebruikerByNummer(userId, Settings.VerenigingId.Value, userId, true);
+                        string pw = Settings.Password;
+
+                        //vds_knltb.Summary = "Veranderingen opgeslagen";
+
+                        //ClubCloud_Gebruiker gebruiker = Client.GetGebruikerByNummer(userId, Settings.VerenigingId.Value, userId, true);
                     }
                     else
                     {
-                        //vds_betalingen.Text = "Geen veranderingen gedaan";
+                        //vds_knltb.Text = "Geen veranderingen gedaan";
                     }
                 }
             }

@@ -39,11 +39,13 @@
 
         <asp:Label ID="lbl_knltbpw" runat="server" Text="KNLTB Wachtwoord :" ></asp:Label> 
         <asp:TextBox ID="tbx_knltbpw" runat="server" TextMode="Password" OnTextChanged="tbx_knltbpw_TextChanged" CssClass="text-input" CausesValidation="True" ></asp:TextBox>
-        <asp:RequiredFieldValidator ControlToValidate="tbx_knltbpw" ErrorMessage="Vul uw MijnKNLTB  wachtwoord in." Text="*" runat="server"/>
-
+        <asp:RequiredFieldValidator ID="rfv_password" ControlToValidate="tbx_knltbpw" ErrorMessage="Vul uw MijnKNLTB wachtwoord in." Text="*" runat="server"/>
         <asp:CheckBox ID="cbx_knltb" runat="server" Text="Akkoord met voorwaarden" TextAlign="Right" Width="80%" />
-        <asp:LinkButton ID="btn_knltbpw" runat="server" Text="Opslaan" Enabled="True" CssClass="button small alignright" OnClick="btn_knltbpw_Click" /><br />
-        <asp:ValidationSummary ID="vds_knltb" runat="server" OnDataBinding="btn_knltbpw_Click" DisplayMode="SingleParagraph" />
+        <asp:LinkButton ID="btn_knltbpw" runat="server" Text="Opslaan" Enabled="True" CssClass="button small alignright" OnClick="btn_knltbpw_Click" />
+        <asp:RequiredFieldValidator ID="rfv_button" ControlToValidate="btn_knltbpw" ErrorMessage="Uw MijnKNLTB wachtwoord is identiek." Text="*" runat="server"/>
+        <br />
+        <asp:ValidationSummary ID="vds_knltb" runat="server" OnDataBinding="btn_knltbpw_Click" DisplayMode="SingleParagraph" ShowSummary="true" ShowMessageBox="false" ShowValidationErrors="true" />
+            <asp:Label ID="lbl_result" runat="server"
         </asp:panel>
         </fieldset>
         <p><br /></p>

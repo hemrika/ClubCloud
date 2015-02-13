@@ -3,7 +3,7 @@ using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
-using ClubCloud.Service.Model;
+using ClubCloud.Model;
 using Microsoft.SharePoint;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;

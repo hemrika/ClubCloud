@@ -1,4 +1,4 @@
-﻿using ClubCloud.Service.Model;
+﻿using ClubCloud.Model;
 using ClubCloud.Social.OAuth;
 using ClubCloud.Social.Twitter;
 using ClubCloud.Social.Twitter.OAuth;

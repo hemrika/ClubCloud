@@ -142,6 +142,8 @@ namespace ClubCloud.Provider.IdentityModel
 
             if (flag)
             {
+                EnsureVisitor(securityToken as GenericXmlSecurityToken);
+                /*
                 try
                 {
                 Guid id = SPContext.Current.Site.ID;
@@ -160,6 +162,8 @@ namespace ClubCloud.Provider.IdentityModel
                         //string userlogonname = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userlogonname']/saml:AttributeValue", nsmgr).InnerText;
                         //string emailaddress = xmlDoc.SelectSingleNode("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='emailaddress']/saml:AttributeValue", nsmgr).InnerText;
                         string name = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='name']/saml:AttributeValue", nsmgr)[1].InnerText;
+                        string userlogonname = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userlogonname']/saml:AttributeValue", nsmgr)[1].InnerText;
+                        string userid = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userid']/saml:AttributeValue", nsmgr)[1].InnerText;
                         SPUser spUser = elevatedWeb.EnsureUser(name);
                         elevatedWeb.Update();
                         elevatedWeb.AllowUnsafeUpdates = false;
@@ -171,9 +175,133 @@ namespace ClubCloud.Provider.IdentityModel
                 {
                     ProviderLogging.LogError(ex);
                 }
+                */
 
                 this.RedirectToSuccessUrl();
             }
+        }
+
+        //internal async Task EnsureVisitor(GenericXmlSecurityToken xmlToken)
+        internal void EnsureVisitor(GenericXmlSecurityToken xmlToken)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xmlToken.TokenXml.OuterXml);
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
+            nsmgr.AddNamespace("saml", "urn:oasis:names:tc:SAML:1.0:assertion");
+
+            XmlNodeList names = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='name']/saml:AttributeValue", nsmgr);
+            XmlNodeList userlogonnames = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userlogonname']/saml:AttributeValue", nsmgr);
+            XmlNodeList userids = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userid']/saml:AttributeValue", nsmgr);
+            //string namefirst = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='name']/saml:AttributeValue", nsmgr)[1].InnerText;
+            //string userlogonname = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userlogonname']/saml:AttributeValue", nsmgr)[1].InnerText;
+            //string userid = xmlDoc.SelectNodes("//saml:Assertion/saml:AttributeStatement/saml:Attribute[@AttributeName='userid']/saml:AttributeValue", nsmgr)[1].InnerText;
+
+            Guid id = SPContext.Current.Site.ID;
+
+            //await Task.Run(() => SPSecurity.RunWithElevatedPrivileges(delegate()
+            SPSecurity.RunWithElevatedPrivileges(delegate()
+            {
+                using (SPWeb elevatedWeb = new SPSite(id).OpenWeb())
+                {
+                    elevatedWeb.AllowUnsafeUpdates = true;
+                    List<SPUser> spUsers = new List<SPUser>();
+
+                        foreach (XmlNode node in names)
+                        {
+                            try
+                            {
+
+                                SPUser spUserbyname = elevatedWeb.EnsureUser(node.InnerText);
+
+                                if (!spUsers.Any<SPUser>(u => u.ID == spUserbyname.ID))
+                                {
+                                    spUsers.Add(spUserbyname);
+                                }
+                                //break;
+                            }
+                            catch (Exception ex)
+                            {
+                                ProviderLogging.LogError(ex);
+                            }
+                        }
+                        foreach (XmlNode node in userlogonnames)
+                        {
+                            try
+                            {
+                                SPUser spUserbyname = elevatedWeb.EnsureUser(node.InnerText);
+                                if (!spUsers.Any<SPUser>(u => u.ID == spUserbyname.ID))
+                                {
+                                    spUsers.Add(spUserbyname);
+                                }
+                                //break;
+                            }
+                            catch (Exception ex)
+                            {
+                                ProviderLogging.LogError(ex);
+                            }
+                        }
+                    
+
+                        foreach (XmlNode node in userids)
+                        {
+                            try
+                            {
+
+                                SPUser spUserbyname = elevatedWeb.EnsureUser(node.InnerText);
+                                if (!spUsers.Any<SPUser>(u => u.ID == spUserbyname.ID))
+                                {
+                                    spUsers.Add(spUserbyname);
+                                }
+                                //break;
+                            }
+                            catch (Exception ex)
+                            {
+                                ProviderLogging.LogError(ex);
+                            }
+                        }
+
+                    elevatedWeb.Update();
+
+                    try
+                    {
+                        if (spUsers != null && spUsers.Count > 0)
+                        {
+                            SPGroup usersGroup = elevatedWeb.SiteGroups.GetByID(7);
+                            SPGroup visitorGroup = elevatedWeb.AssociatedVisitorGroup;
+
+                            foreach (SPUser user in spUsers)
+                            {
+                                usersGroup.AddUser(user);
+                                visitorGroup.AddUser(user);
+                            }
+                            /*
+                            if(usersGroup != null)
+                            {
+
+                                usersGroup.AddUser(spUser);
+                            }
+
+                            //.SiteGroups.Web.AssociatedVisitorGroup;
+                            if (visitorGroup != null)
+                            {
+                                visitorGroup.AddUser(spUser);
+                            }
+                            */
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ProviderLogging.LogError(ex);
+                    }
+                    finally
+                    {
+                        elevatedWeb.Update();
+                    }
+
+                    elevatedWeb.AllowUnsafeUpdates = false;
+                }
+            });
+            //}));
         }
 
         protected virtual SPSessionTokenWriteType GetSessionTokenWriteType(Login formsSignInControl)
@@ -346,6 +474,18 @@ namespace ClubCloud.Provider.IdentityModel
             {
                 return base.AppliesTo;
             }
+        }
+    }
+
+    class SPUserCompare : IEqualityComparer<SPUser>
+    {
+        public bool Equals(SPUser x, SPUser y)
+        {
+            return x.ID == y.ID;
+        }
+        public int GetHashCode(SPUser codeh)
+        {
+            return codeh.GetHashCode();//.GetHashCode();
         }
     }
 }

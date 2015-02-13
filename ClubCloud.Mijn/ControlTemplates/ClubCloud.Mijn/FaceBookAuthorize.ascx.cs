@@ -1,4 +1,4 @@
-﻿using ClubCloud.Service.Model;
+﻿using ClubCloud.Model;
 using ClubCloud.Social.Facebook;
 using ClubCloud.Social.Facebook.OAuth;
 using ClubCloud.Social.Facebook.Responses;

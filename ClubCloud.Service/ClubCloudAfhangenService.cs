@@ -11,7 +11,7 @@ namespace ClubCloud.Service
     using Microsoft.SharePoint.Administration;
     using Microsoft.SharePoint.Client.Services;
     using Microsoft.SharePoint;
-    using ClubCloud.Service.Model;
+    using ClubCloud.Model;
     using System.Net;
     using System.Threading.Tasks;
     using System.Collections.Generic;

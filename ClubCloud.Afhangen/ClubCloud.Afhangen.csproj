@@ -122,6 +122,10 @@
       <Project>{90fe486f-d24e-4290-8e0b-633fa72e5314}</Project>
       <Name>ClubCloud.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClubCloud.Model\ClubCloud.Model.csproj">
+      <Project>{97cb96d6-3b6b-4879-a961-9166a73c7614}</Project>
+      <Name>ClubCloud.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
       <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>
       <Name>ClubCloud.Service</Name>

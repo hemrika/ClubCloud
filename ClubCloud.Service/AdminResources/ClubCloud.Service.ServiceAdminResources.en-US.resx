@@ -121,10 +121,19 @@
     <value>Database Settings</value>
   </data>
   <data name="ApplicationManagementDBSettingsSectionDescription" xml:space="preserve">
-    <value>Configure the database settings. You can provision the database, specify a failover server, and more.</value>
+    <value>Configure the database settings.</value>
   </data>
   <data name="ApplicationManagementDBSettingsSectionTitle" xml:space="preserve">
     <value>Database Settings</value>
+  </data>
+  <data name="ApplicationManagementMetaDataSettingsButtonText" xml:space="preserve">
+    <value>MetaData</value>
+  </data>
+  <data name="ApplicationManagementMetaDataSettingsSectionDescription" xml:space="preserve">
+    <value>MetaData beheren</value>
+  </data>
+  <data name="ApplicationManagementMetaDataSettingsSectionTitle" xml:space="preserve">
+    <value>MetaData</value>
   </data>
   <data name="ApplicationManagementPageDescription" xml:space="preserve">
     <value>Use this page to manage settings for this service application.</value>
@@ -144,8 +153,20 @@
   <data name="ApplicationManagementPropertiesSectionTitle" xml:space="preserve">
     <value>Properties</value>
   </data>
+  <data name="ApplicationManagementUsersSettingsButtonText" xml:space="preserve">
+    <value>Gebruikers</value>
+  </data>
+  <data name="ApplicationManagementUsersSettingsSectionDescription" xml:space="preserve">
+    <value>Gebruikers beheren</value>
+  </data>
+  <data name="ApplicationManagementUsersSettingsSectionTitle" xml:space="preserve">
+    <value>Gebruikers</value>
+  </data>
   <data name="ButtonCancelText" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="ButtonNewText" xml:space="preserve">
+    <value>Nieuwe Gebbruiker</value>
   </data>
   <data name="ButtonOKText" xml:space="preserve">
     <value>OK</value>
@@ -195,8 +216,20 @@
   <data name="CreatePageTitle" xml:space="preserve">
     <value>Create New ClubCloud Service Application</value>
   </data>
+  <data name="CreateUserNameLabel" xml:space="preserve">
+    <value>ClubCloud Gebruiker</value>
+  </data>
+  <data name="CreateUserRequiredError" xml:space="preserve">
+    <value>Verplicht</value>
+  </data>
+  <data name="CreateUserSectionDescription" xml:space="preserve">
+    <value>ClubCloud Gebruiker aanmaken</value>
+  </data>
+  <data name="CreateUserSectionTitle" xml:space="preserve">
+    <value>ClubCloud Gebruiker maken</value>
+  </data>
   <data name="DatabaseSettingsCreateOperationLeadingHtml" xml:space="preserve">
-    <value>Creating Database...</value>
+    <value>Creating Database</value>
   </data>
   <data name="DatabaseSettingsCreateOperationTrailingHtml" xml:space="preserve">
     <value>Creating the database. This may take a few moments.</value>
@@ -357,6 +390,30 @@
   <data name="ManageServiceStatusSectionTitle" xml:space="preserve">
     <value>ClubCloud Service Status</value>
   </data>
+  <data name="ManageUsersDescription" xml:space="preserve">
+    <value>ClubCloud Gebruikers beheren</value>
+  </data>
+  <data name="ManageUsersLabel" xml:space="preserve">
+    <value>Clubcloud Gebruiker beheren</value>
+  </data>
+  <data name="ManageUsersSectionTitle" xml:space="preserve">
+    <value>ClubCloud Gebruikers</value>
+  </data>
+  <data name="MetaDataSettingsCreateOperationLeadingHtml" xml:space="preserve">
+    <value>ClubCloud MetaData verwerken</value>
+  </data>
+  <data name="MetaDataSettingsCreateOperationTrailingHtml" xml:space="preserve">
+    <value>ClubCloud MetaData verwerken</value>
+  </data>
+  <data name="MetaDataSettingsPageDescription" xml:space="preserve">
+    <value>ClubCloud MetaData beheren</value>
+  </data>
+  <data name="MetaDataSettingsPageTitle" xml:space="preserve">
+    <value>ClubCloud MetaData</value>
+  </data>
+  <data name="MetaDataSettingsPageTitleInTitleArea" xml:space="preserve">
+    <value>ClubCloud MetaData</value>
+  </data>
   <data name="PropertiesPageDescription" xml:space="preserve">
     <value>Edit the properties of this service application.</value>
   </data>
@@ -374,5 +431,20 @@
   </data>
   <data name="ServiceName" xml:space="preserve">
     <value>ClubCloud Service</value>
+  </data>
+  <data name="UsersSettingsCreateOperationLeadingHtml" xml:space="preserve">
+    <value>ClubCloud Gebruikers verwerken</value>
+  </data>
+  <data name="UsersSettingsCreateOperationTrailingHtml" xml:space="preserve">
+    <value>ClubCloud Gebruikers verwerken</value>
+  </data>
+  <data name="UsersSettingsPageDescription" xml:space="preserve">
+    <value>ClubCloud Gebruikers Beheren</value>
+  </data>
+  <data name="UsersSettingsPageTitle" xml:space="preserve">
+    <value>ClubCloud Gebruikers</value>
+  </data>
+  <data name="UsersSettingsPageTitleInTitleArea" xml:space="preserve">
+    <value>ClubCloud Gebruikers</value>
   </data>
 </root>

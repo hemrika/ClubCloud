@@ -122,9 +122,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Common", "ClubClo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.KNLTB", "ClubCloud.KNLTB\ClubCloud.KNLTB.csproj", "{B98CD37B-E5D0-49E4-A765-F8FBA945E050}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Model", "ClubCloud.Model\ClubCloud.Model.csproj", "{97CB96D6-3B6B-4879-A961-9166A73C7614}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 15
+		SccNumberOfProjects = 16
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://hemrika.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -170,6 +172,9 @@ Global
 		SccProjectUniqueName14 = ClubCloud.KNLTB\\ClubCloud.KNLTB.csproj
 		SccProjectName14 = ClubCloud.KNLTB
 		SccLocalPath14 = ClubCloud.KNLTB
+		SccProjectUniqueName15 = ClubCloud.Model\\ClubCloud.Model.csproj
+		SccProjectName15 = ClubCloud.Model
+		SccLocalPath15 = ClubCloud.Model
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -250,6 +255,10 @@ Global
 		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B98CD37B-E5D0-49E4-A765-F8FBA945E050}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97CB96D6-3B6B-4879-A961-9166A73C7614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97CB96D6-3B6B-4879-A961-9166A73C7614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97CB96D6-3B6B-4879-A961-9166A73C7614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97CB96D6-3B6B-4879-A961-9166A73C7614}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

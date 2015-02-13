@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{97CB96D6-3B6B-4879-A961-9166A73C7614}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClubCloud.Model</RootNamespace>
+    <AssemblyName>ClubCloud.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaanSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Balance.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BankAccount.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BeheerBaseModel.cs" />
+    <Compile Include="BeheerClubCloud.Context.cs">
+      <DependentUpon>BeheerClubCloud.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="BeheerClubCloud.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="BeheerClubCloud.Designer.cs">
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="BeheerConfiguration.cs" />
+    <Compile Include="BeheerEncryption.cs" />
+    <Compile Include="BeheerFullTextInterceptor.cs" />
+    <Compile Include="BeheerInitializer.cs" />
+    <Compile Include="BoekhoudingClubCloud.Context.cs">
+      <DependentUpon>BoekhoudingClubCloud.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="BoekhoudingClubCloud.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="BoekhoudingClubCloud.Designer.cs">
+      <DependentUpon>BoekhoudingClubCloud.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="BoekhoudingConfiguration.cs" />
+    <Compile Include="BoekhoudingInitializer.cs" />
+    <Compile Include="ClubCloud_Accommodatie.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Address.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Afhang.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Baan.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Baanblok.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Baanschema.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Baansoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_BaanSpeciaal.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Baantoplaag.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Baantype.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Bestuursorgaan.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Bouwaard.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_District.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Foto.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Functie.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Functionaris.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Gebruiker.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Gebruiker_DataView.cs" />
+    <Compile Include="ClubCloud_Lidmaatschap.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_LidmaatschapSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Nationaliteit.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Profiel.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Rechtsvorm.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Regio.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Reservering.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Setting.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Sponsor.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Sponsor_Afbeelding.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClubCloud_Vereniging.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CostCenter.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Days.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContextExtensions.cs" />
+    <Compile Include="DirectionType.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Facebook.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FinancialYear.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Financieel.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeslachtSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceEntry.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceState.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceType.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Journal.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JournalEntry.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JournalTransaction.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JournalType.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JournalYear.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ledger.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LedgerCategory.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LedgerType.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Month.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Payable.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Privacy.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Receivable.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Relation.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReserveringSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Result.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResultType.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SignalRClubCloud.Context.cs">
+      <DependentUpon>SignalRClubCloud.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SignalRClubCloud.cs">
+      <DependentUpon>SignalRClubCloud.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SignalRClubCloud.Designer.cs">
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SignalRConfiguration.cs" />
+    <Compile Include="SignalRInitializer.cs" />
+    <Compile Include="Tax.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Term.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Twitter.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="BeheerClubCloud.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BeheerClubCloud.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="BeheerClubCloud.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+      <LastGenOutput>BeheerClubCloud.Context.cs</LastGenOutput>
+    </None>
+    <None Include="beheerclubcloud.edmx.compareOptions">
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="BeheerClubCloud.edmx.diagram">
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="beheerclubcloud.edmx.namePrefs">
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="BeheerClubCloud.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
+      <LastGenOutput>BeheerClubCloud.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="BoekhoudingClubCloud.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BoekhoudingClubCloud.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BoekhoudingClubCloud.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BoekhoudingClubCloud.edmx</DependentUpon>
+      <LastGenOutput>BoekhoudingClubCloud.Context.cs</LastGenOutput>
+    </None>
+    <None Include="BoekhoudingClubCloud.edmx.diagram">
+      <DependentUpon>BoekhoudingClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="BoekhoudingClubCloud.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BoekhoudingClubCloud.edmx</DependentUpon>
+      <LastGenOutput>BoekhoudingClubCloud.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="SignalRClubCloud.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SignalRClubCloud.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SignalRClubCloud.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+      <LastGenOutput>SignalRClubCloud.Context.cs</LastGenOutput>
+    </None>
+    <None Include="SignalRClubCloud.edmx.diagram">
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="SignalRClubCloud.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
+      <LastGenOutput>SignalRClubCloud.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BeheerClubCloud.edmx.sql" />
+    <Content Include="BoekhoudingClubCloud.edmx.sql" />
+    <Content Include="SignalRClubCloud.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

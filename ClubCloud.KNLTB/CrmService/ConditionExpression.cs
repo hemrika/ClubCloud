@@ -18,6 +18,10 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 
 		private ConditionOperator operatorField;
 
+        private string uinameField;
+
+        private string uitypeField;
+
 		private object[] valuesField;
 
 		[XmlElement] //[XmlElement(Order=0)]
@@ -48,6 +52,35 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			}
 		}
 
+
+        [XmlElement] //[XmlElement(Order=0)]
+        public string uiname
+        {
+            get
+            {
+                return this.uinameField;
+            }
+            set
+            {
+                this.uinameField = value;
+                this.RaisePropertyChanged("uiname");
+            }
+        }
+
+        [XmlElement] //[XmlElement(Order=0)]
+        public string uitype
+        {
+            get
+            {
+                return this.uitypeField;
+            }
+            set
+            {
+                this.uitypeField = value;
+                this.RaisePropertyChanged("uitype");
+            }
+        }
+
 		[XmlArray] //[XmlArray(Order=2)]
 		[XmlArrayItem("Value")]
 		public object[] Values
@@ -63,6 +96,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 			}
 		}
 
+
+         //uiname
 		public ConditionExpression()
 		{
 		}

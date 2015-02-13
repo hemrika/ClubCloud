@@ -23,7 +23,7 @@ namespace ClubCloud.Service.Model
     
     	static SignalRContainer ()
     	{
-            DbInterception.Add(new BeheerFullTextInterceptor());
+            //DbInterception.Add(new BeheerFullTextInterceptor());
         }
     
     	public SignalRContainer()
@@ -52,7 +52,7 @@ namespace ClubCloud.Service.Model
     		}
     		catch { }
     
-    		Database.Initialize(true);
+    		Database.Initialize(false);
     
     		//Database.SetInitializer<SignalRContainer>(new CreateDatabaseIfNotExists<SignalRContainer>());
     		//Database.SetInitializer<SignalRContainer>(new MigrateDatabaseToLatestVersion<SignalRContainer, SignalRConfiguration>());
@@ -98,23 +98,8 @@ namespace ClubCloud.Service.Model
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-    		//modelBuilder.Entity<Messages_0>().MapToStoredProcedures();
-    
-    		modelBuilder.Entity<Messages_0>().Property(e => e.PayloadId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-    
-    		//modelBuilder.Entity<Messages_0_Id>().MapToStoredProcedures();
-    
-    		modelBuilder.Entity<Messages_0_Id>().Property(e => e.PayloadId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-    
-    		//modelBuilder.Entity<Schema>().MapToStoredProcedures();
-    
-    		modelBuilder.Entity<Schema>().Property(e => e.SchemaVersion).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-    
     		base.OnModelCreating(modelBuilder);
         }
     
-        public virtual DbSet<Messages_0> Messages_0 { get; set; }
-        public virtual DbSet<Messages_0_Id> Messages_0_Id { get; set; }
-        public virtual DbSet<Schema> Schemata { get; set; }
     }
 }

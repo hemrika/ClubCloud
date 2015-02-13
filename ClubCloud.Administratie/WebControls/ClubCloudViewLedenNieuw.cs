@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Security;
 using System.Web.UI;
 using System.Runtime.InteropServices;
-using ClubCloud.Service.Model;
+using ClubCloud.Model;
 using Microsoft.SharePoint;
 using System.Reflection;
 using System.Web.UI.WebControls;
