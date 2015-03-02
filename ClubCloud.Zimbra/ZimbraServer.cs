@@ -494,8 +494,9 @@ namespace ClubCloud.Zimbra
             {
                 administrationExtended = new ZimbraAdminExtSoapClient(binding, remoteAddressAdmin);
             }
-            
-            return ProcessMessage(administrationExtended, zimbraMessage);
+
+            object message = await ProcessMessage(administration, zimbraMessage);
+            return message as ZimbraMessage;
             */
             throw new NotImplementedException();
         }

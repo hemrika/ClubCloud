@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f7cdba0088ea44ecbef833b4d217ff48" Name="KNLTB" ZoomLevel="34" >
+      <Diagram DiagramId="f7cdba0088ea44ecbef833b4d217ff48" Name="KNLTB" ZoomLevel="85" >
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Gebruiker" Width="2.25" PointX="3.375" PointY="6" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Vereniging" Width="2.25" PointX="17.5" PointY="7.25" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Setting" Width="2.625" PointX="0.75" PointY="1" />
@@ -17,60 +17,66 @@
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Functionaris" Width="2.375" PointX="11.375" PointY="9.375" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Functie_Functionaris" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Functionaris_Vereniging" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Functionaris" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_FunctionarisClubCloud_District" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Gebruiker_Functionaris" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Functionaris_District" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Vereniging_Lidmaatschap" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Lidmaatschap" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Gebruiker_Lidmaatschap" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Bestuursorgaan" Width="1.5" PointX="9.125" PointY="4.5" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Functionaris_Bestuursorgaan" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BestuursorgaanClubCloud_Vereniging" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Bestuursorgaan_Vereniging" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Vereniging_District" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Rechtsvorm" Width="1.5" PointX="20.5" PointY="23.125" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Rechtsvorm" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Vereniging_Rechtsvorm" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Address" Width="2.125" PointX="20.5" PointY="4.625" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Accommodatie" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Address" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Vereniging_Accommodatie" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Vereniging_Address" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Regio" Width="1.5" PointX="20.5" PointY="11.875" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Regio" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_DistrictClubCloud_Regio" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Address" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Vereniging" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_ProfielClubCloud_Gebruiker" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Vereniging_Regio" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_District_Regio" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Gebruiker_Address" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Gebruiker_Vereniging" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Profiel_Gebruiker" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baansoort" Width="1.875" PointX="7.875" PointY="21.5" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baantype" Width="2.125" PointX="10.5" PointY="19.75" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baan" Width="1.5" PointX="3.375" PointY="17.875" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Bouwaard" Width="2.5" PointX="14.75" PointY="1" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_BaanSpeciaal" Width="2" PointX="5.125" PointY="2.25" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaansoortClubCloud_Baantype" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_AccommodatieClubCloud_District" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_AccommodatieClubCloud_Regio" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baansoort_Baantype" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Accommodatie_District" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Accommodatie_Regio" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Reservering" Width="1.875" PointX="0.75" PointY="17.375" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Baan" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Een" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Twee" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Drie" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Vier" />
-        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Afhang" Width="2.75" PointX="14" PointY="5.25" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_AfhangenClubCloud_Vereniging" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Reservering_Baan" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Een" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Twee" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Drie" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Vier" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Afhang" Width="2.75" PointX="14.875" PointY="3.125" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Afhangen_Vereniging" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baanschema" Width="2" PointX="10.75" PointY="15" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Foto" Width="1.5" PointX="0.75" PointY="6" />
-        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_LidmaatschapSoort" Width="1.5" PointX="21.25" PointY="15.25" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Lidmaatschapsoort" Width="1.5" PointX="21.25" PointY="15.25" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_LidmaatschapSoort_Lidmaatschap" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Sponsor" Width="2.75" PointX="14" PointY="16.375" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_SponsorClubCloud_Vereniging" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Sponsor_Vereniging" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Sponsor_Afbeelding" Width="1.5" PointX="17.5" PointY="16.75" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_SponsorClubCloud_Sponsor_Afbeelding" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Sponsor_Sponsor_Afbeelding" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baanblok" Width="1.5" PointX="5.625" PointY="17.75" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanClubCloud_Baanblok" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Accommodatie" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Baantype" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Baansoort" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanClubCloud_Accommodatie" ManuallyRouted="false" >
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baan_Baanblok" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baanblok_Accommodatie" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baanblok_Baantype" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baanblok_Baansoort" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baan_Accommodatie" ManuallyRouted="false" >
         </AssociationConnector>
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanSpeciaalClubCloud_Accommodatie" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanSpeciaal_Accommodatie" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baantoplaag" Width="1.5" PointX="7.875" PointY="25.25" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanSpeciaalClubCloud_Baantoplaag" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanSpeciaal_Baantoplaag" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Regio_Address" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Setting_Gebruiker" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Setting_Vereniging" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Accommodatie_Address" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Nationaliteit" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baanschema_Baan" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanschemaClubCloud_Vereniging" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

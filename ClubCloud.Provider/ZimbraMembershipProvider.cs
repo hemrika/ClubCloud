@@ -1529,9 +1529,13 @@ namespace ClubCloud.Provider
                         {
                             try
                             {
-                                string value = propertyInfo.GetValue(zuser).ToString();
+                                object ovalue =  propertyInfo.GetValue(zuser);
+                                string value = null;
 
-                                if (!string.IsNullOrWhiteSpace(value))
+                                if(ovalue != null)
+                                    value = ovalue.ToString();
+
+                                if (value != null && !string.IsNullOrWhiteSpace(value))
                                 {
                                     if (propertyInfo.Name == "zimbraId")
                                     {

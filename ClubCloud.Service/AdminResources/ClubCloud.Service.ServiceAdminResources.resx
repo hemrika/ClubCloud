@@ -447,4 +447,16 @@
   <data name="CreateUserRequiredError" xml:space="preserve">
     <value>Verplicht</value>
   </data>
+  <data name="ButtonBanenText" xml:space="preserve">
+    <value>ClubCloud Banen</value>
+  </data>
+  <data name="ButtonMetaDataText" xml:space="preserve">
+    <value>ClubCloud MetaData</value>
+  </data>
+  <data name="ButtonVerenigingenText" xml:space="preserve">
+    <value>ClubCloud Verenigingen</value>
+  </data>
+  <data name="ButtonTriggerText" xml:space="preserve">
+    <value>ClubCloud Trigger Schema</value>
+  </data>
 </root>

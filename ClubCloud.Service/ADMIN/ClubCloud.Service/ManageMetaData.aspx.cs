@@ -16,6 +16,8 @@ namespace ClubCloud.Service.Administration
     using Microsoft.SharePoint.WebControls;
     using ClubCloud.Service;
     using System.Web.UI;
+    using ClubCloud.Model;
+    using System.Collections.Generic;
 
     /// <summary>
     /// The Database Settings Page
@@ -78,7 +80,7 @@ namespace ClubCloud.Service.Administration
         /// </summary>
         /// <param name="sender">The Sender.</param>
         /// <param name="e">The EventArgs.</param>
-        protected void ButtonOk_Click(object sender, EventArgs e)
+        protected void ButtonTrigger_Click(object sender, EventArgs e)
         {
             // Validate
             this.Validate();
@@ -96,7 +98,9 @@ namespace ClubCloud.Service.Administration
                 operation.TrailingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationTrailingHtml", CultureInfo.CurrentCulture).ToString();
                 operation.Begin();
 
-                operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageApplication.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
+                ServiceClient.TriggerMetaData("12073385", true);
+
+                operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageMetaData.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
             }
         }
 
@@ -105,9 +109,153 @@ namespace ClubCloud.Service.Administration
         /// </summary>
         /// <param name="sender">The Sender.</param>
         /// <param name="e">The EventArgs.</param>
-        protected void ButtonNew_Click(object sender, EventArgs e)
+        protected void ButtonMetaData_Click(object sender, EventArgs e)
         {
-            Response.Redirect(string.Format(CultureInfo.InvariantCulture, "ManageApplication.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
+            // Validate
+            this.Validate();
+
+            if (!this.IsValid)
+            {
+                return;
+            }
+
+            // We are valid
+            // Register the database
+            using (SPLongOperation operation = new SPLongOperation(this))
+            {
+                operation.LeadingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationLeadingHtml", CultureInfo.CurrentCulture).ToString();
+                operation.TrailingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationTrailingHtml", CultureInfo.CurrentCulture).ToString();
+                operation.Begin();
+
+                ServiceClient.NationaliteitenUpdate("12073385", true);
+
+                ServiceClient.LidmaatschapSoortenUpdate("12073385", true);
+
+                ServiceClient.ToplagenUpdate("12073385", true);
+
+                ServiceClient.BaantypesUpdate("12073385", true);
+                
+                ServiceClient.BaansoortenUpdate("12073385", true);
+
+                ServiceClient.RechtsvormenUpdate("12073385", true);
+
+                ServiceClient.FunctiesUpdate("12073385", true);
+
+                ServiceClient.RegiosUpdate("12073385", true);
+
+                ServiceClient.DistrictenUpdate("12073385", true);
+
+                operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageMetaData.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
+            }
+        }
+
+        /// <summary>
+        /// Click event.
+        /// </summary>
+        /// <param name="sender">The Sender.</param>
+        /// <param name="e">The EventArgs.</param>
+        protected void ButtonVerenigingen_Click(object sender, EventArgs e)
+        {
+            // Validate
+            this.Validate();
+
+            if (!this.IsValid)
+            {
+                return;
+            }
+
+            // We are valid
+            // Register the database
+            using (SPLongOperation operation = new SPLongOperation(this))
+            {
+                operation.LeadingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationLeadingHtml", CultureInfo.CurrentCulture).ToString();
+                operation.TrailingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationTrailingHtml", CultureInfo.CurrentCulture).ToString();
+                operation.Begin();
+
+                /*
+                int pageNum = 1;
+                bool moreRecords = true;
+                while (moreRecords)
+                {
+                    try
+                    {
+
+                        moreRecords = ServiceClient.VerenigingenUpdate("12073385", pageNum, false);
+                        pageNum++;
+                    }
+                    catch (Exception ex)
+                    {
+                        moreRecords = true;
+                    }
+                }
+                */
+                try
+                {
+                    ServiceClient.BestuursOrganenUpdate("12073385", false);
+                }
+                catch { }
+
+                operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageMetaData.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
+            }
+        }
+
+        /// <summary>
+        /// Click event.
+        /// </summary>
+        /// <param name="sender">The Sender.</param>
+        /// <param name="e">The EventArgs.</param>
+        protected void ButtonBanen_Click(object sender, EventArgs e)
+        {
+            // Validate
+            this.Validate();
+
+            if (!this.IsValid)
+            {
+                return;
+            }
+
+            // We are valid
+            // Register the database
+            using (SPLongOperation operation = new SPLongOperation(this))
+            {
+                operation.LeadingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationLeadingHtml", CultureInfo.CurrentCulture).ToString();
+                operation.TrailingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationTrailingHtml", CultureInfo.CurrentCulture).ToString();
+                operation.Begin();
+
+                //ServiceClient.BaanBlokkenUpdate("12073385", true);
+
+                //ServiceClient.BanenSpeciaalUpdate("12073385", true);
+
+                ServiceClient.BanenUpdate("12073385", true);
+
+                operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageMetaData.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
+            }
+        }
+
+        /// <summary>
+        /// Click event.
+        /// </summary>
+        /// <param name="sender">The Sender.</param>
+        /// <param name="e">The EventArgs.</param>
+        protected void ButtonOk_Click(object sender, EventArgs e)
+        {
+            // Validate
+            this.Validate();
+
+            if (!this.IsValid)
+            {
+                return;
+            }
+
+            // We are valid
+            // Register the database
+            using (SPLongOperation operation = new SPLongOperation(this))
+            {
+                operation.LeadingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationLeadingHtml", CultureInfo.CurrentCulture).ToString();
+                operation.TrailingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationTrailingHtml", CultureInfo.CurrentCulture).ToString();
+                operation.Begin();
+                operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageApplication.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
+            }
         }
 
         #endregion

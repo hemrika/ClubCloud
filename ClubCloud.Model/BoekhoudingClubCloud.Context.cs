@@ -31,11 +31,14 @@ namespace ClubCloud.Model
         public BoekhoudingContainer(bool proxyCreationEnabled)
             : base(NameOrConnectionString)
         {
-    				this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+    		
+    		this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
     
+    		bool initialize = true;
     		if (!Database.Exists(NameOrConnectionString))
     		{
     			Database.SetInitializer<BoekhoudingContainer>(new CreateDatabaseIfNotExists<BoekhoudingContainer>());
+    			initialize = false;
     		}
     
     		try
@@ -43,11 +46,12 @@ namespace ClubCloud.Model
     			if (!Database.CompatibleWithModel(false))
     			{
     				Database.SetInitializer<BoekhoudingContainer>(new MigrateDatabaseToLatestVersion<BoekhoudingContainer, BoekhoudingConfiguration>());
+    				initialize = false;
     			}
     		}
     		catch { }
     
-    		Database.Initialize(false);
+    		Database.Initialize(initialize);
     
     		//Database.SetInitializer<BoekhoudingContainer>(new CreateDatabaseIfNotExists<BoekhoudingContainer>());
     		//Database.SetInitializer<BoekhoudingContainer>(new MigrateDatabaseToLatestVersion<BoekhoudingContainer, BoekhoudingConfiguration>());

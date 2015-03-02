@@ -25,17 +25,23 @@ namespace ClubCloud.Service
         #region Afhangen
 
         [OperationContract]
-        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "LoginMode")]
+        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "LoginMode", ResponseFormat = WebMessageFormat.Json)]
         AuthenticationMode LoginMode();
 
         [OperationContract]
         [ServiceKnownType(typeof(LoginResult))]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Login/{username}/{password}")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Login/{username}/{password}", ResponseFormat= WebMessageFormat.Json)]
         LoginResult Login(string username, string password);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "DeleteReservering", BodyStyle= WebMessageBodyStyle.Wrapped)]
-        bool DeleteReservering(Guid verenigingId, Guid reserveringId);
+        [ServiceKnownType(typeof(ClubCloud_Setting))]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetClubCloudSettings")]//, ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud_Setting GetClubCloudSettings();
+
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "DeleteReservering/{verenigingId}/{reserveringId}", ResponseFormat = WebMessageFormat.Json)]
+        bool DeleteReservering(string verenigingId, string reserveringId);
 
         /*
         [OperationContract]
@@ -57,23 +63,26 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Gebruiker> GetGebruikersByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
-
+        */
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
-        ClubCloud.Model.ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
-
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetGebruikerByNummer/{bondsnummer}/{verenigingId}/{nummer}")]//, ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, string verenigingId, string nummer);
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Foto))]
         ClubCloud.Model.ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
-
+        */
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Foto))]
-        ClubCloud.Model.ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
-
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetFotoById/{bondsnummer}/{verenigingId}/{gebruikerId}")]//, ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Foto GetFotoById(string bondsnummer, string verenigingId, string gebruikerId);
+        
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
-        ClubCloud.Model.ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
-
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetGebruikerById/{bondsnummer}/{verenigingId}/{gebruikerId}")]//, ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, string verenigingId, string gebruikerId);
+        /*
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
         ClubCloud.Model.ClubCloud_Reservering GetReserveringByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
@@ -98,18 +107,18 @@ namespace ClubCloud.Service
         */
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
-        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingByNummer/{bondsnummer}/{verenigingNummer}")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingByNummer/{bondsnummer}/{verenigingNummer}")]//, ResponseFormat = WebMessageFormat.Json)]
         ClubCloud.Model.ClubCloud_Vereniging GetVerenigingByNummer(string bondsnummer, string verenigingNummer);
-        /*
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
-        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "DeleteReservering/{verenigingId}/{reserveringId}")]
-        ClubCloud.Model.ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false);
-        */
         
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
-        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingSettings/{bondsnummer}/{verenigingId}")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingById/{bondsnummer}/{verenigingId}")]
+        ClubCloud.Model.ClubCloud_Vereniging GetVerenigingById(string bondsnummer, string verenigingId);
+        
+        
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingSettings/{bondsnummer}/{verenigingId}")]//, ResponseFormat = WebMessageFormat.Json)]
         ClubCloud.Model.ClubCloud_Afhang GetVerenigingAfhangSettings(string bondsnummer, string verenigingId);
 
         /*

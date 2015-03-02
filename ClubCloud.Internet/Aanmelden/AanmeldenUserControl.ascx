@@ -18,6 +18,13 @@
 function OnClientCompleted(sender, e) {
     sender._element.className = "";
 }
+
+function ValidateBank(sender, e) {
+    $.getJSON('http://openiban.nl/openibanfree?bban=557308453', function (data) {
+        alert(data.iban);
+    });
+
+}
 </script>
 
 <div class="first dark">
@@ -67,7 +74,7 @@ function OnClientCompleted(sender, e) {
                                                 te 
                                                 <asp:TextBox ID="KvKPlaats" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "KvKplaats") %>' Width="57%" /><br />
                                                 <label>Bankrekening: </label>
-                                                <asp:TextBox ID="BankNummer" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "BankNummer") %>' Width="20%" />
+                                                <asp:TextBox ID="BankNummer" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "BankNummer") %>' Width="20%" onchange="ValidateBank()" />
                                                 IBAN : 
                                                 <asp:TextBox ID="BankIban" TextMode="SingleLine" runat="server" Text='<%# Bind(Container.DataItem, "BankIban") %>' Width="26%" />
                                                 te 

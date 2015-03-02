@@ -59,58 +59,6 @@ namespace ClubCloud.Service
             return deleted;
         }
 
-        public System.Collections.Generic.List<ClubCloud_Baanschema> GetBaanSchemaByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false)
-        {
-            List<ClubCloud_Baanschema> baanschema = new List<ClubCloud_Baanschema>();
-
-            if (SPContext.Current != null && SPContext.Current.Web != null)
-            {
-                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                baanschema = client.GetBaanSchemaByAccommodatieId(bondsnummer, verenigingId, accommodatieId, refresh);
-            }
-
-            return baanschema;
-        }
-
-        public System.Collections.Generic.List<ClubCloud_Baanschema> GetBaanSchemaByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
-        {
-            List<ClubCloud_Baanschema> baanschema = new List<ClubCloud_Baanschema>();
-
-            if (SPContext.Current != null && SPContext.Current.Web != null)
-            {
-                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                baanschema = client.GetBaanSchemaByVerenigingId(bondsnummer, verenigingId, refresh);
-            }
-
-            return baanschema;
-        }
-
-        public System.Collections.Generic.List<ClubCloud_Baan> GetBanenByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false)
-        {
-            List<ClubCloud_Baan> banen = new List<ClubCloud_Baan>();
-
-            if (SPContext.Current != null && SPContext.Current.Web != null)
-            {
-                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                banen = client.GetBanenByAccommodatieId(bondsnummer, verenigingId, accommodatieId, refresh);
-            }
-
-            return banen;
-        }
-
-        public System.Collections.Generic.List<ClubCloud_Baan> GetBanenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
-        {
-            List<ClubCloud_Baan> banen = new List<ClubCloud_Baan>();
-
-            if (SPContext.Current != null && SPContext.Current.Web != null)
-            {
-                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                banen = client.GetBanenByVerenigingId(bondsnummer, verenigingId, refresh);
-            }
-
-            return banen;
-        }
-
         public System.Collections.Generic.List<ClubCloud_Gebruiker> GetGebruikersByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false)
         {
             List<ClubCloud_Gebruiker> gebruikers = new List<ClubCloud_Gebruiker>();
@@ -199,6 +147,19 @@ namespace ClubCloud.Service
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
                 reserveringen = client.GetReserveringenByBaanId(bondsnummer, verenigingId, baanId, refresh);
+            }
+
+            return reserveringen;
+        }
+
+        public System.Collections.Generic.List<ClubCloud_Reservering> GetReserveringenByDate(string bondsnummer, Guid verenigingId, DateTime date, bool refresh = false)
+        {
+            List<ClubCloud_Reservering> reserveringen = new List<ClubCloud_Reservering>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                reserveringen = client.GetReserveringenByDate(bondsnummer, verenigingId, date, refresh);
             }
 
             return reserveringen;
@@ -294,9 +255,6 @@ namespace ClubCloud.Service
             return Ureservering;
         }
 
-        #endregion
-
-
         public ClubCloud_Afhang GetVerenigingAfhangSettings(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
             ClubCloud_Afhang afhang = new ClubCloud_Afhang();
@@ -310,6 +268,128 @@ namespace ClubCloud.Service
             return afhang;
 
         }
+        #endregion
+
+        #region Banen
+
+        public ClubCloud_Baan GetBaanById(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false)
+        {
+            ClubCloud_Baan baan = new ClubCloud_Baan();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                baan = client.GetBaanById(bondsnummer, verenigingId, baanId, refresh);
+            }
+
+            return baan;
+        }
+
+        public System.Collections.Generic.List<ClubCloud_Baanschema> GetBaanSchemaByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false)
+        {
+            List<ClubCloud_Baanschema> baanschema = new List<ClubCloud_Baanschema>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                baanschema = client.GetBaanSchemaByAccommodatieId(bondsnummer, verenigingId, accommodatieId, refresh);
+            }
+
+            return baanschema;
+        }
+
+        public System.Collections.Generic.List<ClubCloud_Baanschema> GetBaanSchemaByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            List<ClubCloud_Baanschema> baanschema = new List<ClubCloud_Baanschema>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                baanschema = client.GetBaanSchemaByVerenigingId(bondsnummer, verenigingId, refresh);
+            }
+
+            return baanschema;
+        }
+
+        public List<ClubCloud_Baanschema> GetBaanSchemaByDate(string bondsnummer, Guid verenigingId, DateTime date, bool refresh = false)
+        {
+            List<ClubCloud_Baanschema> baanschema = new List<ClubCloud_Baanschema>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                baanschema = client.GetBaanSchemaByDate(bondsnummer, verenigingId, date, refresh);
+            }
+
+            return baanschema;
+        }
+
+        public System.Collections.Generic.List<ClubCloud_Baan> GetBanenByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false)
+        {
+            List<ClubCloud_Baan> banen = new List<ClubCloud_Baan>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                banen = client.GetBanenByAccommodatieId(bondsnummer, verenigingId, accommodatieId, refresh);
+            }
+
+            return banen;
+        }
+
+        public System.Collections.Generic.List<ClubCloud_Baan> GetBanenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
+        {
+            List<ClubCloud_Baan> banen = new List<ClubCloud_Baan>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                banen = client.GetBanenByVerenigingId(bondsnummer, verenigingId, refresh);
+            }
+
+            return banen;
+        }
+
+        public List<ClubCloud_Baanblok> GetBaanblokkenByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false)
+        {
+            List<ClubCloud_Baanblok> baanblokken = new List<ClubCloud_Baanblok>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                baanblokken = client.GetBaanblokkenByAccommodatieId(bondsnummer, verenigingId, accommodatieId, refresh);
+            }
+
+            return baanblokken;
+        }
+
+        public ClubCloud_Baansoort GetBaansoortById(string bondsnummer, Guid verenigingId, Guid accommodatieId, Guid baansoortId, bool refresh = false)
+        {
+            ClubCloud_Baansoort baansoort = new ClubCloud_Baansoort();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                baansoort = client.GetBaansoortById(bondsnummer, verenigingId, accommodatieId, baansoortId, refresh);
+            }
+
+            return baansoort;
+        }
+
+        public ClubCloud_Baantype GetBaantypeById(string bondsnummer, Guid verenigingId, Guid accommodatieId, Guid BaantypeId, bool refresh = false)
+        {
+            ClubCloud_Baantype baantype = new ClubCloud_Baantype();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                baantype = client.GetBaantypeById(bondsnummer,verenigingId, accommodatieId, BaantypeId, refresh);
+            }
+
+            return baantype;
+        }
+
+        #endregion
 
         #region Sponsor
 
@@ -411,8 +491,6 @@ namespace ClubCloud.Service
             return default(string[]);
         }
         */
-
-
 
     }
 }

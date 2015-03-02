@@ -110,10 +110,14 @@ namespace ClubCloud.Service.Administration
 
                 //TODO Save
                 string nummer = tbx_bondsnummer.Text.Trim();
-                string naam = tbx_naam.Text.Trim();
+                string voornaam = tbx_voornaam.Text.Trim();
+                string achternaam = tbx_achternaam.Text.Trim();
                 string email = tbx_email.Text.Trim();
                 string vereniging = ddl_vereniging.SelectedItem.Value;
-                ClubCloud.Model.ClubCloud_Gebruiker gebruiker = new Model.ClubCloud_Gebruiker { Bondsnummer = nummer, Volledigenaam = naam, EmailKNLTB = email, VerenigingId = Guid.Parse(vereniging) };
+                ClubCloud.Model.ClubCloud_Gebruiker gebruiker = new Model.ClubCloud_Gebruiker { Bondsnummer = nummer, Volledigenaam = voornaam + achternaam, Voornaam = voornaam, Achternaam = achternaam, EmailKNLTB = email, VerenigingId = Guid.Parse(vereniging) };
+
+                ServiceClient.CreateGebruiker(gebruiker);
+
 
                 operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageUsers.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
             }

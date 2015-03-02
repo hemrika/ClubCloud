@@ -74,10 +74,12 @@ using System.Linq;
 		if (!loader.IsLazyLoadingEnabled(container))
 		{
 		#>
+
 		this.Configuration.LazyLoadingEnabled = false;
 		this.Configuration.AutoDetectChangesEnabled = true;
 		this.Configuration.UseDatabaseNullSemantics = false;
 		this.Configuration.ValidateOnSaveEnabled = false;
+
 		<#
 		}
 
@@ -93,11 +95,14 @@ using System.Linq;
 			}
 		}
 		#>
+
 		this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
 
+		bool initialize = true;
 		if (!Database.Exists(NameOrConnectionString))
 		{
 			Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
+			initialize = false;
 		}
 
 		try
@@ -105,11 +110,12 @@ using System.Linq;
 			if (!Database.CompatibleWithModel(false))
 			{
 				Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BoekhoudingConfiguration>());
+				initialize = false;
 			}
 		}
 		catch { }
 
-		Database.Initialize(false);
+		Database.Initialize(initialize);
 
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new CreateDatabaseIfNotExists<<#=code.Escape(container)#>>());
 		//Database.SetInitializer<<#=code.Escape(container)#>>(new MigrateDatabaseToLatestVersion<<#=code.Escape(container)#>, BoekhoudingConfiguration>());

@@ -162,14 +162,26 @@
   <data name="ApplicationManagementUsersSettingsSectionTitle" xml:space="preserve">
     <value>Gebruikers</value>
   </data>
+  <data name="ButtonBanenText" xml:space="preserve">
+    <value>ClubCloud Banen</value>
+  </data>
   <data name="ButtonCancelText" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="ButtonMetaDataText" xml:space="preserve">
+    <value>ClubCloud MetaData</value>
   </data>
   <data name="ButtonNewText" xml:space="preserve">
     <value>Nieuwe Gebbruiker</value>
   </data>
   <data name="ButtonOKText" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="ButtonTriggerText" xml:space="preserve">
+    <value>ClubCloud trigger Schema</value>
+  </data>
+  <data name="ButtonVerenigingenText" xml:space="preserve">
+    <value>ClubCloud Verenigingen</value>
   </data>
   <data name="CreateApplicationDefaultProxyCheckBoxLabel" xml:space="preserve">
     <value>Check this to include the new Service Application Proxy in the Default Proxy Group.</value>

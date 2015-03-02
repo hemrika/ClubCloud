@@ -28,6 +28,7 @@ using ClubCloud.KNLTB.ServIt.CrmService;
 using ClubCloud.KNLTB.ServIt.MetadataService;
 using System.ServiceModel.Channels;
 using Microsoft.SharePoint;
+using System.Text.RegularExpressions;
 
 namespace ClubCloud.Zimbra.Client
 {
@@ -359,10 +360,14 @@ namespace ClubCloud.Zimbra.Client
                 //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
                 //account               
-                ConditionExpression condition = new ConditionExpression { AttributeName = "accountid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("02ada6c7-80f9-4671-91f9-898ea5da3ccd") } };
-                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "accountid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("02ada6c7-80f9-4671-91f9-898ea5da3ccd") } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
-                //customeraddress
+                //sgt_regio
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_regio", Operator = ConditionOperator.Equal, Values = new object[1] { true } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                    //customeraddress
                 //customeraddressid
                 //parentid 
 
@@ -374,14 +379,20 @@ namespace ClubCloud.Zimbra.Client
                 //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_lidmaatschapid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("76760d7b-a9c9-e311-8e30-005056952140") } };
                 //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
+                //<condition attribute="sgt_accommodatieid" operator="eq" uiname="ACLO" uitype="sgt_alg_accommodatie" value="{1881A451-1E89-41D4-9E6A-2E93BCF8C341}"/></filter>
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_accommodatieid", Operator = ConditionOperator.Equal, uiname = "ACLO", uitype = "sgt_alg_accommodatie", Values = new object[1] { new Guid("1881A451-1E89-41D4-9E6A-2E93BCF8C341") } };
+                //<filter type="and">
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                //<link-entity name="sgt_alg_accommodatie" from="sgt_alg_accommodatieid" to="sgt_accommodatieid" alias="aa">
+                //LinkEntity link = new LinkEntity { LinkToEntityName = "sgt_alg_accommodatie", LinkFromAttributeName = "sgt_accommodatieid", LinkToAttributeName = "sgt_alg_accommodatieid", LinkCriteria = expression };
+                //List<BusinessEntity> entities = RetrieveMultiple(CrmService, "sgt_alg_baanblok", out moreRecords, ref pageNum, null, link);
+
                 //<condition attribute="sgt_alg_accommodatieid" operator="eq" uiname="Kampong" uitype="sgt_alg_accommodatie" value="{11029F99-522E-4FC4-A86D-694E003F8BB2}"/>
                 //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_accommodatieid", Operator = ConditionOperator.Equal, uiname = "Kampong", uitype = "sgt_alg_accommodatie", Values = new object[1] { new Guid("11029F99-522E-4FC4-A86D-694E003F8BB2") } };
                 //<filter type="and">
                 //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
                 //<link-entity name="sgt_alg_accommodatie" from="sgt_alg_accommodatieid" to="sgt_accommodatieid" alias="aa">
                 //LinkEntity link = new LinkEntity { LinkToEntityName = "sgt_alg_accommodatie", LinkFromAttributeName = "sgt_accommodatieid", LinkToAttributeName = "sgt_alg_accommodatieid", LinkCriteria = expression };
-
-
 
                 PagingInfo pageInfo = new PagingInfo();
                 pageInfo.Count = 50; // the number of rows in each batch
@@ -403,9 +414,9 @@ namespace ClubCloud.Zimbra.Client
                 //sgt_alg_district
                 //systemuser
                 //FilterExpression expression = new FilterExpression();
-                query.EntityName = "account";
+                query.EntityName = "sgt_alg_soort_lidmaatschap";
                 query.ColumnSet = cols;
-                query.Criteria = expression;
+                query.Criteria = null;
                 query.LinkEntities = new LinkEntity[] { null };
                 query.PageInfo = pageInfo;
                 query.Distinct = true;
@@ -425,11 +436,11 @@ namespace ClubCloud.Zimbra.Client
 
 
                     List<BusinessEntity> entities = results.BusinessEntityCollection.BusinessEntities.ToList<BusinessEntity>();
-                    foreach (account entity in entities)
+                    foreach (sgt_alg_soort_lidmaatschap entity in entities)
                     {
                         //entity.sgt_spelerid
-                        string sentity = SerializeObjectList<account>(entity);
-                        WriteToXmlFile<account>(@"C:\account.xml", entity, true);
+                        string sentity = SerializeObjectList<sgt_alg_soort_lidmaatschap>(entity);
+                        WriteToXmlFile<sgt_alg_soort_lidmaatschap>(@"C:\sgt_alg_soort_lidmaatschap.xml", entity, true);
                     }
                 }
                 catch (Exception ex)
@@ -818,6 +829,9 @@ namespace ClubCloud.Zimbra.Client
         {
             string nummer = textBox1.Text.Trim();
 
+            string found = Regex.Match(nummer, @"\d+").Value;
+            Console.WriteLine(nummer);
+            /*
             using (SPSite site = new SPSite("https://mijn.clubcloud.nl/"))
             {
                 SPServiceContext context = SPServiceContext.GetContext(site);
@@ -829,7 +843,7 @@ namespace ClubCloud.Zimbra.Client
                 //client.VerenigingZimbra("12073385", vereniging);
                 client.GebruikerZimbra("12073385", gebruiker);
             }  
-
+            */
             /*
             contact contact= new KNLTB.ServIt.CrmService.contact{ };
             TargetCreateContact ccontact = new TargetCreateContact { Contact = contact };

@@ -29,7 +29,7 @@
     <EntitySet Name="ClubCloud_Afhangen" EntityType="BeheerClubCloud.Store.ClubCloud_Afhangen" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Baanschemas" EntityType="BeheerClubCloud.Store.ClubCloud_Baanschemas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Fotos" EntityType="BeheerClubCloud.Store.ClubCloud_Fotos" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ClubCloud_LidmaatschapSoorten" EntityType="BeheerClubCloud.Store.ClubCloud_LidmaatschapSoorten" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubCloud_Lidmaatschapsoorten" EntityType="BeheerClubCloud.Store.ClubCloud_Lidmaatschapsoorten" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Sponsoren" EntityType="BeheerClubCloud.Store.ClubCloud_Sponsoren" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Sponsor_Afbeeldingen" EntityType="BeheerClubCloud.Store.ClubCloud_Sponsor_Afbeeldingen" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ClubCloud_Baanblokken" EntityType="BeheerClubCloud.Store.ClubCloud_Baanblokken" store:Type="Tables" Schema="dbo" />
@@ -42,11 +42,11 @@
       <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Functionaris_Gebruiker" Association="BeheerClubCloud.Store.ClubCloud_GebruikerClubCloud_Functionaris">
+    <AssociationSet Name="ClubCloud_Functionaris_Gebruiker" Association="BeheerClubCloud.Store.ClubCloud_Gebruiker_Functionaris">
       <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
       <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Functionaris_District" Association="BeheerClubCloud.Store.ClubCloud_FunctionarisClubCloud_District">
+    <AssociationSet Name="ClubCloud_Functionaris_District" Association="BeheerClubCloud.Store.ClubCloud_Functionaris_District">
       <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
       <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
     </AssociationSet>
@@ -54,7 +54,7 @@
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
       <End Role="ClubCloud_Lidmaatschap" EntitySet="ClubCloud_Lidmaatschappen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Gebruiker_Lidmaatschap" Association="BeheerClubCloud.Store.ClubCloud_GebruikerClubCloud_Lidmaatschap">
+    <AssociationSet Name="ClubCloud_Gebruiker_Lidmaatschap" Association="BeheerClubCloud.Store.ClubCloud_Gebruiker_Lidmaatschap">
       <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
       <End Role="ClubCloud_Lidmaatschap" EntitySet="ClubCloud_Lidmaatschappen" />
     </AssociationSet>
@@ -62,7 +62,7 @@
       <End Role="ClubCloud_Bestuursorgaan" EntitySet="ClubCloud_Bestuursorganen" />
       <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Vereniging_Bestuursorgaan" Association="BeheerClubCloud.Store.ClubCloud_BestuursorgaanClubCloud_Vereniging">
+    <AssociationSet Name="ClubCloud_Vereniging_Bestuursorgaan" Association="BeheerClubCloud.Store.ClubCloud_Bestuursorgaan_Vereniging">
       <End Role="ClubCloud_Bestuursorgaan" EntitySet="ClubCloud_Bestuursorganen" />
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
     </AssociationSet>
@@ -70,117 +70,141 @@
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
       <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Vereniging_Rechtsvorm" Association="BeheerClubCloud.Store.ClubCloud_VerenigingClubCloud_Rechtsvorm">
+    <AssociationSet Name="ClubCloud_Vereniging_Rechtsvorm" Association="BeheerClubCloud.Store.ClubCloud_Vereniging_Rechtsvorm">
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
       <End Role="ClubCloud_Rechtsvorm" EntitySet="ClubCloud_Rechtsvormen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Vereniging_Accommodatie" Association="BeheerClubCloud.Store.ClubCloud_VerenigingClubCloud_Accommodatie">
+    <AssociationSet Name="ClubCloud_Vereniging_Accommodatie" Association="BeheerClubCloud.Store.ClubCloud_Vereniging_Accommodatie">
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
       <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Vereniging_Address" Association="BeheerClubCloud.Store.ClubCloud_VerenigingClubCloud_Address">
+    <AssociationSet Name="ClubCloud_Vereniging_Address" Association="BeheerClubCloud.Store.ClubCloud_Vereniging_Address">
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
       <End Role="ClubCloud_Address" EntitySet="ClubCloud_Addresses" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Vereniging_Regio" Association="BeheerClubCloud.Store.ClubCloud_VerenigingClubCloud_Regio">
+    <AssociationSet Name="ClubCloud_Vereniging_Regio" Association="BeheerClubCloud.Store.ClubCloud_Vereniging_Regio">
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
       <End Role="ClubCloud_Regio" EntitySet="ClubCloud_Regios" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_District_Regio" Association="BeheerClubCloud.Store.ClubCloud_DistrictClubCloud_Regio">
+    <AssociationSet Name="ClubCloud_District_Regio" Association="BeheerClubCloud.Store.ClubCloud_District_Regio">
       <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
       <End Role="ClubCloud_Regio" EntitySet="ClubCloud_Regios" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Gebruiker_Address" Association="BeheerClubCloud.Store.ClubCloud_GebruikerClubCloud_Address">
+    <AssociationSet Name="ClubCloud_Gebruiker_Address" Association="BeheerClubCloud.Store.ClubCloud_Gebruiker_Address">
       <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
       <End Role="ClubCloud_Address" EntitySet="ClubCloud_Addresses" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Gebruiker_Vereniging" Association="BeheerClubCloud.Store.ClubCloud_GebruikerClubCloud_Vereniging">
+    <AssociationSet Name="ClubCloud_Gebruiker_Vereniging" Association="BeheerClubCloud.Store.ClubCloud_Gebruiker_Vereniging">
       <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_ProfielClubCloud_Gebruiker" Association="BeheerClubCloud.Store.ClubCloud_ProfielClubCloud_Gebruiker">
+    <AssociationSet Name="ClubCloud_Profiel_Gebruiker" Association="BeheerClubCloud.Store.ClubCloud_Profiel_Gebruiker">
       <End Role="ClubCloud_Profiel" EntitySet="ClubCloud_Profielen" />
       <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_Baansoort_Baantype" Association="BeheerClubCloud.Store.ClubCloud_BaansoortClubCloud_Baantype">
+    <AssociationSet Name="ClubCloud_Baansoort_Baantype" Association="BeheerClubCloud.Store.ClubCloud_Baansoort_Baantype">
       <End Role="ClubCloud_Baansoort" EntitySet="ClubCloud_Baansoorten" />
       <End Role="ClubCloud_Baantype" EntitySet="ClubCloud_Baantypes" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_AccommodatieClubCloud_District" Association="BeheerClubCloud.Store.ClubCloud_AccommodatieClubCloud_District">
+    <AssociationSet Name="ClubCloud_Accommodatie_District" Association="BeheerClubCloud.Store.ClubCloud_Accommodatie_District">
       <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
       <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_AccommodatieClubCloud_Regio" Association="BeheerClubCloud.Store.ClubCloud_AccommodatieClubCloud_Regio">
+    <AssociationSet Name="ClubCloud_Accommodatie_Regio" Association="BeheerClubCloud.Store.ClubCloud_Accommodatie_Regio">
       <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
       <End Role="ClubCloud_Regio" EntitySet="ClubCloud_Regios" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_ReserveringClubCloud_Baan" Association="BeheerClubCloud.Store.ClubCloud_ReserveringClubCloud_Baan">
+    <AssociationSet Name="ClubCloud_Reservering_Baan" Association="BeheerClubCloud.Store.ClubCloud_Reservering_Baan">
       <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
       <End Role="ClubCloud_Baan" EntitySet="ClubCloud_Banen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_ReserveringClubCloud_Gebruiker" Association="BeheerClubCloud.Store.ClubCloud_ReserveringClubCloud_Gebruiker">
+    <AssociationSet Name="ClubCloud_Reservering_Gebruiker_Een" Association="BeheerClubCloud.Store.ClubCloud_Reservering_Gebruiker_Een">
       <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
       <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_ReserveringClubCloud_Gebruiker_Een" Association="BeheerClubCloud.Store.ClubCloud_ReserveringClubCloud_Gebruiker_Een">
+    <AssociationSet Name="ClubCloud_Reservering_Gebruiker_Twee" Association="BeheerClubCloud.Store.ClubCloud_Reservering_Gebruiker_Twee">
       <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
       <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_ReserveringClubCloud_Gebruiker_Twee" Association="BeheerClubCloud.Store.ClubCloud_ReserveringClubCloud_Gebruiker_Twee">
+    <AssociationSet Name="ClubCloud_Reservering_Gebruiker_Drie" Association="BeheerClubCloud.Store.ClubCloud_Reservering_Gebruiker_Drie">
       <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
       <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_ReserveringClubCloud_Gebruiker_Drie" Association="BeheerClubCloud.Store.ClubCloud_ReserveringClubCloud_Gebruiker_Drie">
+    <AssociationSet Name="ClubCloud_Reservering_Gebruiker_Vier" Association="BeheerClubCloud.Store.ClubCloud_Reservering_Gebruiker_Vier">
       <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
       <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_ReserveringClubCloud_Gebruiker_Vier" Association="BeheerClubCloud.Store.ClubCloud_ReserveringClubCloud_Gebruiker_Vier">
-      <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
-      <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
-    </AssociationSet>
-    <AssociationSet Name="ClubCloud_AfhangenClubCloud_Vereniging" Association="BeheerClubCloud.Store.ClubCloud_AfhangenClubCloud_Vereniging">
+    <AssociationSet Name="ClubCloud_Afhangen_Vereniging" Association="BeheerClubCloud.Store.ClubCloud_Afhangen_Vereniging">
       <End Role="ClubCloud_Afhangen" EntitySet="ClubCloud_Afhangen" />
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap" Association="BeheerClubCloud.Store.ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap">
-      <End Role="ClubCLoud_LidmaatschapSoort" EntitySet="ClubCloud_LidmaatschapSoorten" />
+    <AssociationSet Name="ClubCloud_LidmaatschapSoort_Lidmaatschap" Association="BeheerClubCloud.Store.ClubCloud_LidmaatschapSoort_Lidmaatschap">
+      <End Role="ClubCLoud_LidmaatschapSoort" EntitySet="ClubCloud_Lidmaatschapsoorten" />
       <End Role="ClubCloud_Lidmaatschap" EntitySet="ClubCloud_Lidmaatschappen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_SponsorClubCloud_Vereniging" Association="BeheerClubCloud.Store.ClubCloud_SponsorClubCloud_Vereniging">
+    <AssociationSet Name="ClubCloud_Sponsor_Vereniging" Association="BeheerClubCloud.Store.ClubCloud_Sponsor_Vereniging">
       <End Role="ClubCloud_Sponsor" EntitySet="ClubCloud_Sponsoren" />
       <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_SponsorClubCloud_Sponsor_Afbeelding" Association="BeheerClubCloud.Store.ClubCloud_SponsorClubCloud_Sponsor_Afbeelding">
+    <AssociationSet Name="ClubCloud_Sponsor_Sponsor_Afbeelding" Association="BeheerClubCloud.Store.ClubCloud_Sponsor_Sponsor_Afbeelding">
       <End Role="ClubCloud_Sponsor" EntitySet="ClubCloud_Sponsoren" />
       <End Role="ClubCloud_Sponsor_Afbeelding" EntitySet="ClubCloud_Sponsor_Afbeeldingen" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_BaanClubCloud_Baanblok" Association="BeheerClubCloud.Store.ClubCloud_BaanClubCloud_Baanblok">
+    <AssociationSet Name="ClubCloud_Baan_Baanblok" Association="BeheerClubCloud.Store.ClubCloud_Baan_Baanblok">
       <End Role="ClubCloud_Baan" EntitySet="ClubCloud_Banen" />
       <End Role="ClubCloud_Baanblok" EntitySet="ClubCloud_Baanblokken" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_BaanblokClubCloud_Accommodatie" Association="BeheerClubCloud.Store.ClubCloud_BaanblokClubCloud_Accommodatie">
+    <AssociationSet Name="ClubCloud_Baanblok_Accommodatie" Association="BeheerClubCloud.Store.ClubCloud_Baanblok_Accommodatie">
       <End Role="ClubCloud_Baanblok" EntitySet="ClubCloud_Baanblokken" />
       <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_BaanblokClubCloud_Baantype" Association="BeheerClubCloud.Store.ClubCloud_BaanblokClubCloud_Baantype">
+    <AssociationSet Name="ClubCloud_Baanblok_Baantype" Association="BeheerClubCloud.Store.ClubCloud_Baanblok_Baantype">
       <End Role="ClubCloud_Baanblok" EntitySet="ClubCloud_Baanblokken" />
       <End Role="ClubCloud_Baantype" EntitySet="ClubCloud_Baantypes" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_BaanblokClubCloud_Baansoort" Association="BeheerClubCloud.Store.ClubCloud_BaanblokClubCloud_Baansoort">
+    <AssociationSet Name="ClubCloud_Baanblok_Baansoort" Association="BeheerClubCloud.Store.ClubCloud_Baanblok_Baansoort">
       <End Role="ClubCloud_Baanblok" EntitySet="ClubCloud_Baanblokken" />
       <End Role="ClubCloud_Baansoort" EntitySet="ClubCloud_Baansoorten" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_BaanClubCloud_Accommodatie" Association="BeheerClubCloud.Store.ClubCloud_BaanClubCloud_Accommodatie">
+    <AssociationSet Name="ClubCloud_Baan_Accommodatie" Association="BeheerClubCloud.Store.ClubCloud_Baan_Accommodatie">
       <End Role="ClubCloud_Baan" EntitySet="ClubCloud_Banen" />
       <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_BaanSpeciaalClubCloud_Accommodatie" Association="BeheerClubCloud.Store.ClubCloud_BaanSpeciaalClubCloud_Accommodatie">
+    <AssociationSet Name="ClubCloud_BaanSpeciaal_Accommodatie" Association="BeheerClubCloud.Store.ClubCloud_BaanSpeciaal_Accommodatie">
       <End Role="ClubCloud_BaanSpeciaal" EntitySet="ClubCloud_BanenSpeciaal" />
       <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
     </AssociationSet>
-    <AssociationSet Name="ClubCloud_BaanSpeciaalClubCloud_Baantoplaag" Association="BeheerClubCloud.Store.ClubCloud_BaanSpeciaalClubCloud_Baantoplaag">
+    <AssociationSet Name="ClubCloud_BaanSpeciaal_Baantoplaag" Association="BeheerClubCloud.Store.ClubCloud_BaanSpeciaal_Baantoplaag">
       <End Role="ClubCloud_BaanSpeciaal" EntitySet="ClubCloud_BanenSpeciaal" />
       <End Role="ClubCloud_Baantoplaag" EntitySet="ClubCloud_Baantoplagen" />
+    </AssociationSet>
+    <AssociationSet Name="ClubCloud_Regio_Address" Association="BeheerClubCloud.Store.ClubCloud_Regio_Address">
+      <End Role="ClubCloud_Regio" EntitySet="ClubCloud_Regios" />
+      <End Role="ClubCloud_Address" EntitySet="ClubCloud_Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="ClubCloud_Setting_Gebruiker" Association="BeheerClubCloud.Store.ClubCloud_Setting_Gebruiker">
+      <End Role="ClubCloud_Setting" EntitySet="ClubCloud_Settings" />
+      <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
+    </AssociationSet>
+    <AssociationSet Name="ClubCloud_Setting_Vereniging" Association="BeheerClubCloud.Store.ClubCloud_Setting_Vereniging">
+      <End Role="ClubCloud_Setting" EntitySet="ClubCloud_Settings" />
+      <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+    </AssociationSet>
+    <AssociationSet Name="ClubCloud_Accommodatie_Address" Association="BeheerClubCloud.Store.ClubCloud_Accommodatie_Address">
+      <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
+      <End Role="ClubCloud_Address" EntitySet="ClubCloud_Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="ClubCloud_GebruikerClubCloud_Nationaliteit" Association="BeheerClubCloud.Store.ClubCloud_GebruikerClubCloud_Nationaliteit">
+      <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
+      <End Role="ClubCloud_Nationaliteit" EntitySet="ClubCloud_Nationaliteiten" />
+    </AssociationSet>
+    <AssociationSet Name="ClubCloud_Baanschema_Baan" Association="BeheerClubCloud.Store.ClubCloud_Baanschema_Baan">
+      <End Role="ClubCloud_Baanschema" EntitySet="ClubCloud_Baanschemas" />
+      <End Role="ClubCloud_Baan" EntitySet="ClubCloud_Banen" />
+    </AssociationSet>
+    <AssociationSet Name="ClubCloud_BaanschemaClubCloud_Vereniging" Association="BeheerClubCloud.Store.ClubCloud_BaanschemaClubCloud_Vereniging">
+      <End Role="ClubCloud_Baanschema" EntitySet="ClubCloud_Baanschemas" />
+      <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ClubCloud_Settings">
@@ -268,8 +292,8 @@
     <Property Name="Geboortedatum" Type="datetime" Nullable="true" />
     <Property Name="Geboorteplaats" Type="nvarchar(max)" Nullable="false" />
     <Property Name="OverlijdensDatum" Type="datetime" Nullable="true" />
-    <Property Name="NationaliteitId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="AddressGeheim" Type="bit" Nullable="false" />
+    <Property Name="NationaliteitId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FTPsite" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
@@ -434,9 +458,9 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="true" />
     <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="true" />
-    <Property Name="TypeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Groep" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Rechtsvormen">
@@ -484,6 +508,11 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmailKNLTB" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TelefoonAvond" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TelefoonOverdag" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fax" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Baansoorten">
     <Key>
@@ -520,7 +549,7 @@
     <Property Name="BaanblokId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="AccommodatieId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Keuring" Type="datetime" Nullable="false" />
+    <Property Name="Keuring" Type="datetime" Nullable="true" />
     <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Bouwaarden">
@@ -580,7 +609,8 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="BaanId" Type="uniqueidentifier" Nullable="true" />
-    <Property Name="Beschikbaar" Type="nvarchar(max)" Nullable="false" DefaultValue="True" />
+    <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="Beschikbaar" Type="bit" Nullable="false" />
     <Property Name="MaandBegin" Type="int" Nullable="false" />
     <Property Name="MaandEinde" Type="int" Nullable="false" />
     <Property Name="Dag" Type="int" Nullable="false" />
@@ -598,16 +628,20 @@
     <Property Name="ContentLength" Type="float" Nullable="false" />
     <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="ClubCloud_LidmaatschapSoorten">
+  <EntityType Name="ClubCloud_Lidmaatschapsoorten">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Omschrijving" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DagBegin" Type="time" Nullable="false" />
     <Property Name="DagEinde" Type="time" Nullable="false" />
+    <Property Name="Contributie" Type="bit" Nullable="false" />
     <Property Name="Tarief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Sponsoren">
     <Key>
@@ -675,7 +709,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_GebruikerClubCloud_Functionaris">
+  <Association Name="ClubCloud_Gebruiker_Functionaris">
     <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="0..1" />
     <End Role="ClubCloud_Functionaris" Type="BeheerClubCloud.Store.ClubCloud_Functionarissen" Multiplicity="*" />
     <ReferentialConstraint>
@@ -687,7 +721,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_FunctionarisClubCloud_District">
+  <Association Name="ClubCloud_Functionaris_District">
     <End Role="ClubCloud_Functionaris" Type="BeheerClubCloud.Store.ClubCloud_Functionarissen" Multiplicity="*" />
     <End Role="ClubCloud_District" Type="BeheerClubCloud.Store.ClubCloud_Districten" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -711,7 +745,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_GebruikerClubCloud_Lidmaatschap">
+  <Association Name="ClubCloud_Gebruiker_Lidmaatschap">
     <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="0..1" />
     <End Role="ClubCloud_Lidmaatschap" Type="BeheerClubCloud.Store.ClubCloud_Lidmaatschappen" Multiplicity="*" />
     <ReferentialConstraint>
@@ -735,7 +769,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_BestuursorgaanClubCloud_Vereniging">
+  <Association Name="ClubCloud_Bestuursorgaan_Vereniging">
     <End Role="ClubCloud_Bestuursorgaan" Type="BeheerClubCloud.Store.ClubCloud_Bestuursorganen" Multiplicity="*" />
     <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -759,7 +793,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_VerenigingClubCloud_Rechtsvorm">
+  <Association Name="ClubCloud_Vereniging_Rechtsvorm">
     <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="*" />
     <End Role="ClubCloud_Rechtsvorm" Type="BeheerClubCloud.Store.ClubCloud_Rechtsvormen" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -771,7 +805,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_VerenigingClubCloud_Accommodatie">
+  <Association Name="ClubCloud_Vereniging_Accommodatie">
     <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="*" />
     <End Role="ClubCloud_Accommodatie" Type="BeheerClubCloud.Store.ClubCloud_Accommodaties" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -783,7 +817,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_VerenigingClubCloud_Address">
+  <Association Name="ClubCloud_Vereniging_Address">
     <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="0..1" />
     <End Role="ClubCloud_Address" Type="BeheerClubCloud.Store.ClubCloud_Addresses" Multiplicity="*" />
     <ReferentialConstraint>
@@ -795,7 +829,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_VerenigingClubCloud_Regio">
+  <Association Name="ClubCloud_Vereniging_Regio">
     <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="*" />
     <End Role="ClubCloud_Regio" Type="BeheerClubCloud.Store.ClubCloud_Regios" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -807,7 +841,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_DistrictClubCloud_Regio">
+  <Association Name="ClubCloud_District_Regio">
     <End Role="ClubCloud_District" Type="BeheerClubCloud.Store.ClubCloud_Districten" Multiplicity="*" />
     <End Role="ClubCloud_Regio" Type="BeheerClubCloud.Store.ClubCloud_Regios" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -819,7 +853,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_GebruikerClubCloud_Address">
+  <Association Name="ClubCloud_Gebruiker_Address">
     <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="0..1" />
     <End Role="ClubCloud_Address" Type="BeheerClubCloud.Store.ClubCloud_Addresses" Multiplicity="*" />
     <ReferentialConstraint>
@@ -831,7 +865,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_GebruikerClubCloud_Vereniging">
+  <Association Name="ClubCloud_Gebruiker_Vereniging">
     <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="*" />
     <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -843,7 +877,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_ProfielClubCloud_Gebruiker">
+  <Association Name="ClubCloud_Profiel_Gebruiker">
     <End Role="ClubCloud_Profiel" Type="BeheerClubCloud.Store.ClubCloud_Profielen" Multiplicity="*" />
     <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -855,7 +889,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_BaansoortClubCloud_Baantype">
+  <Association Name="ClubCloud_Baansoort_Baantype">
     <End Role="ClubCloud_Baansoort" Type="BeheerClubCloud.Store.ClubCloud_Baansoorten" Multiplicity="*" />
     <End Role="ClubCloud_Baantype" Type="BeheerClubCloud.Store.ClubCloud_Baantypes" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -867,7 +901,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_AccommodatieClubCloud_District">
+  <Association Name="ClubCloud_Accommodatie_District">
     <End Role="ClubCloud_Accommodatie" Type="BeheerClubCloud.Store.ClubCloud_Accommodaties" Multiplicity="*" />
     <End Role="ClubCloud_District" Type="BeheerClubCloud.Store.ClubCloud_Districten" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -879,7 +913,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_AccommodatieClubCloud_Regio">
+  <Association Name="ClubCloud_Accommodatie_Regio">
     <End Role="ClubCloud_Accommodatie" Type="BeheerClubCloud.Store.ClubCloud_Accommodaties" Multiplicity="*" />
     <End Role="ClubCloud_Regio" Type="BeheerClubCloud.Store.ClubCloud_Regios" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -891,7 +925,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_ReserveringClubCloud_Baan">
+  <Association Name="ClubCloud_Reservering_Baan">
     <End Role="ClubCloud_Reservering" Type="BeheerClubCloud.Store.ClubCloud_Reserveringen" Multiplicity="*" />
     <End Role="ClubCloud_Baan" Type="BeheerClubCloud.Store.ClubCloud_Banen" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -903,7 +937,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_ReserveringClubCloud_Gebruiker">
+  <Association Name="ClubCloud_Reservering_Gebruiker_Een">
     <End Role="ClubCloud_Reservering" Type="BeheerClubCloud.Store.ClubCloud_Reserveringen" Multiplicity="*" />
     <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -915,19 +949,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_ReserveringClubCloud_Gebruiker_Een">
-    <End Role="ClubCloud_Reservering" Type="BeheerClubCloud.Store.ClubCloud_Reserveringen" Multiplicity="*" />
-    <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="ClubCloud_Gebruiker">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ClubCloud_Reservering">
-        <PropertyRef Name="Gebruiker_Een" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ClubCloud_ReserveringClubCloud_Gebruiker_Twee">
+  <Association Name="ClubCloud_Reservering_Gebruiker_Twee">
     <End Role="ClubCloud_Reservering" Type="BeheerClubCloud.Store.ClubCloud_Reserveringen" Multiplicity="*" />
     <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -939,7 +961,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_ReserveringClubCloud_Gebruiker_Drie">
+  <Association Name="ClubCloud_Reservering_Gebruiker_Drie">
     <End Role="ClubCloud_Reservering" Type="BeheerClubCloud.Store.ClubCloud_Reserveringen" Multiplicity="*" />
     <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -951,7 +973,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_ReserveringClubCloud_Gebruiker_Vier">
+  <Association Name="ClubCloud_Reservering_Gebruiker_Vier">
     <End Role="ClubCloud_Reservering" Type="BeheerClubCloud.Store.ClubCloud_Reserveringen" Multiplicity="*" />
     <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -963,7 +985,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_AfhangenClubCloud_Vereniging">
+  <Association Name="ClubCloud_Afhangen_Vereniging">
     <End Role="ClubCloud_Afhangen" Type="BeheerClubCloud.Store.ClubCloud_Afhangen" Multiplicity="*" />
     <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -975,8 +997,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap">
-    <End Role="ClubCLoud_LidmaatschapSoort" Type="BeheerClubCloud.Store.ClubCloud_LidmaatschapSoorten" Multiplicity="0..1" />
+  <Association Name="ClubCloud_LidmaatschapSoort_Lidmaatschap">
+    <End Role="ClubCLoud_LidmaatschapSoort" Type="BeheerClubCloud.Store.ClubCloud_Lidmaatschapsoorten" Multiplicity="0..1" />
     <End Role="ClubCloud_Lidmaatschap" Type="BeheerClubCloud.Store.ClubCloud_Lidmaatschappen" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ClubCLoud_LidmaatschapSoort">
@@ -987,7 +1009,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_SponsorClubCloud_Vereniging">
+  <Association Name="ClubCloud_Sponsor_Vereniging">
     <End Role="ClubCloud_Sponsor" Type="BeheerClubCloud.Store.ClubCloud_Sponsoren" Multiplicity="*" />
     <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="1" />
     <ReferentialConstraint>
@@ -999,7 +1021,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_SponsorClubCloud_Sponsor_Afbeelding">
+  <Association Name="ClubCloud_Sponsor_Sponsor_Afbeelding">
     <End Role="ClubCloud_Sponsor" Type="BeheerClubCloud.Store.ClubCloud_Sponsoren" Multiplicity="*" />
     <End Role="ClubCloud_Sponsor_Afbeelding" Type="BeheerClubCloud.Store.ClubCloud_Sponsor_Afbeeldingen" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -1011,7 +1033,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_BaanClubCloud_Baanblok">
+  <Association Name="ClubCloud_Baan_Baanblok">
     <End Role="ClubCloud_Baan" Type="BeheerClubCloud.Store.ClubCloud_Banen" Multiplicity="*" />
     <End Role="ClubCloud_Baanblok" Type="BeheerClubCloud.Store.ClubCloud_Baanblokken" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -1023,7 +1045,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_BaanblokClubCloud_Accommodatie">
+  <Association Name="ClubCloud_Baanblok_Accommodatie">
     <End Role="ClubCloud_Baanblok" Type="BeheerClubCloud.Store.ClubCloud_Baanblokken" Multiplicity="*" />
     <End Role="ClubCloud_Accommodatie" Type="BeheerClubCloud.Store.ClubCloud_Accommodaties" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -1035,7 +1057,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_BaanblokClubCloud_Baantype">
+  <Association Name="ClubCloud_Baanblok_Baantype">
     <End Role="ClubCloud_Baanblok" Type="BeheerClubCloud.Store.ClubCloud_Baanblokken" Multiplicity="*" />
     <End Role="ClubCloud_Baantype" Type="BeheerClubCloud.Store.ClubCloud_Baantypes" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -1047,7 +1069,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_BaanblokClubCloud_Baansoort">
+  <Association Name="ClubCloud_Baanblok_Baansoort">
     <End Role="ClubCloud_Baanblok" Type="BeheerClubCloud.Store.ClubCloud_Baanblokken" Multiplicity="*" />
     <End Role="ClubCloud_Baansoort" Type="BeheerClubCloud.Store.ClubCloud_Baansoorten" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -1059,7 +1081,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_BaanClubCloud_Accommodatie">
+  <Association Name="ClubCloud_Baan_Accommodatie">
     <End Role="ClubCloud_Baan" Type="BeheerClubCloud.Store.ClubCloud_Banen" Multiplicity="*" />
     <End Role="ClubCloud_Accommodatie" Type="BeheerClubCloud.Store.ClubCloud_Accommodaties" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -1071,7 +1093,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_BaanSpeciaalClubCloud_Accommodatie">
+  <Association Name="ClubCloud_BaanSpeciaal_Accommodatie">
     <End Role="ClubCloud_BaanSpeciaal" Type="BeheerClubCloud.Store.ClubCloud_BanenSpeciaal" Multiplicity="*" />
     <End Role="ClubCloud_Accommodatie" Type="BeheerClubCloud.Store.ClubCloud_Accommodaties" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -1083,7 +1105,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ClubCloud_BaanSpeciaalClubCloud_Baantoplaag">
+  <Association Name="ClubCloud_BaanSpeciaal_Baantoplaag">
     <End Role="ClubCloud_BaanSpeciaal" Type="BeheerClubCloud.Store.ClubCloud_BanenSpeciaal" Multiplicity="*" />
     <End Role="ClubCloud_Baantoplaag" Type="BeheerClubCloud.Store.ClubCloud_Baantoplagen" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -1092,6 +1114,90 @@
       </Principal>
       <Dependent Role="ClubCloud_BaanSpeciaal">
         <PropertyRef Name="BaantoplaagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClubCloud_Regio_Address">
+    <End Role="ClubCloud_Regio" Type="BeheerClubCloud.Store.ClubCloud_Regios" Multiplicity="0..1" />
+    <End Role="ClubCloud_Address" Type="BeheerClubCloud.Store.ClubCloud_Addresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Regio">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Address">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClubCloud_Setting_Gebruiker">
+    <End Role="ClubCloud_Setting" Type="BeheerClubCloud.Store.ClubCloud_Settings" Multiplicity="*" />
+    <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Gebruiker">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Setting">
+        <PropertyRef Name="GebruikerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClubCloud_Setting_Vereniging">
+    <End Role="ClubCloud_Setting" Type="BeheerClubCloud.Store.ClubCloud_Settings" Multiplicity="*" />
+    <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Vereniging">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Setting">
+        <PropertyRef Name="VerenigingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClubCloud_Accommodatie_Address">
+    <End Role="ClubCloud_Accommodatie" Type="BeheerClubCloud.Store.ClubCloud_Accommodaties" Multiplicity="0..1" />
+    <End Role="ClubCloud_Address" Type="BeheerClubCloud.Store.ClubCloud_Addresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Accommodatie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Address">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClubCloud_GebruikerClubCloud_Nationaliteit">
+    <End Role="ClubCloud_Gebruiker" Type="BeheerClubCloud.Store.ClubCloud_Gebruikers" Multiplicity="*" />
+    <End Role="ClubCloud_Nationaliteit" Type="BeheerClubCloud.Store.ClubCloud_Nationaliteiten" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Nationaliteit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Gebruiker">
+        <PropertyRef Name="NationaliteitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClubCloud_Baanschema_Baan">
+    <End Role="ClubCloud_Baanschema" Type="BeheerClubCloud.Store.ClubCloud_Baanschemas" Multiplicity="*" />
+    <End Role="ClubCloud_Baan" Type="BeheerClubCloud.Store.ClubCloud_Banen" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Baan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Baanschema">
+        <PropertyRef Name="BaanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClubCloud_BaanschemaClubCloud_Vereniging">
+    <End Role="ClubCloud_Baanschema" Type="BeheerClubCloud.Store.ClubCloud_Baanschemas" Multiplicity="*" />
+    <End Role="ClubCloud_Vereniging" Type="BeheerClubCloud.Store.ClubCloud_Verenigingen" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ClubCloud_Vereniging">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClubCloud_Baanschema">
+        <PropertyRef Name="VerenigingId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1118,11 +1224,11 @@
             <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
             <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_Functionaris_Gebruiker" Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Functionaris">
+          <AssociationSet Name="ClubCloud_Functionaris_Gebruiker" Association="BeheerClubCloud.ClubCloud_Gebruiker_Functionaris">
             <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
             <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_Functionaris_District" Association="BeheerClubCloud.ClubCloud_FunctionarisClubCloud_District">
+          <AssociationSet Name="ClubCloud_Functionaris_District" Association="BeheerClubCloud.ClubCloud_Functionaris_District">
             <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
             <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
           </AssociationSet>
@@ -1130,7 +1236,7 @@
             <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
             <End Role="ClubCloud_Lidmaatschap" EntitySet="ClubCloud_Lidmaatschappen" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_Gebruiker_Lidmaatschap" Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Lidmaatschap">
+          <AssociationSet Name="ClubCloud_Gebruiker_Lidmaatschap" Association="BeheerClubCloud.ClubCloud_Gebruiker_Lidmaatschap">
             <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
             <End Role="ClubCloud_Lidmaatschap" EntitySet="ClubCloud_Lidmaatschappen" />
           </AssociationSet>
@@ -1139,7 +1245,7 @@
             <End Role="ClubCloud_Bestuursorgaan" EntitySet="ClubCloud_Bestuursorganen" />
             <End Role="ClubCloud_Functionaris" EntitySet="ClubCloud_Functionarissen" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_Vereniging_Bestuursorgaan" Association="BeheerClubCloud.ClubCloud_BestuursorgaanClubCloud_Vereniging">
+          <AssociationSet Name="ClubCloud_Vereniging_Bestuursorgaan" Association="BeheerClubCloud.ClubCloud_Bestuursorgaan_Vereniging">
             <End Role="ClubCloud_Bestuursorgaan" EntitySet="ClubCloud_Bestuursorganen" />
             <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
           </AssociationSet>
@@ -1148,37 +1254,37 @@
             <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
           </AssociationSet>
           <EntitySet Name="ClubCloud_Rechtsvormen" EntityType="BeheerClubCloud.ClubCloud_Rechtsvorm" />
-          <AssociationSet Name="ClubCloud_Vereniging_Rechtsvorm" Association="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Rechtsvorm">
+          <AssociationSet Name="ClubCloud_Vereniging_Rechtsvorm" Association="BeheerClubCloud.ClubCloud_Vereniging_Rechtsvorm">
             <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
             <End Role="ClubCloud_Rechtsvorm" EntitySet="ClubCloud_Rechtsvormen" />
           </AssociationSet>
           <EntitySet Name="ClubCloud_Addresses" EntityType="BeheerClubCloud.ClubCloud_Address" />
-          <AssociationSet Name="ClubCloud_Vereniging_Accommodatie" Association="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Accommodatie">
+          <AssociationSet Name="ClubCloud_Vereniging_Accommodatie" Association="BeheerClubCloud.ClubCloud_Vereniging_Accommodatie">
             <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
             <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_Vereniging_Address" Association="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Address">
+          <AssociationSet Name="ClubCloud_Vereniging_Address" Association="BeheerClubCloud.ClubCloud_Vereniging_Address">
             <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
             <End Role="ClubCloud_Address" EntitySet="ClubCloud_Addresses" />
           </AssociationSet>
           <EntitySet Name="ClubCloud_Regios" EntityType="BeheerClubCloud.ClubCloud_Regio" />
-          <AssociationSet Name="ClubCloud_Vereniging_Regio" Association="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Regio">
+          <AssociationSet Name="ClubCloud_Vereniging_Regio" Association="BeheerClubCloud.ClubCloud_Vereniging_Regio">
             <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
             <End Role="ClubCloud_Regio" EntitySet="ClubCloud_Regios" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_District_Regio" Association="BeheerClubCloud.ClubCloud_DistrictClubCloud_Regio">
+          <AssociationSet Name="ClubCloud_District_Regio" Association="BeheerClubCloud.ClubCloud_District_Regio">
             <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
             <End Role="ClubCloud_Regio" EntitySet="ClubCloud_Regios" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_Gebruiker_Address" Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Address">
+          <AssociationSet Name="ClubCloud_Gebruiker_Address" Association="BeheerClubCloud.ClubCloud_Gebruiker_Address">
             <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
             <End Role="ClubCloud_Address" EntitySet="ClubCloud_Addresses" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_Gebruiker_Vereniging" Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Vereniging">
+          <AssociationSet Name="ClubCloud_Gebruiker_Vereniging" Association="BeheerClubCloud.ClubCloud_Gebruiker_Vereniging">
             <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
             <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_ProfielClubCloud_Gebruiker" Association="BeheerClubCloud.ClubCloud_ProfielClubCloud_Gebruiker">
+          <AssociationSet Name="ClubCloud_Profiel_Gebruiker" Association="BeheerClubCloud.ClubCloud_Profiel_Gebruiker">
             <End Role="ClubCloud_Profiel" EntitySet="ClubCloud_Profielen" />
             <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
           </AssociationSet>
@@ -1187,94 +1293,118 @@
           <EntitySet Name="ClubCloud_Banen" EntityType="BeheerClubCloud.ClubCloud_Baan" />
           <EntitySet Name="ClubCloud_Bouwaarden" EntityType="BeheerClubCloud.ClubCloud_Bouwaard" />
           <EntitySet Name="ClubCloud_BanenSpeciaal" EntityType="BeheerClubCloud.ClubCloud_BaanSpeciaal" />
-          <AssociationSet Name="ClubCloud_Baansoort_Baantype" Association="BeheerClubCloud.ClubCloud_BaansoortClubCloud_Baantype">
+          <AssociationSet Name="ClubCloud_Baansoort_Baantype" Association="BeheerClubCloud.ClubCloud_Baansoort_Baantype">
             <End Role="ClubCloud_Baansoort" EntitySet="ClubCloud_Baansoorten" />
             <End Role="ClubCloud_Baantype" EntitySet="ClubCloud_Baantypes" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_AccommodatieClubCloud_District" Association="BeheerClubCloud.ClubCloud_AccommodatieClubCloud_District">
+          <AssociationSet Name="ClubCloud_Accommodatie_District" Association="BeheerClubCloud.ClubCloud_Accommodatie_District">
             <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
             <End Role="ClubCloud_District" EntitySet="ClubCloud_Districten" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_AccommodatieClubCloud_Regio" Association="BeheerClubCloud.ClubCloud_AccommodatieClubCloud_Regio">
+          <AssociationSet Name="ClubCloud_Accommodatie_Regio" Association="BeheerClubCloud.ClubCloud_Accommodatie_Regio">
             <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
             <End Role="ClubCloud_Regio" EntitySet="ClubCloud_Regios" />
           </AssociationSet>
           <EntitySet Name="ClubCloud_Reserveringen" EntityType="BeheerClubCloud.ClubCloud_Reservering" />
-          <AssociationSet Name="ClubCloud_ReserveringClubCloud_Baan" Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Baan">
+          <AssociationSet Name="ClubCloud_Reservering_Baan" Association="BeheerClubCloud.ClubCloud_Reservering_Baan">
             <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
             <End Role="ClubCloud_Baan" EntitySet="ClubCloud_Banen" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_ReserveringClubCloud_Gebruiker" Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker">
+          <AssociationSet Name="ClubCloud_Reservering_Gebruiker_Een" Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Een">
             <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
             <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_ReserveringClubCloud_Gebruiker_Een" Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Een">
+          <AssociationSet Name="ClubCloud_Reservering_Gebruiker_Twee" Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Twee">
             <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
             <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_ReserveringClubCloud_Gebruiker_Twee" Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Twee">
+          <AssociationSet Name="ClubCloud_Reservering_Gebruiker_Drie" Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Drie">
             <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
             <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_ReserveringClubCloud_Gebruiker_Drie" Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Drie">
-            <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
-            <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
-          </AssociationSet>
-          <AssociationSet Name="ClubCloud_ReserveringClubCloud_Gebruiker_Vier" Association="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Vier">
+          <AssociationSet Name="ClubCloud_Reservering_Gebruiker_Vier" Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Vier">
             <End Role="ClubCloud_Reservering" EntitySet="ClubCloud_Reserveringen" />
             <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
           </AssociationSet>
           <EntitySet Name="ClubCloud_Afhangen" EntityType="BeheerClubCloud.ClubCloud_Afhang" />
-          <AssociationSet Name="ClubCloud_AfhangenClubCloud_Vereniging" Association="BeheerClubCloud.ClubCloud_AfhangenClubCloud_Vereniging">
+          <AssociationSet Name="ClubCloud_Afhangen_Vereniging" Association="BeheerClubCloud.ClubCloud_Afhangen_Vereniging">
             <End Role="ClubCloud_Afhangen" EntitySet="ClubCloud_Afhangen" />
             <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
           </AssociationSet>
           <EntitySet Name="ClubCloud_Baanschemas" EntityType="BeheerClubCloud.ClubCloud_Baanschema" />
           <EntitySet Name="ClubCloud_Fotos" EntityType="BeheerClubCloud.ClubCloud_Foto" />
-          <EntitySet Name="ClubCloud_LidmaatschapSoorten" EntityType="BeheerClubCloud.ClubCloud_LidmaatschapSoort" />
-          <AssociationSet Name="ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap" Association="BeheerClubCloud.ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap">
-            <End Role="ClubCLoud_LidmaatschapSoort" EntitySet="ClubCloud_LidmaatschapSoorten" />
+          <EntitySet Name="ClubCloud_Lidmaatschapsoorten" EntityType="BeheerClubCloud.ClubCloud_Lidmaatschapsoort" />
+          <AssociationSet Name="ClubCloud_LidmaatschapSoort_Lidmaatschap" Association="BeheerClubCloud.ClubCloud_LidmaatschapSoort_Lidmaatschap">
+            <End Role="ClubCLoud_LidmaatschapSoort" EntitySet="ClubCloud_Lidmaatschapsoorten" />
             <End Role="ClubCloud_Lidmaatschap" EntitySet="ClubCloud_Lidmaatschappen" />
           </AssociationSet>
           <EntitySet Name="ClubCloud_Sponsoren" EntityType="BeheerClubCloud.ClubCloud_Sponsor" />
-          <AssociationSet Name="ClubCloud_SponsorClubCloud_Vereniging" Association="BeheerClubCloud.ClubCloud_SponsorClubCloud_Vereniging">
+          <AssociationSet Name="ClubCloud_Sponsor_Vereniging" Association="BeheerClubCloud.ClubCloud_Sponsor_Vereniging">
             <End Role="ClubCloud_Sponsor" EntitySet="ClubCloud_Sponsoren" />
             <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
           </AssociationSet>
           <EntitySet Name="ClubCloud_Sponsor_Afbeeldingen" EntityType="BeheerClubCloud.ClubCloud_Sponsor_Afbeelding" />
-          <AssociationSet Name="ClubCloud_SponsorClubCloud_Sponsor_Afbeelding" Association="BeheerClubCloud.ClubCloud_SponsorClubCloud_Sponsor_Afbeelding">
+          <AssociationSet Name="ClubCloud_Sponsor_Sponsor_Afbeelding" Association="BeheerClubCloud.ClubCloud_Sponsor_Sponsor_Afbeelding">
             <End Role="ClubCloud_Sponsor" EntitySet="ClubCloud_Sponsoren" />
             <End Role="ClubCloud_Sponsor_Afbeelding" EntitySet="ClubCloud_Sponsor_Afbeeldingen" />
           </AssociationSet>
           <EntitySet Name="ClubCloud_Baanblokken" EntityType="BeheerClubCloud.ClubCloud_Baanblok" />
-          <AssociationSet Name="ClubCloud_BaanClubCloud_Baanblok" Association="BeheerClubCloud.ClubCloud_BaanClubCloud_Baanblok">
+          <AssociationSet Name="ClubCloud_Baan_Baanblok" Association="BeheerClubCloud.ClubCloud_Baan_Baanblok">
             <End Role="ClubCloud_Baan" EntitySet="ClubCloud_Banen" />
             <End Role="ClubCloud_Baanblok" EntitySet="ClubCloud_Baanblokken" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_BaanblokClubCloud_Accommodatie" Association="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Accommodatie">
+          <AssociationSet Name="ClubCloud_Baanblok_Accommodatie" Association="BeheerClubCloud.ClubCloud_Baanblok_Accommodatie">
             <End Role="ClubCloud_Baanblok" EntitySet="ClubCloud_Baanblokken" />
             <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_BaanblokClubCloud_Baantype" Association="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Baantype">
+          <AssociationSet Name="ClubCloud_Baanblok_Baantype" Association="BeheerClubCloud.ClubCloud_Baanblok_Baantype">
             <End Role="ClubCloud_Baanblok" EntitySet="ClubCloud_Baanblokken" />
             <End Role="ClubCloud_Baantype" EntitySet="ClubCloud_Baantypes" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_BaanblokClubCloud_Baansoort" Association="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Baansoort">
+          <AssociationSet Name="ClubCloud_Baanblok_Baansoort" Association="BeheerClubCloud.ClubCloud_Baanblok_Baansoort">
             <End Role="ClubCloud_Baanblok" EntitySet="ClubCloud_Baanblokken" />
             <End Role="ClubCloud_Baansoort" EntitySet="ClubCloud_Baansoorten" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_BaanClubCloud_Accommodatie" Association="BeheerClubCloud.ClubCloud_BaanClubCloud_Accommodatie">
+          <AssociationSet Name="ClubCloud_Baan_Accommodatie" Association="BeheerClubCloud.ClubCloud_Baan_Accommodatie">
             <End Role="ClubCloud_Baan" EntitySet="ClubCloud_Banen" />
             <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
           </AssociationSet>
-          <AssociationSet Name="ClubCloud_BaanSpeciaalClubCloud_Accommodatie" Association="BeheerClubCloud.ClubCloud_BaanSpeciaalClubCloud_Accommodatie">
+          <AssociationSet Name="ClubCloud_BaanSpeciaal_Accommodatie" Association="BeheerClubCloud.ClubCloud_BaanSpeciaal_Accommodatie">
             <End Role="ClubCloud_BaanSpeciaal" EntitySet="ClubCloud_BanenSpeciaal" />
             <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
           </AssociationSet>
           <EntitySet Name="ClubCloud_Baantoplagen" EntityType="BeheerClubCloud.ClubCloud_Baantoplaag" />
-          <AssociationSet Name="ClubCloud_BaanSpeciaalClubCloud_Baantoplaag" Association="BeheerClubCloud.ClubCloud_BaanSpeciaalClubCloud_Baantoplaag">
+          <AssociationSet Name="ClubCloud_BaanSpeciaal_Baantoplaag" Association="BeheerClubCloud.ClubCloud_BaanSpeciaal_Baantoplaag">
             <End Role="ClubCloud_BaanSpeciaal" EntitySet="ClubCloud_BanenSpeciaal" />
             <End Role="ClubCloud_Baantoplaag" EntitySet="ClubCloud_Baantoplagen" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Regio_Address" Association="BeheerClubCloud.ClubCloud_Regio_Address">
+            <End Role="ClubCloud_Regio" EntitySet="ClubCloud_Regios" />
+            <End Role="ClubCloud_Address" EntitySet="ClubCloud_Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Setting_Gebruiker" Association="BeheerClubCloud.ClubCloud_Setting_Gebruiker">
+            <End Role="ClubCloud_Setting" EntitySet="ClubCloud_Settings" />
+            <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Setting_Vereniging" Association="BeheerClubCloud.ClubCloud_Setting_Vereniging">
+            <End Role="ClubCloud_Setting" EntitySet="ClubCloud_Settings" />
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Accommodatie_Address" Association="BeheerClubCloud.ClubCloud_Accommodatie_Address">
+            <End Role="ClubCloud_Accommodatie" EntitySet="ClubCloud_Accommodaties" />
+            <End Role="ClubCloud_Address" EntitySet="ClubCloud_Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_GebruikerClubCloud_Nationaliteit" Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Nationaliteit">
+            <End Role="ClubCloud_Gebruiker" EntitySet="ClubCloud_Gebruikers" />
+            <End Role="ClubCloud_Nationaliteit" EntitySet="ClubCloud_Nationaliteiten" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_Baanschema_Baan" Association="BeheerClubCloud.ClubCloud_Baanschema_Baan">
+            <End Role="ClubCloud_Baanschema" EntitySet="ClubCloud_Baanschemas" />
+            <End Role="ClubCloud_Baan" EntitySet="ClubCloud_Banen" />
+          </AssociationSet>
+          <AssociationSet Name="ClubCloud_BaanschemaClubCloud_Vereniging" Association="BeheerClubCloud.ClubCloud_BaanschemaClubCloud_Vereniging">
+            <End Role="ClubCloud_Baanschema" EntitySet="ClubCloud_Baanschemas" />
+            <End Role="ClubCloud_Vereniging" EntitySet="ClubCloud_Verenigingen" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ClubCloud_Gebruiker">
@@ -1308,11 +1438,11 @@
           <Property Name="Geboortedatum" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Geboorteplaats" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="OverlijdensDatum" Type="DateTime" Precision="3" Nullable="true" />
-          <Property Name="NationaliteitId" Type="Guid" Nullable="true" />
-          <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Functionaris" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Functionaris" />
-          <NavigationProperty Name="ClubCloud_Lidmaatschap" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Lidmaatschap" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Lidmaatschap" />
-          <NavigationProperty Name="ClubCloud_Address" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Address" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Address" />
+          <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_Gebruiker_Functionaris" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Functionaris" />
+          <NavigationProperty Name="ClubCloud_Lidmaatschap" Relationship="BeheerClubCloud.ClubCloud_Gebruiker_Lidmaatschap" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Lidmaatschap" />
+          <NavigationProperty Name="ClubCloud_Address" Relationship="BeheerClubCloud.ClubCloud_Gebruiker_Address" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Address" />
           <Property Name="AddressGeheim" Type="Boolean" Nullable="false" />
+          <Property Name="NationaliteitId" Type="Guid" Nullable="true" />
           <Property Name="Website" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FTPsite" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1323,16 +1453,18 @@
           <Property Name="AanhefBrief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="AanhefAttentie" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="FotoId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Vereniging" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Gebruiker_Vereniging" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Vereniging" />
           <Property Name="VerenigingId" Type="Guid" Nullable="true" />
           <Property Name="Volledigenaam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="ClubCloud_Profiel" Relationship="BeheerClubCloud.ClubCloud_ProfielClubCloud_Gebruiker" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Profiel" />
-          <NavigationProperty Name="ClubCloud_Reservering_Een" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Een" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
-          <NavigationProperty Name="ClubCloud_Reservering_Twee" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Twee" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
-          <NavigationProperty Name="ClubCloud_Reservering_Drie" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Drie" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
-          <NavigationProperty Name="ClubCloud_Reservering_Vier" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Vier" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
+          <NavigationProperty Name="ClubCloud_Profiel" Relationship="BeheerClubCloud.ClubCloud_Profiel_Gebruiker" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Profiel" />
+          <NavigationProperty Name="ClubCloud_Reservering_Een" Relationship="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Een" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
+          <NavigationProperty Name="ClubCloud_Reservering_Twee" Relationship="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Twee" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
+          <NavigationProperty Name="ClubCloud_Reservering_Drie" Relationship="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Drie" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
+          <NavigationProperty Name="ClubCloud_Reservering_Vier" Relationship="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Vier" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Reservering" />
           <Property Name="Geslacht" Type="BeheerClubCloud.GeslachtSoort" Nullable="false" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="ClubCloud_Setting" Relationship="BeheerClubCloud.ClubCloud_Setting_Gebruiker" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Setting" />
+          <NavigationProperty Name="ClubCloud_Nationaliteit" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Nationaliteit" FromRole="ClubCloud_Gebruiker" ToRole="ClubCloud_Nationaliteit" />
         </EntityType>
         <EntityType Name="ClubCloud_Vereniging">
           <Key>
@@ -1363,20 +1495,22 @@
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_Functionaris_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Functionaris" />
           <NavigationProperty Name="ClubCloud_Lidmaatschap" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Lidmaatschap" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Lidmaatschap" />
-          <NavigationProperty Name="ClubCloud_Bestuursorgaan" Relationship="BeheerClubCloud.ClubCloud_BestuursorgaanClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Bestuursorgaan" />
+          <NavigationProperty Name="ClubCloud_Bestuursorgaan" Relationship="BeheerClubCloud.ClubCloud_Bestuursorgaan_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Bestuursorgaan" />
           <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_Vereniging_District" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_District" />
-          <NavigationProperty Name="ClubCloud_Rechtsvorm" Relationship="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Rechtsvorm" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Rechtsvorm" />
-          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Accommodatie" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Accommodatie" />
-          <NavigationProperty Name="ClubCloud_Address" Relationship="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Address" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Address" />
-          <NavigationProperty Name="ClubCloud_Regio" Relationship="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Regio" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Regio" />
+          <NavigationProperty Name="ClubCloud_Rechtsvorm" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Rechtsvorm" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Rechtsvorm" />
+          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Accommodatie" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Accommodatie" />
+          <NavigationProperty Name="ClubCloud_Address" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Address" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Address" />
+          <NavigationProperty Name="ClubCloud_Regio" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Regio" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Regio" />
           <Property Name="Oprichting" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Erkenning" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Gestopt" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Maanden" Type="Int32" Nullable="false" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
-          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Gebruiker" />
-          <NavigationProperty Name="ClubCloud_Afhangen" Relationship="BeheerClubCloud.ClubCloud_AfhangenClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Afhangen" />
-          <NavigationProperty Name="ClubCloud_Sponsor" Relationship="BeheerClubCloud.ClubCloud_SponsorClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Sponsor" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_Gebruiker_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_Afhangen" Relationship="BeheerClubCloud.ClubCloud_Afhangen_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Afhangen" />
+          <NavigationProperty Name="ClubCloud_Sponsor" Relationship="BeheerClubCloud.ClubCloud_Sponsor_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Sponsor" />
+          <NavigationProperty Name="ClubCloud_Setting" Relationship="BeheerClubCloud.ClubCloud_Setting_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Setting" />
+          <NavigationProperty Name="ClubCloud_Baanschema" Relationship="BeheerClubCloud.ClubCloud_BaanschemaClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Baanschema" />
           </EntityType>
         <EntityType Name="ClubCloud_Setting">
           <Key>
@@ -1398,6 +1532,8 @@
           <Property Name="privacy" Type="BeheerClubCloud.Privacy" Nullable="false" />
           <Property Name="financieel" Type="BeheerClubCloud.Financieel" Nullable="false" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_Setting_Gebruiker" FromRole="ClubCloud_Setting" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Setting_Vereniging" FromRole="ClubCloud_Setting" ToRole="ClubCloud_Vereniging" />
           </EntityType>
         <EnumType Name="Twitter" IsFlags="true">
           <Member Name="None" Value="0" />
@@ -1466,16 +1602,17 @@
           <Property Name="TotaalAantalWasKleedruimte" Type="Int32" Nullable="true" />
           <Property Name="ValideParkeerplaatsen" Type="Int32" Nullable="true" />
           <Property Name="WasruimteClubhuisAanwezig" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Accommodatie" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Accommodatie" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Vereniging" />
           <Property Name="DistrictId" Type="Guid" Nullable="true" />
           <Property Name="RegioId" Type="Guid" Nullable="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
-          <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_AccommodatieClubCloud_District" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_District" />
-          <NavigationProperty Name="ClubCloud_Regio" Relationship="BeheerClubCloud.ClubCloud_AccommodatieClubCloud_Regio" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Regio" />
-          <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Accommodatie" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Baanblok" />
-          <NavigationProperty Name="ClubCloud_Baan" Relationship="BeheerClubCloud.ClubCloud_BaanClubCloud_Accommodatie" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Baan" />
-          <NavigationProperty Name="ClubCloud_BaanSpeciaal" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaalClubCloud_Accommodatie" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_BaanSpeciaal" />
+          <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_Accommodatie_District" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_District" />
+          <NavigationProperty Name="ClubCloud_Regio" Relationship="BeheerClubCloud.ClubCloud_Accommodatie_Regio" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Regio" />
+          <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_Baanblok_Accommodatie" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Baanblok" />
+          <NavigationProperty Name="ClubCloud_Baan" Relationship="BeheerClubCloud.ClubCloud_Baan_Accommodatie" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Baan" />
+          <NavigationProperty Name="ClubCloud_BaanSpeciaal" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaal_Accommodatie" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_BaanSpeciaal" />
+          <NavigationProperty Name="ClubCloud_Address" Relationship="BeheerClubCloud.ClubCloud_Accommodatie_Address" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Address" />
         </EntityType>
         <EntityType Name="ClubCloud_Nationaliteit">
           <Key>
@@ -1484,6 +1621,7 @@
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Code" Type="String" Nullable="false" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Nationaliteit" FromRole="ClubCloud_Nationaliteit" ToRole="ClubCloud_Gebruiker" />
         </EntityType>
         <EntityType Name="ClubCloud_District">
           <Key>
@@ -1495,10 +1633,10 @@
           <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="RegioId" Type="Guid" Nullable="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_FunctionarisClubCloud_District" FromRole="ClubCloud_District" ToRole="ClubCloud_Functionaris" />
+          <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_Functionaris_District" FromRole="ClubCloud_District" ToRole="ClubCloud_Functionaris" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_District" FromRole="ClubCloud_District" ToRole="ClubCloud_Vereniging" />
-          <NavigationProperty Name="ClubCloud_Regio" Relationship="BeheerClubCloud.ClubCloud_DistrictClubCloud_Regio" FromRole="ClubCloud_District" ToRole="ClubCloud_Regio" />
-          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_AccommodatieClubCloud_District" FromRole="ClubCloud_District" ToRole="ClubCloud_Accommodatie" />
+          <NavigationProperty Name="ClubCloud_Regio" Relationship="BeheerClubCloud.ClubCloud_District_Regio" FromRole="ClubCloud_District" ToRole="ClubCloud_Regio" />
+          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_Accommodatie_District" FromRole="ClubCloud_District" ToRole="ClubCloud_Accommodatie" />
         </EntityType>
         <EntityType Name="ClubCloud_Functie">
           <Key>
@@ -1541,8 +1679,8 @@
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCloud_Vereniging" />
-          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCloud_Gebruiker" />
-          <NavigationProperty Name="ClubCLoud_LidmaatschapSoort" Relationship="BeheerClubCloud.ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCLoud_LidmaatschapSoort" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_Gebruiker_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_Lidmaatschapsoort" Relationship="BeheerClubCloud.ClubCloud_LidmaatschapSoort_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCLoud_LidmaatschapSoort" />
         </EntityType>
         <EntityType Name="ClubCloud_Profiel">
           <Key>
@@ -1552,7 +1690,7 @@
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Datum" Type="DateTime" Nullable="false" />
           <Property Name="Bondsnummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_ProfielClubCloud_Gebruiker" FromRole="ClubCloud_Profiel" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_Profiel_Gebruiker" FromRole="ClubCloud_Profiel" ToRole="ClubCloud_Gebruiker" />
           <Property Name="GebruikerId" Type="Guid" Nullable="true" />
           <Property Name="Enkel_Aantal" Type="Int32" Nullable="false" />
           <Property Name="Dubbel_aantal" Type="Int32" Nullable="false" />
@@ -1584,8 +1722,8 @@
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="ClubCloud_Functie" Relationship="BeheerClubCloud.ClubCloud_Functie_Functionaris" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Functie" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Functionaris_Vereniging" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Vereniging" />
-          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Functionaris" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Gebruiker" />
-          <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_FunctionarisClubCloud_District" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_District" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_Gebruiker_Functionaris" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_Functionaris_District" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_District" />
           <NavigationProperty Name="ClubCloud_Bestuursorgaan" Relationship="BeheerClubCloud.ClubCloud_Functionaris_Bestuursorgaan" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Bestuursorgaan" />
         </EntityType>
         <Association Name="ClubCloud_Functie_Functionaris">
@@ -1612,7 +1750,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_GebruikerClubCloud_Functionaris">
+        <Association Name="ClubCloud_Gebruiker_Functionaris">
           <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
           <End Type="BeheerClubCloud.ClubCloud_Functionaris" Role="ClubCloud_Functionaris" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1624,7 +1762,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_FunctionarisClubCloud_District">
+        <Association Name="ClubCloud_Functionaris_District">
           <End Type="BeheerClubCloud.ClubCloud_Functionaris" Role="ClubCloud_Functionaris" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_District" Role="ClubCloud_District" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1648,7 +1786,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_GebruikerClubCloud_Lidmaatschap">
+        <Association Name="ClubCloud_Gebruiker_Lidmaatschap">
           <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
           <End Type="BeheerClubCloud.ClubCloud_Lidmaatschap" Role="ClubCloud_Lidmaatschap" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1666,12 +1804,12 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Beschrijving" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
           <Property Name="VerenigingId" Type="Guid" Nullable="true" />
-          <Property Name="TypeId" Type="Guid" Nullable="false" />
+          <Property Name="Groep" Type="String" Nullable="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_Functionaris_Bestuursorgaan" FromRole="ClubCloud_Bestuursorgaan" ToRole="ClubCloud_Functionaris" />
-          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_BestuursorgaanClubCloud_Vereniging" FromRole="ClubCloud_Bestuursorgaan" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Bestuursorgaan_Vereniging" FromRole="ClubCloud_Bestuursorgaan" ToRole="ClubCloud_Vereniging" />
         </EntityType>
         <Association Name="ClubCloud_Functionaris_Bestuursorgaan">
           <End Type="BeheerClubCloud.ClubCloud_Bestuursorgaan" Role="ClubCloud_Bestuursorgaan" Multiplicity="0..1" />
@@ -1685,7 +1823,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_BestuursorgaanClubCloud_Vereniging">
+        <Association Name="ClubCloud_Bestuursorgaan_Vereniging">
           <End Type="BeheerClubCloud.ClubCloud_Bestuursorgaan" Role="ClubCloud_Bestuursorgaan" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1720,9 +1858,9 @@
           <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Rechtsvorm" FromRole="ClubCloud_Rechtsvorm" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Rechtsvorm" FromRole="ClubCloud_Rechtsvorm" ToRole="ClubCloud_Vereniging" />
         </EntityType>
-        <Association Name="ClubCloud_VerenigingClubCloud_Rechtsvorm">
+        <Association Name="ClubCloud_Vereniging_Rechtsvorm">
           <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Rechtsvorm" Role="ClubCloud_Rechtsvorm" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1756,14 +1894,16 @@
           <Property Name="TelefoonPrimair" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="TelefoonSecundair" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="TelefoonTertiair" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Address" FromRole="ClubCloud_Address" ToRole="ClubCloud_Vereniging" />
-          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Address" FromRole="ClubCloud_Address" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Address" FromRole="ClubCloud_Address" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_Gebruiker_Address" FromRole="ClubCloud_Address" ToRole="ClubCloud_Gebruiker" />
           <Property Name="GeoLocation" Type="Geography" Nullable="true" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
           <Property Name="Gemeente" Type="String" Nullable="false" />
           <Property Name="AddressGeheim" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <NavigationProperty Name="ClubCloud_Regio" Relationship="BeheerClubCloud.ClubCloud_Regio_Address" FromRole="ClubCloud_Address" ToRole="ClubCloud_Regio" />
+          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_Accommodatie_Address" FromRole="ClubCloud_Address" ToRole="ClubCloud_Accommodatie" />
         </EntityType>
-        <Association Name="ClubCloud_VerenigingClubCloud_Accommodatie">
+        <Association Name="ClubCloud_Vereniging_Accommodatie">
           <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Accommodatie" Role="ClubCloud_Accommodatie" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1775,7 +1915,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_VerenigingClubCloud_Address">
+        <Association Name="ClubCloud_Vereniging_Address">
           <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
           <End Type="BeheerClubCloud.ClubCloud_Address" Role="ClubCloud_Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1793,11 +1933,17 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_VerenigingClubCloud_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_Vereniging" />
-          <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_DistrictClubCloud_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_District" />
-          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_AccommodatieClubCloud_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_Accommodatie" />
+          <Property Name="EmailKNLTB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelefoonAvond" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelefoonOverdag" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_District_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_District" />
+          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_Accommodatie_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_Accommodatie" />
+          <NavigationProperty Name="ClubCloud_Address" Relationship="BeheerClubCloud.ClubCloud_Regio_Address" FromRole="ClubCloud_Regio" ToRole="ClubCloud_Address" />
         </EntityType>
-        <Association Name="ClubCloud_VerenigingClubCloud_Regio">
+        <Association Name="ClubCloud_Vereniging_Regio">
           <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Regio" Role="ClubCloud_Regio" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1809,7 +1955,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_DistrictClubCloud_Regio">
+        <Association Name="ClubCloud_District_Regio">
           <End Type="BeheerClubCloud.ClubCloud_District" Role="ClubCloud_District" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Regio" Role="ClubCloud_Regio" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1821,7 +1967,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_GebruikerClubCloud_Address">
+        <Association Name="ClubCloud_Gebruiker_Address">
           <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
           <End Type="BeheerClubCloud.ClubCloud_Address" Role="ClubCloud_Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1833,7 +1979,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_GebruikerClubCloud_Vereniging">
+        <Association Name="ClubCloud_Gebruiker_Vereniging">
           <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1845,7 +1991,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_ProfielClubCloud_Gebruiker">
+        <Association Name="ClubCloud_Profiel_Gebruiker">
           <End Type="BeheerClubCloud.ClubCloud_Profiel" Role="ClubCloud_Profiel" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1869,8 +2015,8 @@
           <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ClubCloud_Baantype" Relationship="BeheerClubCloud.ClubCloud_BaansoortClubCloud_Baantype" FromRole="ClubCloud_Baansoort" ToRole="ClubCloud_Baantype" />
-          <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Baansoort" FromRole="ClubCloud_Baansoort" ToRole="ClubCloud_Baanblok" />
+          <NavigationProperty Name="ClubCloud_Baantype" Relationship="BeheerClubCloud.ClubCloud_Baansoort_Baantype" FromRole="ClubCloud_Baansoort" ToRole="ClubCloud_Baantype" />
+          <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_Baanblok_Baansoort" FromRole="ClubCloud_Baansoort" ToRole="ClubCloud_Baanblok" />
         </EntityType>
         <EntityType Name="ClubCloud_Baantype">
           <Key>
@@ -1883,8 +2029,8 @@
           <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ClubCloud_Baansoort" Relationship="BeheerClubCloud.ClubCloud_BaansoortClubCloud_Baantype" FromRole="ClubCloud_Baantype" ToRole="ClubCloud_Baansoort" />
-          <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Baantype" FromRole="ClubCloud_Baantype" ToRole="ClubCloud_Baanblok" />
+          <NavigationProperty Name="ClubCloud_Baansoort" Relationship="BeheerClubCloud.ClubCloud_Baansoort_Baantype" FromRole="ClubCloud_Baantype" ToRole="ClubCloud_Baansoort" />
+          <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_Baanblok_Baantype" FromRole="ClubCloud_Baantype" ToRole="ClubCloud_Baanblok" />
         </EntityType>
         <EntityType Name="ClubCloud_Baan">
           <Key>
@@ -1893,14 +2039,15 @@
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Naam" Type="String" Nullable="false" />
           <Property Name="Nummer" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ClubCloud_Reservering" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Baan" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Reservering" />
+          <NavigationProperty Name="ClubCloud_Reservering" Relationship="BeheerClubCloud.ClubCloud_Reservering_Baan" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Reservering" />
           <Property Name="BaanblokId" Type="Guid" Nullable="true" />
           <Property Name="AccommodatieId" Type="Guid" Nullable="true" />
           <Property Name="Status" Type="String" Nullable="false" />
-          <Property Name="Keuring" Type="DateTime" Nullable="false" />
+          <Property Name="Keuring" Type="DateTime" Nullable="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_BaanClubCloud_Baanblok" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Baanblok" />
-          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_BaanClubCloud_Accommodatie" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Accommodatie" />
+          <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_Baan_Baanblok" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Baanblok" />
+          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_Baan_Accommodatie" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Accommodatie" />
+          <NavigationProperty Name="ClubCloud_Baanschema" Relationship="BeheerClubCloud.ClubCloud_Baanschema_Baan" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Baanschema" />
         </EntityType>
         <EntityType Name="ClubCloud_Bouwaard">
           <Key>
@@ -1918,11 +2065,11 @@
           <Property Name="Baansoort" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="AccommodatieId" Type="Guid" Nullable="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaalClubCloud_Accommodatie" FromRole="ClubCloud_BaanSpeciaal" ToRole="ClubCloud_Accommodatie" />
-          <NavigationProperty Name="ClubCloud_Baantoplaag" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaalClubCloud_Baantoplaag" FromRole="ClubCloud_BaanSpeciaal" ToRole="ClubCloud_Baantoplaag" />
+          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaal_Accommodatie" FromRole="ClubCloud_BaanSpeciaal" ToRole="ClubCloud_Accommodatie" />
+          <NavigationProperty Name="ClubCloud_Baantoplaag" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaal_Baantoplaag" FromRole="ClubCloud_BaanSpeciaal" ToRole="ClubCloud_Baantoplaag" />
           <Property Name="BaantoplaagId" Type="Guid" Nullable="true" />
         </EntityType>
-        <Association Name="ClubCloud_BaansoortClubCloud_Baantype">
+        <Association Name="ClubCloud_Baansoort_Baantype">
           <End Type="BeheerClubCloud.ClubCloud_Baansoort" Role="ClubCloud_Baansoort" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Baantype" Role="ClubCloud_Baantype" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1934,7 +2081,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_AccommodatieClubCloud_District">
+        <Association Name="ClubCloud_Accommodatie_District">
           <End Type="BeheerClubCloud.ClubCloud_Accommodatie" Role="ClubCloud_Accommodatie" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_District" Role="ClubCloud_District" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1946,7 +2093,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_AccommodatieClubCloud_Regio">
+        <Association Name="ClubCloud_Accommodatie_Regio">
           <End Type="BeheerClubCloud.ClubCloud_Accommodatie" Role="ClubCloud_Accommodatie" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Regio" Role="ClubCloud_Regio" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1963,24 +2110,24 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <NavigationProperty Name="ClubCloud_Baan" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Baan" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Baan" />
+          <NavigationProperty Name="ClubCloud_Baan" Relationship="BeheerClubCloud.ClubCloud_Reservering_Baan" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Baan" />
           <Property Name="BaanId" Type="Guid" Nullable="true" />
           <Property Name="Datum" Type="DateTime" Nullable="false" />
           <Property Name="Tijd" Type="Time" Nullable="false" />
           <Property Name="Duur" Type="Time" Nullable="false" />
-          <NavigationProperty Name="ClubCloud_Gebruiker_Een" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Een" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_Gebruiker_Een" Relationship="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Een" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
           <Property Name="Soort" Type="BeheerClubCloud.ReserveringSoort" Nullable="false" />
           <Property Name="Beschrijving" Type="String" Nullable="false" />
           <Property Name="Gebruiker_Een" Type="Guid" Nullable="true" />
-          <NavigationProperty Name="ClubCloud_Gebruiker_Twee" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Twee" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_Gebruiker_Twee" Relationship="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Twee" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
           <Property Name="Gebruiker_Twee" Type="Guid" Nullable="true" />
-          <NavigationProperty Name="ClubCloud_Gebruiker_Drie" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Drie" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_Gebruiker_Drie" Relationship="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Drie" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
           <Property Name="Gebruiker_Drie" Type="Guid" Nullable="true" />
-          <NavigationProperty Name="ClubCloud_Gebruiker_Vier" Relationship="BeheerClubCloud.ClubCloud_ReserveringClubCloud_Gebruiker_Vier" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
+          <NavigationProperty Name="ClubCloud_Gebruiker_Vier" Relationship="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Vier" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
           <Property Name="Gebruiker_Vier" Type="Guid" Nullable="true" />
           <Property Name="Final" Type="Boolean" Nullable="false" />
         </EntityType>
-        <Association Name="ClubCloud_ReserveringClubCloud_Baan">
+        <Association Name="ClubCloud_Reservering_Baan">
           <End Type="BeheerClubCloud.ClubCloud_Reservering" Role="ClubCloud_Reservering" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Baan" Role="ClubCloud_Baan" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1992,7 +2139,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_ReserveringClubCloud_Gebruiker">
+        <Association Name="ClubCloud_Reservering_Gebruiker_Een">
           <End Type="BeheerClubCloud.ClubCloud_Reservering" Role="ClubCloud_Reservering" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2004,19 +2151,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_ReserveringClubCloud_Gebruiker_Een">
-          <End Type="BeheerClubCloud.ClubCloud_Reservering" Role="ClubCloud_Reservering" Multiplicity="*" />
-          <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ClubCloud_Gebruiker">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClubCloud_Reservering">
-              <PropertyRef Name="Gebruiker_Een" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ClubCloud_ReserveringClubCloud_Gebruiker_Twee">
+        <Association Name="ClubCloud_Reservering_Gebruiker_Twee">
           <End Type="BeheerClubCloud.ClubCloud_Reservering" Role="ClubCloud_Reservering" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2028,7 +2163,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_ReserveringClubCloud_Gebruiker_Drie">
+        <Association Name="ClubCloud_Reservering_Gebruiker_Drie">
           <End Type="BeheerClubCloud.ClubCloud_Reservering" Role="ClubCloud_Reservering" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2040,7 +2175,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_ReserveringClubCloud_Gebruiker_Vier">
+        <Association Name="ClubCloud_Reservering_Gebruiker_Vier">
           <End Type="BeheerClubCloud.ClubCloud_Reservering" Role="ClubCloud_Reservering" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2062,7 +2197,7 @@
           <Property Name="MaandEinde" Type="BeheerClubCloud.Month" Nullable="false" />
           <Property Name="BaanBegin" Type="Time" Nullable="false" />
           <Property Name="BaanEinde" Type="Time" Nullable="false" />
-          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_AfhangenClubCloud_Vereniging" FromRole="ClubCloud_Afhangen" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Afhangen_Vereniging" FromRole="ClubCloud_Afhangen" ToRole="ClubCloud_Vereniging" />
           <Property Name="Duur_Een" Type="Int32" Nullable="false" DefaultValue="30" />
           <Property Name="Duur_Twee" Type="Int32" Nullable="false" DefaultValue="30" />
           <Property Name="Duur_Drie" Type="Int32" Nullable="false" DefaultValue="45" />
@@ -2083,7 +2218,7 @@
           <Member Name="november" Value="11" />
           <Member Name="december" Value="12" />
         </EnumType>
-        <Association Name="ClubCloud_AfhangenClubCloud_Vereniging">
+        <Association Name="ClubCloud_Afhangen_Vereniging">
           <End Type="BeheerClubCloud.ClubCloud_Afhang" Role="ClubCloud_Afhangen" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2101,21 +2236,24 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="BaanId" Type="Guid" Nullable="true" />
-          <Property Name="Beschikbaar" Type="String" Nullable="false" DefaultValue="True" />
+          <Property Name="VerenigingId" Type="Guid" Nullable="true" />
+          <Property Name="Beschikbaar" Type="Boolean" Nullable="false" />
           <Property Name="MaandBegin" Type="BeheerClubCloud.Month" Nullable="false" />
           <Property Name="MaandEinde" Type="BeheerClubCloud.Month" Nullable="false" />
           <Property Name="Dag" Type="BeheerClubCloud.Days" Nullable="false" />
           <Property Name="DagBegin" Type="Time" Nullable="false" />
           <Property Name="DagEinde" Type="Time" Nullable="false" />
+          <NavigationProperty Name="ClubCloud_Baan" Relationship="BeheerClubCloud.ClubCloud_Baanschema_Baan" FromRole="ClubCloud_Baanschema" ToRole="ClubCloud_Baan" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_BaanschemaClubCloud_Vereniging" FromRole="ClubCloud_Baanschema" ToRole="ClubCloud_Vereniging" />
         </EntityType>
-        <EnumType Name="Days">
+        <EnumType Name="Days" IsFlags="true">
           <Member Name="maandag" Value="1" />
           <Member Name="dinsdag" Value="2" />
           <Member Name="woensdag" Value="3" />
           <Member Name="donderdag" Value="4" />
           <Member Name="vrijdag" Value="5" />
           <Member Name="zaterdag" Value="6" />
-          <Member Name="zondag" Value="7" />
+          <Member Name="zondag" Value="0" />
         </EnumType>
         <EntityType Name="ClubCloud_Foto">
           <Key>
@@ -2149,20 +2287,24 @@
           <Member Name="Man" Value="1" />
           <Member Name="Vrouw" Value="2" />
         </EnumType>
-        <EntityType Name="ClubCloud_LidmaatschapSoort">
+        <EntityType Name="ClubCloud_Lidmaatschapsoort">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Naam" Type="String" Nullable="false" />
           <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DagBegin" Type="Time" Nullable="false" />
           <Property Name="DagEinde" Type="Time" Nullable="false" />
+          <NavigationProperty Name="ClubCloud_Lidmaatschap" Relationship="BeheerClubCloud.ClubCloud_LidmaatschapSoort_Lidmaatschap" FromRole="ClubCLoud_LidmaatschapSoort" ToRole="ClubCloud_Lidmaatschap" />
+          <Property Name="Contributie" Type="Boolean" Nullable="false" />
           <Property Name="Tarief" Type="String" Nullable="false" />
-          <NavigationProperty Name="ClubCloud_Lidmaatschap" Relationship="BeheerClubCloud.ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap" FromRole="ClubCLoud_LidmaatschapSoort" ToRole="ClubCloud_Lidmaatschap" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="ClubCLoud_LidmaatschapSoortClubCloud_Lidmaatschap">
-          <End Type="BeheerClubCloud.ClubCloud_LidmaatschapSoort" Role="ClubCLoud_LidmaatschapSoort" Multiplicity="0..1" />
+        <Association Name="ClubCloud_LidmaatschapSoort_Lidmaatschap">
+          <End Type="BeheerClubCloud.ClubCloud_Lidmaatschapsoort" Role="ClubCLoud_LidmaatschapSoort" Multiplicity="0..1" />
           <End Type="BeheerClubCloud.ClubCloud_Lidmaatschap" Role="ClubCloud_Lidmaatschap" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClubCLoud_LidmaatschapSoort">
@@ -2178,14 +2320,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_SponsorClubCloud_Vereniging" FromRole="ClubCloud_Sponsor" ToRole="ClubCloud_Vereniging" />
+          <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Sponsor_Vereniging" FromRole="ClubCloud_Sponsor" ToRole="ClubCloud_Vereniging" />
           <Property Name="VerenigingId" Type="Guid" Nullable="false" />
           <Property Name="AfbeeldingId" Type="Guid" Nullable="true" />
           <Property Name="Naam" Type="String" Nullable="false" />
           <Property Name="Tekst" Type="String" />
-          <NavigationProperty Name="ClubCloud_Sponsor_Afbeelding" Relationship="BeheerClubCloud.ClubCloud_SponsorClubCloud_Sponsor_Afbeelding" FromRole="ClubCloud_Sponsor" ToRole="ClubCloud_Sponsor_Afbeelding" />
+          <NavigationProperty Name="ClubCloud_Sponsor_Afbeelding" Relationship="BeheerClubCloud.ClubCloud_Sponsor_Sponsor_Afbeelding" FromRole="ClubCloud_Sponsor" ToRole="ClubCloud_Sponsor_Afbeelding" />
         </EntityType>
-        <Association Name="ClubCloud_SponsorClubCloud_Vereniging">
+        <Association Name="ClubCloud_Sponsor_Vereniging">
           <End Type="BeheerClubCloud.ClubCloud_Sponsor" Role="ClubCloud_Sponsor" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="1" />
           <ReferentialConstraint>
@@ -2202,10 +2344,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <NavigationProperty Name="ClubCloud_Sponsor" Relationship="BeheerClubCloud.ClubCloud_SponsorClubCloud_Sponsor_Afbeelding" FromRole="ClubCloud_Sponsor_Afbeelding" ToRole="ClubCloud_Sponsor" />
+          <NavigationProperty Name="ClubCloud_Sponsor" Relationship="BeheerClubCloud.ClubCloud_Sponsor_Sponsor_Afbeelding" FromRole="ClubCloud_Sponsor_Afbeelding" ToRole="ClubCloud_Sponsor" />
           <Property Name="Afbeelding" Type="Binary" Nullable="false" />
         </EntityType>
-        <Association Name="ClubCloud_SponsorClubCloud_Sponsor_Afbeelding">
+        <Association Name="ClubCloud_Sponsor_Sponsor_Afbeelding">
           <End Type="BeheerClubCloud.ClubCloud_Sponsor" Role="ClubCloud_Sponsor" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Sponsor_Afbeelding" Role="ClubCloud_Sponsor_Afbeelding" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2222,19 +2364,19 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <NavigationProperty Name="ClubCloud_Baan" Relationship="BeheerClubCloud.ClubCloud_BaanClubCloud_Baanblok" FromRole="ClubCloud_Baanblok" ToRole="ClubCloud_Baan" />
+          <NavigationProperty Name="ClubCloud_Baan" Relationship="BeheerClubCloud.ClubCloud_Baan_Baanblok" FromRole="ClubCloud_Baanblok" ToRole="ClubCloud_Baan" />
           <Property Name="Naam" Type="String" Nullable="false" />
-          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Accommodatie" FromRole="ClubCloud_Baanblok" ToRole="ClubCloud_Accommodatie" />
+          <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_Baanblok_Accommodatie" FromRole="ClubCloud_Baanblok" ToRole="ClubCloud_Accommodatie" />
           <Property Name="AccommodatieId" Type="Guid" Nullable="true" />
-          <NavigationProperty Name="ClubCloud_Baantype" Relationship="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Baantype" FromRole="ClubCloud_Baanblok" ToRole="ClubCloud_Baantype" />
+          <NavigationProperty Name="ClubCloud_Baantype" Relationship="BeheerClubCloud.ClubCloud_Baanblok_Baantype" FromRole="ClubCloud_Baanblok" ToRole="ClubCloud_Baantype" />
           <Property Name="BaantypeId" Type="Guid" Nullable="true" />
-          <NavigationProperty Name="ClubCloud_Baansoort" Relationship="BeheerClubCloud.ClubCloud_BaanblokClubCloud_Baansoort" FromRole="ClubCloud_Baanblok" ToRole="ClubCloud_Baansoort" />
+          <NavigationProperty Name="ClubCloud_Baansoort" Relationship="BeheerClubCloud.ClubCloud_Baanblok_Baansoort" FromRole="ClubCloud_Baanblok" ToRole="ClubCloud_Baansoort" />
           <Property Name="BaansoortId" Type="Guid" Nullable="true" />
           <Property Name="Verlichting" Type="Boolean" Nullable="false" />
           <Property Name="Locatie" Type="String" Nullable="false" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="ClubCloud_BaanClubCloud_Baanblok">
+        <Association Name="ClubCloud_Baan_Baanblok">
           <End Type="BeheerClubCloud.ClubCloud_Baan" Role="ClubCloud_Baan" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Baanblok" Role="ClubCloud_Baanblok" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2246,7 +2388,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_BaanblokClubCloud_Accommodatie">
+        <Association Name="ClubCloud_Baanblok_Accommodatie">
           <End Type="BeheerClubCloud.ClubCloud_Baanblok" Role="ClubCloud_Baanblok" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Accommodatie" Role="ClubCloud_Accommodatie" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2258,7 +2400,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_BaanblokClubCloud_Baantype">
+        <Association Name="ClubCloud_Baanblok_Baantype">
           <End Type="BeheerClubCloud.ClubCloud_Baanblok" Role="ClubCloud_Baanblok" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Baantype" Role="ClubCloud_Baantype" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2270,7 +2412,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_BaanblokClubCloud_Baansoort">
+        <Association Name="ClubCloud_Baanblok_Baansoort">
           <End Type="BeheerClubCloud.ClubCloud_Baanblok" Role="ClubCloud_Baanblok" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Baansoort" Role="ClubCloud_Baansoort" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2282,7 +2424,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_BaanClubCloud_Accommodatie">
+        <Association Name="ClubCloud_Baan_Accommodatie">
           <End Type="BeheerClubCloud.ClubCloud_Baan" Role="ClubCloud_Baan" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Accommodatie" Role="ClubCloud_Accommodatie" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2294,7 +2436,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ClubCloud_BaanSpeciaalClubCloud_Accommodatie">
+        <Association Name="ClubCloud_BaanSpeciaal_Accommodatie">
           <End Type="BeheerClubCloud.ClubCloud_BaanSpeciaal" Role="ClubCloud_BaanSpeciaal" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Accommodatie" Role="ClubCloud_Accommodatie" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2317,9 +2459,9 @@
           <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ClubCloud_BaanSpeciaal" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaalClubCloud_Baantoplaag" FromRole="ClubCloud_Baantoplaag" ToRole="ClubCloud_BaanSpeciaal" />
+          <NavigationProperty Name="ClubCloud_BaanSpeciaal" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaal_Baantoplaag" FromRole="ClubCloud_Baantoplaag" ToRole="ClubCloud_BaanSpeciaal" />
         </EntityType>
-        <Association Name="ClubCloud_BaanSpeciaalClubCloud_Baantoplaag">
+        <Association Name="ClubCloud_BaanSpeciaal_Baantoplaag">
           <End Type="BeheerClubCloud.ClubCloud_BaanSpeciaal" Role="ClubCloud_BaanSpeciaal" Multiplicity="*" />
           <End Type="BeheerClubCloud.ClubCloud_Baantoplaag" Role="ClubCloud_Baantoplaag" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -2328,6 +2470,90 @@
             </Principal>
             <Dependent Role="ClubCloud_BaanSpeciaal">
               <PropertyRef Name="BaantoplaagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_Regio_Address">
+          <End Type="BeheerClubCloud.ClubCloud_Regio" Role="ClubCloud_Regio" Multiplicity="0..1" />
+          <End Type="BeheerClubCloud.ClubCloud_Address" Role="ClubCloud_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Regio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Address">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_Setting_Gebruiker">
+          <End Type="BeheerClubCloud.ClubCloud_Setting" Role="ClubCloud_Setting" Multiplicity="*" />
+          <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Gebruiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Setting">
+              <PropertyRef Name="GebruikerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_Setting_Vereniging">
+          <End Type="BeheerClubCloud.ClubCloud_Setting" Role="ClubCloud_Setting" Multiplicity="*" />
+          <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Vereniging">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Setting">
+              <PropertyRef Name="VerenigingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_Accommodatie_Address">
+          <End Type="BeheerClubCloud.ClubCloud_Accommodatie" Role="ClubCloud_Accommodatie" Multiplicity="0..1" />
+          <End Type="BeheerClubCloud.ClubCloud_Address" Role="ClubCloud_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Accommodatie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Address">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_GebruikerClubCloud_Nationaliteit">
+          <End Type="BeheerClubCloud.ClubCloud_Gebruiker" Role="ClubCloud_Gebruiker" Multiplicity="*" />
+          <End Type="BeheerClubCloud.ClubCloud_Nationaliteit" Role="ClubCloud_Nationaliteit" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Nationaliteit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Gebruiker">
+              <PropertyRef Name="NationaliteitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_Baanschema_Baan">
+          <End Type="BeheerClubCloud.ClubCloud_Baanschema" Role="ClubCloud_Baanschema" Multiplicity="*" />
+          <End Type="BeheerClubCloud.ClubCloud_Baan" Role="ClubCloud_Baan" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Baan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Baanschema">
+              <PropertyRef Name="BaanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubCloud_BaanschemaClubCloud_Vereniging">
+          <End Type="BeheerClubCloud.ClubCloud_Baanschema" Role="ClubCloud_Baanschema" Multiplicity="*" />
+          <End Type="BeheerClubCloud.ClubCloud_Vereniging" Role="ClubCloud_Vereniging" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClubCloud_Vereniging">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClubCloud_Baanschema">
+              <PropertyRef Name="VerenigingId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2423,8 +2649,8 @@
           <ScalarProperty Name="Geboortedatum" ColumnName="Geboortedatum" />
           <ScalarProperty Name="Geboorteplaats" ColumnName="Geboorteplaats" />
           <ScalarProperty Name="OverlijdensDatum" ColumnName="OverlijdensDatum" />
-          <ScalarProperty Name="NationaliteitId" ColumnName="NationaliteitId" />
           <ScalarProperty Name="AddressGeheim" ColumnName="AddressGeheim" />
+          <ScalarProperty Name="NationaliteitId" ColumnName="NationaliteitId" />
           <ScalarProperty Name="Website" ColumnName="Website" />
           <ScalarProperty Name="FTPsite" ColumnName="FTPsite" />
           <ScalarProperty Name="Actief" ColumnName="Actief" />
@@ -2598,7 +2824,7 @@
           <ScalarProperty Name="Naam" ColumnName="Naam" />
           <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
           <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
-          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="Groep" ColumnName="Groep" />
           <ScalarProperty Name="Actief" ColumnName="Actief" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -2649,6 +2875,11 @@
         <MappingFragment StoreEntitySet="ClubCloud_Regios">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="EmailKNLTB" ColumnName="EmailKNLTB" />
+          <ScalarProperty Name="TelefoonAvond" ColumnName="TelefoonAvond" />
+          <ScalarProperty Name="TelefoonOverdag" ColumnName="TelefoonOverdag" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2753,6 +2984,7 @@
         <MappingFragment StoreEntitySet="ClubCloud_Baanschemas">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BaanId" ColumnName="BaanId" />
+          <ScalarProperty Name="VerenigingId" ColumnName="VerenigingId" />
           <ScalarProperty Name="Beschikbaar" ColumnName="Beschikbaar" />
           <ScalarProperty Name="MaandBegin" ColumnName="MaandBegin" />
           <ScalarProperty Name="MaandEinde" ColumnName="MaandEinde" />
@@ -2774,15 +3006,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ClubCloud_LidmaatschapSoorten">
-      <EntityTypeMapping TypeName="IsTypeOf(BeheerClubCloud.ClubCloud_LidmaatschapSoort)">
-        <MappingFragment StoreEntitySet="ClubCloud_LidmaatschapSoorten">
+    <EntitySetMapping Name="ClubCloud_Lidmaatschapsoorten">
+      <EntityTypeMapping TypeName="IsTypeOf(BeheerClubCloud.ClubCloud_Lidmaatschapsoort)">
+        <MappingFragment StoreEntitySet="ClubCloud_Lidmaatschapsoorten">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Naam" ColumnName="Naam" />
           <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="Omschrijving" ColumnName="Omschrijving" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="DagBegin" ColumnName="DagBegin" />
           <ScalarProperty Name="DagEinde" ColumnName="DagEinde" />
+          <ScalarProperty Name="Contributie" ColumnName="Contributie" />
           <ScalarProperty Name="Tarief" ColumnName="Tarief" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

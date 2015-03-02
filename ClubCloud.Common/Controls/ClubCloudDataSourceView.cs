@@ -43,7 +43,7 @@ namespace ClubCloud.Common.Controls
         {
 
             Type t = p_obj.GetType();
-            PropertyInfo[] tmpP = t.GetProperties();
+            PropertyInfo[] tmpP = t.GetProperties();// (BindingFlags.GetField);
             if (p_ds.Tables[p_tableName] == null)
             {
                 p_ds.Tables.Add(p_tableName);
@@ -58,8 +58,14 @@ namespace ClubCloud.Common.Controls
 
             for (Int32 i = 0; i <= tmpObj.Length - 1; i++)
             {
-                tmpObj[i] = t.InvokeMember(tmpP[i].Name, BindingFlags.GetProperty, null, p_obj, new object[0]);
-
+                try
+                {
+                    tmpObj[i] = t.InvokeMember(tmpP[i].Name, BindingFlags.GetProperty, null, p_obj, new object[0]);
+                }
+                catch (Exception ex)
+                {
+                    string message = ex.Message;
+                }
             }
             p_ds.Tables[p_tableName].LoadDataRow(tmpObj, true);
         }

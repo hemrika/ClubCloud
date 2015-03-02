@@ -31,7 +31,6 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
     var propertiesWithDefaultValues = typeMapper.GetPropertiesWithDefaultValues(entity);
     var collectionNavigationProperties = typeMapper.GetCollectionNavigationProperties(entity);
     var complexProperties = typeMapper.GetComplexProperties(entity);
-
     if (propertiesWithDefaultValues.Any() || collectionNavigationProperties.Any() || complexProperties.Any())
     {
 #>
@@ -99,7 +98,9 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
         foreach (var navigationProperty in navigationProperties)
         {
 #>
-	[DataMember]
+
+	//[DataMember]
+	[IgnoreDataMember]
     <#=codeStringGenerator.NavigationProperty(navigationProperty)#>
 <#
         }
@@ -121,7 +122,6 @@ foreach (var complex in typeMapper.GetItemsToGenerate<ComplexType>(itemCollectio
 <#
     var complexProperties = typeMapper.GetComplexProperties(complex);
     var propertiesWithDefaultValues = typeMapper.GetPropertiesWithDefaultValues(complex);
-
     if (propertiesWithDefaultValues.Any() || complexProperties.Any())
     {
 #>
@@ -281,13 +281,14 @@ public class CodeStringGenerator
     public string Property(EdmProperty edmProperty)
     {
 		return string.Format(
-        CultureInfo.InvariantCulture,
-        "private {1} {3};\r\n"+
-        "\t{0} {1} {2} \r\n" +
+        CultureInfo.InvariantCulture,        
+        "{0} {1} {2} \r\n" +
         "\t{{ \r\n" +
             "\t\t{4}get {{ return {3}; }} \r\n" +
             "\t\t{5}set {{ SetProperty(ref {3}, value); }} \r\n" + 
-        "\t}}\r\n",
+        "\t}}\r\n\r\n"+
+		"\t[IgnoreDataMember]\r\n"+
+		"\tprivate {1} {3};\r\n",
         Accessibility.ForProperty(edmProperty),
         _typeMapper.GetTypeName(edmProperty.TypeUsage),
         _code.Escape(edmProperty),
@@ -457,7 +458,7 @@ public class CodeStringGenerator
 	{
 		StringBuilder output = new StringBuilder();
 		output.AppendLine("[Serializable]");
-		output.AppendLine("[DataContract(IsReference = true)]");
+		
 
 		List<String> typeList = new List<String>();
 		var complexProperties = _typeMapper.GetComplexProperties(type);
@@ -476,7 +477,7 @@ public class CodeStringGenerator
 		{
 			output.AppendFormat("[KnownType(typeof({0}))]{1}", sItem, Environment.NewLine);
 		}
-
+		output.AppendLine("[DataContract(IsReference = true)]");
 		return output.ToString();
 	}
 }

@@ -157,22 +157,40 @@ namespace ClubCloud.Service.Administration {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldValidatorBondsnummer;
         
         /// <summary>
-        /// tbx_naam control.
+        /// tbx_voornaam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbx_naam;
+        protected global::System.Web.UI.WebControls.TextBox tbx_voornaam;
         
         /// <summary>
-        /// requiredFieldValidatorNaam control.
+        /// requiredFieldValidatorAchternaam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldValidatorNaam;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldValidatorAchternaam;
+        
+        /// <summary>
+        /// tbx_achternaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbx_achternaam;
+        
+        /// <summary>
+        /// requiredFieldValidatorVoornaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldValidatorVoornaam;
         
         /// <summary>
         /// tbx_email control.

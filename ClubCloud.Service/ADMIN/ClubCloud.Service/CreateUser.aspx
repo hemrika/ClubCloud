@@ -61,9 +61,12 @@
                         Bondsnummer :<asp:TextBox runat="server" ID="tbx_bondsnummer" MaxLength="8" Width="300px" />
                         <br />
     			        <asp:RequiredFieldValidator ID="requiredFieldValidatorBondsnummer" runat="server" ControlToValidate="tbx_bondsnummer" Font-Bold="true" Forecolor="Red" Text="*" Display="Dynamic" ErrorMessage="<%$ Resources: ClubCloud.Service.ServiceAdminResources, CreateUserRequiredError %>"></asp:RequiredFieldValidator> <br />
-                        Naam :<asp:TextBox runat="server" ID="tbx_naam" MaxLength="50" Width="300px" />
+                        Voornaam :<asp:TextBox runat="server" ID="tbx_voornaam" MaxLength="50" Width="300px" />
                         <br />
-    			        <asp:RequiredFieldValidator ID="requiredFieldValidatorNaam" runat="server" ControlToValidate="tbx_naam" Font-Bold="true" Forecolor="Red" Text="*" Display="Dynamic" ErrorMessage="<%$ Resources: ClubCloud.Service.ServiceAdminResources, CreateUserRequiredError %>"></asp:RequiredFieldValidator> <br />
+    			        <asp:RequiredFieldValidator ID="requiredFieldValidatorAchternaam" runat="server" ControlToValidate="tbx_voornaam" Font-Bold="true" Forecolor="Red" Text="*" Display="Dynamic" ErrorMessage="<%$ Resources: ClubCloud.Service.ServiceAdminResources, CreateUserRequiredError %>"></asp:RequiredFieldValidator> <br />
+                        Achternaam :<asp:TextBox runat="server" ID="tbx_achternaam" MaxLength="50" Width="300px" />
+                        <br />
+    			        <asp:RequiredFieldValidator ID="requiredFieldValidatorVoornaam" runat="server" ControlToValidate="tbx_achternaam" Font-Bold="true" Forecolor="Red" Text="*" Display="Dynamic" ErrorMessage="<%$ Resources: ClubCloud.Service.ServiceAdminResources, CreateUserRequiredError %>"></asp:RequiredFieldValidator> <br />
                         Email :<asp:TextBox runat="server" ID="tbx_email" MaxLength="50" Width="300px" />
                         <br />
     			        <asp:RequiredFieldValidator ID="requiredFieldValidatorEmail" runat="server" ControlToValidate="tbx_email" Font-Bold="true" Forecolor="Red" Text="*" Display="Dynamic" ErrorMessage="<%$ Resources: ClubCloud.Service.ServiceAdminResources, CreateUserRequiredError %>"></asp:RequiredFieldValidator> <br />

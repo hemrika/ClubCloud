@@ -33,11 +33,16 @@ namespace ClubCloud.Model
         public BeheerContainer(bool proxyCreationEnabled)
             : base(NameOrConnectionString)
         {
-    				this.Configuration.LazyLoadingEnabled = false;
+    			
+    		this.Configuration.LazyLoadingEnabled = false;
+    
+    		
     		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
-    		this.Configuration.ValidateOnSaveEnabled = false;
-    				this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+    		this.Configuration.ValidateOnSaveEnabled = true;
+    
+    				
+    		this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
     
     		if (!Database.Exists(NameOrConnectionString))
     		{
@@ -65,12 +70,17 @@ namespace ClubCloud.Model
         public BeheerContainer(string connectionString, bool proxyCreationEnabled)
             : base(connectionString)
         {
-    			NameOrConnectionString = connectionString;
-    				this.Configuration.LazyLoadingEnabled = false;
+    		NameOrConnectionString = connectionString;
+    		
+    		this.Configuration.LazyLoadingEnabled = false;
+    
+    		
     		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
-    		this.Configuration.ValidateOnSaveEnabled = false;
-    		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+    		this.Configuration.ValidateOnSaveEnabled = true;
+    
+    		
+            this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
     
     		if (!Database.Exists(NameOrConnectionString))
     		{
@@ -142,10 +152,19 @@ namespace ClubCloud.Model
                                 //entry.Reload();
                                 break;
                             default:
-                                entry.Reload();
+                                //entry.Reload();
                                 break;
                         }
                     }
+                }
+                catch (System.Data.Entity.Core.EntityException eex)
+                {
+                    string message = eex.Message;
+                }
+                catch (Exception ex)
+                {
+                    string message = ex.Message;
+                    return -1;
                 }
             }
             while (!saved);
@@ -247,9 +266,9 @@ namespace ClubCloud.Model
     
     		modelBuilder.Entity<ClubCloud_Foto>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
-    		//modelBuilder.Entity<ClubCloud_LidmaatschapSoort>().MapToStoredProcedures();
+    		//modelBuilder.Entity<ClubCloud_Lidmaatschapsoort>().MapToStoredProcedures();
     
-    		modelBuilder.Entity<ClubCloud_LidmaatschapSoort>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    		modelBuilder.Entity<ClubCloud_Lidmaatschapsoort>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
     		//modelBuilder.Entity<ClubCloud_Sponsor>().MapToStoredProcedures();
     
@@ -293,7 +312,7 @@ namespace ClubCloud.Model
         public virtual DbSet<ClubCloud_Afhang> ClubCloud_Afhangen { get; set; }
         public virtual DbSet<ClubCloud_Baanschema> ClubCloud_Baanschemas { get; set; }
         public virtual DbSet<ClubCloud_Foto> ClubCloud_Fotos { get; set; }
-        public virtual DbSet<ClubCloud_LidmaatschapSoort> ClubCloud_LidmaatschapSoorten { get; set; }
+        public virtual DbSet<ClubCloud_Lidmaatschapsoort> ClubCloud_Lidmaatschapsoorten { get; set; }
         public virtual DbSet<ClubCloud_Sponsor> ClubCloud_Sponsoren { get; set; }
         public virtual DbSet<ClubCloud_Sponsor_Afbeelding> ClubCloud_Sponsor_Afbeeldingen { get; set; }
         public virtual DbSet<ClubCloud_Baanblok> ClubCloud_Baanblokken { get; set; }

@@ -45,7 +45,8 @@ namespace ClubCloud.Mijn.ControlTemplates
                 try
                 {
                     vereniging = Client.GetVerenigingById(userId, Settings.VerenigingId.Value);
-                    vereniging.ClubCloud_Accommodatie = Client.GetAccommodatieForVereniging(userId, vereniging.Id);
+
+                    vereniging.ClubCloud_Accommodatie = Client.GetAccommodatieById(userId, vereniging.AccommodatieId.Value);
                     vereniging.ClubCloud_Lidmaatschap = Client.GetLidmaatschapByGebruikerId(userId, vereniging.Id, Settings.GebruikerId.Value, false);
                 }
                 catch { }

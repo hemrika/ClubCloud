@@ -163,7 +163,7 @@
     <Compile Include="ClubCloud_Lidmaatschap.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
-    <Compile Include="ClubCloud_LidmaatschapSoort.cs">
+    <Compile Include="ClubCloud_Lidmaatschapsoort.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="ClubCloud_Nationaliteit.cs">

@@ -139,6 +139,24 @@ namespace ClubCloud.Service.Administration {
         protected global::System.Web.UI.UserControl ActionSection;
         
         /// <summary>
+        /// buttonTrigger control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonTrigger;
+        
+        /// <summary>
+        /// buttonMetaData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonMetaData;
+        
+        /// <summary>
         /// buttonVerenigingen control.
         /// </summary>
         /// <remarks>
@@ -146,6 +164,15 @@ namespace ClubCloud.Service.Administration {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button buttonVerenigingen;
+        
+        /// <summary>
+        /// buttonBanen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonBanen;
         
         /// <summary>
         /// buttonSectionBottom control.

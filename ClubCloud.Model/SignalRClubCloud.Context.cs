@@ -32,15 +32,20 @@ namespace ClubCloud.Model
         public SignalRContainer(bool proxyCreationEnabled)
             : base(NameOrConnectionString)
         {
-    				this.Configuration.LazyLoadingEnabled = false;
+    		
+    		this.Configuration.LazyLoadingEnabled = false;
     		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = false;
-    				this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
     
+    		
+    		this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+    
+    		bool initialize = true;
     		if (!Database.Exists(NameOrConnectionString))
     		{
     			Database.SetInitializer<SignalRContainer>(new CreateDatabaseIfNotExists<SignalRContainer>());
+    			initialize = false;
     		}
     
     		try
@@ -48,11 +53,12 @@ namespace ClubCloud.Model
     			if (!Database.CompatibleWithModel(false))
     			{
     				Database.SetInitializer<SignalRContainer>(new MigrateDatabaseToLatestVersion<SignalRContainer, SignalRConfiguration>());
+    				initialize = false;
     			}
     		}
     		catch { }
     
-    		Database.Initialize(false);
+    		Database.Initialize(initialize);
     
     		//Database.SetInitializer<SignalRContainer>(new CreateDatabaseIfNotExists<SignalRContainer>());
     		//Database.SetInitializer<SignalRContainer>(new MigrateDatabaseToLatestVersion<SignalRContainer, SignalRConfiguration>());

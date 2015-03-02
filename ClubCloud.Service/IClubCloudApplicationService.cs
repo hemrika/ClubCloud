@@ -218,22 +218,6 @@ namespace ClubCloud.Service
         bool DeleteReservering(string bondsnummer, Guid verenigingId, Guid reserveringId, bool push = false);
 
         [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Baanschema))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baanschema> GetBaanSchemaByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Baanschema))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baanschema> GetBaanSchemaByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Baan))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baan> GetBanenByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Baan))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baan> GetBanenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false);
-
-        [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Gebruiker> GetGebruikersByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
 
@@ -248,6 +232,10 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
         System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Reservering> GetReserveringenByBondsnummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Reservering))]
+        System.Collections.Generic.List<ClubCloud_Reservering> GetReserveringenByDate(string bondsnummer, Guid verenigingId, DateTime date, bool refresh);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
@@ -285,9 +273,6 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Address))]
         List<ClubCloud_Address> GetAddressByGebruikerId(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false);
 
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Baan))]
-        ClubCloud_Baan GetBaanById(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker_DataView))]
@@ -312,7 +297,55 @@ namespace ClubCloud.Service
         List<ClubCloud_Gebruiker> GetGebruikersBySearch(string bondsnummer, string prefixText, int count, bool refresh = false);
 
         [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Accommodatie))]
+        ClubCloud_Accommodatie GetAccommodatieById(string bondsnummer, Guid accommodatieId, bool refresh);
+
+        #region Banen
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baanschema))]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baanschema> GetBaanSchemaByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baanschema))]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baanschema> GetBaanSchemaByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baanschema))]
+        System.Collections.Generic.List<ClubCloud_Baanschema> GetBaanSchemaByDate(string bondsnummer, Guid verenigingId, DateTime date, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baan))]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baan> GetBanenByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baan))]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baan> GetBanenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baan))]
+        ClubCloud_Baan GetBaanById(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baanblok))]
+        List<ClubCloud_Baanblok> GetBaanblokkenByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baansoort))]
+        ClubCloud_Baansoort GetBaansoortById(string bondsnummer, Guid verenigingId, Guid accommodatieId, Guid baansoortId, bool refresh);
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baantype))]
+        ClubCloud_Baantype GetBaantypeById(string bondsnummer, Guid verenigingId, Guid accommodatieId, Guid BaantypeId, bool refresh);
+
+        #endregion
+
+        #region SignalR
+
+        [OperationContract]
         string ScaleOutConnection(string catalog);
+
+        #endregion
 
         #region Foto
 
@@ -388,10 +421,26 @@ namespace ClubCloud.Service
         #region Administrator
 
         [OperationContract]
-        void VerenigingenUpdate(string bondsnummer, bool refresh = false);
+        void TriggerMetaData(string bondsnummer, bool refresh);
 
         [OperationContract]
-        void LidmaatschappenUpdate(string bondsnummer, Guid verenigingId, bool refresh = false);
+        void BestuursOrganenUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
+        void LidmaatschapSoortenUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
+        void ToplagenUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
+        void BaansoortenUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
+        void BaantypesUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
+        bool VerenigingenUpdate(string bondsnummer, int pageNum = 1, bool refresh = false);
+
 
         [OperationContract]
         void NationaliteitenUpdate(string bondsnummer, bool refresh);
@@ -404,6 +453,18 @@ namespace ClubCloud.Service
 
         [OperationContract]
         void FunctiesUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
+        void RegiosUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
+        void BanenSpeciaalUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
+        void BaanBlokkenUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
+        void BanenUpdate(string bondsnummer, bool refresh);
 
         [OperationContract]
         void VerenigingZimbra(string bondsnummer, ClubCloud_Vereniging vereniging);
@@ -419,11 +480,17 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
         List<ClubCloud_Vereniging> GetVerenigingen();
 
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Accommodatie))]
+        List<ClubCloud_Accommodatie> GetAccommodaties();
+
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
+        ClubCloud_Gebruiker CreateGebruiker(ClubCloud_Gebruiker gebruiker);
+
+        [OperationContract]
+        void LidmaatschappenUpdate(string bondsnummer, Guid verenigingId, bool refresh = false);
+
         #endregion
-
-
-
-
-        
     }
 }

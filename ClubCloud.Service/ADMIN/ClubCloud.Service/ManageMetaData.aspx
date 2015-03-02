@@ -57,7 +57,10 @@
             <template_inputformcontrols>
                 <wssuc:InputFormControl LabelText="" runat="server">
                     <Template_control>				        
-                        <asp:Button runat="server" CssClass="ms-ButtonHeightWidth" OnClick="ButtonVerenigingen_Click" Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ButtonOKText %>" ID="buttonVerenigingen" />
+                        <asp:Button runat="server" CssClass="ms-ButtonHeightWidth" OnClick="ButtonTrigger_Click" Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ButtonTriggerText %>" ID="buttonTrigger" /><br />
+                        <asp:Button runat="server" CssClass="ms-ButtonHeightWidth" OnClick="ButtonMetaData_Click" Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ButtonMetaDataText %>" ID="buttonMetaData" /><br />
+                        <asp:Button runat="server" CssClass="ms-ButtonHeightWidth" OnClick="ButtonVerenigingen_Click" Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ButtonVerenigingenText %>" ID="buttonVerenigingen" /><br />
+                        <asp:Button runat="server" CssClass="ms-ButtonHeightWidth" OnClick="ButtonBanen_Click" Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ButtonBanenText %>" ID="buttonBanen" /><br />
                     </Template_control>
                 </wssuc:InputFormControl>
             </template_inputformcontrols>

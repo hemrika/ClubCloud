@@ -73,7 +73,12 @@ namespace ClubCloud.Model
 
         public bool HasErrors
         {
-            get { return (_errors.Count > 0); }
+            get 
+            { 
+                if(_errors != null)
+                    return (_errors.Count > 0);
+                return false;
+            }
         }
     }
 }

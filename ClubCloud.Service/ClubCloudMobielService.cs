@@ -13,6 +13,7 @@ namespace ClubCloud.Service
     using Microsoft.SharePoint.Client.Services;
     using Microsoft.SharePoint.IdentityModel;
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.IdentityModel.Tokens;
     using System.ServiceModel;
@@ -52,30 +53,51 @@ namespace ClubCloud.Service
 
         public LoginResult Login(string username, string password)
         {
-            LoginResult result = new LoginResult();
             SPSessionAuthenticationModule sessionAuthenticationModule = FederatedAuthentication.SessionAuthenticationModule as SPSessionAuthenticationModule;
+            sessionAuthenticationModule.CookieHandler.HideFromClientScript = false;
+
             if (AuthenticationMode.Forms != SPSecurity.AuthenticationMode || sessionAuthenticationModule == null)
             {
-                result.ErrorCode = LoginErrorCode.NotInFormsAuthenticationMode;
-                return result;
+                //result.ErrorCode = LoginErrorCode.NotInFormsAuthenticationMode;
+                return new LoginResult { ErrorCode = LoginErrorCode.NotInFormsAuthenticationMode };
             }
             if (!SPClaimsUtility.AuthenticateFormsUser(SPAlternateUrl.ContextUri, username, password))
             {
-                result.ErrorCode = LoginErrorCode.PasswordNotMatch;
-                return result;
+                //result.ErrorCode = LoginErrorCode.PasswordNotMatch;
+                return new LoginResult { ErrorCode = LoginErrorCode.PasswordNotMatch };
             }
 
-            result.ErrorCode = LoginErrorCode.NoError;
-            result.CookieName = sessionAuthenticationModule.CookieHandler.Name;
             TimeSpan formsAuthenticationTimeout = TimeSpan.FromMinutes(30);
-            result.TimeoutSeconds = (int)Math.Floor(formsAuthenticationTimeout.TotalSeconds);
-            return result;
+            TimeSpan PersistentSessionLifetime = sessionAuthenticationModule.CookieHandler.PersistentSessionLifetime.Value;
+            Microsoft.IdentityModel.Tokens.SessionSecurityToken token = sessionAuthenticationModule.ContextSessionSecurityToken;
+
+            return new LoginResult
+            {
+                ErrorCode = LoginErrorCode.NoError,
+                CookieName = sessionAuthenticationModule.CookieHandler.Name,
+                TimeoutSeconds = (int)Math.Floor(formsAuthenticationTimeout.TotalSeconds)
+            };
         }
 
         public AuthenticationMode LoginMode()
         {
             return SPSecurity.AuthenticationMode;
         }
+
+        public ClubCloud_Setting GetClubCloudSettings()
+        {
+            ClubCloud_Setting settings = null;
+
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                string bondsnummer = SPContext.Current.Web.CurrentUser.LoginName.Split('|').Last();
+                settings = client.GetClubCloudSettings(bondsnummer);
+            }
+
+            return settings;
+        }
+
         /*
         public ClubCloud_Gebruiker GetClubCloudGebruiker(bool refresh = false)
         {
@@ -89,9 +111,9 @@ namespace ClubCloud.Service
 
             return clubCloud_gebruiker;
         }
-        */        
+        */
 
-        public bool DeleteReservering(Guid verenigingId, Guid reserveringId)
+        public bool DeleteReservering(string verenigingId, string reserveringId)
         {
             bool deleted = false;
 
@@ -100,7 +122,7 @@ namespace ClubCloud.Service
                 //Guid vId = Guid.Parse(verenigingId);
                 //Guid rId = Guid.Parse(reserveringId);
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                deleted = client.DeleteReservering(SPContext.Current.Web.CurrentUser.LoginName, verenigingId, reserveringId, false);
+                deleted = client.DeleteReservering(SPContext.Current.Web.CurrentUser.LoginName, Guid.Parse(verenigingId), Guid.Parse(reserveringId), false);
             }
 
             return deleted;
@@ -171,28 +193,28 @@ namespace ClubCloud.Service
             return gebruikers;
         }
 
-        public ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
+        public ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, string verenigingId, string nummer)
         {
             ClubCloud_Gebruiker gebruiker = new ClubCloud_Gebruiker();
 
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                gebruiker = client.GetGebruikerByNummer(bondsnummer, verenigingId, nummer, refresh);
+                gebruiker = client.GetGebruikerByNummer(bondsnummer, Guid.Parse(verenigingId), nummer);
             }
 
             return gebruiker;
 
         }
 
-        public ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
+        public ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, string verenigingId, string gebruikerId)
         {
             ClubCloud_Gebruiker gebruiker = new ClubCloud_Gebruiker();
 
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                gebruiker = client.GetGebruikerById(bondsnummer, verenigingId, gebruikerId, refresh);
+                gebruiker = client.GetGebruikerById(bondsnummer, Guid.Parse(verenigingId), Guid.Parse(gebruikerId));
             }
 
             return gebruiker;
@@ -212,14 +234,14 @@ namespace ClubCloud.Service
             return foto;
         }
 
-        public ClubCloud_Foto GetFotoById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
+        public ClubCloud_Foto GetFotoById(string bondsnummer, string verenigingId, string gebruikerId)
         {
             ClubCloud_Foto foto = null;
 
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                foto = client.GetFotoById(bondsnummer, verenigingId, gebruikerId, refresh);
+                foto = client.GetFotoById(bondsnummer, Guid.Parse(verenigingId), Guid.Parse(gebruikerId));
             }
 
             return foto;
@@ -304,14 +326,14 @@ namespace ClubCloud.Service
             return vereniging;
         }
 
-        public ClubCloud_Vereniging GetVerenigingById(string bondsnummer, Guid verenigingId, bool refresh = false)
+        public ClubCloud_Vereniging GetVerenigingById(string bondsnummer, string verenigingId)
         {
             ClubCloud_Vereniging vereniging = new ClubCloud_Vereniging();
 
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                vereniging = client.GetVerenigingById(bondsnummer, verenigingId, refresh);
+                vereniging = client.GetVerenigingById(bondsnummer, Guid.Parse(verenigingId));
             }
 
             return vereniging;
