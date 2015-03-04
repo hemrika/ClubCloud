@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/18/2015 12:22:39
+-- Date Created: 03/04/2015 16:42:08
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Model\BeheerClubCloud.edmx
 -- --------------------------------------------------
 
@@ -142,6 +142,9 @@ IF OBJECT_ID(N'[dbo].[FK_ClubCloud_GebruikerClubCloud_Nationaliteit]', 'F') IS N
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Baanschema_Baan]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_Baanschemas] DROP CONSTRAINT [FK_ClubCloud_Baanschema_Baan];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ClubCloud_BaanschemaClubCloud_Vereniging]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ClubCloud_Baanschemas] DROP CONSTRAINT [FK_ClubCloud_BaanschemaClubCloud_Vereniging];
 GO
 
 -- --------------------------------------------------
@@ -534,12 +537,12 @@ GO
 -- Creating table 'ClubCloud_Regios'
 CREATE TABLE [dbo].[ClubCloud_Regios] (
     [Id] uniqueidentifier  NOT NULL,
-    [Naam] nvarchar(max)  NOT NULL,
-    [EmailKNLTB] nvarchar(max)  NOT NULL,
-    [TelefoonAvond] nvarchar(max)  NOT NULL,
-    [TelefoonOverdag] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL,
-    [Fax] nvarchar(max)  NOT NULL
+    [Naam] nvarchar(max)  NULL,
+    [EmailKNLTB] nvarchar(max)  NULL,
+    [TelefoonAvond] nvarchar(max)  NULL,
+    [TelefoonOverdag] nvarchar(max)  NULL,
+    [Fax] nvarchar(max)  NOT NULL,
+    [Actief] nvarchar(max)  NOT NULL
 );
 GO
 

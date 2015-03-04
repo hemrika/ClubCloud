@@ -126,24 +126,60 @@ namespace ClubCloud.Service.Administration
                 operation.LeadingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationLeadingHtml", CultureInfo.CurrentCulture).ToString();
                 operation.TrailingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationTrailingHtml", CultureInfo.CurrentCulture).ToString();
                 operation.Begin();
+                /*
+                try
+                {
+                    ServiceClient.NationaliteitenUpdate("12073385", true);
+                }
+                catch { }
 
-                ServiceClient.NationaliteitenUpdate("12073385", true);
+                try
+                {
+                    ServiceClient.LidmaatschapSoortenUpdate("12073385", true);
+                }
+                catch { }
 
-                ServiceClient.LidmaatschapSoortenUpdate("12073385", true);
+                try
+                {
+                    ServiceClient.ToplagenUpdate("12073385", true);
+                }
+                catch { }
 
-                ServiceClient.ToplagenUpdate("12073385", true);
+                try
+                {
+                    ServiceClient.BaantypesUpdate("12073385", true);
+                }
+                catch { }
 
-                ServiceClient.BaantypesUpdate("12073385", true);
-                
-                ServiceClient.BaansoortenUpdate("12073385", true);
+                try
+                {
+                    ServiceClient.BaansoortenUpdate("12073385", true);
+                }
+                catch { }
 
-                ServiceClient.RechtsvormenUpdate("12073385", true);
+                try
+                {
+                    ServiceClient.RechtsvormenUpdate("12073385", true);
+                }
+                catch { }
 
-                ServiceClient.FunctiesUpdate("12073385", true);
+                try
+                {
+                    ServiceClient.FunctiesUpdate("12073385", true);
+                }
+                catch { }
+                */
+                try
+                {
+                    ServiceClient.RegiosUpdate("12073385", true);
+                }
+                catch { }
 
-                ServiceClient.RegiosUpdate("12073385", true);
-
-                ServiceClient.DistrictenUpdate("12073385", true);
+                try
+                {
+                    ServiceClient.DistrictenUpdate("12073385", true);
+                }
+                catch { }
 
                 operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageMetaData.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
             }
@@ -172,7 +208,6 @@ namespace ClubCloud.Service.Administration
                 operation.TrailingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationTrailingHtml", CultureInfo.CurrentCulture).ToString();
                 operation.Begin();
 
-                /*
                 int pageNum = 1;
                 bool moreRecords = true;
                 while (moreRecords)
@@ -188,7 +223,7 @@ namespace ClubCloud.Service.Administration
                         moreRecords = true;
                     }
                 }
-                */
+
                 try
                 {
                     ServiceClient.BestuursOrganenUpdate("12073385", false);
@@ -222,11 +257,23 @@ namespace ClubCloud.Service.Administration
                 operation.TrailingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationTrailingHtml", CultureInfo.CurrentCulture).ToString();
                 operation.Begin();
 
-                //ServiceClient.BaanBlokkenUpdate("12073385", true);
+                try
+                {
+                    ServiceClient.BaanBlokkenUpdate("12073385", true);
+                }
+                catch { }
 
-                //ServiceClient.BanenSpeciaalUpdate("12073385", true);
+                try
+                {
+                    ServiceClient.BanenSpeciaalUpdate("12073385", true);
+                }
+                catch { }
 
-                ServiceClient.BanenUpdate("12073385", true);
+                try
+                {
+                    ServiceClient.BanenUpdate("12073385", true);
+                }
+                catch { }
 
                 operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageMetaData.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
             }

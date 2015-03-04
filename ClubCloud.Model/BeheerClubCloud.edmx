@@ -507,12 +507,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="EmailKNLTB" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TelefoonAvond" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TelefoonOverdag" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EmailKNLTB" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TelefoonAvond" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TelefoonOverdag" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Fax" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Baansoorten">
     <Key>
@@ -1932,12 +1932,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="EmailKNLTB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TelefoonAvond" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TelefoonOverdag" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Naam" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
+          <Property Name="EmailKNLTB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="TelefoonAvond" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="TelefoonOverdag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="Fax" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_Vereniging" />
           <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_District_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_District" />
           <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_Accommodatie_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_Accommodatie" />
@@ -2878,8 +2878,8 @@
           <ScalarProperty Name="EmailKNLTB" ColumnName="EmailKNLTB" />
           <ScalarProperty Name="TelefoonAvond" ColumnName="TelefoonAvond" />
           <ScalarProperty Name="TelefoonOverdag" ColumnName="TelefoonOverdag" />
-          <ScalarProperty Name="Actief" ColumnName="Actief" />
           <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

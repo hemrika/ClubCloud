@@ -58,7 +58,8 @@ namespace ClubCloud.Service.Administration
 
             if (!this.IsPostBack)
             {
-                List<ClubCloud.Model.ClubCloud_Vereniging> verenigingen = ServiceClient.GetVerenigingen();
+
+                List<ClubCloud.Model.ClubCloud_Vereniging> verenigingen = new List<Model.ClubCloud_Vereniging>();// ServiceClient.GetVerenigingen();
                 verenigingen.Insert(0,new Model.ClubCloud_Vereniging { Id = Guid.Empty, Naam = "< Selecteer Vereniging >" });
                 ddl_vereniging.DataTextField = "Naam";
                 ddl_vereniging.DataValueField = "Id";

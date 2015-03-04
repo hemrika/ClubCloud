@@ -48,6 +48,9 @@ using System.Data.Entity.Infrastructure;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Infrastructure.Interception;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
+
 <#
 if (container.FunctionImports.Any())
 {
@@ -83,7 +86,7 @@ using System.Linq;
 		}
 		#>
 
-		this.Configuration.AutoDetectChangesEnabled = true;
+		this.Configuration.AutoDetectChangesEnabled = false;
 		this.Configuration.UseDatabaseNullSemantics = false;
 		this.Configuration.ValidateOnSaveEnabled = true;
 
@@ -141,7 +144,7 @@ using System.Linq;
 		}
 		#>
 
-		this.Configuration.AutoDetectChangesEnabled = true;
+		this.Configuration.AutoDetectChangesEnabled = false;
 		this.Configuration.UseDatabaseNullSemantics = false;
 		this.Configuration.ValidateOnSaveEnabled = true;
 
@@ -188,27 +191,23 @@ using System.Linq;
 
 	public override int SaveChanges()
     {
+		int count = 0;
         bool saved = false;
+		Stopwatch s = new Stopwatch();
+        s.Start();
 
         do
         {
             try
             {
-                base.SaveChanges();
+                count = base.SaveChanges();
                 saved = true;
             }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
-            {
-                UpdateException uex = null;
-
-                if(e.InnerException != null && e.InnerException.GetType() == typeof(UpdateException))
+			//A database command did not affect the expected number of rows. This usually indicates an optimistic concurrency violation; that is, a row has been changed in the database since it was queried.
+    		catch(DbUpdateConcurrencyException dbucex)
+    		{
+                foreach (DbEntityEntry entry in dbucex.Entries)
                 {
-                    uex = e.InnerException as UpdateException;
-                }
-
-                foreach (DbEntityEntry entry in e.Entries)
-                {
-
                     switch (entry.State)
                     {
                         case EntityState.Deleted:
@@ -226,27 +225,104 @@ using System.Linq;
                                 entry.CurrentValues.SetValues(currentValues);
                             }
                             break;
-                        case EntityState.Added:
-                            //entry.State = EntityState.Unchanged;
-                            //entry.Reload();
-                            break;
                         default:
-                            //entry.Reload();
+                            entry.Reload();
                             break;
                     }
                 }
-            }
-            catch (System.Data.Entity.Core.EntityException eex)
-            {
-                string message = eex.Message;
-            }
+    		}
+			//An error occurred sending updates to the database.
+    		catch(DbUpdateException dbuex)
+    		{
+                foreach (DbEntityEntry entry in dbuex.Entries)
+                {
+                    switch (entry.State)
+                    {
+                        case EntityState.Deleted:
+                            entry.Reload();
+                            entry.State = EntityState.Deleted;
+                            break;
+                        case EntityState.Modified:
+                            DbPropertyValues currentValues = entry.CurrentValues.Clone();
+                            entry.Reload();
+                            if (entry.State == EntityState.Detached)
+                                Set(ObjectContext.GetObjectType(entry.Entity.GetType())).Add(entry.Entity);
+                            else
+                            {
+                                entry.Reload();
+                                entry.CurrentValues.SetValues(currentValues);
+                            }
+                            break;
+                        default:
+                            entry.Reload();
+                            break;
+                    }
+                }                    
+    		}
+			//The save was aborted because validation of entity property values failed.
+    		catch(DbEntityValidationException dbevex)
+    		{
+                foreach (DbEntityValidationResult result in dbevex.EntityValidationErrors)
+                {
+                    switch (result.Entry.State)
+                    {
+                        case EntityState.Deleted:
+                            result.Entry.Reload();
+                            result.Entry.State = EntityState.Deleted;
+                            break;
+                        case EntityState.Modified:
+                            DbPropertyValues currentValues = result.Entry.CurrentValues.Clone();
+                            result.Entry.Reload();
+                            if (result.Entry.State == EntityState.Detached)
+                                Set(ObjectContext.GetObjectType(result.Entry.Entity.GetType())).Add(result.Entry.Entity);
+                            else
+                            {
+                                result.Entry.Reload();
+                                result.Entry.CurrentValues.SetValues(currentValues);
+                            }
+                            break;
+                        default:
+                            result.Entry.Reload();
+                            break;
+                    }
+                }
+    		}
+			//An attempt was made to use unsupported behavior such as executing multiple asynchronous commands concurrently on the same context instance.
+    		catch(NotSupportedException nsex)
+    		{
+				string message = nsex.Message;
+                //throw nsex;
+    		}
+			//The context or connection have been disposed.
+    		catch(ObjectDisposedException odex)
+    		{
+				string message = odex.Message;
+                //throw odex;
+    		}
+			//Some error occurred attempting to process entities in the context either before or after sending commands to the database.
+    		catch(InvalidOperationException ioex)
+    		{
+				string message = ioex.Message;
+                //throw ioex;
+    		}
+        	catch (EntityException eex)
+        	{
+				string message = eex.Message;
+                //throw eex;
+        	}
+
             catch (Exception ex)
             {
                 string message = ex.Message;
+				//throw ex;
             }
         }
-        while (!saved);
-        return base.SaveChanges();
+        while (!saved && s.Elapsed < TimeSpan.FromSeconds(30));
+        s.Stop();
+        
+		this.ObjectContext.AcceptAllChanges();
+
+        return count;
     }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
