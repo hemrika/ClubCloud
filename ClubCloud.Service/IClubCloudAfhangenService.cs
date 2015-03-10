@@ -196,17 +196,17 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ApplicationInfo))]
         //[ServiceKnownType(typeof(BeheerBaseModel))]
-        List<ClubCloud.Model.ApplicationInfo> GetApplicationInfos();
+        System.Collections.Generic.List<ClubCloud.Model.ApplicationInfo> GetApplicationInfos();
 
         [OperationContract]
         [ServiceKnownType(typeof(ApplicationVersion))]
         //[ServiceKnownType(typeof(BeheerBaseModel))]
-        List<ClubCloud.Model.ApplicationVersion> GetApplicationVersion(int applicationInfoId, string version);
+        ClubCloud.Model.ApplicationVersion GetApplicationVersion(int applicationInfoId, string version);
 
         [OperationContract]
         [ServiceKnownType(typeof(ApplicationProcessorArchitecture))]
         //[ServiceKnownType(typeof(BeheerBaseModel))]
-        List<ClubCloud.Model.ApplicationProcessorArchitecture> GetApplicationProcessorArchitectures(int applicationVersionId, string version);
+        System.Collections.Generic.List<ClubCloud.Model.ApplicationProcessorArchitecture> GetApplicationProcessorArchitectures(int applicationVersionId, string version);
 
         #endregion
     }

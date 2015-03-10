@@ -1397,6 +1397,7 @@ namespace ClubCloud.Service
         #endregion
 
         #region Packages
+
         public  List<ApplicationInfo> GetApplications()
         {
             List<ApplicationInfo> response = null;
