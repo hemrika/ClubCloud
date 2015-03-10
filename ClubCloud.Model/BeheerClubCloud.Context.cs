@@ -10,16 +10,14 @@
 namespace ClubCloud.Model
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Core;
     using System.Data.Entity.Core.Objects;
-    using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Infrastructure.Interception;
+    using System.Data.Entity.ModelConfiguration.Conventions;
     using System.Data.Entity.Validation;
     using System.Diagnostics;
-    
     
     public partial class BeheerContainer : DbContext
     {
@@ -147,7 +145,7 @@ namespace ClubCloud.Model
                                 }
                                 break;
                             default:
-                                entry.Reload();
+                                //entry.Reload();
                                 break;
                         }
                     }
@@ -175,7 +173,7 @@ namespace ClubCloud.Model
                                 }
                                 break;
                             default:
-                                entry.Reload();
+                                //entry.Reload();
                                 break;
                         }
                     }                    
@@ -203,7 +201,7 @@ namespace ClubCloud.Model
                                 }
                                 break;
                             default:
-                                result.Entry.Reload();
+                                //result.Entry.Reload();
                                 break;
                         }
                     }
@@ -248,6 +246,7 @@ namespace ClubCloud.Model
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+    		modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
     		//modelBuilder.Entity<ClubCloud_Setting>().MapToStoredProcedures();
     
     		modelBuilder.Entity<ClubCloud_Setting>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);

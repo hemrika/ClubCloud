@@ -24,6 +24,9 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
     BeginNamespace(code);
 #>
 <#=codeStringGenerator.UsingDirectives(inHeader: false)#>
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 <#=codeStringGenerator.WriteEntityTypeSerializationInfo(entity)#>
 <#=codeStringGenerator.EntityClassOpening(entity)#>
 {
@@ -106,6 +109,76 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
         }
     }
 #>
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+    private Dictionary<string, string> _errors = new Dictionary<string, string>();
+
+    protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] String propertyName = null)
+    {
+        if (object.Equals(storage, value)) return false;
+
+        try
+        {
+            storage = value;
+            this.OnPropertyChanged(propertyName);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _errors.Add(propertyName, ex.Message);
+            return false;
+        }
+            
+    }
+
+
+    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        var eventHandler = this.PropertyChanged;
+        if (eventHandler != null)
+        {
+            eventHandler(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+	[IgnoreDataMember]
+    public string Error
+    {
+        get
+        {
+            return string.Empty;
+        }
+    }
+
+	[IgnoreDataMember]
+    public string this[string columnName]
+    {
+        get
+        {
+            if (_errors.ContainsKey(columnName))
+                return _errors[columnName];
+            return string.Empty;
+        }
+    }
+
+        
+    public System.Collections.IEnumerable GetErrors(string propertyName)
+    {
+        return _errors[propertyName];
+    }
+
+	[IgnoreDataMember]
+    public bool HasErrors
+    {
+        get 
+        { 
+            if(_errors != null)
+                return (_errors.Count > 0);
+            return false;
+        }
+    }
 }
 <#
     EndNamespace(code);
@@ -117,7 +190,7 @@ foreach (var complex in typeMapper.GetItemsToGenerate<ComplexType>(itemCollectio
     BeginNamespace(code);
 #>
 <#=codeStringGenerator.UsingDirectives(inHeader: false, includeCollections: false)#>
-<#=Accessibility.ForType(complex)#> partial class <#=code.Escape(complex)#> : BeheerBaseModel
+<#=Accessibility.ForType(complex)#> partial class <#=code.Escape(complex)#> 
 {
 <#
     var complexProperties = typeMapper.GetComplexProperties(complex);
@@ -332,8 +405,8 @@ public class CodeStringGenerator
         Accessibility.ForType(entity),
         _code.SpaceAfter(_code.AbstractOption(entity)),
         _code.Escape(entity),
-        _code.StringBefore(" : ", string.IsNullOrEmpty(_typeMapper.GetTypeName(entity.BaseType)) ? "BeheerBaseModel" : _typeMapper.GetTypeName(entity.BaseType)));
-
+        _code.StringBefore(" : ", string.IsNullOrEmpty(_typeMapper.GetTypeName(entity.BaseType)) ? "INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo" : _typeMapper.GetTypeName(entity.BaseType)));
+		
 //        return string.Format(
 //            CultureInfo.InvariantCulture,
 //           "{0} {1}partial class {2}{3}",

@@ -492,5 +492,47 @@ namespace ClubCloud.Service
         }
         */
 
+        #region Store
+
+        public List<ApplicationInfo> GetApplicationInfos()
+        {
+            List<ApplicationInfo> infos = new List<ApplicationInfo>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                infos = client.GetApplicationInfos();
+            }
+
+            return infos;
+        }
+
+        public ApplicationVersion GetApplicationVersion(int applicationInfoId, string version)
+        {
+            ApplicationVersion _version = new ApplicationVersion();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                _version = client.GetApplicationVersion(applicationInfoId, version);
+            }
+
+            return _version;
+        }
+
+        public List<ApplicationProcessorArchitecture> GetApplicationProcessorArchitectures(int applicationVersionId, string version)
+        {
+            List<ApplicationProcessorArchitecture> architecture = new List<ApplicationProcessorArchitecture>();
+
+            if (SPContext.Current != null && SPContext.Current.Web != null)
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                architecture = client.GetApplicationProcessorArchitecture(applicationVersionId, version);
+            }
+
+            return architecture;
+        }
+
+        #endregion
     }
 }

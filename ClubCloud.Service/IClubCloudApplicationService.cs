@@ -492,5 +492,33 @@ namespace ClubCloud.Service
         void LidmaatschappenUpdate(string bondsnummer, Guid verenigingId, bool refresh = false);
 
         #endregion
+
+        #region Packages
+        [OperationContract]
+        List<ApplicationInfo> GetApplications();        
+
+        [OperationContract]
+        ApplicationInfo GetApplicationInfoByName(string applicationName);
+
+        [OperationContract]
+        ApplicationInfo SetApplicationInfo(ApplicationInfo applicationInfo);
+
+        [OperationContract]
+        ApplicationVersion SetApplicationVersion(int applicationInfoId, ApplicationVersion applicationVersion);
+
+        [OperationContract]
+        ApplicationProcessorArchitecture SetApplicationProcessorArchitecture(int applicationVersionId, ApplicationProcessorArchitecture applicationProcessorArchitecture);
+
+        [OperationContract]
+        List<ApplicationInfo> GetApplicationInfos();
+
+        [OperationContract]
+        ApplicationVersion GetApplicationVersion(int applicationInfoId, string version);
+
+        [OperationContract]
+        List<ApplicationProcessorArchitecture> GetApplicationProcessorArchitecture(int applicationVersionId, string version);
+
+        #endregion
+
     }
 }

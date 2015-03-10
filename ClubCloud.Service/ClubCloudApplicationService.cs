@@ -52,14 +52,12 @@
             {
                 if (_beheerModel == null)
                 {
-                    _beheerModel = new BeheerContainer(GetConnectionString());
                     
+                    _beheerModel = new BeheerContainer(GetConnectionString());                    
                     _beheerModel.Database.Connection.StateChange += Connection_StateChange;
                     _beheerModel.Database.Connection.Disposed += Connection_Disposed;
-
                     _beheerModel.ObjectContext.SavingChanges += ObjectContext_SavingChanges;
                     //_beheerModel.ObjectContext.ObjectMaterialized += ObjectContext_ObjectMaterialized;
-
                 }
                 /*
                 if (_beheerModel.Database.Connection.State == System.Data.ConnectionState.Broken)
@@ -72,7 +70,6 @@
                     _beheerModel.Database.Connection.Open();
                 }
                 */
-
                 return _beheerModel;
             }
             //set { ClubCloudApplicationService.beheerModel = value; }
@@ -119,7 +116,7 @@
             {
                 if (_boekhoudingModel == null)
                 {
-                    _boekhoudingModel = new BoekhoudingContainer(GetConnectionString());
+                    _boekhoudingModel = new BoekhoudingContainer(GetConnectionString("ClubCloudService_Boekhouding"));
                 }
 
                 if (_boekhoudingModel.Database.Connection.State == System.Data.ConnectionState.Broken)
@@ -145,7 +142,7 @@
             {
                 if (_signalRModel == null)
                 {
-                    _signalRModel = new SignalRContainer(GetConnectionString());
+                    _signalRModel = new SignalRContainer(GetConnectionString("ClubCloudService_SignalR"));
                 }
 
                 if (_signalRModel.Database.Connection.State == System.Data.ConnectionState.Broken)
@@ -163,6 +160,31 @@
             //set { ClubCloudApplicationService.beheerModel = value; }
         }
 
+        private static ClubCloud.Model.StoreContainer _storeModel = null;
+
+        public static ClubCloud.Model.StoreContainer storeModel
+        {
+            get
+            {
+                if (_storeModel == null)
+                {
+                    _storeModel = new StoreContainer(GetConnectionString("ClubCloudService_Store"));
+                }
+
+                if (_storeModel.Database.Connection.State == System.Data.ConnectionState.Broken)
+                {
+                    _storeModel.Database.Connection.Close();
+                }
+
+                if (_storeModel.Database.Connection.State == System.Data.ConnectionState.Closed)
+                {
+                    _storeModel.Database.Connection.Open();
+                }
+
+                return _storeModel;
+            }
+            //set { ClubCloudApplicationService.beheerModel = value; }
+        }
         /// <summary>
         /// Deserialize XML string with multiple instances of 'separatorNode' to List<Object>
         /// </summary>
@@ -216,6 +238,16 @@
                     Beheermodel.Database.CompatibleWithModel(false);
                 }
                 return;
+            }
+
+            if (catalog.StartsWith("ClubCloudService_Store", StringComparison.InvariantCultureIgnoreCase))
+            {
+                using (ClubCloud.Model.StoreContainer Storemodel = new Model.StoreContainer(GetConnectionString(catalog)))
+                {
+                    Storemodel.Database.CreateIfNotExists();
+                    Storemodel.Database.Initialize(false);
+                    Storemodel.Database.CompatibleWithModel(false);
+                }
             }
 
             if (catalog.StartsWith("ClubCloudService_Boekhouding", StringComparison.InvariantCultureIgnoreCase))
@@ -5387,6 +5419,7 @@
 
             ClubCloud_Accommodatie accommodatie = GetAccommodatieById(bondsnummer, accommodatieId);
 
+
             banen = beheerModel.ClubCloud_Banen.Where(b => b.AccommodatieId.Value == accommodatieId).ToList();
 
             if (banen == null || banen.Count == 0 || banen.Count != accommodatie.BanenAantal || refresh)
@@ -5471,6 +5504,7 @@
                                         if (entity.sgt_accommodatieid != null)
                                         {
                                             accommodatie = GetAccommodatieById(bondsnummer, entity.sgt_accommodatieid.Value, false, settings);
+                                            
                                             if (accommodatie != null)
                                                 baan.ClubCloud_Accommodatie = accommodatie;
                                             baan.AccommodatieId = entity.sgt_accommodatieid.Value;
@@ -9226,6 +9260,102 @@
 
         #endregion
 
+        #region Package
+
+        public List<ApplicationInfo> GetApplications()
+        {
+            return storeModel.ApplicationInfoes.Where(a => a.Status == ApplicationStatus.Published).ToList();
+        }
+
+        public ApplicationInfo GetApplicationInfoByName(string applicationName)
+        {
+            return storeModel.ApplicationInfoes.Where(a => a.ApplicationName == applicationName).FirstOrDefault();
+        }
+
+        public ApplicationInfo SetApplicationInfo(ApplicationInfo applicationInfo)
+        {
+            ApplicationInfo _applicationInfo = storeModel.ApplicationInfoes.Find(applicationInfo.Id);
+
+            if (_applicationInfo != null)
+            {
+                storeModel.Entry(_applicationInfo).CurrentValues.SetValues(applicationInfo);
+            }
+            else
+            {
+                _applicationInfo = storeModel.ApplicationInfoes.Add(applicationInfo);
+
+            }
+            storeModel.SaveChanges();
+            storeModel.ObjectContext.Refresh(RefreshMode.StoreWins, _applicationInfo);
+
+            return _applicationInfo;
+        }
+
+        public ApplicationVersion SetApplicationVersion(int applicationInfoId, ApplicationVersion applicationVersion)
+        {
+            ApplicationInfo _applicationInfo = storeModel.ApplicationInfoes.Find(applicationInfoId);
+            ApplicationVersion _applicationVersion = storeModel.ApplicationVersions.Where(v => v.ApplicationInfoId == applicationInfoId && v.Version == applicationVersion.Version).FirstOrDefault();
+            if (_applicationInfo != null)
+            {
+                if (_applicationVersion != null)
+                {
+                    applicationVersion.Id = _applicationVersion.Id;
+                    applicationVersion.ApplicationInfo = _applicationInfo;
+                    storeModel.Entry(_applicationVersion).CurrentValues.SetValues(applicationVersion);
+                }
+                else
+                {
+                    applicationVersion.ApplicationInfo = _applicationInfo;
+                    _applicationVersion = storeModel.ApplicationVersions.Add(applicationVersion);
+                }
+                storeModel.SaveChanges();
+                storeModel.ObjectContext.Refresh(RefreshMode.StoreWins, _applicationVersion);
+            }
+
+            return _applicationVersion;
+        }
+
+        public ApplicationProcessorArchitecture SetApplicationProcessorArchitecture(int applicationVersionId, ApplicationProcessorArchitecture applicationProcessorArchitecture)
+        {
+            ApplicationVersion _applicationVersion = storeModel.ApplicationVersions.Find(applicationVersionId);
+            ApplicationProcessorArchitecture _applicationProcessorArchitecture = storeModel.ApplicationProcessorArchitectures.Where(a => a.ApplicationVersionId == applicationVersionId && a.Version == applicationProcessorArchitecture.Version).FirstOrDefault();
+
+            if (_applicationVersion != null)
+            {
+                if (_applicationProcessorArchitecture != null)
+                {
+                    applicationProcessorArchitecture.Id = _applicationProcessorArchitecture.Id;
+                    applicationProcessorArchitecture.ApplicationVersion = _applicationVersion;
+                    storeModel.Entry(_applicationProcessorArchitecture).CurrentValues.SetValues(applicationProcessorArchitecture);
+                }
+                else
+                {
+                    applicationProcessorArchitecture.ApplicationVersion = _applicationVersion;
+                    _applicationProcessorArchitecture = storeModel.ApplicationProcessorArchitectures.Add(applicationProcessorArchitecture);
+                }
+                storeModel.SaveChanges();
+                storeModel.ObjectContext.Refresh(RefreshMode.StoreWins, _applicationProcessorArchitecture);
+            }
+            return _applicationProcessorArchitecture;
+        }
+
+        public List<ApplicationInfo> GetApplicationInfos()
+        {
+            return storeModel.ApplicationInfoes.Where(a => a.Status == ApplicationStatus.Published).ToList();
+        }
+
+        public ApplicationVersion GetApplicationVersion(int applicationInfoId, string version)
+        {
+            return storeModel.ApplicationVersions.Where(v => v.ApplicationInfoId == applicationInfoId && v.Version == version).FirstOrDefault();
+        }
+
+        public List<ApplicationProcessorArchitecture> GetApplicationProcessorArchitecture(int applicationVersionId, string version)
+        {
+            return storeModel.ApplicationProcessorArchitectures.Where(a => a.ApplicationVersionId == applicationVersionId && a.Version == version).ToList();
+        }
+
+        #endregion
+
         #region Aanmelden
         public bool CreateClubCloudWebSite(string verenigingsnummer)
         {
@@ -9403,6 +9533,8 @@
 
             return succeed;
         }
+        
         #endregion
+
     }
 }

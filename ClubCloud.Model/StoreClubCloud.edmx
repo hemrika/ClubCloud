@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ClubCloudStore.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ClubCloudStoreStoreContainer">
+    <EntitySet Name="ApplicationInfoes" EntityType="ClubCloudStore.Store.ApplicationInfoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ApplicationProcessorArchitectures" EntityType="ClubCloudStore.Store.ApplicationProcessorArchitectures" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ApplicationVersions" EntityType="ClubCloudStore.Store.ApplicationVersions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ApplicationOperationRecords" EntityType="ClubCloudStore.Store.ApplicationOperationRecords" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ApplicationVersion_ApplicationInfo" Association="ClubCloudStore.Store.ApplicationVersion_ApplicationInfo">
+      <End Role="ApplicationInfo" EntitySet="ApplicationInfoes" />
+      <End Role="ApplicationVersion" EntitySet="ApplicationVersions" />
+    </AssociationSet>
+    <AssociationSet Name="ApplicationOperationRecord_ApplicationInfo" Association="ClubCloudStore.Store.ApplicationOperationRecord_ApplicationInfo">
+      <End Role="ApplicationInfo" EntitySet="ApplicationInfoes" />
+      <End Role="AppOperationRecord" EntitySet="ApplicationOperationRecords" />
+    </AssociationSet>
+    <AssociationSet Name="ApplicationProcessorArchitectures_ApplicationVersion" Association="ClubCloudStore.Store.ApplicationProcessorArchitecture_AppVersionInfo">
+      <End Role="ApplicationVersionInfo" EntitySet="ApplicationVersions" />
+      <End Role="ApplicationProcessorArchitecture" EntitySet="ApplicationProcessorArchitectures" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ApplicationInfoes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="MajorVersion" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="OperationDate" Type="datetime" Nullable="false" />
+    <Property Name="IsHidden" Type="bit" Nullable="false" />
+    <Property Name="IsValid" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ApplicationProcessorArchitectures">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicationVersionId" Type="int" Nullable="false" />
+    <Property Name="Version" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="ProcessorArchitecture" Type="int" Nullable="false" />
+    <Property Name="Package" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Certificate" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Symbols" Type="varbinary(max)" Nullable="false" />
+    <Property Name="UploadDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ApplicationVersions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicationInfoId" Type="int" Nullable="false" />
+    <Property Name="IdentityName" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="Version" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="Publisher" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="DisplayName" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="PublisherDisplayName" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ProtocolUrl" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="OperationDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ApplicationOperationRecords">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="OperationType" Type="int" Nullable="false" />
+    <Property Name="ApplicationInfoId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ApplicationVersion_ApplicationInfo">
+    <End Role="ApplicationInfo" Type="ClubCloudStore.Store.ApplicationInfoes" Multiplicity="1" />
+    <End Role="ApplicationVersion" Type="ClubCloudStore.Store.ApplicationVersions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ApplicationVersion">
+        <PropertyRef Name="ApplicationInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ApplicationOperationRecord_ApplicationInfo">
+    <End Role="ApplicationInfo" Type="ClubCloudStore.Store.ApplicationInfoes" Multiplicity="1" />
+    <End Role="AppOperationRecord" Type="ClubCloudStore.Store.ApplicationOperationRecords" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AppOperationRecord">
+        <PropertyRef Name="ApplicationInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ApplicationProcessorArchitecture_AppVersionInfo">
+    <End Role="ApplicationVersionInfo" Type="ClubCloudStore.Store.ApplicationVersions" Multiplicity="1" />
+    <End Role="ApplicationProcessorArchitecture" Type="ClubCloudStore.Store.ApplicationProcessorArchitectures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationVersionInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ApplicationProcessorArchitecture">
+        <PropertyRef Name="ApplicationVersionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClubCloudStore" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StoreContainer" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="ApplicationInfoes" EntityType="ClubCloudStore.ApplicationInfo" />
+          <EntitySet Name="ApplicationProcessorArchitectures" EntityType="ClubCloudStore.ApplicationProcessorArchitecture" />
+          <EntitySet Name="ApplicationVersions" EntityType="ClubCloudStore.ApplicationVersion" />
+          <EntitySet Name="ApplicationOperationRecords" EntityType="ClubCloudStore.ApplicationOperationRecord" />
+          <AssociationSet Name="ApplicationVersion_ApplicationInfo" Association="ClubCloudStore.ApplicationVersion_ApplicationInfo">
+            <End Role="ApplicationInfo" EntitySet="ApplicationInfoes" />
+            <End Role="ApplicationVersion" EntitySet="ApplicationVersions" />
+          </AssociationSet>
+          <AssociationSet Name="ApplicationOperationRecord_ApplicationInfo" Association="ClubCloudStore.ApplicationOperationRecord_ApplicationInfo">
+            <End Role="ApplicationInfo" EntitySet="ApplicationInfoes" />
+            <End Role="AppOperationRecord" EntitySet="ApplicationOperationRecords" />
+          </AssociationSet>
+          <AssociationSet Name="ApplicationProcessorArchitectures_ApplicationVersion" Association="ClubCloudStore.ApplicationProcessorArchitecture_AppVersionInfo">
+            <End Role="ApplicationVersionInfo" EntitySet="ApplicationVersions" />
+            <End Role="ApplicationProcessorArchitecture" EntitySet="ApplicationProcessorArchitectures" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ApplicationInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MajorVersion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="ClubCloudStore.ApplicationStatus" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OperationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsHidden" Type="Boolean" Nullable="false" />
+          <Property Name="IsValid" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ApplicationVersions" Relationship="ClubCloudStore.ApplicationVersion_ApplicationInfo" FromRole="ApplicationInfo" ToRole="ApplicationVersion" />
+          <NavigationProperty Name="ApplicationOperationRecords" Relationship="ClubCloudStore.ApplicationOperationRecord_ApplicationInfo" FromRole="ApplicationInfo" ToRole="AppOperationRecord" />
+        </EntityType>
+        <EntityType Name="ApplicationProcessorArchitecture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationVersionId" Type="Int32" Nullable="false" />
+          <Property Name="Version" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessorArchitecture" Type="ClubCloudStore.ProcessorArchitecture" Nullable="false" />
+          <Property Name="Package" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Certificate" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Symbols" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ApplicationVersion" Relationship="ClubCloudStore.ApplicationProcessorArchitecture_AppVersionInfo" FromRole="ApplicationProcessorArchitecture" ToRole="ApplicationVersionInfo" />
+        </EntityType>
+        <EntityType Name="ApplicationVersion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationInfoId" Type="Int32" Nullable="false" />
+          <Property Name="IdentityName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Publisher" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PublisherDisplayName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProtocolUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OperationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ApplicationInfo" Relationship="ClubCloudStore.ApplicationVersion_ApplicationInfo" FromRole="ApplicationVersion" ToRole="ApplicationInfo" />
+          <NavigationProperty Name="ApplicationProcessorArchitectures" Relationship="ClubCloudStore.ApplicationProcessorArchitecture_AppVersionInfo" FromRole="ApplicationVersionInfo" ToRole="ApplicationProcessorArchitecture" />
+        </EntityType>
+        <EntityType Name="ApplicationOperationRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OperationType" Type="ClubCloudStore.ApplicationOperationType" Nullable="false" />
+          <Property Name="ApplicationInfoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ApplicationInfo" Relationship="ClubCloudStore.ApplicationOperationRecord_ApplicationInfo" FromRole="AppOperationRecord" ToRole="ApplicationInfo" />
+        </EntityType>
+        <Association Name="ApplicationVersion_ApplicationInfo">
+          <End Type="ClubCloudStore.ApplicationInfo" Role="ApplicationInfo" Multiplicity="1" />
+          <End Type="ClubCloudStore.ApplicationVersion" Role="ApplicationVersion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApplicationVersion">
+              <PropertyRef Name="ApplicationInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ApplicationOperationRecord_ApplicationInfo">
+          <End Type="ClubCloudStore.ApplicationInfo" Role="ApplicationInfo" Multiplicity="1" />
+          <End Type="ClubCloudStore.ApplicationOperationRecord" Role="AppOperationRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppOperationRecord">
+              <PropertyRef Name="ApplicationInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ApplicationProcessorArchitecture_AppVersionInfo">
+          <End Type="ClubCloudStore.ApplicationVersion" Role="ApplicationVersionInfo" Multiplicity="1" />
+          <End Type="ClubCloudStore.ApplicationProcessorArchitecture" Role="ApplicationProcessorArchitecture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationVersionInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApplicationProcessorArchitecture">
+              <PropertyRef Name="ApplicationVersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="ApplicationOperationType" IsFlags="true">
+          <Member Name="NA" Value="-1" />
+          <Member Name="Install" Value="1" />
+          <Member Name="Update" Value="2" />
+          <Member Name="Uninstall" Value="3" />
+          <Member Name="RequestToInstall" Value="4" />
+          <Member Name="RequestToUninstall" Value="5" />
+        </EnumType>
+        <EnumType Name="ProcessorArchitecture" IsFlags="true">
+          <Member Name="x86" Value="0" />
+          <Member Name="x64" Value="9" />
+          <Member Name="ARM" Value="4" />
+          <Member Name="Neutual" Value="11" />
+          <Member Name="Unknown" Value="65535" />
+        </EnumType>
+        <EnumType Name="ApplicationStatus" IsFlags="true">
+          <Member Name="NA" Value="0" />
+          <Member Name="NotSubmitted" Value="1" />
+          <Member Name="EmptyDescription" Value="2" />
+          <Member Name="NotPublished" Value="3" />
+          <Member Name="Published" Value="4" />
+          <Member Name="PublicStoreApp" Value="5" />
+        </EnumType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ClubCloudStoreStoreContainer" CdmEntityContainer="StoreContainer">
+    <EntitySetMapping Name="ApplicationInfoes">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudStore.ApplicationInfo)">
+        <MappingFragment StoreEntitySet="ApplicationInfoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+          <ScalarProperty Name="MajorVersion" ColumnName="MajorVersion" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+          <ScalarProperty Name="IsHidden" ColumnName="IsHidden" />
+          <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationProcessorArchitectures">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudStore.ApplicationProcessorArchitecture)">
+        <MappingFragment StoreEntitySet="ApplicationProcessorArchitectures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ApplicationVersionId" ColumnName="ApplicationVersionId" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="ProcessorArchitecture" ColumnName="ProcessorArchitecture" />
+          <ScalarProperty Name="Package" ColumnName="Package" />
+          <ScalarProperty Name="Certificate" ColumnName="Certificate" />
+          <ScalarProperty Name="Symbols" ColumnName="Symbols" />
+          <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationVersions">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudStore.ApplicationVersion)">
+        <MappingFragment StoreEntitySet="ApplicationVersions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ApplicationInfoId" ColumnName="ApplicationInfoId" />
+          <ScalarProperty Name="IdentityName" ColumnName="IdentityName" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="PublisherDisplayName" ColumnName="PublisherDisplayName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProtocolUrl" ColumnName="ProtocolUrl" />
+          <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationOperationRecords">
+      <EntityTypeMapping TypeName="IsTypeOf(ClubCloudStore.ApplicationOperationRecord)">
+        <MappingFragment StoreEntitySet="ApplicationOperationRecords">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="OperationType" ColumnName="OperationType" />
+          <ScalarProperty Name="ApplicationInfoId" ColumnName="ApplicationInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

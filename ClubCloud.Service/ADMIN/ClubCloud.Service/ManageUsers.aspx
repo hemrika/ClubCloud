@@ -67,7 +67,7 @@
                                 <asp:BoundField HeaderStyle-CssClass="ms-vh2-nofilter ms-vh2-gridview" ItemStyle-CssClass="ms-vb2" HeaderText="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ManageServiceApplicationNameHeaderText %>" DataField="Actief" />
                                 <asp:TemplateField HeaderStyle-CssClass="ms-vh2-nofilter ms-vh2-gridview" ItemStyle-CssClass="ms-vb2" HeaderText="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ManageServiceApplicationManageHeaderText %>">
                                     <ItemTemplate>
-                                        <asp:HyperLink runat="Server" NavigateUrl='<%# Eval("Id", "/_admin/ClubCloud.Service/ManageApplication.aspx?id={0}") %>' Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ManageServiceApplicationManageHeaderText %>"></asp:HyperLink>
+                                        <asp:HyperLink runat="Server" NavigateUrl='<%# Eval("Id", "/_admin/ClubCloud.Service/ManageUser.aspx?id={0}") %>' Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ManageServiceApplicationManageHeaderText %>"></asp:HyperLink>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

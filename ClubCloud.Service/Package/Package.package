@@ -5,6 +5,7 @@
     <customAssembly location="EntityFramework.SqlServer.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\EntityFramework.SqlServer.dll" />
     <projectOutputAssembly location="ClubCloud.KNLTB.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.KNLTB\ClubCloud.KNLTB.csproj" />
     <projectOutputAssembly location="ClubCloud.Model.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.Model\ClubCloud.Model.csproj" />
+    <projectOutputAssembly location="ClubCloud.Store.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.Store\ClubCloud.Store.csproj" />
   </assemblies>
   <features>
     <featureReference itemId="95303089-9602-4186-a353-cb5f1405a9ac" />

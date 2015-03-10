@@ -109,6 +109,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="CONFIG\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{001b9938-8d5c-4053-b534-17f81fd89211}</SharePointProjectItemId>
     </None>

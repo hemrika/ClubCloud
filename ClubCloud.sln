@@ -69,6 +69,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Mijn", "ClubCloud.Mijn\ClubCloud.Mijn.csproj", "{718DE400-472A-4F4D-A91C-3C6C9503D365}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Service", "ClubCloud.Service\ClubCloud.Service.csproj", "{BC7CCE39-F470-4156-B67A-8A145841F43B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B5DA647E-5434-42F2-9C11-CAF0E4C594A9} = {B5DA647E-5434-42F2-9C11-CAF0E4C594A9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.SignalR", "ClubCloud.SignalR\ClubCloud.SignalR.csproj", "{F2138894-1B9E-4EE4-954B-2414A1C74051}"
 EndProject
@@ -124,9 +127,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.KNLTB", "ClubClou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Model", "ClubCloud.Model\ClubCloud.Model.csproj", "{97CB96D6-3B6B-4879-A961-9166A73C7614}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Store", "ClubCloud.Store\ClubCloud.Store.csproj", "{B5DA647E-5434-42F2-9C11-CAF0E4C594A9}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 16
+		SccNumberOfProjects = 17
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://hemrika.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -175,6 +180,9 @@ Global
 		SccProjectUniqueName15 = ClubCloud.Model\\ClubCloud.Model.csproj
 		SccProjectName15 = ClubCloud.Model
 		SccLocalPath15 = ClubCloud.Model
+		SccProjectUniqueName16 = ClubCloud.Store\\ClubCloud.Store.csproj
+		SccProjectName16 = ClubCloud.Store
+		SccLocalPath16 = ClubCloud.Store
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -259,6 +267,10 @@ Global
 		{97CB96D6-3B6B-4879-A961-9166A73C7614}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97CB96D6-3B6B-4879-A961-9166A73C7614}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97CB96D6-3B6B-4879-A961-9166A73C7614}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5DA647E-5434-42F2-9C11-CAF0E4C594A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5DA647E-5434-42F2-9C11-CAF0E4C594A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5DA647E-5434-42F2-9C11-CAF0E4C594A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5DA647E-5434-42F2-9C11-CAF0E4C594A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

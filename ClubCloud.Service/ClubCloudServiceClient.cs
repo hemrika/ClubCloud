@@ -1396,5 +1396,122 @@ namespace ClubCloud.Service
         */
         #endregion
 
+        #region Packages
+        public  List<ApplicationInfo> GetApplications()
+        {
+            List<ApplicationInfo> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetApplications();
+                },
+                false);
+
+            return response;
+        }
+
+
+        public ApplicationInfo GetApplicationInfoByName(string applicationName)
+        {
+            ApplicationInfo response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetApplicationInfoByName(applicationName);
+                },
+                false);
+
+            return response;
+        }
+
+        internal ApplicationInfo SetApplicationInfo(ApplicationInfo applicationInfo)
+        {
+            ApplicationInfo response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetApplicationInfo(applicationInfo);
+                },
+                false);
+
+            return response;
+
+        }
+
+        internal ApplicationVersion SetApplicationVersion(int applicationInfoId, ApplicationVersion applicationVersion)
+        {
+            ApplicationVersion response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetApplicationVersion(applicationInfoId, applicationVersion);
+                },
+                false);
+
+            return response;
+
+        }
+
+        internal ApplicationProcessorArchitecture SetApplicationProcessorArchitecture(int applicationVersionId, ApplicationProcessorArchitecture applicationProcessorArchitecture)
+        {
+            ApplicationProcessorArchitecture response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetApplicationProcessorArchitecture(applicationVersionId, applicationProcessorArchitecture);
+                },
+                false);
+
+            return response;
+        }
+
+        internal List<ApplicationInfo> GetApplicationInfos()
+        {
+            List<ApplicationInfo> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetApplicationInfos();
+                },
+                false);
+
+            return response;
+        }
+
+        internal ApplicationVersion GetApplicationVersion(int applicationInfoId, string version)
+        {
+            ApplicationVersion response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetApplicationVersion(applicationInfoId, version);
+                },
+                false);
+
+            return response;
+        }
+
+        internal List<ApplicationProcessorArchitecture> GetApplicationProcessorArchitecture(int applicationVersionId, string version)
+        {
+            List<ApplicationProcessorArchitecture> response = null;
+
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetApplicationProcessorArchitecture(applicationVersionId, version);
+                },
+                false);
+
+            return response;
+        }
+
+        #endregion
     }
 }

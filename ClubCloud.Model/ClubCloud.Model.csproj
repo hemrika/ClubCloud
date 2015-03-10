@@ -42,14 +42,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\EntityFramework.dll</HintPath>
       <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Common\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -57,6 +55,7 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,6 +63,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationInfo.cs">
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationOperationRecord.cs">
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationOperationType.cs">
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationProcessorArchitecture.cs">
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationStatus.cs">
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationVersion.cs">
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="BaanSoort.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
@@ -89,10 +106,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ProcessorArchitecture.cs">
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreConfiguration.cs" />
     <Compile Include="BeheerConfiguration.cs" />
     <Compile Include="BeheerEncryption.cs" />
     <Compile Include="BeheerFullTextInterceptor.cs" />
     <Compile Include="BeheerInitializer.cs" />
+    <Compile Include="BeheerTransaction.cs" />
     <Compile Include="BoekhoudingClubCloud.Context.cs">
       <DependentUpon>BoekhoudingClubCloud.Context.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -201,7 +223,6 @@
     <Compile Include="Days.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbContextExtensions.cs" />
     <Compile Include="DirectionType.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
     </Compile>
@@ -298,6 +319,22 @@
     </Compile>
     <Compile Include="SignalRConfiguration.cs" />
     <Compile Include="SignalRInitializer.cs" />
+    <Compile Include="StoreClubCloud.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreClubCloud.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreClubCloud.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreClubCloud.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreClubCloud.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="StoreInitializer.cs" />
     <Compile Include="Tax.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
     </Compile>
@@ -356,6 +393,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SignalRClubCloud.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="packages.config" />
     <None Include="SignalRClubCloud.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
@@ -369,11 +407,29 @@
       <DependentUpon>SignalRClubCloud.edmx</DependentUpon>
       <LastGenOutput>SignalRClubCloud.cs</LastGenOutput>
     </None>
+    <EntityDeploy Include="StoreClubCloud.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StoreClubCloud.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="StoreClubCloud.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>StoreClubCloud.Context.cs</LastGenOutput>
+      <DependentUpon>StoreClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="StoreClubCloud.edmx.diagram">
+      <DependentUpon>StoreClubCloud.edmx</DependentUpon>
+    </None>
+    <None Include="StoreClubCloud.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StoreClubCloud.edmx</DependentUpon>
+      <LastGenOutput>StoreClubCloud.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BeheerClubCloud.edmx.sql" />
     <Content Include="BoekhoudingClubCloud.edmx.sql" />
     <Content Include="SignalRClubCloud.edmx.sql" />
+    <Content Include="StoreClubCloud.edmx.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
