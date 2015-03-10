@@ -58,9 +58,9 @@
                 </wssuc:InputFormControl>
             </template_inputformcontrols>
             </wssuc:InputFormSection>
-            <wssuc:InputFormSection Title="<%$Resources:Hemrika.SharePresence.Administration.AppResources,UploadSolution_Title%>" runat="server">
+            <wssuc:InputFormSection Title="Store Package Uploader" runat="server">
                 <template_description>
-		  <SharePoint:EncodedLiteral ID="EncodedLiteral2" runat="server" text="<%$Resources:Hemrika.SharePresence.Administration.AppResources,UploadSolution_Description%>" EncodeMethod="HtmlEncode"/>
+		  <SharePoint:EncodedLiteral ID="EncodedLiteral2" runat="server" text="Upload een zip met de appx, cer en appxsym bestanden" EncodeMethod="HtmlEncode"/>
 		</template_description>
             <template_inputformcontrols>
 		  <wssuc:InputFormControl runat="server">
@@ -68,7 +68,7 @@
 			  <table border="0" cellspacing="1">
 				<tr>
 				  <td class="ms-authoringcontrols" colspan="2" nowrap="nowrap">
-					<SharePoint:EncodedLiteral ID="lbl_instruction" runat="server" text="<%$Resources:Hemrika.SharePresence.Administration.AppResources,UploadSolution_Instruction%>" EncodeMethod="HtmlEncode"/>:
+					<SharePoint:EncodedLiteral ID="lbl_instruction" runat="server" text="Selecteer een zip voor inladen." EncodeMethod="HtmlEncode"/>:
 					<font size="3">&#160;</font><br />
 				  </td>
 				</tr>

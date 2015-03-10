@@ -42,9 +42,11 @@ namespace ClubCloud.Service
         /// The current service application proxy.
         /// </summary>
         private ClubCloudServiceApplicationProxy currentProxy;
+        
+        
 
         #endregion
-
+        
         #region Constructors
 
         /// <summary>
@@ -151,12 +153,18 @@ namespace ClubCloud.Service
 
             using (new SPMonitoredScope(string.Format(CultureInfo.InvariantCulture, "{0} - {1}", this.EndPoint, codeToExecute.Method.Name)))
             {
+                SPDiagnosticsService diagSvc = SPDiagnosticsService.Local;
+
                 SPServiceLoadBalancer loadBalancer = this.Proxy.LoadBalancer;
 
                 if (loadBalancer == null)
                 {
+                    diagSvc.WriteTrace(0, new SPDiagnosticsCategory("ClubCloud Service", TraceSeverity.Monitorable, EventSeverity.Error), TraceSeverity.Monitorable,
+                        "SPServiceLoadBalancerStatus.Failed:  {0}", new object[] { "No Load Balancer was available." });
+
                     throw new InvalidOperationException("No Load Balancer was available.");
                 }
+
 
                 SPServiceLoadBalancerContext loadBalancerContext = loadBalancer.BeginOperation();
                 try
@@ -178,19 +186,28 @@ namespace ClubCloud.Service
                         }
                     }
                 }
-                catch (TimeoutException)
+                catch (TimeoutException ex)
                 {
                     loadBalancerContext.Status = SPServiceLoadBalancerStatus.Failed;
+
+                    diagSvc.WriteTrace(0, new SPDiagnosticsCategory("ClubCloud Service", TraceSeverity.Monitorable, EventSeverity.Error), TraceSeverity.Monitorable,
+                        "SPServiceLoadBalancerStatus.Failed:  {0}", new object[] { ex.Message });
                     throw;
                 }
-                catch (EndpointNotFoundException)
+                catch (EndpointNotFoundException enfex)
                 {
                     loadBalancerContext.Status = SPServiceLoadBalancerStatus.Failed;
+                    diagSvc.WriteTrace(0, new SPDiagnosticsCategory("ClubCloud Service", TraceSeverity.Monitorable, EventSeverity.Error), TraceSeverity.Monitorable,
+                        "SPServiceLoadBalancerStatus.Failed:  {0}", new object[] { enfex.Message });
+
                     throw;
                 }
-                catch (ServerTooBusyException)
+                catch (ServerTooBusyException stbex)
                 {
                     loadBalancerContext.Status = SPServiceLoadBalancerStatus.Failed;
+                    diagSvc.WriteTrace(0, new SPDiagnosticsCategory("ClubCloud Service", TraceSeverity.Monitorable, EventSeverity.Error), TraceSeverity.Monitorable,
+                        "SPServiceLoadBalancerStatus.Failed:  {0}", new object[] { stbex.Message });
+
                     throw;
                 }
                 catch (CommunicationException exception)
@@ -199,6 +216,9 @@ namespace ClubCloud.Service
                     {
                         loadBalancerContext.Status = SPServiceLoadBalancerStatus.Failed;
                     }
+
+                    diagSvc.WriteTrace(0, new SPDiagnosticsCategory("ClubCloud Service", TraceSeverity.Monitorable, EventSeverity.Error), TraceSeverity.Monitorable,
+                        "SPServiceLoadBalancerStatus.Failed:  {0}", new object[] { exception.Message });
 
                     throw;
                 }
