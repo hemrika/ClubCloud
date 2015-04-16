@@ -1,0 +1,1294 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ include file="EF6.Utility.CS.ttinclude"#>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+
+
+<#
+const string inputFile = @"C:\Source\ClubCloud\ClubCloud.Model\BeheerClubCloud.edmx";
+var textTransform = DynamicTextTransformation.Create(this);
+var code = new CodeGenerationTools(this);
+var ef = new MetadataTools(this);
+var typeMapper = new TypeMapper(code, ef, textTransform.Errors);
+var	fileManager = EntityFrameworkTemplateFileManager.Create(this);
+var itemCollection = new EdmMetadataLoader(textTransform.Host, textTransform.Errors).CreateEdmItemCollection(inputFile);
+var codeStringGenerator = new CodeStringGenerator(code, typeMapper, ef);
+var container = itemCollection.OfType<EntityContainer>().FirstOrDefault();
+if (!typeMapper.VerifyCaseInsensitiveTypeUniqueness(typeMapper.GetAllGlobalItems(itemCollection), inputFile))
+{
+    return string.Empty;
+}
+
+BeginNamespace(code);
+#>
+using ClubCloud.Model;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Validation;
+
+internal partial class ClubCloudApplicationService
+{	
+	internal static ClubCloud.Model.BeheerContainer _beheerModel = null;
+
+	public static ClubCloud.Model.BeheerContainer beheerModel
+	{
+		get
+		{
+			if (_beheerModel == null)
+			{
+					
+				_beheerModel = new BeheerContainer(GetConnectionString());
+                _beheerModel.Database.Connection.StateChange += BeheerModel_Connection_StateChange;
+                _beheerModel.Database.Connection.Disposed += BeheerModel_Connection_Disposed;
+                _beheerModel.ObjectContext.SavingChanges += BeheerModel_ObjectContext_SavingChanges;
+				//_beheerModel.ObjectContext.ObjectMaterialized += BeheerModel_ObjectContext_ObjectMaterialized;
+			}
+
+            return _beheerModel;
+		}
+        private set { _beheerModel = value; }
+	}
+
+    static void BeheerModel_ObjectContext_ObjectMaterialized(object sender, ObjectMaterializedEventArgs e)
+	{
+	}
+
+    static void BeheerModel_Connection_Disposed(object sender, EventArgs e)
+	{
+	}
+
+    static void BeheerModel_Connection_StateChange(object sender, System.Data.StateChangeEventArgs e)
+	{
+		if(e.CurrentState == System.Data.ConnectionState.Broken)
+		{
+			_beheerModel.Database.Connection.Close();
+		}
+
+		if(e.CurrentState == System.Data.ConnectionState.Closed)
+		{
+			_beheerModel.Database.Connection.Open();
+		}
+	}
+
+    static void BeheerModel_ObjectContext_SavingChanges(object sender, EventArgs e)
+	{
+		IEnumerable<DbEntityValidationResult> errors = _beheerModel.GetValidationErrors();
+
+		foreach (DbEntityValidationResult error in errors)
+		{
+			error.Entry.State = EntityState.Detached;
+		}
+	}
+}
+
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<#
+foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
+{
+	var EntitySetName = entitySet.Name.Split('_').Last();
+	var entity = entitySet.ElementType;
+	var EntityName = entity.Name.Split('_').Last();
+	var entityKey = entity.KeyMembers.FirstOrDefault();
+	fileManager.StartNewFile("ClubCloudApplicationService_"+EntityName + ".cs");
+	BeginNamespace(code);
+#>
+using ClubCloud.Model;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+
+internal partial class ClubCloudApplicationService
+{
+<#
+	foreach(EdmMember keyMember in entity.KeyMembers)
+    {
+		if(typeMapper.GetTypeName(keyMember.TypeUsage) == "System.DateTime") continue;
+#>
+	public <#=code.Escape(entity)#> Get<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(<#=code.Escape(keyMember.TypeUsage)#> <#=code.Escape(keyMember.Name)#> , bool refresh = false, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		<#=code.Escape(entity)#> result = null;
+
+		try
+		{			
+			result = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
+		
+			if (result == null || refresh)
+				result = Get<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
+
+			if (result != null)
+				return result;
+
+			return new <#=code.Escape(entity)#>();
+        }
+        finally
+        {
+			if(result != null)
+				beheerModel.ObjectContext.Detach(result);
+        }
+
+	}
+<#
+    }
+#>
+
+	public List<<#=code.Escape(entity)#>> Get<#=code.Escape(EntitySetName)#>(bool refresh = false, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		List<<#=code.Escape(entity)#>> result = null;
+		
+		try
+		{
+			result = beheerModel.<#=code.Escape(entitySet)#>.ToList<<#=code.Escape(entity)#>>();
+		
+			if (result == null || result.Count == 0 || refresh)		
+				result = Get<#=code.Escape(EntitySetName)#>(settings.Id.ToString(), refresh, settings);
+
+			if(result != null)
+				return result;
+
+			return new List<<#=code.Escape(entity)#>>();
+        }
+        finally
+        {
+			if(result != null)
+			{
+				foreach (object item in result)
+				{
+					if(item != null)
+						beheerModel.ObjectContext.Detach(item);
+				}
+			}
+        }
+
+	}
+
+	public <#=code.Escape(entity)#> Set<#=code.Escape(EntityName)#>(<#=code.Escape(entity)#> entity, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		<#=code.Escape(entity)#> tobeupdated = null;
+		
+		try
+		{
+			entity = Set<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, settings);
+
+			beheerModel.<#=code.Escape(entitySet)#>.AddOrUpdate(entity);
+		
+			beheerModel.SaveChanges();
+
+			tobeupdated = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);
+			return tobeupdated;
+        }
+        finally
+        {
+			if(tobeupdated != null)
+				beheerModel.ObjectContext.Detach(tobeupdated);
+        }
+
+	}
+
+<#
+	foreach(EdmMember keyMember in entity.KeyMembers)
+    {
+		if(typeMapper.GetTypeName(keyMember.TypeUsage) == "System.DateTime") continue;
+#>
+
+	public bool Delete<#=code.Escape(EntityName)#>(<#=code.Escape(entity)#> entity, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		return Delete<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(entity.<#=code.Escape(keyMember.Name)#>, settings);
+	}
+
+	public bool Delete<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(<#=code.Escape(keyMember.TypeUsage)#> <#=code.Escape(keyMember.Name)#>, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		<#=code.Escape(entity)#> tobedeleted = null;
+		try
+		{
+
+			tobedeleted = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
+		
+			if (tobedeleted != null)
+			{
+				beheerModel.<#=code.Escape(entitySet)#>.Remove(tobedeleted);
+				beheerModel.SaveChanges();
+			}
+			return true;
+		}
+        finally
+        {
+			if(tobedeleted != null)
+				beheerModel.ObjectContext.Detach(tobedeleted);
+        }
+
+		return false;
+	}
+
+<#
+    }
+#>
+
+	public <#=code.Escape(entity)#>_View Get<#=code.Escape(EntitySetName)#>ByQuery(string bondsnummer, Guid verenigingId,System.Web.UI.DataSourceSelectArguments selectArgs = null, List<System.Web.UI.WebControls.Parameter> parameters = null, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		<#=code.Escape(entity)#>_View view = new <#=code.Escape(entity)#>_View();
+
+		StringBuilder querybuilder = new StringBuilder("SELECT * FROM dbo.<#=code.Escape(entity)#>");
+		List<SqlParameter> sqlparams = new List<SqlParameter>();
+		List<SqlParameter> sqlparamscount = new List<SqlParameter>();
+		string and = " AND ";
+		if (parameters != null && parameters.Count > 0)
+		{
+			querybuilder.Append(" WHERE ");
+
+			foreach (System.Web.UI.WebControls.Parameter parameter in parameters)
+			{
+				querybuilder.Append(parameter.Name + " = @" + parameter.Name + and);
+				Type type = TypeConvertor.ToNetType(parameter.DbType);
+				object value = TypeDescriptor.GetConverter(type).ConvertFrom(parameter.DefaultValue);// typeof(string)));
+
+				sqlparams.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });
+				sqlparamscount.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });
+			}
+
+			querybuilder.Remove(querybuilder.Length - and.Length, and.Length);
+
+		}
+
+		if (!string.IsNullOrWhiteSpace(selectArgs.SortExpression))
+		{
+			querybuilder.Append(" ORDER BY " + selectArgs.SortExpression);
+		}
+
+		view.<#=code.Escape(entity)#> = beheerModel.Database.SqlQuery<<#=code.Escape(entity)#>>(querybuilder.ToString(), sqlparams.ToArray()).Skip(selectArgs.StartRowIndex).Take(selectArgs.MaximumRows).ToList<<#=code.Escape(entity)#>>();
+
+		if (selectArgs.RetrieveTotalRowCount)
+		{
+
+			view.TotalRowCount = beheerModel.Database.SqlQuery<<#=code.Escape(entity)#>>(querybuilder.ToString(), sqlparamscount.ToArray()).Count();
+		}
+		return view;
+	}
+
+	public List<<#=code.Escape(entity)#>> Get<#=code.Escape(EntitySetName)#>BySearch(string prefixText, int count, string contextKey, ClubCloud_Setting _settings = null)
+	{
+		if(_settings != null)
+			ValidateSettings(ref _settings);
+
+        List<string> <#=code.Escape(EntitySetName.ToLower())#> = new List<string>();
+        try
+        {
+            bool enabled = beheerModel.Database.SqlQuery<bool>("SELECT (CAST((FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))AS BIT))").FirstOrDefault();
+
+            List<<#=code.Escape(entity)#>> entities = null;
+
+            if (enabled)
+            {
+                var fts = BeheerFullTextInterceptor.Fts(prefixText);
+				
+<#
+var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.TypeUsage.ToString() == "Edm.String");
+#>
+<#
+	StringBuilder lnq = new StringBuilder("entities = beheerModel."+entitySet+".Where(e => ");
+    
+    if (simpleProperties.Any())
+    {
+		int i = 0;
+		int t = simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String").Count();
+        foreach (var edmProperty in simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String"))
+        {
+			i++;			
+			var or = " || ";
+			if (i == t)
+				or = "";
+
+			lnq.Append("e."+edmProperty+".Contains(fts) "+ or);
+			
+			if (i == t)
+				lnq.Append(").ToList();");
+			
+		}
+#>
+
+			<#=code.Escape(lnq.ToString())#>
+
+<#
+    }
+#>				
+            }
+			else
+			{
+<#
+	StringBuilder lk = new StringBuilder("entities = beheerModel.Database.SqlQuery<"+entity.Name+">(\"SELECT * FROM "+entity.Name+" WHERE ");
+
+    if (simpleProperties.Any())
+    {
+		int i = 0;
+		int t = simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String").Count();
+        foreach (var edmProperty in simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String"))
+        {
+			i++;			
+			var or = " OR ";
+			if (i == t)
+				or = "";
+
+			lk.Append(" "+edmProperty+" LIKE '%\"+ prefixText +\"%'"+ or);
+			
+			if (i == t)
+				lk.Append("\").ToList();");
+			
+		}
+#>
+
+			<#=code.Escape(lk.ToString())#>
+
+<#
+    }
+#>				
+			}
+
+			if (entities != null && entities.Count > 0)
+				return entities;
+        }
+        catch { };
+
+        return new List<<#=code.Escape(entity)#>>();
+	}
+
+<#
+
+	var navigationProperties = typeMapper.GetNavigationProperties(entity);
+
+    if (navigationProperties.Any())
+    {
+		List<string> endnames = new List<string>();
+
+        foreach (var navigationProperty in navigationProperties)
+        {
+			var endEntity = navigationProperty.ToEndMember.GetEntityType();
+			var endEntityName = endEntity.Name.Split('_').Last();
+			if(!endnames.Contains(endEntityName))
+            {
+				endnames.Add(endEntityName);
+
+				if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
+				{
+					var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
+					var endEntitySetName = endEntitySet.Name.Split('_').Last();
+
+					if(EntitySetName == "Reserveringen" || endEntitySetName == "Reserveringen" ) continue;
+
+	#>
+
+	public List<<#=code.Escape(endEntity)#>> Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>(<#=code.Escape(entity)#> entity, bool refresh = false, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		List<<#=code.Escape(endEntity)#>> result = null;
+
+		try
+		{
+			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);
+			if(entity != null && entity.<#=code.Escape(endEntity)#> != null && entity.<#=code.Escape(endEntity)#>.Count == 0)
+				beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
+
+			result = entity.<#=code.Escape(endEntity)#>.ToList();
+
+			if(result == null || result.Count == 0 || refresh)
+				result = Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, refresh, settings);
+
+			if(result != null)
+				return result;
+
+			return new List<<#=code.Escape(endEntity)#>>();
+		}
+	    finally
+	    {
+			if(entity != null)
+				beheerModel.ObjectContext.Detach(entity);
+			if(result != null)
+			{
+				foreach (object item in result)
+				{
+					if(item != null)
+						beheerModel.ObjectContext.Detach(item);
+				}
+			}
+		}	
+
+	}
+
+<#
+	foreach(EdmMember keyMember in entity.KeyMembers)
+    {
+		if(typeMapper.GetTypeName(keyMember.TypeUsage) == "System.DateTime") continue;
+#>
+
+	public List<<#=code.Escape(endEntity)#>> Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(<#=code.Escape(keyMember.TypeUsage)#> <#=code.Escape(keyMember.Name)#>, bool refresh = false, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		<#=code.Escape(entity)#> entity = null;
+		List<<#=code.Escape(endEntity)#>> result = null;
+
+		try
+		{
+			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
+			if(entity != null && entity.<#=code.Escape(endEntity)#> != null && entity.<#=code.Escape(endEntity)#>.Count == 0)
+				beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
+
+			result = entity.<#=code.Escape(endEntity)#>.ToList();
+
+			if(result == null || result.Count == 0 || refresh)
+				result = Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
+
+			if(result != null)
+				return result;
+
+			return new List<<#=code.Escape(endEntity)#>>();
+		}
+	    finally
+	    {
+			if(entity != null)
+				beheerModel.ObjectContext.Detach(entity);
+			if(result != null)
+			{
+				foreach (object item in result)
+				{
+					if(item != null)
+						beheerModel.ObjectContext.Detach(item);
+				}
+			}
+		}	
+	}
+
+	public bool Set<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>(List<<#=code.Escape(endEntity)#>> <#=code.Escape(endEntitySetName)#>, <#=code.Escape(entity)#> entity, bool refresh = false, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		<#=code.Escape(entity)#> result = null;
+
+		try
+		{			
+			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(keyMember.Name)#>);
+		
+			if (entity != null)
+				beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
+				//result = Get<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
+
+			if (result != null)
+				//return result.<#=code.Escape(entitySet)#>.Count == ;
+
+			return false;
+        }
+        finally
+        {
+			if(entity != null)
+				beheerModel.ObjectContext.Detach(entity);
+        }
+		return false;
+	}
+
+<#
+    }
+#>
+
+<#
+				}	
+				else
+				{
+					if(EntityName == "Reservering" || endEntityName == "Reservering" ) continue;
+	#>
+
+	public <#=code.Escape(endEntity)#> Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>(<#=code.Escape(entity)#> entity, bool refresh = false, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		<#=code.Escape(endEntity)#> result = null;
+
+		try
+		{
+			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);
+			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
+				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
+
+			result = entity.<#=code.Escape(endEntity)#>;
+
+			if (result == null || refresh)
+				result = Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, refresh, settings);
+
+			if (result != null)
+				return result;
+
+			return new <#=code.Escape(endEntity)#>();
+		}
+        finally
+        {
+			if(entity != null)
+				beheerModel.ObjectContext.Detach(entity);
+            if(result != null)
+				beheerModel.ObjectContext.Detach(result);
+        }
+
+	}
+
+	public bool Set<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>(<#=code.Escape(endEntity)#> <#=code.Escape(endEntityName)#>, <#=code.Escape(entity)#> entity , bool refresh = false, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		try
+		{		
+			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);	
+
+			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
+				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
+
+			entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
+
+			beheerModel.SaveChanges();
+			return true;
+        }
+        finally
+        {
+			if(entity != null)
+				beheerModel.ObjectContext.Detach(entity);
+        }
+		return false;
+	}
+
+<#
+	foreach(EdmMember keyMember in entity.KeyMembers)
+    {
+		if(typeMapper.GetTypeName(keyMember.TypeUsage) == "System.DateTime") continue;
+#>
+
+	public <#=code.Escape(endEntity)#> Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(<#=code.Escape(keyMember.TypeUsage)#> <#=code.Escape(keyMember.Name)#>, bool refresh = false, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		<#=code.Escape(entity)#> entity = null;
+		<#=code.Escape(endEntity)#> result = null;
+
+		try
+		{
+			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
+			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
+				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
+
+			result = entity.<#=code.Escape(endEntity)#>;
+
+			if (result == null || refresh)
+				result = Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
+
+			if (result != null)
+				return result;
+
+			return new <#=code.Escape(endEntity)#>();
+		}
+        finally
+        {
+			if(entity != null)
+				beheerModel.ObjectContext.Detach(entity);
+            if(result != null)
+				beheerModel.ObjectContext.Detach(result);
+        }
+	}
+
+	public bool Set<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(<#=code.Escape(endEntity)#> <#=code.Escape(endEntityName)#>, <#=code.Escape(keyMember.TypeUsage)#> <#=code.Escape(keyMember.Name)#> , bool refresh = false, ClubCloud_Setting settings = null)
+	{
+		if(settings != null)
+			ValidateSettings(ref settings);
+
+		<#=code.Escape(entity)#> entity = null;
+
+		try
+		{		
+			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);	
+
+			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
+				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
+
+			entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
+
+			beheerModel.SaveChanges();
+			return true;
+        }
+        finally
+        {
+			if(entity != null)
+				beheerModel.ObjectContext.Detach(entity);
+        }
+		return false;
+	}
+<#
+    }
+#>
+
+<#
+				}
+			}
+		}
+	}
+#>
+}
+
+[Serializable]
+[DataContract(IsReference = true)]
+[KnownType(typeof(<#=code.Escape(entity)#>))]
+public partial class <#=code.Escape(entity)#>_View
+{
+	public <#=code.Escape(entity)#>_View()
+	{
+		this.<#=code.Escape(entity)#> = new HashSet<<#=code.Escape(entity)#>>();
+	}
+
+	[DataMember]
+	public int TotalRowCount { get; set; }
+
+	[DataMember]
+	public virtual ICollection<<#=code.Escape(entity)#>> <#=code.Escape(entity)#> { get; set; }
+
+}
+	
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<#
+}
+fileManager.Process();
+#>
+
+<#+
+
+public void WriteHeader(CodeStringGenerator codeStringGenerator, EntityFrameworkTemplateFileManager fileManager)
+{
+    fileManager.StartHeader();
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+// <#=CodeGenerationTools.GetResourceString("Template_GeneratedCodeCommentLine1")#>
+//
+// <#=CodeGenerationTools.GetResourceString("Template_GeneratedCodeCommentLine2")#>
+// <#=CodeGenerationTools.GetResourceString("Template_GeneratedCodeCommentLine3")#>
+// </auto-generated>
+//------------------------------------------------------------------------------
+<#=codeStringGenerator.UsingDirectives(inHeader: true)#>
+<#+
+    fileManager.EndBlock();
+}
+
+public void BeginNamespace(CodeGenerationTools code)
+{
+    var codeNamespace = code.VsNamespaceSuggestion();
+    if (!String.IsNullOrEmpty(codeNamespace))
+    {
+#>
+namespace <#=code.EscapeNamespace(codeNamespace)#>
+{
+<#+
+        PushIndent("    ");
+    }
+}
+
+public void EndNamespace(CodeGenerationTools code)
+{
+    if (!String.IsNullOrEmpty(code.VsNamespaceSuggestion()))
+    {
+        PopIndent();
+#>
+}
+<#+
+    }
+}
+
+public const string TemplateId = "CSharp_DbContext_Types_EF6";
+
+public class CodeStringGenerator
+{
+    private readonly CodeGenerationTools _code;
+    private readonly TypeMapper _typeMapper;
+    private readonly MetadataTools _ef;
+
+    public CodeStringGenerator(CodeGenerationTools code, TypeMapper typeMapper, MetadataTools ef)
+    {
+        ArgumentNotNull(code, "code");
+        ArgumentNotNull(typeMapper, "typeMapper");
+        ArgumentNotNull(ef, "ef");
+
+        _code = code;
+        _typeMapper = typeMapper;
+        _ef = ef;
+    }
+
+	public string PrimaryKey(EntityType entity)
+    {
+		string result = "";
+
+		foreach (EdmProperty keyProperty in entity.KeyMembers)
+		{
+		
+			if(_typeMapper.GetTypeName(keyProperty.TypeUsage) == "System.Guid")
+			{
+				result = string.Format(CultureInfo.InvariantCulture,"entity.{1} = Guid.NewGuid();", _code.Escape(entity),_code.Escape(keyProperty));
+			}
+		}
+
+		return result;
+    }
+
+	public string GetRelatedEntity(NavigationProperty navProp)
+    {
+        var endType = _typeMapper.GetTypeName(navProp.ToEndMember.GetEntityType());
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} {1} {2} {{ {3}get; {4}set; }}",
+            AccessibilityAndVirtual(Accessibility.ForNavigationProperty(navProp)),
+            navProp.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many ? ("ICollection<" + endType + ">") : endType,
+            _code.Escape(navProp),
+            _code.SpaceAfter(Accessibility.ForGetter(navProp)),
+            _code.SpaceAfter(Accessibility.ForSetter(navProp)));
+    }
+
+    public string Property(EdmProperty edmProperty)
+    {
+		return string.Format(
+        CultureInfo.InvariantCulture,        
+        "{0} {1} {2} \r\n" +
+        "\t{{ \r\n" +
+            "\t\t{4}get {{ return {3}; }} \r\n" +
+            "\t\t{5}set {{ SetProperty(ref {3}, value); }} \r\n" + 
+        "\t}}\r\n\r\n"+
+		"\t[IgnoreDataMember]\r\n"+
+		"\tprivate {1} {3};\r\n",
+        Accessibility.ForProperty(edmProperty),
+        _typeMapper.GetTypeName(edmProperty.TypeUsage),
+        _code.Escape(edmProperty),
+        "_" + Char.ToLowerInvariant(_code.Escape(edmProperty)[0]) + _code.Escape(edmProperty).Substring(1),
+        _code.SpaceAfter(Accessibility.ForGetter(edmProperty)),
+        _code.SpaceAfter(Accessibility.ForSetter(edmProperty)));
+        
+//		return string.Format(
+//            CultureInfo.InvariantCulture,
+//            "{0} {1} {2} {{ {3}get; {4}set; }}",
+//            Accessibility.ForProperty(edmProperty),
+//            _typeMapper.GetTypeName(edmProperty.TypeUsage),
+//            _code.Escape(edmProperty),
+//            _code.SpaceAfter(Accessibility.ForGetter(edmProperty)),
+//            _code.SpaceAfter(Accessibility.ForSetter(edmProperty)));
+    }
+
+    public string NavigationProperty(NavigationProperty navProp)
+    {
+        var endType = _typeMapper.GetTypeName(navProp.ToEndMember.GetEntityType());
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} {1} {2} {{ {3}get; {4}set; }}",
+            AccessibilityAndVirtual(Accessibility.ForNavigationProperty(navProp)),
+            navProp.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many ? ("ICollection<" + endType + ">") : endType,
+            _code.Escape(navProp),
+            _code.SpaceAfter(Accessibility.ForGetter(navProp)),
+            _code.SpaceAfter(Accessibility.ForSetter(navProp)));
+    }
+    
+    public string AccessibilityAndVirtual(string accessibility)
+    {
+        return accessibility + (accessibility != "private" ? " virtual" : "");
+    }
+    
+    public string EntityClassOpening(EntityType entity)
+    {
+	    return string.Format(
+        CultureInfo.InvariantCulture,
+        "{0} {1}partial class {2}{3}",
+        Accessibility.ForType(entity),
+        _code.SpaceAfter(_code.AbstractOption(entity)),
+        _code.Escape(entity),
+        _code.StringBefore(" : ", string.IsNullOrEmpty(_typeMapper.GetTypeName(entity.BaseType)) ? "INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo" : _typeMapper.GetTypeName(entity.BaseType)));
+		
+//        return string.Format(
+//            CultureInfo.InvariantCulture,
+//           "{0} {1}partial class {2}{3}",
+//            Accessibility.ForType(entity),
+//            _code.SpaceAfter(_code.AbstractOption(entity)),
+//            _code.Escape(entity),
+//            _code.StringBefore(" : ", _typeMapper.GetTypeName(entity.BaseType)));
+    }
+    
+    public string EnumOpening(SimpleType enumType)
+    {
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} enum {1} : {2}",
+            Accessibility.ForType(enumType),
+            _code.Escape(enumType),
+            _code.Escape(_typeMapper.UnderlyingClrType(enumType)));
+        }
+    
+    public void WriteFunctionParameters(EdmFunction edmFunction, Action<string, string, string, string> writeParameter)
+    {
+        var parameters = FunctionImportParameter.Create(edmFunction.Parameters, _code, _ef);
+        foreach (var parameter in parameters.Where(p => p.NeedsLocalVariable))
+        {
+            var isNotNull = parameter.IsNullableOfT ? parameter.FunctionParameterName + ".HasValue" : parameter.FunctionParameterName + " != null";
+            var notNullInit = "new ObjectParameter(\"" + parameter.EsqlParameterName + "\", " + parameter.FunctionParameterName + ")";
+            var nullInit = "new ObjectParameter(\"" + parameter.EsqlParameterName + "\", typeof(" + TypeMapper.FixNamespaces(parameter.RawClrTypeName) + "))";
+            writeParameter(parameter.LocalVariableName, isNotNull, notNullInit, nullInit);
+        }
+    }
+    
+    public string ComposableFunctionMethod(EdmFunction edmFunction, string modelNamespace)
+    {
+        var parameters = _typeMapper.GetParameters(edmFunction);
+        
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} IQueryable<{1}> {2}({3})",
+            AccessibilityAndVirtual(Accessibility.ForMethod(edmFunction)),
+            _typeMapper.GetTypeName(_typeMapper.GetReturnType(edmFunction), modelNamespace),
+            _code.Escape(edmFunction),
+            string.Join(", ", parameters.Select(p => TypeMapper.FixNamespaces(p.FunctionParameterType) + " " + p.FunctionParameterName).ToArray()));
+    }
+    
+    public string ComposableCreateQuery(EdmFunction edmFunction, string modelNamespace)
+    {
+        var parameters = _typeMapper.GetParameters(edmFunction);
+        
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<{0}>(\"[{1}].[{2}]({3})\"{4});",
+            _typeMapper.GetTypeName(_typeMapper.GetReturnType(edmFunction), modelNamespace),
+            edmFunction.NamespaceName,
+            edmFunction.Name,
+            string.Join(", ", parameters.Select(p => "@" + p.EsqlParameterName).ToArray()),
+            _code.StringBefore(", ", string.Join(", ", parameters.Select(p => p.ExecuteParameterName).ToArray())));
+    }
+    
+    public string FunctionMethod(EdmFunction edmFunction, string modelNamespace, bool includeMergeOption)
+    {
+        var parameters = _typeMapper.GetParameters(edmFunction);
+        var returnType = _typeMapper.GetReturnType(edmFunction);
+
+        var paramList = String.Join(", ", parameters.Select(p => TypeMapper.FixNamespaces(p.FunctionParameterType) + " " + p.FunctionParameterName).ToArray());
+        if (includeMergeOption)
+        {
+            paramList = _code.StringAfter(paramList, ", ") + "MergeOption mergeOption";
+        }
+
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} {1} {2}({3})",
+            AccessibilityAndVirtual(Accessibility.ForMethod(edmFunction)),
+            returnType == null ? "int" : "ObjectResult<" + _typeMapper.GetTypeName(returnType, modelNamespace) + ">",
+            _code.Escape(edmFunction),
+            paramList);
+    }
+    
+    public string ExecuteFunction(EdmFunction edmFunction, string modelNamespace, bool includeMergeOption)
+    {
+        var parameters = _typeMapper.GetParameters(edmFunction);
+        var returnType = _typeMapper.GetReturnType(edmFunction);
+
+        var callParams = _code.StringBefore(", ", String.Join(", ", parameters.Select(p => p.ExecuteParameterName).ToArray()));
+        if (includeMergeOption)
+        {
+            callParams = ", mergeOption" + callParams;
+        }
+        
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction{0}(\"{1}\"{2});",
+            returnType == null ? "" : "<" + _typeMapper.GetTypeName(returnType, modelNamespace) + ">",
+            edmFunction.Name,
+            callParams);
+    }
+    
+    public string DbSet(EntitySet entitySet)
+    {
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} virtual DbSet<{1}> {2} {{ get; set; }}",
+            Accessibility.ForReadOnlyProperty(entitySet),
+            _typeMapper.GetTypeName(entitySet.ElementType),
+            _code.Escape(entitySet));
+    }
+
+    public string UsingDirectives(bool inHeader, bool includeCollections = true)
+    {
+        return inHeader == string.IsNullOrEmpty(_code.VsNamespaceSuggestion())
+            ? string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}using System;{3}using System.Runtime.Serialization;{1}" +
+                "{2}",
+                inHeader ? Environment.NewLine : "",
+                includeCollections ? (Environment.NewLine + "using System.Collections.Generic;") : "",
+                inHeader ? "" : Environment.NewLine, Environment.NewLine)
+            : "";
+    }
+
+	public string WriteEntityTypeSerializationInfo(EntityType type)
+	{
+		StringBuilder output = new StringBuilder();
+		output.AppendLine("[Serializable]");
+		
+
+		List<String> typeList = new List<String>();
+		var complexProperties = _typeMapper.GetComplexProperties(type);
+		foreach(var complexProperty in complexProperties)
+		{
+			typeList.Add(_code.Escape(_typeMapper.GetTypeName(complexProperty.TypeUsage)));
+		}
+
+		var navigationProperties = _typeMapper.GetNavigationProperties(type);
+		foreach (var navigationProperty in navigationProperties)
+		{
+			typeList.Add(_code.Escape(_typeMapper.GetTypeName(navigationProperty.ToEndMember.GetEntityType())));
+		}
+
+		foreach(String sItem in typeList.Distinct())
+		{
+			output.AppendFormat("[KnownType(typeof({0}))]{1}", sItem, Environment.NewLine);
+		}
+		output.AppendLine("[DataContract(IsReference = true)]");
+		return output.ToString();
+	}
+}
+
+public class TypeMapper
+{
+    private const string ExternalTypeNameAttributeName = @"http://schemas.microsoft.com/ado/2006/04/codegeneration:ExternalTypeName";
+
+    private readonly System.Collections.IList _errors;
+    private readonly CodeGenerationTools _code;
+    private readonly MetadataTools _ef;
+
+    public TypeMapper(CodeGenerationTools code, MetadataTools ef, System.Collections.IList errors)
+    {
+        ArgumentNotNull(code, "code");
+        ArgumentNotNull(ef, "ef");
+        ArgumentNotNull(errors, "errors");
+
+        _code = code;
+        _ef = ef;
+        _errors = errors;
+    }
+
+    public static string FixNamespaces(string typeName)
+    {
+        return typeName.Replace("System.Data.Spatial.", "System.Data.Entity.Spatial.");
+    }
+
+	public EntitySet GetEntitySet(EntityContainer container, EntityType entity)
+    {
+		EntitySetBase found  = (from meta in container.BaseEntitySets where meta.ElementType == entity select meta).First();
+		return found as EntitySet;
+    }
+
+    public string GetTypeName(TypeUsage typeUsage)
+    {
+        return typeUsage == null ? null : GetTypeName(typeUsage.EdmType, _ef.IsNullable(typeUsage), modelNamespace: null);
+    }
+
+    public string GetTypeName(EdmType edmType)
+    {
+        return GetTypeName(edmType, isNullable: null, modelNamespace: null);
+    }
+
+    public string GetTypeName(TypeUsage typeUsage, string modelNamespace)
+    {
+        return typeUsage == null ? null : GetTypeName(typeUsage.EdmType, _ef.IsNullable(typeUsage), modelNamespace);
+    }
+
+    public string GetTypeName(EdmType edmType, string modelNamespace)
+    {
+        return GetTypeName(edmType, isNullable: null, modelNamespace: modelNamespace);
+    }
+
+    public string GetTypeName(EdmType edmType, bool? isNullable, string modelNamespace)
+    {
+        if (edmType == null)
+        {
+            return null;
+        }
+
+        var collectionType = edmType as CollectionType;
+        if (collectionType != null)
+        {
+            return String.Format(CultureInfo.InvariantCulture, "ICollection<{0}>", GetTypeName(collectionType.TypeUsage, modelNamespace));
+        }
+
+        var typeName = _code.Escape(edmType.MetadataProperties
+                                .Where(p => p.Name == ExternalTypeNameAttributeName)
+                                .Select(p => (string)p.Value)
+                                .FirstOrDefault())
+            ?? (modelNamespace != null && edmType.NamespaceName != modelNamespace ?
+                _code.CreateFullName(_code.EscapeNamespace(edmType.NamespaceName), _code.Escape(edmType)) :
+                _code.Escape(edmType));
+
+        if (edmType is StructuralType)
+        {
+            return typeName;
+        }
+
+        if (edmType is SimpleType)
+        {
+            var clrType = UnderlyingClrType(edmType);
+            if (!IsEnumType(edmType))
+            {
+                typeName = _code.Escape(clrType);
+            }
+
+            typeName = FixNamespaces(typeName);
+
+            return clrType.IsValueType && isNullable == true ?
+                String.Format(CultureInfo.InvariantCulture, "Nullable<{0}>", typeName) :
+                typeName;
+        }
+
+        throw new ArgumentException("edmType");
+    }
+    
+    public Type UnderlyingClrType(EdmType edmType)
+    {
+        ArgumentNotNull(edmType, "edmType");
+
+        var primitiveType = edmType as PrimitiveType;
+        if (primitiveType != null)
+        {
+            return primitiveType.ClrEquivalentType;
+        }
+
+        if (IsEnumType(edmType))
+        {
+            return GetEnumUnderlyingType(edmType).ClrEquivalentType;
+        }
+
+        return typeof(object);
+    }
+    
+    public object GetEnumMemberValue(MetadataItem enumMember)
+    {
+        ArgumentNotNull(enumMember, "enumMember");
+        
+        var valueProperty = enumMember.GetType().GetProperty("Value");
+        return valueProperty == null ? null : valueProperty.GetValue(enumMember, null);
+    }
+    
+    public string GetEnumMemberName(MetadataItem enumMember)
+    {
+        ArgumentNotNull(enumMember, "enumMember");
+        
+        var nameProperty = enumMember.GetType().GetProperty("Name");
+        return nameProperty == null ? null : (string)nameProperty.GetValue(enumMember, null);
+    }
+
+    public System.Collections.IEnumerable GetEnumMembers(EdmType enumType)
+    {
+        ArgumentNotNull(enumType, "enumType");
+
+        var membersProperty = enumType.GetType().GetProperty("Members");
+        return membersProperty != null 
+            ? (System.Collections.IEnumerable)membersProperty.GetValue(enumType, null)
+            : Enumerable.Empty<MetadataItem>();
+    }
+    
+    public bool EnumIsFlags(EdmType enumType)
+    {
+        ArgumentNotNull(enumType, "enumType");
+        
+        var isFlagsProperty = enumType.GetType().GetProperty("IsFlags");
+        return isFlagsProperty != null && (bool)isFlagsProperty.GetValue(enumType, null);
+    }
+
+    public bool IsEnumType(GlobalItem edmType)
+    {
+        ArgumentNotNull(edmType, "edmType");
+
+        return edmType.GetType().Name == "EnumType";
+    }
+
+    public PrimitiveType GetEnumUnderlyingType(EdmType enumType)
+    {
+        ArgumentNotNull(enumType, "enumType");
+
+        return (PrimitiveType)enumType.GetType().GetProperty("UnderlyingType").GetValue(enumType, null);
+    }
+
+    public string CreateLiteral(object value)
+    {
+        if (value == null || value.GetType() != typeof(TimeSpan))
+        {
+            return _code.CreateLiteral(value);
+        }
+
+        return string.Format(CultureInfo.InvariantCulture, "new TimeSpan({0})", ((TimeSpan)value).Ticks);
+    }
+    
+    public bool VerifyCaseInsensitiveTypeUniqueness(IEnumerable<string> types, string sourceFile)
+    {
+        ArgumentNotNull(types, "types");
+        ArgumentNotNull(sourceFile, "sourceFile");
+        
+        var hash = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+        if (types.Any(item => !hash.Add(item)))
+        {
+            _errors.Add(
+                new CompilerError(sourceFile, -1, -1, "6023",
+                    String.Format(CultureInfo.CurrentCulture, CodeGenerationTools.GetResourceString("Template_CaseInsensitiveTypeConflict"))));
+            return false;
+        }
+        return true;
+    }
+
+    public IEnumerable<SimpleType> GetEnumItemsToGenerate(IEnumerable<GlobalItem> itemCollection)
+    {
+        return GetItemsToGenerate<SimpleType>(itemCollection)
+            .Where(e => IsEnumType(e));
+    }
+    
+    public IEnumerable<T> GetItemsToGenerate<T>(IEnumerable<GlobalItem> itemCollection) where T: EdmType
+    {
+        return itemCollection
+            .OfType<T>()
+            .Where(i => !i.MetadataProperties.Any(p => p.Name == ExternalTypeNameAttributeName))
+            .OrderBy(i => i.Name);
+    }
+
+    public IEnumerable<string> GetAllGlobalItems(IEnumerable<GlobalItem> itemCollection)
+    {
+        return itemCollection
+            .Where(i => i is EntityType || i is ComplexType || i is EntityContainer || IsEnumType(i))
+            .Select(g => GetGlobalItemName(g));
+    }
+
+    public string GetGlobalItemName(GlobalItem item)
+    {
+        if (item is EdmType)
+        {
+            return ((EdmType)item).Name;
+        }
+        else
+        {
+            return ((EntityContainer)item).Name;
+        }
+    }
+
+    public IEnumerable<EdmProperty> GetSimpleProperties(EntityType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type);
+    }
+    
+    public IEnumerable<EdmProperty> GetSimpleProperties(ComplexType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type);
+    }
+    
+    public IEnumerable<EdmProperty> GetComplexProperties(EntityType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == type);
+    }
+    
+    public IEnumerable<EdmProperty> GetComplexProperties(ComplexType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == type);
+    }
+
+    public IEnumerable<EdmProperty> GetPropertiesWithDefaultValues(EntityType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type && p.DefaultValue != null);
+    }
+    
+    public IEnumerable<EdmProperty> GetPropertiesWithDefaultValues(ComplexType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type && p.DefaultValue != null);
+    }
+
+    public IEnumerable<NavigationProperty> GetNavigationProperties(EntityType type)
+    {
+        return type.NavigationProperties.Where(np => np.DeclaringType == type);
+    }
+    
+    public IEnumerable<NavigationProperty> GetCollectionNavigationProperties(EntityType type)
+    {
+        return type.NavigationProperties.Where(np => np.DeclaringType == type && np.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many);
+    }
+    
+    public FunctionParameter GetReturnParameter(EdmFunction edmFunction)
+    {
+        ArgumentNotNull(edmFunction, "edmFunction");
+
+        var returnParamsProperty = edmFunction.GetType().GetProperty("ReturnParameters");
+        return returnParamsProperty == null
+            ? edmFunction.ReturnParameter
+            : ((IEnumerable<FunctionParameter>)returnParamsProperty.GetValue(edmFunction, null)).FirstOrDefault();
+    }
+
+    public bool IsComposable(EdmFunction edmFunction)
+    {
+        ArgumentNotNull(edmFunction, "edmFunction");
+
+        var isComposableProperty = edmFunction.GetType().GetProperty("IsComposableAttribute");
+        return isComposableProperty != null && (bool)isComposableProperty.GetValue(edmFunction, null);
+    }
+
+    public IEnumerable<FunctionImportParameter> GetParameters(EdmFunction edmFunction)
+    {
+        return FunctionImportParameter.Create(edmFunction.Parameters, _code, _ef);
+    }
+
+    public TypeUsage GetReturnType(EdmFunction edmFunction)
+    {
+        var returnParam = GetReturnParameter(edmFunction);
+        return returnParam == null ? null : _ef.GetElementType(returnParam.TypeUsage);
+    }
+    
+    public bool GenerateMergeOptionFunction(EdmFunction edmFunction, bool includeMergeOption)
+    {
+        var returnType = GetReturnType(edmFunction);
+        return !includeMergeOption && returnType != null && returnType.EdmType.BuiltInTypeKind == BuiltInTypeKind.EntityType;
+    }
+}
+
+public static void ArgumentNotNull<T>(T arg, string name) where T : class
+{
+    if (arg == null)
+    {
+        throw new ArgumentNullException(name);
+    }
+}
+#>
