@@ -12,7 +12,7 @@ namespace ClubCloud.KNLTB.Media
     public class KNLTBFoto : IDisposable
     {
         private static string FotoGetUrl = "https://servit.mijnknltb.nl/ISV/KNLTB.ServIT2/KNLTB/Ledenadministratie/OnderhoudenPersonen/OphalenPasfoto/ImageRenderer.aspx?Id={0}";
-        private static string FotSetUrl = "https://servit.mijnknltb.nl/ISV/KNLTB.ServIT2/KNLTB/Ledenadministratie/OnderhoudenPersonen/UploadPasfoto/PasfotoUpload.aspx?orgname=KNLTB";
+        //private static string FotoSetUrl = "https://servit.mijnknltb.nl/ISV/KNLTB.ServIT2/KNLTB/Ledenadministratie/OnderhoudenPersonen/UploadPasfoto/PasfotoUpload.aspx?orgname=KNLTB";
         private System.Drawing.Image _Foto;
         private String _ContentType;
         private long _ContentLength;

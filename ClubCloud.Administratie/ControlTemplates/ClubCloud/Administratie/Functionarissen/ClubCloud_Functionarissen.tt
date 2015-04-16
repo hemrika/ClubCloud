@@ -1,0 +1,1768 @@
+﻿<#@ template debug="true" hostSpecific="true" language="C#" #>
+<#@ include file="EF6.Utility.CS.ttinclude"#>
+<#@ output extension=".ascx" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#
+const string inputFile = @"C:\Source\ClubCloud\ClubCloud.Model\BeheerClubCloud.edmx";
+var textTransform = DynamicTextTransformation.Create(this);
+var code = new CodeGenerationTools(this);
+var ef = new MetadataTools(this);
+var typeMapper = new TypeMapper(code, ef, textTransform.Errors);
+var itemCollection = new EdmMetadataLoader(textTransform.Host, textTransform.Errors).CreateEdmItemCollection(inputFile);
+var codeStringGenerator = new CodeStringGenerator(code, typeMapper, ef);
+var container = itemCollection.OfType<EntityContainer>().FirstOrDefault();
+if (!typeMapper.VerifyCaseInsensitiveTypeUniqueness(typeMapper.GetAllGlobalItems(itemCollection), inputFile))
+{
+    return string.Empty;
+}
+var name = Host.TemplateFile.Split('\\').Last().Split('.').First();
+var entitySet = container.EntitySets[name];
+var EntitySetName = entitySet.Name.Split('_').Last();
+var entity = entitySet.ElementType;
+var primarykey = entity.KeyMembers.FirstOrDefault();
+var EntityName = entity.Name.Split('_').Last();
+var	fileManager = EntityFrameworkTemplateFileManager.Create(this);
+var simpleProperties = typeMapper.GetSimpleProperties(entity);
+var navigationProperties = typeMapper.GetNavigationProperties(entity);
+#>
+<# /* Entity Set */ #>
+<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
+<%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entitySet)#>.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entitySet)#>UserControl" %>
+<Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="<#=code.Escape(entitySet)#>_View" />
+<asp:GridView 
+    ID="<#=code.Escape(entitySet)#>_Grid" 
+    runat="server" 
+    AllowPaging="true" 
+    AllowSorting="true" 
+    AutoGenerateColumns="false" 
+    DataKeyNames="Id" 
+    SelectMethod="Select<#=code.Escape(EntitySetName)#>"
+	OnCallingDataMethods="Grid<#=code.Escape(EntitySetName)#>_CallingDataMethods"
+    PageSize="30"
+    ShowFooter="true"
+    ShowHeader="true" >
+    <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
+    <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
+    <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
+    <PagerSettings Mode="NextPreviousFirstLast" Visible="true" Position="TopAndBottom" PreviousPageText="vorige" NextPageText="volgende"  FirstPageText="Eerste" LastPageText="Laatste" PageButtonCount="5" />
+    <PagerStyle HorizontalAlign="Center" VerticalAlign="Top" BackColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
+    <Columns>
+<#
+    if (simpleProperties.Any())
+    {
+        foreach (var edmProperty in simpleProperties)
+        {
+
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.Guid" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.Guid>") continue;
+#>
+        <asp:BoundField
+            DataField="<#=code.Escape(edmProperty)#>"
+            HeaderText="<#=code.Escape(edmProperty)#>"
+            SortExpression="<#=code.Escape(edmProperty)#>"
+            ItemStyle-Width="40px">
+        </asp:BoundField>
+<#
+        }
+    }
+#>    
+    </Columns>
+    <EmptyDataTemplate>
+        <HeaderTemplate>
+            <asp:HyperLink ID="ClubCloud_Functionaris_Insert" Text="Toevoegen" NavigateUrl="~/ClubCloud_Functionaris_Insert.aspx"  runat="server" /> <br/>
+        </HeaderTemplate>
+        <ItemTemplate>Er zijn geen gegevens gevonden.</ItemTemplate>
+    </EmptyDataTemplate>
+</asp:GridView>
+<p>
+    <asp:Label runat="server" ID="lblMessage" ForeColor="Red" />
+</p>
+<#
+fileManager.StartNewFile(entitySet.Name+".ascx.cs");
+#>
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Data.Entity.Infrastructure;
+using System.Data;
+
+public partial class <#=code.Escape(entitySet)#>UserControl : UserControl
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        <#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
+        <#=code.Escape(entity)#>_DataSource.Assembly = typeof(<#=code.Escape(entitySet)#>UserControl).Assembly;
+
+		<#=code.Escape(entity)#>_DataSource.View.WhereParameters = new ParameterCollection();
+
+        foreach (string key in Request.QueryString.Keys)
+        {
+            string value = Request.QueryString[key];
+            if (value != null || !string.IsNullOrWhiteSpace(value))
+            {
+                Guid DefaultValue = Guid.Empty;
+                if (Guid.TryParse(value, out DefaultValue))
+                {
+                    <#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+                }
+            }
+        }
+
+    }
+
+	protected void Grid<#=code.Escape(EntitySetName)#>_CallingDataMethods(object sender, CallingDataMethodsEventArgs e)
+	{
+		e.DataMethodsObject = <#=code.Escape(entity)#>_DataSource.View;
+	}
+
+    [Browsable(true)]
+    public string ViewName { get; set; }
+
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<#
+fileManager.StartNewFile(entitySet.Name+".ascx.designer.cs");
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated. 
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+public partial class <#=code.Escape(entitySet)#>UserControl 
+{
+    /// <summary>
+    /// <#=code.Escape(entity)#>_DataSource control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+	protected global::ClubCloud.Common.Controls.ClubCloudDataSource <#=code.Escape(entity)#>_DataSource;
+
+    /// <summary>
+    /// <#=code.Escape(entitySet)#>_Grid control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView <#=code.Escape(entitySet)#>_Grid;
+        
+    /// <summary>
+    /// lblMessage control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMessage;
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<# /* Entity */ #>
+<#
+fileManager.StartNewFile(entity.Name+".ascx");
+#>
+<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
+<%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entity)#>.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entity)#>UserControl" %>
+<Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="<#=code.Escape(entitySet)#>_View" />
+<asp:FormView runat="server" ID="Select<#=code.Escape(EntityName)#>form" DefaultMode="ReadOnly" RenderOuterTable="False" OnCallingDataMethods="Select<#=code.Escape(EntityName)#>form_CallingDataMethods" SelectMethod="Select<#=EntityName#>" DataKeyNames="<#=primarykey.Name#>" >
+    <EmptyDataTemplate>
+        <h1 class="title-regular clearfix">
+            Geen <#=code.Escape(EntityName)#> gevonden</h1>
+        <div class="notice">
+            Sorry, er is geen  <#=code.Escape(EntityName)#> beschikbaar voor dit Id.</div>
+        <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>"
+            OnClick="GoBack" SkinID="Button" />
+    </EmptyDataTemplate>
+    <ItemTemplate>
+        <fieldset>
+            <h1 class="title-regular clearfix">
+                <%# ((FormView)Container).CurrentMode == FormViewMode.ReadOnly ? " <#=code.Escape(EntityName)#>" : "" %>
+            </h1>
+<#
+    if (simpleProperties.Any())
+    {
+        foreach (var edmProperty in simpleProperties)
+        {
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.Guid" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.Guid>")
+				continue;
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:Label ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>' /></br>
+<#	
+		}
+	}
+#>
+<#
+	
+    if (navigationProperties.Any())
+    {
+#>
+
+<#
+        foreach (var navigationProperty in navigationProperties)
+        {
+
+			var endEntity = navigationProperty.ToEndMember.GetEntityType();
+			var endEntityName = endEntity.Name.Split('_').Last();
+			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
+			var endEntitySetName = endEntitySet.Name.Split('_').Last();
+
+			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
+            {
+				if(endEntitySetName == "Reserveringen" || endEntitySetName == "Profielen" ) continue;
+
+				if(endEntitySetName == "Addresses")
+                {
+#>
+			<%# Eval("<#=code.Escape(endEntity)#>[0].Naam") %> : <a href="<#=code.Escape(endEntityName)#>.aspx?Id=<%# Eval("<#=code.Escape(endEntity)#>[0].Id") %>" target="_self" title="<%# Eval("<#=code.Escape(endEntity)#>[0].Naam") %>" ><%# Eval("<#=code.Escape(endEntity)#>[0].Naam") %></a></br>
+			<%# Eval("<#=code.Escape(endEntity)#>[1].Naam") %> : <a href="<#=code.Escape(endEntityName)#>.aspx?Id=<%# Eval("<#=code.Escape(endEntity)#>[1].Id") %>" target="_self" title="<%# Eval("<#=code.Escape(endEntity)#>[1].Naam") %>" ><%# Eval("<#=code.Escape(endEntity)#>[1].Naam") %></a></br>
+<#
+				}
+				else
+                {
+#>
+			<#=code.Escape(endEntitySetName)#> : <a href="<#=code.Escape(endEntitySetName)#>.aspx?<#=code.Escape(EntityName)#>Id=<%# Eval("<#=code.Escape(primarykey.Name)#>") %>" target="_self" title="<#=code.Escape(endEntitySetName)#>" ><#=code.Escape(endEntitySetName)#></a></br>
+<#
+				}
+			}
+			else
+			{
+#>
+			<#=code.Escape(endEntityName)#> : <a href="<#=code.Escape(endEntityName)#>.aspx?Id=<%# Eval("<#=code.Escape(endEntityName)#>Id") %>" target="_self" title="<#=code.Escape(endEntityName)#>" ><%# Eval("<#=code.Escape(endEntity)#>.Naam") %></a></br>
+<#
+			}
+        }
+    }
+#>
+
+		<asp:Button ID="btn_goback" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>" CausesValidation="false" OnClick="GoBack"/>
+		<asp:Button ID="btn_edit" runat="server" Text="<#=code.Escape(EntityName)#> bewerken" CausesValidation="false" OnClick="GoEdit"/>
+        </fieldset>
+    </ItemTemplate>
+</asp:FormView>
+
+<#
+fileManager.StartNewFile(entity.Name+".ascx.cs");
+#>
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Data.Entity.Infrastructure;
+
+public partial class <#=code.Escape(entity)#>UserControl : UserControl
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        <#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
+        <#=code.Escape(entity)#>_DataSource.Assembly = typeof(<#=code.Escape(entity)#>UserControl).Assembly;
+
+		<#=code.Escape(entity)#>_DataSource.View.WhereParameters = new ParameterCollection();
+        string value = Request.QueryString["Id"];
+        if(value != null)
+        {
+            Guid DefaultValue = Guid.Empty;
+            if(Guid.TryParse(value,out DefaultValue))
+				<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "Id", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+        }
+    }
+
+	[Browsable(true)]
+    public string ViewName { get; set; }
+
+	protected void Select<#=code.Escape(EntityName)#>form_CallingDataMethods(object sender, CallingDataMethodsEventArgs e)
+	{
+		e.DataMethodsObject = <#=code.Escape(entity)#>_DataSource.View;
+	}
+
+	protected void GoBack(object sender, EventArgs e)
+	{
+		Response.Redirect("<#=code.Escape(EntitySetName)#>.aspx");
+	}
+
+	protected void GoEdit(object sender, EventArgs e)
+	{
+		Response.Redirect("<#=code.Escape(EntityName)#>_Edit.aspx");
+	}
+
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<#
+fileManager.StartNewFile(entity.Name+".ascx.designer.cs");
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated. 
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+public partial class <#=code.Escape(entity)#>UserControl 
+{
+    /// <summary>
+    /// <#=code.Escape(entity)#>_DataSource control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+	protected global::ClubCloud.Common.Controls.ClubCloudDataSource <#=code.Escape(entity)#>_DataSource;   
+    /// <summary>
+    /// Select<#=code.Escape(EntityName)#>form control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.FormView Select<#=code.Escape(EntityName)#>form;
+ 
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<# /* Entity Edit*/ #>
+<#
+fileManager.StartNewFile(entity.Name+"_Edit.ascx");
+#>
+<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
+<%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entity)#>_Edit.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entity)#>_EditUserControl" %>
+<Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="<#=code.Escape(entitySet)#>_View" />
+<asp:ValidationSummary ShowModelStateErrors="true" runat="server" />
+<asp:FormView runat="server" ID="Edit<#=code.Escape(EntityName)#>form" DefaultMode="Edit" RenderOuterTable="False" OnCallingDataMethods="Edit<#=code.Escape(EntityName)#>form_CallingDataMethods" SelectMethod="Select<#=EntityName#>" UpdateMethod="Update<#=EntityName#>" DataKeyNames="<#=primarykey.Name#>">
+    <EmptyDataTemplate>
+        <h1 class="title-regular clearfix">
+            Geen <#=code.Escape(EntityName)#> gevonden</h1>
+        <div class="notice">
+            Sorry, er is geen  <#=code.Escape(EntityName)#> beschikbaar voor dit Id.</div>
+        <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>"
+            OnClick="GoBack" SkinID="Button" />
+    </EmptyDataTemplate>
+    <EditItemTemplate>
+        <fieldset>
+            <h1 class="title-regular clearfix">
+                <%# ((FormView)Container).CurrentMode == FormViewMode.Edit ? "Bewerken <#=code.Escape(EntityName)#>" : "" %>
+            </h1>
+            <asp:Button ID="Button1" runat="server" Text="Save" CommandName="Update" />
+            <asp:Button ID="bn_goback" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>" CausesValidation="false" OnClick="GoBack"/>
+        </fieldset>
+    </EditItemTemplate>
+</asp:FormView>
+
+<#
+fileManager.StartNewFile(entity.Name+"_Edit.ascx.cs");
+#>
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Data.Entity.Infrastructure;
+
+public partial class <#=code.Escape(entity)#>_EditUserControl : UserControl
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        <#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
+        <#=code.Escape(entity)#>_DataSource.Assembly = typeof(<#=code.Escape(entity)#>_EditUserControl).Assembly;
+
+		<#=code.Escape(entity)#>_DataSource.View.WhereParameters = new ParameterCollection();
+        string value = Request.QueryString["Id"];
+        if(value != null)
+        {
+            Guid DefaultValue = Guid.Empty;
+            if(Guid.TryParse(value,out DefaultValue))
+                <#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "Id", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+        }
+    }
+
+	[Browsable(true)]
+    public string ViewName { get; set; }
+
+    protected void Edit<#=code.Escape(EntityName)#>form_CallingDataMethods(object sender, CallingDataMethodsEventArgs e)
+    {
+        e.DataMethodsObject = <#=code.Escape(entity)#>_DataSource.View;
+    }
+
+	protected void GoBack(object sender, EventArgs e)
+	{
+		Response.Redirect("<#=code.Escape(EntitySetName)#>.aspx");
+	}
+
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<#
+fileManager.StartNewFile(entity.Name+"_Edit.ascx.designer.cs");
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated. 
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+public partial class <#=code.Escape(entity)#>_EditUserControl 
+{
+    /// <summary>
+    /// <#=code.Escape(entity)#>_DataSource control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+	protected global::ClubCloud.Common.Controls.ClubCloudDataSource <#=code.Escape(entity)#>_DataSource;
+        
+    /// <summary>
+    /// Edit<#=code.Escape(EntityName)#>form control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.FormView Edit<#=code.Escape(EntityName)#>form;
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<# /* Entity Insert*/ #>
+<#
+fileManager.StartNewFile(entity.Name+"_Insert.ascx");
+#>
+<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
+<%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entity)#>_Insert.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entity)#>_InsertUserControl" %>
+<Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="<#=code.Escape(entitySet)#>_View" />
+<asp:ValidationSummary ShowModelStateErrors="true" runat="server" />
+<asp:FormView runat="server" ID="Insert<#=code.Escape(EntityName)#>form" DefaultMode="Insert" RenderOuterTable="False" OnCallingDataMethods="Insert<#=code.Escape(EntityName)#>form_CallingDataMethods" SelectMethod="Select<#=EntityName#>" InsertMethod="Insert<#=EntityName#>" DataKeyNames="<#=primarykey.Name#>">
+    <EmptyDataTemplate>
+        <h1 class="title-regular clearfix">
+            Geen <#=code.Escape(EntityName)#> gevonden</h1>
+        <div class="notice">
+            Sorry, er is geen  <#=code.Escape(EntityName)#> beschikbaar voor dit Id.</div>
+        <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>"
+            OnClick="GoBack" SkinID="Button" />
+    </EmptyDataTemplate>
+    <InsertItemTemplate>
+        <fieldset>
+            <h1 class="title-regular clearfix">
+                <%# ((FormView)Container).CurrentMode == FormViewMode.Insert ? "Nieuwe <#=code.Escape(EntityName)#>" : "" %>
+            </h1>
+            <asp:Button ID="Button1" runat="server" Text="Save" CommandName="Insert" />
+            <asp:Button ID="bn_goback" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>" CausesValidation="false" OnClick="GoBack"/>
+        </fieldset>
+    </InsertItemTemplate>
+</asp:FormView>
+<#
+fileManager.StartNewFile(entity.Name+"_Insert.ascx.cs");
+#>
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Data.Entity.Infrastructure;
+
+public partial class <#=code.Escape(entity)#>_InsertUserControl : UserControl
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        <#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
+        <#=code.Escape(entity)#>_DataSource.Assembly = typeof(<#=code.Escape(entity)#>_InsertUserControl).Assembly;
+
+		<#=code.Escape(entity)#>_DataSource.View.WhereParameters = new ParameterCollection();
+    }
+
+	[Browsable(true)]
+    public string ViewName { get; set; }
+
+	protected void Insert<#=code.Escape(EntityName)#>form_CallingDataMethods(object sender, CallingDataMethodsEventArgs e)
+	{
+		e.DataMethodsObject = <#=code.Escape(entity)#>_DataSource.View;
+	}
+
+	protected void GoBack(object sender, EventArgs e)
+	{
+		Response.Redirect("<#=code.Escape(EntitySetName)#>.aspx");
+	}
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<#
+fileManager.StartNewFile(entity.Name+"_Insert.ascx.designer.cs");
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated. 
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+public partial class <#=code.Escape(entity)#>_InsertUserControl 
+{
+    /// <summary>
+    /// <#=code.Escape(entity)#>_DataSource control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+	protected global::ClubCloud.Common.Controls.ClubCloudDataSource <#=code.Escape(entity)#>_DataSource;
+    /// <summary>
+    /// Insert<#=code.Escape(EntityName)#>form control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.FormView Insert<#=code.Escape(EntityName)#>form;
+
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<# /* Entity Template*/ #>
+
+<#
+fileManager.StartNewFile(entity.Name+"_Template.ascx.cs");
+#>
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+using System;
+using System.Web.DynamicData;
+
+public partial class <#=code.Escape(entity)#>_Template : EntityTemplateUserControl
+{
+    protected void DynamicControl_Init(object sender, EventArgs e)
+    {
+        DynamicControl dynamicControl = (DynamicControl)sender;
+        dynamicControl.Mode = this.Mode;
+    }
+}
+
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<#
+fileManager.StartNewFile(entity.Name+"_Template.ascx");
+#>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entity)#>_Template.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entity)#>_Template" %>
+<#
+		var propertiesWithDefaultValues = typeMapper.GetPropertiesWithDefaultValues(entity);
+        
+		if (propertiesWithDefaultValues.Any())
+        {
+			foreach (var edmProperty in propertiesWithDefaultValues)
+			{
+#>
+		<asp:DynamicControl Id="<#=code.Escape(entity)#>_<#=code.Escape(edmProperty)#>" runat="server" DataField="<%# <#=code.Escape(edmProperty)#> %>" />
+<#
+			}	
+        }
+#>
+
+<#
+fileManager.StartNewFile(entity.Name+"_Template.ascx.designer.cs");
+#>
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+using System;
+using System.Web.DynamicData;
+
+public partial class <#=code.Escape(entity)#>_Template
+{
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+<# /* Entity View*/ #>
+
+<#
+fileManager.StartNewFile(entitySet.Name+"_View.cs");
+#>
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+
+using ClubCloud.Common.Controls;
+using ClubCloud.Model;
+using ClubCloud.Service;
+using Microsoft.SharePoint;
+using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Web.UI;
+using System.Web.UI.Design;
+using System.Web.UI.WebControls;
+using System.Data.Entity.Infrastructure;
+
+//[Designer(typeof(<#=code.Escape(entity)#>DataSourceViewDesigner)),ToolboxData("<{0}:<#=code.Escape(entitySet)#>_View runat=\"server\"></{0}:<#=code.Escape(entitySet)#>_View>")]
+[System.ComponentModel.DataObject(true)]
+public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
+{
+    public <#=code.Escape(entitySet)#>_View(EntityDataSource owner, string viewName) : base(owner, viewName) { }
+
+    private ClubCloud.Service.ClubCloudServiceClient _client = null;
+
+    public ClubCloud.Service.ClubCloudServiceClient Client
+    {
+        get
+        {
+            if (_client == null)
+            {
+                _client = new Service.ClubCloudServiceClient(SPServiceContext.Current);
+            }
+            return _client;
+        }
+    }
+
+    public override bool CanRetrieveTotalRowCount
+    {
+        get
+        {
+            return true;
+        }
+    }
+
+    public override bool CanPage
+    {
+        get
+        {
+            return true;
+        }
+    }
+
+    public override bool CanSort
+    {
+        get
+        {
+            return true;
+        }
+    }
+
+    partial void On<#=entity.Name#>Saving(<#=entity.Name#> <#=code.CamelCase(EntityName)#>);
+
+    partial void On<#=entity.Name#>Creating(<#=entity.Name#> <#=code.CamelCase(EntityName)#>);
+    partial void On<#=entity.Name#>Created(<#=entity.Name#> <#=code.CamelCase(EntityName)#>);
+
+    partial void On<#=entity.Name#>Updating(<#=entity.Name#> <#=code.CamelCase(EntityName)#>);
+    partial void On<#=entity.Name#>Updated(<#=entity.Name#> <#=code.CamelCase(EntityName)#>);
+
+    partial void On<#=entity.Name#>Saved(<#=entity.Name#> <#=code.CamelCase(EntityName)#>);
+
+    partial void On<#=entity.Name#>Deleting(<#=entity.Name#> <#=code.CamelCase(EntityName)#>);
+    partial void On<#=entity.Name#>Deleted(<#=entity.Name#> <#=code.CamelCase(EntityName)#>);
+
+	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+    public <#=code.Escape(entity)#> Select<#=EntityName#>() //(string <#=code.Escape(primarykey.Name)#>)
+    {
+		<#=code.Escape(entity)#> entity = null;
+
+		if (SPContext.Current.Web.CurrentUser != null)
+		{
+			string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+			ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+
+			if (Settings != null && Settings.VerenigingId != null)
+			{
+				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+
+				if (Settings.ClubCloud_Vereniging != null)
+				{
+					Guid <#=code.Escape(primarykey.Name)#> = Guid.Empty;
+					foreach (Parameter where in WhereParameters)
+					{
+						if (where.Name == "<#=code.Escape(primarykey.Name)#>")
+						{
+							if(Guid.TryParse(where.DefaultValue, out <#=code.Escape(primarykey.Name)#>))
+							{
+								entity = Client.Get<#=EntityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>, false, Settings);
+
+								if(entity != null || entity.<#=code.Escape(primarykey.Name)#> != Guid.Empty)
+								{
+<#
+	
+    if (navigationProperties.Any())
+    {
+#>
+
+<#
+        foreach (var navigationProperty in navigationProperties)
+        {
+
+			var endEntity = navigationProperty.ToEndMember.GetEntityType();
+			var endEntityName = endEntity.Name.Split('_').Last();
+			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
+			var endEntitySetName = endEntitySet.Name.Split('_').Last();
+			
+			if(endEntitySetName == "Reserveringen" || endEntitySetName == "Profielen" ) continue;
+
+			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
+            {
+#>
+									entity.<#=code.Escape(endEntity)#>  = new System.Collections.ObjectModel.ObservableCollection<<#=code.Escape(endEntity)#>>(Client.Get<#=code.Escape(endEntitySetName)#>For<#=EntityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>, false, Settings));
+<#
+			}
+			else
+            {
+#>
+									entity.<#=code.Escape(endEntity)#>  = Client.Get<#=code.Escape(endEntityName)#>For<#=EntityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>, false, Settings);
+<#
+            }
+        }
+    }
+#>
+								}
+							}
+						}
+					}
+
+				}
+
+			}
+		}
+
+
+		return entity;
+    }
+
+	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+    public IQueryable<ClubCloud_Functionaris> SelectFunctionarissen(string sortByExpression, int startRowIndex, int maximumRows, out int totalRowCount)//, bool retrieveTotalRowCount = true)
+    {
+        if(SPContext.Current.Web.CurrentUser != null)
+        {
+            string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+            ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+
+            if(Settings != null && Settings.VerenigingId != null) 
+            {
+                List<Parameter> collection = new List<Parameter>();
+
+            <#
+
+            if (navigationProperties.Any())
+            {
+                foreach (var navigationProperty in navigationProperties)
+                {
+                    var endType = typeMapper.GetTypeName(navigationProperty.ToEndMember.GetEntityType());
+
+                    if(endType == "ClubCloud_Vereniging" && navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+                    {
+        #>
+
+				collection.Add(new Parameter { DefaultValue = "{"+Settings.VerenigingId.Value.ToString()+"}" , Name = "VerenigingId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+        
+		<#
+                    }
+                    if(endType == "ClubCloud_Accommodatie" && navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+                    {
+        #>
+
+				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+
+				if(Settings.ClubCloud_Vereniging != null)
+				{
+					Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie = Client.GetAccommodatieById(Settings.ClubCloud_Vereniging.AccommodatieId.Value, false, Settings);
+					if(Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie != null)
+					collection.Add(new Parameter { DefaultValue = "{"+Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie.Id.ToString()+"}" , Name = "AccommodatieId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+				}
+
+        <#
+                    }
+                }
+            }
+        #>
+    
+                foreach (Parameter where in WhereParameters)
+                {
+                    if (collection.Any(w => w.Name == where.Name))
+                    {
+                        int index = collection.FindIndex(p => p.Name == where.Name);
+                        if (index >= 0)
+                            collection[index] = where;
+                    }
+                    else
+                    {
+                        collection.Add(where);
+                    }
+                }
+
+<#
+			
+#>
+				DataSourceSelectArguments selectArgs = new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression };
+                <#=code.Escape(entity)#>_View queryresult = Client.Get<#=code.Escape(EntitySetName)#>ByQuery(userId, Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
+
+                totalRowCount = queryresult.TotalRowCount;
+				
+				return queryresult.<#=code.Escape(entity)#>.AsQueryable<<#=code.Escape(entity)#>>();
+            }
+        }
+
+        totalRowCount = 0;
+		return null;
+	}
+
+    [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]
+	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+    protected override IEnumerable ExecuteSelect(DataSourceSelectArguments selectArgs)
+    {
+        DataSet ds = new DataSet("result");
+
+        if(SPContext.Current.Web.CurrentUser != null)
+        {
+            string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+            ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+
+            if(Settings != null && Settings.VerenigingId != null) 
+            {
+                List<Parameter> collection = new List<Parameter>();
+
+            <#
+
+            if (navigationProperties.Any())
+            {
+                foreach (var navigationProperty in navigationProperties)
+                {
+                    var endType = typeMapper.GetTypeName(navigationProperty.ToEndMember.GetEntityType());
+
+                    if(endType == "ClubCloud_Vereniging" && navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+                    {
+        #>
+
+				collection.Add(new Parameter { DefaultValue = "{"+Settings.VerenigingId.Value.ToString()+"}" , Name = "VerenigingId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+        
+		<#
+                    }
+                    if(endType == "ClubCloud_Accommodatie" && navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+                    {
+        #>
+
+				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+
+				if(Settings.ClubCloud_Vereniging != null)
+				{
+					Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie = Client.GetAccommodatieById(Settings.ClubCloud_Vereniging.AccommodatieId.Value, false, Settings);
+					if(Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie != null)
+					collection.Add(new Parameter { DefaultValue = "{"+Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie.Id.ToString()+"}" , Name = "AccommodatieId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+				}
+
+        <#
+                    }
+                }
+            }
+        #>
+    
+                foreach (Parameter where in WhereParameters)
+                {
+                    if (collection.Any(w => w.Name == where.Name))
+                    {
+                        int index = collection.FindIndex(p => p.Name == where.Name);
+                        if (index >= 0)
+                            collection[index] = where;
+                    }
+                    else
+                    {
+                        collection.Add(where);
+                    }
+                }
+
+<#
+			
+#>
+                <#=code.Escape(entity)#>_View queryresult = Client.Get<#=code.Escape(EntitySetName)#>ByQuery(userId, Settings.VerenigingId.Value, selectArgs, collection);
+
+                selectArgs.TotalRowCount = queryresult.TotalRowCount;
+				
+				return (IEnumerable)queryresult.<#=code.Escape(entity)#>;
+            }
+        }
+
+        //return new DataView();
+		return null;
+    }
+
+	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Delete, true)]
+	public void Delete<#=code.Escape(EntityName)#>(<#=code.Escape(entity)#> entity)
+    { 
+	}
+
+    protected override int ExecuteDelete(IDictionary keys, IDictionary oldValues)
+    {
+        int count = 0;
+        if (SPContext.Current.Web.CurrentUser != null)
+        {
+            int result;
+            ClubCloud_Setting Settings = null;
+            if(int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                Settings = Client.GetSettingById(result);
+    
+            if (Settings != null && Settings.VerenigingId != null)
+            {
+                foreach (Object key in keys)
+                {
+					<#=code.Escape(entity)#> entity = null;
+<#
+
+	foreach(EdmMember keyMember in entity.KeyMembers)
+    {
+		if(typeMapper.GetTypeName(keyMember.TypeUsage) == "System.DateTime") continue;
+#>
+					if(key == typeof(<#=code.Escape(keyMember.TypeUsage)#>))
+					{
+						entity = Client.Get<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>((<#=code.Escape(keyMember.TypeUsage)#>)key);
+					}
+<#
+	}
+#>
+                    bool succes = false;
+                    if (entity != null)
+                        succes = Client.Delete<#=code.Escape(EntityName)#>(entity);
+                    if (succes)
+                        count++;
+                }
+            }
+        }
+        return count;
+    }
+
+	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Insert, true)]
+	public virtual <#=code.Escape(primarykey.TypeUsage)#> Insert<#=code.Escape(EntityName)#>(<#=code.Escape(entity)#> entity)
+	{
+		return Guid.NewGuid();
+	}
+
+
+    protected override int ExecuteInsert(IDictionary values)
+    {
+        int count = 0;
+
+        if (SPContext.Current.Web.CurrentUser != null)
+        {
+            int result;
+            ClubCloud_Setting Settings = null;
+            if(int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                Settings = Client.GetSettingById(result);
+    
+            if (Settings != null && Settings.VerenigingId != null)
+            {
+    
+            }
+		}
+
+        return count;
+    }
+
+    [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Update, true)]
+    public void Update<#=code.Escape(EntityName)#>(<#=code.Escape(entity)#> entity) 
+	{
+	}
+
+    protected override int ExecuteUpdate(IDictionary keys, IDictionary values, IDictionary oldValues)
+    {
+        int count = 0;
+
+        if (SPContext.Current.Web.CurrentUser != null)
+        {
+            int result;
+            ClubCloud_Setting Settings = null;
+            if(int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                Settings = Client.GetSettingById(result);
+    
+            if (Settings != null && Settings.VerenigingId != null)
+            {
+    
+            }
+        }
+
+        return count;
+    }
+
+    protected override int ExecuteCommand(string commandName, IDictionary keys, IDictionary values)
+    {
+        return base.ExecuteCommand(commandName, keys, values);
+    }
+}
+
+public class <#=code.Escape(EntityName)#> : <#=code.Escape(entity)#> {}
+
+public class <#=code.Escape(entity)#>DataSourceViewDesigner : DesignerDataSourceView
+{
+    private List<<#=code.Escape(entity)#>> _data = null;
+
+    public <#=code.Escape(entity)#>DataSourceViewDesigner(DataSourceDesigner owner, string viewName)
+        : base(owner, viewName)
+    {}
+
+    public override IEnumerable GetDesignTimeData(
+        int minimumRows, out bool isSampleData)
+    {
+        if (_data == null)
+        {
+            // Create a set of design-time fake data
+            _data = new List<<#=code.Escape(entity)#>>();
+            for (int i = 1; i <= minimumRows; i++)
+            {
+                _data.Add(new <#=code.Escape(entity)#> { Id = Guid.NewGuid() });
+            }
+        }
+        isSampleData = true;
+        return _data as IEnumerable;
+    }
+
+    //public override IDataSourceViewSchema Schema
+    //{
+    //    get { return new <#=code.Escape(entity)#>(); }
+    //}
+
+    public override bool CanRetrieveTotalRowCount
+    {
+        get { return true; }
+    }
+
+    public override bool CanDelete
+    {
+        get { return false; }
+    }
+
+    public override bool CanInsert
+    {
+        get { return false; }
+    }
+
+    public override bool CanUpdate
+    {
+        get { return false; }
+    }
+
+    public override bool CanPage
+    {
+        get { return false; }
+    }
+
+    public override bool CanSort
+    {
+        get { return false; }
+    }
+}
+
+<#
+PopIndent();
+EndNamespace(code);
+#>
+<#
+fileManager.Process();
+#>
+
+
+
+<#+
+public void WriteHeader(CodeStringGenerator codeStringGenerator, EntityFrameworkTemplateFileManager fileManager)
+{
+    fileManager.StartHeader();
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+// <#=CodeGenerationTools.GetResourceString("Template_GeneratedCodeCommentLine1")#>
+//
+// <#=CodeGenerationTools.GetResourceString("Template_GeneratedCodeCommentLine2")#>
+// <#=CodeGenerationTools.GetResourceString("Template_GeneratedCodeCommentLine3")#>
+// </auto-generated>
+//------------------------------------------------------------------------------
+<#=codeStringGenerator.UsingDirectives(inHeader: true)#>
+<#+
+    fileManager.EndBlock();
+}
+
+public void BeginNamespace(CodeGenerationTools code)
+{
+    var codeNamespace = code.VsNamespaceSuggestion();
+    if (!String.IsNullOrEmpty(codeNamespace))
+    {
+#>
+namespace <#=code.EscapeNamespace(codeNamespace)#>
+{
+<#+
+        PushIndent("    ");
+    }
+}
+
+public void EndNamespace(CodeGenerationTools code)
+{
+    if (!String.IsNullOrEmpty(code.VsNamespaceSuggestion()))
+    {
+        PopIndent();
+#>
+}
+<#+
+    }
+}
+
+public const string TemplateId = "CSharp_DbContext_Types_EF6";
+
+public class CodeStringGenerator
+{
+    private readonly CodeGenerationTools _code;
+    private readonly TypeMapper _typeMapper;
+    private readonly MetadataTools _ef;
+
+    public CodeStringGenerator(CodeGenerationTools code, TypeMapper typeMapper, MetadataTools ef)
+    {
+        ArgumentNotNull(code, "code");
+        ArgumentNotNull(typeMapper, "typeMapper");
+        ArgumentNotNull(ef, "ef");
+
+        _code = code;
+        _typeMapper = typeMapper;
+        _ef = ef;
+    }
+
+    public string PrimaryKey(EntityType entity)
+    {
+        string result = "";
+
+        foreach (EdmProperty keyProperty in entity.KeyMembers)
+        {
+        
+            if(_typeMapper.GetTypeName(keyProperty.TypeUsage) == "System.Guid")
+            {
+                result = string.Format(CultureInfo.InvariantCulture,"tobeupdated.{1} = Guid.NewGuid();", _code.Escape(entity),_code.Escape(keyProperty));
+            }
+        }
+
+        return result;
+    }
+
+    public string GetRelatedEntity(NavigationProperty navProp)
+    {
+        var endType = _typeMapper.GetTypeName(navProp.ToEndMember.GetEntityType());
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} {1} {2} {{ {3}get; {4}set; }}",
+            AccessibilityAndVirtual(Accessibility.ForNavigationProperty(navProp)),
+            navProp.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many ? ("ICollection<" + endType + ">") : endType,
+            _code.Escape(navProp),
+            _code.SpaceAfter(Accessibility.ForGetter(navProp)),
+            _code.SpaceAfter(Accessibility.ForSetter(navProp)));
+    }
+
+    public string Property(EdmProperty edmProperty)
+    {
+        return string.Format(
+        CultureInfo.InvariantCulture,        
+        "{0} {1} {2} \r\n" +
+        "\t{{ \r\n" +
+            "\t\t{4}get {{ return {3}; }} \r\n" +
+            "\t\t{5}set {{ SetProperty(ref {3}, value); }} \r\n" + 
+        "\t}}\r\n\r\n"+
+        "\t[IgnoreDataMember]\r\n"+
+        "\tprivate {1} {3};\r\n",
+        Accessibility.ForProperty(edmProperty),
+        _typeMapper.GetTypeName(edmProperty.TypeUsage),
+        _code.Escape(edmProperty),
+        "_" + Char.ToLowerInvariant(_code.Escape(edmProperty)[0]) + _code.Escape(edmProperty).Substring(1),
+        _code.SpaceAfter(Accessibility.ForGetter(edmProperty)),
+        _code.SpaceAfter(Accessibility.ForSetter(edmProperty)));
+        
+//		return string.Format(
+//            CultureInfo.InvariantCulture,
+//            "{0} {1} {2} {{ {3}get; {4}set; }}",
+//            Accessibility.ForProperty(edmProperty),
+//            _typeMapper.GetTypeName(edmProperty.TypeUsage),
+//            _code.Escape(edmProperty),
+//            _code.SpaceAfter(Accessibility.ForGetter(edmProperty)),
+//            _code.SpaceAfter(Accessibility.ForSetter(edmProperty)));
+    }
+
+    public string NavigationProperty(NavigationProperty navProp)
+    {
+        var endType = _typeMapper.GetTypeName(navProp.ToEndMember.GetEntityType());
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} {1} {2} {{ {3}get; {4}set; }}",
+            AccessibilityAndVirtual(Accessibility.ForNavigationProperty(navProp)),
+            navProp.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many ? ("ICollection<" + endType + ">") : endType,
+            _code.Escape(navProp),
+            _code.SpaceAfter(Accessibility.ForGetter(navProp)),
+            _code.SpaceAfter(Accessibility.ForSetter(navProp)));
+    }
+    
+    public string AccessibilityAndVirtual(string accessibility)
+    {
+        return accessibility + (accessibility != "private" ? " virtual" : "");
+    }
+    
+    public string EntityClassOpening(EntityType entity)
+    {
+        return string.Format(
+        CultureInfo.InvariantCulture,
+        "{0} {1}partial class {2}{3}",
+        Accessibility.ForType(entity),
+        _code.SpaceAfter(_code.AbstractOption(entity)),
+        _code.Escape(entity),
+        _code.StringBefore(" : ", string.IsNullOrEmpty(_typeMapper.GetTypeName(entity.BaseType)) ? "INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo" : _typeMapper.GetTypeName(entity.BaseType)));
+        
+//        return string.Format(
+//            CultureInfo.InvariantCulture,
+//           "{0} {1}partial class {2}{3}",
+//            Accessibility.ForType(entity),
+//            _code.SpaceAfter(_code.AbstractOption(entity)),
+//            _code.Escape(entity),
+//            _code.StringBefore(" : ", _typeMapper.GetTypeName(entity.BaseType)));
+    }
+    
+    public string EnumOpening(SimpleType enumType)
+    {
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} enum {1} : {2}",
+            Accessibility.ForType(enumType),
+            _code.Escape(enumType),
+            _code.Escape(_typeMapper.UnderlyingClrType(enumType)));
+        }
+    
+    public void WriteFunctionParameters(EdmFunction edmFunction, Action<string, string, string, string> writeParameter)
+    {
+        var parameters = FunctionImportParameter.Create(edmFunction.Parameters, _code, _ef);
+        foreach (var parameter in parameters.Where(p => p.NeedsLocalVariable))
+        {
+            var isNotNull = parameter.IsNullableOfT ? parameter.FunctionParameterName + ".HasValue" : parameter.FunctionParameterName + " != null";
+            var notNullInit = "new ObjectParameter(\"" + parameter.EsqlParameterName + "\", " + parameter.FunctionParameterName + ")";
+            var nullInit = "new ObjectParameter(\"" + parameter.EsqlParameterName + "\", typeof(" + TypeMapper.FixNamespaces(parameter.RawClrTypeName) + "))";
+            writeParameter(parameter.LocalVariableName, isNotNull, notNullInit, nullInit);
+        }
+    }
+    
+    public string ComposableFunctionMethod(EdmFunction edmFunction, string modelNamespace)
+    {
+        var parameters = _typeMapper.GetParameters(edmFunction);
+        
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} IQueryable<{1}> {2}({3})",
+            AccessibilityAndVirtual(Accessibility.ForMethod(edmFunction)),
+            _typeMapper.GetTypeName(_typeMapper.GetReturnType(edmFunction), modelNamespace),
+            _code.Escape(edmFunction),
+            string.Join(", ", parameters.Select(p => TypeMapper.FixNamespaces(p.FunctionParameterType) + " " + p.FunctionParameterName).ToArray()));
+    }
+    
+    public string ComposableCreateQuery(EdmFunction edmFunction, string modelNamespace)
+    {
+        var parameters = _typeMapper.GetParameters(edmFunction);
+        
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<{0}>(\"[{1}].[{2}]({3})\"{4});",
+            _typeMapper.GetTypeName(_typeMapper.GetReturnType(edmFunction), modelNamespace),
+            edmFunction.NamespaceName,
+            edmFunction.Name,
+            string.Join(", ", parameters.Select(p => "@" + p.EsqlParameterName).ToArray()),
+            _code.StringBefore(", ", string.Join(", ", parameters.Select(p => p.ExecuteParameterName).ToArray())));
+    }
+    
+    public string FunctionMethod(EdmFunction edmFunction, string modelNamespace, bool includeMergeOption)
+    {
+        var parameters = _typeMapper.GetParameters(edmFunction);
+        var returnType = _typeMapper.GetReturnType(edmFunction);
+
+        var paramList = String.Join(", ", parameters.Select(p => TypeMapper.FixNamespaces(p.FunctionParameterType) + " " + p.FunctionParameterName).ToArray());
+        if (includeMergeOption)
+        {
+            paramList = _code.StringAfter(paramList, ", ") + "MergeOption mergeOption";
+        }
+
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} {1} {2}({3})",
+            AccessibilityAndVirtual(Accessibility.ForMethod(edmFunction)),
+            returnType == null ? "int" : "ObjectResult<" + _typeMapper.GetTypeName(returnType, modelNamespace) + ">",
+            _code.Escape(edmFunction),
+            paramList);
+    }
+    
+    public string ExecuteFunction(EdmFunction edmFunction, string modelNamespace, bool includeMergeOption)
+    {
+        var parameters = _typeMapper.GetParameters(edmFunction);
+        var returnType = _typeMapper.GetReturnType(edmFunction);
+
+        var callParams = _code.StringBefore(", ", String.Join(", ", parameters.Select(p => p.ExecuteParameterName).ToArray()));
+        if (includeMergeOption)
+        {
+            callParams = ", mergeOption" + callParams;
+        }
+        
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction{0}(\"{1}\"{2});",
+            returnType == null ? "" : "<" + _typeMapper.GetTypeName(returnType, modelNamespace) + ">",
+            edmFunction.Name,
+            callParams);
+    }
+    
+    public string DbSet(EntitySet entitySet)
+    {
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} virtual DbSet<{1}> {2} {{ get; set; }}",
+            Accessibility.ForReadOnlyProperty(entitySet),
+            _typeMapper.GetTypeName(entitySet.ElementType),
+            _code.Escape(entitySet));
+    }
+
+    public string UsingDirectives(bool inHeader, bool includeCollections = true)
+    {
+        return inHeader == string.IsNullOrEmpty(_code.VsNamespaceSuggestion())
+            ? string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}using System;{3}using System.Runtime.Serialization;{1}" +
+                "{2}",
+                inHeader ? Environment.NewLine : "",
+                includeCollections ? (Environment.NewLine + "using System.Collections.Generic;") : "",
+                inHeader ? "" : Environment.NewLine, Environment.NewLine)
+            : "";
+    }
+
+    public string WriteEntityTypeSerializationInfo(EntityType type)
+    {
+        StringBuilder output = new StringBuilder();
+        output.AppendLine("[Serializable]");
+        
+
+        List<String> typeList = new List<String>();
+        var complexProperties = _typeMapper.GetComplexProperties(type);
+        foreach(var complexProperty in complexProperties)
+        {
+            typeList.Add(_code.Escape(_typeMapper.GetTypeName(complexProperty.TypeUsage)));
+        }
+
+        var navigationProperties = _typeMapper.GetNavigationProperties(type);
+        foreach (var navigationProperty in navigationProperties)
+        {
+            typeList.Add(_code.Escape(_typeMapper.GetTypeName(navigationProperty.ToEndMember.GetEntityType())));
+        }
+
+        foreach(String sItem in typeList.Distinct())
+        {
+            output.AppendFormat("[KnownType(typeof({0}))]{1}", sItem, Environment.NewLine);
+        }
+        output.AppendLine("[DataContract(IsReference = true)]");
+        return output.ToString();
+    }
+}
+
+public class TypeMapper
+{
+    private const string ExternalTypeNameAttributeName = @"http://schemas.microsoft.com/ado/2006/04/codegeneration:ExternalTypeName";
+
+    private readonly System.Collections.IList _errors;
+    private readonly CodeGenerationTools _code;
+    private readonly MetadataTools _ef;
+
+    public TypeMapper(CodeGenerationTools code, MetadataTools ef, System.Collections.IList errors)
+    {
+        ArgumentNotNull(code, "code");
+        ArgumentNotNull(ef, "ef");
+        ArgumentNotNull(errors, "errors");
+
+        _code = code;
+        _ef = ef;
+        _errors = errors;
+    }
+
+    public static string FixNamespaces(string typeName)
+    {
+        return typeName.Replace("System.Data.Spatial.", "System.Data.Entity.Spatial.");
+    }
+
+	public EntitySet GetEntitySet(EntityContainer container, EntityType entity)
+    {
+		EntitySetBase found  = (from meta in container.BaseEntitySets where meta.ElementType == entity select meta).First();
+		return found as EntitySet;
+    }
+
+    public string GetTypeName(TypeUsage typeUsage)
+    {
+        return typeUsage == null ? null : GetTypeName(typeUsage.EdmType, _ef.IsNullable(typeUsage), modelNamespace: null);
+    }
+
+    public string GetTypeName(EdmType edmType)
+    {
+        return GetTypeName(edmType, isNullable: null, modelNamespace: null);
+    }
+
+    public string GetTypeName(TypeUsage typeUsage, string modelNamespace)
+    {
+        return typeUsage == null ? null : GetTypeName(typeUsage.EdmType, _ef.IsNullable(typeUsage), modelNamespace);
+    }
+
+    public string GetTypeName(EdmType edmType, string modelNamespace)
+    {
+        return GetTypeName(edmType, isNullable: null, modelNamespace: modelNamespace);
+    }
+
+    public string GetTypeName(EdmType edmType, bool? isNullable, string modelNamespace)
+    {
+        if (edmType == null)
+        {
+            return null;
+        }
+
+        var collectionType = edmType as CollectionType;
+        if (collectionType != null)
+        {
+            return String.Format(CultureInfo.InvariantCulture, "ICollection<{0}>", GetTypeName(collectionType.TypeUsage, modelNamespace));
+        }
+
+        var typeName = _code.Escape(edmType.MetadataProperties
+                                .Where(p => p.Name == ExternalTypeNameAttributeName)
+                                .Select(p => (string)p.Value)
+                                .FirstOrDefault())
+            ?? (modelNamespace != null && edmType.NamespaceName != modelNamespace ?
+                _code.CreateFullName(_code.EscapeNamespace(edmType.NamespaceName), _code.Escape(edmType)) :
+                _code.Escape(edmType));
+
+        if (edmType is StructuralType)
+        {
+            return typeName;
+        }
+
+        if (edmType is SimpleType)
+        {
+            var clrType = UnderlyingClrType(edmType);
+            if (!IsEnumType(edmType))
+            {
+                typeName = _code.Escape(clrType);
+            }
+
+            typeName = FixNamespaces(typeName);
+
+            return clrType.IsValueType && isNullable == true ?
+                String.Format(CultureInfo.InvariantCulture, "Nullable<{0}>", typeName) :
+                typeName;
+        }
+
+        throw new ArgumentException("edmType");
+    }
+    
+    public Type UnderlyingClrType(EdmType edmType)
+    {
+        ArgumentNotNull(edmType, "edmType");
+
+        var primitiveType = edmType as PrimitiveType;
+        if (primitiveType != null)
+        {
+            return primitiveType.ClrEquivalentType;
+        }
+
+        if (IsEnumType(edmType))
+        {
+            return GetEnumUnderlyingType(edmType).ClrEquivalentType;
+        }
+
+        return typeof(object);
+    }
+    
+    public object GetEnumMemberValue(MetadataItem enumMember)
+    {
+        ArgumentNotNull(enumMember, "enumMember");
+        
+        var valueProperty = enumMember.GetType().GetProperty("Value");
+        return valueProperty == null ? null : valueProperty.GetValue(enumMember, null);
+    }
+    
+    public string GetEnumMemberName(MetadataItem enumMember)
+    {
+        ArgumentNotNull(enumMember, "enumMember");
+        
+        var nameProperty = enumMember.GetType().GetProperty("Name");
+        return nameProperty == null ? null : (string)nameProperty.GetValue(enumMember, null);
+    }
+
+    public System.Collections.IEnumerable GetEnumMembers(EdmType enumType)
+    {
+        ArgumentNotNull(enumType, "enumType");
+
+        var membersProperty = enumType.GetType().GetProperty("Members");
+        return membersProperty != null 
+            ? (System.Collections.IEnumerable)membersProperty.GetValue(enumType, null)
+            : Enumerable.Empty<MetadataItem>();
+    }
+    
+    public bool EnumIsFlags(EdmType enumType)
+    {
+        ArgumentNotNull(enumType, "enumType");
+        
+        var isFlagsProperty = enumType.GetType().GetProperty("IsFlags");
+        return isFlagsProperty != null && (bool)isFlagsProperty.GetValue(enumType, null);
+    }
+
+    public bool IsEnumType(GlobalItem edmType)
+    {
+        ArgumentNotNull(edmType, "edmType");
+
+        return edmType.GetType().Name == "EnumType";
+    }
+
+    public PrimitiveType GetEnumUnderlyingType(EdmType enumType)
+    {
+        ArgumentNotNull(enumType, "enumType");
+
+        return (PrimitiveType)enumType.GetType().GetProperty("UnderlyingType").GetValue(enumType, null);
+    }
+
+    public string CreateLiteral(object value)
+    {
+        if (value == null || value.GetType() != typeof(TimeSpan))
+        {
+            return _code.CreateLiteral(value);
+        }
+
+        return string.Format(CultureInfo.InvariantCulture, "new TimeSpan({0})", ((TimeSpan)value).Ticks);
+    }
+    
+    public bool VerifyCaseInsensitiveTypeUniqueness(IEnumerable<string> types, string sourceFile)
+    {
+        ArgumentNotNull(types, "types");
+        ArgumentNotNull(sourceFile, "sourceFile");
+        
+        var hash = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+        if (types.Any(item => !hash.Add(item)))
+        {
+            _errors.Add(
+                new CompilerError(sourceFile, -1, -1, "6023",
+                    String.Format(CultureInfo.CurrentCulture, CodeGenerationTools.GetResourceString("Template_CaseInsensitiveTypeConflict"))));
+            return false;
+        }
+        return true;
+    }
+
+    public IEnumerable<SimpleType> GetEnumItemsToGenerate(IEnumerable<GlobalItem> itemCollection)
+    {
+        return GetItemsToGenerate<SimpleType>(itemCollection)
+            .Where(e => IsEnumType(e));
+    }
+    
+    public IEnumerable<T> GetItemsToGenerate<T>(IEnumerable<GlobalItem> itemCollection) where T: EdmType
+    {
+        return itemCollection
+            .OfType<T>()
+            .Where(i => !i.MetadataProperties.Any(p => p.Name == ExternalTypeNameAttributeName))
+            .OrderBy(i => i.Name);
+    }
+
+    public IEnumerable<string> GetAllGlobalItems(IEnumerable<GlobalItem> itemCollection)
+    {
+        return itemCollection
+            .Where(i => i is EntityType || i is ComplexType || i is EntityContainer || IsEnumType(i))
+            .Select(g => GetGlobalItemName(g));
+    }
+
+    public string GetGlobalItemName(GlobalItem item)
+    {
+        if (item is EdmType)
+        {
+            return ((EdmType)item).Name;
+        }
+        else
+        {
+            return ((EntityContainer)item).Name;
+        }
+    }
+
+    public IEnumerable<EdmProperty> GetSimpleProperties(EntityType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type);
+    }
+    
+    public IEnumerable<EdmProperty> GetSimpleProperties(ComplexType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type);
+    }
+    
+    public IEnumerable<EdmProperty> GetComplexProperties(EntityType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == type);
+    }
+    
+    public IEnumerable<EdmProperty> GetComplexProperties(ComplexType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == type);
+    }
+
+    public IEnumerable<EdmProperty> GetPropertiesWithDefaultValues(EntityType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type && p.DefaultValue != null);
+    }
+    
+    public IEnumerable<EdmProperty> GetPropertiesWithDefaultValues(ComplexType type)
+    {
+        return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type && p.DefaultValue != null);
+    }
+
+    public IEnumerable<NavigationProperty> GetNavigationProperties(EntityType type)
+    {
+        return type.NavigationProperties.Where(np => np.DeclaringType == type);
+    }
+    
+    public IEnumerable<NavigationProperty> GetCollectionNavigationProperties(EntityType type)
+    {
+        return type.NavigationProperties.Where(np => np.DeclaringType == type && np.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many);
+    }
+    
+    public FunctionParameter GetReturnParameter(EdmFunction edmFunction)
+    {
+        ArgumentNotNull(edmFunction, "edmFunction");
+
+        var returnParamsProperty = edmFunction.GetType().GetProperty("ReturnParameters");
+        return returnParamsProperty == null
+            ? edmFunction.ReturnParameter
+            : ((IEnumerable<FunctionParameter>)returnParamsProperty.GetValue(edmFunction, null)).FirstOrDefault();
+    }
+
+    public bool IsComposable(EdmFunction edmFunction)
+    {
+        ArgumentNotNull(edmFunction, "edmFunction");
+
+        var isComposableProperty = edmFunction.GetType().GetProperty("IsComposableAttribute");
+        return isComposableProperty != null && (bool)isComposableProperty.GetValue(edmFunction, null);
+    }
+
+    public IEnumerable<FunctionImportParameter> GetParameters(EdmFunction edmFunction)
+    {
+        return FunctionImportParameter.Create(edmFunction.Parameters, _code, _ef);
+    }
+
+    public TypeUsage GetReturnType(EdmFunction edmFunction)
+    {
+        var returnParam = GetReturnParameter(edmFunction);
+        return returnParam == null ? null : _ef.GetElementType(returnParam.TypeUsage);
+    }
+    
+    public bool GenerateMergeOptionFunction(EdmFunction edmFunction, bool includeMergeOption)
+    {
+        var returnType = GetReturnType(edmFunction);
+        return !includeMergeOption && returnType != null && returnType.EdmType.BuiltInTypeKind == BuiltInTypeKind.EntityType;
+    }
+}
+
+public static void ArgumentNotNull<T>(T arg, string name) where T : class
+{
+    if (arg == null)
+    {
+        throw new ArgumentNullException(name);
+    }
+}
+#>

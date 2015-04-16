@@ -26,6 +26,8 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
 <#=codeStringGenerator.UsingDirectives(inHeader: false)#>
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Data.Entity.ModelConfiguration;
+using System.Collections.Generic;
 
 <#=codeStringGenerator.WriteEntityTypeSerializationInfo(entity)#>
 <#=codeStringGenerator.EntityClassOpening(entity)#>
@@ -50,7 +52,7 @@ using System.Runtime.CompilerServices;
         foreach (var navigationProperty in collectionNavigationProperties)
         {
 #>
-        this.<#=code.Escape(navigationProperty)#> = new HashSet<<#=typeMapper.GetTypeName(navigationProperty.ToEndMember.GetEntityType())#>>();
+        this.<#=code.Escape(navigationProperty)#> = new ObservableCollection<<#=typeMapper.GetTypeName(navigationProperty.ToEndMember.GetEntityType())#>>();
 <#
         }
 
@@ -62,7 +64,6 @@ using System.Runtime.CompilerServices;
         }
 #>
     }
-
 <#
     }
 
@@ -143,6 +144,15 @@ using System.Runtime.CompilerServices;
         }
     }
 
+    protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+    {
+        var eventHandler = this.ErrorsChanged;
+        if (eventHandler != null)
+        {
+            eventHandler(this, e);
+        }
+    }
+
 	[IgnoreDataMember]
     public string Error
     {
@@ -180,6 +190,19 @@ using System.Runtime.CompilerServices;
         }
     }
 }
+
+<#
+var entityKey = entity.KeyMembers.FirstOrDefault();
+#>
+
+public class <#=code.Escape(entity)#>_Mapping : EntityTypeConfiguration<<#=code.Escape(entity)#>>
+{
+	public <#=code.Escape(entity)#>_Mapping() 
+	{			
+		HasKey(m => m.<#=code.Escape(entityKey)#>);
+	}
+}
+
 <#
     EndNamespace(code);
 }
@@ -386,7 +409,7 @@ public class CodeStringGenerator
             CultureInfo.InvariantCulture,
             "{0} {1} {2} {{ {3}get; {4}set; }}",
             AccessibilityAndVirtual(Accessibility.ForNavigationProperty(navProp)),
-            navProp.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many ? ("ICollection<" + endType + ">") : endType,
+            navProp.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many ? ("ObservableCollection<" + endType + ">") : endType,
             _code.Escape(navProp),
             _code.SpaceAfter(Accessibility.ForGetter(navProp)),
             _code.SpaceAfter(Accessibility.ForSetter(navProp)));
@@ -522,7 +545,7 @@ public class CodeStringGenerator
                 "{0}using System;{3}using System.Runtime.Serialization;{1}" +
                 "{2}",
                 inHeader ? Environment.NewLine : "",
-                includeCollections ? (Environment.NewLine + "using System.Collections.Generic;") : "",
+                includeCollections ? (Environment.NewLine + "using System.Collections.ObjectModel;") : "",
                 inHeader ? "" : Environment.NewLine, Environment.NewLine)
             : "";
     }
@@ -609,7 +632,7 @@ public class TypeMapper
         var collectionType = edmType as CollectionType;
         if (collectionType != null)
         {
-            return String.Format(CultureInfo.InvariantCulture, "ICollection<{0}>", GetTypeName(collectionType.TypeUsage, modelNamespace));
+            return String.Format(CultureInfo.InvariantCulture, "ObservableCollection<{0}>", GetTypeName(collectionType.TypeUsage, modelNamespace));
         }
 
         var typeName = _code.Escape(edmType.MetadataProperties

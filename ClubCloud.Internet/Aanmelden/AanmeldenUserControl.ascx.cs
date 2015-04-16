@@ -101,9 +101,57 @@ namespace ClubCloud.Internet
 
         protected void wzd_aanmelden_FinishButtonClick(object sender, WizardNavigationEventArgs e)
         {
-            FormViewRow row = fvw_vereniging.Row;
-            TextBox tbx_naam = (TextBox)fvw_vereniging.FindControl("Naam");
-            string naam = tbx_naam.Text;
+            string verenigingsnummer = tbx_verenigingsnummer.Text;
+
+            //FormViewRow vereniging = fvw_vereniging.Row;
+
+            TextBox vereniging_naam = (TextBox)fvw_vereniging.FindControl("Naam");
+            string verenigingnaam = vereniging_naam.Text;
+
+            TextBox vereniging_KvKNummer = (TextBox)fvw_vereniging.FindControl("KvKNummer");
+            string verenigingkvknummer = vereniging_KvKNummer.Text;
+
+            TextBox vereniging_KvKPlaats = (TextBox)fvw_vereniging.FindControl("KvKPlaats");
+            string verenigingkvkplaats = vereniging_KvKPlaats.Text;
+
+            TextBox vereniging_BankNummer = (TextBox)fvw_vereniging.FindControl("BankNummer");
+            string verenigingbanknummer = vereniging_BankNummer.Text;
+
+            TextBox vereniging_BankIban = (TextBox)fvw_vereniging.FindControl("BankIban");
+            string verenigingbankiban = vereniging_BankIban.Text;
+
+            TextBox vereniging_BankPlaats = (TextBox)fvw_vereniging.FindControl("BankPlaats");
+            string verenigingbankplaats = vereniging_BankPlaats.Text;
+
+            TextBox vereniging_TelefoonOverdag = (TextBox)fvw_vereniging.FindControl("TelefoonOverdag");
+            string verenigingtelefoonoverdag = vereniging_TelefoonOverdag.Text;
+
+            TextBox vereniging_TelefoonAvond = (TextBox)fvw_vereniging.FindControl("TelefoonAvond");
+            string verenigingtelefoonavond = vereniging_TelefoonAvond.Text;
+
+            TextBox vereniging_Email = (TextBox)fvw_vereniging.FindControl("Email");
+            string verenigingemail = vereniging_Email.Text;
+
+            //FormViewRow persoon = fvw_persoon.Row;
+
+            TextBox persoon_knltb = (TextBox)fvw_persoon.FindControl("KNLTBNummer");
+            string persoonknltb = persoon_knltb.Text;
+
+            TextBox persoon_naam = (TextBox)fvw_persoon.FindControl("Naam");
+            string persoonnaam = persoon_naam.Text;
+
+            TextBox persoon_TelefoonOverdag = (TextBox)fvw_persoon.FindControl("TelefoonOverdag");
+            string persoontelefoonoverdag = persoon_TelefoonOverdag.Text;
+
+            TextBox persoon_TelefoonAvond = (TextBox)fvw_persoon.FindControl("TelefoonAvond");
+            string persoontelefoonavond = persoon_TelefoonAvond.Text;
+
+            TextBox persoon_Email = (TextBox)fvw_persoon.FindControl("Email");
+            string persoonemail = persoon_Email.Text;
+
+            bool akkoord = voorwaarden.Checked;
+
+            //Client.SendMessage()
 
         }
 

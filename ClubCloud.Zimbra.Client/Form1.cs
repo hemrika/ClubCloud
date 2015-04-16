@@ -831,19 +831,34 @@ namespace ClubCloud.Zimbra.Client
 
             string found = Regex.Match(nummer, @"\d+").Value;
             Console.WriteLine(nummer);
-            /*
+            
             using (SPSite site = new SPSite("https://mijn.clubcloud.nl/"))
             {
                 SPServiceContext context = SPServiceContext.GetContext(site);
                 ClubCloud.Service.ClubCloudServiceClient client = new ClubCloud.Service.ClubCloudServiceClient(context);
-                ClubCloud.Model.ClubCloud_Vereniging vereniging = client.GetVerenigingByNummer("12073385", "82503", false);
-                ClubCloud.Model.ClubCloud_Gebruiker gebruiker = client.GetGebruikerByNummer("12073385", vereniging.Id, nummer, false);
+                Model.ClubCloud_Setting settings = new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = new Guid("02ADA6C7-80F9-4671-91F9-898EA5DA3CCD") };
+                ClubCloud.Model.ClubCloud_Vereniging vereniging = client.GetVerenigingById(new Guid("02ADA6C7-80F9-4671-91F9-898EA5DA3CCD"), false, settings);
+                Model.ClubCloud_Lidmaatschapsoort lidmaatschapsoort = client.GetLidmaatschapsoortById(new Guid("9D246ECB-837D-425F-9C01-C8FF676611D9"), false, settings);
+
+                //ClubCloud.Model.ClubCloud_Vereniging vereniging = client.GetVerenigingByNummer("12073385", "82503", false);
+                //ClubCloud.Model.ClubCloud_Functie functie =  client.GetFunctieById(Guid.Parse("FD9FE656-31BC-E411-9299-0050569F0030"), false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                //functie.Meervoud = "Beschermheren";
+                //functie = client.SetFunctie(functie, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+
+                //functie = new Model.ClubCloud_Functie { Actief = "Actief", Beschrijving = "Lorem Ipsum", Code = "LI", Meervoud = "lorem ipsums", Naam = "lorem ipsum", Omschrijving = "lorem ipsums", Toegang = false };
+                //functie = client.SetFunctie(functie, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                //Guid id = functie.Id;
+                //List<ClubCloud.Model.ClubCloud_Functionaris> functionarissen= client.GetFunctionarissenForVereniging(vereniging,false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                //ClubCloud.Model.ClubCloud_Accommodatie accommodatie = client.GetAccommodatieForVereniging(vereniging, false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                //List<ClubCloud.Model.ClubCloud_Baan> banen = client.GetBanenForAccommodatie(accommodatie, false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                //int aantal = banen.Count;
+                //ClubCloud.Model.ClubCloud_Gebruiker gebruiker = client.GetGebruikerByNummer("12073385", vereniging.Id, nummer, false);
                 //client.LidmaatschappenUpdate("12073385", vereniging.Id, true);
                 //client.VerenigingenUpdate("12073385", true);
                 //client.VerenigingZimbra("12073385", vereniging);
-                client.GebruikerZimbra("12073385", gebruiker);
+                //client.GebruikerZimbra("12073385", gebruiker);
             }  
-            */
+           
             /*
             contact contact= new KNLTB.ServIt.CrmService.contact{ };
             TargetCreateContact ccontact = new TargetCreateContact { Contact = contact };

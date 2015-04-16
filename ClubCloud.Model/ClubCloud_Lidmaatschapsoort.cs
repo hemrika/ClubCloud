@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Lidmaatschap))]
@@ -24,9 +26,8 @@ namespace ClubCloud.Model
     {
         public ClubCloud_Lidmaatschapsoort()
         {
-            this.ClubCloud_Lidmaatschap = new HashSet<ClubCloud_Lidmaatschap>();
+            this.ClubCloud_Lidmaatschap = new ObservableCollection<ClubCloud_Lidmaatschap>();
         }
-    
     	[DataMember]
         public System.Guid Id 
     	{ 
@@ -131,7 +132,7 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Lidmaatschap> ClubCloud_Lidmaatschap { get; set; }
+        public virtual ObservableCollection<ClubCloud_Lidmaatschap> ClubCloud_Lidmaatschap { get; set; }
     
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
@@ -163,6 +164,15 @@ namespace ClubCloud.Model
             if (eventHandler != null)
             {
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
             }
         }
     
@@ -203,4 +213,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_Lidmaatschapsoort_Mapping : EntityTypeConfiguration<ClubCloud_Lidmaatschapsoort>
+    {
+    	public ClubCloud_Lidmaatschapsoort_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

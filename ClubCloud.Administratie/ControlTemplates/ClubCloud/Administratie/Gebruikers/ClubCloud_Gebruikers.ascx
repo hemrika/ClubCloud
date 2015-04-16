@@ -1,0 +1,302 @@
+﻿
+ 
+<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
+<%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Gebruikers.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_GebruikersUserControl" %>
+<Common:ClubCloudDataSource ID="ClubCloud_Gebruiker_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Gebruikers_View" />
+<SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="ClubCloud_Gebruiker_Grid" runat="server" />
+<br />
+<SharePoint:SPGridView
+    ID="ClubCloud_Gebruiker_Grid"
+    runat="server"
+    DataSourceID="ClubCloud_Gebruiker_DataSource"
+    AutoGenerateColumns="false"     
+    AllowPaging="true"
+    PageSize="30"
+    AllowSorting="true" 
+    ShowFooter="True" OnDataBinding="Page_Load">
+    <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
+    <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
+    <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
+    <PagerSettings Mode="NextPreviousFirstLast" Visible="true" Position="TopAndBottom" PreviousPageText="vorige" NextPageText="volgende"  FirstPageText="Eerste" LastPageText="Laatste" PageButtonCount="5" />
+    <PagerStyle HorizontalAlign="Center" VerticalAlign="Top" BackColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
+    <Columns>
+        <SharePoint:SPBoundField
+            DataField="Id"
+            HeaderText="Id"
+            SortExpression="Id"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Beschrijving"
+            HeaderText="Beschrijving"
+            SortExpression="Beschrijving"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Bondsnummer"
+            HeaderText="Bondsnummer"
+            SortExpression="Bondsnummer"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Roepnaam"
+            HeaderText="Roepnaam"
+            SortExpression="Roepnaam"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Aanhef"
+            HeaderText="Aanhef"
+            SortExpression="Aanhef"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Voornaam"
+            HeaderText="Voornaam"
+            SortExpression="Voornaam"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Voornamen"
+            HeaderText="Voornamen"
+            SortExpression="Voornamen"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Achtervoegsel"
+            HeaderText="Achtervoegsel"
+            SortExpression="Achtervoegsel"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Tussenvoegsel"
+            HeaderText="Tussenvoegsel"
+            SortExpression="Tussenvoegsel"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Achternaam"
+            HeaderText="Achternaam"
+            SortExpression="Achternaam"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Voorletters"
+            HeaderText="Voorletters"
+            SortExpression="Voorletters"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="EmailGeheim"
+            HeaderText="EmailGeheim"
+            SortExpression="EmailGeheim"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="EmailKNLTB"
+            HeaderText="EmailKNLTB"
+            SortExpression="EmailKNLTB"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="EmailWebSite"
+            HeaderText="EmailWebSite"
+            SortExpression="EmailWebSite"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="EmailOverig"
+            HeaderText="EmailOverig"
+            SortExpression="EmailOverig"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="TelefoonGeheim"
+            HeaderText="TelefoonGeheim"
+            SortExpression="TelefoonGeheim"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="TelefoonAvond"
+            HeaderText="TelefoonAvond"
+            SortExpression="TelefoonAvond"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="TelefoonOverdag"
+            HeaderText="TelefoonOverdag"
+            SortExpression="TelefoonOverdag"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="TelefoonOverig"
+            HeaderText="TelefoonOverig"
+            SortExpression="TelefoonOverig"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Mobiel"
+            HeaderText="Mobiel"
+            SortExpression="Mobiel"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Fax"
+            HeaderText="Fax"
+            SortExpression="Fax"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="BankNummer"
+            HeaderText="BankNummer"
+            SortExpression="BankNummer"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="BankIban"
+            HeaderText="BankIban"
+            SortExpression="BankIban"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="BankPlaats"
+            HeaderText="BankPlaats"
+            SortExpression="BankPlaats"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Geboortedatum"
+            HeaderText="Geboortedatum"
+            SortExpression="Geboortedatum"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Geboorteplaats"
+            HeaderText="Geboorteplaats"
+            SortExpression="Geboorteplaats"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="OverlijdensDatum"
+            HeaderText="OverlijdensDatum"
+            SortExpression="OverlijdensDatum"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="AddressGeheim"
+            HeaderText="AddressGeheim"
+            SortExpression="AddressGeheim"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="NationaliteitId"
+            HeaderText="NationaliteitId"
+            SortExpression="NationaliteitId"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Website"
+            HeaderText="Website"
+            SortExpression="Website"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="FTPsite"
+            HeaderText="FTPsite"
+            SortExpression="FTPsite"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Actief"
+            HeaderText="Actief"
+            SortExpression="Actief"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Beroep"
+            HeaderText="Beroep"
+            SortExpression="Beroep"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Kinderen"
+            HeaderText="Kinderen"
+            SortExpression="Kinderen"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="KinderenAantal"
+            HeaderText="KinderenAantal"
+            SortExpression="KinderenAantal"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Partner"
+            HeaderText="Partner"
+            SortExpression="Partner"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="AanhefBrief"
+            HeaderText="AanhefBrief"
+            SortExpression="AanhefBrief"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="AanhefAttentie"
+            HeaderText="AanhefAttentie"
+            SortExpression="AanhefAttentie"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="FotoId"
+            HeaderText="FotoId"
+            SortExpression="FotoId"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="VerenigingId"
+            HeaderText="VerenigingId"
+            SortExpression="VerenigingId"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Volledigenaam"
+            HeaderText="Volledigenaam"
+            SortExpression="Volledigenaam"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Geslacht"
+            HeaderText="Geslacht"
+            SortExpression="Geslacht"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+        <SharePoint:SPBoundField
+            DataField="Gewijzigd"
+            HeaderText="Gewijzigd"
+            SortExpression="Gewijzigd"
+            ItemStyle-Width="40px">
+        </SharePoint:SPBoundField>
+    </Columns>
+    <EmptyDataTemplate>
+        <HeaderTemplate>
+            <asp:HyperLink ID="ClubCloud_Gebruiker_Insert" Text="Toevoegen" NavigateUrl="~/ClubCloud_Gebruiker_Insert.aspx"  runat="server" /> <br/>
+        </HeaderTemplate>
+        <ItemTemplate>Er zijn geen gegevens gevonden.</ItemTemplate>
+    </EmptyDataTemplate>
+</SharePoint:SPGridView>
+<br />
+<SharePoint:SPGridViewPager ID="spgvpager_bottom" GridViewId="ClubCloud_Gebruiker_Grid" runat="server"/>
+<p>
+    <asp:Label runat="server" ID="lblMessage" ForeColor="Red" />
+</p>
+
+
+

@@ -53,7 +53,7 @@
     <SharePoint:ProjectProperty Property="Title" runat="server"/>
 </asp:Content>
 
-<asp:Content ID="Content1" ContentPlaceHolderId="PlaceHolderMain" runat="server">
+<asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
     <h1>
         Administratie
     </h1>

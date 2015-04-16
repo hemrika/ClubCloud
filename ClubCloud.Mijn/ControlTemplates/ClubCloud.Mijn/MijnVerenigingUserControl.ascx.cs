@@ -44,10 +44,10 @@ namespace ClubCloud.Mijn.ControlTemplates
                 ClubCloud_Vereniging vereniging = null;
                 try
                 {
-                    vereniging = Client.GetVerenigingById(userId, Settings.VerenigingId.Value);
+                    vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value, false, Settings);
 
-                    vereniging.ClubCloud_Accommodatie = Client.GetAccommodatieById(userId, vereniging.AccommodatieId.Value);
-                    vereniging.ClubCloud_Lidmaatschap = Client.GetLidmaatschapByGebruikerId(userId, vereniging.Id, Settings.GebruikerId.Value, false);
+                    vereniging.ClubCloud_Accommodatie = Client.GetAccommodatieById(vereniging.AccommodatieId.Value);
+                    vereniging.ClubCloud_Lidmaatschap = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Lidmaatschap>(Client.GetLidmaatschapByGebruikerId(userId, vereniging.Id, Settings.GebruikerId.Value, false));
                 }
                 catch { }
 
@@ -122,7 +122,7 @@ namespace ClubCloud.Mijn.ControlTemplates
             if (Settings != null)
             {
                 Guid Id = Guid.Parse(lst_verenigingen.SelectedDataKey.Value.ToString());
-                ClubCloud_Vereniging vereniging = Client.GetVerenigingById(userId,Id,false);
+                ClubCloud_Vereniging vereniging = Client.GetVerenigingById(Id, false, Settings);
                 fvw_vereniging.DataSource = new List<ClubCloud_Vereniging> { vereniging };
                 fvw_vereniging.DataBind();
             }

@@ -64,6 +64,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
@@ -111,6 +112,7 @@
     <ProjectReference Include="..\ClubCloud.Model\ClubCloud.Model.csproj">
       <Project>{97cb96d6-3b6b-4879-a961-9166a73c7614}</Project>
       <Name>ClubCloud.Model</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\ClubCloud.Service\ClubCloud.Service.csproj">
       <Project>{bc7cce39-f470-4156-b67a-8a145841f43b}</Project>

@@ -393,7 +393,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Bondsnummer" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="SoortId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="LidmaatschapsoortId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Begin" Type="datetime" Nullable="false" />
     <Property Name="Einde" Type="datetime" Nullable="true" />
     <Property Name="Opzegging" Type="datetime" Nullable="true" />
@@ -558,6 +558,11 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Omschrijving" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Meervoud" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_BanenSpeciaal">
     <Key>
@@ -1005,7 +1010,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ClubCloud_Lidmaatschap">
-        <PropertyRef Name="SoortId" />
+        <PropertyRef Name="LidmaatschapsoortId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1507,7 +1512,7 @@
           <Property Name="Maanden" Type="Int32" Nullable="false" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_Gebruiker_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Gebruiker" />
-          <NavigationProperty Name="ClubCloud_Afhangen" Relationship="BeheerClubCloud.ClubCloud_Afhangen_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Afhangen" />
+          <NavigationProperty Name="ClubCloud_Afhang" Relationship="BeheerClubCloud.ClubCloud_Afhangen_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Afhangen" />
           <NavigationProperty Name="ClubCloud_Sponsor" Relationship="BeheerClubCloud.ClubCloud_Sponsor_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Sponsor" />
           <NavigationProperty Name="ClubCloud_Setting" Relationship="BeheerClubCloud.ClubCloud_Setting_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Setting" />
           <NavigationProperty Name="ClubCloud_Baanschema" Relationship="BeheerClubCloud.ClubCloud_BaanschemaClubCloud_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Baanschema" />
@@ -1658,7 +1663,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Bondsnummer" Type="String" />
-          <Property Name="SoortId" Type="Guid" Nullable="true" />
+          <Property Name="LidmaatschapsoortId" Type="Guid" Nullable="true" />
           <Property Name="Begin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Einde" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Opzegging" Type="DateTime" Nullable="true" Precision="3" />
@@ -2055,6 +2060,11 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Naam" Type="String" Nullable="false" />
+          <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ClubCloud_BaanSpeciaal">
           <Key>
@@ -2311,7 +2321,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ClubCloud_Lidmaatschap">
-              <PropertyRef Name="SoortId" />
+              <PropertyRef Name="LidmaatschapsoortId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2755,7 +2765,7 @@
         <MappingFragment StoreEntitySet="ClubCloud_Lidmaatschappen">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Bondsnummer" ColumnName="Bondsnummer" />
-          <ScalarProperty Name="SoortId" ColumnName="SoortId" />
+          <ScalarProperty Name="LidmaatschapsoortId" ColumnName="LidmaatschapsoortId" />
           <ScalarProperty Name="Begin" ColumnName="Begin" />
           <ScalarProperty Name="Einde" ColumnName="Einde" />
           <ScalarProperty Name="Opzegging" ColumnName="Opzegging" />
@@ -2929,6 +2939,11 @@
         <MappingFragment StoreEntitySet="ClubCloud_Bouwaarden">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Omschrijving" ColumnName="Omschrijving" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
+          <ScalarProperty Name="Meervoud" ColumnName="Meervoud" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

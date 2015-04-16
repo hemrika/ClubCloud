@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using Microsoft.SharePoint;
 using ClubCloud.Model;
 using System.Reflection;
+using ClubCloud.Service;
 
 namespace ClubCloud.Administratie.WebControls
 {
@@ -65,7 +66,7 @@ namespace ClubCloud.Administratie.WebControls
             string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
             ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
 
-            ClubCloud_Gebruiker_DataView gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs);
+            ClubCloud_Gebruiker_View gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs);
 
             selectArgs.TotalRowCount = gebruikers.TotalRowCount;
 

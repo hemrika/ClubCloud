@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/04/2015 16:42:08
+-- Date Created: 04/15/2015 12:00:42
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Model\BeheerClubCloud.edmx
 -- --------------------------------------------------
 
@@ -154,87 +154,115 @@ GO
 IF OBJECT_ID(N'[dbo].[ClubCloud_Settings]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Settings];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Verenigingen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Verenigingen];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Gebruikers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Gebruikers];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Accommodaties]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Accommodaties];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Nationaliteiten]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Nationaliteiten];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Districten]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Districten];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Functies]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Functies];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Lidmaatschappen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Lidmaatschappen];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Profielen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Profielen];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Functionarissen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Functionarissen];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Bestuursorganen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Bestuursorganen];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Rechtsvormen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Rechtsvormen];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Addresses]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Addresses];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Regios]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Regios];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Baansoorten]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Baansoorten];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Baantypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Baantypes];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Banen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Banen];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Bouwaarden]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Bouwaarden];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_BanenSpeciaal]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_BanenSpeciaal];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Reserveringen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Reserveringen];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Afhangen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Afhangen];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Baanschemas]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Baanschemas];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Fotos]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Fotos];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Lidmaatschapsoorten]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Lidmaatschapsoorten];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Sponsoren]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Sponsoren];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Sponsor_Afbeeldingen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Sponsor_Afbeeldingen];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Baanblokken]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Baanblokken];
 GO
+    
 IF OBJECT_ID(N'[dbo].[ClubCloud_Baantoplagen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Baantoplagen];
 GO
+    
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -424,7 +452,7 @@ GO
 CREATE TABLE [dbo].[ClubCloud_Lidmaatschappen] (
     [Id] uniqueidentifier  NOT NULL,
     [Bondsnummer] nvarchar(max)  NULL,
-    [SoortId] uniqueidentifier  NULL,
+    [LidmaatschapsoortId] uniqueidentifier  NULL,
     [Begin] datetime  NOT NULL,
     [Einde] datetime  NULL,
     [Opzegging] datetime  NULL,
@@ -587,7 +615,12 @@ GO
 -- Creating table 'ClubCloud_Bouwaarden'
 CREATE TABLE [dbo].[ClubCloud_Bouwaarden] (
     [Id] uniqueidentifier  NOT NULL,
-    [Naam] nvarchar(max)  NOT NULL
+    [Naam] nvarchar(max)  NOT NULL,
+    [Omschrijving] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
+    [Beschrijving] nvarchar(max)  NOT NULL,
+    [Meervoud] nvarchar(max)  NOT NULL,
+    [Actief] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -716,6 +749,7 @@ CREATE TABLE [dbo].[ClubCloud_Baantoplagen] (
     [Actief] nvarchar(max)  NOT NULL
 );
 GO
+
 
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
@@ -1283,10 +1317,10 @@ ON [dbo].[ClubCloud_Afhangen]
     ([VerenigingId]);
 GO
 
--- Creating foreign key on [SoortId] in table 'ClubCloud_Lidmaatschappen'
+-- Creating foreign key on [LidmaatschapsoortId] in table 'ClubCloud_Lidmaatschappen'
 ALTER TABLE [dbo].[ClubCloud_Lidmaatschappen]
 ADD CONSTRAINT [FK_ClubCloud_LidmaatschapSoort_Lidmaatschap]
-    FOREIGN KEY ([SoortId])
+    FOREIGN KEY ([LidmaatschapsoortId])
     REFERENCES [dbo].[ClubCloud_Lidmaatschapsoorten]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -1295,7 +1329,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_LidmaatschapSoort_Lidmaatschap'
 CREATE INDEX [IX_FK_ClubCloud_LidmaatschapSoort_Lidmaatschap]
 ON [dbo].[ClubCloud_Lidmaatschappen]
-    ([SoortId]);
+    ([LidmaatschapsoortId]);
 GO
 
 -- Creating foreign key on [VerenigingId] in table 'ClubCloud_Sponsoren'

@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Vereniging))]
@@ -116,6 +118,15 @@ namespace ClubCloud.Model
             }
         }
     
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
+            }
+        }
+    
     	[IgnoreDataMember]
         public string Error
         {
@@ -153,4 +164,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_Sponsor_Mapping : EntityTypeConfiguration<ClubCloud_Sponsor>
+    {
+    	public ClubCloud_Sponsor_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

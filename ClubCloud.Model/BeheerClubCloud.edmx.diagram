@@ -50,7 +50,7 @@
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Twee" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Drie" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Vier" />
-        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Afhang" Width="2.75" PointX="14.875" PointY="3.125" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Afhang" Width="2.75" PointX="12.625" PointY="4" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Afhangen_Vereniging" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baanschema" Width="2" PointX="10.75" PointY="15" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Foto" Width="1.5" PointX="0.75" PointY="6" />

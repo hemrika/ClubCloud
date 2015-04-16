@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Functionaris))]
@@ -25,9 +27,8 @@ namespace ClubCloud.Model
     {
         public ClubCloud_Bestuursorgaan()
         {
-            this.ClubCloud_Functionaris = new HashSet<ClubCloud_Functionaris>();
+            this.ClubCloud_Functionaris = new ObservableCollection<ClubCloud_Functionaris>();
         }
-    
     	[DataMember]
         public System.Guid Id 
     	{ 
@@ -92,7 +93,7 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Functionaris> ClubCloud_Functionaris { get; set; }
+        public virtual ObservableCollection<ClubCloud_Functionaris> ClubCloud_Functionaris { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
@@ -128,6 +129,15 @@ namespace ClubCloud.Model
             if (eventHandler != null)
             {
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
             }
         }
     
@@ -168,4 +178,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_Bestuursorgaan_Mapping : EntityTypeConfiguration<ClubCloud_Bestuursorgaan>
+    {
+    	public ClubCloud_Bestuursorgaan_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

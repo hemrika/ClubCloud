@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Vereniging))]
@@ -30,7 +32,6 @@ namespace ClubCloud.Model
             this.Duur_Vier = 45;
             this.Duur_Precisie = 5;
         }
-    
     	[DataMember]
         public System.Guid Id 
     	{ 
@@ -180,6 +181,15 @@ namespace ClubCloud.Model
             }
         }
     
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
+            }
+        }
+    
     	[IgnoreDataMember]
         public string Error
         {
@@ -217,4 +227,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_Afhang_Mapping : EntityTypeConfiguration<ClubCloud_Afhang>
+    {
+    	public ClubCloud_Afhang_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

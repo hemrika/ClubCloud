@@ -111,6 +111,15 @@ namespace ClubCloud.Model
             }
         }
     
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
+            }
+        }
+    
     	[IgnoreDataMember]
         public string Error
         {

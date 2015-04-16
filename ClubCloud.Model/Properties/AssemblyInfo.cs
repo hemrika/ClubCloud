@@ -6,10 +6,15 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ClubCloud.Model")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ClubCloud.Model")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+[assembly: AssemblyDescription("ClubCloud Model - Debug")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+[assembly: AssemblyDescription("ClubCloud Model")]
+#endif
+[assembly: AssemblyCompany("Hemrika")]
+[assembly: AssemblyProduct("ClubCloud")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

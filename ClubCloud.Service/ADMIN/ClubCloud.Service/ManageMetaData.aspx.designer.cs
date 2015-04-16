@@ -166,6 +166,24 @@ namespace ClubCloud.Service.Administration {
         protected global::System.Web.UI.WebControls.Button buttonVerenigingen;
         
         /// <summary>
+        /// tbx_verenigingsnummer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbx_verenigingsnummer;
+        
+        /// <summary>
+        /// buttonGebruikers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonGebruikers;
+        
+        /// <summary>
         /// buttonBanen control.
         /// </summary>
         /// <remarks>

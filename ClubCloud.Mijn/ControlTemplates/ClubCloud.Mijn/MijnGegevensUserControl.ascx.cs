@@ -54,10 +54,10 @@ namespace ClubCloud.Mijn.ControlTemplates
                 {
                     try
                     {
-                        gebruiker.ClubCloud_Vereniging = Client.GetVerenigingById(userId, gebruiker.VerenigingId.Value);
+                        gebruiker.ClubCloud_Vereniging = Client.GetVerenigingById(gebruiker.VerenigingId.Value, false, Settings);
 
                         //gebruiker.ClubCloud_Lidmaatschap = Client.GetLidaamschapByGebruikerId(userId, gebruiker.VerenigingId.Value);
-                        gebruiker.ClubCloud_Address = Client.GetAddressByGebruikerId(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false);
+                        gebruiker.ClubCloud_Address = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressByGebruikerId(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false));
                     }
                     catch { }
 
@@ -111,7 +111,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     try
                     {
 
-                        ClubCloud_Foto foto = Client.GetFotoById(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false);
+                        ClubCloud_Foto foto = Client.GetFotoForGebruikerById(gebruiker.Bondsnummer, gebruiker.Id,false, Settings);
 
                         fvw_afbeelding.DataSource = new List<ClubCloud_Foto> { foto }; ;
                         fvw_afbeelding.DataBind();
@@ -217,7 +217,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                 if (Settings != null)
                 {
                     ClubCloud_Gebruiker gebruiker = Client.GetGebruikerByNummer(userId, Settings.VerenigingId.Value, userId, false);
-                    gebruiker.ClubCloud_Address = Client.GetAddressByGebruikerId(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false);
+                    gebruiker.ClubCloud_Address = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressByGebruikerId(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false));
 
                     gebruiker.ClubCloud_Address.First().Naam = "Bezoekadres";
                     gebruiker.ClubCloud_Address.First().Gemeente = e.NewValues["Gemeente"].ToString();

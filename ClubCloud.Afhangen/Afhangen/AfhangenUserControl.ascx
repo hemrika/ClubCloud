@@ -135,40 +135,33 @@
                     </p>
                     
                     <asp:TextBox ID="tbx_speler_een" runat="server" OnTextChanged="aantal_TextChanged"></asp:TextBox>
-                    <ajaxToolkit:AutoCompleteExtender ID="SpelerEen_AutoCompleteExtender" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetGebruikerAutoComplete" ServicePath="https://mijn.clubcloud.nl/_vti_bin/ClubCloud.Afhangen/Afhangen.svc/Script" TargetControlID="tbx_speler_een" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="3" CompletionInterval="250" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating">
+                    <ajaxToolkit:AutoCompleteExtender ID="SpelerEen_AutoCompleteExtender" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetGebruikers" ServicePath="/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" TargetControlID="tbx_speler_een" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="3" CompletionInterval="250" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating">
                         <Animations>
-                                                <OnShow>
-                                                <Sequence>
-                                                <OpacityAction Opacity="0" />
-                                                <HideAction Visible="true" />
-                                                <ScriptAction Script="
-                                                // Cache the size and setup the initial size
-                                                var behavior = $find('AutoCompleteEx');
-                                                if (!behavior._height) {
-                                                var target = behavior.get_completionList();
-                                                behavior._height = target.offsetHeight - 2;
-                                                target.style.height = '0px';
-                                                }" />
-                                                <Parallel Duration=".4">
-                                                <FadeIn />
-                                                <Length PropertyKey="height" StartValue="0" EndValueScript="$find('AutoCompleteEx')._height" />
-                                                </Parallel>
-                                                </Sequence>
-                                                </OnShow>
-                                                <OnHide>
-                                                <Parallel Duration=".4">
-                                                <FadeOut />
-                                                <Length PropertyKey="height" StartValueScript="$find('AutoCompleteEx')._height" EndValue="0" />
-                                                </Parallel>
-                                                </OnHide>
+                            <OnShow><Sequence><OpacityAction Opacity="0" /><HideAction Visible="true" /><Parallel Duration=".4"><FadeIn /></Parallel></Sequence></OnShow>
+                            <OnHide><Parallel Duration=".4"><FadeOut /></Parallel></OnHide>
                         </Animations>
                     </ajaxToolkit:AutoCompleteExtender>
                     <asp:TextBox ID="tbx_speler_twee" runat="server"></asp:TextBox>
-                    <ajaxToolkit:AutoCompleteExtender ID="SpelerTwee" TargetControlID="tbx_speler_twee" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetGebruikerAutoComplete" ServicePath="https://mijn.clubcloud.nl/_vti_bin/ClubCloud.Afhangen/Afhangen.svc/Script" UseContextKey="True" ></ajaxToolkit:AutoCompleteExtender>
+                    <ajaxToolkit:AutoCompleteExtender ID="SpelerTwee" TargetControlID="tbx_speler_twee" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetGebruikers" ServicePath="/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="3" CompletionInterval="250" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating">
+                        <Animations>
+                            <OnShow><Sequence><OpacityAction Opacity="0" /><HideAction Visible="true" /><Parallel Duration=".4"><FadeIn /></Parallel></Sequence></OnShow>
+                            <OnHide><Parallel Duration=".4"><FadeOut /></Parallel></OnHide>
+                        </Animations>
+                    </ajaxToolkit:AutoCompleteExtender>
                     <asp:TextBox ID="tbx_speler_drie" runat="server"></asp:TextBox>
-                    <ajaxToolkit:AutoCompleteExtender ID="SpelerDrie" TargetControlID="tbx_speler_drie" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetGebruikerAutoComplete" ServicePath="https://mijn.clubcloud.nl/_vti_bin/ClubCloud.Afhangen/Afhangen.svc/Script" UseContextKey="True" ></ajaxToolkit:AutoCompleteExtender>
+                    <ajaxToolkit:AutoCompleteExtender ID="SpelerDrie" TargetControlID="tbx_speler_drie" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetGebruikers" ServicePath="/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="3" CompletionInterval="250" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating">
+                        <Animations>
+                            <OnShow><Sequence><OpacityAction Opacity="0" /><HideAction Visible="true" /><Parallel Duration=".4"><FadeIn /></Parallel></Sequence></OnShow>
+                            <OnHide><Parallel Duration=".4"><FadeOut /></Parallel></OnHide>
+                        </Animations>
+                    </ajaxToolkit:AutoCompleteExtender>
                     <asp:TextBox ID="tbx_speler_vier" runat="server"></asp:TextBox>
-                    <ajaxToolkit:AutoCompleteExtender ID="SpelerVier" TargetControlID="tbx_speler_vier" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetGebruikerAutoComplete" ServicePath="https://mijn.clubcloud.nl/_vti_bin/ClubCloud.Afhangen/Afhangen.svc/Script" UseContextKey="True" ></ajaxToolkit:AutoCompleteExtender>
+                    <ajaxToolkit:AutoCompleteExtender ID="SpelerVier" TargetControlID="tbx_speler_vier" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetGebruikers" ServicePath="/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="3" CompletionInterval="250" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating">
+                        <Animations>
+                            <OnShow><Sequence><OpacityAction Opacity="0" /><HideAction Visible="true" /><Parallel Duration=".4"><FadeIn /></Parallel></Sequence></OnShow>
+                            <OnHide><Parallel Duration=".4"><FadeOut /></Parallel></OnHide>
+                        </Animations>
+                    </ajaxToolkit:AutoCompleteExtender>
                     <label>Datum</label><br />
                         <p>
                             <div id="DateMonthYear" class="MonthYearBox">

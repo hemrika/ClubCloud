@@ -46,8 +46,8 @@ namespace ClubCloud.Model
             {
                 DbParameter parameter = cmd.Parameters[i];
                 List<DbType> types = new List<DbType>(){ DbType.String, DbType.AnsiString, DbType.StringFixedLength, DbType.AnsiStringFixedLength};
+
                 if(types.Contains(parameter.DbType))
-                //if (parameter.DbType.GetType()..In(DbType.String, DbType.AnsiString, DbType.StringFixedLength, DbType.AnsiStringFixedLength))
                 {
                     if (parameter.Value == DBNull.Value)
                         continue;
@@ -69,6 +69,14 @@ namespace ClubCloud.Model
                     }
                 }
             }
+        }
+    }
+
+    static class LanguageExtensions
+    {
+        public static bool In<T>(this T source, params T[] list)
+        {
+            return (list as IList<T>).Contains(source);
         }
     }
 }

@@ -1,25 +1,18 @@
-﻿using System;
+﻿using ClubCloud.Common.Controls;
+using ClubCloud.Model;
+using ClubCloud.Service;
+using Microsoft.SharePoint;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Security;
 using System.Web.UI;
-using System.Runtime.InteropServices;
-using ClubCloud.Model;
-using Microsoft.SharePoint;
-using System.Reflection;
 using System.Web.UI.WebControls;
-using ClubCloud.Common.Controls;
 
 namespace ClubCloud.Administratie.WebControls
 {
     public class ClubCloudViewLedenAlle : ClubCloudDataSourceView
     {
-
-
         public override bool CanRetrieveTotalRowCount
         {
             get
@@ -58,7 +51,7 @@ namespace ClubCloud.Administratie.WebControls
             }
         }
 
-        public ClubCloudViewLedenAlle(IDataSource owner, string viewName) : base(owner, viewName) { }
+        public ClubCloudViewLedenAlle(EntityDataSource owner, string viewName) : base(owner, viewName) { }
 
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]
         protected override IEnumerable ExecuteSelect(DataSourceSelectArguments selectArgs)
@@ -81,7 +74,7 @@ namespace ClubCloud.Administratie.WebControls
                 collection.Add(where);
             }
 
-            ClubCloud_Gebruiker_DataView gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs,collection,true);
+            ClubCloud_Gebruiker_View gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs,collection);
 
             selectArgs.TotalRowCount = gebruikers.TotalRowCount;
 

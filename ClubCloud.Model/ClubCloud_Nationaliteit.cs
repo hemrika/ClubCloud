@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Gebruiker))]
@@ -24,9 +26,8 @@ namespace ClubCloud.Model
     {
         public ClubCloud_Nationaliteit()
         {
-            this.ClubCloud_Gebruiker = new HashSet<ClubCloud_Gebruiker>();
+            this.ClubCloud_Gebruiker = new ObservableCollection<ClubCloud_Gebruiker>();
         }
-    
     	[DataMember]
         public System.Guid Id 
     	{ 
@@ -61,7 +62,7 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Gebruiker> ClubCloud_Gebruiker { get; set; }
+        public virtual ObservableCollection<ClubCloud_Gebruiker> ClubCloud_Gebruiker { get; set; }
     
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
@@ -93,6 +94,15 @@ namespace ClubCloud.Model
             if (eventHandler != null)
             {
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
             }
         }
     
@@ -133,4 +143,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_Nationaliteit_Mapping : EntityTypeConfiguration<ClubCloud_Nationaliteit>
+    {
+    	public ClubCloud_Nationaliteit_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

@@ -13,6 +13,7 @@ using Microsoft.SharePoint;
 using System.Reflection;
 using System.Web.UI.WebControls;
 using ClubCloud.Common.Controls;
+using ClubCloud.Service;
 
 namespace ClubCloud.Administratie.WebControls
 {
@@ -58,7 +59,7 @@ namespace ClubCloud.Administratie.WebControls
             }
         }
 
-        public ClubCloudViewLedenZoeken(IDataSource owner, string viewName) : base(owner, viewName) { }
+        public ClubCloudViewLedenZoeken(EntityDataSource owner, string viewName) : base(owner, viewName) { }
 
 
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]
@@ -74,7 +75,7 @@ namespace ClubCloud.Administratie.WebControls
                 selectArgs.SortExpression = "Volledigenaam";
             }
 
-            ClubCloud_Gebruiker_DataView gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs);
+            ClubCloud_Gebruiker_View gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs);
 
             selectArgs.TotalRowCount = gebruikers.TotalRowCount;
 

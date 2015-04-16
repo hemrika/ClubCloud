@@ -167,6 +167,7 @@ namespace ClubCloud.Service
             return banen;
         }
 
+        /*
         public System.Collections.Generic.List<ClubCloud_Baan> GetBanenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false)
         {
             List<ClubCloud_Baan> banen = new List<ClubCloud_Baan>();
@@ -179,6 +180,7 @@ namespace ClubCloud.Service
 
             return banen;
         }
+        */
 
         public System.Collections.Generic.List<ClubCloud_Gebruiker> GetGebruikersByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false)
         {
@@ -214,13 +216,14 @@ namespace ClubCloud.Service
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                gebruiker = client.GetGebruikerById(bondsnummer, Guid.Parse(verenigingId), Guid.Parse(gebruikerId));
+                gebruiker = client.GetGebruikerById(Guid.Parse(gebruikerId), false, new ClubCloud_Setting { Id = int.Parse(bondsnummer), VerenigingId = Guid.Parse(verenigingId) });
             }
 
             return gebruiker;
 
         }
 
+        /*
         public ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
         {
             ClubCloud_Foto foto = null;
@@ -233,7 +236,9 @@ namespace ClubCloud.Service
 
             return foto;
         }
+        */
 
+        
         public ClubCloud_Foto GetFotoById(string bondsnummer, string verenigingId, string gebruikerId)
         {
             ClubCloud_Foto foto = null;
@@ -241,12 +246,12 @@ namespace ClubCloud.Service
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                foto = client.GetFotoById(bondsnummer, Guid.Parse(verenigingId), Guid.Parse(gebruikerId));
+                foto = client.GetFotoForGebruikerById(bondsnummer, Guid.Parse(gebruikerId), false, new ClubCloud_Setting { Id = int.Parse(bondsnummer), VerenigingId = Guid.Parse(verenigingId), GebruikerId = Guid.Parse(gebruikerId) });
             }
 
             return foto;
         }
-
+        
         public ClubCloud_Reservering GetReserveringByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false)
         {
             ClubCloud_Reservering reservering = new ClubCloud_Reservering();
@@ -333,19 +338,19 @@ namespace ClubCloud.Service
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                vereniging = client.GetVerenigingById(bondsnummer, Guid.Parse(verenigingId));
+                vereniging = client.GetVerenigingById(Guid.Parse(verenigingId), false, new ClubCloud_Setting { Id = int.Parse(bondsnummer), VerenigingId = Guid.Parse(verenigingId) });
             }
 
             return vereniging;
         }
-        public ClubCloud_Reservering SetReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime Datum,TimeSpan Tijd, TimeSpan Duur, ReserveringSoort Soort = ReserveringSoort.Afhangen, bool final = false, bool push = false, string Beschrijving = "")
+        public ClubCloud_Reservering AddReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime Datum,TimeSpan Tijd, TimeSpan Duur, ReserveringSoort Soort = ReserveringSoort.Afhangen, bool final = false, bool push = false, string Beschrijving = "")
         {
             ClubCloud_Reservering reservering = new ClubCloud_Reservering();
 
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                reservering = client.SetReservering(bondsnummer, verenigingId, baanId, gebruikers,Datum, Tijd, Duur,Soort, final, push, Beschrijving);
+                reservering = client.AddReservering(bondsnummer, verenigingId, baanId, gebruikers,Datum, Tijd, Duur,Soort, final, push, Beschrijving);
             }
 
             return reservering;

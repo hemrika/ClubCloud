@@ -10,7 +10,29 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AanmeldenUserControl.ascx.cs" Inherits="ClubCloud.Internet.AanmeldenUserControl" %>
 <%@ Register Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls" TagPrefix="ClubCloud" %>
 
-
+<style>
+    .autocomplete_completionListElement
+        {
+            background-color: inherit;
+            overflow: visible;
+            text-align: left;
+            list-style-type: none;
+        }
+        /* AutoComplete highlighted item */
+        .autocomplete_highlightedListItem
+        {
+            background-color: rgb(218, 218, 218);
+            color: black;
+            padding: 1px;
+        }
+        /* AutoComplete item */
+        .autocomplete_listItem
+        {
+            background-color: rgb(218, 218, 218);
+            color: #838383;
+            padding: 1px;
+        }
+</style>
 <script type="text/javascript">
     function OnClientPopulating(sender, e) {
     sender._element.className = "wizardSearch";
@@ -24,6 +46,10 @@ function ValidateBank(sender, e) {
         alert(data.iban);
     });
 
+}
+
+function SetContextKey() {
+    $find('<%=Verenigingsnummer_AutoCompleteExtender.ClientID%>').set_contextKey($get("<%=tbx_verenigingsnummer.ClientID %>").value);
 }
 </script>
 
@@ -52,14 +78,15 @@ function ValidateBank(sender, e) {
                     <asp:WizardStep ID="wzd_vereniging" runat="server" Title="Uw vereniging" StepType="Start">
                         <asp:Panel runat="server" ID="pnl_vereniging" CssClass="forms">
                             <br />
-                            <div class="three-fourth info ">
-                                <fieldset>
+                            <div class="three-fourth info" style="overflow:visible;">
+                                <fieldset >
                                     <legend style="width:100%" ><i class="icon-address special"></i><h2>Vereniging</h2></legend>
                                     <br />
                                     <p>
                                         <label>Verenigingsnummer : </label>
-                                        <asp:TextBox ID="tbx_verenigingsnummer" TextMode="SingleLine" runat="server" AutoPostBack="true" OnTextChanged="tbx_verenigingsnummer_TextChanged" Width="80%" placeholder="Uw verenigingsnummer" />
-                                        <ajaxToolkit:AutoCompleteExtender ID="Verenigingsnummer_AutoCompleteExtender" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetVereniningen" ServicePath="//mijn.clubcloud.nl/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" TargetControlID="tbx_verenigingsnummer" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="5" CompletionInterval="1000" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating">
+                                        <asp:TextBox ID="tbx_verenigingsnummer" TextMode="SingleLine" runat="server" onkeyup ="SetContextKey()" AutoPostBack="true" OnTextChanged="tbx_verenigingsnummer_TextChanged" Width="80%" placeholder="Uw verenigingsnummer" />
+                                        <ajaxToolkit:AutoCompleteExtender ID="Verenigingsnummer_AutoCompleteExtender" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetVerenigingen" ServicePath="/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" TargetControlID="tbx_verenigingsnummer" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="4" CompletionInterval="1000" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating"
+                                            CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" >
                                             <Animations>
                                        <OnShow><Sequence><OpacityAction Opacity="0" /><HideAction Visible="true" /><Parallel Duration=".4"><FadeIn /></Parallel></Sequence></OnShow>
                                        <OnHide><Parallel Duration=".4"><FadeOut /></Parallel></OnHide>
@@ -92,13 +119,13 @@ function ValidateBank(sender, e) {
                             </div>
                         </asp:Panel>
                     </asp:WizardStep>
-                    <asp:WizardStep ID="wzd_gegevens" runat="server" Title="Gegevens" StepType="Step">
+                    <asp:WizardStep ID="wzd_gegevens" runat="server" Title="Uw Gegevens" StepType="Step">
                         <asp:Panel runat="server" ID="pnl_gegevens" CssClass="forms">
                             <br />
                             <div class="three-fourth info ">
                                 <fieldset>
                                     <legend style="width:100%" ><i class="icon-user special"></i>
-                                        <h2>Uw gegevens</h2>
+                                        <h2>Contact gegevens</h2>
                                     </legend>
                                     <br />
                                     <p>
@@ -121,50 +148,27 @@ function ValidateBank(sender, e) {
                             </div>
                         </asp:Panel>
                     </asp:WizardStep>
-                    <asp:WizardStep ID="wzd_opties" runat="server" Title="Opties" StepType="Step">
-                        <asp:Panel runat="server" ID="pnl_opties" CssClass="forms">
+                    <asp:WizardStep ID="wzd_afronden" runat="server" Title="Aanmelden" StepType="Finish">
+                        <asp:Panel runat="server" ID="pnl_aanmelden" CssClass="forms">
                             <br />
-                            <i class="icon-user special"></i>
+                            <i class="icon-pencil special"></i>
                             <div class="three-fourth info ">
-                                <h3 class="lined">Opties</h3>
-                                <p>
-                                </p>
-                            </div>
-                        </asp:Panel>
-                    </asp:WizardStep>
-                    <asp:WizardStep ID="wzd_voorwaarden" runat="server" Title="Voorwaarden" StepType="Step">
-                        <asp:Panel runat="server" ID="pnl_voorwaarden" CssClass="forms">
-                            <br />
-                            <i class="icon-user special"></i>
-                            <div class="three-fourth info ">
-                                <h3 class="lined">voorwaarden</h3>
+                                <h3 class="lined">Aanmelden</h3>
                                 <p>
                                     Op alle aanbiedingen en overeenkomsten zijn de Nederland ICT Voorwaarden van toepassing, gedeponeerd bij de Kamer van Koophandel te Midden-Nederland onder nummer 30174840.<br />
                                     <a href="https://onedrive.live.com/embed?cid=E2EF8A57AA853CB3&resid=E2EF8A57AA853CB3%21128&authkey=AFHwySTc3F1Vxi0&em=2" target="_blank">Voorwaarden lezen</a>
                                 </p>
-                            </div>
-                        </asp:Panel>
-                    </asp:WizardStep>
-                    <asp:WizardStep ID="wzd_afronden" runat="server" Title="Aanmelden" StepType="Finish">
-                        <asp:Panel runat="server" ID="pnl_aanmelden" CssClass="forms">
-                            <br />
-                            <i class="icon-user special"></i>
-                            <div class="three-fourth info ">
-                                <h3 class="lined">Afronden</h3>
-                                <p>
-                                </p>
+                                <asp:CheckBox ID="voorwaarden" runat="server" Checked="false" Text=" " CssClass="regular-checkbox" /> &nbsp;&nbsp;Akkoord met de voorwaarden.
                             </div>
                         </asp:Panel>
                     </asp:WizardStep>
                     <asp:WizardStep ID="wzd_klaar" runat="server" Title="Vervolg" StepType="Complete">
                         <i class="icon-info special"></i>
                         <div class="info">
-                            <h3 class="lined">Het process</h3>
+                            <h3 class="lined">Het vervolg</h3>
                             <p>
-                                Laat uw gegevens achter via het onderstaande formulier. 
-						ClubCloud neemt vervolgens contact met u op.<br />
-                                Nadat alles duidelijk is, starten we met het activeren 
-						en regelen van uw clubcloud omgeving.<br />
+                                Bedankt voor het aanmelden van uw club. Wij zullen uw aanmelding zo snel mogelijk verwerken.
+                                Binnenkost zullen wij contact opnemen om de verdere afhandeling te regelen.                      
                             </p>
                         </div>
                     </asp:WizardStep>

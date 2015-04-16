@@ -126,7 +126,7 @@ namespace ClubCloud.Service.Administration
                 operation.LeadingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationLeadingHtml", CultureInfo.CurrentCulture).ToString();
                 operation.TrailingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationTrailingHtml", CultureInfo.CurrentCulture).ToString();
                 operation.Begin();
-                /*
+
                 try
                 {
                     ServiceClient.NationaliteitenUpdate("12073385", true);
@@ -168,7 +168,7 @@ namespace ClubCloud.Service.Administration
                     ServiceClient.FunctiesUpdate("12073385", true);
                 }
                 catch { }
-                */
+
                 try
                 {
                     ServiceClient.RegiosUpdate("12073385", true);
@@ -218,7 +218,7 @@ namespace ClubCloud.Service.Administration
                         moreRecords = ServiceClient.VerenigingenUpdate("12073385", pageNum, false);
                         pageNum++;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         moreRecords = true;
                     }
@@ -229,6 +229,48 @@ namespace ClubCloud.Service.Administration
                     ServiceClient.BestuursOrganenUpdate("12073385", false);
                 }
                 catch { }
+
+                operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageMetaData.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
+            }
+        }
+
+        protected void ButtonGebruikers_Click(object sender, EventArgs e)
+        {
+            // Validate
+            this.Validate();
+
+            if (!this.IsValid)
+            {
+                return;
+            }
+
+            // We are valid
+            // Register the database
+            using (SPLongOperation operation = new SPLongOperation(this))
+            {
+                operation.LeadingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationLeadingHtml", CultureInfo.CurrentCulture).ToString();
+                operation.TrailingHTML = HttpContext.GetGlobalResourceObject("ClubCloud.Service.ServiceAdminResources", "UsersSettingsCreateOperationTrailingHtml", CultureInfo.CurrentCulture).ToString();
+                operation.Begin();
+
+                string nummer = tbx_verenigingsnummer.Text;
+                if (!string.IsNullOrWhiteSpace(nummer))
+                {
+                    int pageNum = 1;
+                    bool moreRecords = true;
+                    while (moreRecords)
+                    {
+                        try
+                        {
+
+                            moreRecords = ServiceClient.GebruikersUpdate("12073385", nummer, pageNum, false);
+                            pageNum++;
+                        }
+                        catch (Exception)
+                        {
+                            moreRecords = true;
+                        }
+                    }
+                }
 
                 operation.End(string.Format(CultureInfo.InvariantCulture, "/_admin/ClubCloud.Service/ManageMetaData.aspx?id={0}", SPHttpUtility.UrlKeyValueEncode(this.ServiceApplication.Id)));
             }

@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Reservering))]
@@ -27,10 +29,9 @@ namespace ClubCloud.Model
     {
         public ClubCloud_Baan()
         {
-            this.ClubCloud_Reservering = new HashSet<ClubCloud_Reservering>();
-            this.ClubCloud_Baanschema = new HashSet<ClubCloud_Baanschema>();
+            this.ClubCloud_Reservering = new ObservableCollection<ClubCloud_Reservering>();
+            this.ClubCloud_Baanschema = new ObservableCollection<ClubCloud_Baanschema>();
         }
-    
     	[DataMember]
         public System.Guid Id 
     	{ 
@@ -115,7 +116,7 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Reservering> ClubCloud_Reservering { get; set; }
+        public virtual ObservableCollection<ClubCloud_Reservering> ClubCloud_Reservering { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
@@ -127,7 +128,7 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Baanschema> ClubCloud_Baanschema { get; set; }
+        public virtual ObservableCollection<ClubCloud_Baanschema> ClubCloud_Baanschema { get; set; }
     
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
@@ -159,6 +160,15 @@ namespace ClubCloud.Model
             if (eventHandler != null)
             {
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
             }
         }
     
@@ -199,4 +209,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_Baan_Mapping : EntityTypeConfiguration<ClubCloud_Baan>
+    {
+    	public ClubCloud_Baan_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

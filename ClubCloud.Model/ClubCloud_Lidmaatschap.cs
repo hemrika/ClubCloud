@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Vereniging))]
@@ -45,14 +47,14 @@ namespace ClubCloud.Model
     	private string _bondsnummer;
     
     	[DataMember]
-        public Nullable<System.Guid> SoortId 
+        public Nullable<System.Guid> LidmaatschapsoortId 
     	{ 
-    		get { return _soortId; } 
-    		set { SetProperty(ref _soortId, value); } 
+    		get { return _lidmaatschapsoortId; } 
+    		set { SetProperty(ref _lidmaatschapsoortId, value); } 
     	}
     
     	[IgnoreDataMember]
-    	private Nullable<System.Guid> _soortId;
+    	private Nullable<System.Guid> _lidmaatschapsoortId;
     
     	[DataMember]
         public System.DateTime Begin 
@@ -291,6 +293,15 @@ namespace ClubCloud.Model
             }
         }
     
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
+            }
+        }
+    
     	[IgnoreDataMember]
         public string Error
         {
@@ -328,4 +339,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_Lidmaatschap_Mapping : EntityTypeConfiguration<ClubCloud_Lidmaatschap>
+    {
+    	public ClubCloud_Lidmaatschap_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

@@ -13,9 +13,9 @@ using System.Web.UI.WebControls;
 
 namespace ClubCloud.Internet
 {
-    public class VerenigingView : ClubCloudDataSourceView, IQueryableDataSource
+    public class VerenigingView : ClubCloudDataSourceView //, IQueryableDataSource
     {
-        public VerenigingView(IDataSource owner, string viewName) : base(owner, viewName) { }
+        public VerenigingView(EntityDataSource owner, string viewName) : base(owner, viewName) { }
 
         private ClubCloud.Service.ClubCloudServiceClient _client = null;
 
@@ -60,6 +60,7 @@ namespace ClubCloud.Internet
 
         public event EventHandler DataSourceChanged;
 
+        /*
         public DataSourceView GetView(string viewName)
         {
             return this;
@@ -70,6 +71,7 @@ namespace ClubCloud.Internet
             return new List<string> { this.Name };
             //throw new NotImplementedException();
         }
+        */
     }
 }
 /*

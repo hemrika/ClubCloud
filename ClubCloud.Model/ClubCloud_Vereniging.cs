@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Functionaris))]
@@ -36,17 +38,16 @@ namespace ClubCloud.Model
     {
         public ClubCloud_Vereniging()
         {
-            this.ClubCloud_Functionaris = new HashSet<ClubCloud_Functionaris>();
-            this.ClubCloud_Lidmaatschap = new HashSet<ClubCloud_Lidmaatschap>();
-            this.ClubCloud_Bestuursorgaan = new HashSet<ClubCloud_Bestuursorgaan>();
-            this.ClubCloud_Address = new HashSet<ClubCloud_Address>();
-            this.ClubCloud_Gebruiker = new HashSet<ClubCloud_Gebruiker>();
-            this.ClubCloud_Afhangen = new HashSet<ClubCloud_Afhang>();
-            this.ClubCloud_Sponsor = new HashSet<ClubCloud_Sponsor>();
-            this.ClubCloud_Setting = new HashSet<ClubCloud_Setting>();
-            this.ClubCloud_Baanschema = new HashSet<ClubCloud_Baanschema>();
+            this.ClubCloud_Functionaris = new ObservableCollection<ClubCloud_Functionaris>();
+            this.ClubCloud_Lidmaatschap = new ObservableCollection<ClubCloud_Lidmaatschap>();
+            this.ClubCloud_Bestuursorgaan = new ObservableCollection<ClubCloud_Bestuursorgaan>();
+            this.ClubCloud_Address = new ObservableCollection<ClubCloud_Address>();
+            this.ClubCloud_Gebruiker = new ObservableCollection<ClubCloud_Gebruiker>();
+            this.ClubCloud_Afhang = new ObservableCollection<ClubCloud_Afhang>();
+            this.ClubCloud_Sponsor = new ObservableCollection<ClubCloud_Sponsor>();
+            this.ClubCloud_Setting = new ObservableCollection<ClubCloud_Setting>();
+            this.ClubCloud_Baanschema = new ObservableCollection<ClubCloud_Baanschema>();
         }
-    
     	[DataMember]
         public System.Guid Id 
     	{ 
@@ -331,15 +332,15 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Functionaris> ClubCloud_Functionaris { get; set; }
+        public virtual ObservableCollection<ClubCloud_Functionaris> ClubCloud_Functionaris { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Lidmaatschap> ClubCloud_Lidmaatschap { get; set; }
+        public virtual ObservableCollection<ClubCloud_Lidmaatschap> ClubCloud_Lidmaatschap { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Bestuursorgaan> ClubCloud_Bestuursorgaan { get; set; }
+        public virtual ObservableCollection<ClubCloud_Bestuursorgaan> ClubCloud_Bestuursorgaan { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
@@ -355,7 +356,7 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Address> ClubCloud_Address { get; set; }
+        public virtual ObservableCollection<ClubCloud_Address> ClubCloud_Address { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
@@ -363,23 +364,23 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Gebruiker> ClubCloud_Gebruiker { get; set; }
+        public virtual ObservableCollection<ClubCloud_Gebruiker> ClubCloud_Gebruiker { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Afhang> ClubCloud_Afhangen { get; set; }
+        public virtual ObservableCollection<ClubCloud_Afhang> ClubCloud_Afhang { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Sponsor> ClubCloud_Sponsor { get; set; }
+        public virtual ObservableCollection<ClubCloud_Sponsor> ClubCloud_Sponsor { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Setting> ClubCloud_Setting { get; set; }
+        public virtual ObservableCollection<ClubCloud_Setting> ClubCloud_Setting { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Baanschema> ClubCloud_Baanschema { get; set; }
+        public virtual ObservableCollection<ClubCloud_Baanschema> ClubCloud_Baanschema { get; set; }
     
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
@@ -411,6 +412,15 @@ namespace ClubCloud.Model
             if (eventHandler != null)
             {
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
             }
         }
     
@@ -451,4 +461,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_Vereniging_Mapping : EntityTypeConfiguration<ClubCloud_Vereniging>
+    {
+    	public ClubCloud_Vereniging_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

@@ -60,6 +60,8 @@
                         <asp:Button runat="server" CssClass="ms-ButtonHeightWidth" OnClick="ButtonTrigger_Click" Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ButtonTriggerText %>" ID="buttonTrigger" /><br />
                         <asp:Button runat="server" CssClass="ms-ButtonHeightWidth" OnClick="ButtonMetaData_Click" Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ButtonMetaDataText %>" ID="buttonMetaData" /><br />
                         <asp:Button runat="server" CssClass="ms-ButtonHeightWidth" OnClick="ButtonVerenigingen_Click" Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ButtonVerenigingenText %>" ID="buttonVerenigingen" /><br />
+                        <asp:TextBox runat="server" CssClass="ms-ButtonHeightWidth" ID="tbx_verenigingsnummer" ></asp:TextBox><br />
+                        <asp:Button runat="server" CssClass="ms-ButtonHeightWidth" OnClick="ButtonGebruikers_Click" Text="Gebruiker per verenigings nummer" ID="buttonGebruikers" /><br />
                         <asp:Button runat="server" CssClass="ms-ButtonHeightWidth" OnClick="ButtonBanen_Click" Text="<%$ Resources: ClubCloud.Service.ServiceAdminResources, ButtonBanenText %>" ID="buttonBanen" /><br />
                     </Template_control>
                 </wssuc:InputFormControl>

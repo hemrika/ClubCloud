@@ -7,7 +7,7 @@
     <ProjectGuid>{DB188B7A-705D-49DD-B842-9EAFBA850C83}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClubCloud.Administratie</RootNamespace>
+    <RootNamespace>ClubCloud.Administratie.WebControls</RootNamespace>
     <AssemblyName>ClubCloud.Administratie</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetOfficeVersion>15.0</TargetOfficeVersion>
@@ -47,12 +47,24 @@
     <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.EJ, Version=12.4451.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.EJ.Web, Version=12.4451.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
@@ -69,35 +81,233 @@
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClubCloudDataSet.cs">
-      <DependentUpon>ClubCloudDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ClubCloudDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClubCloudDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="ControlTemplates\ClubCloud.Administratie\PromotedLinksDelegate.ascx.cs">
-      <DependentUpon>PromotedLinksDelegate.ascx</DependentUpon>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie.ascx.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ControlTemplates\ClubCloud.Administratie\PromotedLinksDelegate.ascx.designer.cs">
-      <DependentUpon>PromotedLinksDelegate.ascx.cs</DependentUpon>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
     </Compile>
-    <Compile Include="ControlTemplates\ClubCloud.Administratie\SuiteBarBrandingDelegate.ascx.cs">
-      <DependentUpon>SuiteBarBrandingDelegate.ascx</DependentUpon>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodaties.ascx.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ControlTemplates\ClubCloud.Administratie\SuiteBarBrandingDelegate.ascx.designer.cs">
-      <DependentUpon>SuiteBarBrandingDelegate.ascx.cs</DependentUpon>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodaties.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
     </Compile>
-    <Compile Include="ControlTemplates\ClubCloud.Administratie\SuiteLinksDelegate.ascx.cs">
-      <DependentUpon>SuiteLinksDelegate.ascx</DependentUpon>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodaties_View.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Edit.ascx.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ControlTemplates\ClubCloud.Administratie\SuiteLinksDelegate.ascx.designer.cs">
-      <DependentUpon>SuiteLinksDelegate.ascx.cs</DependentUpon>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Edit.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Insert.ascx.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Insert.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Template.ascx.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Template.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok.ascx.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblokken.ascx.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblokken.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblokken_View.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok_Edit.ascx.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok_Edit.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok_Insert.ascx.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok_Insert.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok_Template.ascx.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok_Template.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema.ascx.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschemas.ascx.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschemas.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschemas_View.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema_Edit.ascx.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema_Edit.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema_Insert.ascx.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema_Insert.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema_Template.ascx.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema_Template.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan.ascx.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan_Edit.ascx.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan_Edit.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan_Insert.ascx.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan_Insert.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan_Template.ascx.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan_Template.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Banen.ascx.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Banen.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Banen_View.cs">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris.ascx.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionarissen.ascx.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionarissen.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionarissen_View.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Edit.ascx.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Edit.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Insert.ascx.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Insert.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Template.ascx.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Template.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker.ascx.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruikers.ascx.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruikers.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruikers_View.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Edit.ascx.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Edit.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Insert.ascx.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Insert.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Template.ascx.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Template.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebControls\ClubCloudDataSource.cs" />
@@ -162,23 +372,37 @@
     <Compile Include="WebControls\SPDisposeCheckIgnoreAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Administratie\Pages.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Pages.aspx</LastGenOutput>
+    </None>
     <None Include="app.config" />
-    <None Include="ClubCloudDataSet.xsc">
-      <DependentUpon>ClubCloudDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ClubCloudDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ClubCloudDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="ClubCloudDataSet.xss">
-      <DependentUpon>ClubCloudDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Administratie\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{53789977-244e-4b5f-b58d-492e8c8b7c3e}</SharePointProjectItemId>
     </None>
-    <None Include="BrandingDelegateElement\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{402677ac-9663-4ddc-b9ef-f50281ca8657}</SharePointProjectItemId>
+    <None Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodaties.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloud_Accommodaties.ascx</LastGenOutput>
+    </None>
+    <None Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblokken.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloud_Baanblokken.ascx</LastGenOutput>
+    </None>
+    <None Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschemas.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloud_Baanschemas.ascx</LastGenOutput>
+    </None>
+    <None Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Banen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloud_Banen.ascx</LastGenOutput>
+    </None>
+    <None Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionarissen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloud_Functionarissen.ascx</LastGenOutput>
+    </None>
+    <None Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruikers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloud_Gebruikers.ascx</LastGenOutput>
     </None>
     <None Include="ControlTemplates\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{152aa947-fc0b-48bd-a24d-333852848fa1}</SharePointProjectItemId>
@@ -189,9 +413,11 @@
     <None Include="Images\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{688dca0e-e0a2-4ac3-8e13-6a850e8f706c}</SharePointProjectItemId>
     </None>
+    <None Include="packages.config" />
     <None Include="Package\Package.package">
       <PackageId>{792e76e2-1c7e-4377-b410-fc11315fb17f}</PackageId>
     </None>
+    <None Include="WebControls\ClubCloudViews.tt" />
     <None Include="WebControls\DispayRoles\DispayRoles.webpart" />
     <None Include="WebControls\DispayRoles\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a6cde790-a257-4bd3-9d9a-d9e77f8bd1d3}</SharePointProjectItemId>
@@ -216,70 +442,595 @@
     <None Include="WebControls\DisplayUser\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{fa88bdcc-91db-49b1-b8b9-fb21437b8566}</SharePointProjectItemId>
     </None>
+    <None Include="WebControls\TemplateFileManagerV2.1.ttinclude" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administratie\Accommodatie.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Accommodaties.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Accommodatie_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Accommodatie_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Accommodatie_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Address.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Addresses.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Address_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Address_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Address_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Afbeelding.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Afbeeldingen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Afbeelding_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Afbeelding_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Afbeelding_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Afhang.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Afhangen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Afhang_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Afhang_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Afhang_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baan.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baanblok.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baanblokken.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baanblok_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baanblok_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baanblok_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baanschema.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baanschemas.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baanschema_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baanschema_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baanschema_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baansoort.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baansoorten.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baansoort_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baansoort_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baansoort_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\BaanSpeciaal.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\BaanSpeciaal_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\BaanSpeciaal_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\BaanSpeciaal_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baantoplaag.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baantoplaag_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baantoplaag_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baantoplaag_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baantoplagen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baantype.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baantypes.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baantype_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baantype_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baantype_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baan_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baan_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Baan_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Banen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\BanenSpeciaal.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Bestuursorgaan.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Bestuursorgaan_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Bestuursorgaan_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Bestuursorgaan_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Bestuursorganen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Bouwaard.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Bouwaarden.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Bouwaard_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Bouwaard_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Bouwaard_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\District.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Districten.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\District_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\District_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\District_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Foto.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Fotos.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Foto_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Foto_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Foto_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Functie.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Functies.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Functie_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Functie_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Functie_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Functionaris.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Functionarissen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Functionaris_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Functionaris_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Functionaris_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Gebruiker.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Gebruikers.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Gebruiker_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Gebruiker_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Gebruiker_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Lidmaatschap.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Lidmaatschappen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Lidmaatschapsoort.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Lidmaatschapsoorten.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Lidmaatschapsoort_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Lidmaatschapsoort_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Lidmaatschapsoort_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Lidmaatschap_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Lidmaatschap_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Lidmaatschap_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
     <Content Include="Administratie\LidNieuw.aspx" />
     <Content Include="Administratie\LidBewerken.aspx" />
     <Content Include="Administratie\LidBekijken.aspx" />
     <Content Include="Administratie\Leden.aspx" />
     <Content Include="Administratie\Groepen.aspx" />
     <Content Include="Administratie\Facturatie.aspx" />
+    <Content Include="Administratie\Nationaliteit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Nationaliteiten.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Nationaliteit_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Nationaliteit_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Nationaliteit_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Pages.aspx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Profiel.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Profielen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Profiel_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Profiel_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Profiel_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Rechtsvorm.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Rechtsvormen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Rechtsvorm_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Rechtsvorm_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Rechtsvorm_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Regio.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Regios.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Regio_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Regio_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Regio_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Reservering.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Reserveringen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Reservering_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Reservering_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Reservering_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
     <Content Include="Administratie\Rollen.aspx" />
     <Content Include="Administratie\Default.aspx" />
     <Content Include="Administratie\onet.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Administratie\Setting.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Settings.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Setting_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Setting_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Setting_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Sponsor.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Sponsoren.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Sponsor_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Sponsor_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Sponsor_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Vereniging.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Verenigingen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Vereniging_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Vereniging_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Vereniging_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
     <Content Include="Administratie\webtemp_Administratie.xml" />
-    <Content Include="BrandingDelegateElement\Elements.xml" />
-    <Content Include="ControlTemplates\ClubCloud.Administratie\PromotedLinksDelegate.ascx" />
-    <Content Include="ControlTemplates\ClubCloud.Administratie\SuiteBarBrandingDelegate.ascx" />
-    <Content Include="ControlTemplates\ClubCloud.Administratie\SuiteLinksDelegate.ascx" />
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie.ascx">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodaties.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Edit.ascx">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Insert.ascx">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Template.ascx">
+      <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok.ascx">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblokken.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok_Edit.ascx">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok_Insert.ascx">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok_Template.ascx">
+      <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema.ascx">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschemas.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema_Edit.ascx">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema_Insert.ascx">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\BaanSchemas\ClubCloud_Baanschema_Template.ascx">
+      <DependentUpon>ClubCloud_Baanschemas.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan.ascx">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan_Edit.ascx">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan_Insert.ascx">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Baan_Template.ascx">
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Banen\ClubCloud_Banen.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Banen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris.ascx">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Edit.ascx">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Insert.ascx">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Template.ascx">
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionarissen.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker.ascx">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruikers.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Edit.ascx">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Insert.ascx">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Template.ascx">
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Content>
     <Content Include="Features\Administratie WebParts\Administratie WebParts.Template.xml">
       <DependentUpon>Administratie WebParts.feature</DependentUpon>
     </Content>
-    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_128.png" />
-    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_16.png" />
-    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_256.png" />
-    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_32.png" />
-    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_512.png" />
-    <Content Include="Images\ClubCloud.Administratie\Contact\Contact_64.png" />
-    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_128.png" />
-    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_16.png" />
-    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_256.png" />
-    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_32.png" />
-    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_512.png" />
-    <Content Include="Images\ClubCloud.Administratie\Factuur\Factuur_64.png" />
-    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_128.png" />
-    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_16.png" />
-    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_256.png" />
-    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_32.png" />
-    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_512.png" />
-    <Content Include="Images\ClubCloud.Administratie\Groepen\Groepen_64.png" />
-    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_128.png" />
-    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_16.png" />
-    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_256.png" />
-    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_32.png" />
-    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_512.png" />
-    <Content Include="Images\ClubCloud.Administratie\Mail\Mail_64.png" />
-    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_128.png" />
-    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_16.png" />
-    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_256.png" />
-    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_32.png" />
-    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_512.png" />
-    <Content Include="Images\ClubCloud.Administratie\Rollen\Rollen_64.png" />
-    <Content Include="Images\ClubCloud.Administratie\Search\Search_128.png" />
-    <Content Include="Images\ClubCloud.Administratie\Search\Search_16.png" />
-    <Content Include="Images\ClubCloud.Administratie\Search\Search_256.png" />
-    <Content Include="Images\ClubCloud.Administratie\Search\Search_32.png" />
-    <Content Include="Images\ClubCloud.Administratie\Search\Search_512.png" />
-    <Content Include="Images\ClubCloud.Administratie\Search\Search_64.png" />
-    <Content Include="Images\ClubCloud.Administratie\SITEICON.PNG" />
-    <Content Include="Images\ClubCloud.Administratie\User\User_128.png" />
-    <Content Include="Images\ClubCloud.Administratie\User\User_16.png" />
-    <Content Include="Images\ClubCloud.Administratie\User\User_256.png" />
-    <Content Include="Images\ClubCloud.Administratie\User\User_32.png" />
-    <Content Include="Images\ClubCloud.Administratie\User\User_512.png" />
-    <Content Include="Images\ClubCloud.Administratie\User\User_64.png" />
+    <Content Include="Images\ClubCloud\Administratie\Administrative_Tools.png" />
+    <Content Include="Images\ClubCloud\Administratie\Contact\Contact_128.png" />
+    <Content Include="Images\ClubCloud\Administratie\Contact\Contact_16.png" />
+    <Content Include="Images\ClubCloud\Administratie\Contact\Contact_256.png" />
+    <Content Include="Images\ClubCloud\Administratie\Contact\Contact_32.png" />
+    <Content Include="Images\ClubCloud\Administratie\Contact\Contact_512.png" />
+    <Content Include="Images\ClubCloud\Administratie\Contact\Contact_64.png" />
+    <Content Include="Images\ClubCloud\Administratie\Factuur\Factuur_128.png" />
+    <Content Include="Images\ClubCloud\Administratie\Factuur\Factuur_16.png" />
+    <Content Include="Images\ClubCloud\Administratie\Factuur\Factuur_256.png" />
+    <Content Include="Images\ClubCloud\Administratie\Factuur\Factuur_32.png" />
+    <Content Include="Images\ClubCloud\Administratie\Factuur\Factuur_512.png" />
+    <Content Include="Images\ClubCloud\Administratie\Factuur\Factuur_64.png" />
+    <Content Include="Images\ClubCloud\Administratie\Groepen\Groepen_128.png" />
+    <Content Include="Images\ClubCloud\Administratie\Groepen\Groepen_16.png" />
+    <Content Include="Images\ClubCloud\Administratie\Groepen\Groepen_256.png" />
+    <Content Include="Images\ClubCloud\Administratie\Groepen\Groepen_32.png" />
+    <Content Include="Images\ClubCloud\Administratie\Groepen\Groepen_512.png" />
+    <Content Include="Images\ClubCloud\Administratie\Groepen\Groepen_64.png" />
+    <Content Include="Images\ClubCloud\Administratie\Mail\Mail_128.png" />
+    <Content Include="Images\ClubCloud\Administratie\Mail\Mail_16.png" />
+    <Content Include="Images\ClubCloud\Administratie\Mail\Mail_256.png" />
+    <Content Include="Images\ClubCloud\Administratie\Mail\Mail_32.png" />
+    <Content Include="Images\ClubCloud\Administratie\Mail\Mail_512.png" />
+    <Content Include="Images\ClubCloud\Administratie\Mail\Mail_64.png" />
+    <Content Include="Images\ClubCloud\Administratie\Rollen\Rollen_128.png" />
+    <Content Include="Images\ClubCloud\Administratie\Rollen\Rollen_16.png" />
+    <Content Include="Images\ClubCloud\Administratie\Rollen\Rollen_256.png" />
+    <Content Include="Images\ClubCloud\Administratie\Rollen\Rollen_32.png" />
+    <Content Include="Images\ClubCloud\Administratie\Rollen\Rollen_512.png" />
+    <Content Include="Images\ClubCloud\Administratie\Rollen\Rollen_64.png" />
+    <Content Include="Images\ClubCloud\Administratie\Search\Search_128.png" />
+    <Content Include="Images\ClubCloud\Administratie\Search\Search_16.png" />
+    <Content Include="Images\ClubCloud\Administratie\Search\Search_256.png" />
+    <Content Include="Images\ClubCloud\Administratie\Search\Search_32.png" />
+    <Content Include="Images\ClubCloud\Administratie\Search\Search_512.png" />
+    <Content Include="Images\ClubCloud\Administratie\Search\Search_64.png" />
+    <Content Include="Images\ClubCloud\Administratie\SITEICON.PNG" />
+    <Content Include="Images\ClubCloud\Administratie\User\User_128.png" />
+    <Content Include="Images\ClubCloud\Administratie\User\User_16.png" />
+    <Content Include="Images\ClubCloud\Administratie\User\User_256.png" />
+    <Content Include="Images\ClubCloud\Administratie\User\User_32.png" />
+    <Content Include="Images\ClubCloud\Administratie\User\User_512.png" />
+    <Content Include="Images\ClubCloud\Administratie\User\User_64.png" />
     <Content Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </Content>
@@ -311,6 +1062,12 @@
       <Name>ClubCloud.Service</Name>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WebControls\Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -12,36 +12,21 @@ using System.Web.UI.WebControls;
 
 namespace ClubCloud.Common.Controls
 {
-    public abstract class ClubCloudDataSourceView : DataSourceView, IStateManager//, IQueryableDataSource
+    public abstract class ClubCloudDataSourceView : EntityDataSourceView //DataSourceView, IStateManager //, IQueryableDataSource
     {
-        public ClubCloudDataSourceView(IDataSource owner, string viewName) : base(owner, viewName) { }
+        //public ClubCloudDataSourceView(IDataSource owner, string viewName) : base(owner, viewName) { }
+        public ClubCloudDataSourceView(EntityDataSource owner, string viewName) : base(owner, viewName) { }
 
         private ParameterCollection _whereParameters;
+        private ParameterCollection _orderByParameters;
 
-        internal readonly static object EventQueryCreated;
+       // internal readonly static object EventQueryCreated;
 
         private bool _isTracking;
 
-        //Removed for external dependency
-        /*
-        private ClubCloud.Service.ClubCloudServiceClient _client = null;
-
-        public ClubCloud.Service.ClubCloudServiceClient Client
+        public static void  ObjectToTableConvert(Object p_obj, ref DataSet p_ds, String p_tableName)
         {
-            get
-            {
-                if (_client == null)
-                {
-                    _client = new Service.ClubCloudServiceClient(SPServiceContext.Current);
-                }
-                return _client;
-            }
-        }
-        */
-
-        public static void ObjectToTableConvert(Object p_obj, ref DataSet p_ds, String p_tableName)
-        {
-
+            
             Type t = p_obj.GetType();
             PropertyInfo[] tmpP = t.GetProperties();// (BindingFlags.GetField);
             if (p_ds.Tables[p_tableName] == null)
@@ -53,6 +38,8 @@ namespace ClubCloud.Common.Controls
                     p_ds.Tables[p_tableName].Columns.Add(xtemp2.Name, Nullable.GetUnderlyingType(xtemp2.PropertyType) ?? xtemp2.PropertyType);
                 }
             }
+
+            //p_ds.Tables[p_tableName].BeginLoadData();
 
             Object[] tmpObj = new Object[tmpP.Length];
 
@@ -68,8 +55,11 @@ namespace ClubCloud.Common.Controls
                 }
             }
             p_ds.Tables[p_tableName].LoadDataRow(tmpObj, true);
+
+            //p_ds.Tables[p_tableName].EndLoadData();
         }
 
+        /*
         bool IStateManager.IsTrackingViewState
         {
             [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
@@ -84,6 +74,7 @@ namespace ClubCloud.Common.Controls
             object[] objArray = new object[] { SaveViewState(this._whereParameters), null };
             return objArray;
         }
+        */
 
         public static object SaveViewState(ParameterCollection parameters)
         {
@@ -105,7 +96,6 @@ namespace ClubCloud.Common.Controls
                 }
             }
         }
-
 
         public virtual ParameterCollection WhereParameters
         {
@@ -133,6 +123,32 @@ namespace ClubCloud.Common.Controls
             }
         }
 
+        public virtual ParameterCollection OrderByParameters
+        {
+            get
+            {
+                if (this._orderByParameters == null)
+                {
+                    this._orderByParameters = new ParameterCollection();
+                    this._orderByParameters.ParametersChanged += new EventHandler(this.OnQueryParametersChanged);
+                    if (this._isTracking)
+                    {
+                        TrackViewState(this._orderByParameters);
+                    }
+                }
+                return this._orderByParameters;
+            }
+            set
+            {
+                this._orderByParameters = value;
+                this._orderByParameters.ParametersChanged += new EventHandler(this.OnQueryParametersChanged);
+                if (this._isTracking)
+                {
+                    TrackViewState(this._orderByParameters);
+                }
+            }
+        }
+
         private void TrackViewState(ParameterCollection parameterCollection)
         {
             this._isTracking = true;
@@ -145,31 +161,17 @@ namespace ClubCloud.Common.Controls
             this.OnDataSourceViewChanged(EventArgs.Empty);
         }
 
+        /*
         void IStateManager.TrackViewState()
         {
             this._isTracking = true;
             TrackViewState(this._whereParameters);
         }
-
-        public event EventHandler<QueryCreatedEventArgs> QueryCreated;
-
-        /*
-        public void RaiseViewChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public event EventHandler DataSourceChanged;
-
-        public DataSourceView GetView(string viewName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public System.Collections.ICollection GetViewNames()
-        {
-            throw new NotImplementedException();
-        }
         */
+
+        //public event EventHandler<QueryCreatedEventArgs> QueryCreated;
+
+
+        
     }
 }

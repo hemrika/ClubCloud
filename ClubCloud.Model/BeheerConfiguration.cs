@@ -15,6 +15,7 @@ namespace ClubCloud.Model
 
         protected override void Seed(Model.BeheerContainer context)
         {
+            //context.ClubCloud_Verenigingen.AddOrUpdate
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
@@ -27,6 +28,8 @@ namespace ClubCloud.Model
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            //context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "DROP FULLTEXT INDEX ON dbo.ClubCloud_Vereniging");
+            //context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "DROP FULLTEXT CATALOG ClubCloud_Vereniging_catalog]");
         }
     }
 }

@@ -8,7 +8,6 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using System.Reflection;
 
 namespace ClubCloud.Store.Package

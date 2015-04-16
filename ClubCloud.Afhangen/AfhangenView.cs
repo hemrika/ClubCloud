@@ -15,7 +15,7 @@ namespace ClubCloud.Internet
 {
     public class AanmeldenView : ClubCloudDataSourceView, IQueryableDataSource
     {
-        public AanmeldenView(IDataSource owner, string viewName) : base(owner, viewName) { }
+        public AanmeldenView(EntityDataSource owner, string viewName) : base(owner, viewName) { }
 
         private ClubCloud.Service.ClubCloudServiceClient _client = null;
 

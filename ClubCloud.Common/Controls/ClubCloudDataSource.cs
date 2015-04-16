@@ -15,9 +15,9 @@ using System.Web.UI.WebControls;
 namespace ClubCloud.Common.Controls
 {
     [PersistChildren(false), ParseChildren(true)]
-    [Designer(typeof(DataSourceDesigner))]
+    [Designer(typeof(ClubCloudDataSourceDesigner)), ToolboxData("<{0}:ClubCloudDataSource runat=\"server\"></{0}:ClubCloudDataSource>")]
     [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class ClubCloudDataSource : DataSourceControl, IDataSource, IQueryableDataSource
+    public class ClubCloudDataSource : EntityDataSource //DataSourceControl, IDataSource, IQueryableDataSource
     {
 
         public ClubCloudDataSource() : base() { }
@@ -38,6 +38,7 @@ namespace ClubCloud.Common.Controls
             set { _assembly = value; }
         }
 
+
         private static ClubCloudDataSourceView _view = null;
 
         public ClubCloudDataSourceView View
@@ -45,7 +46,7 @@ namespace ClubCloud.Common.Controls
             get
             {
 
-                if (_view == null && !string.IsNullOrEmpty(ViewName))
+                if (_view == null || _view.Name != ViewName)
                 {
                     try
                     {
@@ -55,7 +56,7 @@ namespace ClubCloud.Common.Controls
                         if (type != null)
                         {
                             var parameters = new object[2] { this, type.Name };
-                            var constructor = type.GetConstructor(new Type[] { typeof(IDataSource), typeof(string) });
+                            var constructor = type.GetConstructor(new Type[] { typeof(EntityDataSource), typeof(string) });
                             if (constructor != null)
                             {
                                 _view = constructor.Invoke(parameters) as ClubCloudDataSourceView;
@@ -95,7 +96,7 @@ namespace ClubCloud.Common.Controls
                 viewName = ViewName;
             }
 
-            if (_view == null)
+            if (_view == null || _view.Name != viewName)
             {
                 try
                 {
@@ -104,7 +105,7 @@ namespace ClubCloud.Common.Controls
                     if (type != null)
                     {
                         var parameters = new object[2] { this, type.Name };
-                        var constructor = type.GetConstructor(new Type[] { typeof(IDataSource), typeof(string) });
+                        var constructor = type.GetConstructor(new Type[] { typeof(EntityDataSource), typeof(string) });
                         if (constructor != null)
                         {
                             _view = constructor.Invoke(parameters) as ClubCloudDataSourceView;
@@ -153,7 +154,7 @@ namespace ClubCloud.Common.Controls
                 return Assembly.GetCallingAssembly().GetTypes().Where(type => type.IsSubclassOf(baseType)).ToList();
             }
         }
-
+        /*
         public event EventHandler<QueryCreatedEventArgs> QueryCreated
         {
             add
@@ -165,7 +166,7 @@ namespace ClubCloud.Common.Controls
                 base.Events.RemoveHandler(ClubCloudDataSourceView.EventQueryCreated, value);
             }
         }
-
+        */
         public void RaiseViewChanged()
         {
             ((IQueryableDataSource)this.View).RaiseViewChanged();

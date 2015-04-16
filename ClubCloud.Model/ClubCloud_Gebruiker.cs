@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Functionaris))]
@@ -31,17 +33,16 @@ namespace ClubCloud.Model
     {
         public ClubCloud_Gebruiker()
         {
-            this.ClubCloud_Functionaris = new HashSet<ClubCloud_Functionaris>();
-            this.ClubCloud_Lidmaatschap = new HashSet<ClubCloud_Lidmaatschap>();
-            this.ClubCloud_Address = new HashSet<ClubCloud_Address>();
-            this.ClubCloud_Profiel = new HashSet<ClubCloud_Profiel>();
-            this.ClubCloud_Reservering_Een = new HashSet<ClubCloud_Reservering>();
-            this.ClubCloud_Reservering_Twee = new HashSet<ClubCloud_Reservering>();
-            this.ClubCloud_Reservering_Drie = new HashSet<ClubCloud_Reservering>();
-            this.ClubCloud_Reservering_Vier = new HashSet<ClubCloud_Reservering>();
-            this.ClubCloud_Setting = new HashSet<ClubCloud_Setting>();
+            this.ClubCloud_Functionaris = new ObservableCollection<ClubCloud_Functionaris>();
+            this.ClubCloud_Lidmaatschap = new ObservableCollection<ClubCloud_Lidmaatschap>();
+            this.ClubCloud_Address = new ObservableCollection<ClubCloud_Address>();
+            this.ClubCloud_Profiel = new ObservableCollection<ClubCloud_Profiel>();
+            this.ClubCloud_Reservering_Een = new ObservableCollection<ClubCloud_Reservering>();
+            this.ClubCloud_Reservering_Twee = new ObservableCollection<ClubCloud_Reservering>();
+            this.ClubCloud_Reservering_Drie = new ObservableCollection<ClubCloud_Reservering>();
+            this.ClubCloud_Reservering_Vier = new ObservableCollection<ClubCloud_Reservering>();
+            this.ClubCloud_Setting = new ObservableCollection<ClubCloud_Setting>();
         }
-    
     	[DataMember]
         public System.Guid Id 
     	{ 
@@ -476,15 +477,15 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Functionaris> ClubCloud_Functionaris { get; set; }
+        public virtual ObservableCollection<ClubCloud_Functionaris> ClubCloud_Functionaris { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Lidmaatschap> ClubCloud_Lidmaatschap { get; set; }
+        public virtual ObservableCollection<ClubCloud_Lidmaatschap> ClubCloud_Lidmaatschap { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Address> ClubCloud_Address { get; set; }
+        public virtual ObservableCollection<ClubCloud_Address> ClubCloud_Address { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
@@ -492,27 +493,27 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Profiel> ClubCloud_Profiel { get; set; }
+        public virtual ObservableCollection<ClubCloud_Profiel> ClubCloud_Profiel { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Reservering> ClubCloud_Reservering_Een { get; set; }
+        public virtual ObservableCollection<ClubCloud_Reservering> ClubCloud_Reservering_Een { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Reservering> ClubCloud_Reservering_Twee { get; set; }
+        public virtual ObservableCollection<ClubCloud_Reservering> ClubCloud_Reservering_Twee { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Reservering> ClubCloud_Reservering_Drie { get; set; }
+        public virtual ObservableCollection<ClubCloud_Reservering> ClubCloud_Reservering_Drie { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Reservering> ClubCloud_Reservering_Vier { get; set; }
+        public virtual ObservableCollection<ClubCloud_Reservering> ClubCloud_Reservering_Vier { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Setting> ClubCloud_Setting { get; set; }
+        public virtual ObservableCollection<ClubCloud_Setting> ClubCloud_Setting { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
@@ -548,6 +549,15 @@ namespace ClubCloud.Model
             if (eventHandler != null)
             {
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
             }
         }
     
@@ -588,4 +598,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_Gebruiker_Mapping : EntityTypeConfiguration<ClubCloud_Gebruiker>
+    {
+    	public ClubCloud_Gebruiker_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

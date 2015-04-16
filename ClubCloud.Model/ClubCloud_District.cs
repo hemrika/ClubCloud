@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Functionaris))]
@@ -27,11 +29,10 @@ namespace ClubCloud.Model
     {
         public ClubCloud_District()
         {
-            this.ClubCloud_Functionaris = new HashSet<ClubCloud_Functionaris>();
-            this.ClubCloud_Vereniging = new HashSet<ClubCloud_Vereniging>();
-            this.ClubCloud_Accommodatie = new HashSet<ClubCloud_Accommodatie>();
+            this.ClubCloud_Functionaris = new ObservableCollection<ClubCloud_Functionaris>();
+            this.ClubCloud_Vereniging = new ObservableCollection<ClubCloud_Vereniging>();
+            this.ClubCloud_Accommodatie = new ObservableCollection<ClubCloud_Accommodatie>();
         }
-    
     	[DataMember]
         public System.Guid Id 
     	{ 
@@ -96,11 +97,11 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Functionaris> ClubCloud_Functionaris { get; set; }
+        public virtual ObservableCollection<ClubCloud_Functionaris> ClubCloud_Functionaris { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Vereniging> ClubCloud_Vereniging { get; set; }
+        public virtual ObservableCollection<ClubCloud_Vereniging> ClubCloud_Vereniging { get; set; }
     
     	//[DataMember]
     	[IgnoreDataMember]
@@ -108,7 +109,7 @@ namespace ClubCloud.Model
     
     	//[DataMember]
     	[IgnoreDataMember]
-        public virtual ICollection<ClubCloud_Accommodatie> ClubCloud_Accommodatie { get; set; }
+        public virtual ObservableCollection<ClubCloud_Accommodatie> ClubCloud_Accommodatie { get; set; }
     
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
@@ -140,6 +141,15 @@ namespace ClubCloud.Model
             if (eventHandler != null)
             {
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
             }
         }
     
@@ -180,4 +190,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_District_Mapping : EntityTypeConfiguration<ClubCloud_District>
+    {
+    	public ClubCloud_District_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

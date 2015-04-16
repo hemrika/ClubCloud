@@ -121,42 +121,6 @@ namespace ClubCloud.Internet {
         protected global::System.Web.UI.WebControls.FormView fvw_persoon;
         
         /// <summary>
-        /// wzd_opties control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.WizardStep wzd_opties;
-        
-        /// <summary>
-        /// pnl_opties control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_opties;
-        
-        /// <summary>
-        /// wzd_voorwaarden control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.WizardStep wzd_voorwaarden;
-        
-        /// <summary>
-        /// pnl_voorwaarden control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_voorwaarden;
-        
-        /// <summary>
         /// wzd_afronden control.
         /// </summary>
         /// <remarks>
@@ -173,6 +137,15 @@ namespace ClubCloud.Internet {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnl_aanmelden;
+        
+        /// <summary>
+        /// voorwaarden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox voorwaarden;
         
         /// <summary>
         /// wzd_klaar control.

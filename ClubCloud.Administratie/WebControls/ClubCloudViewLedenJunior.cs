@@ -13,6 +13,7 @@ using Microsoft.SharePoint;
 using System.Reflection;
 using System.Web.UI.WebControls;
 using ClubCloud.Common.Controls;
+using ClubCloud.Service;
 
 namespace ClubCloud.Administratie.WebControls
 {
@@ -58,7 +59,7 @@ namespace ClubCloud.Administratie.WebControls
             }
         }
 
-        public ClubCloudViewLedenJunior(IDataSource owner, string viewName) : base(owner, viewName) { }
+        public ClubCloudViewLedenJunior(EntityDataSource owner, string viewName) : base(owner, viewName) { }
 
 
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]
@@ -78,13 +79,12 @@ namespace ClubCloud.Administratie.WebControls
             List<Parameter> collection = new List<Parameter>();
             collection.Insert(0, new Parameter { DefaultValue = "Actief", Name = "Actief", DbType = DbType.String, Direction = ParameterDirection.Input });
             collection.Insert(1, new Parameter { DefaultValue = "{" + Settings.VerenigingId.Value.ToString() + "}", Name = "VerenigingId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
-            collection.Insert(1, new Parameter { DefaultValue = "{" + Settings.VerenigingId.Value.ToString() + "}", Name = "VerenigingId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
             foreach (Parameter where in WhereParameters)
             {
                 collection.Add(where);
             }
 
-            ClubCloud_Gebruiker_DataView gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs, collection);
+            ClubCloud_Gebruiker_View gebruikers = Client.GetGebruikersByQuery(userId, Settings.VerenigingId.Value, selectArgs, collection);
 
             selectArgs.TotalRowCount = gebruikers.TotalRowCount;
 

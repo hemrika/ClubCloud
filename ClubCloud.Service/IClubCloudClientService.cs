@@ -25,11 +25,11 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string[] GetGebruikerAutoComplete(string prefixText, int count, string contextKey);
+        string[] GetGebruikers(string prefixText, int count, string contextKey);
 
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string[] GetVereniningen(string prefixText, int count, string contextKey);
+        string[] GetVerenigingen(string prefixText, int count, string contextKey);
 
         #endregion
 

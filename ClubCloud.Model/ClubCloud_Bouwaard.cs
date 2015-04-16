@@ -11,10 +11,12 @@ namespace ClubCloud.Model
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Data.Entity.ModelConfiguration;
+    using System.Collections.Generic;
     
     [Serializable]
     [DataContract(IsReference = true)]
@@ -40,6 +42,56 @@ namespace ClubCloud.Model
     
     	[IgnoreDataMember]
     	private string _naam;
+    
+    	[DataMember]
+        public string Omschrijving 
+    	{ 
+    		get { return _omschrijving; } 
+    		set { SetProperty(ref _omschrijving, value); } 
+    	}
+    
+    	[IgnoreDataMember]
+    	private string _omschrijving;
+    
+    	[DataMember]
+        public string Code 
+    	{ 
+    		get { return _code; } 
+    		set { SetProperty(ref _code, value); } 
+    	}
+    
+    	[IgnoreDataMember]
+    	private string _code;
+    
+    	[DataMember]
+        public string Beschrijving 
+    	{ 
+    		get { return _beschrijving; } 
+    		set { SetProperty(ref _beschrijving, value); } 
+    	}
+    
+    	[IgnoreDataMember]
+    	private string _beschrijving;
+    
+    	[DataMember]
+        public string Meervoud 
+    	{ 
+    		get { return _meervoud; } 
+    		set { SetProperty(ref _meervoud, value); } 
+    	}
+    
+    	[IgnoreDataMember]
+    	private string _meervoud;
+    
+    	[DataMember]
+        public string Actief 
+    	{ 
+    		get { return _actief; } 
+    		set { SetProperty(ref _actief, value); } 
+    	}
+    
+    	[IgnoreDataMember]
+    	private string _actief;
     
     
         public event PropertyChangedEventHandler PropertyChanged;
@@ -72,6 +124,15 @@ namespace ClubCloud.Model
             if (eventHandler != null)
             {
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    
+        protected void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e = null)
+        {
+            var eventHandler = this.ErrorsChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, e);
             }
         }
     
@@ -112,4 +173,14 @@ namespace ClubCloud.Model
             }
         }
     }
+    
+    
+    public class ClubCloud_Bouwaard_Mapping : EntityTypeConfiguration<ClubCloud_Bouwaard>
+    {
+    	public ClubCloud_Bouwaard_Mapping() 
+    	{			
+    		HasKey(m => m.Id);
+    	}
+    }
+    
 }

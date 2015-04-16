@@ -106,7 +106,33 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Days.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Facebook.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Financieel.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeslachtSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Month.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Privacy.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProcessorArchitecture.cs">
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReserveringSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreClubCloud.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>StoreClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="StoreConfiguration.cs" />
@@ -220,23 +246,11 @@
     <Compile Include="CostCenter.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
     </Compile>
-    <Compile Include="Days.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
     <Compile Include="DirectionType.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
     </Compile>
-    <Compile Include="Facebook.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
     <Compile Include="FinancialYear.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Financieel.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GeslachtSoort.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Invoice.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
@@ -274,14 +288,8 @@
     <Compile Include="LedgerType.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
     </Compile>
-    <Compile Include="Month.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
     <Compile Include="Payable.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Privacy.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
@@ -292,9 +300,6 @@
     </Compile>
     <Compile Include="Relation.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ReserveringSoort.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Result.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
@@ -323,11 +328,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StoreClubCloud.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StoreClubCloud.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StoreClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="StoreClubCloud.Designer.cs">
       <AutoGen>True</AutoGen>

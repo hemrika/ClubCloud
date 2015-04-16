@@ -32,15 +32,15 @@ namespace ClubCloud.Service
     {
         #region Public WebSite
 
-        public string[] GetGebruikerAutoComplete(string prefixText, int count, string contextKey)
+        public string[] GetGebruikers(string prefixText, int count, string contextKey)
         {
             List<string> customers = new List<string>();
 
             if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-
-                List<ClubCloud_Gebruiker> gebruikers = client.GetGebruikersBySearch(SPContext.Current.Web.CurrentUser.LoginName, prefixText, count, true);
+                
+                List<ClubCloud_Gebruiker> gebruikers = client.GetGebruikersBySearch(prefixText, count, contextKey, new ClubCloud_Setting { Id = int.Parse(SPContext.Current.Web.CurrentUser.UserId.NameId) });
 
                 if (gebruikers != null && gebruikers.Count > 0)
                 {
@@ -56,6 +56,8 @@ namespace ClubCloud.Service
                 {
                     return default(string[]);
                 }
+                
+                return customers.ToArray(); ;
             }
             else
             {
@@ -64,58 +66,30 @@ namespace ClubCloud.Service
         }
 
 
-        public string[] GetVereniningen(string prefixText, int count, string contextKey)
+        public string[] GetVerenigingen(string prefixText, int count, string contextKey)
         {
-            List<string> verenigingen = new List<string>();
+            List<string> results = new List<string>();
             try
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
 
-                ClubCloud_Vereniging vereniging = client.GetVerenigingByNummer("00000000", prefixText, true);
+                List<ClubCloud_Vereniging> verenigingen = client.GetVerenigingenBySearch(prefixText, count, contextKey);
 
-                if (vereniging != null)
+                if (verenigingen != null && verenigingen.Count > 0)
                 {
-                    verenigingen.Add((new JavaScriptSerializer()).Serialize(new Pair(string.Format("{0} - {1}", vereniging.Nummer, vereniging.Naam), vereniging.Nummer)));
-                    return verenigingen.ToArray();
+                    foreach (ClubCloud_Vereniging vereniging in verenigingen)
+                    {
+                        results.Add((new JavaScriptSerializer()).Serialize(new Pair(string.Format("{0} - {1}", vereniging.Nummer, vereniging.Naam), vereniging.Nummer)));
+                    }
+
+                    return results.ToArray();
                 }
+
+                return results.ToArray(); ;
             }
             catch { };
 
             return default(string[]);
-        }
-
-        #endregion
-
-
-        #region Store
-
-
-        
-
-
-        public ApplicationOperationRecord InsertApplicationOperationRecord(ApplicationOperationRecord record)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<ApplicationOperationRecord> GetApplicationOperationRecords(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ApplicationOperationRecord GetApplicationOperationRecord(string userName, int appInfoId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ApplicationVersion GetApplicationVersion(int appVersionInfoId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ApplicationProcessorArchitecture GetPackageUrl(int appVersionInfoId, int processArchitecture)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
