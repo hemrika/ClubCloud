@@ -8816,11 +8816,11 @@
         /// <returns></returns>
         private ClubCloud_Lidmaatschapsoort GetLidmaatschapsoortById(string bondsnummer, Guid Id, bool refresh, ClubCloud_Setting settings)
         {
-            ClubCloud_Lidmaatschapsoort lidmaatschapsoort = new ClubCloud_Lidmaatschapsoort();
+            ClubCloud_Lidmaatschapsoort entity = null;
 
-            lidmaatschapsoort = beheerModel.ClubCloud_Lidmaatschapsoorten.Find(Id);
+            entity = beheerModel.ClubCloud_Lidmaatschapsoorten.Find(Id);
 
-            if (lidmaatschapsoort == null || refresh)
+            if (entity == null || refresh)
             {
                 if (settings == null)
                     settings = GetSettings(bondsnummer);
@@ -8837,13 +8837,13 @@
 
                             if (lidmaatschapsoort != null && lidmaatschapsoort.sgt_alg_soort_lidmaatschapid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Lidmaatschappen.Create();
+                                entity = beheerModel.ClubCloud_Lidmaatschapsoorten.Create();
                                 entity.Id = lidmaatschapsoort.sgt_alg_soort_lidmaatschapid.Value;
 
-                                LidmaatschapsoortToEntity(lidmaatschapsoort, entity, bondsnummer, settings);
+                                LidmaatschapsoortToEntity(lidmaatschapsoort, entity, settings);
                                 //EntityToLidmaatschapsoort(lidmaatschapsoort, entity, bondsnummer, settings);
 
-                                beheerModel.ClubCloud_Lidmaatschappen.AddOrUpdate(entity);
+                                beheerModel.ClubCloud_Lidmaatschapsoorten.AddOrUpdate(entity);
                                 beheerModel.SaveChanges();
                             }
 
@@ -8895,10 +8895,10 @@
                         }
                     }
                 }
-                lidmaatschapsoort = beheerModel.ClubCloud_Lidmaatschapsoorten.Find(Id);
+                entity = beheerModel.ClubCloud_Lidmaatschapsoorten.Find(Id);
             }
 
-            return lidmaatschapsoort;
+            return entity;
         }
 
         /// <summary>
