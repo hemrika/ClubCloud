@@ -48,7 +48,7 @@ namespace ClubCloud.Service
     		
     		try
     		{
-    			result = beheerModel.ClubCloud_Afhangen.ToList<ClubCloud_Afhang>();
+    			result = beheerModel.ClubCloud_Afhangen.Where(i => i.VerenigingId.Value == settings.VerenigingId.Value).ToList<ClubCloud_Afhang>();
     		
     			if (result == null || result.Count == 0 || refresh)		
     				result = GetAfhangen(settings.Id.ToString(), refresh, settings);
