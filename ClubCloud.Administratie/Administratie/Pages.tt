@@ -35,7 +35,7 @@ fileManager.StartNewFile(SetName+".aspx");
 #>
 <#=codeStringGenerator.WritePageHeaderDeclaration(entitySet)#>
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1>
+    <h1 class="s4-notdlg noindex" >
         <#=code.Escape(SetName)#>
     </h1>
 	<ClubCloud:<#=code.Escape(SetName)#> id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
@@ -45,9 +45,6 @@ fileManager.StartNewFile(Name+".aspx");
 #>
 <#=codeStringGenerator.WritePageHeaderDeclaration(entitySet,entity, "")#>
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1>
-        <#=code.Escape(Name)#>
-    </h1>
 	<ClubCloud:<#=code.Escape(Name)#> id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
 </asp:Content>
 <#
@@ -55,9 +52,6 @@ fileManager.StartNewFile(Name+"_Insert.aspx");
 #>
 <#=codeStringGenerator.WritePageHeaderDeclaration(entitySet,entity,"_Insert")#>
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1>
-        <#=code.Escape(Name)#>
-    </h1>
 	<ClubCloud:<#=code.Escape(Name)#>_Insert id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
 </asp:Content>
 <#
@@ -65,9 +59,6 @@ fileManager.StartNewFile(Name+"_Edit.aspx");
 #>
 <#=codeStringGenerator.WritePageHeaderDeclaration(entitySet,entity,"_Edit")#>
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1>
-        <#=code.Escape(Name)#>
-    </h1>
 	<ClubCloud:<#=code.Escape(Name)#>_Edit id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
 </asp:Content>
 <#
@@ -75,9 +66,6 @@ fileManager.StartNewFile(Name+"_Search.aspx");
 #>
 <#=codeStringGenerator.WritePageHeaderDeclaration(entitySet,entity,"_Search")#>
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1>
-        <#=code.Escape(Name)#>
-    </h1>
 	<ClubCloud:<#=code.Escape(Name)#>_Search id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
 </asp:Content>
 <#

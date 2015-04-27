@@ -11,6 +11,34 @@ namespace ClubCloud.Administratie.WebControls
 {
     public partial class ClubCloud_BanenUserControl 
     {
+    
+        /// <summary>
+        /// BaanMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuTemplate BaanMenu;
+    
+    	/// <summary>
+        /// Baan_Details control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Baan_Details;
+    
+        /// <summary>
+        /// Baanschemas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Baanschemas;
+    
         /// <summary>
         /// ClubCloud_Baan_DataSource control.
         /// </summary>
@@ -20,23 +48,23 @@ namespace ClubCloud.Administratie.WebControls
         /// </remarks>
     	protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Baan_DataSource;
     
-    	/// <summary>
-    	/// spgvpager_top control.
-    	/// </summary>
-    	/// <remarks>
-    	/// Auto-generated field.
-    	/// To modify move field declaration from designer file to code-behind file.
-    	/// </remarks>
-    	protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_top;
-    
         /// <summary>
-        /// ClubCloud_Baan_Grid control.
+        /// spgvpager_top control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.SPGridView ClubCloud_Baan_Grid;
+        protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_top;
+    
+        /// <summary>
+        /// ClubCloud_Banen_Grid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.SPGridView Banen_Grid;
     
         /// <summary>
         /// spgvpager_bottom control.

@@ -101,13 +101,12 @@ namespace ClubCloud.Administratie.WebControls
     								if(entity != null || entity.Id != Guid.Empty)
     								{
     
-    									entity.ClubCloud_Vereniging  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Vereniging>(Client.GetVerenigingenForAccommodatieById(Id, false, Settings));
     									entity.ClubCloud_District  = Client.GetDistrictForAccommodatieById(Id, false, Settings);
     									entity.ClubCloud_Regio  = Client.GetRegioForAccommodatieById(Id, false, Settings);
     									entity.ClubCloud_Baanblok  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanblok>(Client.GetBaanblokkenForAccommodatieById(Id, false, Settings));
     									entity.ClubCloud_Baan  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baan>(Client.GetBanenForAccommodatieById(Id, false, Settings));
     									entity.ClubCloud_BaanSpeciaal  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_BaanSpeciaal>(Client.GetBanenSpeciaalForAccommodatieById(Id, false, Settings));
-    									entity.ClubCloud_Address  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressesForAccommodatieById(Id, false, Settings));
+    									entity.ClubCloud_Address  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressenForAccommodatieById(Id, false, Settings));
     								}
     							}
     						}
@@ -122,7 +121,71 @@ namespace ClubCloud.Administratie.WebControls
     		return entity;
         }
     
+    	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+        public IQueryable<ClubCloud_Accommodatie> SelectAccommodaties(string sortByExpression, int startRowIndex, int maximumRows, out int totalRowCount)//, bool retrieveTotalRowCount = true)
+        {
+            if(SPContext.Current.Web.CurrentUser != null)
+            {
+                string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+                ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+    
+                if(Settings != null && Settings.VerenigingId != null) 
+                {
+                    List<Parameter> collection = new List<Parameter>();
+    
+                    
+                    foreach (Parameter where in WhereParameters)
+                    {
+                        if (collection.Any(w => w.Name == where.Name))
+                        {
+                            int index = collection.FindIndex(p => p.Name == where.Name);
+                            if (index >= 0)
+                                collection[index] = where;
+                        }
+                        else
+                        {
+                            collection.Add(where);
+                        }
+                    }
+    
+    				DataSourceSelectArguments selectArgs = new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression };
+                    ClubCloud_Accommodatie_View queryresult = Client.GetAccommodatiesByQuery(userId, Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
+    
+                    totalRowCount = queryresult.TotalRowCount;
+    
+    				
+    				if(totalRowCount > 0)
+    				{
+                        foreach (ClubCloud_Accommodatie Accommodatie in queryresult.ClubCloud_Accommodatie)
+                        {
+    						Accommodatie.ClubCloud_District  = Client.GetDistrictForAccommodatieById(Accommodatie.Id, false, Settings);
+    						Accommodatie.ClubCloud_Regio  = Client.GetRegioForAccommodatieById(Accommodatie.Id, false, Settings);
+    						Accommodatie.ClubCloud_Baanblok  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanblok>(Client.GetBaanblokkenForAccommodatieById(Accommodatie.Id, false, Settings));
+    						Accommodatie.ClubCloud_Baan  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baan>(Client.GetBanenForAccommodatieById(Accommodatie.Id, false, Settings));
+    						Accommodatie.ClubCloud_BaanSpeciaal  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_BaanSpeciaal>(Client.GetBanenSpeciaalForAccommodatieById(Accommodatie.Id, false, Settings));
+    						Accommodatie.ClubCloud_Address  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressenForAccommodatieById(Accommodatie.Id, false, Settings));
+                            
+                        }
+    				}
+    				return queryresult.ClubCloud_Accommodatie.AsQueryable<ClubCloud_Accommodatie>();
+                }
+            }
+    
+            totalRowCount = 0;
+    		return null;
+    	}
+    
+    	//Verenigingen
+    	//Districten
+    	//Regios
+    	//Baanblokken
+    	//Banen
+    	//BanenSpeciaal
+    	//Addressen
+    
+    
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]
+    	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         protected override IEnumerable ExecuteSelect(DataSourceSelectArguments selectArgs)
         {
             DataSet ds = new DataSet("result");
@@ -164,8 +227,21 @@ namespace ClubCloud.Administratie.WebControls
         }
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Delete, true)]
-    	public void DeleteAccommodatie(ClubCloud_Accommodatie entity)
+    	public bool DeleteAccommodatie(ClubCloud_Accommodatie entity)
         { 
+            if (SPContext.Current.Web.CurrentUser != null)
+            {
+                int result;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                    Settings = Client.GetSettingById(result);
+    
+                if (Settings != null && Settings.VerenigingId != null)
+                {
+                    return Client.DeleteAccommodatie(entity, Settings);
+                }
+            }
+    		return false;
     	}
     
         protected override int ExecuteDelete(IDictionary keys, IDictionary oldValues)
@@ -201,7 +277,19 @@ namespace ClubCloud.Administratie.WebControls
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Insert, true)]
     	public virtual System.Guid InsertAccommodatie(ClubCloud_Accommodatie entity)
     	{
-    		return Guid.NewGuid();
+            if (SPContext.Current.Web.CurrentUser != null)
+            {
+                int result;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                    Settings = Client.GetSettingById(result);
+    
+                if (Settings != null && Settings.VerenigingId != null)
+                {
+                    entity = Client.SetAccommodatie(entity, Settings);
+                }
+            }
+    		return entity.Id;
     	}
     
     
@@ -228,6 +316,18 @@ namespace ClubCloud.Administratie.WebControls
         [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Update, true)]
         public void UpdateAccommodatie(ClubCloud_Accommodatie entity) 
     	{
+            if (SPContext.Current.Web.CurrentUser != null)
+            {
+                int result;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                    Settings = Client.GetSettingById(result);
+    
+                if (Settings != null && Settings.VerenigingId != null)
+                {
+                    Client.SetAccommodatie(entity, Settings);
+                }
+            }
     	}
     
         protected override int ExecuteUpdate(IDictionary keys, IDictionary values, IDictionary oldValues)
@@ -256,7 +356,7 @@ namespace ClubCloud.Administratie.WebControls
         }
     }
     
-    public class Accommodatie : ClubCloud_Accommodatie {}
+    //public class Accommodatie : ClubCloud_Accommodatie {}
     
     public class ClubCloud_AccommodatieDataSourceViewDesigner : DesignerDataSourceView
     {
@@ -294,27 +394,27 @@ namespace ClubCloud.Administratie.WebControls
     
         public override bool CanDelete
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanInsert
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanUpdate
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanPage
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanSort
         {
-            get { return false; }
+            get { return true; }
         }
     }
     

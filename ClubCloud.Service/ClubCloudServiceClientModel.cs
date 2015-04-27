@@ -598,28 +598,28 @@ namespace ClubCloud.Service
     	}
     
     	
-    	public List<ClubCloud_Address> GetAddressesForVereniging(ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenForVereniging(ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
     	{
             List<ClubCloud_Address> response = null;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddressesForVereniging(entity, refresh, settings);
+                    response = channel.GetAddressenForVereniging(entity, refresh, settings);
                 },
                 false);
     
             return response;
     	}
     
-    	public bool SetAddressesForVereniging(List<ClubCloud_Address> Addresses, ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	public bool SetAddressenForVereniging(List<ClubCloud_Address> Addressen, ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
     	{
             bool response = false;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.SetAddressesForVereniging(Addresses, entity, refresh, settings);
+                    response = channel.SetAddressenForVereniging(Addressen, entity, refresh, settings);
                 },
                 false);
     
@@ -627,7 +627,7 @@ namespace ClubCloud.Service
     	}
     
     
-    	public List<ClubCloud_Address> GetAddressesForVerenigingById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenForVerenigingById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
     	{
     
     	    List<ClubCloud_Address> response = null;
@@ -635,7 +635,7 @@ namespace ClubCloud.Service
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddressesForVerenigingById(Id, refresh, settings);
+                    response = channel.GetAddressenForVerenigingById(Id, refresh, settings);
                 },
                 false);
     
@@ -918,6 +918,52 @@ namespace ClubCloud.Service
     	}
     
     
+    	
+    	public List<ClubCloud_Lidmaatschapsoort> GetLidmaatschapsoortenForVereniging(ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+            List<ClubCloud_Lidmaatschapsoort> response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetLidmaatschapsoortenForVereniging(entity, refresh, settings);
+                },
+                false);
+    
+            return response;
+    	}
+    
+    	public bool SetLidmaatschapsoortenForVereniging(List<ClubCloud_Lidmaatschapsoort> Lidmaatschapsoorten, ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+            bool response = false;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetLidmaatschapsoortenForVereniging(Lidmaatschapsoorten, entity, refresh, settings);
+                },
+                false);
+    
+            return response;
+    	}
+    
+    
+    	public List<ClubCloud_Lidmaatschapsoort> GetLidmaatschapsoortenForVerenigingById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+    
+    	    List<ClubCloud_Lidmaatschapsoort> response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetLidmaatschapsoortenForVerenigingById(Id, refresh, settings);
+                },
+                false);
+    
+            return response;
+    	}
+    
+    
     	    public ClubCloud_Gebruiker GetGebruikerById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
         {
     
@@ -1122,28 +1168,28 @@ namespace ClubCloud.Service
     
     
     	
-    	public List<ClubCloud_Address> GetAddressesForGebruiker(ClubCloud_Gebruiker entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenForGebruiker(ClubCloud_Gebruiker entity, bool refresh = false, ClubCloud_Setting settings = null)
     	{
             List<ClubCloud_Address> response = null;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddressesForGebruiker(entity, refresh, settings);
+                    response = channel.GetAddressenForGebruiker(entity, refresh, settings);
                 },
                 false);
     
             return response;
     	}
     
-    	public bool SetAddressesForGebruiker(List<ClubCloud_Address> Addresses, ClubCloud_Gebruiker entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	public bool SetAddressenForGebruiker(List<ClubCloud_Address> Addressen, ClubCloud_Gebruiker entity, bool refresh = false, ClubCloud_Setting settings = null)
     	{
             bool response = false;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.SetAddressesForGebruiker(Addresses, entity, refresh, settings);
+                    response = channel.SetAddressenForGebruiker(Addressen, entity, refresh, settings);
                 },
                 false);
     
@@ -1151,7 +1197,7 @@ namespace ClubCloud.Service
     	}
     
     
-    	public List<ClubCloud_Address> GetAddressesForGebruikerById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenForGebruikerById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
     	{
     
     	    List<ClubCloud_Address> response = null;
@@ -1159,7 +1205,7 @@ namespace ClubCloud.Service
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddressesForGebruikerById(Id, refresh, settings);
+                    response = channel.GetAddressenForGebruikerById(Id, refresh, settings);
                 },
                 false);
     
@@ -1735,28 +1781,28 @@ namespace ClubCloud.Service
     
     
     	
-    	public List<ClubCloud_Address> GetAddressesForAccommodatie(ClubCloud_Accommodatie entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenForAccommodatie(ClubCloud_Accommodatie entity, bool refresh = false, ClubCloud_Setting settings = null)
     	{
             List<ClubCloud_Address> response = null;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddressesForAccommodatie(entity, refresh, settings);
+                    response = channel.GetAddressenForAccommodatie(entity, refresh, settings);
                 },
                 false);
     
             return response;
     	}
     
-    	public bool SetAddressesForAccommodatie(List<ClubCloud_Address> Addresses, ClubCloud_Accommodatie entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	public bool SetAddressenForAccommodatie(List<ClubCloud_Address> Addressen, ClubCloud_Accommodatie entity, bool refresh = false, ClubCloud_Setting settings = null)
     	{
             bool response = false;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.SetAddressesForAccommodatie(Addresses, entity, refresh, settings);
+                    response = channel.SetAddressenForAccommodatie(Addressen, entity, refresh, settings);
                 },
                 false);
     
@@ -1764,7 +1810,7 @@ namespace ClubCloud.Service
     	}
     
     
-    	public List<ClubCloud_Address> GetAddressesForAccommodatieById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenForAccommodatieById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
     	{
     
     	    List<ClubCloud_Address> response = null;
@@ -1772,7 +1818,7 @@ namespace ClubCloud.Service
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddressesForAccommodatieById(Id, refresh, settings);
+                    response = channel.GetAddressenForAccommodatieById(Id, refresh, settings);
                 },
                 false);
     
@@ -3502,14 +3548,14 @@ namespace ClubCloud.Service
         }
     
     
-    	public List<ClubCloud_Address> GetAddresses(bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressen(bool refresh = false, ClubCloud_Setting settings = null)
         {
             List<ClubCloud_Address> response = null;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddresses(refresh, settings);
+                    response = channel.GetAddressen(refresh, settings);
                 },
                 false);
     
@@ -3565,7 +3611,7 @@ namespace ClubCloud.Service
         }
     
     
-    	public ClubCloud_Address_View GetAddressesByQuery(string bondsnummer, Guid verenigingId,System.Web.UI.DataSourceSelectArguments selectArgs = null, List<System.Web.UI.WebControls.Parameter> parameters = null, ClubCloud_Setting settings = null)
+    	public ClubCloud_Address_View GetAddressenByQuery(string bondsnummer, Guid verenigingId,System.Web.UI.DataSourceSelectArguments selectArgs = null, List<System.Web.UI.WebControls.Parameter> parameters = null, ClubCloud_Setting settings = null)
         {
     
             ClubCloud_Address_View response = null;
@@ -3573,7 +3619,7 @@ namespace ClubCloud.Service
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddressesByQuery(bondsnummer, verenigingId, selectArgs, parameters, settings);
+                    response = channel.GetAddressenByQuery(bondsnummer, verenigingId, selectArgs, parameters, settings);
                 },
                 false);
     
@@ -3582,14 +3628,14 @@ namespace ClubCloud.Service
         }
     
     
-    	public List<ClubCloud_Address> GetAddressesBySearch(string prefixText, int count, string contextKey, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenBySearch(string prefixText, int count, string contextKey, ClubCloud_Setting settings = null)
     	{
     		List<ClubCloud_Address> response = null;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddressesBySearch(prefixText, count, contextKey, settings);
+                    response = channel.GetAddressenBySearch(prefixText, count, contextKey, settings);
                 },
                 false);
     
@@ -3770,6 +3816,51 @@ namespace ClubCloud.Service
                 delegate(IClubCloudApplicationService channel)
                 {
                     response = channel.GetAccommodatieForAddressById(Id, refresh, settings);
+                },
+                false);
+    
+            return response;	
+    	}
+    
+    	
+    	public ClubCloud_Land GetLandForAddress(ClubCloud_Address entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+            ClubCloud_Land response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetLandForAddress(entity, refresh, settings);
+                },
+                false);
+    
+            return response;	
+    	}
+    
+    	public bool SetLandForAddress(ClubCloud_Land Land, ClubCloud_Address entity , bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+    	    bool response = false;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetLandForAddress(Land, entity , refresh, settings);
+                },
+                false);
+    
+            return response;
+    	}
+    
+    	
+    	public ClubCloud_Land GetLandForAddressById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+    
+    	    ClubCloud_Land response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetLandForAddressById(Id, refresh, settings);
                 },
                 false);
     
@@ -4026,28 +4117,28 @@ namespace ClubCloud.Service
     
     
     	
-    	public List<ClubCloud_Address> GetAddressesForRegio(ClubCloud_Regio entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenForRegio(ClubCloud_Regio entity, bool refresh = false, ClubCloud_Setting settings = null)
     	{
             List<ClubCloud_Address> response = null;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddressesForRegio(entity, refresh, settings);
+                    response = channel.GetAddressenForRegio(entity, refresh, settings);
                 },
                 false);
     
             return response;
     	}
     
-    	public bool SetAddressesForRegio(List<ClubCloud_Address> Addresses, ClubCloud_Regio entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	public bool SetAddressenForRegio(List<ClubCloud_Address> Addressen, ClubCloud_Regio entity, bool refresh = false, ClubCloud_Setting settings = null)
     	{
             bool response = false;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.SetAddressesForRegio(Addresses, entity, refresh, settings);
+                    response = channel.SetAddressenForRegio(Addressen, entity, refresh, settings);
                 },
                 false);
     
@@ -4055,7 +4146,7 @@ namespace ClubCloud.Service
     	}
     
     
-    	public List<ClubCloud_Address> GetAddressesForRegioById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenForRegioById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
     	{
     
     	    List<ClubCloud_Address> response = null;
@@ -4063,7 +4154,7 @@ namespace ClubCloud.Service
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetAddressesForRegioById(Id, refresh, settings);
+                    response = channel.GetAddressenForRegioById(Id, refresh, settings);
                 },
                 false);
     
@@ -5771,6 +5862,51 @@ namespace ClubCloud.Service
     	}
     
     
+    	
+    	public ClubCloud_Vereniging GetVerenigingForLidmaatschapsoort(ClubCloud_Lidmaatschapsoort entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+            ClubCloud_Vereniging response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetVerenigingForLidmaatschapsoort(entity, refresh, settings);
+                },
+                false);
+    
+            return response;	
+    	}
+    
+    	public bool SetVerenigingForLidmaatschapsoort(ClubCloud_Vereniging Vereniging, ClubCloud_Lidmaatschapsoort entity , bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+    	    bool response = false;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetVerenigingForLidmaatschapsoort(Vereniging, entity , refresh, settings);
+                },
+                false);
+    
+            return response;
+    	}
+    
+    	
+    	public ClubCloud_Vereniging GetVerenigingForLidmaatschapsoortById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+    
+    	    ClubCloud_Vereniging response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetVerenigingForLidmaatschapsoortById(Id, refresh, settings);
+                },
+                false);
+    
+            return response;	
+    	}
+    
     	    public ClubCloud_Sponsor GetSponsorById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
         {
     
@@ -6571,6 +6707,163 @@ namespace ClubCloud.Service
                 delegate(IClubCloudApplicationService channel)
                 {
                     response = channel.GetBanenSpeciaalForBaantoplaagById(Id, refresh, settings);
+                },
+                false);
+    
+            return response;
+    	}
+    
+    
+    	    public ClubCloud_Land GetLandById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+        {
+    
+            ClubCloud_Land response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetLandById(Id, refresh, settings);
+                },
+                false);
+    
+            return response;
+    
+        }
+    
+    
+    	public List<ClubCloud_Land> GetLanden(bool refresh = false, ClubCloud_Setting settings = null)
+        {
+            List<ClubCloud_Land> response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetLanden(refresh, settings);
+                },
+                false);
+    
+            return response;
+        }
+    
+        public ClubCloud_Land SetLand(ClubCloud_Land entity, ClubCloud_Setting settings = null)
+        {
+    
+            ClubCloud_Land response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetLand(entity, settings);
+                },
+                false);
+    
+            return response;
+    
+        }
+    
+    	public bool DeleteLand(ClubCloud_Land entity, ClubCloud_Setting settings = null)
+        {
+    
+            bool response = false;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.DeleteLand(entity, settings);
+                },
+                false);
+    
+            return response;
+    
+        }
+    
+    	public bool DeleteLandById(System.Guid Id, ClubCloud_Setting settings = null)
+    	{
+    
+            bool response = false;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.DeleteLandById(Id, settings);
+                },
+                false);
+    
+            return response;
+    
+        }
+    
+    
+    	public ClubCloud_Land_View GetLandenByQuery(string bondsnummer, Guid verenigingId,System.Web.UI.DataSourceSelectArguments selectArgs = null, List<System.Web.UI.WebControls.Parameter> parameters = null, ClubCloud_Setting settings = null)
+        {
+    
+            ClubCloud_Land_View response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetLandenByQuery(bondsnummer, verenigingId, selectArgs, parameters, settings);
+                },
+                false);
+    
+            return response;
+    
+        }
+    
+    
+    	public List<ClubCloud_Land> GetLandenBySearch(string prefixText, int count, string contextKey, ClubCloud_Setting settings = null)
+    	{
+    		List<ClubCloud_Land> response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetLandenBySearch(prefixText, count, contextKey, settings);
+                },
+                false);
+    
+    		return response;
+    	}
+    
+    
+    	public List<ClubCloud_Address> GetAddressenForLand(ClubCloud_Land entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+            List<ClubCloud_Address> response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetAddressenForLand(entity, refresh, settings);
+                },
+                false);
+    
+            return response;
+    	}
+    
+    	public bool SetAddressenForLand(List<ClubCloud_Address> Addressen, ClubCloud_Land entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+            bool response = false;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.SetAddressenForLand(Addressen, entity, refresh, settings);
+                },
+                false);
+    
+            return response;
+    	}
+    
+    
+    	public List<ClubCloud_Address> GetAddressenForLandById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+    
+    	    List<ClubCloud_Address> response = null;
+    
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.GetAddressenForLandById(Id, refresh, settings);
                 },
                 false);
     

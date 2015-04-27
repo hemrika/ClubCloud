@@ -305,6 +305,8 @@ namespace ClubCloud.Model
     
     		modelBuilder.Entity<ClubCloud_Baantoplaag>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		modelBuilder.Entity<ClubCloud_Land>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+    
     		modelBuilder.Configurations.Add(new ClubCloud_Accommodatie_Mapping());
     		modelBuilder.Configurations.Add(new ClubCloud_Address_Mapping());
     		modelBuilder.Configurations.Add(new ClubCloud_Afhang_Mapping());
@@ -322,6 +324,7 @@ namespace ClubCloud.Model
     		modelBuilder.Configurations.Add(new ClubCloud_Functie_Mapping());
     		modelBuilder.Configurations.Add(new ClubCloud_Functionaris_Mapping());
     		modelBuilder.Configurations.Add(new ClubCloud_Gebruiker_Mapping());
+    		modelBuilder.Configurations.Add(new ClubCloud_Land_Mapping());
     		modelBuilder.Configurations.Add(new ClubCloud_Lidmaatschap_Mapping());
     		modelBuilder.Configurations.Add(new ClubCloud_Lidmaatschapsoort_Mapping());
     		modelBuilder.Configurations.Add(new ClubCloud_Nationaliteit_Mapping());
@@ -349,7 +352,7 @@ namespace ClubCloud.Model
         public virtual DbSet<ClubCloud_Functionaris> ClubCloud_Functionarissen { get; set; }
         public virtual DbSet<ClubCloud_Bestuursorgaan> ClubCloud_Bestuursorganen { get; set; }
         public virtual DbSet<ClubCloud_Rechtsvorm> ClubCloud_Rechtsvormen { get; set; }
-        public virtual DbSet<ClubCloud_Address> ClubCloud_Addresses { get; set; }
+        public virtual DbSet<ClubCloud_Address> ClubCloud_Addressen { get; set; }
         public virtual DbSet<ClubCloud_Regio> ClubCloud_Regios { get; set; }
         public virtual DbSet<ClubCloud_Baansoort> ClubCloud_Baansoorten { get; set; }
         public virtual DbSet<ClubCloud_Baantype> ClubCloud_Baantypes { get; set; }
@@ -365,5 +368,6 @@ namespace ClubCloud.Model
         public virtual DbSet<ClubCloud_Sponsor_Afbeelding> ClubCloud_Sponsor_Afbeeldingen { get; set; }
         public virtual DbSet<ClubCloud_Baanblok> ClubCloud_Baanblokken { get; set; }
         public virtual DbSet<ClubCloud_Baantoplaag> ClubCloud_Baantoplagen { get; set; }
+        public virtual DbSet<ClubCloud_Land> ClubCloud_Landen { get; set; }
     }
 }

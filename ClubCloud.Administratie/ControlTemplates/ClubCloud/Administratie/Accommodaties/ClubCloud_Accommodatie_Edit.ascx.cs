@@ -36,8 +36,23 @@ namespace ClubCloud.Administratie.WebControls
     
     	protected void GoBack(object sender, EventArgs e)
     	{
-    		Response.Redirect("Accommodaties.aspx");
+    		Button btn = (Button)sender;
+    
+            if(Request.QueryString.AllKeys.Contains("IsDlg"))
+    			Response.Redirect(string.Format("Accommodatie.aspx?Id={0}&IsDlg=1", btn.CommandArgument.ToString()));
+    
+            Response.Redirect(string.Format("Accommodatie.aspx?Id={0}", btn.CommandArgument.ToString()));
+    
     	}
+    
+    	protected void GoBack(object sender, CommandEventArgs e)
+        {
+            if(Request.QueryString.AllKeys.Contains("IsDlg"))
+    			Response.Redirect(string.Format("Accommodatie.aspx?Id={0}&IsDlg=1", e.CommandArgument.ToString()));
+    
+            Response.Redirect(string.Format("Accommodatie.aspx?Id={0}", e.CommandArgument.ToString()));
+        }
+    
     
     }
 }

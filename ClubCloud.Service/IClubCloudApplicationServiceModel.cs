@@ -209,16 +209,16 @@ namespace ClubCloud.Service
     	[OperationContract]
     	[ServiceKnownType(typeof(ClubCloud_Vereniging))]
         [ServiceKnownType(typeof(ClubCloud_Address))]
-    	List<ClubCloud_Address> GetAddressesForVereniging(ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null);
+    	List<ClubCloud_Address> GetAddressenForVereniging(ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null);
     
     	[OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
     	[ServiceKnownType(typeof(ClubCloud_Address))]
-    	bool SetAddressesForVereniging(List<ClubCloud_Address> Addresses, ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null);
+    	bool SetAddressenForVereniging(List<ClubCloud_Address> Addressen, ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null);
     	[OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Vereniging))]
     	[ServiceKnownType(typeof(ClubCloud_Address))]
-    	List<ClubCloud_Address> GetAddressesForVerenigingById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
+    	List<ClubCloud_Address> GetAddressenForVerenigingById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
     
     	
     	
@@ -318,6 +318,22 @@ namespace ClubCloud.Service
     	List<ClubCloud_Baanschema> GetBaanschemasForVerenigingById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
     
     	
+    		
+    	[OperationContract]
+    	[ServiceKnownType(typeof(ClubCloud_Vereniging))]
+        [ServiceKnownType(typeof(ClubCloud_Lidmaatschapsoort))]
+    	List<ClubCloud_Lidmaatschapsoort> GetLidmaatschapsoortenForVereniging(ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null);
+    
+    	[OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
+    	[ServiceKnownType(typeof(ClubCloud_Lidmaatschapsoort))]
+    	bool SetLidmaatschapsoortenForVereniging(List<ClubCloud_Lidmaatschapsoort> Lidmaatschapsoorten, ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null);
+    	[OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
+    	[ServiceKnownType(typeof(ClubCloud_Lidmaatschapsoort))]
+    	List<ClubCloud_Lidmaatschapsoort> GetLidmaatschapsoortenForVerenigingById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
+    
+    	
     	    [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         ClubCloud_Gebruiker  GetGebruikerById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
@@ -384,16 +400,16 @@ namespace ClubCloud.Service
     	[OperationContract]
     	[ServiceKnownType(typeof(ClubCloud_Gebruiker))]
         [ServiceKnownType(typeof(ClubCloud_Address))]
-    	List<ClubCloud_Address> GetAddressesForGebruiker(ClubCloud_Gebruiker entity, bool refresh = false, ClubCloud_Setting settings = null);
+    	List<ClubCloud_Address> GetAddressenForGebruiker(ClubCloud_Gebruiker entity, bool refresh = false, ClubCloud_Setting settings = null);
     
     	[OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
     	[ServiceKnownType(typeof(ClubCloud_Address))]
-    	bool SetAddressesForGebruiker(List<ClubCloud_Address> Addresses, ClubCloud_Gebruiker entity, bool refresh = false, ClubCloud_Setting settings = null);
+    	bool SetAddressenForGebruiker(List<ClubCloud_Address> Addressen, ClubCloud_Gebruiker entity, bool refresh = false, ClubCloud_Setting settings = null);
     	[OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
     	[ServiceKnownType(typeof(ClubCloud_Address))]
-    	List<ClubCloud_Address> GetAddressesForGebruikerById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
+    	List<ClubCloud_Address> GetAddressenForGebruikerById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
     
     	
     	
@@ -594,16 +610,16 @@ namespace ClubCloud.Service
     	[OperationContract]
     	[ServiceKnownType(typeof(ClubCloud_Accommodatie))]
         [ServiceKnownType(typeof(ClubCloud_Address))]
-    	List<ClubCloud_Address> GetAddressesForAccommodatie(ClubCloud_Accommodatie entity, bool refresh = false, ClubCloud_Setting settings = null);
+    	List<ClubCloud_Address> GetAddressenForAccommodatie(ClubCloud_Accommodatie entity, bool refresh = false, ClubCloud_Setting settings = null);
     
     	[OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Accommodatie))]
     	[ServiceKnownType(typeof(ClubCloud_Address))]
-    	bool SetAddressesForAccommodatie(List<ClubCloud_Address> Addresses, ClubCloud_Accommodatie entity, bool refresh = false, ClubCloud_Setting settings = null);
+    	bool SetAddressenForAccommodatie(List<ClubCloud_Address> Addressen, ClubCloud_Accommodatie entity, bool refresh = false, ClubCloud_Setting settings = null);
     	[OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Accommodatie))]
     	[ServiceKnownType(typeof(ClubCloud_Address))]
-    	List<ClubCloud_Address> GetAddressesForAccommodatieById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
+    	List<ClubCloud_Address> GetAddressenForAccommodatieById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
     
     	
     	    [OperationContract]
@@ -1152,7 +1168,7 @@ namespace ClubCloud.Service
     
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Address))]
-        List<ClubCloud_Address> GetAddresses(bool refresh = false, ClubCloud_Setting settings = null);
+        List<ClubCloud_Address> GetAddressen(bool refresh = false, ClubCloud_Setting settings = null);
     
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Address))]
@@ -1169,11 +1185,11 @@ namespace ClubCloud.Service
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Address))]
     	[ServiceKnownType(typeof(ClubCloud_Address_View))]
-    	ClubCloud_Address_View GetAddressesByQuery(string bondsnummer, Guid verenigingId,System.Web.UI.DataSourceSelectArguments selectArgs = null, List<System.Web.UI.WebControls.Parameter> parameters = null, ClubCloud_Setting settings = null);
+    	ClubCloud_Address_View GetAddressenByQuery(string bondsnummer, Guid verenigingId,System.Web.UI.DataSourceSelectArguments selectArgs = null, List<System.Web.UI.WebControls.Parameter> parameters = null, ClubCloud_Setting settings = null);
     
     	[OperationContract]
     	[ServiceKnownType(typeof(ClubCloud_Address))]
-    	List<ClubCloud_Address> GetAddressesBySearch(string prefixText, int count, string contextKey, ClubCloud_Setting settings = null);
+    	List<ClubCloud_Address> GetAddressenBySearch(string prefixText, int count, string contextKey, ClubCloud_Setting settings = null);
     
     
     	[OperationContract]
@@ -1242,6 +1258,23 @@ namespace ClubCloud.Service
     	[OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Accommodatie))]
     	ClubCloud_Accommodatie GetAccommodatieForAddressById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
+    
+    	
+    	[OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Address))]
+    	[ServiceKnownType(typeof(ClubCloud_Land))]
+    	ClubCloud_Land GetLandForAddress(ClubCloud_Address entity, bool refresh = false, ClubCloud_Setting settings = null);
+    
+    	[OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Address))]
+    	[ServiceKnownType(typeof(ClubCloud_Land))]
+    	bool SetLandForAddress(ClubCloud_Land Land, ClubCloud_Address entity , bool refresh = false, ClubCloud_Setting settings = null);
+    
+    
+    
+    	[OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Land))]
+    	ClubCloud_Land GetLandForAddressById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
     
     	    [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Regio))]
@@ -1325,16 +1358,16 @@ namespace ClubCloud.Service
     	[OperationContract]
     	[ServiceKnownType(typeof(ClubCloud_Regio))]
         [ServiceKnownType(typeof(ClubCloud_Address))]
-    	List<ClubCloud_Address> GetAddressesForRegio(ClubCloud_Regio entity, bool refresh = false, ClubCloud_Setting settings = null);
+    	List<ClubCloud_Address> GetAddressenForRegio(ClubCloud_Regio entity, bool refresh = false, ClubCloud_Setting settings = null);
     
     	[OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Regio))]
     	[ServiceKnownType(typeof(ClubCloud_Address))]
-    	bool SetAddressesForRegio(List<ClubCloud_Address> Addresses, ClubCloud_Regio entity, bool refresh = false, ClubCloud_Setting settings = null);
+    	bool SetAddressenForRegio(List<ClubCloud_Address> Addressen, ClubCloud_Regio entity, bool refresh = false, ClubCloud_Setting settings = null);
     	[OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Regio))]
     	[ServiceKnownType(typeof(ClubCloud_Address))]
-    	List<ClubCloud_Address> GetAddressesForRegioById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
+    	List<ClubCloud_Address> GetAddressenForRegioById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
     
     	
     	    [OperationContract]
@@ -1853,6 +1886,23 @@ namespace ClubCloud.Service
     	List<ClubCloud_Lidmaatschap> GetLidmaatschappenForLidmaatschapsoortById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
     
     	
+    	
+    	[OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Lidmaatschapsoort))]
+    	[ServiceKnownType(typeof(ClubCloud_Vereniging))]
+    	ClubCloud_Vereniging GetVerenigingForLidmaatschapsoort(ClubCloud_Lidmaatschapsoort entity, bool refresh = false, ClubCloud_Setting settings = null);
+    
+    	[OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Lidmaatschapsoort))]
+    	[ServiceKnownType(typeof(ClubCloud_Vereniging))]
+    	bool SetVerenigingForLidmaatschapsoort(ClubCloud_Vereniging Vereniging, ClubCloud_Lidmaatschapsoort entity , bool refresh = false, ClubCloud_Setting settings = null);
+    
+    
+    
+    	[OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
+    	ClubCloud_Vereniging GetVerenigingForLidmaatschapsoortById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
+    
     	    [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Sponsor))]
         ClubCloud_Sponsor  GetSponsorById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
@@ -2104,6 +2154,52 @@ namespace ClubCloud.Service
         [ServiceKnownType(typeof(ClubCloud_Baantoplaag))]
     	[ServiceKnownType(typeof(ClubCloud_BaanSpeciaal))]
     	List<ClubCloud_BaanSpeciaal> GetBanenSpeciaalForBaantoplaagById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
+    
+    	
+    	    [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Land))]
+        ClubCloud_Land  GetLandById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
+    
+    
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Land))]
+        List<ClubCloud_Land> GetLanden(bool refresh = false, ClubCloud_Setting settings = null);
+    
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Land))]
+    	ClubCloud_Land SetLand(ClubCloud_Land entity, ClubCloud_Setting settings = null);
+    
+    
+        [OperationContract]
+    	bool DeleteLand(ClubCloud_Land entity, ClubCloud_Setting settings = null);
+    
+    	[OperationContract]
+    	bool DeleteLandById(System.Guid Id, ClubCloud_Setting settings = null);
+    
+    
+        [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Land))]
+    	[ServiceKnownType(typeof(ClubCloud_Land_View))]
+    	ClubCloud_Land_View GetLandenByQuery(string bondsnummer, Guid verenigingId,System.Web.UI.DataSourceSelectArguments selectArgs = null, List<System.Web.UI.WebControls.Parameter> parameters = null, ClubCloud_Setting settings = null);
+    
+    	[OperationContract]
+    	[ServiceKnownType(typeof(ClubCloud_Land))]
+    	List<ClubCloud_Land> GetLandenBySearch(string prefixText, int count, string contextKey, ClubCloud_Setting settings = null);
+    
+    	
+    	[OperationContract]
+    	[ServiceKnownType(typeof(ClubCloud_Land))]
+        [ServiceKnownType(typeof(ClubCloud_Address))]
+    	List<ClubCloud_Address> GetAddressenForLand(ClubCloud_Land entity, bool refresh = false, ClubCloud_Setting settings = null);
+    
+    	[OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Land))]
+    	[ServiceKnownType(typeof(ClubCloud_Address))]
+    	bool SetAddressenForLand(List<ClubCloud_Address> Addressen, ClubCloud_Land entity, bool refresh = false, ClubCloud_Setting settings = null);
+    	[OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Land))]
+    	[ServiceKnownType(typeof(ClubCloud_Address))]
+    	List<ClubCloud_Address> GetAddressenForLandById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null);
     
     	
     		}

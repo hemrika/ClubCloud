@@ -14,7 +14,7 @@
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1>
+    <h1 class="s4-notdlg noindex" >
         Regios
     </h1>
 	<ClubCloud:Regios id="Regios" runat="server" visible="true" ViewName="ClubCloud_Regios_View" />

@@ -22,8 +22,8 @@
             <h1 class="title-regular clearfix">
                 <%# ((FormView)Container).CurrentMode == FormViewMode.Insert ? "Nieuwe Accommodatie" : "" %>
             </h1>
-            <asp:Button ID="Button1" runat="server" Text="Save" CommandName="Insert" />
-            <asp:Button ID="bn_goback" runat="server" Text="Terug naar Accommodaties" CausesValidation="false" OnClick="GoBack"/>
+            <asp:Button ID="Insert" runat="server" Text="Save" CommandName="Insert" CausesValidation="true" />
+            <asp:Button ID="Goback" runat="server" Text="Terug naar Accommodaties" CausesValidation="false" OnClick="GoBack"/>
         </fieldset>
     </InsertItemTemplate>
 </asp:FormView>

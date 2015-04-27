@@ -119,6 +119,44 @@
     <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Template.ascx.designer.cs">
       <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address.ascx.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Addressen.ascx.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Addressen.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Addressen_View.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address_Edit.ascx.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address_Edit.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address_Insert.ascx.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address_Insert.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address_Template.ascx.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address_Template.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok.ascx.cs">
       <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -309,6 +347,82 @@
     <Compile Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Template.ascx.designer.cs">
       <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap.ascx.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschappen.ascx.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschappen.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschappen_View.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap_Edit.ascx.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap_Edit.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap_Insert.ascx.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap_Insert.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap_Template.ascx.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap_Template.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging.ascx.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Verenigingen.ascx.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Verenigingen.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Verenigingen_View.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Edit.ascx.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Edit.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Insert.ascx.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Insert.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Template.ascx.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Template.ascx.designer.cs">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebControls\ClubCloudDataSource.cs" />
     <Compile Include="WebControls\ClubCloudDataSourceView.cs" />
@@ -384,6 +498,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ClubCloud_Accommodaties.ascx</LastGenOutput>
     </None>
+    <None Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Addressen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloud_Addressen.ascx</LastGenOutput>
+    </None>
     <None Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblokken.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ClubCloud_Baanblokken.ascx</LastGenOutput>
@@ -403,6 +521,14 @@
     <None Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruikers.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ClubCloud_Gebruikers.ascx</LastGenOutput>
+    </None>
+    <None Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschappen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloud_Lidmaatschappen.ascx</LastGenOutput>
+    </None>
+    <None Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Verenigingen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClubCloud_Verenigingen.ascx</LastGenOutput>
     </None>
     <None Include="ControlTemplates\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{152aa947-fc0b-48bd-a24d-333852848fa1}</SharePointProjectItemId>
@@ -463,7 +589,7 @@
     <Content Include="Administratie\Address.aspx">
       <DependentUpon>Pages.tt</DependentUpon>
     </Content>
-    <Content Include="Administratie\Addresses.aspx">
+    <Content Include="Administratie\Addressen.aspx">
       <DependentUpon>Pages.tt</DependentUpon>
     </Content>
     <Content Include="Administratie\Address_Edit.aspx">
@@ -715,6 +841,21 @@
     <Content Include="Administratie\Gebruiker_Search.aspx">
       <DependentUpon>Pages.tt</DependentUpon>
     </Content>
+    <Content Include="Administratie\Land.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Landen.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Land_Edit.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Land_Insert.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
+    <Content Include="Administratie\Land_Search.aspx">
+      <DependentUpon>Pages.tt</DependentUpon>
+    </Content>
     <Content Include="Administratie\Lidmaatschap.aspx">
       <DependentUpon>Pages.tt</DependentUpon>
     </Content>
@@ -899,6 +1040,23 @@
     <Content Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie_Template.ascx">
       <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
     </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address.ascx">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Addressen.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address_Edit.ascx">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address_Insert.ascx">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Addressen\ClubCloud_Address_Template.ascx">
+      <DependentUpon>ClubCloud_Addressen.tt</DependentUpon>
+    </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Baanblokken\ClubCloud_Baanblok.ascx">
       <DependentUpon>ClubCloud_Baanblokken.tt</DependentUpon>
     </Content>
@@ -953,6 +1111,11 @@
     <Content Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris.ascx">
       <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
     </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionarissen.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
+    </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Edit.ascx">
       <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
     </Content>
@@ -960,11 +1123,6 @@
       <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
     </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionaris_Template.ascx">
-      <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
-    </Content>
-    <Content Include="ControlTemplates\ClubCloud\Administratie\Functionarissen\ClubCloud_Functionarissen.ascx">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>ClubCloud_Functionarissen.tt</DependentUpon>
     </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker.ascx">
@@ -983,6 +1141,40 @@
     </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Template.ascx">
       <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap.ascx">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschappen.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap_Edit.ascx">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap_Insert.ascx">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap_Template.ascx">
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging.ascx">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Verenigingen.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Edit.ascx">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Insert.ascx">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Template.ascx">
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
     </Content>
     <Content Include="Features\Administratie WebParts\Administratie WebParts.Template.xml">
       <DependentUpon>Administratie WebParts.feature</DependentUpon>

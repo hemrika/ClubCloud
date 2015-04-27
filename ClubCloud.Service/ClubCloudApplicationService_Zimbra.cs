@@ -90,7 +90,7 @@
 
                     if (status == MembershipCreateStatus.Success)
                     {
-                        List<ClubCloud_Address> adressen = GetAddressesForGebruikerById(gebruiker.Id, false, settings);
+                        List<ClubCloud_Address> adressen = GetAddressenForGebruikerById(gebruiker.Id, false, settings);
 
                         ClubCloud_Address home = new ClubCloud_Address();
                         ClubCloud_Address post = new ClubCloud_Address();
@@ -189,7 +189,7 @@
 
                     if (status == MembershipCreateStatus.Success)
                     {
-                        List<ClubCloud_Address> adressen = GetAddressesForVerenigingById(vereniging.Id, false, settings);
+                        List<ClubCloud_Address> adressen = GetAddressenForVerenigingById(vereniging.Id, false, settings);
                         ClubCloud_Address home = new ClubCloud_Address();
                         ClubCloud_Address post = new ClubCloud_Address();
                         if (adressen != null && adressen.Count > 0)

@@ -84,7 +84,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     try
                     {
                         ClubCloud_Address first = gebruiker.ClubCloud_Address.First();
-                        if (string.IsNullOrWhiteSpace(first.Naam)) first.Naam = "Bezoekadres";
+                        //if (string.IsNullOrWhiteSpace(first.Naam)) first.Naam = "Bezoekadres";
                         fvw_adres.DataSource = new List<ClubCloud_Address> { first };
                         fvw_adres.DataBind();
                     }
@@ -219,7 +219,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     ClubCloud_Gebruiker gebruiker = Client.GetGebruikerByNummer(userId, Settings.VerenigingId.Value, userId, false);
                     gebruiker.ClubCloud_Address = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressByGebruikerId(userId, gebruiker.VerenigingId.Value, gebruiker.Id, false));
 
-                    gebruiker.ClubCloud_Address.First().Naam = "Bezoekadres";
+                    gebruiker.ClubCloud_Address.First().Naam = AddressSoort.Bezoekadres;// "Bezoekadres";
                     gebruiker.ClubCloud_Address.First().Gemeente = e.NewValues["Gemeente"].ToString();
                     gebruiker.ClubCloud_Address.First().Nummer = e.NewValues["Nummer"].ToString();
                     gebruiker.ClubCloud_Address.First().Postbus = e.NewValues["Postbus"].ToString();
@@ -228,7 +228,7 @@ namespace ClubCloud.Mijn.ControlTemplates
                     gebruiker.ClubCloud_Address.First().Stad = e.NewValues["Stad"].ToString();
                     gebruiker.ClubCloud_Address.First().Straat = e.NewValues["Straat"].ToString();
                     DropDownList Land = (DropDownList)fvw_adres.FindControl("Land");
-                    gebruiker.ClubCloud_Address.First().Land = Land.SelectedItem.Text;
+                    gebruiker.ClubCloud_Address.First().LandId = new Guid(Land.SelectedItem.Value);
                     CheckBox AddressGeheim = (CheckBox)fvw_adres.FindControl("AddressGeheim");
                     gebruiker.AddressGeheim = AddressGeheim.Checked;
                     Client.SetClubCloudGebruiker(userId, Settings.VerenigingId.Value, gebruiker, false);

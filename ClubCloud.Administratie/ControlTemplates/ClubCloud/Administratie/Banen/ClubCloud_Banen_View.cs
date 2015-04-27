@@ -102,7 +102,6 @@ namespace ClubCloud.Administratie.WebControls
     								{
     
     									entity.ClubCloud_Baanblok  = Client.GetBaanblokForBaanById(Id, false, Settings);
-    									entity.ClubCloud_Accommodatie  = Client.GetAccommodatieForBaanById(Id, false, Settings);
     									entity.ClubCloud_Baanschema  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanschema>(Client.GetBaanschemasForBaanById(Id, false, Settings));
     								}
     							}
@@ -118,7 +117,74 @@ namespace ClubCloud.Administratie.WebControls
     		return entity;
         }
     
+    	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+        public IQueryable<ClubCloud_Baan> SelectBanen(string sortByExpression, int startRowIndex, int maximumRows, out int totalRowCount)//, bool retrieveTotalRowCount = true)
+        {
+            if(SPContext.Current.Web.CurrentUser != null)
+            {
+                string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+                ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+    
+                if(Settings != null && Settings.VerenigingId != null) 
+                {
+                    List<Parameter> collection = new List<Parameter>();
+    
+                
+    				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+    
+    				if(Settings.ClubCloud_Vereniging != null)
+    				{
+    					Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie = Client.GetAccommodatieById(Settings.ClubCloud_Vereniging.AccommodatieId.Value, false, Settings);
+    					if(Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie != null)
+    					collection.Add(new Parameter { DefaultValue = "{"+Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie.Id.ToString()+"}" , Name = "AccommodatieId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+    				}
+    
+                
+                    foreach (Parameter where in WhereParameters)
+                    {
+                        if (collection.Any(w => w.Name == where.Name))
+                        {
+                            int index = collection.FindIndex(p => p.Name == where.Name);
+                            if (index >= 0)
+                                collection[index] = where;
+                        }
+                        else
+                        {
+                            collection.Add(where);
+                        }
+                    }
+    
+    				DataSourceSelectArguments selectArgs = new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression };
+                    ClubCloud_Baan_View queryresult = Client.GetBanenByQuery(userId, Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
+    
+                    totalRowCount = queryresult.TotalRowCount;
+    
+    				
+    				if(totalRowCount > 0)
+    				{
+                        foreach (ClubCloud_Baan Baan in queryresult.ClubCloud_Baan)
+                        {
+    						Baan.ClubCloud_Baanblok  = Client.GetBaanblokForBaanById(Baan.Id, false, Settings);
+    						Baan.ClubCloud_Baanschema  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanschema>(Client.GetBaanschemasForBaanById(Baan.Id, false, Settings));
+                            
+                        }
+    				}
+    				return queryresult.ClubCloud_Baan.AsQueryable<ClubCloud_Baan>();
+                }
+            }
+    
+            totalRowCount = 0;
+    		return null;
+    	}
+    
+    	//Reserveringen
+    	//Baanblokken
+    	//Accommodaties
+    	//Baanschemas
+    
+    
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]
+    	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         protected override IEnumerable ExecuteSelect(DataSourceSelectArguments selectArgs)
         {
             DataSet ds = new DataSet("result");
@@ -170,8 +236,21 @@ namespace ClubCloud.Administratie.WebControls
         }
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Delete, true)]
-    	public void DeleteBaan(ClubCloud_Baan entity)
+    	public bool DeleteBaan(ClubCloud_Baan entity)
         { 
+            if (SPContext.Current.Web.CurrentUser != null)
+            {
+                int result;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                    Settings = Client.GetSettingById(result);
+    
+                if (Settings != null && Settings.VerenigingId != null)
+                {
+                    return Client.DeleteBaan(entity, Settings);
+                }
+            }
+    		return false;
     	}
     
         protected override int ExecuteDelete(IDictionary keys, IDictionary oldValues)
@@ -207,7 +286,19 @@ namespace ClubCloud.Administratie.WebControls
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Insert, true)]
     	public virtual System.Guid InsertBaan(ClubCloud_Baan entity)
     	{
-    		return Guid.NewGuid();
+            if (SPContext.Current.Web.CurrentUser != null)
+            {
+                int result;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                    Settings = Client.GetSettingById(result);
+    
+                if (Settings != null && Settings.VerenigingId != null)
+                {
+                    entity = Client.SetBaan(entity, Settings);
+                }
+            }
+    		return entity.Id;
     	}
     
     
@@ -234,6 +325,23 @@ namespace ClubCloud.Administratie.WebControls
         [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Update, true)]
         public void UpdateBaan(ClubCloud_Baan entity) 
     	{
+            if (SPContext.Current.Web.CurrentUser != null)
+            {
+                int result;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                    Settings = Client.GetSettingById(result);
+    
+                if (Settings != null && Settings.VerenigingId != null)
+                {
+    				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+    				if(Settings.ClubCloud_Vereniging != null)
+    				{
+    					entity.AccommodatieId = Settings.ClubCloud_Vereniging.AccommodatieId.Value;
+    				}
+                    Client.SetBaan(entity, Settings);
+                }
+            }
     	}
     
         protected override int ExecuteUpdate(IDictionary keys, IDictionary values, IDictionary oldValues)
@@ -262,7 +370,7 @@ namespace ClubCloud.Administratie.WebControls
         }
     }
     
-    public class Baan : ClubCloud_Baan {}
+    //public class Baan : ClubCloud_Baan {}
     
     public class ClubCloud_BaanDataSourceViewDesigner : DesignerDataSourceView
     {
@@ -300,27 +408,27 @@ namespace ClubCloud.Administratie.WebControls
     
         public override bool CanDelete
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanInsert
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanUpdate
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanPage
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanSort
         {
-            get { return false; }
+            get { return true; }
         }
     }
     

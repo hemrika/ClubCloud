@@ -11,6 +11,25 @@ namespace ClubCloud.Administratie.WebControls
 {
     public partial class ClubCloud_FunctionarissenUserControl 
     {
+    
+        /// <summary>
+        /// FunctionarisMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuTemplate FunctionarisMenu;
+    
+    	/// <summary>
+        /// Functionaris_Details control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Functionaris_Details;
+    
         /// <summary>
         /// ClubCloud_Functionaris_DataSource control.
         /// </summary>
@@ -21,13 +40,31 @@ namespace ClubCloud.Administratie.WebControls
     	protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Functionaris_DataSource;
     
         /// <summary>
+        /// spgvpager_top control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_top;
+    
+        /// <summary>
         /// ClubCloud_Functionarissen_Grid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ClubCloud_Functionarissen_Grid;
+        protected global::Microsoft.SharePoint.WebControls.SPGridView Functionarissen_Grid;
+    
+        /// <summary>
+        /// spgvpager_bottom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_bottom;
             
         /// <summary>
         /// lblMessage control.

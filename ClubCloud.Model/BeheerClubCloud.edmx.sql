@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/15/2015 12:00:42
+-- Date Created: 04/25/2015 09:46:54
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Model\BeheerClubCloud.edmx
 -- --------------------------------------------------
 
@@ -51,7 +51,7 @@ IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Vereniging_Accommodatie]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_Verenigingen] DROP CONSTRAINT [FK_ClubCloud_Vereniging_Accommodatie];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Vereniging_Address]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ClubCloud_Addresses] DROP CONSTRAINT [FK_ClubCloud_Vereniging_Address];
+    ALTER TABLE [dbo].[ClubCloud_Addressen] DROP CONSTRAINT [FK_ClubCloud_Vereniging_Address];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Vereniging_Regio]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_Verenigingen] DROP CONSTRAINT [FK_ClubCloud_Vereniging_Regio];
@@ -60,7 +60,7 @@ IF OBJECT_ID(N'[dbo].[FK_ClubCloud_District_Regio]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_Districten] DROP CONSTRAINT [FK_ClubCloud_District_Regio];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Gebruiker_Address]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ClubCloud_Addresses] DROP CONSTRAINT [FK_ClubCloud_Gebruiker_Address];
+    ALTER TABLE [dbo].[ClubCloud_Addressen] DROP CONSTRAINT [FK_ClubCloud_Gebruiker_Address];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Gebruiker_Vereniging]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_Gebruikers] DROP CONSTRAINT [FK_ClubCloud_Gebruiker_Vereniging];
@@ -126,7 +126,7 @@ IF OBJECT_ID(N'[dbo].[FK_ClubCloud_BaanSpeciaal_Baantoplaag]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_BanenSpeciaal] DROP CONSTRAINT [FK_ClubCloud_BaanSpeciaal_Baantoplaag];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Regio_Address]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ClubCloud_Addresses] DROP CONSTRAINT [FK_ClubCloud_Regio_Address];
+    ALTER TABLE [dbo].[ClubCloud_Addressen] DROP CONSTRAINT [FK_ClubCloud_Regio_Address];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Setting_Gebruiker]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_Settings] DROP CONSTRAINT [FK_ClubCloud_Setting_Gebruiker];
@@ -135,16 +135,22 @@ IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Setting_Vereniging]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_Settings] DROP CONSTRAINT [FK_ClubCloud_Setting_Vereniging];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Accommodatie_Address]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ClubCloud_Addresses] DROP CONSTRAINT [FK_ClubCloud_Accommodatie_Address];
+    ALTER TABLE [dbo].[ClubCloud_Addressen] DROP CONSTRAINT [FK_ClubCloud_Accommodatie_Address];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ClubCloud_GebruikerClubCloud_Nationaliteit]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ClubCloud_Gebruikers] DROP CONSTRAINT [FK_ClubCloud_GebruikerClubCloud_Nationaliteit];
+IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Gebruiker_Nationaliteit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ClubCloud_Gebruikers] DROP CONSTRAINT [FK_ClubCloud_Gebruiker_Nationaliteit];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Baanschema_Baan]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ClubCloud_Baanschemas] DROP CONSTRAINT [FK_ClubCloud_Baanschema_Baan];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ClubCloud_BaanschemaClubCloud_Vereniging]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ClubCloud_Baanschemas] DROP CONSTRAINT [FK_ClubCloud_BaanschemaClubCloud_Vereniging];
+IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Baanschema_Vereniging]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ClubCloud_Baanschemas] DROP CONSTRAINT [FK_ClubCloud_Baanschema_Vereniging];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Vereniging_Lidmaatschapsoort]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ClubCloud_Lidmaatschapsoorten] DROP CONSTRAINT [FK_ClubCloud_Vereniging_Lidmaatschapsoort];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ClubCloud_Address_Land]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ClubCloud_Addressen] DROP CONSTRAINT [FK_ClubCloud_Address_Land];
 GO
 
 -- --------------------------------------------------
@@ -199,8 +205,8 @@ IF OBJECT_ID(N'[dbo].[ClubCloud_Rechtsvormen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Rechtsvormen];
 GO
     
-IF OBJECT_ID(N'[dbo].[ClubCloud_Addresses]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ClubCloud_Addresses];
+IF OBJECT_ID(N'[dbo].[ClubCloud_Addressen]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_Addressen];
 GO
     
 IF OBJECT_ID(N'[dbo].[ClubCloud_Regios]', 'U') IS NOT NULL
@@ -261,6 +267,10 @@ GO
     
 IF OBJECT_ID(N'[dbo].[ClubCloud_Baantoplagen]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ClubCloud_Baantoplagen];
+GO
+    
+IF OBJECT_ID(N'[dbo].[ClubCloud_Landen]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ClubCloud_Landen];
 GO
     
 
@@ -535,20 +545,20 @@ CREATE TABLE [dbo].[ClubCloud_Rechtsvormen] (
 );
 GO
 
--- Creating table 'ClubCloud_Addresses'
-CREATE TABLE [dbo].[ClubCloud_Addresses] (
+-- Creating table 'ClubCloud_Addressen'
+CREATE TABLE [dbo].[ClubCloud_Addressen] (
     [Id] uniqueidentifier  NOT NULL,
     [ParentId] uniqueidentifier  NULL,
     [Stad] nvarchar(max)  NOT NULL,
     [Provincie] nvarchar(max)  NOT NULL,
     [Latitude] float  NULL,
     [Longitude] float  NULL,
-    [Naam] nvarchar(max)  NOT NULL,
+    [Naam] int  NOT NULL,
     [Postcode] nvarchar(max)  NOT NULL,
     [Straat] nvarchar(max)  NOT NULL,
     [Nummer] nvarchar(max)  NOT NULL,
+    [LandId] uniqueidentifier  NULL,
     [Actief] nvarchar(max)  NOT NULL,
-    [Land] nvarchar(max)  NOT NULL,
     [Fax] nvarchar(max)  NOT NULL,
     [Toevoeging] nvarchar(max)  NOT NULL,
     [Postbus] nvarchar(max)  NOT NULL,
@@ -696,6 +706,7 @@ GO
 -- Creating table 'ClubCloud_Lidmaatschapsoorten'
 CREATE TABLE [dbo].[ClubCloud_Lidmaatschapsoorten] (
     [Id] uniqueidentifier  NOT NULL,
+    [VerenigingId] uniqueidentifier  NULL,
     [Naam] nvarchar(max)  NOT NULL,
     [Beschrijving] nvarchar(max)  NOT NULL,
     [Omschrijving] nvarchar(max)  NOT NULL,
@@ -747,6 +758,14 @@ CREATE TABLE [dbo].[ClubCloud_Baantoplagen] (
     [Omschrijving] nvarchar(max)  NOT NULL,
     [Code] nvarchar(max)  NOT NULL,
     [Actief] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'ClubCloud_Landen'
+CREATE TABLE [dbo].[ClubCloud_Landen] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Naam] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -827,9 +846,9 @@ ADD CONSTRAINT [PK_ClubCloud_Rechtsvormen]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ClubCloud_Addresses'
-ALTER TABLE [dbo].[ClubCloud_Addresses]
-ADD CONSTRAINT [PK_ClubCloud_Addresses]
+-- Creating primary key on [Id] in table 'ClubCloud_Addressen'
+ALTER TABLE [dbo].[ClubCloud_Addressen]
+ADD CONSTRAINT [PK_ClubCloud_Addressen]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -920,6 +939,12 @@ GO
 -- Creating primary key on [Id] in table 'ClubCloud_Baantoplagen'
 ALTER TABLE [dbo].[ClubCloud_Baantoplagen]
 ADD CONSTRAINT [PK_ClubCloud_Baantoplagen]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ClubCloud_Landen'
+ALTER TABLE [dbo].[ClubCloud_Landen]
+ADD CONSTRAINT [PK_ClubCloud_Landen]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -1092,8 +1117,8 @@ ON [dbo].[ClubCloud_Verenigingen]
     ([AccommodatieId]);
 GO
 
--- Creating foreign key on [ParentId] in table 'ClubCloud_Addresses'
-ALTER TABLE [dbo].[ClubCloud_Addresses]
+-- Creating foreign key on [ParentId] in table 'ClubCloud_Addressen'
+ALTER TABLE [dbo].[ClubCloud_Addressen]
 ADD CONSTRAINT [FK_ClubCloud_Vereniging_Address]
     FOREIGN KEY ([ParentId])
     REFERENCES [dbo].[ClubCloud_Verenigingen]
@@ -1103,7 +1128,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_Vereniging_Address'
 CREATE INDEX [IX_FK_ClubCloud_Vereniging_Address]
-ON [dbo].[ClubCloud_Addresses]
+ON [dbo].[ClubCloud_Addressen]
     ([ParentId]);
 GO
 
@@ -1137,8 +1162,8 @@ ON [dbo].[ClubCloud_Districten]
     ([RegioId]);
 GO
 
--- Creating foreign key on [ParentId] in table 'ClubCloud_Addresses'
-ALTER TABLE [dbo].[ClubCloud_Addresses]
+-- Creating foreign key on [ParentId] in table 'ClubCloud_Addressen'
+ALTER TABLE [dbo].[ClubCloud_Addressen]
 ADD CONSTRAINT [FK_ClubCloud_Gebruiker_Address]
     FOREIGN KEY ([ParentId])
     REFERENCES [dbo].[ClubCloud_Gebruikers]
@@ -1148,7 +1173,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_Gebruiker_Address'
 CREATE INDEX [IX_FK_ClubCloud_Gebruiker_Address]
-ON [dbo].[ClubCloud_Addresses]
+ON [dbo].[ClubCloud_Addressen]
     ([ParentId]);
 GO
 
@@ -1467,8 +1492,8 @@ ON [dbo].[ClubCloud_BanenSpeciaal]
     ([BaantoplaagId]);
 GO
 
--- Creating foreign key on [ParentId] in table 'ClubCloud_Addresses'
-ALTER TABLE [dbo].[ClubCloud_Addresses]
+-- Creating foreign key on [ParentId] in table 'ClubCloud_Addressen'
+ALTER TABLE [dbo].[ClubCloud_Addressen]
 ADD CONSTRAINT [FK_ClubCloud_Regio_Address]
     FOREIGN KEY ([ParentId])
     REFERENCES [dbo].[ClubCloud_Regios]
@@ -1478,7 +1503,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_Regio_Address'
 CREATE INDEX [IX_FK_ClubCloud_Regio_Address]
-ON [dbo].[ClubCloud_Addresses]
+ON [dbo].[ClubCloud_Addressen]
     ([ParentId]);
 GO
 
@@ -1512,8 +1537,8 @@ ON [dbo].[ClubCloud_Settings]
     ([VerenigingId]);
 GO
 
--- Creating foreign key on [ParentId] in table 'ClubCloud_Addresses'
-ALTER TABLE [dbo].[ClubCloud_Addresses]
+-- Creating foreign key on [ParentId] in table 'ClubCloud_Addressen'
+ALTER TABLE [dbo].[ClubCloud_Addressen]
 ADD CONSTRAINT [FK_ClubCloud_Accommodatie_Address]
     FOREIGN KEY ([ParentId])
     REFERENCES [dbo].[ClubCloud_Accommodaties]
@@ -1523,21 +1548,21 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_Accommodatie_Address'
 CREATE INDEX [IX_FK_ClubCloud_Accommodatie_Address]
-ON [dbo].[ClubCloud_Addresses]
+ON [dbo].[ClubCloud_Addressen]
     ([ParentId]);
 GO
 
 -- Creating foreign key on [NationaliteitId] in table 'ClubCloud_Gebruikers'
 ALTER TABLE [dbo].[ClubCloud_Gebruikers]
-ADD CONSTRAINT [FK_ClubCloud_GebruikerClubCloud_Nationaliteit]
+ADD CONSTRAINT [FK_ClubCloud_Gebruiker_Nationaliteit]
     FOREIGN KEY ([NationaliteitId])
     REFERENCES [dbo].[ClubCloud_Nationaliteiten]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_GebruikerClubCloud_Nationaliteit'
-CREATE INDEX [IX_FK_ClubCloud_GebruikerClubCloud_Nationaliteit]
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_Gebruiker_Nationaliteit'
+CREATE INDEX [IX_FK_ClubCloud_Gebruiker_Nationaliteit]
 ON [dbo].[ClubCloud_Gebruikers]
     ([NationaliteitId]);
 GO
@@ -1559,17 +1584,47 @@ GO
 
 -- Creating foreign key on [VerenigingId] in table 'ClubCloud_Baanschemas'
 ALTER TABLE [dbo].[ClubCloud_Baanschemas]
-ADD CONSTRAINT [FK_ClubCloud_BaanschemaClubCloud_Vereniging]
+ADD CONSTRAINT [FK_ClubCloud_Baanschema_Vereniging]
     FOREIGN KEY ([VerenigingId])
     REFERENCES [dbo].[ClubCloud_Verenigingen]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_BaanschemaClubCloud_Vereniging'
-CREATE INDEX [IX_FK_ClubCloud_BaanschemaClubCloud_Vereniging]
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_Baanschema_Vereniging'
+CREATE INDEX [IX_FK_ClubCloud_Baanschema_Vereniging]
 ON [dbo].[ClubCloud_Baanschemas]
     ([VerenigingId]);
+GO
+
+-- Creating foreign key on [VerenigingId] in table 'ClubCloud_Lidmaatschapsoorten'
+ALTER TABLE [dbo].[ClubCloud_Lidmaatschapsoorten]
+ADD CONSTRAINT [FK_ClubCloud_Vereniging_Lidmaatschapsoort]
+    FOREIGN KEY ([VerenigingId])
+    REFERENCES [dbo].[ClubCloud_Verenigingen]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_Vereniging_Lidmaatschapsoort'
+CREATE INDEX [IX_FK_ClubCloud_Vereniging_Lidmaatschapsoort]
+ON [dbo].[ClubCloud_Lidmaatschapsoorten]
+    ([VerenigingId]);
+GO
+
+-- Creating foreign key on [LandId] in table 'ClubCloud_Addressen'
+ALTER TABLE [dbo].[ClubCloud_Addressen]
+ADD CONSTRAINT [FK_ClubCloud_Address_Land]
+    FOREIGN KEY ([LandId])
+    REFERENCES [dbo].[ClubCloud_Landen]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClubCloud_Address_Land'
+CREATE INDEX [IX_FK_ClubCloud_Address_Land]
+ON [dbo].[ClubCloud_Addressen]
+    ([LandId]);
 GO
 
 -- --------------------------------------------------

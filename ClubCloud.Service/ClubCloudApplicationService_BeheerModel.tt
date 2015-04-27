@@ -141,7 +141,7 @@ internal partial class ClubCloudApplicationService
         finally
         {
 			if(result != null)
-				beheerModel.ObjectContext.Detach(result);
+				try { beheerModel.ObjectContext.Detach(result);} catch{}
         }
 
 	}
@@ -175,7 +175,7 @@ internal partial class ClubCloudApplicationService
 				foreach (object item in result)
 				{
 					if(item != null)
-						beheerModel.ObjectContext.Detach(item);
+						try {beheerModel.ObjectContext.Detach(item); } catch{}
 				}
 			}
         }
@@ -203,7 +203,7 @@ internal partial class ClubCloudApplicationService
         finally
         {
 			if(tobeupdated != null)
-				beheerModel.ObjectContext.Detach(tobeupdated);
+				try { beheerModel.ObjectContext.Detach(tobeupdated); } catch{}
         }
 
 	}
@@ -243,7 +243,7 @@ internal partial class ClubCloudApplicationService
         finally
         {
 			if(tobedeleted != null)
-				beheerModel.ObjectContext.Detach(tobedeleted);
+				try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
         }
 
 		return false;
@@ -434,13 +434,13 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 	    finally
 	    {
 			if(entity != null)
-				beheerModel.ObjectContext.Detach(entity);
+				try { beheerModel.ObjectContext.Detach(entity); } catch{}
 			if(result != null)
 			{
 				foreach (object item in result)
 				{
 					if(item != null)
-						beheerModel.ObjectContext.Detach(item);
+						try { beheerModel.ObjectContext.Detach(item); } catch{}
 				}
 			}
 		}	
@@ -480,13 +480,13 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 	    finally
 	    {
 			if(entity != null)
-				beheerModel.ObjectContext.Detach(entity);
+				try { beheerModel.ObjectContext.Detach(entity); } catch{}
 			if(result != null)
 			{
 				foreach (object item in result)
 				{
 					if(item != null)
-						beheerModel.ObjectContext.Detach(item);
+						try { beheerModel.ObjectContext.Detach(item); } catch{}
 				}
 			}
 		}	
@@ -515,7 +515,7 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
         finally
         {
 			if(entity != null)
-				beheerModel.ObjectContext.Detach(entity);
+				try { beheerModel.ObjectContext.Detach(entity); } catch{}
         }
 		return false;
 	}
@@ -557,9 +557,9 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
         finally
         {
 			if(entity != null)
-				beheerModel.ObjectContext.Detach(entity);
+				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             if(result != null)
-				beheerModel.ObjectContext.Detach(result);
+				try { beheerModel.ObjectContext.Detach(result); } catch{}
         }
 
 	}
@@ -584,7 +584,7 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
         finally
         {
 			if(entity != null)
-				beheerModel.ObjectContext.Detach(entity);
+				try { beheerModel.ObjectContext.Detach(entity); } catch{}
         }
 		return false;
 	}
@@ -622,9 +622,9 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
         finally
         {
 			if(entity != null)
-				beheerModel.ObjectContext.Detach(entity);
+				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             if(result != null)
-				beheerModel.ObjectContext.Detach(result);
+				try { beheerModel.ObjectContext.Detach(result); } catch{}
         }
 	}
 
@@ -650,7 +650,7 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
         finally
         {
 			if(entity != null)
-				beheerModel.ObjectContext.Detach(entity);
+				try { beheerModel.ObjectContext.Detach(entity); } catch{}
         }
 		return false;
 	}

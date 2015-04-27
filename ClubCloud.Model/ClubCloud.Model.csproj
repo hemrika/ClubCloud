@@ -63,6 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationInfo.cs">
       <DependentUpon>StoreClubCloud.tt</DependentUpon>
     </Compile>
@@ -105,6 +108,9 @@
       <DependentUpon>BeheerClubCloud.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ClubCloud_Land.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Days.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>

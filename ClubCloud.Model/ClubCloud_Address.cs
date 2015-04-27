@@ -23,12 +23,14 @@ namespace ClubCloud.Model
     [KnownType(typeof(ClubCloud_Gebruiker))]
     [KnownType(typeof(ClubCloud_Regio))]
     [KnownType(typeof(ClubCloud_Accommodatie))]
+    [KnownType(typeof(ClubCloud_Land))]
     [DataContract(IsReference = true)]
     
     public partial class ClubCloud_Address : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         public ClubCloud_Address()
         {
+            this.LandId = new Guid("1aedac02-b67a-4fc1-8fe7-5b7e3fcff5f5");
             this.AddressGeheim = false;
         }
     	[DataMember]
@@ -92,14 +94,14 @@ namespace ClubCloud.Model
     	private Nullable<double> _longitude;
     
     	[DataMember]
-        public string Naam 
+        public AddressSoort Naam 
     	{ 
     		get { return _naam; } 
     		set { SetProperty(ref _naam, value); } 
     	}
     
     	[IgnoreDataMember]
-    	private string _naam;
+    	private AddressSoort _naam;
     
     	[DataMember]
         public string Postcode 
@@ -132,6 +134,16 @@ namespace ClubCloud.Model
     	private string _nummer;
     
     	[DataMember]
+        public Nullable<System.Guid> LandId 
+    	{ 
+    		get { return _landId; } 
+    		set { SetProperty(ref _landId, value); } 
+    	}
+    
+    	[IgnoreDataMember]
+    	private Nullable<System.Guid> _landId;
+    
+    	[DataMember]
         public string Actief 
     	{ 
     		get { return _actief; } 
@@ -140,16 +152,6 @@ namespace ClubCloud.Model
     
     	[IgnoreDataMember]
     	private string _actief;
-    
-    	[DataMember]
-        public string Land 
-    	{ 
-    		get { return _land; } 
-    		set { SetProperty(ref _land, value); } 
-    	}
-    
-    	[IgnoreDataMember]
-    	private string _land;
     
     	[DataMember]
         public string Fax 
@@ -268,6 +270,10 @@ namespace ClubCloud.Model
     	//[DataMember]
     	[IgnoreDataMember]
         public virtual ClubCloud_Accommodatie ClubCloud_Accommodatie { get; set; }
+    
+    	//[DataMember]
+    	[IgnoreDataMember]
+        public virtual ClubCloud_Land ClubCloud_Land { get; set; }
     
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;

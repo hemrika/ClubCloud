@@ -17,13 +17,37 @@
         <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar Functionarissen"
             OnClick="GoBack" SkinID="Button" />
     </EmptyDataTemplate>
+    <HeaderTemplate>
+        <asp:Button ID="btn_goback_top" runat="server" Text="Terug naar Functionarissen" CausesValidation="false" OnClick="GoBack" OnCommand="GoBack" CommandArgument='<%# Eval("Id") %>'/>
+        <asp:Button ID="btn_update_top" runat="server" Text="Save" CommandName="Update" CausesValidation="true" />
+    </HeaderTemplate>
+    <FooterTemplate>
+        <asp:Button ID="btn_goback_bottom" runat="server" Text="Terug naar Functionarissen" CausesValidation="false" OnClick="GoBack" OnCommand="GoBack" CommandArgument='<%# Eval("Id") %>'/>
+        <asp:Button ID="btn_update_bottom" runat="server" Text="Save" CommandName="Update" CausesValidation="true" />
+    </FooterTemplate>
     <EditItemTemplate>
         <fieldset>
-            <h1 class="title-regular clearfix">
-                <%# ((FormView)Container).CurrentMode == FormViewMode.Edit ? "Bewerken Functionaris" : "" %>
-            </h1>
-            <asp:Button ID="Button1" runat="server" Text="Save" CommandName="Update" />
-            <asp:Button ID="bn_goback" runat="server" Text="Terug naar Functionarissen" CausesValidation="false" OnClick="GoBack"/>
+
+
+            Functie : <asp:DropDownList ID="FunctieId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("FunctieId") %>' SelectMethod="SelectFunctie" OnCallingDataMethods="EditFunctionarisform_CallingDataMethods" /></br>
+
+			<asp:HiddenField ID="VerenigingId" Value='<%# Bind("VerenigingId") %>' runat="server" />
+
+			<asp:HiddenField ID="GebruikerId" Value='<%# Bind("GebruikerId") %>' runat="server" />
+
+            Bestuursorgaan : <asp:DropDownList ID="BestuursorgaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BestuursorgaanId") %>' SelectMethod="SelectBestuursorgaan" OnCallingDataMethods="EditFunctionarisform_CallingDataMethods" /></br>
+
+			<asp:HiddenField ID="DistrictId" Value='<%# Bind("DistrictId") %>' runat="server" />
+
+			TermijnBegin : <asp:TextBox ID="TermijnBegin" runat="server" Text='<%# Bind("TermijnBegin") %>' TextMode="Date" /></br>
+
+			TermijnEinde : <asp:TextBox ID="TermijnEinde" runat="server" Text='<%# Bind("TermijnEinde") %>' TextMode="Date" /></br>
+
+			Autorisatie : <asp:Checkbox ID="Autorisatie" runat="server" Checked='<%# Bind("Autorisatie") %>' /></br>
+
+			Actief : <asp:TextBox ID="Actief" runat="server" Text='<%# Bind("Actief") %>' TextMode="SingleLine"/></br>
+
+			Gewijzigd : <asp:TextBox ID="Gewijzigd" runat="server" Text='<%# Bind("Gewijzigd") %>' TextMode="Date" /></br>
         </fieldset>
     </EditItemTemplate>
 </asp:FormView>

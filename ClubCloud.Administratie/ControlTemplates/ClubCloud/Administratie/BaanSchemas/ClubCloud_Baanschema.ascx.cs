@@ -36,14 +36,31 @@ namespace ClubCloud.Administratie.WebControls
     
     	protected void GoBack(object sender, EventArgs e)
     	{
-    		Response.Redirect("Baanschemas.aspx");
+    		Response.Clear();
+            Response.Write("<script type=\"text/javascript\">window.frameElement.commonModalDialogClose(1);</script>"); 
+            Response.End();
+    
+    		//Response.Redirect("Baanschemas.aspx");
     	}
     
     	protected void GoEdit(object sender, EventArgs e)
     	{
-    		Response.Redirect("Baanschema_Edit.aspx");
+    		LinkButton btn = (LinkButton)sender;
+    
+            if(Request.QueryString.AllKeys.Contains("IsDlg"))
+    			Response.Redirect(string.Format("Baanschema_Edit.aspx?Id={0}&IsDlg=1", btn.CommandArgument.ToString()));
+    
+            Response.Redirect(string.Format("Baanschema_Edit.aspx?Id={0}", btn.CommandArgument.ToString()));
+    
     	}
     
+    	protected void GoEdit(object sender, CommandEventArgs e)
+        {
+            if(Request.QueryString.AllKeys.Contains("IsDlg"))
+    			Response.Redirect(string.Format("Baanschema_Edit.aspx?Id={0}&IsDlg=1", e.CommandArgument.ToString()));
+    
+            Response.Redirect(string.Format("Baanschema_Edit.aspx?Id={0}", e.CommandArgument.ToString()));
+        }
     }
 }
 

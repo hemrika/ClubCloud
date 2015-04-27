@@ -14,8 +14,5 @@
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1>
-        Functie
-    </h1>
 	<ClubCloud:Functie_Insert id="Functies" runat="server" visible="true" ViewName="ClubCloud_Functies_View" />
 </asp:Content>

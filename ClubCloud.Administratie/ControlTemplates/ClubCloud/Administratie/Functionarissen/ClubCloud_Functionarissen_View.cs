@@ -102,8 +102,6 @@ namespace ClubCloud.Administratie.WebControls
     								{
     
     									entity.ClubCloud_Functie  = Client.GetFunctieForFunctionarisById(Id, false, Settings);
-    									entity.ClubCloud_Vereniging  = Client.GetVerenigingForFunctionarisById(Id, false, Settings);
-    									entity.ClubCloud_Gebruiker  = Client.GetGebruikerForFunctionarisById(Id, false, Settings);
     									entity.ClubCloud_District  = Client.GetDistrictForFunctionarisById(Id, false, Settings);
     									entity.ClubCloud_Bestuursorgaan  = Client.GetBestuursorgaanForFunctionarisById(Id, false, Settings);
     								}
@@ -154,7 +152,18 @@ namespace ClubCloud.Administratie.WebControls
                     ClubCloud_Functionaris_View queryresult = Client.GetFunctionarissenByQuery(userId, Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
     
                     totalRowCount = queryresult.TotalRowCount;
+    
     				
+    				if(totalRowCount > 0)
+    				{
+                        foreach (ClubCloud_Functionaris Functionaris in queryresult.ClubCloud_Functionaris)
+                        {
+    						Functionaris.ClubCloud_Functie  = Client.GetFunctieForFunctionarisById(Functionaris.Id, false, Settings);
+    						Functionaris.ClubCloud_District  = Client.GetDistrictForFunctionarisById(Functionaris.Id, false, Settings);
+    						Functionaris.ClubCloud_Bestuursorgaan  = Client.GetBestuursorgaanForFunctionarisById(Functionaris.Id, false, Settings);
+                            
+                        }
+    				}
     				return queryresult.ClubCloud_Functionaris.AsQueryable<ClubCloud_Functionaris>();
                 }
             }
@@ -162,6 +171,49 @@ namespace ClubCloud.Administratie.WebControls
             totalRowCount = 0;
     		return null;
     	}
+    
+    	//Functies
+    
+    	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+        public IQueryable<ClubCloud_Functie> SelectFunctie()
+        {
+            if(SPContext.Current.Web.CurrentUser != null)
+            {
+                string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+                ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+    
+                if(Settings != null && Settings.VerenigingId != null) 
+                {
+    				List<ClubCloud_Functie> result = Client.GetFuncties(false, Settings);
+    				return result.AsQueryable<ClubCloud_Functie>();
+    			}
+    		}
+    
+    		return null;
+    	}
+    	//Verenigingen
+    	//Gebruikers
+    	//Districten
+    	//Bestuursorganen
+    
+    	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+        public IQueryable<ClubCloud_Bestuursorgaan> SelectBestuursorgaan()
+        {
+            if(SPContext.Current.Web.CurrentUser != null)
+            {
+                string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+                ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+    
+                if(Settings != null && Settings.VerenigingId != null) 
+                {
+    				List<ClubCloud_Bestuursorgaan> result = Client.GetBestuursorganen(false, Settings);
+    				return result.AsQueryable<ClubCloud_Bestuursorgaan>();
+    			}
+    		}
+    
+    		return null;
+    	}
+    
     
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
@@ -209,8 +261,21 @@ namespace ClubCloud.Administratie.WebControls
         }
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Delete, true)]
-    	public void DeleteFunctionaris(ClubCloud_Functionaris entity)
+    	public bool DeleteFunctionaris(ClubCloud_Functionaris entity)
         { 
+            if (SPContext.Current.Web.CurrentUser != null)
+            {
+                int result;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                    Settings = Client.GetSettingById(result);
+    
+                if (Settings != null && Settings.VerenigingId != null)
+                {
+                    return Client.DeleteFunctionaris(entity, Settings);
+                }
+            }
+    		return false;
     	}
     
         protected override int ExecuteDelete(IDictionary keys, IDictionary oldValues)
@@ -246,7 +311,19 @@ namespace ClubCloud.Administratie.WebControls
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Insert, true)]
     	public virtual System.Guid InsertFunctionaris(ClubCloud_Functionaris entity)
     	{
-    		return Guid.NewGuid();
+            if (SPContext.Current.Web.CurrentUser != null)
+            {
+                int result;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                    Settings = Client.GetSettingById(result);
+    
+                if (Settings != null && Settings.VerenigingId != null)
+                {
+                    entity = Client.SetFunctionaris(entity, Settings);
+                }
+            }
+    		return entity.Id;
     	}
     
     
@@ -273,6 +350,19 @@ namespace ClubCloud.Administratie.WebControls
         [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Update, true)]
         public void UpdateFunctionaris(ClubCloud_Functionaris entity) 
     	{
+            if (SPContext.Current.Web.CurrentUser != null)
+            {
+                int result;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
+                    Settings = Client.GetSettingById(result);
+    
+                if (Settings != null && Settings.VerenigingId != null)
+                {
+    				entity.VerenigingId = Settings.VerenigingId.Value;
+                    Client.SetFunctionaris(entity, Settings);
+                }
+            }
     	}
     
         protected override int ExecuteUpdate(IDictionary keys, IDictionary values, IDictionary oldValues)
@@ -301,7 +391,7 @@ namespace ClubCloud.Administratie.WebControls
         }
     }
     
-    public class Functionaris : ClubCloud_Functionaris {}
+    //public class Functionaris : ClubCloud_Functionaris {}
     
     public class ClubCloud_FunctionarisDataSourceViewDesigner : DesignerDataSourceView
     {
@@ -339,27 +429,27 @@ namespace ClubCloud.Administratie.WebControls
     
         public override bool CanDelete
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanInsert
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanUpdate
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanPage
         {
-            get { return false; }
+            get { return true; }
         }
     
         public override bool CanSort
         {
-            get { return false; }
+            get { return true; }
         }
     }
     

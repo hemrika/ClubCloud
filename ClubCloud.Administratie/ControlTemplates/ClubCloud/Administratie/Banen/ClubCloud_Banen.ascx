@@ -9,54 +9,39 @@
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Banen.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_BanenUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Baan_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Banen_View" />
-<SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="ClubCloud_Baan_Grid" runat="server" />
+<SharePoint:MenuTemplate ID="BaanMenu" runat="server">
+	<SharePoint:MenuItemTemplate ID="Baan_Details" runat="server" Text="Details bekijken van Baan" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baan.aspx?Id=%Id%', title:'Details van Baan', autoSize:false});" Title="Details van Baan"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Baanschemas" runat="server" Text="Details bekijken van Baanschemas" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baanschemas.aspx?BaanId=%Id%',title:'Details van Baanschemas', autoSize:false});" Title="Details van Baanschemas"></SharePoint:MenuItemTemplate>
+</SharePoint:MenuTemplate>
+<asp:HyperLink ID="Baan_Insert" Text="Toevoegen" NavigateUrl="Baan_Insert.aspx"  runat="server" />
+<br/>
+<SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="Banen_Grid" runat="server" />
 <br />
-<SharePoint:SPGridView
-    ID="ClubCloud_Baan_Grid"
+<SharePoint:SPGridView 
+    ID="Banen_Grid" 
     runat="server"
-    DataSourceID="ClubCloud_Baan_DataSource"
-    AutoGenerateColumns="false"     
-    AllowPaging="true"
-    PageSize="30"
+    AllowPaging="true" 
     AllowSorting="true" 
-    ShowFooter="True" OnDataBinding="Page_Load">
+    AutoGenerateColumns="false" 
+    SelectMethod="SelectBanen"
+	OnCallingDataMethods="GridBanen_CallingDataMethods"
+    PageSize="30"
+    ShowFooter="true"
+    ShowHeader="true" >
     <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
     <PagerSettings Mode="NextPreviousFirstLast" Visible="true" Position="TopAndBottom" PreviousPageText="vorige" NextPageText="volgende"  FirstPageText="Eerste" LastPageText="Laatste" PageButtonCount="5" />
     <PagerStyle HorizontalAlign="Center" VerticalAlign="Top" BackColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <Columns>
-        <SharePoint:SPBoundField
-            DataField="Id"
-            HeaderText="Id"
-            SortExpression="Id"
-            ItemStyle-Width="40px">
-        </SharePoint:SPBoundField>
-        <SharePoint:SPBoundField
-            DataField="Naam"
-            HeaderText="Naam"
-            SortExpression="Naam"
-            ItemStyle-Width="40px">
-        </SharePoint:SPBoundField>
-        <SharePoint:SPBoundField
-            DataField="Nummer"
-            HeaderText="Nummer"
-            SortExpression="Nummer"
-            ItemStyle-Width="40px">
-        </SharePoint:SPBoundField>
-        <SharePoint:SPBoundField
-            DataField="BaanblokId"
-            HeaderText="BaanblokId"
-            SortExpression="BaanblokId"
-            ItemStyle-Width="40px">
-        </SharePoint:SPBoundField>
-        <SharePoint:SPBoundField
-            DataField="AccommodatieId"
-            HeaderText="AccommodatieId"
-            SortExpression="AccommodatieId"
-            ItemStyle-Width="40px">
-        </SharePoint:SPBoundField>
-        <SharePoint:SPBoundField
+			<SharePoint:SPMenuField
+			HeaderText="Naam"
+			TextFields="Naam"
+			MenuTemplateId="BaanMenu"
+			TokenNameAndValueFields="Id=Id"
+			SortExpression="Naam"
+			ItemStyle-Width="120px" />
+	        <SharePoint:SPBoundField
             DataField="Status"
             HeaderText="Status"
             SortExpression="Status"
@@ -74,16 +59,27 @@
             SortExpression="Actief"
             ItemStyle-Width="40px">
         </SharePoint:SPBoundField>
+    
+		<asp:TemplateField HeaderText="Baanblok" SortExpression="BaanblokId">
+			<ItemTemplate>
+				<asp:Label ID="Baanblok" runat="server" Text='<%# Bind("ClubCloud_Baanblok.Naam") %>'></asp:Label>
+			</ItemTemplate>
+		</asp:TemplateField>
+		<asp:TemplateField HeaderText="Baanschemas" SortExpression="BaanschemaId">
+			<ItemTemplate>
+				<asp:Label ID="Baanschemas" runat="server" Text='<%# Bind("ClubCloud_Baanschema.Count") %>'></asp:Label>
+			</ItemTemplate>
+		</asp:TemplateField>
     </Columns>
     <EmptyDataTemplate>
         <HeaderTemplate>
-            <asp:HyperLink ID="ClubCloud_Baan_Insert" Text="Toevoegen" NavigateUrl="~/ClubCloud_Baan_Insert.aspx"  runat="server" /> <br/>
+            <asp:HyperLink ID="Baan_Insert" Text="Toevoegen" NavigateUrl="Baan_Insert.aspx"  runat="server" /> <br/>
         </HeaderTemplate>
         <ItemTemplate>Er zijn geen gegevens gevonden.</ItemTemplate>
-    </EmptyDataTemplate>
-</SharePoint:SPGridView>
+    </EmptyDataTemplate>        
+</SharePoint:SPGridView >
 <br />
-<SharePoint:SPGridViewPager ID="spgvpager_bottom" GridViewId="ClubCloud_Baan_Grid" runat="server"/>
+<SharePoint:SPGridViewPager ID="spgvpager_bottom" GridViewId="Banen_Grid" runat="server"/>
 <p>
     <asp:Label runat="server" ID="lblMessage" ForeColor="Red" />
 </p>

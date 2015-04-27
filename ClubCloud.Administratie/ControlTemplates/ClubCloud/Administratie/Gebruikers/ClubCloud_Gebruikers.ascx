@@ -9,39 +9,45 @@
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Gebruikers.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_GebruikersUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Gebruiker_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Gebruikers_View" />
-<SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="ClubCloud_Gebruiker_Grid" runat="server" />
+<SharePoint:MenuTemplate ID="GebruikerMenu" runat="server">
+	<SharePoint:MenuItemTemplate ID="Gebruiker_Details" runat="server" Text="Details bekijken van Gebruiker" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Gebruiker.aspx?Id=%Id%', title:'Details van Gebruiker', autoSize:false});" Title="Details van Gebruiker"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Functionarissen" runat="server" Text="Details bekijken van Functionarissen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Functionarissen.aspx?GebruikerId=%Id%',title:'Details van Functionarissen', autoSize:false});" Title="Details van Functionarissen"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Lidmaatschappen" runat="server" Text="Details bekijken van Lidmaatschappen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Lidmaatschappen.aspx?GebruikerId=%Id%',title:'Details van Lidmaatschappen', autoSize:false});" Title="Details van Lidmaatschappen"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Addressen" runat="server" Text="Details bekijken van Addressen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Addressen.aspx?GebruikerId=%Id%',title:'Details van Addressen', autoSize:false});" Title="Details van Addressen"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Profielen" runat="server" Text="Details bekijken van Profielen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Profielen.aspx?GebruikerId=%Id%',title:'Details van Profielen', autoSize:false});" Title="Details van Profielen"></SharePoint:MenuItemTemplate>
+</SharePoint:MenuTemplate>
+<asp:HyperLink ID="Gebruiker_Insert" Text="Toevoegen" NavigateUrl="Gebruiker_Insert.aspx"  runat="server" />
+<br/>
+<SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="Gebruikers_Grid" runat="server" />
 <br />
-<SharePoint:SPGridView
-    ID="ClubCloud_Gebruiker_Grid"
+<SharePoint:SPGridView 
+    ID="Gebruikers_Grid" 
     runat="server"
-    DataSourceID="ClubCloud_Gebruiker_DataSource"
-    AutoGenerateColumns="false"     
-    AllowPaging="true"
-    PageSize="30"
+    AllowPaging="true" 
     AllowSorting="true" 
-    ShowFooter="True" OnDataBinding="Page_Load">
+    AutoGenerateColumns="false" 
+    SelectMethod="SelectGebruikers"
+	OnCallingDataMethods="GridGebruikers_CallingDataMethods"
+    PageSize="30"
+    ShowFooter="true"
+    ShowHeader="true" >
     <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
     <PagerSettings Mode="NextPreviousFirstLast" Visible="true" Position="TopAndBottom" PreviousPageText="vorige" NextPageText="volgende"  FirstPageText="Eerste" LastPageText="Laatste" PageButtonCount="5" />
     <PagerStyle HorizontalAlign="Center" VerticalAlign="Top" BackColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <Columns>
-        <SharePoint:SPBoundField
-            DataField="Id"
-            HeaderText="Id"
-            SortExpression="Id"
-            ItemStyle-Width="40px">
-        </SharePoint:SPBoundField>
-        <SharePoint:SPBoundField
+			<SharePoint:SPMenuField
+			HeaderText="Bondsnummer"
+			TextFields="Bondsnummer"
+			MenuTemplateId="GebruikerMenu"
+			TokenNameAndValueFields="Id=Id"
+			SortExpression="Bondsnummer"
+			ItemStyle-Width="120px" />
+	        <SharePoint:SPBoundField
             DataField="Beschrijving"
             HeaderText="Beschrijving"
             SortExpression="Beschrijving"
-            ItemStyle-Width="40px">
-        </SharePoint:SPBoundField>
-        <SharePoint:SPBoundField
-            DataField="Bondsnummer"
-            HeaderText="Bondsnummer"
-            SortExpression="Bondsnummer"
             ItemStyle-Width="40px">
         </SharePoint:SPBoundField>
         <SharePoint:SPBoundField
@@ -195,12 +201,6 @@
             ItemStyle-Width="40px">
         </SharePoint:SPBoundField>
         <SharePoint:SPBoundField
-            DataField="NationaliteitId"
-            HeaderText="NationaliteitId"
-            SortExpression="NationaliteitId"
-            ItemStyle-Width="40px">
-        </SharePoint:SPBoundField>
-        <SharePoint:SPBoundField
             DataField="Website"
             HeaderText="Website"
             SortExpression="Website"
@@ -261,12 +261,6 @@
             ItemStyle-Width="40px">
         </SharePoint:SPBoundField>
         <SharePoint:SPBoundField
-            DataField="VerenigingId"
-            HeaderText="VerenigingId"
-            SortExpression="VerenigingId"
-            ItemStyle-Width="40px">
-        </SharePoint:SPBoundField>
-        <SharePoint:SPBoundField
             DataField="Volledigenaam"
             HeaderText="Volledigenaam"
             SortExpression="Volledigenaam"
@@ -284,16 +278,42 @@
             SortExpression="Gewijzigd"
             ItemStyle-Width="40px">
         </SharePoint:SPBoundField>
+    
+		<asp:TemplateField HeaderText="Functionarissen" SortExpression="FunctionarisId">
+			<ItemTemplate>
+				<asp:Label ID="Functionarissen" runat="server" Text='<%# Bind("ClubCloud_Functionaris.Count") %>'></asp:Label>
+			</ItemTemplate>
+		</asp:TemplateField>
+		<asp:TemplateField HeaderText="Lidmaatschappen" SortExpression="LidmaatschapId">
+			<ItemTemplate>
+				<asp:Label ID="Lidmaatschappen" runat="server" Text='<%# Bind("ClubCloud_Lidmaatschap.Count") %>'></asp:Label>
+			</ItemTemplate>
+		</asp:TemplateField>
+		<asp:TemplateField HeaderText="Addressen" SortExpression="AddressId">
+			<ItemTemplate>
+				<asp:Label ID="Addressen" runat="server" Text='<%# Bind("ClubCloud_Address.Count") %>'></asp:Label>
+			</ItemTemplate>
+		</asp:TemplateField>
+		<asp:TemplateField HeaderText="Profielen" SortExpression="ProfielId">
+			<ItemTemplate>
+				<asp:Label ID="Profielen" runat="server" Text='<%# Bind("ClubCloud_Profiel.Count") %>'></asp:Label>
+			</ItemTemplate>
+		</asp:TemplateField>
+		<asp:TemplateField HeaderText="Nationaliteit" SortExpression="NationaliteitId">
+			<ItemTemplate>
+				<asp:Label ID="Nationaliteit" runat="server" Text='<%# Bind("ClubCloud_Nationaliteit.Naam") %>'></asp:Label>
+			</ItemTemplate>
+		</asp:TemplateField>
     </Columns>
     <EmptyDataTemplate>
         <HeaderTemplate>
-            <asp:HyperLink ID="ClubCloud_Gebruiker_Insert" Text="Toevoegen" NavigateUrl="~/ClubCloud_Gebruiker_Insert.aspx"  runat="server" /> <br/>
+            <asp:HyperLink ID="Gebruiker_Insert" Text="Toevoegen" NavigateUrl="Gebruiker_Insert.aspx"  runat="server" /> <br/>
         </HeaderTemplate>
         <ItemTemplate>Er zijn geen gegevens gevonden.</ItemTemplate>
-    </EmptyDataTemplate>
-</SharePoint:SPGridView>
+    </EmptyDataTemplate>        
+</SharePoint:SPGridView >
 <br />
-<SharePoint:SPGridViewPager ID="spgvpager_bottom" GridViewId="ClubCloud_Gebruiker_Grid" runat="server"/>
+<SharePoint:SPGridViewPager ID="spgvpager_bottom" GridViewId="Gebruikers_Grid" runat="server"/>
 <p>
     <asp:Label runat="server" ID="lblMessage" ForeColor="Red" />
 </p>

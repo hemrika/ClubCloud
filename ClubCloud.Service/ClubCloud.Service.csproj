@@ -245,6 +245,9 @@
     <Compile Include="ClubCloudApplicationService_Gebruiker.cs">
       <DependentUpon>ClubCloudApplicationService_BeheerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClubCloudApplicationService_Land.cs">
+      <DependentUpon>ClubCloudApplicationService_BeheerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ClubCloudApplicationService_Lidmaatschap.cs">
       <DependentUpon>ClubCloudApplicationService_BeheerModel.tt</DependentUpon>
     </Compile>

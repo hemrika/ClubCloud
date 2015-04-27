@@ -14,8 +14,5 @@
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1>
-        Sponsor
-    </h1>
 	<ClubCloud:Sponsor_Insert id="Sponsoren" runat="server" visible="true" ViewName="ClubCloud_Sponsoren_View" />
 </asp:Content>

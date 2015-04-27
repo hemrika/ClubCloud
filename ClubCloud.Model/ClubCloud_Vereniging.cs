@@ -32,6 +32,7 @@ namespace ClubCloud.Model
     [KnownType(typeof(ClubCloud_Sponsor))]
     [KnownType(typeof(ClubCloud_Setting))]
     [KnownType(typeof(ClubCloud_Baanschema))]
+    [KnownType(typeof(ClubCloud_Lidmaatschapsoort))]
     [DataContract(IsReference = true)]
     
     public partial class ClubCloud_Vereniging : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
@@ -47,6 +48,7 @@ namespace ClubCloud.Model
             this.ClubCloud_Sponsor = new ObservableCollection<ClubCloud_Sponsor>();
             this.ClubCloud_Setting = new ObservableCollection<ClubCloud_Setting>();
             this.ClubCloud_Baanschema = new ObservableCollection<ClubCloud_Baanschema>();
+            this.ClubCloud_Lidmaatschapsoort = new ObservableCollection<ClubCloud_Lidmaatschapsoort>();
         }
     	[DataMember]
         public System.Guid Id 
@@ -381,6 +383,10 @@ namespace ClubCloud.Model
     	//[DataMember]
     	[IgnoreDataMember]
         public virtual ObservableCollection<ClubCloud_Baanschema> ClubCloud_Baanschema { get; set; }
+    
+    	//[DataMember]
+    	[IgnoreDataMember]
+        public virtual ObservableCollection<ClubCloud_Lidmaatschapsoort> ClubCloud_Lidmaatschapsoort { get; set; }
     
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;

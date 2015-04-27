@@ -33,6 +33,11 @@ namespace ClubCloud.Administratie.WebControls
     
         }
     
+    	protected void GridBaanblokken_CallingDataMethods(object sender, CallingDataMethodsEventArgs e)
+    	{
+    		e.DataMethodsObject = ClubCloud_Baanblok_DataSource.View;
+    	}
+    
         [Browsable(true)]
         public string ViewName { get; set; }
     

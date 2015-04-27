@@ -17,13 +17,31 @@
         <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar Banen"
             OnClick="GoBack" SkinID="Button" />
     </EmptyDataTemplate>
+    <HeaderTemplate>
+        <asp:Button ID="btn_goback_top" runat="server" Text="Terug naar Banen" CausesValidation="false" OnClick="GoBack" OnCommand="GoBack" CommandArgument='<%# Eval("Id") %>'/>
+        <asp:Button ID="btn_update_top" runat="server" Text="Save" CommandName="Update" CausesValidation="true" />
+    </HeaderTemplate>
+    <FooterTemplate>
+        <asp:Button ID="btn_goback_bottom" runat="server" Text="Terug naar Banen" CausesValidation="false" OnClick="GoBack" OnCommand="GoBack" CommandArgument='<%# Eval("Id") %>'/>
+        <asp:Button ID="btn_update_bottom" runat="server" Text="Save" CommandName="Update" CausesValidation="true" />
+    </FooterTemplate>
     <EditItemTemplate>
         <fieldset>
-            <h1 class="title-regular clearfix">
-                <%# ((FormView)Container).CurrentMode == FormViewMode.Edit ? "Bewerken Baan" : "" %>
-            </h1>
-            <asp:Button ID="Button1" runat="server" Text="Save" CommandName="Update" />
-            <asp:Button ID="bn_goback" runat="server" Text="Terug naar Banen" CausesValidation="false" OnClick="GoBack"/>
+
+
+			Naam : <asp:TextBox ID="Naam" runat="server" Text='<%# Bind("Naam") %>' TextMode="SingleLine"/></br>
+
+			Nummer : <asp:TextBox ID="Nummer" runat="server" Text='<%# Bind("Nummer") %>' TextMode="Number" /></br>
+
+			<asp:HiddenField ID="BaanblokId" Value='<%# Bind("BaanblokId") %>' runat="server" />
+
+			<asp:HiddenField ID="AccommodatieId" Value='<%# Bind("AccommodatieId") %>' runat="server" />
+
+			Status : <asp:TextBox ID="Status" runat="server" Text='<%# Bind("Status") %>' TextMode="SingleLine"/></br>
+
+			Keuring : <asp:TextBox ID="Keuring" runat="server" Text='<%# Bind("Keuring") %>' TextMode="Date" /></br>
+
+			Actief : <asp:TextBox ID="Actief" runat="server" Text='<%# Bind("Actief") %>' TextMode="SingleLine"/></br>
         </fieldset>
     </EditItemTemplate>
 </asp:FormView>

@@ -11,6 +11,61 @@ namespace ClubCloud.Administratie.WebControls
 {
     public partial class ClubCloud_AccommodatiesUserControl 
     {
+    
+        /// <summary>
+        /// AccommodatieMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuTemplate AccommodatieMenu;
+    
+    	/// <summary>
+        /// Accommodatie_Details control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Accommodatie_Details;
+    
+        /// <summary>
+        /// Baanblokken control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Baanblokken;
+    
+        /// <summary>
+        /// Banen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Banen;
+    
+        /// <summary>
+        /// BanenSpeciaal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate BanenSpeciaal;
+    
+        /// <summary>
+        /// Addressen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Addressen;
+    
         /// <summary>
         /// ClubCloud_Accommodatie_DataSource control.
         /// </summary>
@@ -20,23 +75,23 @@ namespace ClubCloud.Administratie.WebControls
         /// </remarks>
     	protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Accommodatie_DataSource;
     
-    	/// <summary>
-    	/// spgvpager_top control.
-    	/// </summary>
-    	/// <remarks>
-    	/// Auto-generated field.
-    	/// To modify move field declaration from designer file to code-behind file.
-    	/// </remarks>
-    	protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_top;
-    
         /// <summary>
-        /// ClubCloud_Accommodatie_Grid control.
+        /// spgvpager_top control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.SPGridView ClubCloud_Accommodatie_Grid;
+        protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_top;
+    
+        /// <summary>
+        /// ClubCloud_Accommodaties_Grid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.SPGridView Accommodaties_Grid;
     
         /// <summary>
         /// spgvpager_bottom control.

@@ -8,14 +8,11 @@
 <%@ Register TagPrefix="wssuc" TagName="InputFormSection" src="~/_controltemplates/InputFormSection.ascx" %>
 <%@ Register TagPrefix="wssuc" TagName="InputFormControl" src="~/_controltemplates/InputFormControl.ascx" %>
 <%@ Register TagPrefix="wssuc" TagName="ButtonSection" src="~/_controltemplates/ButtonSection.ascx" %>
-<%@ Register TagPrefix="ClubCloud" TagName="Addresses" Src="~/_controltemplates/ClubCloud/Administratie/Addresses/ClubCloud_Addresses.ascx" %>
+<%@ Register TagPrefix="ClubCloud" TagName="Land" Src="~/_controltemplates/ClubCloud/Administratie/Landen/ClubCloud_Land.ascx" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Import Namespace="Microsoft.SharePoint.ApplicationPages" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1>
-        Addresses
-    </h1>
-	<ClubCloud:Addresses id="Addresses" runat="server" visible="true" ViewName="ClubCloud_Addresses_View" />
+	<ClubCloud:Land id="Landen" runat="server" visible="true" ViewName="ClubCloud_Landen_View" />
 </asp:Content>

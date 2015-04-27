@@ -221,7 +221,7 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Gebruiker> GetGebruikersByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Gebruiker> GetGebruikersForReserveringById(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]

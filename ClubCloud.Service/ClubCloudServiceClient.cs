@@ -224,6 +224,7 @@ namespace ClubCloud.Service
 
             return response;
         }
+
         /*
         public ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
         {
@@ -471,14 +472,14 @@ namespace ClubCloud.Service
 
 
 
-        public List<ClubCloud_Gebruiker> GetGebruikersByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false)
+        public List<ClubCloud_Gebruiker> GetGebruikersForReserveringById(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false)
         {
             List<ClubCloud_Gebruiker> response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetGebruikersByReserveringId(bondsnummer, verenigingId, reserveringId, refresh);
+                    response = channel.GetGebruikersForReserveringById(bondsnummer, verenigingId, reserveringId, refresh);
                 },
                 false);
 

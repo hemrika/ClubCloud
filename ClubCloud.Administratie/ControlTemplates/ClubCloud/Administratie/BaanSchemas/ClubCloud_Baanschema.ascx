@@ -10,29 +10,35 @@
 <asp:FormView runat="server" ID="SelectBaanschemaform" DefaultMode="ReadOnly" RenderOuterTable="False" OnCallingDataMethods="SelectBaanschemaform_CallingDataMethods" SelectMethod="SelectBaanschema" DataKeyNames="Id" >
     <EmptyDataTemplate>
         <h1 class="title-regular clearfix">
-            Geen Baanschema gevonden</h1>
+            Geen Baanschema gevonden
+		</h1>
         <div class="notice">
             Sorry, er is geen  Baanschema beschikbaar voor dit Id.</div>
-        <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar Baanschemas"
-            OnClick="GoBack" SkinID="Button" />
+        <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar Baanschemas" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button" />
     </EmptyDataTemplate>
+    <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" HorizontalAlign="Center" />
+    <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" HorizontalAlign="Center"/>
+    <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
+    <HeaderTemplate>
+		<asp:LinkButton ID="btn_goback_top" runat="server" Text="Terug" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
+        <asp:LinkButton ID="btn_edit_top" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/>
+    </HeaderTemplate>
+    <FooterTemplate>
+		<asp:LinkButton ID="btn_goback_bottom" runat="server" Text="Terug " CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
+		<asp:LinkButton ID="btn_edit_bottom" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/>
+    </FooterTemplate>
     <ItemTemplate>
+		
+
         <fieldset>
-            <h1 class="title-regular clearfix">
-                <%# ((FormView)Container).CurrentMode == FormViewMode.ReadOnly ? " Baanschema" : "" %>
-            </h1>
 			Beschikbaar : <asp:Label ID="Beschikbaar" runat="server" Text='<%# Eval("Beschikbaar") %>' /></br>
-			MaandBegin : <asp:Label ID="MaandBegin" runat="server" Text='<%# Eval("MaandBegin") %>' /></br>
-			MaandEinde : <asp:Label ID="MaandEinde" runat="server" Text='<%# Eval("MaandEinde") %>' /></br>
 			Dag : <asp:Label ID="Dag" runat="server" Text='<%# Eval("Dag") %>' /></br>
 			DagBegin : <asp:Label ID="DagBegin" runat="server" Text='<%# Eval("DagBegin") %>' /></br>
 			DagEinde : <asp:Label ID="DagEinde" runat="server" Text='<%# Eval("DagEinde") %>' /></br>
-
+			MaandBegin : <asp:Label ID="MaandBegin" runat="server" Text='<%# Eval("MaandBegin") %>' /></br>
+			MaandEinde : <asp:Label ID="MaandEinde" runat="server" Text='<%# Eval("MaandEinde") %>' /></br>
 			Baan : <a href="Baan.aspx?Id=<%# Eval("BaanId") %>" target="_self" title="Baan" ><%# Eval("ClubCloud_Baan.Naam") %></a></br>
 			Vereniging : <a href="Vereniging.aspx?Id=<%# Eval("VerenigingId") %>" target="_self" title="Vereniging" ><%# Eval("ClubCloud_Vereniging.Naam") %></a></br>
-
-		<asp:Button ID="btn_goback" runat="server" Text="Terug naar Baanschemas" CausesValidation="false" OnClick="GoBack"/>
-		<asp:Button ID="btn_edit" runat="server" Text="Baanschema bewerken" CausesValidation="false" OnClick="GoEdit"/>
         </fieldset>
     </ItemTemplate>
 </asp:FormView>

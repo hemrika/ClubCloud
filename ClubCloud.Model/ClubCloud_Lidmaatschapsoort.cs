@@ -20,6 +20,7 @@ namespace ClubCloud.Model
     
     [Serializable]
     [KnownType(typeof(ClubCloud_Lidmaatschap))]
+    [KnownType(typeof(ClubCloud_Vereniging))]
     [DataContract(IsReference = true)]
     
     public partial class ClubCloud_Lidmaatschapsoort : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
@@ -37,6 +38,16 @@ namespace ClubCloud.Model
     
     	[IgnoreDataMember]
     	private System.Guid _id;
+    
+    	[DataMember]
+        public Nullable<System.Guid> VerenigingId 
+    	{ 
+    		get { return _verenigingId; } 
+    		set { SetProperty(ref _verenigingId, value); } 
+    	}
+    
+    	[IgnoreDataMember]
+    	private Nullable<System.Guid> _verenigingId;
     
     	[DataMember]
         public string Naam 
@@ -133,6 +144,10 @@ namespace ClubCloud.Model
     	//[DataMember]
     	[IgnoreDataMember]
         public virtual ObservableCollection<ClubCloud_Lidmaatschap> ClubCloud_Lidmaatschap { get; set; }
+    
+    	//[DataMember]
+    	[IgnoreDataMember]
+        public virtual ClubCloud_Vereniging ClubCloud_Vereniging { get; set; }
     
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;

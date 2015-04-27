@@ -17,13 +17,28 @@
         <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar Baanschemas"
             OnClick="GoBack" SkinID="Button" />
     </EmptyDataTemplate>
+    <HeaderTemplate>
+        <asp:Button ID="btn_goback_top" runat="server" Text="Terug naar Baanschemas" CausesValidation="false" OnClick="GoBack" OnCommand="GoBack" CommandArgument='<%# Eval("Id") %>'/>
+        <asp:Button ID="btn_update_top" runat="server" Text="Save" CommandName="Update" CausesValidation="true" />
+    </HeaderTemplate>
+    <FooterTemplate>
+        <asp:Button ID="btn_goback_bottom" runat="server" Text="Terug naar Baanschemas" CausesValidation="false" OnClick="GoBack" OnCommand="GoBack" CommandArgument='<%# Eval("Id") %>'/>
+        <asp:Button ID="btn_update_bottom" runat="server" Text="Save" CommandName="Update" CausesValidation="true" />
+    </FooterTemplate>
     <EditItemTemplate>
         <fieldset>
-            <h1 class="title-regular clearfix">
-                <%# ((FormView)Container).CurrentMode == FormViewMode.Edit ? "Bewerken Baanschema" : "" %>
-            </h1>
-            <asp:Button ID="Button1" runat="server" Text="Save" CommandName="Update" />
-            <asp:Button ID="bn_goback" runat="server" Text="Terug naar Baanschemas" CausesValidation="false" OnClick="GoBack"/>
+
+
+			<asp:HiddenField ID="BaanId" Value='<%# Bind("BaanId") %>' runat="server" />
+
+			<asp:HiddenField ID="VerenigingId" Value='<%# Bind("VerenigingId") %>' runat="server" />
+
+			Beschikbaar : <asp:Checkbox ID="Beschikbaar" runat="server" Checked='<%# Bind("Beschikbaar") %>' /></br>
+
+
+
+
+
         </fieldset>
     </EditItemTemplate>
 </asp:FormView>

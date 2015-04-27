@@ -14,8 +14,5 @@
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1>
-        Baansoort
-    </h1>
 	<ClubCloud:Baansoort_Insert id="Baansoorten" runat="server" visible="true" ViewName="ClubCloud_Baansoorten_View" />
 </asp:Content>

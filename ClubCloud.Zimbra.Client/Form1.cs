@@ -371,7 +371,11 @@ namespace ClubCloud.Zimbra.Client
                 //customeraddressid
                 //parentid 
 
+                //Rutger Hemrika
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "parentid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
+                //Kampong Vereniging
                 //ConditionExpression condition = new ConditionExpression { AttributeName = "parentid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("02ada6c7-80f9-4671-91f9-898ea5da3ccd") } };
+                //Kampong Accommodatie
                 //ConditionExpression condition = new ConditionExpression { AttributeName = "parentid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("11029f99-522e-4fc4-a86d-694e003f8bb2") } };
                 //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
@@ -394,6 +398,13 @@ namespace ClubCloud.Zimbra.Client
                 //<link-entity name="sgt_alg_accommodatie" from="sgt_alg_accommodatieid" to="sgt_accommodatieid" alias="aa">
                 //LinkEntity link = new LinkEntity { LinkToEntityName = "sgt_alg_accommodatie", LinkFromAttributeName = "sgt_accommodatieid", LinkToAttributeName = "sgt_alg_accommodatieid", LinkCriteria = expression };
 
+                //Annotation
+                //annotation anno = new annotation{ objectid}
+                ConditionExpression conditionid = new ConditionExpression { AttributeName = "objectid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
+                //ConditionExpression conditiontype = new ConditionExpression { AttributeName = "objecttypecode", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
+                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { conditionid } };
+
+
                 PagingInfo pageInfo = new PagingInfo();
                 pageInfo.Count = 50; // the number of rows in each batch
                 pageInfo.PageNumber = pageNum;
@@ -414,16 +425,16 @@ namespace ClubCloud.Zimbra.Client
                 //sgt_alg_district
                 //systemuser
                 //FilterExpression expression = new FilterExpression();
-                query.EntityName = "sgt_alg_soort_lidmaatschap";
+                query.EntityName = "annotation";
                 query.ColumnSet = cols;
-                query.Criteria = null;
-                query.LinkEntities = new LinkEntity[] { null };
+                query.Criteria = expression;
+                //query.LinkEntities = new LinkEntity[] { null };
                 query.PageInfo = pageInfo;
                 query.Distinct = true;
 
                 // Create the request object.
                 RetrieveMultipleRequest request = new RetrieveMultipleRequest();
-
+                request.ReturnDynamicEntities = false;
                 // Set the properties of the request object.
                 request.Query = query;
 
@@ -433,14 +444,12 @@ namespace ClubCloud.Zimbra.Client
                     // Execute the request.
                     results = (RetrieveMultipleResponse)service.Execute(request);
 
-
-
                     List<BusinessEntity> entities = results.BusinessEntityCollection.BusinessEntities.ToList<BusinessEntity>();
-                    foreach (sgt_alg_soort_lidmaatschap entity in entities)
+                    foreach (annotation entity in entities)
                     {
                         //entity.sgt_spelerid
-                        string sentity = SerializeObjectList<sgt_alg_soort_lidmaatschap>(entity);
-                        WriteToXmlFile<sgt_alg_soort_lidmaatschap>(@"C:\sgt_alg_soort_lidmaatschap.xml", entity, true);
+                        string sentity = SerializeObjectList<annotation>(entity);
+                        WriteToXmlFile<annotation>(@"C:\annotation.xml", entity, true);
                     }
                 }
                 catch (Exception ex)
@@ -449,6 +458,7 @@ namespace ClubCloud.Zimbra.Client
                     throw;
                 }
 
+                //sgt_alg_landcode item = new sgt_alg_landcode {  }
                 /*
                 foreach (sgt_alg_bestuursorgaan entity in entities)
                 {

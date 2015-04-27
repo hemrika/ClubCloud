@@ -115,7 +115,8 @@ namespace ClubCloud.Common.Controls
             set
             {
                 this._whereParameters = value;
-                this._whereParameters.ParametersChanged += new EventHandler(this.OnQueryParametersChanged);
+                
+                //this._whereParameters.ParametersChanged += new EventHandler(this.OnQueryParametersChanged);
                 if (this._isTracking)
                 {
                     TrackViewState(this._whereParameters);

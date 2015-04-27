@@ -34,7 +34,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(result != null)
-    				beheerModel.ObjectContext.Detach(result);
+    				try { beheerModel.ObjectContext.Detach(result);} catch{}
             }
     
     	}
@@ -65,7 +65,7 @@ namespace ClubCloud.Service
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try {beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
             }
@@ -93,7 +93,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(tobeupdated != null)
-    				beheerModel.ObjectContext.Detach(tobeupdated);
+    				try { beheerModel.ObjectContext.Detach(tobeupdated); } catch{}
             }
     
     	}
@@ -128,7 +128,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(tobedeleted != null)
-    				beheerModel.ObjectContext.Detach(tobedeleted);
+    				try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
             }
     
     		return false;
@@ -196,14 +196,14 @@ namespace ClubCloud.Service
                     var fts = BeheerFullTextInterceptor.Fts(prefixText);
     				
     
-    			entities = beheerModel.ClubCloud_Bouwaarden.Where(e => e.Naam.Contains(fts) ).ToList();
+    			entities = beheerModel.ClubCloud_Bouwaarden.Where(e => e.Naam.Contains(fts)  || e.Omschrijving.Contains(fts)  || e.Code.Contains(fts)  || e.Beschrijving.Contains(fts)  || e.Meervoud.Contains(fts)  || e.Actief.Contains(fts) ).ToList();
     
     				
                 }
     			else
     			{
     
-    			entities = beheerModel.Database.SqlQuery<ClubCloud_Bouwaard>("SELECT * FROM ClubCloud_Bouwaard WHERE  Naam LIKE '%"+ prefixText +"%'").ToList();
+    			entities = beheerModel.Database.SqlQuery<ClubCloud_Bouwaard>("SELECT * FROM ClubCloud_Bouwaard WHERE  Naam LIKE '%"+ prefixText +"%' OR  Omschrijving LIKE '%"+ prefixText +"%' OR  Code LIKE '%"+ prefixText +"%' OR  Beschrijving LIKE '%"+ prefixText +"%' OR  Meervoud LIKE '%"+ prefixText +"%' OR  Actief LIKE '%"+ prefixText +"%'").ToList();
     
     				
     			}

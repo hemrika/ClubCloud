@@ -34,7 +34,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(result != null)
-    				beheerModel.ObjectContext.Detach(result);
+    				try { beheerModel.ObjectContext.Detach(result);} catch{}
             }
     
     	}
@@ -65,7 +65,7 @@ namespace ClubCloud.Service
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try {beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
             }
@@ -93,7 +93,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(tobeupdated != null)
-    				beheerModel.ObjectContext.Detach(tobeupdated);
+    				try { beheerModel.ObjectContext.Detach(tobeupdated); } catch{}
             }
     
     	}
@@ -128,7 +128,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(tobedeleted != null)
-    				beheerModel.ObjectContext.Detach(tobedeleted);
+    				try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
             }
     
     		return false;
@@ -243,13 +243,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -284,13 +284,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -319,7 +319,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -352,13 +352,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -393,13 +393,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -428,7 +428,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -461,13 +461,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -502,13 +502,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -537,7 +537,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -570,9 +570,9 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
                 if(result != null)
-    				beheerModel.ObjectContext.Detach(result);
+    				try { beheerModel.ObjectContext.Detach(result); } catch{}
             }
     
     	}
@@ -597,7 +597,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -630,9 +630,9 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
                 if(result != null)
-    				beheerModel.ObjectContext.Detach(result);
+    				try { beheerModel.ObjectContext.Detach(result); } catch{}
             }
     	}
     
@@ -658,7 +658,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -690,9 +690,9 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
                 if(result != null)
-    				beheerModel.ObjectContext.Detach(result);
+    				try { beheerModel.ObjectContext.Detach(result); } catch{}
             }
     
     	}
@@ -717,7 +717,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -750,9 +750,9 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
                 if(result != null)
-    				beheerModel.ObjectContext.Detach(result);
+    				try { beheerModel.ObjectContext.Detach(result); } catch{}
             }
     	}
     
@@ -778,7 +778,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -810,9 +810,9 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
                 if(result != null)
-    				beheerModel.ObjectContext.Detach(result);
+    				try { beheerModel.ObjectContext.Detach(result); } catch{}
             }
     
     	}
@@ -837,7 +837,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -870,9 +870,9 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
                 if(result != null)
-    				beheerModel.ObjectContext.Detach(result);
+    				try { beheerModel.ObjectContext.Detach(result); } catch{}
             }
     	}
     
@@ -898,13 +898,13 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
     
     
-    	public List<ClubCloud_Address> GetAddressesForVereniging(ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenForVereniging(ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
     	{
     		if(settings != null)
     			ValidateSettings(ref settings);
@@ -920,7 +920,7 @@ namespace ClubCloud.Service
     			result = entity.ClubCloud_Address.ToList();
     
     			if(result == null || result.Count == 0 || refresh)
-    				result = GetAddressesForVereniging(settings.Id.ToString(), entity, refresh, settings);
+    				result = GetAddressenForVereniging(settings.Id.ToString(), entity, refresh, settings);
     
     			if(result != null)
     				return result;
@@ -930,13 +930,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -944,7 +944,7 @@ namespace ClubCloud.Service
     	}
     
     
-    	public List<ClubCloud_Address> GetAddressesForVerenigingById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+    	public List<ClubCloud_Address> GetAddressenForVerenigingById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
     	{
     		if(settings != null)
     			ValidateSettings(ref settings);
@@ -961,7 +961,7 @@ namespace ClubCloud.Service
     			result = entity.ClubCloud_Address.ToList();
     
     			if(result == null || result.Count == 0 || refresh)
-    				result = GetAddressesForVerenigingById(settings.Id.ToString(), Id, refresh, settings);
+    				result = GetAddressenForVerenigingById(settings.Id.ToString(), Id, refresh, settings);
     
     			if(result != null)
     				return result;
@@ -971,19 +971,19 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
     	}
     
-    	public bool SetAddressesForVereniging(List<ClubCloud_Address> Addresses, ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	public bool SetAddressenForVereniging(List<ClubCloud_Address> Addressen, ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
     	{
     		if(settings != null)
     			ValidateSettings(ref settings);
@@ -1006,7 +1006,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -1039,9 +1039,9 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
                 if(result != null)
-    				beheerModel.ObjectContext.Detach(result);
+    				try { beheerModel.ObjectContext.Detach(result); } catch{}
             }
     
     	}
@@ -1066,7 +1066,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -1099,9 +1099,9 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
                 if(result != null)
-    				beheerModel.ObjectContext.Detach(result);
+    				try { beheerModel.ObjectContext.Detach(result); } catch{}
             }
     	}
     
@@ -1127,7 +1127,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -1159,13 +1159,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -1200,13 +1200,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -1235,7 +1235,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -1268,13 +1268,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -1309,13 +1309,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -1344,7 +1344,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -1377,13 +1377,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -1418,13 +1418,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -1453,7 +1453,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -1486,13 +1486,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -1527,13 +1527,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -1562,7 +1562,7 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}
@@ -1595,13 +1595,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -1636,13 +1636,13 @@ namespace ClubCloud.Service
     	    finally
     	    {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
     			if(result != null)
     			{
     				foreach (object item in result)
     				{
     					if(item != null)
-    						beheerModel.ObjectContext.Detach(item);
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
     				}
     			}
     		}	
@@ -1671,7 +1671,116 @@ namespace ClubCloud.Service
             finally
             {
     			if(entity != null)
-    				beheerModel.ObjectContext.Detach(entity);
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
+            }
+    		return false;
+    	}
+    
+    
+    
+    	public List<ClubCloud_Lidmaatschapsoort> GetLidmaatschapsoortenForVereniging(ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+    		if(settings != null)
+    			ValidateSettings(ref settings);
+    
+    		List<ClubCloud_Lidmaatschapsoort> result = null;
+    
+    		try
+    		{
+    			entity = beheerModel.ClubCloud_Verenigingen.Find(entity.Id);
+    			if(entity != null && entity.ClubCloud_Lidmaatschapsoort != null && entity.ClubCloud_Lidmaatschapsoort.Count == 0)
+    				beheerModel.Entry(entity).Collection(e => e.ClubCloud_Lidmaatschapsoort).Load();
+    
+    			result = entity.ClubCloud_Lidmaatschapsoort.ToList();
+    
+    			if(result == null || result.Count == 0 || refresh)
+    				result = GetLidmaatschapsoortenForVereniging(settings.Id.ToString(), entity, refresh, settings);
+    
+    			if(result != null)
+    				return result;
+    
+    			return new List<ClubCloud_Lidmaatschapsoort>();
+    		}
+    	    finally
+    	    {
+    			if(entity != null)
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
+    			if(result != null)
+    			{
+    				foreach (object item in result)
+    				{
+    					if(item != null)
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
+    				}
+    			}
+    		}	
+    
+    	}
+    
+    
+    	public List<ClubCloud_Lidmaatschapsoort> GetLidmaatschapsoortenForVerenigingById(System.Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+    		if(settings != null)
+    			ValidateSettings(ref settings);
+    
+    		ClubCloud_Vereniging entity = null;
+    		List<ClubCloud_Lidmaatschapsoort> result = null;
+    
+    		try
+    		{
+    			entity = beheerModel.ClubCloud_Verenigingen.Find(Id);
+    			if(entity != null && entity.ClubCloud_Lidmaatschapsoort != null && entity.ClubCloud_Lidmaatschapsoort.Count == 0)
+    				beheerModel.Entry(entity).Collection(e => e.ClubCloud_Lidmaatschapsoort).Load();
+    
+    			result = entity.ClubCloud_Lidmaatschapsoort.ToList();
+    
+    			if(result == null || result.Count == 0 || refresh)
+    				result = GetLidmaatschapsoortenForVerenigingById(settings.Id.ToString(), Id, refresh, settings);
+    
+    			if(result != null)
+    				return result;
+    
+    			return new List<ClubCloud_Lidmaatschapsoort>();
+    		}
+    	    finally
+    	    {
+    			if(entity != null)
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
+    			if(result != null)
+    			{
+    				foreach (object item in result)
+    				{
+    					if(item != null)
+    						try { beheerModel.ObjectContext.Detach(item); } catch{}
+    				}
+    			}
+    		}	
+    	}
+    
+    	public bool SetLidmaatschapsoortenForVereniging(List<ClubCloud_Lidmaatschapsoort> Lidmaatschapsoorten, ClubCloud_Vereniging entity, bool refresh = false, ClubCloud_Setting settings = null)
+    	{
+    		if(settings != null)
+    			ValidateSettings(ref settings);
+    
+    		ClubCloud_Vereniging result = null;
+    
+    		try
+    		{			
+    			entity = beheerModel.ClubCloud_Verenigingen.Find(entity.Id);
+    		
+    			if (entity != null)
+    				beheerModel.Entry(entity).Collection(e => e.ClubCloud_Lidmaatschapsoort).Load();
+    				//result = GetVerenigingById(settings.Id.ToString(), Id, refresh, settings);
+    
+    			if (result != null)
+    				//return result.ClubCloud_Verenigingen.Count == ;
+    
+    			return false;
+            }
+            finally
+            {
+    			if(entity != null)
+    				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
     		return false;
     	}

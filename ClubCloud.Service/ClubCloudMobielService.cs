@@ -189,7 +189,7 @@ namespace ClubCloud.Service
             if (SPContext.Current != null && SPContext.Current.Web != null)
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
-                gebruikers = client.GetGebruikersByReserveringId(bondsnummer, verenigingId, reserveringId, refresh);
+                gebruikers = client.GetGebruikersForReserveringById(bondsnummer, verenigingId, reserveringId, refresh);
             }
 
             return gebruikers;

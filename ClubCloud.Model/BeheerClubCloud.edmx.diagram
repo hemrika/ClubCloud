@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Nationaliteit" Width="1.875" PointX="11.75" PointY="1" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_District" Width="2" PointX="14.5" PointY="12" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Functie" Width="2.25" PointX="8.375" PointY="0.75" />
-        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Lidmaatschap" Width="1.875" PointX="23.5" PointY="8.5" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Lidmaatschap" Width="2.875" PointX="23.5" PointY="8.5" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Profiel" Width="1.875" PointX="0.75" PointY="9.375" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Functionaris" Width="2.375" PointX="11.375" PointY="9.375" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Functie_Functionaris" />
@@ -39,7 +39,7 @@
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baansoort" Width="1.875" PointX="7.875" PointY="21.5" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baantype" Width="2.125" PointX="10.5" PointY="19.75" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baan" Width="1.5" PointX="3.375" PointY="17.875" />
-        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Bouwaard" Width="2.5" PointX="14.75" PointY="1" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Bouwaard" Width="2.5" PointX="17.5" PointY="0.5" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_BaanSpeciaal" Width="2" PointX="5.125" PointY="2.25" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baansoort_Baantype" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Accommodatie_District" />
@@ -54,7 +54,7 @@
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Afhangen_Vereniging" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baanschema" Width="2" PointX="10.75" PointY="15" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Foto" Width="1.5" PointX="0.75" PointY="6" />
-        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Lidmaatschapsoort" Width="1.5" PointX="21.25" PointY="15.25" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Lidmaatschapsoort" Width="3.375" PointX="21.125" PointY="15.625" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_LidmaatschapSoort_Lidmaatschap" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Sponsor" Width="2.75" PointX="14" PointY="16.375" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Sponsor_Vereniging" />
@@ -74,9 +74,12 @@
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Setting_Gebruiker" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Setting_Vereniging" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Accommodatie_Address" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_GebruikerClubCloud_Nationaliteit" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Gebruiker_Nationaliteit" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baanschema_Baan" />
-        <AssociationConnector Association="BeheerClubCloud.ClubCloud_BaanschemaClubCloud_Vereniging" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baanschema_Vereniging" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Vereniging_Lidmaatschapsoort" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Land" Width="1.5" PointX="14" PointY="1" />
+        <AssociationConnector Association="BeheerClubCloud.ClubCloud_Address_Land" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

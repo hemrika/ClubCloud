@@ -56,7 +56,6 @@
     <ProjectItemFile Source="Baantypes.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
     <ProjectItemFile Source="Baansoorten.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
     <ProjectItemFile Source="Regios.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
-    <ProjectItemFile Source="Addresses.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
     <ProjectItemFile Source="Rechtsvormen.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
     <ProjectItemFile Source="Bestuursorganen.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
     <ProjectItemFile Source="Functionarissen.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
@@ -153,5 +152,11 @@
     <ProjectItemFile Source="Setting_Search.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
     <ProjectItemFile Source="Setting_Edit.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
     <ProjectItemFile Source="Setting_Insert.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="Addressen.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="Land_Search.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="Land_Edit.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="Land_Insert.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="Land.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
+    <ProjectItemFile Source="Landen.aspx" Target="SiteTemplates\Administratie\" Type="TemplateFile" />
   </Files>
 </ProjectItem>
