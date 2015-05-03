@@ -224,6 +224,10 @@ namespace ClubCloud.Service
         System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Gebruiker> GetGebruikersForReserveringById(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
 
         [OperationContract]
+        [ServiceKnownType(typeof(ClubCloud_Baan))]
+        ClubCloud_Baan GetBaanForReserveringById(Guid reserveringId, bool refresh, ClubCloud_Setting Settings);
+
+        [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Reservering))]
         ClubCloud.Model.ClubCloud_Reservering GetReserveringByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
 
@@ -544,5 +548,6 @@ namespace ClubCloud.Service
         List<ApplicationProcessorArchitecture> GetApplicationProcessorArchitecture(int applicationVersionId, string version);
 
         #endregion        
+    
     }
 }

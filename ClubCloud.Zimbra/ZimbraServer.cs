@@ -208,6 +208,13 @@ namespace ClubCloud.Zimbra
         }
         public string Authenticate() 
         {
+            try
+            {
+                if (configuration == null)
+                    configuration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
+            }
+            catch { };
+
             return Authenticate(configuration.Server.UserName, configuration.Server.Password, configuration.Server.IsAdmin);
         }
 

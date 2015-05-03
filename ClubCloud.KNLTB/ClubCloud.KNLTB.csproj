@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,6 +44,9 @@
   <ItemGroup>
     <Reference Include="AntiXSSLibrary">
       <HintPath>..\..\..\Program Files (x86)\Microsoft Information Security\AntiXSS Library v4.2\NET40\AntiXSSLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ClubCloud.KNLTB.XmlSerializers">
+      <HintPath>..\Common\ClubCloud.KNLTB.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -4978,6 +4982,7 @@
     <Compile Include="DuplicaatPersonen\DuplicaatPersonenServiceSoapChannel.cs" />
     <Compile Include="DuplicaatPersonen\DuplicaatPersonenServiceSoapClient.cs" />
     <Compile Include="DuplicaatPersonen\OrganizationHeader.cs" />
+    <Compile Include="Media\XmlSanitizingStream.cs" />
     <Compile Include="MetadataService\ApplicationOrigin.cs" />
     <Compile Include="MetadataService\AssociatedMenuBehavior.cs" />
     <Compile Include="MetadataService\AssociatedMenuGroup.cs" />

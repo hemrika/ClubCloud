@@ -22,7 +22,7 @@ namespace ClubCloud.Model
     [KnownType(typeof(ClubCloud_Baantype))]
     [KnownType(typeof(ClubCloud_Baanblok))]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Baansoort_TypeDescriptionProvider))]
     public partial class ClubCloud_Baansoort : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         public ClubCloud_Baansoort()
@@ -207,5 +207,73 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Baansoort_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Baansoort_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Baansoort))) {}
+    
+        public ClubCloud_Baansoort_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Baansoort_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Baansoort_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Baansoort_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+    		List<PropertyDescriptor> extended = new List<PropertyDescriptor>();
+            foreach (PropertyDescriptor item in cols)
+            {
+                extended.Add(item);
+            }
+    		//ClubCloud_Baantype
+    		PropertyDescriptor ClubCloud_Baantype_Columns = cols["ClubCloud_Baantype"];
+    		PropertyDescriptorCollection ClubCloud_Baantype_Children = ClubCloud_Baantype_Columns.GetChildProperties();
+    
+    		PropertyDescriptor ClubCloud_Baantype_Id = new BeheerPropertyDescriptor(ClubCloud_Baantype_Columns,ClubCloud_Baantype_Children["Id"],"ClubCloud_Baantype_Id");
+    		extended.Add(ClubCloud_Baantype_Id);
+    
+    		PropertyDescriptor ClubCloud_Baantype_Naam = new BeheerPropertyDescriptor(ClubCloud_Baantype_Columns,ClubCloud_Baantype_Children["Naam"],"ClubCloud_Baantype_Naam");
+    		extended.Add(ClubCloud_Baantype_Naam);
+    
+    		PropertyDescriptor ClubCloud_Baantype_Beschrijving = new BeheerPropertyDescriptor(ClubCloud_Baantype_Columns,ClubCloud_Baantype_Children["Beschrijving"],"ClubCloud_Baantype_Beschrijving");
+    		extended.Add(ClubCloud_Baantype_Beschrijving);
+    
+    		PropertyDescriptor ClubCloud_Baantype_Meervoud = new BeheerPropertyDescriptor(ClubCloud_Baantype_Columns,ClubCloud_Baantype_Children["Meervoud"],"ClubCloud_Baantype_Meervoud");
+    		extended.Add(ClubCloud_Baantype_Meervoud);
+    
+    		PropertyDescriptor ClubCloud_Baantype_Omschrijving = new BeheerPropertyDescriptor(ClubCloud_Baantype_Columns,ClubCloud_Baantype_Children["Omschrijving"],"ClubCloud_Baantype_Omschrijving");
+    		extended.Add(ClubCloud_Baantype_Omschrijving);
+    
+    		PropertyDescriptor ClubCloud_Baantype_Code = new BeheerPropertyDescriptor(ClubCloud_Baantype_Columns,ClubCloud_Baantype_Children["Code"],"ClubCloud_Baantype_Code");
+    		extended.Add(ClubCloud_Baantype_Code);
+    
+    		PropertyDescriptor ClubCloud_Baantype_Actief = new BeheerPropertyDescriptor(ClubCloud_Baantype_Columns,ClubCloud_Baantype_Children["Actief"],"ClubCloud_Baantype_Actief");
+    		extended.Add(ClubCloud_Baantype_Actief);
+    
+    
+    		if(extended.Count > 0)
+    		{
+    			PropertyDescriptorCollection newcols = new PropertyDescriptorCollection(extended.ToArray());
+    			return newcols;
+    		}
+            return cols;            
+        }     
+    } 
     
 }

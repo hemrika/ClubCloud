@@ -27,7 +27,7 @@ namespace ClubCloud.Model
     [KnownType(typeof(ClubCloud_BaanSpeciaal))]
     [KnownType(typeof(ClubCloud_Address))]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Accommodatie_TypeDescriptionProvider))]
     public partial class ClubCloud_Accommodatie : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         public ClubCloud_Accommodatie()
@@ -576,5 +576,96 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Accommodatie_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Accommodatie_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Accommodatie))) {}
+    
+        public ClubCloud_Accommodatie_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Accommodatie_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Accommodatie_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Accommodatie_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+    		List<PropertyDescriptor> extended = new List<PropertyDescriptor>();
+            foreach (PropertyDescriptor item in cols)
+            {
+                extended.Add(item);
+            }
+    		//ClubCloud_District
+    		PropertyDescriptor ClubCloud_District_Columns = cols["ClubCloud_District"];
+    		PropertyDescriptorCollection ClubCloud_District_Children = ClubCloud_District_Columns.GetChildProperties();
+    
+    		PropertyDescriptor ClubCloud_District_Id = new BeheerPropertyDescriptor(ClubCloud_District_Columns,ClubCloud_District_Children["Id"],"ClubCloud_District_Id");
+    		extended.Add(ClubCloud_District_Id);
+    
+    		PropertyDescriptor ClubCloud_District_Naam = new BeheerPropertyDescriptor(ClubCloud_District_Columns,ClubCloud_District_Children["Naam"],"ClubCloud_District_Naam");
+    		extended.Add(ClubCloud_District_Naam);
+    
+    		PropertyDescriptor ClubCloud_District_Beschrijving = new BeheerPropertyDescriptor(ClubCloud_District_Columns,ClubCloud_District_Children["Beschrijving"],"ClubCloud_District_Beschrijving");
+    		extended.Add(ClubCloud_District_Beschrijving);
+    
+    		PropertyDescriptor ClubCloud_District_Omschrijving = new BeheerPropertyDescriptor(ClubCloud_District_Columns,ClubCloud_District_Children["Omschrijving"],"ClubCloud_District_Omschrijving");
+    		extended.Add(ClubCloud_District_Omschrijving);
+    
+    		PropertyDescriptor ClubCloud_District_RegioId = new BeheerPropertyDescriptor(ClubCloud_District_Columns,ClubCloud_District_Children["RegioId"],"ClubCloud_District_RegioId");
+    		extended.Add(ClubCloud_District_RegioId);
+    
+    		PropertyDescriptor ClubCloud_District_Actief = new BeheerPropertyDescriptor(ClubCloud_District_Columns,ClubCloud_District_Children["Actief"],"ClubCloud_District_Actief");
+    		extended.Add(ClubCloud_District_Actief);
+    
+    
+    		//ClubCloud_Regio
+    		PropertyDescriptor ClubCloud_Regio_Columns = cols["ClubCloud_Regio"];
+    		PropertyDescriptorCollection ClubCloud_Regio_Children = ClubCloud_Regio_Columns.GetChildProperties();
+    
+    		PropertyDescriptor ClubCloud_Regio_Id = new BeheerPropertyDescriptor(ClubCloud_Regio_Columns,ClubCloud_Regio_Children["Id"],"ClubCloud_Regio_Id");
+    		extended.Add(ClubCloud_Regio_Id);
+    
+    		PropertyDescriptor ClubCloud_Regio_Naam = new BeheerPropertyDescriptor(ClubCloud_Regio_Columns,ClubCloud_Regio_Children["Naam"],"ClubCloud_Regio_Naam");
+    		extended.Add(ClubCloud_Regio_Naam);
+    
+    		PropertyDescriptor ClubCloud_Regio_EmailKNLTB = new BeheerPropertyDescriptor(ClubCloud_Regio_Columns,ClubCloud_Regio_Children["EmailKNLTB"],"ClubCloud_Regio_EmailKNLTB");
+    		extended.Add(ClubCloud_Regio_EmailKNLTB);
+    
+    		PropertyDescriptor ClubCloud_Regio_TelefoonAvond = new BeheerPropertyDescriptor(ClubCloud_Regio_Columns,ClubCloud_Regio_Children["TelefoonAvond"],"ClubCloud_Regio_TelefoonAvond");
+    		extended.Add(ClubCloud_Regio_TelefoonAvond);
+    
+    		PropertyDescriptor ClubCloud_Regio_TelefoonOverdag = new BeheerPropertyDescriptor(ClubCloud_Regio_Columns,ClubCloud_Regio_Children["TelefoonOverdag"],"ClubCloud_Regio_TelefoonOverdag");
+    		extended.Add(ClubCloud_Regio_TelefoonOverdag);
+    
+    		PropertyDescriptor ClubCloud_Regio_Fax = new BeheerPropertyDescriptor(ClubCloud_Regio_Columns,ClubCloud_Regio_Children["Fax"],"ClubCloud_Regio_Fax");
+    		extended.Add(ClubCloud_Regio_Fax);
+    
+    		PropertyDescriptor ClubCloud_Regio_Actief = new BeheerPropertyDescriptor(ClubCloud_Regio_Columns,ClubCloud_Regio_Children["Actief"],"ClubCloud_Regio_Actief");
+    		extended.Add(ClubCloud_Regio_Actief);
+    
+    
+    		if(extended.Count > 0)
+    		{
+    			PropertyDescriptorCollection newcols = new PropertyDescriptorCollection(extended.ToArray());
+    			return newcols;
+    		}
+            return cols;            
+        }     
+    } 
     
 }

@@ -2179,7 +2179,7 @@
           <Property Name="Tijd" Type="Time" Nullable="false" />
           <Property Name="Duur" Type="Time" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Gebruiker_Een" Relationship="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Een" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
-          <Property Name="Soort" Type="BeheerClubCloud.ReserveringSoort" Nullable="false" />
+          <Property Name="ReserveringSoort" Type="BeheerClubCloud.ReserveringSoort" Nullable="false" />
           <Property Name="Beschrijving" Type="String" Nullable="false" />
           <Property Name="Gebruiker_Een" Type="Guid" Nullable="true" />
           <NavigationProperty Name="ClubCloud_Gebruiker_Twee" Relationship="BeheerClubCloud.ClubCloud_Reservering_Gebruiker_Twee" FromRole="ClubCloud_Reservering" ToRole="ClubCloud_Gebruiker" />
@@ -3059,7 +3059,7 @@
           <ScalarProperty Name="Datum" ColumnName="Datum" />
           <ScalarProperty Name="Tijd" ColumnName="Tijd" />
           <ScalarProperty Name="Duur" ColumnName="Duur" />
-          <ScalarProperty Name="Soort" ColumnName="Soort" />
+          <ScalarProperty Name="ReserveringSoort" ColumnName="Soort" />
           <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
           <ScalarProperty Name="Gebruiker_Een" ColumnName="Gebruiker_Een" />
           <ScalarProperty Name="Gebruiker_Twee" ColumnName="Gebruiker_Twee" />

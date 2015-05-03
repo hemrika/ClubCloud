@@ -11,6 +11,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[DesignerCategory("code")]
 	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+    /*
 	[XmlInclude(typeof(account))]
 	[XmlInclude(typeof(activitymimeattachment))]
 	[XmlInclude(typeof(activityparty))]
@@ -516,6 +517,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[XmlInclude(typeof(workflow))]
 	[XmlInclude(typeof(workflowdependency))]
 	[XmlInclude(typeof(workflowlog))]
+    */
+    [XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")]
 	[XmlType(Namespace="http://schemas.microsoft.com/crm/2006/WebServices")]
 	public abstract class BusinessEntity : INotifyPropertyChanged
 	{

@@ -11,6 +11,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[DesignerCategory("code")]
 	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+    /*
 	[XmlInclude(typeof(TargetUpdateAccount))]
 	[XmlInclude(typeof(TargetUpdateActivityMimeAttachment))]
 	[XmlInclude(typeof(TargetUpdateAnnotation))]
@@ -478,6 +479,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[XmlInclude(typeof(TargetUpdateWorkflow))]
 	[XmlInclude(typeof(TargetUpdateWorkflowDependency))]
 	[XmlInclude(typeof(TargetUpdateWorkflowLog))]
+    */
+    [XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")]
 	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public abstract class TargetUpdate : INotifyPropertyChanged
 	{

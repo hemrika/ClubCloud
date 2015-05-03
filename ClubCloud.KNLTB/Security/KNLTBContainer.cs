@@ -12,7 +12,9 @@ namespace ClubCloud.KNLTB.Security
     public class KNLTBContainer
     {
         private static string _MijnLogonUrl = "https://www.mijnknltb.nl/CookieAuth.dll?Logon";
+        //private static string _MijnLogonUrl = "https://www.mijnknltb.nl/CookieAuth.dll?GetLogon?curl=Z2F&formdir=12";
         private static string _ServItLogonUrl = "https://servit.mijnknltb.nl/CookieAuth.dll?Logon";
+        //private static string _ServItLogonUrl = "https://servit.mijnknltb.nl/CookieAuth.dll?GetLogon?curl=Z2F&formdir=12";
         private CookieContainer _Container;
         IAsyncResult result;
 
@@ -36,13 +38,24 @@ namespace ClubCloud.KNLTB.Security
                 _Password = password;
                 Container = new CookieContainer();
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_MijnLogonUrl);
+                ServicePointManager.Expect100Continue = false;
+
+                Uri requestUri = new Uri(_MijnLogonUrl);
+
+                if (requestUri.Scheme == "https")
+                {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+
+                    ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, err) => true;
+                }
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri);
+
                 request.CookieContainer = _Container;
-                bool support = request.SupportsCookieContainer;
                 request.Method = "POST";
                 request.Accept = "text/html, application/xhtml+xml, */*";
                 request.Headers.Add(HttpRequestHeader.AcceptLanguage, "nl-NL,nl;q=0.8,en-US;q=0.6,en-GB;q=0.4,en;q=0.2");
-                request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko";
+                request.UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.3; WOW64; Trident/7.0)";
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
                 request.Host = "www.mijnknltb.nl";
                 request.KeepAlive = true;
@@ -55,13 +68,24 @@ namespace ClubCloud.KNLTB.Security
             _Password = password;
             Container = new CookieContainer();
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_ServItLogonUrl);
+            ServicePointManager.Expect100Continue = false;
+
+            Uri requestUri = new Uri(_ServItLogonUrl);
+
+            if (requestUri.Scheme == "https")
+            {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+
+                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, err) => true;
+            }
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri);
+
             request.CookieContainer = _Container;
-            //bool support = request.SupportsCookieContainer;
             request.Method = "POST";
             request.Accept = "text/html, application/xhtml+xml, */*";
             request.Headers.Add(HttpRequestHeader.AcceptLanguage, "nl-NL,nl;q=0.8,en-US;q=0.6,en-GB;q=0.4,en;q=0.2");
-            request.UserAgent = "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/6.0;)";
+            request.UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.3; WOW64; Trident/7.0)";
             request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
             request.Host = "servit.mijnknltb.nl";
             request.KeepAlive = true;

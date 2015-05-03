@@ -266,7 +266,7 @@
         </fieldset>
     </contenttemplate>
     <triggers>
-        <asp:AsyncPostBackTrigger ControlID="tmr_loader_profiel" EventName="Tick" />
+        <asp:AsyncPostBackTrigger ControlID="tmr_loader_profiel" EventName="Tick"/>
     </triggers>
 </asp:UpdatePanel>
 <asp:UpdateProgress ID="udp_profiel_progress" runat="server" AssociatedUpdatePanelID="udp_profiel" DisplayAfter="50">

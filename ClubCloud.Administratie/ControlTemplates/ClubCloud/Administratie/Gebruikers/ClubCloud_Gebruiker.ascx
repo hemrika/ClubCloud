@@ -4,9 +4,12 @@
 <%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Gebruiker.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_GebruikerUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Gebruiker_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Gebruikers_View" />
+<asp:UpdatePanel ID="udp_profiel" runat="server" UpdateMode="Always">
+    <contenttemplate>
 <asp:FormView runat="server" ID="SelectGebruikerform" DefaultMode="ReadOnly" RenderOuterTable="False" OnCallingDataMethods="SelectGebruikerform_CallingDataMethods" SelectMethod="SelectGebruiker" DataKeyNames="Id" >
     <EmptyDataTemplate>
         <h1 class="title-regular clearfix">
@@ -20,20 +23,20 @@
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" HorizontalAlign="Center"/>
     <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
     <HeaderTemplate>
-		<asp:LinkButton ID="btn_goback_top" runat="server" Text="Terug" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
-        <asp:LinkButton ID="btn_edit_top" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/>
-		<a onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Functionarissen.aspx?GebruikerId=<%# Eval("Id") %>'});" href="#" target="_self" title="Functionarissen" >Functionarissen</a>
-		<a onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Lidmaatschappen.aspx?GebruikerId=<%# Eval("Id") %>'});" href="#" target="_self" title="Lidmaatschappen" >Lidmaatschappen</a>
-		<a onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Addressen.aspx?GebruikerId=<%# Eval("Id") %>'});" href="#" target="_self" title="Addressen" >Addressen</a>
-		<a onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Profielen.aspx?GebruikerId=<%# Eval("Id") %>'});" href="#" target="_self" title="Profielen" >Profielen</a>
+	<span style="display:inline-block;" >
+		<asp:LinkButton CssClass="button big"  ID="btn_goback_top" runat="server" Text="Terug" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
+        <asp:LinkButton CssClass="button big"  ID="btn_edit_top" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/></br>
+		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Functionarissen.aspx?GebruikerId=<%# Eval("Id") %>', title:'Functionarissen van <%# Eval("Volledigenaam") %>', autoSize:true});" href="#" target="_self" title="Functionarissen" >Functionarissen</a>
+		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Lidmaatschappen.aspx?GebruikerId=<%# Eval("Id") %>', title:'Lidmaatschappen van <%# Eval("Volledigenaam") %>', autoSize:true});" href="#" target="_self" title="Lidmaatschappen" >Lidmaatschappen</a>
+		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Addressen.aspx?GebruikerId=<%# Eval("Id") %>', title:'Addressen van <%# Eval("Volledigenaam") %>', autoSize:true});" href="#" target="_self" title="Addressen" >Addressen</a>
+		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Profielen.aspx?GebruikerId=<%# Eval("Id") %>', title:'Profielen van <%# Eval("Volledigenaam") %>', autoSize:true});" href="#" target="_self" title="Profielen" >Profielen</a>
+	</span>
     </HeaderTemplate>
     <FooterTemplate>
-		<asp:LinkButton ID="btn_goback_bottom" runat="server" Text="Terug " CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
-		<asp:LinkButton ID="btn_edit_bottom" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/>
+		<asp:LinkButton CssClass="button big"  ID="btn_goback_bottom" runat="server" Text="Terug " CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
+		<asp:LinkButton CssClass="button big"  ID="btn_edit_bottom" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/>
     </FooterTemplate>
     <ItemTemplate>
-		
-
         <fieldset>
 			Aanhef : <asp:Label ID="Aanhef" runat="server" Text='<%# Eval("Aanhef") %>' /></br>
 			AanhefAttentie : <asp:Label ID="AanhefAttentie" runat="server" Text='<%# Eval("AanhefAttentie") %>' /></br>
@@ -75,13 +78,14 @@
 			Voornaam : <asp:Label ID="Voornaam" runat="server" Text='<%# Eval("Voornaam") %>' /></br>
 			Voornamen : <asp:Label ID="Voornamen" runat="server" Text='<%# Eval("Voornamen") %>' /></br>
 			Website : <asp:Label ID="Website" runat="server" Text='<%# Eval("Website") %>' /></br>
-		Functionarissen : <a onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Functionarissen.aspx?GebruikerId=<%# Eval("Id") %>'});" href="#" target="_self" title="Functionarissen" >Functionarissen</a></br>			
-		Lidmaatschappen : <a onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Lidmaatschappen.aspx?GebruikerId=<%# Eval("Id") %>'});" href="#" target="_self" title="Lidmaatschappen" >Lidmaatschappen</a></br>			
-		Addressen : <a onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Addressen.aspx?GebruikerId=<%# Eval("Id") %>'});" href="#" target="_self" title="Addressen" >Addressen</a></br>			
-			Vereniging : <a href="Vereniging.aspx?Id=<%# Eval("VerenigingId") %>" target="_self" title="Vereniging" ><%# Eval("ClubCloud_Vereniging.Naam") %></a></br>
-		Profielen : <a onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Profielen.aspx?GebruikerId=<%# Eval("Id") %>'});" href="#" target="_self" title="Profielen" >Profielen</a></br>			
-			Nationaliteit : <a href="Nationaliteit.aspx?Id=<%# Eval("NationaliteitId") %>" target="_self" title="Nationaliteit" ><%# Eval("ClubCloud_Nationaliteit.Naam") %></a></br>
+			Functionarissen : <asp:Label runat="server" ID="Functionaris" Text='<%# Eval("ClubCloud_Functionaris.Count") %>' /></br>		
+			Lidmaatschappen : <asp:Label runat="server" ID="Lidmaatschap" Text='<%# Eval("ClubCloud_Lidmaatschap.Count") %>' /></br>		
+			Addressen : <asp:Label runat="server" ID="Address" Text='<%# Eval("ClubCloud_Address.Count") %>' /></br>		
+			Vereniging : <asp:Label runat="server" ID="Vereniging" Text='<%# Eval("ClubCloud_Vereniging.Naam") %>' /></br>
+			Profielen : <asp:Label runat="server" ID="Profiel" Text='<%# Eval("ClubCloud_Profiel.Count") %>' /></br>		
+			Nationaliteit : <asp:Label runat="server" ID="Nationaliteit" Text='<%# Eval("ClubCloud_Nationaliteit.Naam") %>' /></br>
         </fieldset>
     </ItemTemplate>
 </asp:FormView>
-
+    </contenttemplate>
+</asp:UpdatePanel>

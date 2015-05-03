@@ -62,6 +62,7 @@
       <HintPath>..\Common\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.SharePoint.Security, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Core, Version=12.4450.0.24, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Common\Syncfusion.Core.dll</HintPath>
@@ -104,6 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ClubCloudDataSourceDesigner.cs" />
+    <Compile Include="Controls\SharePointPermission.cs" />
+    <Compile Include="Controls\SPGridViewSearch.cs" />
     <Compile Include="ControlTemplates\ClubCloud\Common\SyncFusionDelegate.ascx.cs">
       <DependentUpon>SyncFusionDelegate.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

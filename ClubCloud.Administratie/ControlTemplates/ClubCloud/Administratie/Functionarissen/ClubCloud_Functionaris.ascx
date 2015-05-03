@@ -4,9 +4,12 @@
 <%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Functionaris.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_FunctionarisUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Functionaris_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Functionarissen_View" />
+<asp:UpdatePanel ID="udp_profiel" runat="server" UpdateMode="Always">
+    <contenttemplate>
 <asp:FormView runat="server" ID="SelectFunctionarisform" DefaultMode="ReadOnly" RenderOuterTable="False" OnCallingDataMethods="SelectFunctionarisform_CallingDataMethods" SelectMethod="SelectFunctionaris" DataKeyNames="Id" >
     <EmptyDataTemplate>
         <h1 class="title-regular clearfix">
@@ -20,28 +23,29 @@
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" HorizontalAlign="Center"/>
     <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
     <HeaderTemplate>
-		<asp:LinkButton ID="btn_goback_top" runat="server" Text="Terug" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
-        <asp:LinkButton ID="btn_edit_top" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/>
+	<span style="display:inline-block;" >
+		<asp:LinkButton CssClass="button big"  ID="btn_goback_top" runat="server" Text="Terug" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
+        <asp:LinkButton CssClass="button big"  ID="btn_edit_top" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/></br>
+	</span>
     </HeaderTemplate>
     <FooterTemplate>
-		<asp:LinkButton ID="btn_goback_bottom" runat="server" Text="Terug " CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
-		<asp:LinkButton ID="btn_edit_bottom" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/>
+		<asp:LinkButton CssClass="button big"  ID="btn_goback_bottom" runat="server" Text="Terug " CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
+		<asp:LinkButton CssClass="button big"  ID="btn_edit_bottom" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/>
     </FooterTemplate>
     <ItemTemplate>
-		
-
         <fieldset>
 			Actief : <asp:Label ID="Actief" runat="server" Text='<%# Eval("Actief") %>' /></br>
 			Autorisatie : <asp:Label ID="Autorisatie" runat="server" Text='<%# Eval("Autorisatie") %>' /></br>
 			Gewijzigd : <asp:Label ID="Gewijzigd" runat="server" Text='<%# Eval("Gewijzigd") %>' /></br>
 			TermijnBegin : <asp:Label ID="TermijnBegin" runat="server" Text='<%# Eval("TermijnBegin") %>' /></br>
 			TermijnEinde : <asp:Label ID="TermijnEinde" runat="server" Text='<%# Eval("TermijnEinde") %>' /></br>
-			Functie : <a href="Functie.aspx?Id=<%# Eval("FunctieId") %>" target="_self" title="Functie" ><%# Eval("ClubCloud_Functie.Naam") %></a></br>
-			Vereniging : <a href="Vereniging.aspx?Id=<%# Eval("VerenigingId") %>" target="_self" title="Vereniging" ><%# Eval("ClubCloud_Vereniging.Naam") %></a></br>
-			Gebruiker : <a href="Gebruiker.aspx?Id=<%# Eval("GebruikerId") %>" target="_self" title="Gebruiker" ><%# Eval("ClubCloud_Gebruiker.Nummer") %></a></br>
-			District : <a href="District.aspx?Id=<%# Eval("DistrictId") %>" target="_self" title="District" ><%# Eval("ClubCloud_District.Naam") %></a></br>
-			Bestuursorgaan : <a href="Bestuursorgaan.aspx?Id=<%# Eval("BestuursorgaanId") %>" target="_self" title="Bestuursorgaan" ><%# Eval("ClubCloud_Bestuursorgaan.Naam") %></a></br>
+			Functie : <asp:Label runat="server" ID="Functie" Text='<%# Eval("ClubCloud_Functie.Naam") %>' /></br>
+			Vereniging : <asp:Label runat="server" ID="Vereniging" Text='<%# Eval("ClubCloud_Vereniging.Naam") %>' /></br>
+			Gebruiker : <asp:Label runat="server" ID="Gebruiker" Text='<%# Eval("ClubCloud_Gebruiker.Volledigenaam") %>' /></br>
+			District : <asp:Label runat="server" ID="District" Text='<%# Eval("ClubCloud_District.Naam") %>' /></br>
+			Bestuursorgaan : <asp:Label runat="server" ID="Bestuursorgaan" Text='<%# Eval("ClubCloud_Bestuursorgaan.Naam") %>' /></br>
         </fieldset>
     </ItemTemplate>
 </asp:FormView>
-
+    </contenttemplate>
+</asp:UpdatePanel>

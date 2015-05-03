@@ -21,7 +21,7 @@ namespace ClubCloud.Model
     [Serializable]
     [KnownType(typeof(ClubCloud_Gebruiker))]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Profiel_TypeDescriptionProvider))]
     public partial class ClubCloud_Profiel : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
     	[DataMember]
@@ -278,5 +278,181 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Profiel_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Profiel_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Profiel))) {}
+    
+        public ClubCloud_Profiel_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Profiel_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Profiel_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Profiel_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+    		List<PropertyDescriptor> extended = new List<PropertyDescriptor>();
+            foreach (PropertyDescriptor item in cols)
+            {
+                extended.Add(item);
+            }
+    		//ClubCloud_Gebruiker
+    		PropertyDescriptor ClubCloud_Gebruiker_Columns = cols["ClubCloud_Gebruiker"];
+    		PropertyDescriptorCollection ClubCloud_Gebruiker_Children = ClubCloud_Gebruiker_Columns.GetChildProperties();
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Id = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Id"],"ClubCloud_Gebruiker_Id");
+    		extended.Add(ClubCloud_Gebruiker_Id);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Beschrijving = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Beschrijving"],"ClubCloud_Gebruiker_Beschrijving");
+    		extended.Add(ClubCloud_Gebruiker_Beschrijving);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Bondsnummer = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Bondsnummer"],"ClubCloud_Gebruiker_Bondsnummer");
+    		extended.Add(ClubCloud_Gebruiker_Bondsnummer);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Roepnaam = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Roepnaam"],"ClubCloud_Gebruiker_Roepnaam");
+    		extended.Add(ClubCloud_Gebruiker_Roepnaam);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Aanhef = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Aanhef"],"ClubCloud_Gebruiker_Aanhef");
+    		extended.Add(ClubCloud_Gebruiker_Aanhef);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Voornaam = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Voornaam"],"ClubCloud_Gebruiker_Voornaam");
+    		extended.Add(ClubCloud_Gebruiker_Voornaam);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Voornamen = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Voornamen"],"ClubCloud_Gebruiker_Voornamen");
+    		extended.Add(ClubCloud_Gebruiker_Voornamen);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Achtervoegsel = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Achtervoegsel"],"ClubCloud_Gebruiker_Achtervoegsel");
+    		extended.Add(ClubCloud_Gebruiker_Achtervoegsel);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Tussenvoegsel = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Tussenvoegsel"],"ClubCloud_Gebruiker_Tussenvoegsel");
+    		extended.Add(ClubCloud_Gebruiker_Tussenvoegsel);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Achternaam = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Achternaam"],"ClubCloud_Gebruiker_Achternaam");
+    		extended.Add(ClubCloud_Gebruiker_Achternaam);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Voorletters = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Voorletters"],"ClubCloud_Gebruiker_Voorletters");
+    		extended.Add(ClubCloud_Gebruiker_Voorletters);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_EmailGeheim = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["EmailGeheim"],"ClubCloud_Gebruiker_EmailGeheim");
+    		extended.Add(ClubCloud_Gebruiker_EmailGeheim);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_EmailKNLTB = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["EmailKNLTB"],"ClubCloud_Gebruiker_EmailKNLTB");
+    		extended.Add(ClubCloud_Gebruiker_EmailKNLTB);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_EmailWebSite = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["EmailWebSite"],"ClubCloud_Gebruiker_EmailWebSite");
+    		extended.Add(ClubCloud_Gebruiker_EmailWebSite);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_EmailOverig = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["EmailOverig"],"ClubCloud_Gebruiker_EmailOverig");
+    		extended.Add(ClubCloud_Gebruiker_EmailOverig);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_TelefoonGeheim = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["TelefoonGeheim"],"ClubCloud_Gebruiker_TelefoonGeheim");
+    		extended.Add(ClubCloud_Gebruiker_TelefoonGeheim);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_TelefoonAvond = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["TelefoonAvond"],"ClubCloud_Gebruiker_TelefoonAvond");
+    		extended.Add(ClubCloud_Gebruiker_TelefoonAvond);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_TelefoonOverdag = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["TelefoonOverdag"],"ClubCloud_Gebruiker_TelefoonOverdag");
+    		extended.Add(ClubCloud_Gebruiker_TelefoonOverdag);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_TelefoonOverig = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["TelefoonOverig"],"ClubCloud_Gebruiker_TelefoonOverig");
+    		extended.Add(ClubCloud_Gebruiker_TelefoonOverig);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Mobiel = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Mobiel"],"ClubCloud_Gebruiker_Mobiel");
+    		extended.Add(ClubCloud_Gebruiker_Mobiel);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Fax = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Fax"],"ClubCloud_Gebruiker_Fax");
+    		extended.Add(ClubCloud_Gebruiker_Fax);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_BankNummer = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["BankNummer"],"ClubCloud_Gebruiker_BankNummer");
+    		extended.Add(ClubCloud_Gebruiker_BankNummer);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_BankIban = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["BankIban"],"ClubCloud_Gebruiker_BankIban");
+    		extended.Add(ClubCloud_Gebruiker_BankIban);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_BankPlaats = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["BankPlaats"],"ClubCloud_Gebruiker_BankPlaats");
+    		extended.Add(ClubCloud_Gebruiker_BankPlaats);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Geboortedatum = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Geboortedatum"],"ClubCloud_Gebruiker_Geboortedatum");
+    		extended.Add(ClubCloud_Gebruiker_Geboortedatum);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Geboorteplaats = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Geboorteplaats"],"ClubCloud_Gebruiker_Geboorteplaats");
+    		extended.Add(ClubCloud_Gebruiker_Geboorteplaats);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_OverlijdensDatum = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["OverlijdensDatum"],"ClubCloud_Gebruiker_OverlijdensDatum");
+    		extended.Add(ClubCloud_Gebruiker_OverlijdensDatum);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_AddressGeheim = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["AddressGeheim"],"ClubCloud_Gebruiker_AddressGeheim");
+    		extended.Add(ClubCloud_Gebruiker_AddressGeheim);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_NationaliteitId = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["NationaliteitId"],"ClubCloud_Gebruiker_NationaliteitId");
+    		extended.Add(ClubCloud_Gebruiker_NationaliteitId);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Website = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Website"],"ClubCloud_Gebruiker_Website");
+    		extended.Add(ClubCloud_Gebruiker_Website);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_FTPsite = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["FTPsite"],"ClubCloud_Gebruiker_FTPsite");
+    		extended.Add(ClubCloud_Gebruiker_FTPsite);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Actief = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Actief"],"ClubCloud_Gebruiker_Actief");
+    		extended.Add(ClubCloud_Gebruiker_Actief);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Beroep = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Beroep"],"ClubCloud_Gebruiker_Beroep");
+    		extended.Add(ClubCloud_Gebruiker_Beroep);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Kinderen = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Kinderen"],"ClubCloud_Gebruiker_Kinderen");
+    		extended.Add(ClubCloud_Gebruiker_Kinderen);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_KinderenAantal = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["KinderenAantal"],"ClubCloud_Gebruiker_KinderenAantal");
+    		extended.Add(ClubCloud_Gebruiker_KinderenAantal);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Partner = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Partner"],"ClubCloud_Gebruiker_Partner");
+    		extended.Add(ClubCloud_Gebruiker_Partner);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_AanhefBrief = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["AanhefBrief"],"ClubCloud_Gebruiker_AanhefBrief");
+    		extended.Add(ClubCloud_Gebruiker_AanhefBrief);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_AanhefAttentie = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["AanhefAttentie"],"ClubCloud_Gebruiker_AanhefAttentie");
+    		extended.Add(ClubCloud_Gebruiker_AanhefAttentie);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_FotoId = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["FotoId"],"ClubCloud_Gebruiker_FotoId");
+    		extended.Add(ClubCloud_Gebruiker_FotoId);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_VerenigingId = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["VerenigingId"],"ClubCloud_Gebruiker_VerenigingId");
+    		extended.Add(ClubCloud_Gebruiker_VerenigingId);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Volledigenaam = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Volledigenaam"],"ClubCloud_Gebruiker_Volledigenaam");
+    		extended.Add(ClubCloud_Gebruiker_Volledigenaam);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Geslacht = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Geslacht"],"ClubCloud_Gebruiker_Geslacht");
+    		extended.Add(ClubCloud_Gebruiker_Geslacht);
+    
+    		PropertyDescriptor ClubCloud_Gebruiker_Gewijzigd = new BeheerPropertyDescriptor(ClubCloud_Gebruiker_Columns,ClubCloud_Gebruiker_Children["Gewijzigd"],"ClubCloud_Gebruiker_Gewijzigd");
+    		extended.Add(ClubCloud_Gebruiker_Gewijzigd);
+    
+    
+    		if(extended.Count > 0)
+    		{
+    			PropertyDescriptorCollection newcols = new PropertyDescriptorCollection(extended.ToArray());
+    			return newcols;
+    		}
+            return cols;            
+        }     
+    } 
     
 }

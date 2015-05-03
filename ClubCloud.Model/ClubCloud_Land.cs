@@ -21,7 +21,7 @@ namespace ClubCloud.Model
     [Serializable]
     [KnownType(typeof(ClubCloud_Address))]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Land_TypeDescriptionProvider))]
     public partial class ClubCloud_Land : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         public ClubCloud_Land()
@@ -152,5 +152,37 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Land_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Land_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Land))) {}
+    
+        public ClubCloud_Land_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Land_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Land_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Land_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+            return cols;            
+        }     
+    } 
     
 }

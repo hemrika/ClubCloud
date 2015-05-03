@@ -11,6 +11,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[DesignerCategory("code")]
 	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+    /*
 	[XmlInclude(typeof(TargetRelatedDynamic))]
 	[XmlInclude(typeof(TargetRelatedInvoiceToContact))]
 	[XmlInclude(typeof(TargetRelatedLeadToAccount))]
@@ -24,6 +25,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[XmlInclude(typeof(TargetRelatedSalesLiteratureToCompetitor))]
 	[XmlInclude(typeof(TargetRelatedSalesLiteratureToProduct))]
 	[XmlInclude(typeof(TargetRelatedSalesOrderToContact))]
+    */
+    [XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")]
 	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public abstract class TargetRelated : INotifyPropertyChanged
 	{

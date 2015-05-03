@@ -96,23 +96,29 @@ namespace ClubCloud.Administratie.WebControls
     						{
     							if(Guid.TryParse(where.DefaultValue, out Id))
     							{
-    								entity = Client.GetAddressById(Id, false, Settings);
-    
-    								if(entity != null || entity.Id != Guid.Empty)
-    								{
-    
-    									entity.ClubCloud_Regio  = Client.GetRegioForAddressById(Id, false, Settings);
-    									entity.ClubCloud_Land  = Client.GetLandForAddressById(Id, false, Settings);
-    								}
+    								break;
     							}
     						}
     					}
     
-    				}
+    					if(Id == Guid.Empty)
+    					{
+    										
+    					}
     
+    					entity = Client.GetAddressById(Id, false, Settings);
+    
+    					if(entity != null || entity.Id != Guid.Empty)
+    					{
+    						entity.ClubCloud_Vereniging  = Client.GetVerenigingForAddressById(Id, false, Settings);
+    						entity.ClubCloud_Gebruiker  = Client.GetGebruikerForAddressById(Id, false, Settings);
+    						entity.ClubCloud_Regio  = Client.GetRegioForAddressById(Id, false, Settings);
+    						entity.ClubCloud_Accommodatie  = Client.GetAccommodatieForAddressById(Id, false, Settings);
+    						entity.ClubCloud_Land  = Client.GetLandForAddressById(Id, false, Settings);
+    					}
+    				}
     			}
     		}
-    
     
     		return entity;
         }
@@ -154,7 +160,10 @@ namespace ClubCloud.Administratie.WebControls
     				{
                         foreach (ClubCloud_Address Address in queryresult.ClubCloud_Address)
                         {
+    						Address.ClubCloud_Vereniging  = Client.GetVerenigingForAddressById(Address.Id, false, Settings);
+    						Address.ClubCloud_Gebruiker  = Client.GetGebruikerForAddressById(Address.Id, false, Settings);
     						Address.ClubCloud_Regio  = Client.GetRegioForAddressById(Address.Id, false, Settings);
+    						Address.ClubCloud_Accommodatie  = Client.GetAccommodatieForAddressById(Address.Id, false, Settings);
     						Address.ClubCloud_Land  = Client.GetLandForAddressById(Address.Id, false, Settings);
                             
                         }
@@ -167,11 +176,6 @@ namespace ClubCloud.Administratie.WebControls
     		return null;
     	}
     
-    	//Verenigingen
-    	//Gebruikers
-    	//Regios
-    	//Accommodaties
-    	//Landen
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         public IQueryable<ClubCloud_Land> SelectLand()
@@ -183,13 +187,25 @@ namespace ClubCloud.Administratie.WebControls
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
-    				List<ClubCloud_Land> result = Client.GetLanden(false, Settings);
-    				return result.AsQueryable<ClubCloud_Land>();
+    				List<ClubCloud_Land> result = null;
+    
+    				if(result == null)
+    				{
+    					result = Client.GetLanden(false, Settings);
+    				
+    				}
+    
+                    //Default
+                    result = result.OrderBy(r => r.Naam).ToList();    				
+                    result.Insert(0, new ClubCloud_Land { Naam = "Onbekend" });
+        
+        			return result.AsQueryable<ClubCloud_Land>();
     			}
     		}
     
     		return null;
     	}
+    
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         public Hashtable SelectNaam()

@@ -338,6 +338,7 @@
       <SharePointProjectItemId>{df7ca0b9-6af4-4ebc-956b-1e2eacd09ce0}</SharePointProjectItemId>
     </None>
     <None Include="App.Config" />
+    <None Include="ClubCloud.pfx" />
     <None Include="ClubCloudApplicationService_SignalRModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ClubCloudApplicationService_SignalRModel.cs</LastGenOutput>

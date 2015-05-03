@@ -24,7 +24,7 @@ namespace ClubCloud.Model
     [KnownType(typeof(ClubCloud_Accommodatie))]
     [KnownType(typeof(ClubCloud_Address))]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Regio_TypeDescriptionProvider))]
     public partial class ClubCloud_Regio : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         public ClubCloud_Regio()
@@ -210,5 +210,37 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Regio_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Regio_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Regio))) {}
+    
+        public ClubCloud_Regio_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Regio_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Regio_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Regio_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+            return cols;            
+        }     
+    } 
     
 }

@@ -36,7 +36,7 @@ namespace ClubCloud.Administratie.WebControls
     
     	protected void GoBack(object sender, EventArgs e)
     	{
-    		Button btn = (Button)sender;
+    		LinkButton btn = (LinkButton)sender;
     
             if(Request.QueryString.AllKeys.Contains("IsDlg"))
     			Response.Redirect(string.Format("Address.aspx?Id={0}&IsDlg=1", btn.CommandArgument.ToString()));
@@ -53,7 +53,21 @@ namespace ClubCloud.Administratie.WebControls
             Response.Redirect(string.Format("Address.aspx?Id={0}", e.CommandArgument.ToString()));
         }
     
+        public string CheckForNull(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return string.Empty;
     
+            return input;
+        }
+    
+        public Guid CheckForNull(Nullable<Guid> input)
+        {
+            if (input.HasValue)
+                return input.Value;
+        
+            return Guid.Empty;
+        }
     }
 }
 

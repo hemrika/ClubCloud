@@ -4,13 +4,22 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Services;
 using System.Web.Services.Description;
 using System.Web.Services.Protocols;
 using System.Xml.Serialization;
 namespace ClubCloud.KNLTB.ServIt.CrmService
 {
-	[GeneratedCode("System.Web.Services", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, WebServiceBinding(Name = "CrmServiceSoap", Namespace = "http://schemas.microsoft.com/crm/2007/WebServices"), XmlInclude(typeof(CrmReference)), XmlInclude(typeof(Property[])), XmlInclude(typeof(activityparty[]))]
+	[GeneratedCode("System.Web.Services", "4.0.30319.33440"), 
+    DesignerCategory("code"), 
+    DebuggerStepThrough, 
+    WebServiceBinding(Name = "CrmServiceSoap", Namespace = "http://schemas.microsoft.com/crm/2007/WebServices"), 
+    //XmlInclude(typeof(CrmReference)), 
+    //XmlInclude(typeof(Property[])),
+    //XmlInclude(typeof(activityparty[])),
+    XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")
+    ]
 	public class CrmService : SoapHttpClientProtocol
 	{
 		private CrmAuthenticationToken crmAuthenticationTokenValueField;
@@ -136,6 +145,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
         public CrmService(System.Net.CookieContainer cc)
         {
             this.Url = "https://servit.mijnknltb.nl/MSCrmServices/2007/CrmService.asmx";
+            this.Proxy = null;
 
             if (this.IsLocalFileSystemWebService(this.Url))
             {
@@ -151,6 +161,15 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
             this.CorrelationTokenValue = null;
             this.CrmAuthenticationTokenValue = new KNLTB.ServIt.CrmService.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
             this.CrmCookieContainer = cc;
+
+            try
+            {
+                ExecuteAsync(new WhoAmIRequest());
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
         }
 
 		[SoapDocumentMethod("http://schemas.microsoft.com/crm/2007/WebServices/Execute", RequestNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", ResponseNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped), SoapHeader("CorrelationTokenValue"), SoapHeader("CallerOriginTokenValue"), SoapHeader("CrmAuthenticationTokenValue")]

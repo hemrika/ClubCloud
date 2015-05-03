@@ -96,26 +96,30 @@ namespace ClubCloud.Administratie.WebControls
     						{
     							if(Guid.TryParse(where.DefaultValue, out Id))
     							{
-    								entity = Client.GetGebruikerById(Id, false, Settings);
-    
-    								if(entity != null || entity.Id != Guid.Empty)
-    								{
-    
-    									entity.ClubCloud_Functionaris  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Functionaris>(Client.GetFunctionarissenForGebruikerById(Id, false, Settings));
-    									entity.ClubCloud_Lidmaatschap  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Lidmaatschap>(Client.GetLidmaatschappenForGebruikerById(Id, false, Settings));
-    									entity.ClubCloud_Address  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressenForGebruikerById(Id, false, Settings));
-    									entity.ClubCloud_Profiel  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Profiel>(Client.GetProfielenForGebruikerById(Id, false, Settings));
-    									entity.ClubCloud_Nationaliteit  = Client.GetNationaliteitForGebruikerById(Id, false, Settings);
-    								}
+    								break;
     							}
     						}
     					}
     
-    				}
+    					if(Id == Guid.Empty)
+    					{
+    										
+    					}
     
+    					entity = Client.GetGebruikerById(Id, false, Settings);
+    
+    					if(entity != null || entity.Id != Guid.Empty)
+    					{
+    						entity.ClubCloud_Functionaris  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Functionaris>(Client.GetFunctionarissenForGebruikerById(Id, false, Settings));
+    						entity.ClubCloud_Lidmaatschap  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Lidmaatschap>(Client.GetLidmaatschappenForGebruikerById(Id, false, Settings));
+    						entity.ClubCloud_Address  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressenForGebruikerById(Id, false, Settings));
+    						entity.ClubCloud_Vereniging  = Client.GetVerenigingForGebruikerById(Id, false, Settings);
+    						entity.ClubCloud_Profiel  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Profiel>(Client.GetProfielenForGebruikerById(Id, false, Settings));
+    						entity.ClubCloud_Nationaliteit  = Client.GetNationaliteitForGebruikerById(Id, false, Settings);
+    					}
+    				}
     			}
     		}
-    
     
     		return entity;
         }
@@ -163,6 +167,7 @@ namespace ClubCloud.Administratie.WebControls
     						Gebruiker.ClubCloud_Functionaris  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Functionaris>(Client.GetFunctionarissenForGebruikerById(Gebruiker.Id, false, Settings));
     						Gebruiker.ClubCloud_Lidmaatschap  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Lidmaatschap>(Client.GetLidmaatschappenForGebruikerById(Gebruiker.Id, false, Settings));
     						Gebruiker.ClubCloud_Address  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressenForGebruikerById(Gebruiker.Id, false, Settings));
+    						Gebruiker.ClubCloud_Vereniging  = Client.GetVerenigingForGebruikerById(Gebruiker.Id, false, Settings);
     						Gebruiker.ClubCloud_Profiel  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Profiel>(Client.GetProfielenForGebruikerById(Gebruiker.Id, false, Settings));
     						Gebruiker.ClubCloud_Nationaliteit  = Client.GetNationaliteitForGebruikerById(Gebruiker.Id, false, Settings);
                             
@@ -176,17 +181,6 @@ namespace ClubCloud.Administratie.WebControls
     		return null;
     	}
     
-    	//Functionarissen
-    	//Lidmaatschappen
-    	//Addressen
-    	//Verenigingen
-    	//Profielen
-    	//Reserveringen
-    	//Reserveringen
-    	//Reserveringen
-    	//Reserveringen
-    	//Settings
-    	//Nationaliteiten
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         public IQueryable<ClubCloud_Nationaliteit> SelectNationaliteit()
@@ -198,13 +192,25 @@ namespace ClubCloud.Administratie.WebControls
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
-    				List<ClubCloud_Nationaliteit> result = Client.GetNationaliteiten(false, Settings);
-    				return result.AsQueryable<ClubCloud_Nationaliteit>();
+    				List<ClubCloud_Nationaliteit> result = null;
+    
+    				if(result == null)
+    				{
+    					result = Client.GetNationaliteiten(false, Settings);
+    				
+    				}
+    
+                    //Default
+                    result = result.OrderBy(r => r.Naam).ToList();    				
+                    result.Insert(0, new ClubCloud_Nationaliteit { Naam = "Onbekend" });
+        
+        			return result.AsQueryable<ClubCloud_Nationaliteit>();
     			}
     		}
     
     		return null;
     	}
+    
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         public Hashtable SelectGeslacht()

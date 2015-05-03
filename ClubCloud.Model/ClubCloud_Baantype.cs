@@ -22,7 +22,7 @@ namespace ClubCloud.Model
     [KnownType(typeof(ClubCloud_Baansoort))]
     [KnownType(typeof(ClubCloud_Baanblok))]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Baantype_TypeDescriptionProvider))]
     public partial class ClubCloud_Baantype : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         public ClubCloud_Baantype()
@@ -198,5 +198,37 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Baantype_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Baantype_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Baantype))) {}
+    
+        public ClubCloud_Baantype_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Baantype_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Baantype_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Baantype_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+            return cols;            
+        }     
+    } 
     
 }

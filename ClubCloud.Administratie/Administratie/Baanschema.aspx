@@ -14,5 +14,24 @@
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-	<ClubCloud:Baanschema id="Baanschemas" runat="server" visible="true" ViewName="ClubCloud_Baanschemas_View" />
+	<div class="inner light ms-dialogHidden">
+        <div class="aligncenter">
+			<h1 >
+		        Baanschema
+		    </h1>
+        </div>
+    </div>
+    <div class="inner dark" id="Baanschema" name="Baanschema">
+        <div class="services">
+            <div class="first" >
+                <div class="info">
+					<Provider:ZimbraRolesSecurityTrimmedControl RolesString="All Authenticated Users" runat="server" ID="security" >
+						<ClubCloud:Baanschema id="Baanschemas" runat="server" visible="true" ViewName="ClubCloud_Baanschemas_View" />
+					</Provider:ZimbraRolesSecurityTrimmedControl>
+	            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>	
 </asp:Content>

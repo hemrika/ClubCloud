@@ -96,22 +96,26 @@ namespace ClubCloud.Administratie.WebControls
     						{
     							if(Guid.TryParse(where.DefaultValue, out Id))
     							{
-    								entity = Client.GetBaanschemaById(Id, false, Settings);
-    
-    								if(entity != null || entity.Id != Guid.Empty)
-    								{
-    
-    									entity.ClubCloud_Baan  = Client.GetBaanForBaanschemaById(Id, false, Settings);
-    								}
+    								break;
     							}
     						}
     					}
     
-    				}
+    					if(Id == Guid.Empty)
+    					{
+    										
+    					}
     
+    					entity = Client.GetBaanschemaById(Id, false, Settings);
+    
+    					if(entity != null || entity.Id != Guid.Empty)
+    					{
+    						entity.ClubCloud_Baan  = Client.GetBaanForBaanschemaById(Id, false, Settings);
+    						entity.ClubCloud_Vereniging  = Client.GetVerenigingForBaanschemaById(Id, false, Settings);
+    					}
+    				}
     			}
     		}
-    
     
     		return entity;
         }
@@ -157,6 +161,7 @@ namespace ClubCloud.Administratie.WebControls
                         foreach (ClubCloud_Baanschema Baanschema in queryresult.ClubCloud_Baanschema)
                         {
     						Baanschema.ClubCloud_Baan  = Client.GetBaanForBaanschemaById(Baanschema.Id, false, Settings);
+    						Baanschema.ClubCloud_Vereniging  = Client.GetVerenigingForBaanschemaById(Baanschema.Id, false, Settings);
                             
                         }
     				}
@@ -168,8 +173,6 @@ namespace ClubCloud.Administratie.WebControls
     		return null;
     	}
     
-    	//Banen
-    	//Verenigingen
     
     
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]

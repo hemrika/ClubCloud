@@ -62,21 +62,21 @@ namespace ClubCloud.Service
 
         #region Afhangen
 
-        /*
-        public List<ClubCloud_Gebruiker> GetGebruikersBySearch(string bondsnummer, string prefixText, int count, bool refresh)
+        public ClubCloud_Baan GetBaanForReserveringById(Guid reserveringId, bool refresh, ClubCloud_Setting Settings)
         {
-            List<ClubCloud_Gebruiker> response = null;
+            ClubCloud_Baan response = null;
 
             this.ExecuteOnChannel<IClubCloudApplicationService>(
                 delegate(IClubCloudApplicationService channel)
                 {
-                    response = channel.GetGebruikersBySearch(bondsnummer, prefixText, count, refresh);
+                    response = channel.GetBaanForReserveringById(reserveringId, refresh, Settings);
                 },
                 false);
 
             return response;
+
         }
-        */
+
         #endregion
 
         #region Settings
@@ -1547,6 +1547,5 @@ namespace ClubCloud.Service
         }
 
         #endregion
-
     }
 }

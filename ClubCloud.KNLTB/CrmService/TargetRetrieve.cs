@@ -11,6 +11,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[DesignerCategory("code")]
 	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+    /*
 	[XmlInclude(typeof(TargetRetrieveAccount))]
 	[XmlInclude(typeof(TargetRetrieveActivityMimeAttachment))]
 	[XmlInclude(typeof(TargetRetrieveActivityPointer))]
@@ -505,6 +506,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[XmlInclude(typeof(TargetRetrieveWorkflow))]
 	[XmlInclude(typeof(TargetRetrieveWorkflowDependency))]
 	[XmlInclude(typeof(TargetRetrieveWorkflowLog))]
+    */
+    [XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")]
 	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public abstract class TargetRetrieve : INotifyPropertyChanged
 	{

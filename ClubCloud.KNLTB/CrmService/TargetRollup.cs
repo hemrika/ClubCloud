@@ -11,6 +11,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[DesignerCategory("code")]
 	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+    /*
 	[XmlInclude(typeof(TargetRollupActivityPointerByAccount))]
 	[XmlInclude(typeof(TargetRollupActivityPointerByContact))]
 	[XmlInclude(typeof(TargetRollupActivityPointerByOpportunity))]
@@ -30,6 +31,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[XmlInclude(typeof(TargetRollupQuoteByContact))]
 	[XmlInclude(typeof(TargetRollupSalesOrderByAccount))]
 	[XmlInclude(typeof(TargetRollupSalesOrderByContact))]
+    */
+    [XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")]
 	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public abstract class TargetRollup : INotifyPropertyChanged
 	{

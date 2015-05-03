@@ -20,7 +20,7 @@ namespace ClubCloud.Model
     
     [Serializable]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Foto_TypeDescriptionProvider))]
     public partial class ClubCloud_Foto : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
     	[DataMember]
@@ -172,5 +172,37 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Foto_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Foto_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Foto))) {}
+    
+        public ClubCloud_Foto_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Foto_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Foto_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Foto_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+            return cols;            
+        }     
+    } 
     
 }

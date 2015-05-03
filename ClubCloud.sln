@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5D62A5
 	ProjectSection(SolutionItems) = preProject
 		Common\AjaxControlToolkit.dll = Common\AjaxControlToolkit.dll
 		Common\AjaxMin.dll = Common\AjaxMin.dll
+		Common\ClubCloud.KNLTB.XmlSerializers.dll = Common\ClubCloud.KNLTB.XmlSerializers.dll
 		Common\ClubCloud.pfx = Common\ClubCloud.pfx
 		Common\EntityFramework.dll = Common\EntityFramework.dll
 		Common\EntityFramework.SqlServer.dll = Common\EntityFramework.SqlServer.dll

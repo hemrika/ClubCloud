@@ -11,13 +11,16 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[DesignerCategory("code")]
 	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	[XmlInclude(typeof(CallPriorityOptionalParameter))]
+	/*
+    [XmlInclude(typeof(CallPriorityOptionalParameter))]
 	[XmlInclude(typeof(CreateDuplicatesOptionalParameter))]
 	[XmlInclude(typeof(ExportIdsOptionalParameter))]
 	[XmlInclude(typeof(OfflineDataOptionalParameter))]
 	[XmlInclude(typeof(PersistInSyncOptionalParameter))]
 	[XmlInclude(typeof(RegardingObjectIdOptionalParameter))]
 	[XmlInclude(typeof(RequestIdOptionalParameter))]
+    */
+    [XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")]
 	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public abstract class OptionalParameter : INotifyPropertyChanged
 	{

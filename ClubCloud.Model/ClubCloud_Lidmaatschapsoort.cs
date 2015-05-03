@@ -22,7 +22,7 @@ namespace ClubCloud.Model
     [KnownType(typeof(ClubCloud_Lidmaatschap))]
     [KnownType(typeof(ClubCloud_Vereniging))]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Lidmaatschapsoort_TypeDescriptionProvider))]
     public partial class ClubCloud_Lidmaatschapsoort : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         public ClubCloud_Lidmaatschapsoort()
@@ -237,5 +237,136 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Lidmaatschapsoort_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Lidmaatschapsoort_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Lidmaatschapsoort))) {}
+    
+        public ClubCloud_Lidmaatschapsoort_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Lidmaatschapsoort_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Lidmaatschapsoort_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Lidmaatschapsoort_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+    		List<PropertyDescriptor> extended = new List<PropertyDescriptor>();
+            foreach (PropertyDescriptor item in cols)
+            {
+                extended.Add(item);
+            }
+    		//ClubCloud_Vereniging
+    		PropertyDescriptor ClubCloud_Vereniging_Columns = cols["ClubCloud_Vereniging"];
+    		PropertyDescriptorCollection ClubCloud_Vereniging_Children = ClubCloud_Vereniging_Columns.GetChildProperties();
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Id = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Id"],"ClubCloud_Vereniging_Id");
+    		extended.Add(ClubCloud_Vereniging_Id);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Naam = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Naam"],"ClubCloud_Vereniging_Naam");
+    		extended.Add(ClubCloud_Vereniging_Naam);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Beschrijving = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Beschrijving"],"ClubCloud_Vereniging_Beschrijving");
+    		extended.Add(ClubCloud_Vereniging_Beschrijving);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Nummer = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Nummer"],"ClubCloud_Vereniging_Nummer");
+    		extended.Add(ClubCloud_Vereniging_Nummer);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_DistrictId = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["DistrictId"],"ClubCloud_Vereniging_DistrictId");
+    		extended.Add(ClubCloud_Vereniging_DistrictId);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_RechtsvormId = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["RechtsvormId"],"ClubCloud_Vereniging_RechtsvormId");
+    		extended.Add(ClubCloud_Vereniging_RechtsvormId);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_AccommodatieId = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["AccommodatieId"],"ClubCloud_Vereniging_AccommodatieId");
+    		extended.Add(ClubCloud_Vereniging_AccommodatieId);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_RegioId = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["RegioId"],"ClubCloud_Vereniging_RegioId");
+    		extended.Add(ClubCloud_Vereniging_RegioId);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_BankNummer = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["BankNummer"],"ClubCloud_Vereniging_BankNummer");
+    		extended.Add(ClubCloud_Vereniging_BankNummer);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_BankIban = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["BankIban"],"ClubCloud_Vereniging_BankIban");
+    		extended.Add(ClubCloud_Vereniging_BankIban);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_BankPlaats = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["BankPlaats"],"ClubCloud_Vereniging_BankPlaats");
+    		extended.Add(ClubCloud_Vereniging_BankPlaats);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_KvKnummer = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["KvKnummer"],"ClubCloud_Vereniging_KvKnummer");
+    		extended.Add(ClubCloud_Vereniging_KvKnummer);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_KvKplaats = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["KvKplaats"],"ClubCloud_Vereniging_KvKplaats");
+    		extended.Add(ClubCloud_Vereniging_KvKplaats);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_EmailKNLTB = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["EmailKNLTB"],"ClubCloud_Vereniging_EmailKNLTB");
+    		extended.Add(ClubCloud_Vereniging_EmailKNLTB);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_EmailWebSite = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["EmailWebSite"],"ClubCloud_Vereniging_EmailWebSite");
+    		extended.Add(ClubCloud_Vereniging_EmailWebSite);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_EmailOverig = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["EmailOverig"],"ClubCloud_Vereniging_EmailOverig");
+    		extended.Add(ClubCloud_Vereniging_EmailOverig);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Fax = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Fax"],"ClubCloud_Vereniging_Fax");
+    		extended.Add(ClubCloud_Vereniging_Fax);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_TelefoonAvond = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["TelefoonAvond"],"ClubCloud_Vereniging_TelefoonAvond");
+    		extended.Add(ClubCloud_Vereniging_TelefoonAvond);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_TelefoonOverdag = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["TelefoonOverdag"],"ClubCloud_Vereniging_TelefoonOverdag");
+    		extended.Add(ClubCloud_Vereniging_TelefoonOverdag);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_TelefoonOverig = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["TelefoonOverig"],"ClubCloud_Vereniging_TelefoonOverig");
+    		extended.Add(ClubCloud_Vereniging_TelefoonOverig);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Website = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Website"],"ClubCloud_Vereniging_Website");
+    		extended.Add(ClubCloud_Vereniging_Website);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_FTPsite = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["FTPsite"],"ClubCloud_Vereniging_FTPsite");
+    		extended.Add(ClubCloud_Vereniging_FTPsite);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Actief = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Actief"],"ClubCloud_Vereniging_Actief");
+    		extended.Add(ClubCloud_Vereniging_Actief);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Oprichting = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Oprichting"],"ClubCloud_Vereniging_Oprichting");
+    		extended.Add(ClubCloud_Vereniging_Oprichting);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Erkenning = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Erkenning"],"ClubCloud_Vereniging_Erkenning");
+    		extended.Add(ClubCloud_Vereniging_Erkenning);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Gestopt = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Gestopt"],"ClubCloud_Vereniging_Gestopt");
+    		extended.Add(ClubCloud_Vereniging_Gestopt);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Maanden = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Maanden"],"ClubCloud_Vereniging_Maanden");
+    		extended.Add(ClubCloud_Vereniging_Maanden);
+    
+    		PropertyDescriptor ClubCloud_Vereniging_Gewijzigd = new BeheerPropertyDescriptor(ClubCloud_Vereniging_Columns,ClubCloud_Vereniging_Children["Gewijzigd"],"ClubCloud_Vereniging_Gewijzigd");
+    		extended.Add(ClubCloud_Vereniging_Gewijzigd);
+    
+    
+    		if(extended.Count > 0)
+    		{
+    			PropertyDescriptorCollection newcols = new PropertyDescriptorCollection(extended.ToArray());
+    			return newcols;
+    		}
+            return cols;            
+        }     
+    } 
     
 }

@@ -22,7 +22,7 @@ namespace ClubCloud.Model
     [KnownType(typeof(ClubCloud_Baan))]
     [KnownType(typeof(ClubCloud_Gebruiker))]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Reservering_TypeDescriptionProvider))]
     public partial class ClubCloud_Reservering : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
     	[DataMember]
@@ -76,14 +76,14 @@ namespace ClubCloud.Model
     	private System.TimeSpan _duur;
     
     	[DataMember]
-        public ReserveringSoort Soort 
+        public ReserveringSoort ReserveringSoort 
     	{ 
-    		get { return _soort; } 
-    		set { SetProperty(ref _soort, value); } 
+    		get { return _reserveringSoort; } 
+    		set { SetProperty(ref _reserveringSoort, value); } 
     	}
     
     	[IgnoreDataMember]
-    	private ReserveringSoort _soort;
+    	private ReserveringSoort _reserveringSoort;
     
     	[DataMember]
         public string Beschrijving 
@@ -255,5 +255,37 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Reservering_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Reservering_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Reservering))) {}
+    
+        public ClubCloud_Reservering_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Reservering_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Reservering_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Reservering_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+            return cols;            
+        }     
+    } 
     
 }

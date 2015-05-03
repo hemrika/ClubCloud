@@ -2,6 +2,7 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Net;
 using System.Threading;
 using System.Web.Services;
 using System.Web.Services.Description;
@@ -12,11 +13,12 @@ namespace ClubCloud.KNLTB.ServIt.MetadataService
 	[GeneratedCode("System.Web.Services", "4.0.30319.33440"), DesignerCategory("code"), DebuggerStepThrough, WebServiceBinding(Name = "MetadataServiceSoap", Namespace = "http://schemas.microsoft.com/crm/2007/WebServices"), XmlInclude(typeof(CrmNullable))]
 	public class MetadataService : SoapHttpClientProtocol
 	{
-		private CrmAuthenticationToken crmAuthenticationTokenValueField;
-		private CallerOriginToken callerOriginTokenValueField;
-		private SendOrPostCallback ExecuteOperationCompleted;
+        private CrmAuthenticationToken crmAuthenticationTokenValueField;
+        private CallerOriginToken callerOriginTokenValueField;
+        private SendOrPostCallback ExecuteOperationCompleted;
 		private bool useDefaultCredentialsSetExplicitly;
 		public event ExecuteCompletedEventHandler ExecuteCompleted;
+
 		public CrmAuthenticationToken CrmAuthenticationTokenValue
 		{
 			get
@@ -39,6 +41,19 @@ namespace ClubCloud.KNLTB.ServIt.MetadataService
 				this.callerOriginTokenValueField = value;
 			}
 		}
+
+        public CookieContainer CrmCookieContainer
+        {
+            get
+            {
+                return this.CookieContainer;
+            }
+            set
+            {
+                this.CookieContainer = value;
+            }
+        }
+
 		public new string Url
 		{
 			get
@@ -66,9 +81,14 @@ namespace ClubCloud.KNLTB.ServIt.MetadataService
 				this.useDefaultCredentialsSetExplicitly = true;
 			}
 		}
+
+        /// <summary>
+        /// https://servit.mijnknltb.nl/MSCrmServices/2007/metadataservice.asmx
+        /// </summary>
 		public MetadataService()
 		{
-			this.Url = "https://servit.mijnknltb.nl/mscrmservices/2007/metadataservice.asmx";
+            this.Url = "https://servit.mijnknltb.nl/MSCrmServices/2007/metadataservice.asmx";
+
 			if (this.IsLocalFileSystemWebService(this.Url))
 			{
 				this.UseDefaultCredentials = true;
@@ -79,6 +99,33 @@ namespace ClubCloud.KNLTB.ServIt.MetadataService
 				this.useDefaultCredentialsSetExplicitly = true;
 			}
 		}
+
+        /// <summary>
+        /// https://servit.mijnknltb.nl/MSCrmServices/2007/metadataservice.asmx
+        /// </summary>
+        /// <param name="cc"></param>
+        public MetadataService(System.Net.CookieContainer cc)
+        {
+            this.Url = "https://servit.mijnknltb.nl/MSCrmServices/2007/metadataservice.asmx";
+            this.Proxy = null;
+
+            if (this.IsLocalFileSystemWebService(this.Url))
+            {
+                this.UseDefaultCredentials = true;
+                this.useDefaultCredentialsSetExplicitly = false;
+            }
+            else
+            {
+                this.useDefaultCredentialsSetExplicitly = true;
+            }
+
+            this.CallerOriginTokenValue = null;
+
+            this.CrmAuthenticationTokenValue = new KNLTB.ServIt.MetadataService.CrmAuthenticationToken{ AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
+            this.CrmCookieContainer = cc;
+
+        }
+
 		[SoapDocumentMethod("http://schemas.microsoft.com/crm/2007/WebServices/Execute", RequestNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", ResponseNamespace = "http://schemas.microsoft.com/crm/2007/WebServices", Use = SoapBindingUse.Literal, ParameterStyle = SoapParameterStyle.Wrapped), SoapHeader("CrmAuthenticationTokenValue"), SoapHeader("CallerOriginTokenValue")]
 		[return: XmlElement("Response")]
 		public MetadataServiceResponse Execute(MetadataServiceRequest Request)

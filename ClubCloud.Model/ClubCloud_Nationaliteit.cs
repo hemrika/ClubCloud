@@ -21,7 +21,7 @@ namespace ClubCloud.Model
     [Serializable]
     [KnownType(typeof(ClubCloud_Gebruiker))]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Nationaliteit_TypeDescriptionProvider))]
     public partial class ClubCloud_Nationaliteit : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         public ClubCloud_Nationaliteit()
@@ -152,5 +152,37 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Nationaliteit_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Nationaliteit_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Nationaliteit))) {}
+    
+        public ClubCloud_Nationaliteit_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Nationaliteit_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Nationaliteit_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Nationaliteit_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+            return cols;            
+        }     
+    } 
     
 }

@@ -96,23 +96,27 @@ namespace ClubCloud.Administratie.WebControls
     						{
     							if(Guid.TryParse(where.DefaultValue, out Id))
     							{
-    								entity = Client.GetBaanById(Id, false, Settings);
-    
-    								if(entity != null || entity.Id != Guid.Empty)
-    								{
-    
-    									entity.ClubCloud_Baanblok  = Client.GetBaanblokForBaanById(Id, false, Settings);
-    									entity.ClubCloud_Baanschema  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanschema>(Client.GetBaanschemasForBaanById(Id, false, Settings));
-    								}
+    								break;
     							}
     						}
     					}
     
-    				}
+    					if(Id == Guid.Empty)
+    					{
+    										
+    					}
     
+    					entity = Client.GetBaanById(Id, false, Settings);
+    
+    					if(entity != null || entity.Id != Guid.Empty)
+    					{
+    						entity.ClubCloud_Baanblok  = Client.GetBaanblokForBaanById(Id, false, Settings);
+    						entity.ClubCloud_Accommodatie  = Client.GetAccommodatieForBaanById(Id, false, Settings);
+    						entity.ClubCloud_Baanschema  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanschema>(Client.GetBaanschemasForBaanById(Id, false, Settings));
+    					}
+    				}
     			}
     		}
-    
     
     		return entity;
         }
@@ -165,6 +169,7 @@ namespace ClubCloud.Administratie.WebControls
                         foreach (ClubCloud_Baan Baan in queryresult.ClubCloud_Baan)
                         {
     						Baan.ClubCloud_Baanblok  = Client.GetBaanblokForBaanById(Baan.Id, false, Settings);
+    						Baan.ClubCloud_Accommodatie  = Client.GetAccommodatieForBaanById(Baan.Id, false, Settings);
     						Baan.ClubCloud_Baanschema  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanschema>(Client.GetBaanschemasForBaanById(Baan.Id, false, Settings));
                             
                         }
@@ -177,10 +182,41 @@ namespace ClubCloud.Administratie.WebControls
     		return null;
     	}
     
-    	//Reserveringen
-    	//Baanblokken
-    	//Accommodaties
-    	//Baanschemas
+    
+    	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+        public IQueryable<ClubCloud_Baanblok> SelectBaanblok()
+        {
+            if(SPContext.Current.Web.CurrentUser != null)
+            {
+                string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
+                ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+    
+                if(Settings != null && Settings.VerenigingId != null) 
+                {
+    				List<ClubCloud_Baanblok> result = null;
+    
+    				//Get By ClubCloud_Accommodatie
+    				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+    				result = Client.GetBaanblokkenForAccommodatieById(Settings.ClubCloud_Vereniging.AccommodatieId.Value, false, Settings);
+    
+    
+    				if(result == null)
+    				{
+    					result = Client.GetBaanblokken(false, Settings);
+    				
+    				}
+    
+                    //Default
+                    result = result.OrderBy(r => r.Naam).ToList();    				
+                    result.Insert(0, new ClubCloud_Baanblok { Naam = "Onbekend" });
+        
+        			return result.AsQueryable<ClubCloud_Baanblok>();
+    			}
+    		}
+    
+    		return null;
+    	}
+    
     
     
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]

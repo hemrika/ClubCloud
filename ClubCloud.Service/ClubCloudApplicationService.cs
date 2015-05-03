@@ -10838,6 +10838,43 @@
             throw new NotImplementedException();
         }
 
+        public ClubCloud_Baan GetBaanForReserveringById(Guid reserveringId, bool refresh, ClubCloud_Setting settings)
+        {
+            if (settings != null)
+                ValidateSettings(ref settings);
+
+            ClubCloud_Reservering entity = null;
+            ClubCloud_Baan result = null;
+
+            try
+            {
+                entity = beheerModel.ClubCloud_Reserveringen.Find(reserveringId);
+                if (entity != null )
+                    beheerModel.Entry(entity).Reference(e => e.ClubCloud_Baan).Load();
+
+                result = entity.ClubCloud_Baan;
+
+                if (result == null && entity.BaanId != null)
+                    result = beheerModel.ClubCloud_Banen.Find(entity.BaanId.Value);
+
+                if (result != null)
+                    return result;
+
+                return new ClubCloud_Baan();
+            }
+            finally
+            {
+                if (entity != null)
+                    try { beheerModel.ObjectContext.Detach(entity); }
+                    catch { }
+                if (result != null)
+                {
+                    try { beheerModel.ObjectContext.Detach(result); }
+                    catch { }
+                }
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -12910,6 +12947,7 @@
             gebruiker = GebruikerByNummer(bondsnummer, nummer, refresh);
             return gebruiker;
         }
+
         /*
         public ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false)
         {
@@ -12928,6 +12966,7 @@
             return foto;
         }
         */
+
         /*
         public ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, Guid verenigingId, Guid gebruikerId, bool refresh = false)
         {
@@ -13367,7 +13406,7 @@
 				reservering.Datum = Datum;
 				reservering.Tijd = Tijd;
 				reservering.Duur = Duur;
-				reservering.Soort = Soort;
+				reservering.ReserveringSoort = Soort;
 				reservering.Beschrijving = Beschrijving;
 				reservering.Final = final;
 
@@ -13460,7 +13499,7 @@
 				Ureservering.Datum = reservering.Datum;
 				Ureservering.Tijd = reservering.Tijd;
 				Ureservering.Duur = reservering.Duur;
-				Ureservering.Soort = reservering.Soort;
+                Ureservering.ReserveringSoort = reservering.ReserveringSoort;
 				Ureservering.Beschrijving = reservering.Beschrijving;
 				Ureservering.Final = reservering.Final;
 

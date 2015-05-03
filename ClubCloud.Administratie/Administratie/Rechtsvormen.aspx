@@ -9,13 +9,30 @@
 <%@ Register TagPrefix="wssuc" TagName="InputFormControl" src="~/_controltemplates/InputFormControl.ascx" %>
 <%@ Register TagPrefix="wssuc" TagName="ButtonSection" src="~/_controltemplates/ButtonSection.ascx" %>
 <%@ Register TagPrefix="ClubCloud" TagName="Rechtsvormen" Src="~/_controltemplates/ClubCloud/Administratie/Rechtsvormen/ClubCloud_Rechtsvormen.ascx" %>
+<%@ Register TagPrefix="Provider" Namespace="ClubCloud.Provider.Controls" Assembly="ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Import Namespace="Microsoft.SharePoint.ApplicationPages" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1 class="s4-notdlg noindex" >
-        Rechtsvormen
-    </h1>
-	<ClubCloud:Rechtsvormen id="Rechtsvormen" runat="server" visible="true" ViewName="ClubCloud_Rechtsvormen_View" />
+	<div class="inner light ms-dialogHidden">
+        <div class="aligncenter">
+			<h1 >
+		        Rechtsvormen
+		    </h1>
+        </div>
+    </div>
+    <div class="inner dark" id="Rechtsvormen" name="Rechtsvormen">
+        <div class="services">
+            <div class="first" >
+                <div class="info">
+					<Provider:ZimbraRolesSecurityTrimmedControl RolesString="All Authenticated Users" runat="server" ID="security" >
+						<ClubCloud:Rechtsvormen id="Rechtsvormen" runat="server" visible="true" ViewName="ClubCloud_Rechtsvormen_View" />
+					</Provider:ZimbraRolesSecurityTrimmedControl>
+	            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
 </asp:Content>

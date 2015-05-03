@@ -109,6 +109,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="BeheerPropertyDescriptor.cs" />
     <Compile Include="ClubCloud_Land.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>

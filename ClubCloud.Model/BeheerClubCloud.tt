@@ -203,10 +203,98 @@ public class <#=code.Escape(entity)#>_Mapping : EntityTypeConfiguration<<#=code.
 	}
 }
 
+public class <#=code.Escape(entity)#>_TypeDescriptionProvider : TypeDescriptionProvider
+{
+    private ICustomTypeDescriptor td;
+
+    public <#=code.Escape(entity)#>_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(<#=code.Escape(entity)#>))) {}
+
+    public <#=code.Escape(entity)#>_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+
+    public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+    {
+        if (td == null)
+        {
+            td = base.GetTypeDescriptor(objectType, instance);
+            td = new <#=code.Escape(entity)#>_CustomTypeDescriptor(td);
+        }
+
+        return td;
+    }        
+}
+
+public class <#=code.Escape(entity)#>_CustomTypeDescriptor : CustomTypeDescriptor
+{       
+    public <#=code.Escape(entity)#>_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+
+    public override PropertyDescriptorCollection GetProperties()
+    {
+        PropertyDescriptorCollection cols = base.GetProperties();
+		
+<#
+    if (navigationProperties.Any() && entity.Name != "ClubCloud_Reservering")
+    {
+		int count = navigationProperties.Where(np => np.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many).Count();
+
+		if(count > 0)
+        {
+#>
+		List<PropertyDescriptor> extended = new List<PropertyDescriptor>();
+        foreach (PropertyDescriptor item in cols)
+        {
+            extended.Add(item);
+        }
+<#
+			foreach (var navigationProperty in navigationProperties)
+			{
+				if(navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+				{
+					var endType = navigationProperty.ToEndMember.GetEntityType();
+#>
+		//<#=code.Escape(endType)#>
+		PropertyDescriptor <#=code.Escape(endType)#>_Columns = cols["<#=code.Escape(endType)#>"];
+		PropertyDescriptorCollection <#=code.Escape(endType)#>_Children = <#=code.Escape(endType)#>_Columns.GetChildProperties();
+
+<#
+			var endsimpleProperties = typeMapper.GetSimpleProperties(endType);
+			if (endsimpleProperties.Any())
+			{
+				foreach (var edmProperty in endsimpleProperties)
+				{
+#>
+		PropertyDescriptor <#=code.Escape(endType)#>_<#=code.Escape(edmProperty)#> = new BeheerPropertyDescriptor(<#=code.Escape(endType)#>_Columns,<#=code.Escape(endType)#>_Children["<#=code.Escape(edmProperty)#>"],"<#=code.Escape(endType)#>_<#=code.Escape(edmProperty)#>");
+		extended.Add(<#=code.Escape(endType)#>_<#=code.Escape(edmProperty)#>);
+
+<#
+				}
+			}
+#>
+
+<#
+				}
+			}
+#>
+		if(extended.Count > 0)
+		{
+			PropertyDescriptorCollection newcols = new PropertyDescriptorCollection(extended.ToArray());
+			return newcols;
+		}
+<#
+        }
+#>
+<#
+	}
+#>
+        return cols;            
+    }     
+} 
+
 <#
     EndNamespace(code);
 }
+#>
 
+<#
 foreach (var complex in typeMapper.GetItemsToGenerate<ComplexType>(itemCollection))
 {
     fileManager.StartNewFile(complex.Name + ".cs");
@@ -574,6 +662,7 @@ public class CodeStringGenerator
 			output.AppendFormat("[KnownType(typeof({0}))]{1}", sItem, Environment.NewLine);
 		}
 		output.AppendLine("[DataContract(IsReference = true)]");
+		output.AppendFormat("[TypeDescriptionProvider(typeof({0}_TypeDescriptionProvider))]", type.Name, Environment.NewLine);
 		return output.ToString();
 	}
 }

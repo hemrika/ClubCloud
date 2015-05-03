@@ -14,5 +14,24 @@
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-	<ClubCloud:Rechtsvorm id="Rechtsvormen" runat="server" visible="true" ViewName="ClubCloud_Rechtsvormen_View" />
+	<div class="inner light ms-dialogHidden">
+        <div class="aligncenter">
+			<h1 >
+		        Rechtsvorm
+		    </h1>
+        </div>
+    </div>
+    <div class="inner dark" id="Rechtsvorm" name="Rechtsvorm">
+        <div class="services">
+            <div class="first" >
+                <div class="info">
+					<Provider:ZimbraRolesSecurityTrimmedControl RolesString="All Authenticated Users" runat="server" ID="security" >
+						<ClubCloud:Rechtsvorm id="Rechtsvormen" runat="server" visible="true" ViewName="ClubCloud_Rechtsvormen_View" />
+					</Provider:ZimbraRolesSecurityTrimmedControl>
+	            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>	
 </asp:Content>

@@ -152,8 +152,15 @@ namespace ClubCloud.Service
     
     			foreach (System.Web.UI.WebControls.Parameter parameter in parameters)
     			{
-    				querybuilder.Append(parameter.Name + " = @" + parameter.Name + and);
     				Type type = TypeConvertor.ToNetType(parameter.DbType);
+    				if(type == typeof(DateTime))
+    				{
+    					querybuilder.Append(parameter.Name + " >= " + parameter.Name + and);
+    				}
+    				else
+    				{
+    					querybuilder.Append(parameter.Name + " = @" + parameter.Name + and);
+    				}
     				object value = TypeDescriptor.GetConverter(type).ConvertFrom(parameter.DefaultValue);// typeof(string)));
     
     				sqlparams.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });

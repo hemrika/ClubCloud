@@ -11,6 +11,7 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[DesignerCategory("code")]
 	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+    /*
 	[XmlInclude(typeof(AddItemCampaignActivityRequest))]
 	[XmlInclude(typeof(AddItemCampaignRequest))]
 	[XmlInclude(typeof(AddMemberListRequest))]
@@ -611,6 +612,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[XmlInclude(typeof(WhoAmIRequest))]
 	[XmlInclude(typeof(WinOpportunityRequest))]
 	[XmlInclude(typeof(WinQuoteRequest))]
+    */
+    [XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")]
 	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public abstract class Request : INotifyPropertyChanged
 	{

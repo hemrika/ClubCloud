@@ -35,31 +35,104 @@ fileManager.StartNewFile(SetName+".aspx");
 #>
 <#=codeStringGenerator.WritePageHeaderDeclaration(entitySet)#>
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1 class="s4-notdlg noindex" >
-        <#=code.Escape(SetName)#>
-    </h1>
-	<ClubCloud:<#=code.Escape(SetName)#> id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
+	<div class="inner light ms-dialogHidden">
+        <div class="aligncenter">
+			<h1 >
+		        <#=code.Escape(SetName)#>
+		    </h1>
+        </div>
+    </div>
+    <div class="inner dark" id="<#=code.Escape(SetName)#>" name="<#=code.Escape(SetName)#>">
+        <div class="services">
+            <div class="first" >
+                <div class="info">
+					<Provider:ZimbraRolesSecurityTrimmedControl RolesString="All Authenticated Users" runat="server" ID="security" >
+						<ClubCloud:<#=code.Escape(SetName)#> id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
+					</Provider:ZimbraRolesSecurityTrimmedControl>
+	            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
 </asp:Content>
 <#
 fileManager.StartNewFile(Name+".aspx");
 #>
 <#=codeStringGenerator.WritePageHeaderDeclaration(entitySet,entity, "")#>
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-	<ClubCloud:<#=code.Escape(Name)#> id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
+	<div class="inner light ms-dialogHidden">
+        <div class="aligncenter">
+			<h1 >
+		        <#=code.Escape(Name)#>
+		    </h1>
+        </div>
+    </div>
+    <div class="inner dark" id="<#=code.Escape(Name)#>" name="<#=code.Escape(Name)#>">
+        <div class="services">
+            <div class="first" >
+                <div class="info">
+					<Provider:ZimbraRolesSecurityTrimmedControl RolesString="All Authenticated Users" runat="server" ID="security" >
+						<ClubCloud:<#=code.Escape(Name)#> id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
+					</Provider:ZimbraRolesSecurityTrimmedControl>
+	            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>	
 </asp:Content>
 <#
 fileManager.StartNewFile(Name+"_Insert.aspx");
 #>
 <#=codeStringGenerator.WritePageHeaderDeclaration(entitySet,entity,"_Insert")#>
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-	<ClubCloud:<#=code.Escape(Name)#>_Insert id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
+	<div class="inner light ms-dialogHidden">
+        <div class="aligncenter">
+			<h1 >
+		        Toevoegen <#=code.Escape(Name)#>
+		    </h1>
+        </div>
+    </div>
+    <div class="inner dark" id="<#=code.Escape(Name)#>" name="<#=code.Escape(Name)#>">
+        <div class="services">
+            <div class="first" >
+                <div class="info">
+					<Provider:ZimbraRolesSecurityTrimmedControl RolesString="All Authenticated Users" runat="server" ID="security" >
+						<ClubCloud:<#=code.Escape(Name)#>_Insert id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
+					</Provider:ZimbraRolesSecurityTrimmedControl>
+	            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>		
 </asp:Content>
 <#
 fileManager.StartNewFile(Name+"_Edit.aspx");
 #>
 <#=codeStringGenerator.WritePageHeaderDeclaration(entitySet,entity,"_Edit")#>
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-	<ClubCloud:<#=code.Escape(Name)#>_Edit id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
+	<div class="inner light ms-dialogHidden">
+        <div class="aligncenter">
+			<h1 >
+		        Wijzigen <#=code.Escape(Name)#>
+		    </h1>
+        </div>
+    </div>
+    <div class="inner dark" id="<#=code.Escape(Name)#>" name="<#=code.Escape(Name)#>">
+        <div class="services">
+            <div class="first" >
+                <div class="info">
+					<Provider:ZimbraRolesSecurityTrimmedControl RolesString="All Authenticated Users" runat="server" ID="security" >
+						<ClubCloud:<#=code.Escape(Name)#>_Edit id="<#=code.Escape(SetName)#>" runat="server" visible="true" ViewName="<#=code.Escape(entitySet)#>_View" />
+					</Provider:ZimbraRolesSecurityTrimmedControl>
+	            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>		
 </asp:Content>
 <#
 fileManager.StartNewFile(Name+"_Search.aspx");
@@ -78,7 +151,7 @@ public void WriteHeader(CodeStringGenerator codeStringGenerator, EntityFramework
     fileManager.StartHeader();
 #>
 //------------------------------------------------------------------------------
-// <auto-generated>
+// <a class="button big" uto-generated>
 // <#=CodeGenerationTools.GetResourceString("Template_GeneratedCodeCommentLine1")#>
 //
 // <#=CodeGenerationTools.GetResourceString("Template_GeneratedCodeCommentLine2")#>
@@ -380,6 +453,7 @@ public class CodeStringGenerator
 		output.AppendLine("<%@ Register TagPrefix=\"wssuc\" TagName=\"InputFormControl\" src=\"~/_controltemplates/InputFormControl.ascx\" %>");
 		output.AppendLine("<%@ Register TagPrefix=\"wssuc\" TagName=\"ButtonSection\" src=\"~/_controltemplates/ButtonSection.ascx\" %>");
 		output.AppendFormat("<%@ Register TagPrefix=\"ClubCloud\" TagName=\"{0}\" Src=\"~/_controltemplates/ClubCloud/Administratie/{0}/ClubCloud_{0}.ascx\" %>{1}",SetName,Environment.NewLine);
+		output.AppendLine("<%@ Register TagPrefix=\"Provider\" Namespace=\"ClubCloud.Provider.Controls\" Assembly=\"ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e\" %>");
 		output.AppendLine("<%@ Import Namespace=\"Microsoft.SharePoint\" %>");
 		output.AppendLine("<%@ Import Namespace=\"Microsoft.SharePoint.ApplicationPages\" %>");
 		output.AppendLine("<%@ Assembly Name=\"Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c\" %>");

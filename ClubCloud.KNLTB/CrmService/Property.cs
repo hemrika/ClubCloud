@@ -11,7 +11,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[DesignerCategory("code")]
 	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	[XmlInclude(typeof(CrmBooleanProperty))]
+	/*
+    [XmlInclude(typeof(CrmBooleanProperty))]
 	[XmlInclude(typeof(CrmDateTimeProperty))]
 	[XmlInclude(typeof(CrmDecimalProperty))]
 	[XmlInclude(typeof(CrmFloatProperty))]
@@ -28,6 +29,8 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[XmlInclude(typeof(StatusProperty))]
 	[XmlInclude(typeof(StringProperty))]
 	[XmlInclude(typeof(UniqueIdentifierProperty))]
+    */
+    [XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")]
 	[XmlType(Namespace="http://schemas.microsoft.com/crm/2006/WebServices")]
 	public abstract class Property : INotifyPropertyChanged
 	{

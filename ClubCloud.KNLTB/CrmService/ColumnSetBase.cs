@@ -11,8 +11,11 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[DesignerCategory("code")]
 	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
-	[XmlInclude(typeof(AllColumns))]
+	/*
+    [XmlInclude(typeof(AllColumns))]
 	[XmlInclude(typeof(ColumnSet))]
+    */
+    [XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")]
 	[XmlType(Namespace="http://schemas.microsoft.com/crm/2006/Query")]
 	public abstract class ColumnSetBase : INotifyPropertyChanged
 	{

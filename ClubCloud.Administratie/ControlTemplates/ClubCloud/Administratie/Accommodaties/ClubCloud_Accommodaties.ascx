@@ -6,18 +6,23 @@
 <%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Accommodaties.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_AccommodatiesUserControl" %>
-<Common:ClubCloudDataSource ID="ClubCloud_Accommodatie_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Accommodaties_View" />
-<SharePoint:MenuTemplate ID="AccommodatieMenu" runat="server">
-	<SharePoint:MenuItemTemplate ID="Accommodatie_Details" runat="server" Text="Details bekijken van Accommodatie" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Accommodatie.aspx?Id=%Id%', title:'Details van Accommodatie', autoSize:false});" Title="Details van Accommodatie"></SharePoint:MenuItemTemplate>
-    <SharePoint:MenuItemTemplate ID="Baanblokken" runat="server" Text="Details bekijken van Baanblokken" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baanblokken.aspx?AccommodatieId=%Id%',title:'Details van Baanblokken', autoSize:false});" Title="Details van Baanblokken"></SharePoint:MenuItemTemplate>
-    <SharePoint:MenuItemTemplate ID="Banen" runat="server" Text="Details bekijken van Banen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Banen.aspx?AccommodatieId=%Id%',title:'Details van Banen', autoSize:false});" Title="Details van Banen"></SharePoint:MenuItemTemplate>
-    <SharePoint:MenuItemTemplate ID="BanenSpeciaal" runat="server" Text="Details bekijken van BanenSpeciaal" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'BanenSpeciaal.aspx?AccommodatieId=%Id%',title:'Details van BanenSpeciaal', autoSize:false});" Title="Details van BanenSpeciaal"></SharePoint:MenuItemTemplate>
-    <SharePoint:MenuItemTemplate ID="Addressen" runat="server" Text="Details bekijken van Addressen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Addressen.aspx?AccommodatieId=%Id%',title:'Details van Addressen', autoSize:false});" Title="Details van Addressen"></SharePoint:MenuItemTemplate>
+<Common:ClubCloudDataSource ID="ClubCloud_Accommodatie_DataSource" runat="server" OnDataBinding="tmr_loader_Accommodaties_Tick" ViewName="ClubCloud_Accommodaties_View" />
+<asp:UpdatePanel ID="udp_Accommodaties" runat="server" UpdateMode="Always">
+    <contenttemplate>
+		<asp:Timer runat="server" ID="tmr_loader_Accommodaties" OnTick="tmr_loader_Accommodaties_Tick" interval="500" />
+<SharePoint:MenuTemplate ID="AccommodatieMenu" runat="server" LargeIconMode="true">
+	<SharePoint:MenuItemTemplate ID="Accommodatie_Details" runat="server" Text="Details van %Naam%" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Accommodatie.aspx?Id=%Id%', title:'Details van %Naam%', autoSize:true});" Title="Details van %Naam%"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Baanblokken" runat="server" Text="Baanblokken" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baanblokken.aspx?AccommodatieId=%Id%',title:'Baanblokken', autoSize:true});" Title="Baanblokken"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Banen" runat="server" Text="Banen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Banen.aspx?AccommodatieId=%Id%',title:'Banen', autoSize:true});" Title="Banen"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="BanenSpeciaal" runat="server" Text="BanenSpeciaal" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'BanenSpeciaal.aspx?AccommodatieId=%Id%',title:'BanenSpeciaal', autoSize:true});" Title="BanenSpeciaal"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Addressen" runat="server" Text="Addressen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Addressen.aspx?AccommodatieId=%Id%',title:'Addressen', autoSize:true});" Title="Addressen"></SharePoint:MenuItemTemplate>
 </SharePoint:MenuTemplate>
-<asp:HyperLink ID="Accommodatie_Insert" Text="Toevoegen" NavigateUrl="Accommodatie_Insert.aspx"  runat="server" />
+<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Accommodatie_Insert.aspx', title:'Toevoegen Accommodatie'});" href="#" target="_self" title="Toevoegen" >Toevoegen Accommodatie</a>
 <br/>
+<asp:panel runat="server" ID="pnl_Accommodaties" >
 <SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="Accommodaties_Grid" runat="server" />
 <br />
 <SharePoint:SPGridView 
@@ -30,20 +35,24 @@
 	OnCallingDataMethods="GridAccommodaties_CallingDataMethods"
     PageSize="30"
     ShowFooter="true"
-    ShowHeader="true" >
+    ShowHeader="true"
+	OnDataBinding="tmr_loader_Accommodaties_Tick" >
     <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
     <PagerSettings Mode="NextPreviousFirstLast" Visible="true" Position="TopAndBottom" PreviousPageText="vorige" NextPageText="volgende"  FirstPageText="Eerste" LastPageText="Laatste" PageButtonCount="5" />
     <PagerStyle HorizontalAlign="Center" VerticalAlign="Top" BackColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <Columns>
-			<SharePoint:SPMenuField
-			HeaderText="Naam"
-			TextFields="Naam"
-			MenuTemplateId="AccommodatieMenu"
-			TokenNameAndValueFields="Id=Id"
-			SortExpression="Naam"
-			ItemStyle-Width="120px" />
+		<asp:TemplateField>
+			<HeaderTemplate>
+			    <asp:LinkButton ForeColor="White" ID="Naam_Sort" runat="server" Text="Naam" CommandName="Sort" CommandArgument="Naam"></asp:LinkButton>
+			</HeaderTemplate>
+			<ItemTemplate>
+                <a id="<%# Eval("Naam") %>" title="<%# Eval("Naam") %>" name="<%# Eval("Naam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Accommodatie.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Naam") %>', autoSize:true});" style="white-space:nowrap;" href="#" >
+                    <%# Eval("Naam") %>
+                </a>
+			</ItemTemplate>
+		</asp:TemplateField>
 	        <SharePoint:SPBoundField
             DataField="BanenAantal"
             HeaderText="BanenAantal"
@@ -269,47 +278,57 @@
     
 		<asp:TemplateField HeaderText="District" SortExpression="DistrictId">
 			<ItemTemplate>
-				<asp:Label ID="District" runat="server" Text='<%# Bind("ClubCloud_District.Naam") %>'></asp:Label>
+				<asp:Label ID="ClubCloud_District" runat="server" Text='<%# Bind("ClubCloud_District.Naam") %>'></asp:Label>
 			</ItemTemplate>
 		</asp:TemplateField>
 		<asp:TemplateField HeaderText="Regio" SortExpression="RegioId">
 			<ItemTemplate>
-				<asp:Label ID="Regio" runat="server" Text='<%# Bind("ClubCloud_Regio.Naam") %>'></asp:Label>
+				<asp:Label ID="ClubCloud_Regio" runat="server" Text='<%# Bind("ClubCloud_Regio.Naam") %>'></asp:Label>
 			</ItemTemplate>
 		</asp:TemplateField>
 		<asp:TemplateField HeaderText="Baanblokken" SortExpression="BaanblokId">
 			<ItemTemplate>
-				<asp:Label ID="Baanblokken" runat="server" Text='<%# Bind("ClubCloud_Baanblok.Count") %>'></asp:Label>
+				<asp:Label ID="ClubCloud_Baanblok" runat="server" Text='<%# Bind("ClubCloud_Baanblok.Count") %>'></asp:Label>
 			</ItemTemplate>
 		</asp:TemplateField>
 		<asp:TemplateField HeaderText="Banen" SortExpression="BaanId">
 			<ItemTemplate>
-				<asp:Label ID="Banen" runat="server" Text='<%# Bind("ClubCloud_Baan.Count") %>'></asp:Label>
+				<asp:Label ID="ClubCloud_Baan" runat="server" Text='<%# Bind("ClubCloud_Baan.Count") %>'></asp:Label>
 			</ItemTemplate>
 		</asp:TemplateField>
 		<asp:TemplateField HeaderText="BanenSpeciaal" SortExpression="BaanSpeciaalId">
 			<ItemTemplate>
-				<asp:Label ID="BanenSpeciaal" runat="server" Text='<%# Bind("ClubCloud_BaanSpeciaal.Count") %>'></asp:Label>
+				<asp:Label ID="ClubCloud_BaanSpeciaal" runat="server" Text='<%# Bind("ClubCloud_BaanSpeciaal.Count") %>'></asp:Label>
 			</ItemTemplate>
 		</asp:TemplateField>
 		<asp:TemplateField HeaderText="Addressen" SortExpression="AddressId">
 			<ItemTemplate>
-				<asp:Label ID="Addressen" runat="server" Text='<%# Bind("ClubCloud_Address.Count") %>'></asp:Label>
+				<asp:Label ID="ClubCloud_Address" runat="server" Text='<%# Bind("ClubCloud_Address.Count") %>'></asp:Label>
 			</ItemTemplate>
 		</asp:TemplateField>
     </Columns>
     <EmptyDataTemplate>
-        <HeaderTemplate>
-            <asp:HyperLink ID="Accommodatie_Insert" Text="Toevoegen" NavigateUrl="Accommodatie_Insert.aspx"  runat="server" /> <br/>
-        </HeaderTemplate>
-        <ItemTemplate>Er zijn geen gegevens gevonden.</ItemTemplate>
+        <ItemTemplate>Er zijn geen Accommodaties gevonden.</ItemTemplate>
     </EmptyDataTemplate>        
 </SharePoint:SPGridView >
 <br />
 <SharePoint:SPGridViewPager ID="spgvpager_bottom" GridViewId="Accommodaties_Grid" runat="server"/>
+</asp:panel>
 <p>
     <asp:Label runat="server" ID="lblMessage" ForeColor="Red" />
 </p>
+    <triggers>
+        <asp:AsyncPostBackTrigger ControlID="tmr_loader_Accommodaties" EventName="Tick" />
+    </triggers>
+    </contenttemplate>
+</asp:UpdatePanel>
+<asp:UpdateProgress ID="udp_Accommodaties_progress" runat="server" AssociatedUpdatePanelID="udp_Accommodaties" DisplayAfter="50">
+    <progresstemplate>
+        <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity=80); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; z-index: 10000;">
+        <div class="bubbles aligncenter" style="top:48%;">laden...</div>
+        </div>
+</progresstemplate>
+</asp:UpdateProgress>
 
 
 

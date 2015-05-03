@@ -21,7 +21,7 @@ namespace ClubCloud.Model
     [Serializable]
     [KnownType(typeof(ClubCloud_Sponsor))]
     [DataContract(IsReference = true)]
-    
+    [TypeDescriptionProvider(typeof(ClubCloud_Sponsor_Afbeelding_TypeDescriptionProvider))]
     public partial class ClubCloud_Sponsor_Afbeelding : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         public ClubCloud_Sponsor_Afbeelding()
@@ -142,5 +142,37 @@ namespace ClubCloud.Model
     		HasKey(m => m.Id);
     	}
     }
+    
+    public class ClubCloud_Sponsor_Afbeelding_TypeDescriptionProvider : TypeDescriptionProvider
+    {
+        private ICustomTypeDescriptor td;
+    
+        public ClubCloud_Sponsor_Afbeelding_TypeDescriptionProvider() : this(TypeDescriptor.GetProvider(typeof(ClubCloud_Sponsor_Afbeelding))) {}
+    
+        public ClubCloud_Sponsor_Afbeelding_TypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) {}
+    
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            if (td == null)
+            {
+                td = base.GetTypeDescriptor(objectType, instance);
+                td = new ClubCloud_Sponsor_Afbeelding_CustomTypeDescriptor(td);
+            }
+    
+            return td;
+        }        
+    }
+    
+    public class ClubCloud_Sponsor_Afbeelding_CustomTypeDescriptor : CustomTypeDescriptor
+    {       
+        public ClubCloud_Sponsor_Afbeelding_CustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) {}
+    
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            PropertyDescriptorCollection cols = base.GetProperties();
+    		
+            return cols;            
+        }     
+    } 
     
 }

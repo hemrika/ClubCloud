@@ -11,11 +11,14 @@ namespace ClubCloud.KNLTB.ServIt.CrmService
 	[DesignerCategory("code")]
 	[GeneratedCode("System.Xml", "4.0.30319.33440")]
 	[Serializable]
+    /*
 	[XmlInclude(typeof(TargetCompoundDuplicateRule))]
 	[XmlInclude(typeof(TargetCompoundDynamic))]
 	[XmlInclude(typeof(TargetCompoundInvoice))]
 	[XmlInclude(typeof(TargetCompoundQuote))]
 	[XmlInclude(typeof(TargetCompoundSalesOrder))]
+    */
+    [XmlSerializerAssembly(AssemblyName = "ClubCloud.KNLTB.XmlSerializers")]
 	[XmlType(Namespace="http://schemas.microsoft.com/crm/2007/WebServices")]
 	public abstract class TargetCompound : INotifyPropertyChanged
 	{

@@ -9,13 +9,30 @@
 <%@ Register TagPrefix="wssuc" TagName="InputFormControl" src="~/_controltemplates/InputFormControl.ascx" %>
 <%@ Register TagPrefix="wssuc" TagName="ButtonSection" src="~/_controltemplates/ButtonSection.ascx" %>
 <%@ Register TagPrefix="ClubCloud" TagName="Baanschemas" Src="~/_controltemplates/ClubCloud/Administratie/Baanschemas/ClubCloud_Baanschemas.ascx" %>
+<%@ Register TagPrefix="Provider" Namespace="ClubCloud.Provider.Controls" Assembly="ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Import Namespace="Microsoft.SharePoint.ApplicationPages" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1 class="s4-notdlg noindex" >
-        Baanschemas
-    </h1>
-	<ClubCloud:Baanschemas id="Baanschemas" runat="server" visible="true" ViewName="ClubCloud_Baanschemas_View" />
+	<div class="inner light ms-dialogHidden">
+        <div class="aligncenter">
+			<h1 >
+		        Baanschemas
+		    </h1>
+        </div>
+    </div>
+    <div class="inner dark" id="Baanschemas" name="Baanschemas">
+        <div class="services">
+            <div class="first" >
+                <div class="info">
+					<Provider:ZimbraRolesSecurityTrimmedControl RolesString="All Authenticated Users" runat="server" ID="security" >
+						<ClubCloud:Baanschemas id="Baanschemas" runat="server" visible="true" ViewName="ClubCloud_Baanschemas_View" />
+					</Provider:ZimbraRolesSecurityTrimmedControl>
+	            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
 </asp:Content>

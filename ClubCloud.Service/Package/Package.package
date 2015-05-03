@@ -6,6 +6,7 @@
     <projectOutputAssembly location="ClubCloud.KNLTB.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.KNLTB\ClubCloud.KNLTB.csproj" />
     <projectOutputAssembly location="ClubCloud.Model.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.Model\ClubCloud.Model.csproj" />
     <projectOutputAssembly location="ClubCloud.Store.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.Store\ClubCloud.Store.csproj" />
+    <customAssembly location="ClubCloud.KNLTB.XmlSerializers.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\ClubCloud.KNLTB.XmlSerializers.dll" />
   </assemblies>
   <features>
     <featureReference itemId="95303089-9602-4186-a353-cb5f1405a9ac" />

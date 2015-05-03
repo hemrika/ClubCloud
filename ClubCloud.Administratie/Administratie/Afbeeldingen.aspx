@@ -9,13 +9,30 @@
 <%@ Register TagPrefix="wssuc" TagName="InputFormControl" src="~/_controltemplates/InputFormControl.ascx" %>
 <%@ Register TagPrefix="wssuc" TagName="ButtonSection" src="~/_controltemplates/ButtonSection.ascx" %>
 <%@ Register TagPrefix="ClubCloud" TagName="Afbeeldingen" Src="~/_controltemplates/ClubCloud/Administratie/Afbeeldingen/ClubCloud_Afbeeldingen.ascx" %>
+<%@ Register TagPrefix="Provider" Namespace="ClubCloud.Provider.Controls" Assembly="ClubCloud.Provider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Import Namespace="Microsoft.SharePoint.ApplicationPages" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Main" ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <h1 class="s4-notdlg noindex" >
-        Afbeeldingen
-    </h1>
-	<ClubCloud:Afbeeldingen id="Afbeeldingen" runat="server" visible="true" ViewName="ClubCloud_Sponsor_Afbeeldingen_View" />
+	<div class="inner light ms-dialogHidden">
+        <div class="aligncenter">
+			<h1 >
+		        Afbeeldingen
+		    </h1>
+        </div>
+    </div>
+    <div class="inner dark" id="Afbeeldingen" name="Afbeeldingen">
+        <div class="services">
+            <div class="first" >
+                <div class="info">
+					<Provider:ZimbraRolesSecurityTrimmedControl RolesString="All Authenticated Users" runat="server" ID="security" >
+						<ClubCloud:Afbeeldingen id="Afbeeldingen" runat="server" visible="true" ViewName="ClubCloud_Sponsor_Afbeeldingen_View" />
+					</Provider:ZimbraRolesSecurityTrimmedControl>
+	            </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
 </asp:Content>

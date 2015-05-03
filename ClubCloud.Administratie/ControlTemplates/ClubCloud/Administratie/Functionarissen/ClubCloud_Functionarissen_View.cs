@@ -96,24 +96,29 @@ namespace ClubCloud.Administratie.WebControls
     						{
     							if(Guid.TryParse(where.DefaultValue, out Id))
     							{
-    								entity = Client.GetFunctionarisById(Id, false, Settings);
-    
-    								if(entity != null || entity.Id != Guid.Empty)
-    								{
-    
-    									entity.ClubCloud_Functie  = Client.GetFunctieForFunctionarisById(Id, false, Settings);
-    									entity.ClubCloud_District  = Client.GetDistrictForFunctionarisById(Id, false, Settings);
-    									entity.ClubCloud_Bestuursorgaan  = Client.GetBestuursorgaanForFunctionarisById(Id, false, Settings);
-    								}
+    								break;
     							}
     						}
     					}
     
-    				}
+    					if(Id == Guid.Empty)
+    					{
+    										
+    					}
     
+    					entity = Client.GetFunctionarisById(Id, false, Settings);
+    
+    					if(entity != null || entity.Id != Guid.Empty)
+    					{
+    						entity.ClubCloud_Functie  = Client.GetFunctieForFunctionarisById(Id, false, Settings);
+    						entity.ClubCloud_Vereniging  = Client.GetVerenigingForFunctionarisById(Id, false, Settings);
+    						entity.ClubCloud_Gebruiker  = Client.GetGebruikerForFunctionarisById(Id, false, Settings);
+    						entity.ClubCloud_District  = Client.GetDistrictForFunctionarisById(Id, false, Settings);
+    						entity.ClubCloud_Bestuursorgaan  = Client.GetBestuursorgaanForFunctionarisById(Id, false, Settings);
+    					}
+    				}
     			}
     		}
-    
     
     		return entity;
         }
@@ -148,6 +153,15 @@ namespace ClubCloud.Administratie.WebControls
                         }
                     }
     
+    				if(String.IsNullOrWhiteSpace(sortByExpression))
+    				{
+    					sortByExpression = "FunctieId";
+    				}
+    				else
+    				{
+    					if(!sortByExpression.Contains("FunctieId"))
+    						sortByExpression += ", FunctieId";
+    				}
     				DataSourceSelectArguments selectArgs = new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression };
                     ClubCloud_Functionaris_View queryresult = Client.GetFunctionarissenByQuery(userId, Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
     
@@ -159,6 +173,8 @@ namespace ClubCloud.Administratie.WebControls
                         foreach (ClubCloud_Functionaris Functionaris in queryresult.ClubCloud_Functionaris)
                         {
     						Functionaris.ClubCloud_Functie  = Client.GetFunctieForFunctionarisById(Functionaris.Id, false, Settings);
+    						Functionaris.ClubCloud_Vereniging  = Client.GetVerenigingForFunctionarisById(Functionaris.Id, false, Settings);
+    						Functionaris.ClubCloud_Gebruiker  = Client.GetGebruikerForFunctionarisById(Functionaris.Id, false, Settings);
     						Functionaris.ClubCloud_District  = Client.GetDistrictForFunctionarisById(Functionaris.Id, false, Settings);
     						Functionaris.ClubCloud_Bestuursorgaan  = Client.GetBestuursorgaanForFunctionarisById(Functionaris.Id, false, Settings);
                             
@@ -172,7 +188,6 @@ namespace ClubCloud.Administratie.WebControls
     		return null;
     	}
     
-    	//Functies
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         public IQueryable<ClubCloud_Functie> SelectFunctie()
@@ -184,17 +199,25 @@ namespace ClubCloud.Administratie.WebControls
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
-    				List<ClubCloud_Functie> result = Client.GetFuncties(false, Settings);
-    				return result.AsQueryable<ClubCloud_Functie>();
+    				List<ClubCloud_Functie> result = null;
+    
+    				if(result == null)
+    				{
+    					result = Client.GetFuncties(false, Settings);
+    				
+    				}
+    
+                    //Default
+                    result = result.OrderBy(r => r.Naam).ToList();    				
+                    result.Insert(0, new ClubCloud_Functie { Naam = "Onbekend" });
+        
+        			return result.AsQueryable<ClubCloud_Functie>();
     			}
     		}
     
     		return null;
     	}
-    	//Verenigingen
-    	//Gebruikers
-    	//Districten
-    	//Bestuursorganen
+    
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         public IQueryable<ClubCloud_Bestuursorgaan> SelectBestuursorgaan()
@@ -206,13 +229,29 @@ namespace ClubCloud.Administratie.WebControls
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
-    				List<ClubCloud_Bestuursorgaan> result = Client.GetBestuursorganen(false, Settings);
-    				return result.AsQueryable<ClubCloud_Bestuursorgaan>();
+    				List<ClubCloud_Bestuursorgaan> result = null;
+    
+    				//Get By ClubCloud_Vereniging
+    				result = Client.GetBestuursorganenForVerenigingById(Settings.VerenigingId.Value, false, Settings);
+    
+    
+    				if(result == null)
+    				{
+    					result = Client.GetBestuursorganen(false, Settings);
+    				
+    				}
+    
+                    //Default
+                    result = result.OrderBy(r => r.Naam).ToList();    				
+                    result.Insert(0, new ClubCloud_Bestuursorgaan { Naam = "Onbekend" });
+        
+        			return result.AsQueryable<ClubCloud_Bestuursorgaan>();
     			}
     		}
     
     		return null;
     	}
+    
     
     
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]

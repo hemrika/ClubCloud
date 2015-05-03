@@ -96,32 +96,38 @@ namespace ClubCloud.Administratie.WebControls
     						{
     							if(Guid.TryParse(where.DefaultValue, out Id))
     							{
-    								entity = Client.GetVerenigingById(Id, false, Settings);
-    
-    								if(entity != null || entity.Id != Guid.Empty)
-    								{
-    
-    									entity.ClubCloud_Functionaris  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Functionaris>(Client.GetFunctionarissenForVerenigingById(Id, false, Settings));
-    									entity.ClubCloud_Lidmaatschap  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Lidmaatschap>(Client.GetLidmaatschappenForVerenigingById(Id, false, Settings));
-    									entity.ClubCloud_Bestuursorgaan  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Bestuursorgaan>(Client.GetBestuursorganenForVerenigingById(Id, false, Settings));
-    									entity.ClubCloud_District  = Client.GetDistrictForVerenigingById(Id, false, Settings);
-    									entity.ClubCloud_Rechtsvorm  = Client.GetRechtsvormForVerenigingById(Id, false, Settings);
-    									entity.ClubCloud_Address  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressenForVerenigingById(Id, false, Settings));
-    									entity.ClubCloud_Regio  = Client.GetRegioForVerenigingById(Id, false, Settings);
-    									entity.ClubCloud_Afhang  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Afhang>(Client.GetAfhangenForVerenigingById(Id, false, Settings));
-    									entity.ClubCloud_Sponsor  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Sponsor>(Client.GetSponsorenForVerenigingById(Id, false, Settings));
-    									entity.ClubCloud_Baanschema  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanschema>(Client.GetBaanschemasForVerenigingById(Id, false, Settings));
-    									entity.ClubCloud_Lidmaatschapsoort  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Lidmaatschapsoort>(Client.GetLidmaatschapsoortenForVerenigingById(Id, false, Settings));
-    								}
+    								break;
     							}
     						}
     					}
     
-    				}
+    					if(Id == Guid.Empty)
+    					{
+    					
+    						Id = Settings.VerenigingId.Value;
+    										
+    					}
     
+    					entity = Client.GetVerenigingById(Id, false, Settings);
+    
+    					if(entity != null || entity.Id != Guid.Empty)
+    					{
+    						entity.ClubCloud_Functionaris  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Functionaris>(Client.GetFunctionarissenForVerenigingById(Id, false, Settings));
+    						entity.ClubCloud_Lidmaatschap  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Lidmaatschap>(Client.GetLidmaatschappenForVerenigingById(Id, false, Settings));
+    						entity.ClubCloud_Bestuursorgaan  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Bestuursorgaan>(Client.GetBestuursorganenForVerenigingById(Id, false, Settings));
+    						entity.ClubCloud_District  = Client.GetDistrictForVerenigingById(Id, false, Settings);
+    						entity.ClubCloud_Rechtsvorm  = Client.GetRechtsvormForVerenigingById(Id, false, Settings);
+    						entity.ClubCloud_Accommodatie  = Client.GetAccommodatieForVerenigingById(Id, false, Settings);
+    						entity.ClubCloud_Address  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressenForVerenigingById(Id, false, Settings));
+    						entity.ClubCloud_Regio  = Client.GetRegioForVerenigingById(Id, false, Settings);
+    						entity.ClubCloud_Afhang  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Afhang>(Client.GetAfhangenForVerenigingById(Id, false, Settings));
+    						entity.ClubCloud_Sponsor  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Sponsor>(Client.GetSponsorenForVerenigingById(Id, false, Settings));
+    						entity.ClubCloud_Baanschema  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanschema>(Client.GetBaanschemasForVerenigingById(Id, false, Settings));
+    						entity.ClubCloud_Lidmaatschapsoort  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Lidmaatschapsoort>(Client.GetLidmaatschapsoortenForVerenigingById(Id, false, Settings));
+    					}
+    				}
     			}
     		}
-    
     
     		return entity;
         }
@@ -178,6 +184,7 @@ namespace ClubCloud.Administratie.WebControls
     						Vereniging.ClubCloud_Bestuursorgaan  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Bestuursorgaan>(Client.GetBestuursorganenForVerenigingById(Vereniging.Id, false, Settings));
     						Vereniging.ClubCloud_District  = Client.GetDistrictForVerenigingById(Vereniging.Id, false, Settings);
     						Vereniging.ClubCloud_Rechtsvorm  = Client.GetRechtsvormForVerenigingById(Vereniging.Id, false, Settings);
+    						Vereniging.ClubCloud_Accommodatie  = Client.GetAccommodatieForVerenigingById(Vereniging.Id, false, Settings);
     						Vereniging.ClubCloud_Address  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Address>(Client.GetAddressenForVerenigingById(Vereniging.Id, false, Settings));
     						Vereniging.ClubCloud_Regio  = Client.GetRegioForVerenigingById(Vereniging.Id, false, Settings);
     						Vereniging.ClubCloud_Afhang  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Afhang>(Client.GetAfhangenForVerenigingById(Vereniging.Id, false, Settings));
@@ -195,9 +202,6 @@ namespace ClubCloud.Administratie.WebControls
     		return null;
     	}
     
-    	//Functionarissen
-    	//Lidmaatschappen
-    	//Bestuursorganen
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         public IQueryable<ClubCloud_Bestuursorgaan> SelectBestuursorgaan()
@@ -209,15 +213,29 @@ namespace ClubCloud.Administratie.WebControls
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
-    				List<ClubCloud_Bestuursorgaan> result = Client.GetBestuursorganen(false, Settings);
-    				return result.AsQueryable<ClubCloud_Bestuursorgaan>();
+    				List<ClubCloud_Bestuursorgaan> result = null;
+    
+    				//Get By ClubCloud_Vereniging
+    				result = Client.GetBestuursorganenForVerenigingById(Settings.VerenigingId.Value, false, Settings);
+    
+    
+    				if(result == null)
+    				{
+    					result = Client.GetBestuursorganen(false, Settings);
+    				
+    				}
+    
+                    //Default
+                    result = result.OrderBy(r => r.Naam).ToList();    				
+                    result.Insert(0, new ClubCloud_Bestuursorgaan { Naam = "Onbekend" });
+        
+        			return result.AsQueryable<ClubCloud_Bestuursorgaan>();
     			}
     		}
     
     		return null;
     	}
-    	//Districten
-    	//Rechtsvormen
+    
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         public IQueryable<ClubCloud_Rechtsvorm> SelectRechtsvorm()
@@ -229,22 +247,25 @@ namespace ClubCloud.Administratie.WebControls
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
-    				List<ClubCloud_Rechtsvorm> result = Client.GetRechtsvormen(false, Settings);
-    				return result.AsQueryable<ClubCloud_Rechtsvorm>();
+    				List<ClubCloud_Rechtsvorm> result = null;
+    
+    				if(result == null)
+    				{
+    					result = Client.GetRechtsvormen(false, Settings);
+    				
+    				}
+    
+                    //Default
+                    result = result.OrderBy(r => r.Naam).ToList();    				
+                    result.Insert(0, new ClubCloud_Rechtsvorm { Naam = "Onbekend" });
+        
+        			return result.AsQueryable<ClubCloud_Rechtsvorm>();
     			}
     		}
     
     		return null;
     	}
-    	//Accommodaties
-    	//Addressen
-    	//Regios
-    	//Gebruikers
-    	//Afhangen
-    	//Sponsoren
-    	//Settings
-    	//Baanschemas
-    	//Lidmaatschapsoorten
+    
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         public IQueryable<ClubCloud_Lidmaatschapsoort> SelectLidmaatschapsoort()
@@ -256,13 +277,29 @@ namespace ClubCloud.Administratie.WebControls
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
-    				List<ClubCloud_Lidmaatschapsoort> result = Client.GetLidmaatschapsoorten(false, Settings);
-    				return result.AsQueryable<ClubCloud_Lidmaatschapsoort>();
+    				List<ClubCloud_Lidmaatschapsoort> result = null;
+    
+    				//Get By ClubCloud_Vereniging
+    				result = Client.GetLidmaatschapsoortenForVerenigingById(Settings.VerenigingId.Value, false, Settings);
+    
+    
+    				if(result == null)
+    				{
+    					result = Client.GetLidmaatschapsoorten(false, Settings);
+    				
+    				}
+    
+                    //Default
+                    result = result.OrderBy(r => r.Naam).ToList();    				
+                    result.Insert(0, new ClubCloud_Lidmaatschapsoort { Naam = "Onbekend" });
+        
+        			return result.AsQueryable<ClubCloud_Lidmaatschapsoort>();
     			}
     		}
     
     		return null;
     	}
+    
     
     
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]

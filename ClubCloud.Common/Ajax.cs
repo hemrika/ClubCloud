@@ -39,12 +39,12 @@ namespace ClubCloud.Common
         {
             var configModajaxToolkit = new SPWebConfigModification
             {
-                Name = "add[@tagPrefix='ajaxToolkit'][@assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e'][@namespace='AjaxControlToolkit']",
+                Name = "add[@tagPrefix='ajax'][@assembly='AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e'][@namespace='AjaxControlToolkit']",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/pages/controls",
                 Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
-                Value = "<add tagPrefix='ajaxToolkit' assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e' namespace='AjaxControlToolkit' />"
+                Value = "<add tagPrefix=\"ajax\" assembly=\"AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e\" namespace=\"AjaxControlToolkit\" />"
 
             };
             _modifications.Add(configModajaxToolkit);
@@ -55,12 +55,12 @@ namespace ClubCloud.Common
         {
             var configModAjaxControlToolkit = new SPWebConfigModification
             {
-                Name = "add[@assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e']",
+                Name = "add[@assembly='AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e']",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/system.web/compilation/assemblies",
                 Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
-                Value = "<add assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e' />"
+                Value = "<add assembly=\"AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e\" />"
 
             };
             _modifications.Add(configModAjaxControlToolkit);
@@ -92,12 +92,12 @@ namespace ClubCloud.Common
         {
             var configModAjaxControlToolkit = new SPWebConfigModification
             {
-                Name = "SafeControl[@Assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e'][@Namespace='AjaxControlToolkit'][@TypeName='*'][@Safe='True'][@SafeAgainstScript='True']",
+                Name = "SafeControl[@Assembly='AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e'][@Namespace='AjaxControlToolkit'][@TypeName='*'][@Safe='True'][@SafeAgainstScript='True']",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration/SharePoint/SafeControls",
                 Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
-                Value = "<SafeControl Assembly='AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e' Namespace='AjaxControlToolkit' TypeName='*' Safe='True' SafeAgainstScript='True' />"
+                Value = "<SafeControl Assembly=\"AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e\" Namespace=\"AjaxControlToolkit\" TypeName=\"*\" Safe=\"True\" SafeAgainstScript=\"True\" />"
 
             };
             _modifications.Add(configModAjaxControlToolkit);

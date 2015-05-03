@@ -4,9 +4,12 @@
 <%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Gebruiker_Insert.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_Gebruiker_InsertUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Gebruiker_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Gebruikers_View" />
+<asp:UpdatePanel ID="udp_profiel" runat="server" UpdateMode="Always">
+    <contenttemplate>
 <asp:ValidationSummary ShowModelStateErrors="true" runat="server" />
 <asp:FormView runat="server" ID="InsertGebruikerform" DefaultMode="Insert" RenderOuterTable="False" OnCallingDataMethods="InsertGebruikerform_CallingDataMethods" SelectMethod="SelectGebruiker" InsertMethod="InsertGebruiker" DataKeyNames="Id">
     <EmptyDataTemplate>
@@ -27,3 +30,5 @@
         </fieldset>
     </InsertItemTemplate>
 </asp:FormView>
+    </contenttemplate>
+</asp:UpdatePanel>

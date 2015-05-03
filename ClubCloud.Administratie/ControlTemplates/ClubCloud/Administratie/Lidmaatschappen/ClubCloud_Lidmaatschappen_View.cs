@@ -96,22 +96,27 @@ namespace ClubCloud.Administratie.WebControls
     						{
     							if(Guid.TryParse(where.DefaultValue, out Id))
     							{
-    								entity = Client.GetLidmaatschapById(Id, false, Settings);
-    
-    								if(entity != null || entity.Id != Guid.Empty)
-    								{
-    
-    									entity.ClubCloud_Lidmaatschapsoort  = Client.GetLidmaatschapsoortForLidmaatschapById(Id, false, Settings);
-    								}
+    								break;
     							}
     						}
     					}
     
-    				}
+    					if(Id == Guid.Empty)
+    					{
+    										
+    					}
     
+    					entity = Client.GetLidmaatschapById(Id, false, Settings);
+    
+    					if(entity != null || entity.Id != Guid.Empty)
+    					{
+    						entity.ClubCloud_Vereniging  = Client.GetVerenigingForLidmaatschapById(Id, false, Settings);
+    						entity.ClubCloud_Gebruiker  = Client.GetGebruikerForLidmaatschapById(Id, false, Settings);
+    						entity.ClubCloud_Lidmaatschapsoort  = Client.GetLidmaatschapsoortForLidmaatschapById(Id, false, Settings);
+    					}
+    				}
     			}
     		}
-    
     
     		return entity;
         }
@@ -156,6 +161,8 @@ namespace ClubCloud.Administratie.WebControls
     				{
                         foreach (ClubCloud_Lidmaatschap Lidmaatschap in queryresult.ClubCloud_Lidmaatschap)
                         {
+    						Lidmaatschap.ClubCloud_Vereniging  = Client.GetVerenigingForLidmaatschapById(Lidmaatschap.Id, false, Settings);
+    						Lidmaatschap.ClubCloud_Gebruiker  = Client.GetGebruikerForLidmaatschapById(Lidmaatschap.Id, false, Settings);
     						Lidmaatschap.ClubCloud_Lidmaatschapsoort  = Client.GetLidmaatschapsoortForLidmaatschapById(Lidmaatschap.Id, false, Settings);
                             
                         }
@@ -168,9 +175,6 @@ namespace ClubCloud.Administratie.WebControls
     		return null;
     	}
     
-    	//Verenigingen
-    	//Gebruikers
-    	//Lidmaatschapsoorten
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         public IQueryable<ClubCloud_Lidmaatschapsoort> SelectLidmaatschapsoort()
@@ -182,13 +186,29 @@ namespace ClubCloud.Administratie.WebControls
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
-    				List<ClubCloud_Lidmaatschapsoort> result = Client.GetLidmaatschapsoorten(false, Settings);
-    				return result.AsQueryable<ClubCloud_Lidmaatschapsoort>();
+    				List<ClubCloud_Lidmaatschapsoort> result = null;
+    
+    				//Get By ClubCloud_Vereniging
+    				result = Client.GetLidmaatschapsoortenForVerenigingById(Settings.VerenigingId.Value, false, Settings);
+    
+    
+    				if(result == null)
+    				{
+    					result = Client.GetLidmaatschapsoorten(false, Settings);
+    				
+    				}
+    
+                    //Default
+                    result = result.OrderBy(r => r.Naam).ToList();    				
+                    result.Insert(0, new ClubCloud_Lidmaatschapsoort { Naam = "Onbekend" });
+        
+        			return result.AsQueryable<ClubCloud_Lidmaatschapsoort>();
     			}
     		}
     
     		return null;
     	}
+    
     
     
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]

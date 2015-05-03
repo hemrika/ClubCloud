@@ -163,6 +163,7 @@ namespace ClubCloud.Zimbra.Client
         {
             try
             {
+                ColumnSetBase cols = new AllColumns();
                 if (cc == null)
                 {
                     ClubCloud.KNLTB.Security.KNLTBContainer container = new KNLTB.Security.KNLTBContainer();
@@ -173,8 +174,32 @@ namespace ClubCloud.Zimbra.Client
                     cc = container.Container;
                 }
 
-                ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
+                ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);                
                 GetUsersUsingExecute(service);
+
+                /*
+                ClubCloud.KNLTB.Media.KNLTBFoto foto = new KNLTB.Media.KNLTBFoto();
+
+                Tuple<Image, string, long> result = Task.Run(async () => await foto.RequestFotoAsync("12073385", cc)).Result;
+                pictureBox1.Image = result.Item1;
+                pictureBox1.Height = pictureBox1.Image.Height;
+                pictureBox1.Width = pictureBox1.Image.Width;
+                MemoryStream ms = new MemoryStream();
+                */
+
+                //pictureBox1.Image = result.Item1;                
+                //MemoryStream ms = new MemoryStream();
+                //result.Item1.Save(ms,System.Drawing.Imaging.ImageFormat.Gif);
+                //byte[] contentData =  ms.ToArray();
+
+                /*
+                pictureBox1.Image = Image.FromFile(@"C:\TempImageFiles\Rutger_Hemrika_Profiel.jpg");
+                MemoryStream ms = new MemoryStream();
+                pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+                byte[] contentData = ms.ToArray();
+
+                foto.ServitUploadFoto("12073385", contentData, "image/jpeg", contentData.Length, cc);
+                */
 
                 /*
                 ClubCloud.KNLTB.Media.KNLTBFoto foto = new KNLTB.Media.KNLTBFoto();
@@ -193,19 +218,17 @@ namespace ClubCloud.Zimbra.Client
                 */
 
                 /*
-                ClubCloud.KNLTB.ServIt.MetadataService.MetadataService service = new KNLTB.ServIt.MetadataService.MetadataService();
-                service.CookieContainer = cc;
-                service.CrmAuthenticationTokenValue = new KNLTB.ServIt.MetadataService.CrmAuthenticationToken { AuthenticationType = 0, OrganizationName = "KNLTB", CrmTicket = string.Empty, CallerId = new Guid("00000000-0000-0000-0000-000000000000") };
-
+                ClubCloud.KNLTB.ServIt.MetadataService.MetadataService service = new KNLTB.ServIt.MetadataService.MetadataService(cc);
                 RetrieveAllEntitiesRequest request = new RetrieveAllEntitiesRequest();
                 request.MetadataItems = MetadataItems.IncludeRelationships;
+                //request.RetrieveAsIfPublished = true;
                 RetrieveAllEntitiesResponse metadata = (RetrieveAllEntitiesResponse)service.Execute(request);
                 WriteMetadata(metadata);
                 */
-
                 /*
                 ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
-                GetUsersUsingExecute(service);
+                //service.ExecuteAsync(new WhoAmIRequest());
+                //System.Threading.Thread.Sleep(5000);
                 WhoAmIResponse response = service.Execute(new WhoAmIRequest()) as WhoAmIResponse;
                 Console.WriteLine(response.BusinessUnitId);
                 Console.WriteLine(response.OrganizationId);
@@ -383,6 +406,10 @@ namespace ClubCloud.Zimbra.Client
                 //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_lidmaatschapid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("76760d7b-a9c9-e311-8e30-005056952140") } };
                 //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
+                //sgt_alg_pb_mutatie_leden
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_lidmaatschapid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("76760d7b-a9c9-e311-8e30-005056952140") } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
                 //<condition attribute="sgt_accommodatieid" operator="eq" uiname="ACLO" uitype="sgt_alg_accommodatie" value="{1881A451-1E89-41D4-9E6A-2E93BCF8C341}"/></filter>
                 //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_accommodatieid", Operator = ConditionOperator.Equal, uiname = "ACLO", uitype = "sgt_alg_accommodatie", Values = new object[1] { new Guid("1881A451-1E89-41D4-9E6A-2E93BCF8C341") } };
                 //<filter type="and">
@@ -400,9 +427,9 @@ namespace ClubCloud.Zimbra.Client
 
                 //Annotation
                 //annotation anno = new annotation{ objectid}
-                ConditionExpression conditionid = new ConditionExpression { AttributeName = "objectid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
+                //ConditionExpression conditionid = new ConditionExpression { AttributeName = "objectid", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
                 //ConditionExpression conditiontype = new ConditionExpression { AttributeName = "objecttypecode", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
-                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { conditionid } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { conditionid } };
 
 
                 PagingInfo pageInfo = new PagingInfo();
@@ -425,16 +452,16 @@ namespace ClubCloud.Zimbra.Client
                 //sgt_alg_district
                 //systemuser
                 //FilterExpression expression = new FilterExpression();
-                query.EntityName = "annotation";
+                query.EntityName = "sgt_alg_pb_mutatie_leden";
                 query.ColumnSet = cols;
-                query.Criteria = expression;
+                //query.Criteria = expression;
                 //query.LinkEntities = new LinkEntity[] { null };
                 query.PageInfo = pageInfo;
                 query.Distinct = true;
 
                 // Create the request object.
                 RetrieveMultipleRequest request = new RetrieveMultipleRequest();
-                request.ReturnDynamicEntities = false;
+                request.ReturnDynamicEntities = true;
                 // Set the properties of the request object.
                 request.Query = query;
 
@@ -445,11 +472,11 @@ namespace ClubCloud.Zimbra.Client
                     results = (RetrieveMultipleResponse)service.Execute(request);
 
                     List<BusinessEntity> entities = results.BusinessEntityCollection.BusinessEntities.ToList<BusinessEntity>();
-                    foreach (annotation entity in entities)
+                    foreach (sgt_alg_pb_mutatie_leden entity in entities)
                     {
                         //entity.sgt_spelerid
-                        string sentity = SerializeObjectList<annotation>(entity);
-                        WriteToXmlFile<annotation>(@"C:\annotation.xml", entity, true);
+                        string sentity = SerializeObjectList<sgt_alg_pb_mutatie_leden>(entity);
+                        WriteToXmlFile<sgt_alg_pb_mutatie_leden>(@"C:\sgt_alg_pb_mutatie_leden.xml", entity, true);
                     }
                 }
                 catch (Exception ex)
@@ -529,19 +556,23 @@ namespace ClubCloud.Zimbra.Client
             using (StreamWriter sw = new StreamWriter(@"C:\metadata.xml"))
             {
                 // Create Xml Writer.
-                XmlTextWriter metadataWriter = new XmlTextWriter(sw);
+                //XmlTextWriter metadataWriter = new XmlTextWriter(sw);
 
                 // Start Xml File.
-                metadataWriter.WriteStartDocument();
+                //metadataWriter.WriteStartDocument();
 
                 // Metadata Xml Node.
-                metadataWriter.WriteStartElement("Metadata");
+                //metadataWriter.WriteStartElement("Metadata");
 
-                AttributeMetadata currentAttribute;// Declared outside of loop
+               // AttributeMetadata currentAttribute;// Declared outside of loop
 
                 // Iterate through all entities and add their attributes and relationships to the file.
                 foreach (EntityMetadata currentEntity in metadata.CrmMetadata)
                 {
+                    string sentity =  SerializeObjectList<EntityMetadata>(currentEntity);
+
+                    WriteToXmlFile<EntityMetadata>(@"C:\EntityMetadata.xml", currentEntity, true);
+                    /*
                     // Start Entity Node
                     metadataWriter.WriteStartElement("Entity");
 
@@ -713,14 +744,15 @@ namespace ClubCloud.Zimbra.Client
 
                     // End Entity Node
                     metadataWriter.WriteEndElement();
+                    */ 
                 }
 
                 // End Metadata Xml Node
-                metadataWriter.WriteEndElement();
-                metadataWriter.WriteEndDocument();
+                //metadataWriter.WriteEndElement();
+                //metadataWriter.WriteEndDocument();
 
                 // Close xml writer.
-                metadataWriter.Close();
+                //metadataWriter.Close();
             }
 
         }
