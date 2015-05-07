@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="b3c7e0c2-5f5b-4796-ac47-aaefca623bbc" solutionId="b3c7e0c2-5f5b-4796-ac47-aaefca623bbc" resetWebServer="false" sharePointProductVersion="15.0" name="ClubCloud.Administratie" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <features>
-    <featureReference itemId="b5db6863-d907-4857-81ea-8f71c96ff8f1" />
+    <featureReference itemId="974544e5-7f5c-4ea0-8d91-8141b1c29f40" />
   </features>
   <projectItems>
     <projectItemReference itemId="53789977-244e-4b5f-b58d-492e8c8b7c3e" />

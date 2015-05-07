@@ -30,10 +30,10 @@
     <ProjectItemFile Source="ClubCloud\Icons\mstile-310x310.png" Target="ClubCloudDesign\ClubCloud\Icons\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\Icons\mstile-70x70.png" Target="ClubCloudDesign\ClubCloud\Icons\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\images\dropdown-arrow.png" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
-    <ProjectItemFile Source="ClubCloud\images\dropdown-arrow@2x.png" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
+    <ProjectItemFile Source="ClubCloud\images\dropdown-arrow_2x.png" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\images\favicon.ico" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\images\loading.gif" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
-    <ProjectItemFile Source="ClubCloud\images\loading@2x.gif" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
+    <ProjectItemFile Source="ClubCloud\images\loading_2x.gif" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\images\logo.png" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\images\metrotile.png" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\images\timer.png" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
@@ -77,12 +77,10 @@
     <ProjectItemFile Source="ClubCloud\type\awesome\fontawesome-webfont.woff" Target="ClubCloudDesign\ClubCloud\type\awesome\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\type\awesome\FontAwesome.otf" Target="ClubCloudDesign\ClubCloud\type\awesome\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\type\fontello\fontello-social.eot" Target="ClubCloudDesign\ClubCloud\type\fontello\" Type="ElementFile" />
-    <ProjectItemFile Source="ClubCloud\type\fontello\fontello-social.eot@" Target="ClubCloudDesign\ClubCloud\type\fontello\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\type\fontello\fontello-social.svg" Target="ClubCloudDesign\ClubCloud\type\fontello\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\type\fontello\fontello-social.ttf" Target="ClubCloudDesign\ClubCloud\type\fontello\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\type\fontello\fontello-social.woff" Target="ClubCloudDesign\ClubCloud\type\fontello\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\type\fontello\fontello.eot" Target="ClubCloudDesign\ClubCloud\type\fontello\" Type="ElementFile" />
-    <ProjectItemFile Source="ClubCloud\type\fontello\fontello.eot@" Target="ClubCloudDesign\ClubCloud\type\fontello\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\type\fontello\fontello.svg" Target="ClubCloudDesign\ClubCloud\type\fontello\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\type\fontello\fontello.ttf" Target="ClubCloudDesign\ClubCloud\type\fontello\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\type\fontello\fontello.woff" Target="ClubCloudDesign\ClubCloud\type\fontello\" Type="ElementFile" />

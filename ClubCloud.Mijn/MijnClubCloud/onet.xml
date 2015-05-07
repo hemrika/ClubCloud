@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Title="ClubCLoud Mijn" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" HideSiteContentsLink="true" DisableWebDesignFeatures="true" EnableMinimalDownload="true">
+<Project Title="ClubCLoud Mijn" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" HideSiteContentsLink="true" DisableWebDesignFeatures="false" EnableMinimalDownload="false">
   <NavBars>
     <NavBar ID="1002" Name="ClubCloud Mijn" >
     </NavBar>
@@ -8,8 +8,18 @@
     <Configuration ID="0" Name="ClubCLoud Mijn" Description="ClubCloud Mijn Site" Hidden="false" Title="Mijn ClubCloud"  >
       <Lists/>
       <SiteFeatures>
+        <!-- BasicWebParts Feature -->
+        <Feature ID="00BFEA71-1C5E-4A24-B310-BA51C3EB7A57" />
+        <!-- Three-state Workflow Feature -->
+        <Feature ID="FDE5D850-671E-4143-950A-87B473922DC7" />
+        <!-- Zimbra WebParts -->
+        <Feature ID="9632a0d4-0d82-4a5d-a50b-e0e0bd3c8427" />
+        <!-- ClubCloud Administratie Design -->
+        <Feature ID="d8462e0b-5399-460b-bead-33f727528679" />
       </SiteFeatures>
       <WebFeatures>
+        <!-- Zimbra Receivers -->
+        <Feature ID="feeca0b7-26ac-459f-83de-82e1943f195c" />
       </WebFeatures>
       <Modules>
         <Module Name="Mijn" />
@@ -18,7 +28,10 @@
   </Configurations>
   <Modules>
     <Module Name="Mijn" Url="" Path=""  >
-      <File Path="default.aspx" Url="default.aspx" />
+      <File Path="default.aspx" Url="default.aspx" NavBarHome="True" >
+        <NavBarPage Name="$Resources:core,nav_Home;" Url="~site" ID="1002" Position="Start" />
+        <NavBarPage Name="$Resources:core,nav_Home;" ID="0" Position="Start" />
+      </File>
       <File Path="afhangen.aspx" Url="afhangen.aspx" />
       <File Path="competitie.aspx" Url="competitie.aspx" />
       <File Path="instellingen.aspx" Url="instellingen.aspx" />

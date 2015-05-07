@@ -56,6 +56,36 @@ namespace ClubCloud.Common
 
             };
             _modifications.Add(configModhttpRuntimeTargetFramework);
+
+            /*
+            <add key="ValidationSettings:UnobtrusiveValidationMode" value="None" />
+            <add key="aspnet:MaxConcurrentCompilations" value="0" />
+            */
+
+            var UnobtrusiveValidationMode = new SPWebConfigModification
+            {
+                Name = "UnobtrusiveValidationMode",
+                Owner = "ClubCloud",
+                Sequence = 2,
+                Path = "configuration/appSettings",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<add key=\"ValidationSettings:UnobtrusiveValidationMode\" value=\"None\" />"
+
+            };
+            _modifications.Add(UnobtrusiveValidationMode);
+
+            var MaxConcurrentCompilations = new SPWebConfigModification
+            {
+                Name = "MaxConcurrentCompilations",
+                Owner = "ClubCloud",
+                Sequence = 2,
+                Path = "configuration/appSettings",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<add key=\"aspnet:MaxConcurrentCompilations\" value=\"0\" />"
+
+            };
+            _modifications.Add(MaxConcurrentCompilations);
+
         }
 
         private static void AddScriptResourceAttributes()
@@ -70,7 +100,7 @@ namespace ClubCloud.Common
 
             var systemwebextensions = new SPWebConfigModification
             {
-                Name = "systemwebextensions",
+                Name = "system.web.extensions",
                 Owner = "ClubCloud",
                 Sequence = 0,
                 Path = "configuration",
@@ -82,7 +112,7 @@ namespace ClubCloud.Common
 
             var systemwebextensionsscripting = new SPWebConfigModification
             {
-                Name = "systemwebextensionsscripting",
+                Name = "scripting",
                 Owner = "ClubCloud",
                 Sequence = 1,
                 Path = "configuration/system.web.extensions",
@@ -94,7 +124,7 @@ namespace ClubCloud.Common
 
             var systemwebextensionsscriptingscriptResourceHandler = new SPWebConfigModification
             {
-                Name = "systemwebextensionsscriptingscriptResourceHandler",
+                Name = "scriptResourceHandler",
                 Owner = "ClubCloud",
                 Sequence = 2,
                 Path = "configuration/system.web.extensions/scripting",

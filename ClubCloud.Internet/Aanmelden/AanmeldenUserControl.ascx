@@ -3,7 +3,7 @@
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="Utilities" Namespace="Microsoft.SharePoint.Utilities" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register Tagprefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
-<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
+<%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <%@ Import Namespace="Microsoft.SharePoint" %> 
 <%@ Import Namespace="AjaxControlToolkit" %>
 <%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
@@ -85,13 +85,13 @@ function SetContextKey() {
                                     <p>
                                         <label>Verenigingsnummer : </label>
                                         <asp:TextBox ID="tbx_verenigingsnummer" TextMode="SingleLine" runat="server" onkeyup ="SetContextKey()" AutoPostBack="true" OnTextChanged="tbx_verenigingsnummer_TextChanged" Width="80%" placeholder="Uw verenigingsnummer" />
-                                        <ajaxToolkit:AutoCompleteExtender ID="Verenigingsnummer_AutoCompleteExtender" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetVerenigingen" ServicePath="/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" TargetControlID="tbx_verenigingsnummer" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="4" CompletionInterval="1000" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating"
+                                        <asp:AutoCompleteExtender ID="Verenigingsnummer_AutoCompleteExtender" runat="server" DelimiterCharacters="" Enabled="True" ServiceMethod="GetVerenigingen" ServicePath="/_vti_bin/ClubCloud.Service/ClubCloud.svc/Script" TargetControlID="tbx_verenigingsnummer" UseContextKey="True" FirstRowSelected="True" MinimumPrefixLength="4" CompletionInterval="1000" OnClientHiding="OnClientCompleted" OnClientPopulated="OnClientCompleted" OnClientPopulating="OnClientPopulating"
                                             CompletionListCssClass="autocomplete_completionListElement" CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" >
                                             <Animations>
                                        <OnShow><Sequence><OpacityAction Opacity="0" /><HideAction Visible="true" /><Parallel Duration=".4"><FadeIn /></Parallel></Sequence></OnShow>
                                        <OnHide><Parallel Duration=".4"><FadeOut /></Parallel></OnHide>
                                             </Animations>
-                                        </ajaxToolkit:AutoCompleteExtender>
+                                        </asp:AutoCompleteExtender>
                                         <asp:FormView ID="fvw_vereniging" runat="server" RenderOuterTable="false" DataKeyNames="Id">
                                             <ItemTemplate>
                                                 <label>Naam : </label>

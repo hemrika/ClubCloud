@@ -1,9 +1,12 @@
 ﻿<%@ master language="C#" %>
 <%@ register tagprefix="SharePoint" namespace="Microsoft.SharePoint.WebControls" assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ register tagprefix="WebPartPages" namespace="Microsoft.SharePoint.WebPartPages" assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ register tagprefix="wssucmui" tagname="MUISelector" src="~/_controltemplates/15/MUISelector.ascx" %>
-<%@ register tagprefix="wssuc" tagname="Welcome" src="~/_controltemplates/15/Welcome.ascx" %>
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Import Namespace="Microsoft.SharePoint.ApplicationPages" %>
+<%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register tagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
+<%@ import namespace="AjaxControlToolkit" %>
 <%@ import namespace="System.Web.Security" %>
 <!DOCTYPE HTML>
 <SharePoint:SPHtmlTag runat="server" id="SPHtmlTag" dir="<%@ $Resources:wss,multipages_direction_dir_value%>">
@@ -140,39 +143,21 @@
 									<li  class="menu-item"><a href="/kosten_vergelijken.aspx"><i class="fa fa-calculator fa-fw special"></i> Vergelijken</a></li>
 								</ul>
 								</li>
-								<!-- <Sharepoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly" Permissions="EmptyMask" __designer:Preview="&lt;span&gt; --&gt;
-								&lt;li  class=&quot;menu-item&quot;&gt;
-									&lt;a href=&quot;https://development.clubcloud.nl/_zimbra/default.aspx&quot;&gt;&lt;i class=&quot;fa fa-sign-in special&quot;&gt;&lt;/i&gt; Inloggen&lt;/a&gt;
-									&lt;ul class=&quot;sub-menu&quot;&gt;
-										&lt;li  class=&quot;menu-item&quot;&gt;&lt;a href=&quot;https://afhangen.clubcloud.nl/&quot;  target=&quot;_blank&quot;&gt;&lt;i class=&quot;fa fa-lock special&quot;&gt;&lt;/i&gt; Afhangen&lt;/a&gt;&lt;/li&gt;
-										&lt;li  class=&quot;menu-item&quot;&gt;&lt;a href=&quot;https://mijn.clubcloud.nl/&quot; target=&quot;_blank&quot;&gt;&lt;i class=&quot;fa fa-lock special&quot;&gt;&lt;/i&gt; Mijn&lt;/a&gt;&lt;/li&gt;
-										&lt;li  class=&quot;menu-item&quot;&gt;&lt;a href=&quot;https://administratie.clubcloud.nl/&quot; target=&quot;_blank&quot;&gt;&lt;i class=&quot;fa fa-lock special&quot;&gt;&lt;/i&gt; Administratie&lt;/a&gt;&lt;/li&gt;
-									&lt;/ul&gt;									
-								&lt;/li&gt;
-								&lt;!-- &lt;/span&gt;" __designer:Values="&lt;P N=&#39;PermissionsString&#39; T=&#39;EmptyMask&#39; /&gt;&lt;P N=&#39;AuthenticationRestrictions&#39; E=&#39;2&#39; /&gt;&lt;P N=&#39;ID&#39; T=&#39;ctl01&#39; /&gt;&lt;P N=&#39;Page&#39; ID=&#39;1&#39; /&gt;&lt;P N=&#39;TemplateControl&#39; ID=&#39;2&#39; /&gt;&lt;P N=&#39;AppRelativeTemplateSourceDirectory&#39; R=&#39;-1&#39; /&gt;"> -->
+                                <!-- <Sharepoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly" Permissions="EmptyMask"> -->
 								<li  class="menu-item">
-									<a href="https://development.clubcloud.nl/_zimbra/default.aspx"><i class="fa fa-sign-in special"></i> Inloggen</a>
+									<a href="/_zimbra/default.aspx"><i class="fa fa-sign-in special"></i> Inloggen</a>
 									<ul class="sub-menu">
-										<li  class="menu-item"><a href="https://afhangen.clubcloud.nl/"  target="_blank"><i class="fa fa-lock special"></i> Afhangen</a></li>
+										<li  class="menu-item"><a href="https://www.clubcloud.nl/"  target="_blank"><i class="fa fa-lock special"></i> Internet</a></li>
 										<li  class="menu-item"><a href="https://mijn.clubcloud.nl/" target="_blank"><i class="fa fa-lock special"></i> Mijn</a></li>
-										<li  class="menu-item"><a href="https://administratie.clubcloud.nl/" target="_blank"><i class="fa fa-lock special"></i> Administratie</a></li>
 									</ul>									
 								</li>
 								<!-- </SharePoint:SPSecurityTrimmedControl> -->
-								<!-- <Sharepoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AuthenticatedUsersOnly" Permissions="EmptyMask" __designer:Preview="&lt;span&gt; --&gt;
-								&lt;li  class=&quot;menu-item&quot;&gt;
-									&lt;a href=&quot;/_layouts/signout.aspx&quot;&gt;&lt;i class=&quot;fa fa-sign-out special&quot;&gt;&lt;/i&gt; Uitloggen&lt;/a&gt;
-									&lt;ul class=&quot;sub-menu&quot;&gt;
-										&lt;li  class=&quot;menu-item&quot;&gt;&lt;a href=&quot;https://mijn.clubcloud.nl/&quot;&gt;&lt;i class=&quot;fa fa-lock special&quot;&gt;&lt;/i&gt; Mijn ClubCloud&lt;/a&gt;&lt;/li&gt;
-										&lt;li  class=&quot;menu-item&quot;&gt;&lt;a href=&quot;https://administratie.clubcloud.nl/&quot;&gt;&lt;i class=&quot;fa fa-lock special&quot;&gt;&lt;/i&gt; Administratie&lt;/a&gt;&lt;/li&gt;
-									&lt;/ul&gt;									
-								&lt;/li&gt;
-								&lt;!-- &lt;/span&gt;" __designer:Values="&lt;P N=&#39;PermissionsString&#39; T=&#39;EmptyMask&#39; /&gt;&lt;P N=&#39;AuthenticationRestrictions&#39; E=&#39;1&#39; /&gt;&lt;P N=&#39;ID&#39; T=&#39;ctl02&#39; /&gt;&lt;P N=&#39;Page&#39; ID=&#39;1&#39; /&gt;&lt;P N=&#39;TemplateControl&#39; ID=&#39;2&#39; /&gt;&lt;P N=&#39;AppRelativeTemplateSourceDirectory&#39; R=&#39;-1&#39; /&gt;"> -->
+								<!-- <Sharepoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AuthenticatedUsersOnly" Permissions="EmptyMask" > -->
 								<li  class="menu-item">
 									<a href="/_layouts/signout.aspx"><i class="fa fa-sign-out special"></i> Uitloggen</a>
 									<ul class="sub-menu">
-										<li  class="menu-item"><a href="https://mijn.clubcloud.nl/"><i class="fa fa-lock special"></i> Mijn ClubCloud</a></li>
-										<li  class="menu-item"><a href="https://administratie.clubcloud.nl/"><i class="fa fa-lock special"></i> Administratie</a></li>
+										<li  class="menu-item"><a href="https://www.clubcloud.nl/"><i class="fa fa-lock special"></i> Internet</a></li>
+										<li  class="menu-item"><a href="https://mijn.clubcloud.nl/"><i class="fa fa-lock special"></i> Mijn</a></li>
 									</ul>									
 								</li>
 								<!-- </SharePoint:SPSecurityTrimmedControl> -->
@@ -187,8 +172,7 @@
 				  <!-- End Top Wrapper -->
 					<!-- Begin Wrapper -->
 					<main>
-					<div id="contentBox" class="wrapper">
-					
+					<div id="contentBox" class="wrapper">					
 						<SharePoint:AjaxDelta ID="DeltaPlaceHolderMain" IsMainContent="true" runat="server">
 							<asp:ContentPlaceHolder ID="PlaceHolderMain" runat="server" />
 						</SharePoint:AjaxDelta>						
@@ -221,7 +205,7 @@
 			</div>
 		</div>
 		<div class="widget one-third widget">
-			<h3 class="widget-title srp-widget-title">Functionaliteit ClubCloud</h3>
+			<h3 class="widget-title srp-widget-title">ClubCloud Administratie</h3>
 			<div class="textwidget"><p>
 			Als tennisser en bestuurslid bleek er veel mis met de ondersteuning voor clubs en tennissers. ClubCloud is gemaakt voor clubs en tennissers.
 			ClubCloud biedt een breed scala aan functionaliteiten. En de functionaliteiten worden steeds uitgebreid of verbeterd. Genoemde functionaliteiten
@@ -232,13 +216,10 @@
 		<div class="widget last one-third widget buzz-out" name="contact" id="contact">
 			<h3 class="widget-title">Contact</h3>
 			<div class="textwidget">Als u contact wilt hebben met ClubCloud dan kan dit via  de onderstaande gegevens.
-			<a class="button big" href="tel:0302686099" >Helpdesk: 030-2686088</a>
-			<a class="button big" href="tel:0302686099" >Telefoon: 030-2686099</a>
+			<a class="button big" href="tel:0302686077" >Telefoon: 030-2686099</a>
 			<a class="button big" href="mailto:info@clubcloud.nl">Email: info@clubcloud.nl</a>
-			<a class="button big" href="https://twitter.com/MijnClubCloud" target="_blank">Twitter: @MijnClubCloud</a>
-
-</div>
-		</div>
+        </div>
+	</div>
 
 	  <div class="clear"></div>
 	</div>
@@ -276,32 +257,34 @@
 <script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/jquery.ui.widget.min.js"></script>
 <script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/jquery.ui.accordion.min.js"></script> -->
 <script type="text/javascript" >
-	$(document).ready(function () {
+    $(document).ready(function () {
 
-		$(function () {
-			var current = location.pathname;
-			$('nav li a').each(function () {
-				var $this = $(this);
-				var $parent = $(this.parentNode);
-				if ($this.closest('.sub-menu').length) {
-					$parent = $parent.parent().closest('li.menu-item');
-				}
-				if ($this.attr('href').indexOf(current) !== -1) {
-					$parent.addClass('current-menu-item');
-				}
-			})
-		});
-	});
+        $(function () {
+            var current = location.pathname;
+            $('nav li a').each(function () {
+                var $this = $(this);
+                var $parent = $(this.parentNode);
+                if ($this.closest('.sub-menu').length) {
+                    $parent = $parent.parent().closest('li.menu-item');
+                }
+                if ($this.attr('href').indexOf(current) !== -1) {
+                    $parent.addClass('current-menu-item');
+                }
+            })
+        });
+    });
 </script>	
 
 <script type="text/javascript" >
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-9934149-20', 'auto');
-  ga('send', 'pageview');
+    ga('create', 'UA-9934149-20', 'auto');
+    ga('send', 'pageview');
 
 </script>
 

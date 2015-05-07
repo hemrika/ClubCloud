@@ -283,7 +283,6 @@
     <Content Include="Features\BrandingDelegate\BrandingDelegate.Template.xml">
       <DependentUpon>BrandingDelegate.feature</DependentUpon>
     </Content>
-    <Content Include="Images\ClubCloud.Mijn\cloud.jpg" />
     <Content Include="Images\ClubCloud.Mijn\mijnknltb.png" />
     <Content Include="MijnClubCloud\facturen.aspx" />
     <Content Include="MijnClubCloud\factuur.aspx" />

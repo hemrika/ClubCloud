@@ -734,8 +734,9 @@ namespace ClubCloud.KNLTB.Media
 
             webRequest.ContentType = "multipart/form-data; boundary=" + boundary;
 
-            string ctype;
             /*
+            string ctype;
+            
             if (string.IsNullOrEmpty(fileContentType))
                 fileContentType = TryGetContentType(fileName, out ctype)
                                     ? ctype

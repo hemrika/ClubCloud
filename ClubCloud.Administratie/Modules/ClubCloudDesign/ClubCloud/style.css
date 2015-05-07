@@ -744,7 +744,7 @@ footer .inner {
 @media 
 {
 .selectnav {
-	background-image: url(images/dropdown-arrow@2x.png);
+	background-image: url(images/dropdown-arrow_2x.png);
 }
 }
 /*-----------------------------------------------------------------------------------*/
@@ -1164,7 +1164,7 @@ footer .inner {
 @media 
 {
 .tp-loader {
-	background-image: url(images/loading@2x.gif);
+	background-image: url(images/loading_2x.gif);
 }
 }
 /*-----------------------------------------------------------------------------------*/

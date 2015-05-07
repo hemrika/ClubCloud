@@ -5,98 +5,96 @@
 		Name="ClubCloudDesign"
 		Path="ClubCloudDesign"
 		Url="_catalogs/masterpage"
-		RootWebOnly="TRUE">
-    <File Path="ClubCloud.master" Url="ClubCloudDesign/ClubCloud.master" />
-    <File Path="ClubCloud\css\clubcloud.css" Url="ClubCloudDesign/ClubCloud/css/clubcloud.css" />
-    <File Path="ClubCloud\css\hover-min.css" Url="ClubCloudDesign/ClubCloud/css/hover-min.css" />
-    <File Path="ClubCloud\css\hover.css" Url="ClubCloudDesign/ClubCloud/css/hover.css" />
-    <File Path="ClubCloud\css\media-queries.css" Url="ClubCloudDesign/ClubCloud/css/media-queries.css" />
-    <File Path="ClubCloud\Icons\apple-touch-icon-114x114.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon-114x114.png" />
-    <File Path="ClubCloud\Icons\apple-touch-icon-120x120.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon-120x120.png" />
-    <File Path="ClubCloud\Icons\apple-touch-icon-144x144.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon-144x144.png" />
-    <File Path="ClubCloud\Icons\apple-touch-icon-152x152.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon-152x152.png" />
-    <File Path="ClubCloud\Icons\apple-touch-icon-180x180.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon-180x180.png" />
-    <File Path="ClubCloud\Icons\apple-touch-icon-57x57.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon-57x57.png" />
-    <File Path="ClubCloud\Icons\apple-touch-icon-60x60.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon-60x60.png" />
-    <File Path="ClubCloud\Icons\apple-touch-icon-72x72.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon-72x72.png" />
-    <File Path="ClubCloud\Icons\apple-touch-icon-76x76.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon-76x76.png" />
-    <File Path="ClubCloud\Icons\apple-touch-icon-precomposed.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon-precomposed.png" />
-    <File Path="ClubCloud\Icons\apple-touch-icon.png" Url="ClubCloudDesign/ClubCloud/Icons/apple-touch-icon.png" />
-    <File Path="ClubCloud\Icons\favicon-160x160.png" Url="ClubCloudDesign/ClubCloud/Icons/favicon-160x160.png" />
-    <File Path="ClubCloud\Icons\favicon-16x16.png" Url="ClubCloudDesign/ClubCloud/Icons/favicon-16x16.png" />
-    <File Path="ClubCloud\Icons\favicon-192x192.png" Url="ClubCloudDesign/ClubCloud/Icons/favicon-192x192.png" />
-    <File Path="ClubCloud\Icons\favicon-32x32.png" Url="ClubCloudDesign/ClubCloud/Icons/favicon-32x32.png" />
-    <File Path="ClubCloud\Icons\favicon-96x96.png" Url="ClubCloudDesign/ClubCloud/Icons/favicon-96x96.png" />
-    <File Path="ClubCloud\Icons\favicon.ico" Url="ClubCloudDesign/ClubCloud/Icons/favicon.ico" />
-    <File Path="ClubCloud\Icons\mstile-144x144.png" Url="ClubCloudDesign/ClubCloud/Icons/mstile-144x144.png" />
-    <File Path="ClubCloud\Icons\mstile-150x150.png" Url="ClubCloudDesign/ClubCloud/Icons/mstile-150x150.png" />
-    <File Path="ClubCloud\Icons\mstile-310x150.png" Url="ClubCloudDesign/ClubCloud/Icons/mstile-310x150.png" />
-    <File Path="ClubCloud\Icons\mstile-310x310.png" Url="ClubCloudDesign/ClubCloud/Icons/mstile-310x310.png" />
-    <File Path="ClubCloud\Icons\mstile-70x70.png" Url="ClubCloudDesign/ClubCloud/Icons/mstile-70x70.png" />
-    <File Path="ClubCloud\images\dropdown-arrow.png" Url="ClubCloudDesign/ClubCloud/images/dropdown-arrow.png" />
-    <File Path="ClubCloud\images\dropdown-arrow@2x.png" Url="ClubCloudDesign/ClubCloud/images/dropdown-arrow@2x.png" />
-    <File Path="ClubCloud\images\favicon.ico" Url="ClubCloudDesign/ClubCloud/images/favicon.ico" />
-    <File Path="ClubCloud\images\loading.gif" Url="ClubCloudDesign/ClubCloud/images/loading.gif" />
-    <File Path="ClubCloud\images\loading@2x.gif" Url="ClubCloudDesign/ClubCloud/images/loading@2x.gif" />
-    <File Path="ClubCloud\images\logo.png" Url="ClubCloudDesign/ClubCloud/images/logo.png" />
-    <File Path="ClubCloud\images\metrotile.png" Url="ClubCloudDesign/ClubCloud/images/metrotile.png" />
-    <File Path="ClubCloud\images\timer.png" Url="ClubCloudDesign/ClubCloud/images/timer.png" />
-    <File Path="ClubCloud\js\ddsmoothmenu.js" Url="ClubCloudDesign/ClubCloud/js/ddsmoothmenu.js" />
-    <File Path="ClubCloud\js\ddsmoothmenu_3.js" Url="ClubCloudDesign/ClubCloud/js/ddsmoothmenu_3.js" />
-    <File Path="ClubCloud\js\jquery.easytabs.min.js" Url="ClubCloudDesign/ClubCloud/js/jquery.easytabs.min.js" />
-    <File Path="ClubCloud\js\jquery.easytabs.min_old.js" Url="ClubCloudDesign/ClubCloud/js/jquery.easytabs.min_old.js" />
-    <File Path="ClubCloud\js\jquery.fancybox-thumbs.js" Url="ClubCloudDesign/ClubCloud/js/jquery.fancybox-thumbs.js" />
-    <File Path="ClubCloud\js\jquery.fancybox.pack.js" Url="ClubCloudDesign/ClubCloud/js/jquery.fancybox.pack.js" />
-    <File Path="ClubCloud\js\jquery.fitvids.js" Url="ClubCloudDesign/ClubCloud/js/jquery.fitvids.js" />
-    <File Path="ClubCloud\js\jquery.isotope.min.js" Url="ClubCloudDesign/ClubCloud/js/jquery.isotope.min.js" />
-    <File Path="ClubCloud\js\jquery.min.js" Url="ClubCloudDesign/ClubCloud/js/jquery.min.js" />
-    <File Path="ClubCloud\js\jquery.min_183.js" Url="ClubCloudDesign/ClubCloud/js/jquery.min_183.js" />
-    <File Path="ClubCloud\js\jquery.slickforms.js" Url="ClubCloudDesign/ClubCloud/js/jquery.slickforms.js" />
-    <File Path="ClubCloud\js\jquery.themepunch.plugins.min.js" Url="ClubCloudDesign/ClubCloud/js/jquery.themepunch.plugins.min.js" />
-    <File Path="ClubCloud\js\jquery.themepunch.revolution.min.js" Url="ClubCloudDesign/ClubCloud/js/jquery.themepunch.revolution.min.js" />
-    <File Path="ClubCloud\js\scripts.js" Url="ClubCloudDesign/ClubCloud/js/scripts.js" />
-    <File Path="ClubCloud\js\selectnav.js" Url="ClubCloudDesign/ClubCloud/js/selectnav.js" />
-    <File Path="ClubCloud\js\selectnav.min.js" Url="ClubCloudDesign/ClubCloud/js/selectnav.min.js" />
-    <File Path="ClubCloud\js\twitter.min.js" Url="ClubCloudDesign/ClubCloud/js/twitter.min.js" />
-    <File Path="ClubCloud\js\fancybox\blank.gif" Url="ClubCloudDesign/ClubCloud/js/fancybox/blank.gif" />
-    <File Path="ClubCloud\js\fancybox\fancybox_loading.gif" Url="ClubCloudDesign/ClubCloud/js/fancybox/fancybox_loading.gif" />
-    <File Path="ClubCloud\js\fancybox\fancybox_overlay.png" Url="ClubCloudDesign/ClubCloud/js/fancybox/fancybox_overlay.png" />
-    <File Path="ClubCloud\js\fancybox\fancybox_sprite.png" Url="ClubCloudDesign/ClubCloud/js/fancybox/fancybox_sprite.png" />
-    <File Path="ClubCloud\js\fancybox\jquery.fancybox.css" Url="ClubCloudDesign/ClubCloud/js/fancybox/jquery.fancybox.css" />
-    <File Path="ClubCloud\js\fancybox\helpers\fancybox_buttons.png" Url="ClubCloudDesign/ClubCloud/js/fancybox/helpers/fancybox_buttons.png" />
-    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-buttons.js" Url="ClubCloudDesign/ClubCloud/js/fancybox/helpers/jquery.fancybox-buttons.js" />
-    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-buttons0ff5.css" Url="ClubCloudDesign/ClubCloud/js/fancybox/helpers/jquery.fancybox-buttons0ff5.css" />
-    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-buttons0ff5.js" Url="ClubCloudDesign/ClubCloud/js/fancybox/helpers/jquery.fancybox-buttons0ff5.js" />
-    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-media.js" Url="ClubCloudDesign/ClubCloud/js/fancybox/helpers/jquery.fancybox-media.js" />
-    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-mediae209.js" Url="ClubCloudDesign/ClubCloud/js/fancybox/helpers/jquery.fancybox-mediae209.js" />
-    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-thumbs.js" Url="ClubCloudDesign/ClubCloud/js/fancybox/helpers/jquery.fancybox-thumbs.js" />
-    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-thumbs0ff5.css" Url="ClubCloudDesign/ClubCloud/js/fancybox/helpers/jquery.fancybox-thumbs0ff5.css" />
-    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-thumbs0ff5.js" Url="ClubCloudDesign/ClubCloud/js/fancybox/helpers/jquery.fancybox-thumbs0ff5.js" />
-    <File Path="ClubCloud\type\awesome.css" Url="ClubCloudDesign/ClubCloud/type/awesome.css" />
-    <File Path="ClubCloud\type\awesome.min.css" Url="ClubCloudDesign/ClubCloud/type/awesome.min.css" />
-    <File Path="ClubCloud\type\fontello.css" Url="ClubCloudDesign/ClubCloud/type/fontello.css" />
-    <File Path="ClubCloud\type\awesome\fontawesome-webfont.eot" Url="ClubCloudDesign/ClubCloud/type/awesome/fontawesome-webfont.eot" />
-    <File Path="ClubCloud\type\awesome\fontawesome-webfont.svg" Url="ClubCloudDesign/ClubCloud/type/awesome/fontawesome-webfont.svg" />
-    <File Path="ClubCloud\type\awesome\fontawesome-webfont.ttf" Url="ClubCloudDesign/ClubCloud/type/awesome/fontawesome-webfont.ttf" />
-    <File Path="ClubCloud\type\awesome\fontawesome-webfont.woff" Url="ClubCloudDesign/ClubCloud/type/awesome/fontawesome-webfont.woff" />
-    <File Path="ClubCloud\type\awesome\FontAwesome.otf" Url="ClubCloudDesign/ClubCloud/type/awesome/FontAwesome.otf" />
-    <File Path="ClubCloud\type\fontello\fontello-social.eot" Url="ClubCloudDesign/ClubCloud/type/fontello/fontello-social.eot" />
-    <File Path="ClubCloud\type\fontello\fontello-social.eot@" Url="ClubCloudDesign/ClubCloud/type/fontello/fontello-social.eot@" />
-    <File Path="ClubCloud\type\fontello\fontello-social.svg" Url="ClubCloudDesign/ClubCloud/type/fontello/fontello-social.svg" />
-    <File Path="ClubCloud\type\fontello\fontello-social.ttf" Url="ClubCloudDesign/ClubCloud/type/fontello/fontello-social.ttf" />
-    <File Path="ClubCloud\type\fontello\fontello-social.woff" Url="ClubCloudDesign/ClubCloud/type/fontello/fontello-social.woff" />
-    <File Path="ClubCloud\type\fontello\fontello.eot" Url="ClubCloudDesign/ClubCloud/type/fontello/fontello.eot" />
-    <File Path="ClubCloud\type\fontello\fontello.eot@" Url="ClubCloudDesign/ClubCloud/type/fontello/fontello.eot@" />
-    <File Path="ClubCloud\type\fontello\fontello.svg" Url="ClubCloudDesign/ClubCloud/type/fontello/fontello.svg" />
-    <File Path="ClubCloud\type\fontello\fontello.ttf" Url="ClubCloudDesign/ClubCloud/type/fontello/fontello.ttf" />
-    <File Path="ClubCloud\type\fontello\fontello.woff" Url="ClubCloudDesign/ClubCloud/type/fontello/fontello.woff" />
-    <File Path="ClubCloud\css-ie7-fix.css" Url="ClubCloudDesign/ClubCloud/css-ie7-fix.css" />
-    <File Path="ClubCloud\jquery-migrate.min.js" Url="ClubCloudDesign/ClubCloud/jquery-migrate.min.js" />
-    <File Path="ClubCloud\jquery.js" Url="ClubCloudDesign/ClubCloud/jquery.js" />
-    <File Path="ClubCloud\jquery.ui.accordion.min.js" Url="ClubCloudDesign/ClubCloud/jquery.ui.accordion.min.js" />
-    <File Path="ClubCloud\jquery.ui.core.min.js" Url="ClubCloudDesign/ClubCloud/jquery.ui.core.min.js" />
-    <File Path="ClubCloud\jquery.ui.widget.min.js" Url="ClubCloudDesign/ClubCloud/jquery.ui.widget.min.js" />
-    <File Path="ClubCloud\style.css" Url="ClubCloudDesign/ClubCloud/style.css" />
-    <File Path="ClubCloud\symple_accordion.js" Url="ClubCloudDesign/ClubCloud/symple_accordion.js" />
+		RootWebOnly="FALSE">
+    <File Path="ClubCloud.master" Url="ClubCloud.master" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\css\clubcloud.css" Url="ClubCloud/css/clubcloud.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\css\hover-min.css" Url="ClubCloud/css/hover-min.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\css\hover.css" Url="ClubCloud/css/hover.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\css\media-queries.css" Url="ClubCloud/css/media-queries.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon-114x114.png" Url="ClubCloud/Icons/apple-touch-icon-114x114.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon-120x120.png" Url="ClubCloud/Icons/apple-touch-icon-120x120.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon-144x144.png" Url="ClubCloud/Icons/apple-touch-icon-144x144.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon-152x152.png" Url="ClubCloud/Icons/apple-touch-icon-152x152.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon-180x180.png" Url="ClubCloud/Icons/apple-touch-icon-180x180.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon-57x57.png" Url="ClubCloud/Icons/apple-touch-icon-57x57.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon-60x60.png" Url="ClubCloud/Icons/apple-touch-icon-60x60.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon-72x72.png" Url="ClubCloud/Icons/apple-touch-icon-72x72.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon-76x76.png" Url="ClubCloud/Icons/apple-touch-icon-76x76.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon-precomposed.png" Url="ClubCloud/Icons/apple-touch-icon-precomposed.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\apple-touch-icon.png" Url="ClubCloud/Icons/apple-touch-icon.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\favicon-160x160.png" Url="ClubCloud/Icons/favicon-160x160.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\favicon-16x16.png" Url="ClubCloud/Icons/favicon-16x16.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\favicon-192x192.png" Url="ClubCloud/Icons/favicon-192x192.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\favicon-32x32.png" Url="ClubCloud/Icons/favicon-32x32.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\favicon-96x96.png" Url="ClubCloud/Icons/favicon-96x96.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\favicon.ico" Url="ClubCloud/Icons/favicon.ico" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\mstile-144x144.png" Url="ClubCloud/Icons/mstile-144x144.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\mstile-150x150.png" Url="ClubCloud/Icons/mstile-150x150.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\mstile-310x150.png" Url="ClubCloud/Icons/mstile-310x150.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\mstile-310x310.png" Url="ClubCloud/Icons/mstile-310x310.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\Icons\mstile-70x70.png" Url="ClubCloud/Icons/mstile-70x70.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\images\dropdown-arrow.png" Url="ClubCloud/images/dropdown-arrow.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\images\dropdown-arrow_2x.png" Url="ClubCloud/images/dropdown-arrow_2x.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\images\favicon.ico" Url="ClubCloud/images/favicon.ico" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\images\loading.gif" Url="ClubCloud/images/loading.gif" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\images\loading_2x.gif" Url="ClubCloud/images/loading_2x.gif" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\images\logo.png" Url="ClubCloud/images/logo.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\images\metrotile.png" Url="ClubCloud/images/metrotile.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\images\timer.png" Url="ClubCloud/images/timer.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\ddsmoothmenu.js" Url="ClubCloud/js/ddsmoothmenu.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\ddsmoothmenu_3.js" Url="ClubCloud/js/ddsmoothmenu_3.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.easytabs.min.js" Url="ClubCloud/js/jquery.easytabs.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.easytabs.min_old.js" Url="ClubCloud/js/jquery.easytabs.min_old.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.fancybox-thumbs.js" Url="ClubCloud/js/jquery.fancybox-thumbs.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.fancybox.pack.js" Url="ClubCloud/js/jquery.fancybox.pack.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.fitvids.js" Url="ClubCloud/js/jquery.fitvids.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.isotope.min.js" Url="ClubCloud/js/jquery.isotope.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.min.js" Url="ClubCloud/js/jquery.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.min_183.js" Url="ClubCloud/js/jquery.min_183.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.slickforms.js" Url="ClubCloud/js/jquery.slickforms.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.themepunch.plugins.min.js" Url="ClubCloud/js/jquery.themepunch.plugins.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\jquery.themepunch.revolution.min.js" Url="ClubCloud/js/jquery.themepunch.revolution.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\scripts.js" Url="ClubCloud/js/scripts.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\selectnav.js" Url="ClubCloud/js/selectnav.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\selectnav.min.js" Url="ClubCloud/js/selectnav.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\twitter.min.js" Url="ClubCloud/js/twitter.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\blank.gif" Url="ClubCloud/js/fancybox/blank.gif" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\fancybox_loading.gif" Url="ClubCloud/js/fancybox/fancybox_loading.gif" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\fancybox_overlay.png" Url="ClubCloud/js/fancybox/fancybox_overlay.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\fancybox_sprite.png" Url="ClubCloud/js/fancybox/fancybox_sprite.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\jquery.fancybox.css" Url="ClubCloud/js/fancybox/jquery.fancybox.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\helpers\fancybox_buttons.png" Url="ClubCloud/js/fancybox/helpers/fancybox_buttons.png" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-buttons.js" Url="ClubCloud/js/fancybox/helpers/jquery.fancybox-buttons.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-buttons0ff5.css" Url="ClubCloud/js/fancybox/helpers/jquery.fancybox-buttons0ff5.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-buttons0ff5.js" Url="ClubCloud/js/fancybox/helpers/jquery.fancybox-buttons0ff5.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-media.js" Url="ClubCloud/js/fancybox/helpers/jquery.fancybox-media.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-mediae209.js" Url="ClubCloud/js/fancybox/helpers/jquery.fancybox-mediae209.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-thumbs.js" Url="ClubCloud/js/fancybox/helpers/jquery.fancybox-thumbs.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-thumbs0ff5.css" Url="ClubCloud/js/fancybox/helpers/jquery.fancybox-thumbs0ff5.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\js\fancybox\helpers\jquery.fancybox-thumbs0ff5.js" Url="ClubCloud/js/fancybox/helpers/jquery.fancybox-thumbs0ff5.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\awesome.css" Url="ClubCloud/type/awesome.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\awesome.min.css" Url="ClubCloud/type/awesome.min.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\fontello.css" Url="ClubCloud/type/fontello.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\awesome\fontawesome-webfont.eot" Url="ClubCloud/type/awesome/fontawesome-webfont.eot" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\awesome\fontawesome-webfont.svg" Url="ClubCloud/type/awesome/fontawesome-webfont.svg" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\awesome\fontawesome-webfont.ttf" Url="ClubCloud/type/awesome/fontawesome-webfont.ttf" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\awesome\fontawesome-webfont.woff" Url="ClubCloud/type/awesome/fontawesome-webfont.woff" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\awesome\FontAwesome.otf" Url="ClubCloud/type/awesome/FontAwesome.otf" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\fontello\fontello-social.eot" Url="ClubCloud/type/fontello/fontello-social.eot" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\fontello\fontello-social.svg" Url="ClubCloud/type/fontello/fontello-social.svg" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\fontello\fontello-social.ttf" Url="ClubCloud/type/fontello/fontello-social.ttf" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\fontello\fontello-social.woff" Url="ClubCloud/type/fontello/fontello-social.woff" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\fontello\fontello.eot" Url="ClubCloud/type/fontello/fontello.eot" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\fontello\fontello.svg" Url="ClubCloud/type/fontello/fontello.svg" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\fontello\fontello.ttf" Url="ClubCloud/type/fontello/fontello.ttf" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\type\fontello\fontello.woff" Url="ClubCloud/type/fontello/fontello.woff" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\css-ie7-fix.css" Url="ClubCloud/css-ie7-fix.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\jquery-migrate.min.js" Url="ClubCloud/jquery-migrate.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\jquery.js" Url="ClubCloud/jquery.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\jquery.ui.accordion.min.js" Url="ClubCloud/jquery.ui.accordion.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\jquery.ui.core.min.js" Url="ClubCloud/jquery.ui.core.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\jquery.ui.widget.min.js" Url="ClubCloud/jquery.ui.widget.min.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\style.css" Url="ClubCloud/style.css" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\symple_accordion.js" Url="ClubCloud/symple_accordion.js" Type="GhostableInLibrary" />
   </Module>
 </Elements>

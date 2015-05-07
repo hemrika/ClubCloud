@@ -392,12 +392,15 @@
     <Compile Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Insert.ascx.designer.cs">
       <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
     </Compile>
-    <Compile Include="Features\ClubCloud_Design\ClubCloud_Design.EventReceiver.cs">
-      <DependentUpon>ClubCloud_Design.feature</DependentUpon>
+    <Compile Include="Features\ClubCloudDesign\ClubCloudDesign.EventReceiver.cs">
+      <DependentUpon>ClubCloudDesign.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ClubCloudDesign\ClubCloudDesign.feature">
+      <FeatureId>{974544e5-7f5c-4ea0-8d91-8141b1c29f40}</FeatureId>
+    </None>
     <None Include="Modules\ClubCloudPages\Pages.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Pages.aspx</LastGenOutput>
@@ -449,9 +452,6 @@
     <None Include="ControlTemplates\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{152aa947-fc0b-48bd-a24d-333852848fa1}</SharePointProjectItemId>
     </None>
-    <None Include="Features\ClubCloud_Design\ClubCloud_Design.feature">
-      <FeatureId>{b5db6863-d907-4857-81ea-8f71c96ff8f1}</FeatureId>
-    </None>
     <None Include="Images\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{688dca0e-e0a2-4ac3-8e13-6a850e8f706c}</SharePointProjectItemId>
     </None>
@@ -460,11 +460,9 @@
     <None Include="Modules\ClubCloudDesign\ClubCloud\type\awesome\fontawesome-webfont.woff" />
     <None Include="Modules\ClubCloudDesign\ClubCloud\type\awesome\FontAwesome.otf" />
     <None Include="Modules\ClubCloudDesign\ClubCloud\type\fontello\fontello-social.eot" />
-    <None Include="Modules\ClubCloudDesign\ClubCloud\type\fontello\fontello-social.eot%40" />
     <None Include="Modules\ClubCloudDesign\ClubCloud\type\fontello\fontello-social.ttf" />
     <None Include="Modules\ClubCloudDesign\ClubCloud\type\fontello\fontello-social.woff" />
     <None Include="Modules\ClubCloudDesign\ClubCloud\type\fontello\fontello.eot" />
-    <None Include="Modules\ClubCloudDesign\ClubCloud\type\fontello\fontello.eot%40" />
     <None Include="Modules\ClubCloudDesign\ClubCloud\type\fontello\fontello.ttf" />
     <None Include="Modules\ClubCloudDesign\ClubCloud\type\fontello\fontello.woff" />
     <None Include="Modules\ClubCloudDesign\SharePointProjectItem.spdata">
@@ -479,6 +477,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Features\ClubCloudDesign\ClubCloudDesign.Template.xml">
+      <DependentUpon>ClubCloudDesign.feature</DependentUpon>
+    </Content>
     <Content Include="Modules\ClubCloudPages\Accommodatie.aspx">
       <DependentUpon>Pages.tt</DependentUpon>
     </Content>
@@ -1066,9 +1067,6 @@
     <Content Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Insert.ascx">
       <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
     </Content>
-    <Content Include="Features\ClubCloud_Design\ClubCloud_Design.Template.xml">
-      <DependentUpon>ClubCloud_Design.feature</DependentUpon>
-    </Content>
     <Content Include="Images\ClubCloud\Administratie\Administrative_Tools.png" />
     <Content Include="Images\ClubCloud\Administratie\Contact\Contact_128.png" />
     <Content Include="Images\ClubCloud\Administratie\Contact\Contact_16.png" />
@@ -1140,10 +1138,10 @@
     <Content Include="Modules\ClubCloudDesign\ClubCloud\Icons\mstile-310x150.png" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\Icons\mstile-310x310.png" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\Icons\mstile-70x70.png" />
-    <Content Include="Modules\ClubCloudDesign\ClubCloud\images\dropdown-arrow%402x.png" />
+    <Content Include="Modules\ClubCloudDesign\ClubCloud\images\dropdown-arrow_2x.png" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\images\dropdown-arrow.png" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\images\favicon.ico" />
-    <Content Include="Modules\ClubCloudDesign\ClubCloud\images\loading%402x.gif" />
+    <Content Include="Modules\ClubCloudDesign\ClubCloud\images\loading_2x.gif" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\images\loading.gif" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\images\logo.png" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\images\metrotile.png" />

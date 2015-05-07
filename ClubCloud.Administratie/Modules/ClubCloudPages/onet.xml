@@ -1,16 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Title="ClubCloud Administratie" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" HideSiteContentsLink="true" DisableWebDesignFeatures="true" EnableMinimalDownload="false" SiteLogoDescription="ClubCloud Administratie" SiteLogoUrl="/_layouts/15/images/ClubCloud.Administratie/siteIcon.png" >
+<Project Title="ClubCloud Administratie" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" HideSiteContentsLink="true" DisableWebDesignFeatures="false" EnableMinimalDownload="false" SiteLogoDescription="ClubCloud Administratie" SiteLogoUrl="/_layouts/15/images/ClubCloud/Administratie/siteIcon.png" >
   <NavBars>
     <NavBar ID="1002" Name="ClubCloud Administratie"  >
     </NavBar>
   </NavBars>
   <Configurations>
-    <Configuration ID="0" Name="ClubCloud Administratie" Description="ClubCloud Administratie Site" Hidden="false" Title="ClubCloud Administratie" >
+    <Configuration ID="-1" Name="NewWeb" MasterUrl="_catalogs/masterpage/seattle.master" />
+    <Configuration ID="0" Name="ClubCloud Administratie" Description="ClubCloud Administratie Site" Hidden="false" Title="ClubCloud Administratie" MasterUrl="_catalogs/masterpage/clubcloud.master">
       <Lists/>
       <SiteFeatures>
-        <Feature ID="4d0d7862-e699-453c-a30c-77427f1078eb" Name="ClubCloud Administratie Design" />
+        <!-- BasicWebParts Feature -->
+        <Feature ID="00BFEA71-1C5E-4A24-B310-BA51C3EB7A57" />
+        <!-- Three-state Workflow Feature -->
+        <Feature ID="FDE5D850-671E-4143-950A-87B473922DC7" />
+        <!-- Zimbra WebParts -->
+        <Feature ID="9632a0d4-0d82-4a5d-a50b-e0e0bd3c8427" />
+        <!-- ClubCloud Administratie Design -->
+        <Feature ID="d8462e0b-5399-460b-bead-33f727528679" />
       </SiteFeatures>
       <WebFeatures>
+        <!-- Zimbra Receivers -->
+        <Feature ID="feeca0b7-26ac-459f-83de-82e1943f195c" />
       </WebFeatures>
       <Modules>
         <Module Name="Administratie"  />
@@ -19,7 +29,10 @@
   </Configurations>
   <Modules>
     <Module Name="Administratie" Url="" Path="" >
-      <File Path="Default.aspx" Url="Default.aspx" />
+      <File Path="Default.aspx" Url="Default.aspx" NavBarHome="True" >
+        <NavBarPage Name="$Resources:core,nav_Home;" Url="~site" ID="1002" Position="Start" />
+        <NavBarPage Name="$Resources:core,nav_Home;" ID="0" Position="Start" />
+      </File>
       <File Path="Pages.aspx" Url="Pages.aspx" />
       <File Path="Baantoplaag.aspx" Url="Baantoplaag.aspx" />
       <File Path="Baanblok.aspx" Url="Baanblok.aspx" />
