@@ -23,6 +23,7 @@ namespace ClubCloud.Common
                 _modifications = new List<SPWebConfigModification>();
 
                 AddTargetFramework();
+                AddScriptResourceAttributes();
                 AddSaveControls();
 
                 return _modifications;
@@ -55,6 +56,54 @@ namespace ClubCloud.Common
 
             };
             _modifications.Add(configModhttpRuntimeTargetFramework);
+        }
+
+        private static void AddScriptResourceAttributes()
+        {
+            /*
+            <system.web.extensions>
+                <scripting>
+                    <scriptResourceHandler enableCompression="true" enableCaching="true"/>
+                </scripting>
+            </system.web.extensions>  
+            */
+
+            var systemwebextensions = new SPWebConfigModification
+            {
+                Name = "systemwebextensions",
+                Owner = "ClubCloud",
+                Sequence = 0,
+                Path = "configuration",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
+                Value = "<system.web.extensions> </system.web.extensions>"
+
+            };
+            _modifications.Add(systemwebextensions);
+
+            var systemwebextensionsscripting = new SPWebConfigModification
+            {
+                Name = "systemwebextensionsscripting",
+                Owner = "ClubCloud",
+                Sequence = 1,
+                Path = "configuration/system.web.extensions",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureSection,
+                Value = "<scripting> </scripting>"
+
+            };
+            _modifications.Add(systemwebextensionsscripting);
+
+            var systemwebextensionsscriptingscriptResourceHandler = new SPWebConfigModification
+            {
+                Name = "systemwebextensionsscriptingscriptResourceHandler",
+                Owner = "ClubCloud",
+                Sequence = 2,
+                Path = "configuration/system.web.extensions/scripting",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<scriptResourceHandler enableCompression=\"true\" enableCaching=\"true\"/>"
+
+            };
+            _modifications.Add(systemwebextensionsscripting);
+
         }
 
         private static void AddSaveControls()

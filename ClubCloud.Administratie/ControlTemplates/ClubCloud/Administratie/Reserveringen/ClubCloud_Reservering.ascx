@@ -10,8 +10,6 @@
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Reservering.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_ReserveringUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Reservering_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Reserveringen_View" />
-<asp:UpdatePanel ID="udp_profiel" runat="server" UpdateMode="Always">
-    <contenttemplate>
 <asp:FormView runat="server" ID="SelectReserveringform" DefaultMode="ReadOnly" RenderOuterTable="False" OnCallingDataMethods="SelectReserveringform_CallingDataMethods" SelectMethod="SelectReservering" DataKeyNames="Id" >
     <EmptyDataTemplate>
         <h1 class="title-regular clearfix">
@@ -26,12 +24,12 @@
     <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
     <HeaderTemplate>
 	<span style="display:inline-block;" >
-		<asp:LinkButton CssClass="button big"  ID="btn_goback_top" runat="server" Text="Terug" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
+		<asp:LinkButton CssClass="button big"  ID="btn_goback_top" runat="server" Text="Terug naar Reserveringen" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
         <asp:LinkButton CssClass="button big"  ID="btn_edit_top" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/></br>
 	</span>
     </HeaderTemplate>
     <FooterTemplate>
-		<asp:LinkButton CssClass="button big"  ID="btn_goback_bottom" runat="server" Text="Terug " CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
+		<asp:LinkButton CssClass="button big"  ID="btn_goback_bottom" runat="server" Text="Terug naar Reserveringen" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
 		<asp:LinkButton CssClass="button big"  ID="btn_edit_bottom" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/>
     </FooterTemplate>
     <ItemTemplate>
@@ -40,6 +38,7 @@
 			Datum : <asp:Label ID="Datum" runat="server" Text='<%# Eval("Datum") %>' /></br>
 			Duur : <asp:Label ID="Duur" runat="server" Text='<%# Eval("Duur") %>' /></br>
 			Final : <asp:Label ID="Final" runat="server" Text='<%# Eval("Final") %>' /></br>
+			<asp:HiddenField ID="Id" Value='<%# Eval("Id") %>' runat="server" />
 			ReserveringSoort : <asp:Label ID="ReserveringSoort" runat="server" Text='<%# Eval("ReserveringSoort") %>' /></br>
 			Tijd : <asp:Label ID="Tijd" runat="server" Text='<%# Eval("Tijd") %>' /></br>
 			Baan : <asp:Label runat="server" ID="Baan" Text='<%# Eval("ClubCloud_Baan.Naam") %>' /></br>
@@ -50,5 +49,3 @@
         </fieldset>
     </ItemTemplate>
 </asp:FormView>
-    </contenttemplate>
-</asp:UpdatePanel>

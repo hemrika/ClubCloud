@@ -498,7 +498,7 @@
     <Property Name="Postcode" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Straat" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Nummer" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="LandId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="LandId" Type="uniqueidentifier" Nullable="true" DefaultValue="1aedac02-b67a-4fc1-8fe7-5b7e3fcff5f5" />
     <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Fax" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Toevoeging" Type="nvarchar(max)" Nullable="false" />
@@ -579,7 +579,7 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Baansoort" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Baansoort" Type="int" Nullable="false" />
     <Property Name="AccommodatieId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BaantoplaagId" Type="uniqueidentifier" Nullable="true" />
@@ -593,7 +593,7 @@
     <Property Name="Datum" Type="datetime" Nullable="false" />
     <Property Name="Tijd" Type="time" Nullable="false" />
     <Property Name="Duur" Type="time" Nullable="false" />
-    <Property Name="Soort" Type="int" Nullable="false" />
+    <Property Name="ReserveringSoort" Type="int" Nullable="false" />
     <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Gebruiker_Een" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Gebruiker_Twee" Type="uniqueidentifier" Nullable="true" />
@@ -2125,7 +2125,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Baansoort" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Baansoort" Type="BeheerClubCloud.BaanSoort" Nullable="false" />
           <Property Name="AccommodatieId" Type="Guid" Nullable="true" />
           <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaal_Accommodatie" FromRole="ClubCloud_BaanSpeciaal" ToRole="ClubCloud_Accommodatie" />
@@ -2256,8 +2256,8 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="VerenigingId" Type="Guid" Nullable="true" />
-          <Property Name="MaandBegin" Type="BeheerClubCloud.Month" Nullable="false" />
-          <Property Name="MaandEinde" Type="BeheerClubCloud.Month" Nullable="false" />
+          <Property Name="MaandBegin" Type="BeheerClubCloud.MonthSoort" Nullable="false" />
+          <Property Name="MaandEinde" Type="BeheerClubCloud.MonthSoort" Nullable="false" />
           <Property Name="BaanBegin" Type="Time" Nullable="false" />
           <Property Name="BaanEinde" Type="Time" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Afhangen_Vereniging" FromRole="ClubCloud_Afhangen" ToRole="ClubCloud_Vereniging" />
@@ -2267,7 +2267,7 @@
           <Property Name="Duur_Vier" Type="Int32" Nullable="false" DefaultValue="45" />
           <Property Name="Duur_Precisie" Type="Int32" Nullable="false" DefaultValue="5" />
           </EntityType>
-        <EnumType Name="Month" IsFlags="true">
+        <EnumType Name="MonthSoort" IsFlags="true">
           <Member Name="januari" Value="1" />
           <Member Name="februari" Value="2" />
           <Member Name="maart" Value="3" />
@@ -2280,6 +2280,7 @@
           <Member Name="oktober" Value="10" />
           <Member Name="november" Value="11" />
           <Member Name="december" Value="12" />
+          <Member Name="Onbekend" Value="0" />
         </EnumType>
         <Association Name="ClubCloud_Afhangen_Vereniging">
           <End Type="BeheerClubCloud.ClubCloud_Afhang" Role="ClubCloud_Afhangen" Multiplicity="*" />
@@ -2301,15 +2302,15 @@
           <Property Name="BaanId" Type="Guid" Nullable="true" />
           <Property Name="VerenigingId" Type="Guid" Nullable="true" />
           <Property Name="Beschikbaar" Type="Boolean" Nullable="false" />
-          <Property Name="MaandBegin" Type="BeheerClubCloud.Month" Nullable="false" />
-          <Property Name="MaandEinde" Type="BeheerClubCloud.Month" Nullable="false" />
-          <Property Name="Dag" Type="BeheerClubCloud.Days" Nullable="false" />
+          <Property Name="MaandBegin" Type="BeheerClubCloud.MonthSoort" Nullable="false" />
+          <Property Name="MaandEinde" Type="BeheerClubCloud.MonthSoort" Nullable="false" />
+          <Property Name="Dag" Type="BeheerClubCloud.DaysSoort" Nullable="false" />
           <Property Name="DagBegin" Type="Time" Nullable="false" />
           <Property Name="DagEinde" Type="Time" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Baan" Relationship="BeheerClubCloud.ClubCloud_Baanschema_Baan" FromRole="ClubCloud_Baanschema" ToRole="ClubCloud_Baan" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Baanschema_Vereniging" FromRole="ClubCloud_Baanschema" ToRole="ClubCloud_Vereniging" />
         </EntityType>
-        <EnumType Name="Days" IsFlags="true">
+        <EnumType Name="DaysSoort" IsFlags="true">
           <Member Name="maandag" Value="1" />
           <Member Name="dinsdag" Value="2" />
           <Member Name="woensdag" Value="3" />
@@ -2330,20 +2331,24 @@
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" />
         </EntityType>
         <EnumType Name="BaanSoort" IsFlags="true">
-          <Member Name="Buiten" Value="1" />
-          <Member Name="Binnen" Value="2" />
-          <Member Name="Blaashal" Value="3" />
+          <Member Name="Rodebaan" Value="1" />
+          <Member Name="Oranjebaan" Value="2" />
+          <Member Name="Minibaan" Value="3" />
+          <Member Name="Oefenmuur" Value="4" />
+          <Member Name="Playground" Value="5" />
+          <Member Name="Onbekend" Value="0" />
         </EnumType>
         <EnumType Name="ReserveringSoort" IsFlags="true">
-          <Member Name="Afhangen" Value="0" />
+          <Member Name="Afhangen" Value="1" />
           <Member Name="Les" Value="2" />
           <Member Name="Competitie" Value="3" />
           <Member Name="Toernooi" Value="4" />
           <Member Name="Evenement" Value="5" />
           <Member Name="Onderhoud" Value="6" />
           <Member Name="Seizoen" Value="7" />
-          <Member Name="Mobiel" Value="1" />
-          <Member Name="Overig" Value="8" />
+          <Member Name="Mobiel" Value="8" />
+          <Member Name="Overig" Value="9" />
+          <Member Name="Onbekend" Value="0" />
         </EnumType>
         <EnumType Name="GeslachtSoort" IsFlags="true">
           <Member Name="Onbekend" Value="0" />
@@ -2637,6 +2642,7 @@
         <EnumType Name="AddressSoort" IsFlags="true">
           <Member Name="Bezoekadres" Value="1" />
           <Member Name="Postadres" Value="2" />
+          <Member Name="Onbekend" Value="0" />
         </EnumType>
         <EntityType Name="ClubCloud_Land">
           <Key>
@@ -3059,7 +3065,7 @@
           <ScalarProperty Name="Datum" ColumnName="Datum" />
           <ScalarProperty Name="Tijd" ColumnName="Tijd" />
           <ScalarProperty Name="Duur" ColumnName="Duur" />
-          <ScalarProperty Name="ReserveringSoort" ColumnName="Soort" />
+          <ScalarProperty Name="ReserveringSoort" ColumnName="ReserveringSoort" />
           <ScalarProperty Name="Beschrijving" ColumnName="Beschrijving" />
           <ScalarProperty Name="Gebruiker_Een" ColumnName="Gebruiker_Een" />
           <ScalarProperty Name="Gebruiker_Twee" ColumnName="Gebruiker_Twee" />

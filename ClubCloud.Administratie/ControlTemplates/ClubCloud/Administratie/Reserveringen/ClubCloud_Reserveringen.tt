@@ -22,7 +22,7 @@ if (!typeMapper.VerifyCaseInsensitiveTypeUniqueness(typeMapper.GetAllGlobalItems
 }
 var name = Host.TemplateFile.Split('\\').Last().Split('.').First();
 var entitySet = container.EntitySets[name];
-var EntitySetName = entitySet.Name.Split('_').Last();
+var entitySetName = entitySet.Name.Split('_').Last();
 var entity = entitySet.ElementType;
 var primarykey = entity.KeyMembers.FirstOrDefault();
 var entityName = entity.Name.Split('_').Last();
@@ -42,10 +42,10 @@ var navigationProperties = typeMapper.GetNavigationProperties(entity);
 <%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entitySet)#>.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entitySet)#>UserControl" %>
-<Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="tmr_loader_<#=code.Escape(EntitySetName)#>_Tick" ViewName="<#=code.Escape(entitySet)#>_View" />
-<asp:UpdatePanel ID="udp_<#=code.Escape(EntitySetName)#>" runat="server" UpdateMode="Always">
+<Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="tmr_loader_<#=code.Escape(entitySetName)#>_Tick" ViewName="<#=code.Escape(entitySet)#>_View" />
+<asp:UpdatePanel ID="udp_<#=code.Escape(entitySetName)#>" runat="server" UpdateMode="Always">
     <contenttemplate>
-		<asp:Timer runat="server" ID="tmr_loader_<#=code.Escape(EntitySetName)#>" OnTick="tmr_loader_<#=code.Escape(EntitySetName)#>_Tick" interval="500" />
+		<asp:Timer runat="server" ID="tmr_loader_<#=code.Escape(entitySetName)#>" OnTick="tmr_loader_<#=code.Escape(entitySetName)#>_Tick" interval="500" />
 <#
     if (navigationProperties.Any())
     {
@@ -59,13 +59,13 @@ var navigationProperties = typeMapper.GetNavigationProperties(entity);
 			var endEntity = navigationProperty.ToEndMember.GetEntityType();
 			var endentityName = endEntity.Name.Split('_').Last();
 			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endEntitySetName = endEntitySet.Name.Split('_').Last();			
+			var endentitySetName = endEntitySet.Name.Split('_').Last();			
 
 			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
             {
-				if(endEntitySetName == "Verenigingen"|| endEntitySetName == "Accommodaties"|| endEntitySetName == "Gebruikers"  || endEntitySetName == "Reserveringen" || endEntitySetName == "Settings" ) continue;
+				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 #>
-    <SharePoint:MenuItemTemplate ID="<#=code.Escape(endEntitySetName)#>" runat="server" Text="<#=code.Escape(endEntitySetName)#>" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endEntitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=%Id%',title:'<#=code.Escape(endEntitySetName)#>', autoSize:true});" Title="<#=code.Escape(endEntitySetName)#>"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="<#=code.Escape(endentitySetName)#>" runat="server" Text="<#=code.Escape(endentitySetName)#>" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endentitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=%Id%',title:'<#=code.Escape(endentitySetName)#>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" Title="<#=code.Escape(endentitySetName)#>"></SharePoint:MenuItemTemplate>
 <#
             }
         }
@@ -74,37 +74,38 @@ var navigationProperties = typeMapper.GetNavigationProperties(entity);
 <#
     }
 #>
-<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>_Insert.aspx', title:'Toevoegen <#=code.Escape(entityName)#>'});" href="#" target="_self" title="Toevoegen" >Toevoegen <#=code.Escape(entityName)#></a>
+<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>_Insert.aspx', title:'Toevoegen <#=code.Escape(entityName)#>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="Toevoegen" >Toevoegen <#=code.Escape(entityName)#></a>
 <br/>
-<asp:panel runat="server" ID="pnl_<#=code.Escape(EntitySetName)#>" >
-<SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="<#=code.Escape(EntitySetName)#>_Grid" runat="server" />
+<asp:panel runat="server" ID="pnl_<#=code.Escape(entitySetName)#>" >
+<SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="<#=code.Escape(entitySetName)#>_Grid" runat="server" />
 <br />
 <SharePoint:SPGridView 
-    ID="<#=code.Escape(EntitySetName)#>_Grid" 
+    ID="<#=code.Escape(entitySetName)#>_Grid" 
     runat="server"
     AllowPaging="true" 
     AllowSorting="true" 
     AutoGenerateColumns="false" 
-    SelectMethod="Select<#=code.Escape(EntitySetName)#>"
-	OnCallingDataMethods="Grid<#=code.Escape(EntitySetName)#>_CallingDataMethods"
+    SelectMethod="Select<#=code.Escape(entitySetName)#>"
+	OnCallingDataMethods="Grid<#=code.Escape(entitySetName)#>_CallingDataMethods"
     PageSize="30"
     ShowFooter="true"
     ShowHeader="true"
+	EnableViewState="false"
+	ViewStateMode="Disabled"
 <#
-if(EntitySetName == "Functionarissen")
+if(entitySetName == "Functionarissen")
 {
 #>
     GroupField="ClubCloud_Functie_Naam"
     GroupDisplayTextField="ClubCloud_Functie_Naam"
     GroupFieldDisplayName="Functie"
-    ViewStateMode="Disabled"
     AllowGrouping="true"
     AllowGroupCollapse="true"
     DisplayGroupFieldName="true"
 <#
 }
 #>
-	OnDataBinding="tmr_loader_<#=code.Escape(EntitySetName)#>_Tick" >
+	OnDataBinding="tmr_loader_<#=code.Escape(entitySetName)#>_Tick" >
     <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
@@ -117,7 +118,7 @@ if(EntitySetName == "Functionarissen")
 	    foreach (var edmProperty in simpleProperties)
         {
 
-			if(EntitySetName == "Functionarissen")
+			if(entitySetName == "Functionarissen")
 			{
 #>
 		<asp:TemplateField>
@@ -125,7 +126,7 @@ if(EntitySetName == "Functionarissen")
 			    <asp:LinkButton ForeColor="White" ID="<#=code.Escape(edmProperty.Name)#>_Sort" runat="server" Text="Naam" CommandName="Sort" CommandArgument="<#=code.Escape(edmProperty.Name)#>"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" name="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>', autoSize:true});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" name="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>
                 </a>
 			</ItemTemplate>
@@ -134,7 +135,7 @@ if(EntitySetName == "Functionarissen")
 				break;
 			}
 
-			if(EntitySetName == "Gebruikers")
+			if(entitySetName == "Gebruikers")
 			{
 #>
 		<asp:TemplateField>
@@ -142,7 +143,7 @@ if(EntitySetName == "Functionarissen")
 			    <asp:LinkButton ForeColor="White" ID="<#=code.Escape(edmProperty.Name)#>_Sort" runat="server" Text="Bondsnummer" CommandName="Sort" CommandArgument="Bondsnummer"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("Volledigenaam") %>" name="<%# Eval("Volledigenaam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Volledigenaam") %>', autoSize:true});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("Volledigenaam") %>" name="<%# Eval("Volledigenaam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Volledigenaam") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("Bondsnummer") %>
                 </a>
 			</ItemTemplate>
@@ -159,7 +160,7 @@ if(EntitySetName == "Functionarissen")
 			    <asp:LinkButton ForeColor="White" ID="<#=code.Escape(edmProperty.Name)#>_Sort" runat="server" Text="<#=code.Escape(edmProperty.Name)#>" CommandName="Sort" CommandArgument="<#=code.Escape(edmProperty.Name)#>"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" name="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>', autoSize:true});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" name="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("<#=code.Escape(edmProperty.Name)#>") %>
                 </a>
 			</ItemTemplate>
@@ -176,7 +177,7 @@ if(EntitySetName == "Functionarissen")
 			    <asp:LinkButton ForeColor="White" ID="<#=code.Escape(edmProperty.Name)#>_Sort" runat="server" Text="<#=code.Escape(edmProperty.Name)#>" CommandName="Sort" CommandArgument="<#=code.Escape(edmProperty.Name)#>"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" name="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Id") %>', autoSize:true});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" name="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Id") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("<#=code.Escape(edmProperty.Name)#>") %>
                 </a>
 			</ItemTemplate>
@@ -210,7 +211,7 @@ if(EntitySetName == "Functionarissen")
     {
 #>
 <#
-		if(EntitySetName != "Functionarissen")
+		if(entitySetName != "Functionarissen")
 		{
 
         foreach (var navigationProperty in navigationProperties)
@@ -219,13 +220,13 @@ if(EntitySetName == "Functionarissen")
 			var endEntity = navigationProperty.ToEndMember.GetEntityType();
 			var endentityName = endEntity.Name.Split('_').Last();
 			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endEntitySetName = endEntitySet.Name.Split('_').Last();			
+			var endentitySetName = endEntitySet.Name.Split('_').Last();			
 
 			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
             {
-				if(endEntitySetName == "Verenigingen"|| endEntitySetName == "Accommodaties"|| endEntitySetName == "Gebruikers"  || endEntitySetName == "Reserveringen" || endEntitySetName == "Settings" ) continue;
+				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 #>
-		<asp:TemplateField HeaderText="<#=code.Escape(endEntitySetName)#>" SortExpression="<#=code.Escape(endentityName)#>Id">
+		<asp:TemplateField HeaderText="<#=code.Escape(endentitySetName)#>" SortExpression="<#=code.Escape(endentityName)#>Id">
 			<ItemTemplate>
 				<asp:Label ID="<#=code.Escape(navigationProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(navigationProperty.Name)#>.Count") %>'></asp:Label>
 			</ItemTemplate>
@@ -235,12 +236,12 @@ if(EntitySetName == "Functionarissen")
 
 			if(navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
             {
-				if(endEntitySetName == "Verenigingen"|| endEntitySetName == "Accommodaties" || endEntitySetName == "Reserveringen" || endEntitySetName == "Settings" ) continue;
+				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties" || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 #>
 		<asp:TemplateField HeaderText="<#=code.Escape(endentityName)#>" SortExpression="<#=code.Escape(endentityName)#>Id">
 			<ItemTemplate>
 <#
-				if(endEntitySetName == "Gebruikers")
+				if(endentitySetName == "Gebruikers")
                 {
 #>
 				<asp:Label ID="<#=code.Escape(navigationProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(navigationProperty.Name)#>.Volledigenaam") %>'></asp:Label>
@@ -263,21 +264,21 @@ if(EntitySetName == "Functionarissen")
 #>
     </Columns>
     <EmptyDataTemplate>
-        <ItemTemplate>Er zijn geen <#=code.Escape(EntitySetName)#> gevonden.</ItemTemplate>
+        <ItemTemplate>Er zijn geen <#=code.Escape(entitySetName)#> gevonden.</ItemTemplate>
     </EmptyDataTemplate>        
 </SharePoint:SPGridView >
 <br />
-<SharePoint:SPGridViewPager ID="spgvpager_bottom" GridViewId="<#=code.Escape(EntitySetName)#>_Grid" runat="server"/>
+<SharePoint:SPGridViewPager ID="spgvpager_bottom" GridViewId="<#=code.Escape(entitySetName)#>_Grid" runat="server"/>
 </asp:panel>
 <p>
     <asp:Label runat="server" ID="lblMessage" ForeColor="Red" />
 </p>
     <triggers>
-        <asp:AsyncPostBackTrigger ControlID="tmr_loader_<#=code.Escape(EntitySetName)#>" EventName="Tick" />
+        <asp:AsyncPostBackTrigger ControlID="tmr_loader_<#=code.Escape(entitySetName)#>" EventName="Tick" />
     </triggers>
     </contenttemplate>
 </asp:UpdatePanel>
-<asp:UpdateProgress ID="udp_<#=code.Escape(EntitySetName)#>_progress" runat="server" AssociatedUpdatePanelID="udp_<#=code.Escape(EntitySetName)#>" DisplayAfter="50">
+<asp:UpdateProgress ID="udp_<#=code.Escape(entitySetName)#>_progress" runat="server" AssociatedUpdatePanelID="udp_<#=code.Escape(entitySetName)#>" DisplayAfter="50">
     <progresstemplate>
         <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity=80); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; z-index: 10000;">
         <div class="bubbles aligncenter" style="top:48%;">laden...</div>
@@ -311,37 +312,47 @@ public partial class <#=code.Escape(entitySet)#>UserControl : UserControl
 
 		<#=code.Escape(entity)#>_DataSource.View.WhereParameters = new ParameterCollection();
 
-        foreach (string key in Request.QueryString.Keys)
+        if (Request.QueryString.HasKeys())
         {
-            string value = Request.QueryString[key];
-            if (value != null || !string.IsNullOrWhiteSpace(value))
+            foreach (String key in Request.QueryString.AllKeys)
             {
-                Guid DefaultValue = Guid.Empty;
-                if (Guid.TryParse(value, out DefaultValue))
+                string value = Request.QueryString[key];
+                if (value != null)
                 {
-<#
-					if(EntitySetName == "Addressen")
+                    Guid DefaultValue = Guid.Empty;
+                    if (Guid.TryParse(value, out DefaultValue))
 					{
-#>
-						<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "ParentId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
 <#
-					}
-					else
-                    {
+				if(entitySetName == "Addressen")
+				{
 #>
-                    <#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+						if(key == "Id")
+						{
+
+							<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "ParentId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+						}
+						else
+						{
+							<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+						}
 <#
-					}
+				}
+				else
+                {
 #>
-                }
-            }
-        }
+						<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+<#
+				}
+#>					}
+				}      
+			}
+		}
 		*/
     }
 
-	protected void tmr_loader_<#=code.Escape(EntitySetName)#>_Tick(object sender, EventArgs e)
+	protected void tmr_loader_<#=code.Escape(entitySetName)#>_Tick(object sender, EventArgs e)
 	{
-		tmr_loader_<#=code.Escape(EntitySetName)#>.Enabled = false;
+		tmr_loader_<#=code.Escape(entitySetName)#>.Enabled = false;
 
 		if(<#=code.Escape(entity)#>_DataSource.ViewName != this.ViewName)
 			<#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
@@ -354,36 +365,46 @@ public partial class <#=code.Escape(entitySet)#>UserControl : UserControl
 
 		<#=code.Escape(entity)#>_DataSource.View.WhereParameters = new ParameterCollection();
 
-        foreach (string key in Request.QueryString.Keys)
+        if (Request.QueryString.HasKeys())
         {
-            string value = Request.QueryString[key];
-            if (value != null || !string.IsNullOrWhiteSpace(value))
+            foreach (String key in Request.QueryString.AllKeys)
             {
-                Guid DefaultValue = Guid.Empty;
-                if (Guid.TryParse(value, out DefaultValue))
+                string value = Request.QueryString[key];
+                if (value != null)
                 {
-<#
-					if(EntitySetName == "Addressen")
+                    Guid DefaultValue = Guid.Empty;
+                    if (Guid.TryParse(value, out DefaultValue))
 					{
-#>
-						<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "ParentId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
 <#
-					}
-					else
-                    {
+				if(entitySetName == "Addressen")
+				{
 #>
-                    <#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
-<#
-					}
-#>
-                }
-            }
-        }
+						if(key == "Id")
+						{
 
-		udp_<#=code.Escape(EntitySetName)#>_progress.Visible = false;
+							<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "ParentId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+						}
+						else
+						{
+							<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+						}
+<#
+				}
+				else
+                {
+#>
+						<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+<#
+				}
+#>					}
+				}      
+			}
+		}
+
+		udp_<#=code.Escape(entitySetName)#>_progress.Visible = false;
 	}
 
-	protected void Grid<#=code.Escape(EntitySetName)#>_CallingDataMethods(object sender, CallingDataMethodsEventArgs e)
+	protected void Grid<#=code.Escape(entitySetName)#>_CallingDataMethods(object sender, CallingDataMethodsEventArgs e)
 	{
 		if(<#=code.Escape(entity)#>_DataSource.ViewName != this.ViewName)
 			<#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
@@ -404,7 +425,7 @@ public partial class <#=code.Escape(entitySet)#>UserControl : UserControl
                 if (Guid.TryParse(value, out DefaultValue))
                 {
 <#
-					if(EntitySetName == "Addressen")
+					if(entitySetName == "Addressen")
 					{
 #>
 						<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "ParentId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
@@ -437,7 +458,7 @@ EndNamespace(code);
 fileManager.StartNewFile(entitySet.Name+".ascx.designer.cs");
 #>
 //------------------------------------------------------------------------------
-// <a class="button big" uto-generated>
+// <auto-generated>
 //     This code was generated by a tool.
 //
 //     Changes to this file may cause incorrect behavior and will be lost if
@@ -453,40 +474,40 @@ public partial class <#=code.Escape(entitySet)#>UserControl
 {
 
     /// <summary>
-    /// udp_<#=code.Escape(EntitySetName)#> control.
+    /// udp_<#=code.Escape(entitySetName)#> control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel udp_<#=code.Escape(EntitySetName)#>;
+    protected global::System.Web.UI.UpdatePanel udp_<#=code.Escape(entitySetName)#>;
 
 	/// <summary>
-	/// tmr_loader_<#=code.Escape(EntitySetName)#> control.
+	/// tmr_loader_<#=code.Escape(entitySetName)#> control.
 	/// </summary>
 	/// <remarks>
 	/// Auto-generated field.
 	/// To modify move field declaration from designer file to code-behind file.
 	/// </remarks>
-	protected global::System.Web.UI.Timer tmr_loader_<#=code.Escape(EntitySetName)#>;
+	protected global::System.Web.UI.Timer tmr_loader_<#=code.Escape(entitySetName)#>;
         
 	/// <summary>
-	/// pnl_<#=code.Escape(EntitySetName)#> control.
+	/// pnl_<#=code.Escape(entitySetName)#> control.
 	/// </summary>
 	/// <remarks>
 	/// Auto-generated field.
 	/// To modify move field declaration from designer file to code-behind file.
 	/// </remarks>
-	protected global::System.Web.UI.WebControls.Panel pnl_<#=code.Escape(EntitySetName)#>;
+	protected global::System.Web.UI.WebControls.Panel pnl_<#=code.Escape(entitySetName)#>;
 
 	/// <summary>
-	/// udp_<#=code.Escape(EntitySetName)#>_progress control.
+	/// udp_<#=code.Escape(entitySetName)#>_progress control.
 	/// </summary>
 	/// <remarks>
 	/// Auto-generated field.
 	/// To modify move field declaration from designer file to code-behind file.
 	/// </remarks>
-	protected global::System.Web.UI.UpdateProgress udp_<#=code.Escape(EntitySetName)#>_progress;
+	protected global::System.Web.UI.UpdateProgress udp_<#=code.Escape(entitySetName)#>_progress;
 
 <#
     if (navigationProperties.Any())
@@ -517,21 +538,21 @@ public partial class <#=code.Escape(entitySet)#>UserControl
 			var endEntity = navigationProperty.ToEndMember.GetEntityType();
 			var endentityName = endEntity.Name.Split('_').Last();
 			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endEntitySetName = endEntitySet.Name.Split('_').Last();
+			var endentitySetName = endEntitySet.Name.Split('_').Last();
 
-			if(endEntitySetName == "Verenigingen"|| endEntitySetName == "Accommodaties"|| endEntitySetName == "Gebruikers"  || endEntitySetName == "Reserveringen" || endEntitySetName == "Settings" ) continue;
+			if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 
 			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
             {
 #>
     /// <summary>
-    /// <#=code.Escape(endEntitySetName)#> control.
+    /// <#=code.Escape(endentitySetName)#> control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate <#=code.Escape(endEntitySetName)#>;
+    protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate <#=code.Escape(endentitySetName)#>;
 
 <#
             }
@@ -563,7 +584,7 @@ public partial class <#=code.Escape(entitySet)#>UserControl
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::Microsoft.SharePoint.WebControls.SPGridView <#=code.Escape(EntitySetName)#>_Grid;
+    protected global::Microsoft.SharePoint.WebControls.SPGridView <#=code.Escape(entitySetName)#>_Grid;
 
     /// <summary>
     /// spgvpager_bottom control.
@@ -604,8 +625,6 @@ fileManager.StartNewFile(entity.Name+".ascx");
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entity)#>.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entity)#>UserControl" %>
 <Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="<#=code.Escape(entitySet)#>_View" />
-<asp:UpdatePanel ID="udp_profiel" runat="server" UpdateMode="Always">
-    <contenttemplate>
 <asp:FormView runat="server" ID="Select<#=code.Escape(entityName)#>form" DefaultMode="ReadOnly" RenderOuterTable="False" OnCallingDataMethods="Select<#=code.Escape(entityName)#>form_CallingDataMethods" SelectMethod="Select<#=entityName#>" DataKeyNames="<#=primarykey.Name#>" >
     <EmptyDataTemplate>
         <h1 class="title-regular clearfix">
@@ -613,14 +632,14 @@ fileManager.StartNewFile(entity.Name+".ascx");
 		</h1>
         <div class="notice">
             Sorry, er is geen  <#=code.Escape(entityName)#> beschikbaar voor dit Id.</div>
-        <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button" />
+        <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar <#=code.Escape(entitySetName)#>" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button" />
     </EmptyDataTemplate>
     <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" HorizontalAlign="Center" />
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" HorizontalAlign="Center"/>
     <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
     <HeaderTemplate>
 	<span style="display:inline-block;" >
-		<asp:LinkButton CssClass="button big"  ID="btn_goback_top" runat="server" Text="Terug" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
+		<asp:LinkButton CssClass="button big"  ID="btn_goback_top" runat="server" Text="Terug naar <#=code.Escape(entitySetName)#>" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
         <asp:LinkButton CssClass="button big"  ID="btn_edit_top" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/></br>
 <#
 	
@@ -634,23 +653,23 @@ fileManager.StartNewFile(entity.Name+".ascx");
 			var endEntity = navigationProperty.ToEndMember.GetEntityType();
 			var endentityName = endEntity.Name.Split('_').Last();
 			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endEntitySetName = endEntitySet.Name.Split('_').Last();
+			var endentitySetName = endEntitySet.Name.Split('_').Last();
 
 			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
             {
-				if(endEntitySetName == "Verenigingen"|| endEntitySetName == "Accommodaties"|| endEntitySetName == "Gebruikers"  || endEntitySetName == "Reserveringen" || endEntitySetName == "Settings" ) continue;
+				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 
-				if(EntitySetName != "Gebruikers")
+				if(entitySetName != "Gebruikers")
 				{
 
 #>
-		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endEntitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=<%# Eval("<#=code.Escape(primarykey.Name)#>") %>', title:'<#=code.Escape(endEntitySetName)#> van <%# Eval("<#=code.Escape("Naam")#>") %>', autoSize:true});" href="#" target="_self" title="<#=code.Escape(endEntitySetName)#>" ><#=code.Escape(endEntitySetName)#></a>
+		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endentitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=<%# Eval("<#=code.Escape(primarykey.Name)#>") %>', title:'<#=code.Escape(endentitySetName)#> van <%# Eval("<#=code.Escape("Naam")#>") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="<#=code.Escape(endentitySetName)#>" ><#=code.Escape(endentitySetName)#></a>
 <#
 				}
 				else
 				{
 #>
-		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endEntitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=<%# Eval("<#=code.Escape(primarykey.Name)#>") %>', title:'<#=code.Escape(endEntitySetName)#> van <%# Eval("<#=code.Escape("Volledigenaam")#>") %>', autoSize:true});" href="#" target="_self" title="<#=code.Escape(endEntitySetName)#>" ><#=code.Escape(endEntitySetName)#></a>
+		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endentitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=<%# Eval("<#=code.Escape(primarykey.Name)#>") %>', title:'<#=code.Escape(endentitySetName)#> van <%# Eval("<#=code.Escape("Volledigenaam")#>") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="<#=code.Escape(endentitySetName)#>" ><#=code.Escape(endentitySetName)#></a>
 <#
 				}
 			}
@@ -660,7 +679,7 @@ fileManager.StartNewFile(entity.Name+".ascx");
 	</span>
     </HeaderTemplate>
     <FooterTemplate>
-		<asp:LinkButton CssClass="button big"  ID="btn_goback_bottom" runat="server" Text="Terug " CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
+		<asp:LinkButton CssClass="button big"  ID="btn_goback_bottom" runat="server" Text="Terug naar <#=code.Escape(entitySetName)#>" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
 		<asp:LinkButton CssClass="button big"  ID="btn_edit_bottom" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/>
     </FooterTemplate>
     <ItemTemplate>
@@ -671,7 +690,16 @@ fileManager.StartNewFile(entity.Name+".ascx");
         foreach (var edmProperty in simpleProperties.OrderBy(e => e.Name))
         {
 			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.Guid" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.Guid>")
+            {
+				if(edmProperty.Name == "Id")
+                {
+#>
+			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
+<#
+					continue;
+                }
 				continue;
+			}
 #>
 			<#=code.Escape(edmProperty.Name)#> : <asp:Label ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>' /></br>
 <#	
@@ -690,20 +718,20 @@ fileManager.StartNewFile(entity.Name+".ascx");
 			var endEntity = navigationProperty.ToEndMember.GetEntityType();
 			var endentityName = endEntity.Name.Split('_').Last();
 			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endEntitySetName = endEntitySet.Name.Split('_').Last();
+			var endentitySetName = endEntitySet.Name.Split('_').Last();
 
 			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many )
             {
-				if(endEntitySetName == "Verenigingen"|| endEntitySetName == "Accommodaties"|| endEntitySetName == "Gebruikers"  || endEntitySetName == "Reserveringen" || endEntitySetName == "Settings" ) continue;
+				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 
 #>
-			<#=code.Escape(endEntitySetName)#> : <asp:Label runat="server" ID="<#=code.Escape(endentityName)#>" Text='<%# Eval("<#=code.Escape(endEntity)#>.Count") %>' /></br>		
+			<#=code.Escape(endentitySetName)#> : <asp:Label runat="server" ID="<#=code.Escape(endentityName)#>" Text='<%# Eval("<#=code.Escape(endEntity)#>.Count") %>' /></br>		
 <#
 		
 			}
 			else
 			{
-				if(endEntitySetName == "Gebruikers" && EntitySetName != "Addressen")
+				if(endentitySetName == "Gebruikers" && entitySetName != "Addressen")
 				{
 					var gebruiker = navigationProperty.Name.Replace("ClubCloud_",String.Empty);
 					var gebruiker_label = gebruiker.Replace("_"," ");
@@ -714,7 +742,7 @@ fileManager.StartNewFile(entity.Name+".ascx");
 				}
 				else
 				{
-					if(EntitySetName != "Addressen")
+					if(entitySetName != "Addressen")
 					{
 #>
 			<#=code.Escape(endentityName)#> : <asp:Label runat="server" ID="<#=code.Escape(endentityName)#>" Text='<%# Eval("<#=code.Escape(navigationProperty.Name)#>.Naam") %>' /></br>
@@ -729,8 +757,6 @@ fileManager.StartNewFile(entity.Name+".ascx");
         </fieldset>
     </ItemTemplate>
 </asp:FormView>
-    </contenttemplate>
-</asp:UpdatePanel>
 <#
 fileManager.StartNewFile(entity.Name+".ascx.cs");
 #>
@@ -755,14 +781,18 @@ public partial class <#=code.Escape(entity)#>UserControl : UserControl
         <#=code.Escape(entity)#>_DataSource.Assembly = typeof(<#=code.Escape(entity)#>UserControl).Assembly;
 
 		<#=code.Escape(entity)#>_DataSource.View.WhereParameters = new ParameterCollection();
-        string value = Request.QueryString["Id"];
-        if(value != null)
+
+        foreach (string key in Request.QueryString.Keys)
         {
-            Guid DefaultValue = Guid.Empty;
-            if(Guid.TryParse(value,out DefaultValue))
-				<#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "Id", DbType = DbType.Guid, Direction = ParameterDirection.Input });
-        }
-    }
+            string value = Request.QueryString[key];
+            if (value != null || !string.IsNullOrWhiteSpace(value))
+            {
+                Guid DefaultValue = Guid.Empty;
+                if (Guid.TryParse(value, out DefaultValue))
+                    <#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+            }
+		}    
+	}
 
 	[Browsable(true)]
     public string ViewName { get; set; }
@@ -778,7 +808,7 @@ public partial class <#=code.Escape(entity)#>UserControl : UserControl
         Response.Write("<script type=\"text/javascript\">window.frameElement.commonModalDialogClose(1);</script>"); 
         Response.End();
 
-		//Response.Redirect("<#=code.Escape(EntitySetName)#>.aspx");
+		//Response.Redirect("<#=code.Escape(entitySetName)#>.aspx");
 	}
 
 	protected void GoEdit(object sender, EventArgs e)
@@ -809,7 +839,7 @@ EndNamespace(code);
 fileManager.StartNewFile(entity.Name+".ascx.designer.cs");
 #>
 //------------------------------------------------------------------------------
-// <a class="button big" uto-generated>
+// <auto-generated>
 //     This code was generated by a tool.
 //
 //     Changes to this file may cause incorrect behavior and will be lost if
@@ -839,7 +869,7 @@ public partial class <#=code.Escape(entity)#>UserControl
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel udp_<#=code.Escape(entityName)#>;
+    //protected global::System.Web.UI.UpdatePanel udp_<#=code.Escape(entityName)#>;
 
     /// <summary>
     /// Select<#=code.Escape(entityName)#>form control.
@@ -872,16 +902,15 @@ fileManager.StartNewFile(entity.Name+"_Edit.ascx");
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entity)#>_Edit.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entity)#>_EditUserControl" %>
 <Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="<#=code.Escape(entitySet)#>_View" />
-<asp:UpdatePanel ID="udp_<#=code.Escape(entityName)#>" runat="server" UpdateMode="Always">
-    <contenttemplate>
-<asp:ValidationSummary ShowModelStateErrors="true" runat="server" />
-<asp:FormView runat="server" ID="Edit<#=code.Escape(entityName)#>form" DefaultMode="Edit" RenderOuterTable="False" OnCallingDataMethods="Edit<#=code.Escape(entityName)#>form_CallingDataMethods" SelectMethod="Select<#=entityName#>" UpdateMethod="Update<#=entityName#>" DataKeyNames="<#=primarykey.Name#>">
+<asp:CustomValidator ID="<#=code.Escape(entityName)#>_Validator" Display="Dynamic" runat="server" />
+<asp:ValidationSummary ShowModelStateErrors="true" runat="server" ID="<#=code.Escape(entityName)#>_Summary" />
+<asp:FormView runat="server" ID="Edit<#=code.Escape(entityName)#>form" DefaultMode="Edit" RenderOuterTable="False" OnCallingDataMethods="Edit<#=code.Escape(entityName)#>form_CallingDataMethods" SelectMethod="Select<#=entityName#>" UpdateMethod="Update<#=entityName#>" DataKeyNames="<#=primarykey.Name#>" OnItemUpdated="Update<#=code.Escape(entityName)#>form_ItemUpdated">
     <EmptyDataTemplate>
         <h1 class="title-regular clearfix">
             Geen <#=code.Escape(entityName)#> gevonden</h1>
         <div class="notice">
             Sorry, er is geen  <#=code.Escape(entityName)#> beschikbaar voor dit Id.</div>
-        <asp:LinkButton CssClass="button big" ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>"
+        <asp:LinkButton CssClass="button big" ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar <#=code.Escape(entitySetName)#>"
             OnClick="GoBack" SkinID="Button" />
     </EmptyDataTemplate>
     <HeaderTemplate>
@@ -907,299 +936,6 @@ fileManager.StartNewFile(entity.Name+"_Edit.ascx");
             {
 				
 				string edmname = edmProperty.Name.Replace("Id", string.Empty);
-				if(edmname != "Nationaliteit" && edmname != "Functie" && edmname != "Baansoort" && edmname != "Baantoplaag" && edmname != "Baantype" && edmname != "Bestuursorgaan" && edmname != "Bouwaard" && edmname != "Lidmaatschapsoort" && edmname != "Rechtsvorm" && edmname != "Land" && edmname != "Baanblok") 
-                {
-					if(!string.IsNullOrWhiteSpace(edmname))
-                    {
-#>
-			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
-<#
-					}
-					continue;
-                }
-
-				if(!string.IsNullOrWhiteSpace(edmname))
-                {
-#>
-            <#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Edit<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
-<#
-				}
-				continue;
-			}
-#>
-<#
-			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "string" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "@string")
-            {
-				if(edmProperty.Name.StartsWith("Telefoon", StringComparison.InvariantCultureIgnoreCase) || edmProperty.Name.StartsWith("Mobiel", StringComparison.InvariantCultureIgnoreCase) || edmProperty.Name.StartsWith("Fax", StringComparison.InvariantCultureIgnoreCase))
-                {
-#>
-			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Phone" /></br>
-<#
-					continue;
-                }
-
-				if(edmProperty.Name.StartsWith("Email", StringComparison.InvariantCultureIgnoreCase))
-                {
-#>
-			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Email" /></br>
-<#
-					continue;
-                }
-
-				if(edmProperty.Name.EndsWith("Nummer", StringComparison.InvariantCultureIgnoreCase))
-                {
-#>
-			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Number" Enabled="false" /></br>
-<#
-					continue;
-                }
-
-			
-			if(edmProperty.Name.StartsWith("Beschrijving", StringComparison.InvariantCultureIgnoreCase) || edmProperty.Name.StartsWith("Omschrijving", StringComparison.InvariantCultureIgnoreCase))
-                {
-#>
-			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="MultiLine" /></br>
-<#
-					continue;
-                }
-
-
-#>
-			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="SingleLine"/></br>
-<#
-				continue;
-			}
-#>
-<#
-			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "int" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "@int")
-            {
-#>
-			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Number" /></br>
-<#
-				continue;
-			}
-#>
-<#
-			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "bool" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "@bool")
-            {
-#>
-			<#=code.Escape(edmProperty.Name)#> : <asp:Checkbox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Checked='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' /></br>
-<#
-				continue;
-			}
-#>
-<#
-			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.DateTime" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.DateTime>")
-            {
-#>
-			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Date" /></br>
-<#
-				continue;
-			}
-#>
-<#
-			if(typeMapper.GetTypeName(edmProperty.TypeUsage).EndsWith("Soort", StringComparison.InvariantCultureIgnoreCase))
-            {
-				string edmname = edmProperty.Name.Replace("Soort", string.Empty);
-				if(edmname == entityName)
-					edmname = "_"+edmname;
-#>
-			<#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Key" DataValueField="Value" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Edit<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
-<#
-				continue;
-            }
-#>
-<#	
-		}
-	}
-#>
-        </fieldset>
-    </EditItemTemplate>
-</asp:FormView>
-    </contenttemplate>
-</asp:UpdatePanel>
-<#
-fileManager.StartNewFile(entity.Name+"_Edit.ascx.cs");
-#>
-namespace ClubCloud.Administratie.WebControls
-{
-<# PushIndent("    "); #>
-<# /* Code */#>
-using System;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Data.Entity.Infrastructure;
-
-public partial class <#=code.Escape(entity)#>_EditUserControl : UserControl
-{
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        <#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
-        <#=code.Escape(entity)#>_DataSource.Assembly = typeof(<#=code.Escape(entity)#>_EditUserControl).Assembly;
-
-		<#=code.Escape(entity)#>_DataSource.View.WhereParameters = new ParameterCollection();
-        string value = Request.QueryString["Id"];
-        if(value != null)
-        {
-            Guid DefaultValue = Guid.Empty;
-            if(Guid.TryParse(value,out DefaultValue))
-                <#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "Id", DbType = DbType.Guid, Direction = ParameterDirection.Input });
-        }
-    }
-
-	[Browsable(true)]
-    public string ViewName { get; set; }
-
-    protected void Edit<#=code.Escape(entityName)#>form_CallingDataMethods(object sender, CallingDataMethodsEventArgs e)
-    {
-        e.DataMethodsObject = <#=code.Escape(entity)#>_DataSource.View;
-    }
-
-	protected void GoBack(object sender, EventArgs e)
-	{
-		LinkButton btn = (LinkButton)sender;
-
-        if(Request.QueryString.AllKeys.Contains("IsDlg"))
-			Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}&IsDlg=1", btn.CommandArgument.ToString()));
-
-        Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}", btn.CommandArgument.ToString()));
-
-	}
-
-	protected void GoBack(object sender, CommandEventArgs e)
-    {
-        if(Request.QueryString.AllKeys.Contains("IsDlg"))
-			Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}&IsDlg=1", e.CommandArgument.ToString()));
-
-        Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}", e.CommandArgument.ToString()));
-    }
-
-    public string CheckForNull(string input)
-    {
-        if (string.IsNullOrWhiteSpace(input))
-            return string.Empty;
-
-        return input;
-    }
-
-    public Guid CheckForNull(Nullable<Guid> input)
-    {
-        if (input.HasValue)
-            return input.Value;
-    
-        return Guid.Empty;
-    }
-}
-<#
-PopIndent();
-EndNamespace(code);
-#>
-
-<#
-fileManager.StartNewFile(entity.Name+"_Edit.ascx.designer.cs");
-#>
-//------------------------------------------------------------------------------
-// <a class="button big" uto-generated>
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated. 
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-namespace ClubCloud.Administratie.WebControls
-{
-<# PushIndent("    "); #>
-<# /* Code */#>
-public partial class <#=code.Escape(entity)#>_EditUserControl 
-{
-    /// <summary>
-    /// <#=code.Escape(entity)#>_DataSource control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-	protected global::ClubCloud.Common.Controls.ClubCloudDataSource <#=code.Escape(entity)#>_DataSource;
-
-    /// <summary>
-    /// udp_<#=code.Escape(entity)#> control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.UpdatePanel udp_<#=code.Escape(entityName)#>;
-        
-    /// <summary>
-    /// Edit<#=code.Escape(entityName)#>form control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.FormView Edit<#=code.Escape(entityName)#>form;
-}
-<#
-PopIndent();
-EndNamespace(code);
-#>
-
-<# /* Entity Insert*/ #>
-<#
-fileManager.StartNewFile(entity.Name+"_Insert.ascx");
-#>
-<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
-<%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Import Namespace="Microsoft.SharePoint" %>
-<%@ Import Namespace="AjaxControlToolkit" %>
-<%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
-<%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
-<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
-<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
-<%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entity)#>_Insert.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entity)#>_InsertUserControl" %>
-<Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="<#=code.Escape(entitySet)#>_View" />
-<asp:UpdatePanel ID="udp_profiel" runat="server" UpdateMode="Always">
-    <contenttemplate>
-<asp:ValidationSummary ShowModelStateErrors="true" runat="server" />
-<asp:FormView runat="server" ID="Insert<#=code.Escape(entityName)#>form" DefaultMode="Insert" RenderOuterTable="False" OnCallingDataMethods="Insert<#=code.Escape(entityName)#>form_CallingDataMethods" SelectMethod="Select<#=entityName#>" InsertMethod="Insert<#=entityName#>" DataKeyNames="<#=primarykey.Name#>">
-    <EmptyDataTemplate>
-        <h1 class="title-regular clearfix">
-            Geen <#=code.Escape(entityName)#> gevonden</h1>
-        <div class="notice">
-            Sorry, er is geen  <#=code.Escape(entityName)#> beschikbaar voor dit Id.</div>
-        <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>"
-            OnClick="GoBack" SkinID="Button" />
-    </EmptyDataTemplate>
-    <HeaderTemplate>
-        <asp:LinkButton CssClass="button big" ID="btn_goback_top" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>" CausesValidation="false" OnClick="GoBack" OnCommand="GoBack" CommandArgument='<%# Eval("Id") %>'/>
-        <asp:LinkButton CssClass="button big" ID="btn_update_top" runat="server" Text="Save" CommandName="Insert" CausesValidation="true" />
-    </HeaderTemplate>
-    <FooterTemplate>
-        <asp:LinkButton CssClass="button big" ID="btn_goback_bottom" runat="server" Text="Terug naar <#=code.Escape(EntitySetName)#>" CausesValidation="false" OnClick="GoBack" OnCommand="GoBack" CommandArgument='<%# Eval("Id") %>'/>
-        <asp:LinkButton CssClass="button big" ID="btn_update_bottom" runat="server" Text="Save" CommandName="Insert" CausesValidation="true" />
-    </FooterTemplate>
-    <InsertItemTemplate>
-        <fieldset>
-<#
-    if (simpleProperties.Any())
-    {
-        foreach (var edmProperty in simpleProperties)
-        {
-			var typeofusage = typeMapper.GetTypeName(edmProperty.TypeUsage);
-			var naam = simpleProperties.Where(e => e.Name == "Naam").FirstOrDefault();
-#>
-<#
-			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.Guid" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.Guid>")
-            {
-				
-				string edmname = edmProperty.Name.Replace("Id", string.Empty);
 				if(edmname != "Nationaliteit" && edmname != "Functie" && edmname != "Baan" && edmname != "Baansoort" && edmname != "Baantoplaag" && edmname != "Baantype" && edmname != "Bestuursorgaan" && edmname != "Bouwaard" && edmname != "Lidmaatschapsoort" && edmname != "Rechtsvorm" && edmname != "Land" && edmname != "Baanblok") 
                 {
 					if(!string.IsNullOrWhiteSpace(edmname))
@@ -1207,16 +943,43 @@ fileManager.StartNewFile(entity.Name+"_Insert.ascx");
 #>
 			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
 <#
+						continue;
 					}
-					continue;
+					
+					if(edmProperty.Name == "Id")
+                    {
+#>
+			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
+<#
+						continue;
+					}
                 }
 
 				if(!string.IsNullOrWhiteSpace(edmname))
-                {
+				{
 #>
-            <#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Insert<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
+            <#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Edit<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
 <#
+					continue;
 				}
+                
+			}
+
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "double" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<double>")
+            {
+
+#>
+			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
+<#
+				continue;
+			}
+
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.Data.Entity.Spatial.DbGeography" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.Data.Entity.Spatial.DbGeography>")
+            {
+
+#>
+			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
+<#
 				continue;
 			}
 #>
@@ -1294,6 +1057,7 @@ fileManager.StartNewFile(entity.Name+"_Insert.ascx");
 			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.TimeSpan" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.TimeSpan>")
             {
 #>
+
 			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Time" /></br>
 <#
 				continue;
@@ -1306,7 +1070,394 @@ fileManager.StartNewFile(entity.Name+"_Insert.ascx");
 				if(edmname == entityName)
 					edmname = "_"+edmname;
 #>
-			<#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Key" DataValueField="Value" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Insert<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
+			<#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Edit<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
+<#
+				continue;
+            }
+#>
+<#	
+		}
+	}
+#>
+        </fieldset>
+    </EditItemTemplate>
+</asp:FormView>
+<#
+fileManager.StartNewFile(entity.Name+"_Edit.ascx.cs");
+#>
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Data.Entity.Infrastructure;
+
+public partial class <#=code.Escape(entity)#>_EditUserControl : UserControl
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        <#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
+        <#=code.Escape(entity)#>_DataSource.Assembly = typeof(<#=code.Escape(entity)#>_EditUserControl).Assembly;
+
+		<#=code.Escape(entity)#>_DataSource.View.WhereParameters = new ParameterCollection();
+
+        foreach (string key in Request.QueryString.Keys)
+        {
+            string value = Request.QueryString[key];
+            if (value != null || !string.IsNullOrWhiteSpace(value))
+            {
+                Guid DefaultValue = Guid.Empty;
+                if (Guid.TryParse(value, out DefaultValue))
+                    <#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+            }
+		}    
+    }
+
+	[Browsable(true)]
+    public string ViewName { get; set; }
+
+    protected void Edit<#=code.Escape(entityName)#>form_CallingDataMethods(object sender, CallingDataMethodsEventArgs e)
+    {
+        e.DataMethodsObject = <#=code.Escape(entity)#>_DataSource.View;
+    }
+
+	protected void GoBack(object sender, EventArgs e)
+	{
+		LinkButton btn = (LinkButton)sender;
+
+        if(Request.QueryString.AllKeys.Contains("IsDlg"))
+			Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}&IsDlg=1", btn.CommandArgument.ToString()));
+
+        Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}", btn.CommandArgument.ToString()));
+
+	}
+
+	protected void GoBack(object sender, CommandEventArgs e)
+    {
+        if(Request.QueryString.AllKeys.Contains("IsDlg"))
+			Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}&IsDlg=1", e.CommandArgument.ToString()));
+
+        Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}", e.CommandArgument.ToString()));
+    }
+
+	protected void Update<#=code.Escape(entityName)#>form_ItemUpdated(object sender, FormViewUpdatedEventArgs e)
+    {
+		/*
+        if (e.Exception != null)
+        {
+            <#=code.Escape(entityName)#>_Validator.ErrorMessage = e.Exception.Message;
+            e.ExceptionHandled = true;
+            e.KeepInInsertMode = true;
+        }
+        else
+        {
+            if (Request.QueryString.AllKeys.Contains("IsDlg"))
+            {
+                Response.Write("<script type='text/javascript'>window.frameElement.commitPopup()</script>");
+                Response.Flush();
+                Response.End();
+            }
+            else
+            {
+                Response.Redirect("<#=code.Escape(entitySetName)#>.aspx");
+            }
+        }
+		*/
+        System.Collections.Specialized.OrderedDictionary inserted = (System.Collections.Specialized.OrderedDictionary)e.NewValues;
+        object value = inserted["<#=code.Escape(primarykey)#>"];
+
+        if(Request.QueryString.AllKeys.Contains("IsDlg"))
+    		Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?<#=code.Escape(primarykey)#>={0}&IsDlg=1", value));
+    
+        Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?<#=code.Escape(primarykey)#>={0}", value));
+
+        int keys = e.Keys.Count;
+        int newv = e.NewValues.Count;
+        int oldv = e.OldValues.Count;
+        int rows = e.AffectedRows;
+        Exception ex = e.Exception;
+    }	
+
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<#
+fileManager.StartNewFile(entity.Name+"_Edit.ascx.designer.cs");
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated. 
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace ClubCloud.Administratie.WebControls
+{
+<# PushIndent("    "); #>
+<# /* Code */#>
+public partial class <#=code.Escape(entity)#>_EditUserControl 
+{
+    /// <summary>
+    /// <#=code.Escape(entity)#>_DataSource control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+	protected global::ClubCloud.Common.Controls.ClubCloudDataSource <#=code.Escape(entity)#>_DataSource;
+
+    /// <summary>
+    /// udp_<#=code.Escape(entity)#> control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    //protected global::System.Web.UI.UpdatePanel udp_<#=code.Escape(entityName)#>;
+
+    /// <summary>
+    /// <#=code.Escape(entityName)#>_Validator control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CustomValidator <#=code.Escape(entityName)#>_Validator;
+
+	/// <summary>
+    /// <#=code.Escape(entityName)#>_Summary control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ValidationSummary <#=code.Escape(entityName)#>_Summary;
+        
+    /// <summary>
+    /// Edit<#=code.Escape(entityName)#>form control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.FormView Edit<#=code.Escape(entityName)#>form;
+}
+<#
+PopIndent();
+EndNamespace(code);
+#>
+
+<# /* Entity Insert*/ #>
+<#
+fileManager.StartNewFile(entity.Name+"_Insert.ascx");
+#>
+<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
+<%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Import Namespace="AjaxControlToolkit" %>
+<%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
+<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
+<%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entity)#>_Insert.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entity)#>_InsertUserControl" %>
+<Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="<#=code.Escape(entitySet)#>_View" />
+<asp:CustomValidator ID="<#=code.Escape(entityName)#>_Validator" Display="Dynamic" runat="server" />
+<asp:ValidationSummary ShowModelStateErrors="true" runat="server" ID="<#=code.Escape(entityName)#>_Summary" />
+<asp:FormView runat="server" ID="Insert<#=code.Escape(entityName)#>form" DefaultMode="Insert" RenderOuterTable="False" OnCallingDataMethods="Insert<#=code.Escape(entityName)#>form_CallingDataMethods" SelectMethod="Select<#=entityName#>" InsertMethod="Insert<#=entityName#>" DataKeyNames="<#=primarykey.Name#>" OnItemInserted="Insert<#=code.Escape(entityName)#>form_ItemInserted">
+    <EmptyDataTemplate>
+        <h1 class="title-regular clearfix">
+            Geen <#=code.Escape(entityName)#> gevonden</h1>
+        <div class="notice">
+            Sorry, er is geen  <#=code.Escape(entityName)#> beschikbaar voor dit Id.</div>
+        <asp:Button ID="btn_goback" CausesValidation="false" runat="server" Text="Terug naar <#=code.Escape(entitySetName)#>"
+            OnClick="GoBack" SkinID="Button" />
+    </EmptyDataTemplate>
+    <HeaderTemplate>
+        <asp:LinkButton CssClass="button big" ID="btn_goback_top" runat="server" Text="Terug naar <#=code.Escape(entitySetName)#>" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);"/>
+        <asp:LinkButton CssClass="button big" ID="btn_update_top" runat="server" Text="Save" CommandName="Insert" CausesValidation="true" />
+    </HeaderTemplate>
+    <FooterTemplate>
+        <asp:LinkButton CssClass="button big" ID="btn_goback_bottom" runat="server" Text="Terug naar <#=code.Escape(entitySetName)#>" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);"/>
+        <asp:LinkButton CssClass="button big" ID="btn_update_bottom" runat="server" Text="Save" CommandName="Insert" CausesValidation="true" />
+    </FooterTemplate>
+    <InsertItemTemplate>
+        <fieldset>
+<#
+    if (simpleProperties.Any())
+    {
+        foreach (var edmProperty in simpleProperties)
+        {
+			var typeofusage = typeMapper.GetTypeName(edmProperty.TypeUsage);
+			var naam = simpleProperties.Where(e => e.Name == "Naam").FirstOrDefault();
+#>
+<#
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.Guid" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.Guid>")
+            {
+				
+				string edmname = edmProperty.Name.Replace("Id", string.Empty);
+
+				if(edmname != "Nationaliteit" && edmname != "Functie" && edmname != "Baan" && edmname != "Baansoort" && edmname != "Baantoplaag" && edmname != "Baantype" && edmname != "Bestuursorgaan" && edmname != "Bouwaard" && edmname != "Lidmaatschapsoort" && edmname != "Rechtsvorm" && edmname != "Land" && edmname != "Baanblok") 
+                {
+					if(!string.IsNullOrWhiteSpace(edmname))
+                    {
+#>
+			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
+<#
+						continue;
+					}
+					/*
+					if(edmProperty.Name == "Id")
+                    {
+#>
+			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
+<#
+						continue;
+					}
+					*/
+                }
+
+				if(!string.IsNullOrWhiteSpace(edmname))
+				{
+#>
+            <#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Insert<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
+<#
+					continue;
+				}
+			}
+
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "double" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<double>")
+            {
+
+#>
+			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
+<#
+			}
+
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.Data.Entity.Spatial.DbGeography" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.Data.Entity.Spatial.DbGeography>")
+            {
+
+#>
+			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
+<#
+			}
+
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "string" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "@string")
+            {
+				if(edmProperty.Name.StartsWith("Telefoon", StringComparison.InvariantCultureIgnoreCase) || edmProperty.Name.StartsWith("Mobiel", StringComparison.InvariantCultureIgnoreCase) || edmProperty.Name.StartsWith("Fax", StringComparison.InvariantCultureIgnoreCase))
+                {
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Phone" /></br>
+<#
+					continue;
+                }
+
+				if(edmProperty.Name.StartsWith("Email", StringComparison.InvariantCultureIgnoreCase))
+                {
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Email" /></br>
+<#
+					continue;
+                }
+
+				if(edmProperty.Name.EndsWith("Nummer", StringComparison.InvariantCultureIgnoreCase))
+                {
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Number" Enabled="false" /></br>
+<#
+					continue;
+                }
+
+			
+			if(edmProperty.Name.StartsWith("Beschrijving", StringComparison.InvariantCultureIgnoreCase) || edmProperty.Name.StartsWith("Omschrijving", StringComparison.InvariantCultureIgnoreCase))
+                {
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="MultiLine" /></br>
+<#
+					continue;
+                }
+
+
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="SingleLine"/></br>
+<#
+				continue;
+			}
+#>
+<#
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "int" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "@int")
+            {
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Number" /></br>
+<#
+				continue;
+			}
+#>
+<#
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "bool" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "@bool")
+            {
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:Checkbox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Checked='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' /></br>
+<#
+				continue;
+			}
+#>
+<#
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.DateTime" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.DateTime>")
+            {
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Date" /></br>
+			<ajaxToolkit:CalendarExtender ID="<#=code.Escape(edmProperty.Name)#>_CalendarExtender" runat="server" BehaviorID="<#=code.Escape(edmProperty.Name)#>_CalendarExtender" TargetControlID="<#=code.Escape(edmProperty.Name)#>" />
+<#
+				continue;
+			}
+#>
+<#
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.TimeSpan" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.TimeSpan>")
+            {
+				if(edmProperty.Name.Contains("Tijd"))
+                {
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Time" /></br>
+			<ajaxToolkit:MaskedEditExtender ID="<#=code.Escape(edmProperty.Name)#>_MaskedEditExtender" runat="server" BehaviorID="<#=code.Escape(edmProperty.Name)#>_MaskedEditExtender" TargetControlID="<#=code.Escape(edmProperty.Name)#>" Mask="99:99" MaskType="Time"  />
+<#
+					continue;
+				}
+				if(edmProperty.Name.Contains("Duur"))
+                {
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Time" /></br>
+			<ajaxToolkit:MaskedEditExtender ID="<#=code.Escape(edmProperty.Name)#>_MaskedEditExtender" runat="server" BehaviorID="<#=code.Escape(edmProperty.Name)#>_MaskedEditExtender" TargetControlID="<#=code.Escape(edmProperty.Name)#>" Mask="99:99:99" MaskType="Number"  />
+<#
+					continue;
+				}
+#>
+			<#=code.Escape(edmProperty.Name)#> : <asp:TextBox ID="<#=code.Escape(edmProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' TextMode="Time" /></br>
+			<ajaxToolkit:MaskedEditExtender ID="<#=code.Escape(edmProperty.Name)#>_MaskedEditExtender" runat="server" BehaviorID="<#=code.Escape(edmProperty.Name)#>_MaskedEditExtender" TargetControlID="<#=code.Escape(edmProperty.Name)#>" Mask="99:99" MaskType="Time"  />
+<#
+					continue;
+			}
+#>
+<#
+			if(typeMapper.GetTypeName(edmProperty.TypeUsage).EndsWith("Soort", StringComparison.InvariantCultureIgnoreCase))
+            {
+				string edmname = edmProperty.Name.Replace("Soort", string.Empty);
+				if(edmname == entityName)
+					edmname = "_"+edmname;
+#>
+			<#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Insert<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
 <#
 				continue;
             }
@@ -1318,8 +1469,6 @@ fileManager.StartNewFile(entity.Name+"_Insert.ascx");
         </fieldset>
     </InsertItemTemplate>
 </asp:FormView>
-    </contenttemplate>
-</asp:UpdatePanel>
 <#
 fileManager.StartNewFile(entity.Name+"_Insert.ascx.cs");
 #>
@@ -1335,6 +1484,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Data.Entity.Infrastructure;
+using ClubCloud.Model;
 
 public partial class <#=code.Escape(entity)#>_InsertUserControl : UserControl
 {
@@ -1344,6 +1494,17 @@ public partial class <#=code.Escape(entity)#>_InsertUserControl : UserControl
         <#=code.Escape(entity)#>_DataSource.Assembly = typeof(<#=code.Escape(entity)#>_InsertUserControl).Assembly;
 
 		<#=code.Escape(entity)#>_DataSource.View.WhereParameters = new ParameterCollection();
+
+        foreach (string key in Request.QueryString.Keys)
+        {
+            string value = Request.QueryString[key];
+            if (value != null || !string.IsNullOrWhiteSpace(value))
+            {
+                Guid DefaultValue = Guid.Empty;
+                if (Guid.TryParse(value, out DefaultValue))
+                    <#=code.Escape(entity)#>_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+            }
+		}    
     }
 
 	[Browsable(true)]
@@ -1356,8 +1517,45 @@ public partial class <#=code.Escape(entity)#>_InsertUserControl : UserControl
 
 	protected void GoBack(object sender, EventArgs e)
 	{
-		Response.Redirect("<#=code.Escape(EntitySetName)#>.aspx");
+		LinkButton btn = (LinkButton)sender;
+
+        if(Request.QueryString.AllKeys.Contains("IsDlg"))
+			Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}&IsDlg=1", btn.CommandArgument.ToString()));
+
+        Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}", btn.CommandArgument.ToString()));
+
 	}
+
+	protected void GoBack(object sender, CommandEventArgs e)
+    {
+        if(Request.QueryString.AllKeys.Contains("IsDlg"))
+			Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}&IsDlg=1", e.CommandArgument.ToString()));
+
+        Response.Redirect(string.Format("<#=code.Escape(entityName)#>.aspx?Id={0}", e.CommandArgument.ToString()));
+    }
+
+	protected void Insert<#=code.Escape(entityName)#>form_ItemInserted(object sender, FormViewInsertedEventArgs e)
+    {
+        if (e.Exception != null)
+        {
+            <#=code.Escape(entityName)#>_Validator.ErrorMessage = e.Exception.Message;
+            e.ExceptionHandled = true;
+            e.KeepInInsertMode = true;
+        }
+        else
+        {
+            if (Request.QueryString.AllKeys.Contains("IsDlg"))
+            {
+                Response.Write("<script type='text/javascript'>window.frameElement.commitPopup()</script>");
+                Response.Flush();
+                Response.End();
+            }
+            else
+            {
+                Response.Redirect("<#=code.Escape(entitySetName)#>.aspx");
+            }
+        }
+    }
 }
 <#
 PopIndent();
@@ -1368,7 +1566,7 @@ EndNamespace(code);
 fileManager.StartNewFile(entity.Name+"_Insert.ascx.designer.cs");
 #>
 //------------------------------------------------------------------------------
-// <a class="button big" uto-generated>
+// <auto-generated>
 //     This code was generated by a tool.
 //
 //     Changes to this file may cause incorrect behavior and will be lost if
@@ -1398,7 +1596,25 @@ public partial class <#=code.Escape(entity)#>_InsertUserControl
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel udp_<#=code.Escape(entityName)#>;
+    //protected global::System.Web.UI.UpdatePanel udp_<#=code.Escape(entityName)#>;
+
+    /// <summary>
+    /// <#=code.Escape(entityName)#>_Validator control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CustomValidator <#=code.Escape(entityName)#>_Validator;
+
+	/// <summary>
+    /// <#=code.Escape(entityName)#>_Summary control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ValidationSummary <#=code.Escape(entityName)#>_Summary;
 
     /// <summary>
     /// Insert<#=code.Escape(entityName)#>form control.
@@ -1438,6 +1654,7 @@ using System.Web.UI;
 using System.Web.UI.Design;
 using System.Web.UI.WebControls;
 using System.Data.Entity.Infrastructure;
+using System.Web.ModelBinding;
 
 //[Designer(typeof(<#=code.Escape(entity)#>DataSourceViewDesigner)),ToolboxData("<{0}:<#=code.Escape(entitySet)#>_View runat=\"server\"></{0}:<#=code.Escape(entitySet)#>_View>")]
 [System.ComponentModel.DataObject(true)]
@@ -1483,6 +1700,7 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
         }
     }
 
+	/*
     partial void On<#=entity.Name#>Saving(<#=entity.Name#> <#=code.CamelCase(entityName)#>);
 
     partial void On<#=entity.Name#>Creating(<#=entity.Name#> <#=code.CamelCase(entityName)#>);
@@ -1495,16 +1713,19 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
 
     partial void On<#=entity.Name#>Deleting(<#=entity.Name#> <#=code.CamelCase(entityName)#>);
     partial void On<#=entity.Name#>Deleted(<#=entity.Name#> <#=code.CamelCase(entityName)#>);
+	*/
 
 	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
-    public <#=code.Escape(entity)#> Select<#=entityName#>() //(string <#=code.Escape(primarykey.Name)#>)
+    public <#=code.Escape(entity)#> Select<#=entityName#>([QueryString] Guid? <#=code.Escape(primarykey.Name)#>) //(string <#=code.Escape(primarykey.Name)#>)
     {
 		<#=code.Escape(entity)#> entity = null;
 
 		if (SPContext.Current.Web.CurrentUser != null)
 		{
-			string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-			ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+            int bondsnummer;
+            ClubCloud_Setting Settings = null;
+            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                Settings = Client.GetSettingById(bondsnummer);
 
 			if (Settings != null && Settings.VerenigingId != null)
 			{
@@ -1512,17 +1733,23 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
 
 				if (Settings.ClubCloud_Vereniging != null)
 				{
-					Guid <#=code.Escape(primarykey.Name)#> = Guid.Empty;
-					foreach (Parameter where in WhereParameters)
-					{
-						if (where.Name == "<#=code.Escape(primarykey.Name)#>")
-						{
-							if(Guid.TryParse(where.DefaultValue, out <#=code.Escape(primarykey.Name)#>))
-							{
-								break;
-							}
-						}
-					}
+
+				    if (<#=code.Escape(primarykey.Name)#> == null)
+                    {
+                        Guid queryId = Guid.Empty;
+                        foreach (Parameter where in WhereParameters)
+                        {
+                            if (where.Name == "<#=code.Escape(primarykey.Name)#>")
+                            {
+                                if (Guid.TryParse(where.DefaultValue, out queryId))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                        <#=code.Escape(primarykey.Name)#> = queryId;
+                    }
 
 					if(<#=code.Escape(primarykey.Name)#> == Guid.Empty)
 					{
@@ -1548,7 +1775,7 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
 
 					}
 
-					entity = Client.Get<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>, false, Settings);
+					entity = Client.Get<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>.Value, false, Settings);
 
 					if(entity != null || entity.<#=code.Escape(primarykey.Name)#> != Guid.Empty)
 					{
@@ -1564,16 +1791,16 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
 			var endEntity = navigationProperty.ToEndMember.GetEntityType();
 			var endentityName = endEntity.Name.Split('_').Last();
 			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endEntitySetName = endEntitySet.Name.Split('_').Last();
+			var endentitySetName = endEntitySet.Name.Split('_').Last();
 					
 
 			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
             {
-				if(endEntitySetName == "Verenigingen"|| endEntitySetName == "Accommodaties" || endEntitySetName == "Gebruikers"  || endEntitySetName == "Reserveringen" || endEntitySetName == "Settings" ) continue;
+				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties" || endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 
 
 #>
-						entity.<#=code.Escape(navigationProperty.Name)#>  = new System.Collections.ObjectModel.ObservableCollection<<#=code.Escape(endEntity)#>>(Client.Get<#=code.Escape(endEntitySetName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>, false, Settings));
+						entity.<#=code.Escape(navigationProperty.Name)#>  = new System.Collections.ObjectModel.ObservableCollection<<#=code.Escape(endEntity)#>>(Client.Get<#=code.Escape(endentitySetName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>.Value, false, Settings));
 <#
 			}
 			else
@@ -1589,7 +1816,7 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
 				else
                 {
 #>
-						entity.<#=code.Escape(navigationProperty.Name)#>  = Client.Get<#=code.Escape(endentityName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>, false, Settings);
+						entity.<#=code.Escape(navigationProperty.Name)#>  = Client.Get<#=code.Escape(endentityName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>.Value, false, Settings);
 <#
 				}
             }
@@ -1604,13 +1831,15 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
 		return entity;
     }
 
-	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
-    public IQueryable<<#=code.Escape(entity)#>> Select<#=code.Escape(EntitySetName)#>(string sortByExpression, int startRowIndex, int maximumRows, out int totalRowCount)//, bool retrieveTotalRowCount = true)
+	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Fill, true)]
+    public IQueryable<<#=code.Escape(entity)#>> Select<#=code.Escape(entitySetName)#>(string sortByExpression, int startRowIndex, int maximumRows, out int totalRowCount)//, bool retrieveTotalRowCount = true)
     {
         if(SPContext.Current.Web.CurrentUser != null)
         {
-            string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-            ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+            int bondsnummer;
+            ClubCloud_Setting Settings = null;
+            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                Settings = Client.GetSettingById(bondsnummer);
 
             if(Settings != null && Settings.VerenigingId != null) 
             {
@@ -1618,7 +1847,7 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
 
             <#
 
-            if (navigationProperties.Any() && EntitySetName != "Addressen")
+            if (navigationProperties.Any() && entitySetName != "Addressen")
             {
                 foreach (var navigationProperty in navigationProperties)
                 {
@@ -1650,6 +1879,15 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
                 }
             }
         #>
+		<#
+			if(entitySetName == "Reserveringen")
+			{
+		#>
+
+				collection.Add(new Parameter { DefaultValue = DateTime.Now.Date.ToString() , Name = "Datum", DbType = DbType.DateTime, Direction = ParameterDirection.Input });
+		<#
+			}
+		#>
     
                 foreach (Parameter where in WhereParameters)
                 {
@@ -1666,7 +1904,7 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
                 }
 
 <#
-if(EntitySetName == "Functionarissen")
+if(entitySetName == "Functionarissen")
 {
 #>
 				if(String.IsNullOrWhiteSpace(sortByExpression))
@@ -1682,7 +1920,7 @@ if(EntitySetName == "Functionarissen")
 }
 #>
 				DataSourceSelectArguments selectArgs = new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression };
-                <#=code.Escape(entity)#>_View queryresult = Client.Get<#=code.Escape(EntitySetName)#>ByQuery(userId, Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
+                <#=code.Escape(entity)#>_View queryresult = Client.Get<#=code.Escape(entitySetName)#>ByQuery(bondsnummer.ToString(), Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
 
                 totalRowCount = queryresult.TotalRowCount;
 
@@ -1702,15 +1940,15 @@ if(EntitySetName == "Functionarissen")
 			var endEntity = navigationProperty.ToEndMember.GetEntityType();
 			var endentityName = endEntity.Name.Split('_').Last();
 			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endEntitySetName = endEntitySet.Name.Split('_').Last();
+			var endentitySetName = endEntitySet.Name.Split('_').Last();
 			
 			
 			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
             {
-				if(endEntitySetName == "Verenigingen"|| endEntitySetName == "Accommodaties"|| endEntitySetName == "Gebruikers"  || endEntitySetName == "Reserveringen" || endEntitySetName == "Settings" ) continue;
+				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 
 #>
-						<#=code.Escape(entityName)#>.<#=code.Escape(navigationProperty.Name)#>  = new System.Collections.ObjectModel.ObservableCollection<<#=code.Escape(endEntity)#>>(Client.Get<#=code.Escape(endEntitySetName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(entityName)#>.<#=code.Escape(primarykey.Name)#>, false, Settings));
+						<#=code.Escape(entityName)#>.<#=code.Escape(navigationProperty.Name)#>  = new System.Collections.ObjectModel.ObservableCollection<<#=code.Escape(endEntity)#>>(Client.Get<#=code.Escape(endentitySetName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(entityName)#>.<#=code.Escape(primarykey.Name)#>, false, Settings));
 <#
 			}
 			else
@@ -1757,10 +1995,10 @@ if(EntitySetName == "Functionarissen")
 			var endEntity = navigationProperty.ToEndMember.GetEntityType();
 			var endentityName = endEntity.Name.Split('_').Last();
 			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endEntitySetName = endEntitySet.Name.Split('_').Last();
+			var endentitySetName = endEntitySet.Name.Split('_').Last();
 #>
 <#			
-			if(endEntitySetName != "Nationaliteiten" && endEntitySetName != "Functies" && endEntitySetName != "Banen" && endEntitySetName != "Baansoorten" && endEntitySetName != "Baantoplagen" && endEntitySetName != "Baantypes" && endEntitySetName != "Bestuursorganen" && endEntitySetName != "Bouwaarden" && endEntitySetName != "Lidmaatschapsoorten" && endEntitySetName != "Rechtsvormen" && endEntitySetName != "Landen" && endEntitySetName != "Baanblokken") continue;
+			if(endentitySetName != "Nationaliteiten" && endentitySetName != "Functies" && endentitySetName != "Banen" && endentitySetName != "Baansoorten" && endentitySetName != "Baantoplagen" && endentitySetName != "Baantypes" && endentitySetName != "Bestuursorganen" && endentitySetName != "Bouwaarden" && endentitySetName != "Lidmaatschapsoorten" && endentitySetName != "Rechtsvormen" && endentitySetName != "Landen" && endentitySetName != "Baanblokken") continue;
 #>
 
 	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
@@ -1768,8 +2006,10 @@ if(EntitySetName == "Functionarissen")
     {
         if(SPContext.Current.Web.CurrentUser != null)
         {
-            string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-            ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+            int bondsnummer;
+            ClubCloud_Setting Settings = null;
+            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                Settings = Client.GetSettingById(bondsnummer);
 
             if(Settings != null && Settings.VerenigingId != null) 
             {
@@ -1787,7 +2027,7 @@ if(EntitySetName == "Functionarissen")
 
 				//Get By <#=code.Escape(EndNavigationProperty)#>
 				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
-				result = Client.Get<#=code.Escape(endEntitySetName)#>ForAccommodatieById(Settings.ClubCloud_Vereniging.AccommodatieId.Value, false, Settings);
+				result = Client.Get<#=code.Escape(endentitySetName)#>ForAccommodatieById(Settings.ClubCloud_Vereniging.AccommodatieId.Value, false, Settings);
 
 <#
 					}
@@ -1799,7 +2039,7 @@ if(EntitySetName == "Functionarissen")
 #>
 
 				//Get By <#=code.Escape(EndNavigationProperty)#>
-				result = Client.Get<#=code.Escape(endEntitySetName)#>ForVerenigingById(Settings.VerenigingId.Value, false, Settings);
+				result = Client.Get<#=code.Escape(endentitySetName)#>ForVerenigingById(Settings.VerenigingId.Value, false, Settings);
 
 <#
 					}
@@ -1808,7 +2048,7 @@ if(EntitySetName == "Functionarissen")
 
 				if(result == null)
 				{
-					result = Client.Get<#=code.Escape(endEntitySetName)#>(false, Settings);
+					result = Client.Get<#=code.Escape(endentitySetName)#>(false, Settings);
 				
 				}
 
@@ -1839,24 +2079,43 @@ if(EntitySetName == "Functionarissen")
 				if(edmname == entityName)
 					edmname = "_"+edmname;
 #>
-	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
-    public Hashtable Select<#=code.Escape(edmname)#>()
+	//public Hashtable Select<#=code.Escape(edmname)#>()
+	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]    
+	public IQueryable<DictionaryEntry> Select<#=code.Escape(edmname)#>()
     {
         if(SPContext.Current.Web.CurrentUser != null)
         {
-            string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-            ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+            int bondsnummer;
+            ClubCloud_Setting Settings = null;
+            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                Settings = Client.GetSettingById(bondsnummer);
 
+			if(Settings != null && Settings.VerenigingId != null) 
+            {
+                List<DictionaryEntry> result = new List<DictionaryEntry>();
+            	Array values = Enum.GetValues(typeof(<#=code.Escape(edmProperty.TypeUsage)#>));
+                Array.Sort(values);
+                foreach (int value in values)
+                {
+                    result.Add(new DictionaryEntry(value, (<#=code.Escape(edmProperty.TypeUsage)#>)value));
+                }
+                return result.AsQueryable<DictionaryEntry>();
+    		}
+			/*
             if(Settings != null && Settings.VerenigingId != null) 
             {
-				string[] names = Enum.GetNames(typeof(<#=code.Escape(edmProperty.TypeUsage)#>));
-				Array values = Enum.GetValues(typeof(<#=code.Escape(edmProperty.TypeUsage)#>));
-				Hashtable ht = new Hashtable();
-				for (int i = 0; i < names.Length; i++)
-					ht.Add(names[i], names[i]);//(int)values.GetValue(i));
-
-				return ht;
+                Hashtable ht = new Hashtable();
+				ht.Add(string.Empty,"Onbekend");
+    			Array values = Enum.GetValues(typeof(<#=code.Escape(edmProperty.TypeUsage)#>));
+                Array.Sort(values);
+                foreach (int value in values)
+                {
+                    string name = ((<#=code.Escape(edmProperty.TypeUsage)#>)value).ToString();
+                    ht.Add(name,name);
+                }    
+    			return ht;
 			}
+			*/
 		}
 
 		return null;
@@ -1870,14 +2129,17 @@ if(EntitySetName == "Functionarissen")
 	}
 #>
 
+	/*
     [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]
 	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
     protected override IEnumerable ExecuteSelect(DataSourceSelectArguments selectArgs)
     {
         if(SPContext.Current.Web.CurrentUser != null)
         {
-            string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-            ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+            int bondsnummer;
+            ClubCloud_Setting Settings = null;
+            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                Settings = Client.GetSettingById(bondsnummer);
 
             if(Settings != null && Settings.VerenigingId != null) 
             {
@@ -1935,7 +2197,7 @@ if(EntitySetName == "Functionarissen")
 <#
 			
 #>
-                <#=code.Escape(entity)#>_View queryresult = Client.Get<#=code.Escape(EntitySetName)#>ByQuery(userId, Settings.VerenigingId.Value, selectArgs, collection);
+                <#=code.Escape(entity)#>_View queryresult = Client.Get<#=code.Escape(entitySetName)#>ByQuery(userId, Settings.VerenigingId.Value, selectArgs, collection);
 
                 selectArgs.TotalRowCount = queryresult.TotalRowCount;
 				
@@ -1946,16 +2208,17 @@ if(EntitySetName == "Functionarissen")
         //return new DataView();
 		return null;
     }
+	*/
 
 	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Delete, true)]
 	public bool Delete<#=code.Escape(entityName)#>(<#=code.Escape(entity)#> entity)
     { 
         if (SPContext.Current.Web.CurrentUser != null)
         {
-            int result;
+            int bondsnummer;
             ClubCloud_Setting Settings = null;
-            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
-                Settings = Client.GetSettingById(result);
+            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                Settings = Client.GetSettingById(bondsnummer);
 
             if (Settings != null && Settings.VerenigingId != null)
             {
@@ -1965,6 +2228,7 @@ if(EntitySetName == "Functionarissen")
 		return false;
 	}
 
+	/*
     protected override int ExecuteDelete(IDictionary keys, IDictionary oldValues)
     {
         int count = 0;
@@ -2003,26 +2267,53 @@ if(EntitySetName == "Functionarissen")
         }
         return count;
     }
+	*/
 
 	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Insert, true)]
-	public virtual <#=code.Escape(primarykey.TypeUsage)#> Insert<#=code.Escape(entityName)#>(<#=code.Escape(entity)#> entity)
+	public int Insert<#=code.Escape(entityName)#>(<#=code.Escape(entity)#> entity)
 	{
         if (SPContext.Current.Web.CurrentUser != null)
         {
-            int result;
+            int bondsnummer;
             ClubCloud_Setting Settings = null;
-            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
-                Settings = Client.GetSettingById(result);
+            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                Settings = Client.GetSettingById(bondsnummer);
 
             if (Settings != null && Settings.VerenigingId != null)
             {
+<#
+    if (simpleProperties.Any())
+    {
+        foreach (var edmProperty in simpleProperties)
+        {
+			if(edmProperty.Name == "VerenigingId")
+            {
+#>
+				entity.VerenigingId = Settings.VerenigingId.Value;
+<#
+			}
+			if(edmProperty.Name == "AccommodatieId")
+            {
+#>
+				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+				if(Settings.ClubCloud_Vereniging != null)
+				{
+					entity.AccommodatieId = Settings.ClubCloud_Vereniging.AccommodatieId.Value;
+				}
+<#
+			}
+        }
+    }
+#>
                 entity = Client.Set<#=code.Escape(entityName)#>(entity, Settings);
+				this.OnDataSourceViewChanged(EventArgs.Empty);
             }
         }
-		return entity.Id;
+
+		return 1;
 	}
 
-
+	/*
     protected override int ExecuteInsert(IDictionary values)
     {
         int count = 0;
@@ -2042,16 +2333,17 @@ if(EntitySetName == "Functionarissen")
 
         return count;
     }
+	*/
 
     [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Update, true)]
     public void Update<#=code.Escape(entityName)#>(<#=code.Escape(entity)#> entity) 
 	{
         if (SPContext.Current.Web.CurrentUser != null)
         {
-            int result;
+            int bondsnummer;
             ClubCloud_Setting Settings = null;
-            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
-                Settings = Client.GetSettingById(result);
+            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                Settings = Client.GetSettingById(bondsnummer);
 
             if (Settings != null && Settings.VerenigingId != null)
             {
@@ -2080,10 +2372,12 @@ if(EntitySetName == "Functionarissen")
     }
 #>
                 Client.Set<#=code.Escape(entityName)#>(entity, Settings);
+				this.OnDataSourceViewChanged(EventArgs.Empty);
             }
         }
 	}
 
+	/*
     protected override int ExecuteUpdate(IDictionary keys, IDictionary values, IDictionary oldValues)
     {
         int count = 0;
@@ -2103,10 +2397,33 @@ if(EntitySetName == "Functionarissen")
 
         return count;
     }
+	*/
 
+	/*
     protected override int ExecuteCommand(string commandName, IDictionary keys, IDictionary values)
     {
         return base.ExecuteCommand(commandName, keys, values);
+    }
+	*/
+
+    public override void Insert(IDictionary values, DataSourceViewOperationCallback callback)
+    {
+        base.Insert(values, callback);
+    }
+
+    public override void Delete(IDictionary keys, IDictionary oldValues, DataSourceViewOperationCallback callback)
+    {
+        base.Delete(keys, oldValues, callback);
+    }
+
+    public override void Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+    {
+        base.Select(arguments, callback);
+    }
+
+    public override void Update(IDictionary keys, IDictionary values, IDictionary oldValues, DataSourceViewOperationCallback callback)
+    {
+        base.Update(keys, values, oldValues, callback);
     }
 }
 
@@ -2188,7 +2505,7 @@ public void WriteHeader(CodeStringGenerator codeStringGenerator, EntityFramework
     fileManager.StartHeader();
 #>
 //------------------------------------------------------------------------------
-// <a class="button big" uto-generated>
+// <auto-generated>
 // <#=CodeGenerationTools.GetResourceString("Template_GeneratedCodeCommentLine1")#>
 //
 // <#=CodeGenerationTools.GetResourceString("Template_GeneratedCodeCommentLine2")#>

@@ -17,14 +17,18 @@ namespace ClubCloud.Administratie.WebControls
             ClubCloud_Accommodatie_DataSource.Assembly = typeof(ClubCloud_AccommodatieUserControl).Assembly;
     
     		ClubCloud_Accommodatie_DataSource.View.WhereParameters = new ParameterCollection();
-            string value = Request.QueryString["Id"];
-            if(value != null)
+    
+            foreach (string key in Request.QueryString.Keys)
             {
-                Guid DefaultValue = Guid.Empty;
-                if(Guid.TryParse(value,out DefaultValue))
-    				ClubCloud_Accommodatie_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "Id", DbType = DbType.Guid, Direction = ParameterDirection.Input });
-            }
-        }
+                string value = Request.QueryString[key];
+                if (value != null || !string.IsNullOrWhiteSpace(value))
+                {
+                    Guid DefaultValue = Guid.Empty;
+                    if (Guid.TryParse(value, out DefaultValue))
+                        ClubCloud_Accommodatie_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+                }
+    		}    
+    	}
     
     	[Browsable(true)]
         public string ViewName { get; set; }

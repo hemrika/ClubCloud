@@ -35,7 +35,7 @@ namespace ClubCloud.Common.Features.Common
 
                 List<SPWebConfigModification> process = new List<SPWebConfigModification>();
                 process.AddRange(ClubCloud.Common.Common.Modifications);
-                process.AddRange(Syncfusion.Modifications);
+                //process.AddRange(Syncfusion.Modifications);
                 process.AddRange(Ajax.Modifications);
                 //process.AddRange(CrossSiteScripting.Modifications);
 

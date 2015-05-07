@@ -1,17 +1,18 @@
 <%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Import Namespace="AjaxControlToolkit" %>
 <%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
+<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Vereniging_Edit.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_Vereniging_EditUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Vereniging_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Verenigingen_View" />
-<asp:UpdatePanel ID="udp_Vereniging" runat="server" UpdateMode="Always">
-    <contenttemplate>
-<asp:ValidationSummary ShowModelStateErrors="true" runat="server" />
-<asp:FormView runat="server" ID="EditVerenigingform" DefaultMode="Edit" RenderOuterTable="False" OnCallingDataMethods="EditVerenigingform_CallingDataMethods" SelectMethod="SelectVereniging" UpdateMethod="UpdateVereniging" DataKeyNames="Id">
+<asp:CustomValidator ID="Vereniging_Validator" Display="Dynamic" runat="server" />
+<asp:ValidationSummary ShowModelStateErrors="true" runat="server" ID="Vereniging_Summary" />
+<asp:FormView runat="server" ID="EditVerenigingform" DefaultMode="Edit" RenderOuterTable="False" OnCallingDataMethods="EditVerenigingform_CallingDataMethods" SelectMethod="SelectVereniging" UpdateMethod="UpdateVereniging" DataKeyNames="Id" OnItemUpdated="UpdateVerenigingform_ItemUpdated">
     <EmptyDataTemplate>
         <h1 class="title-regular clearfix">
             Geen Vereniging gevonden</h1>
@@ -30,6 +31,7 @@
     </FooterTemplate>
     <EditItemTemplate>
         <fieldset>
+			<asp:HiddenField ID="Id" Value='<%# Bind("Id") %>' runat="server" />
 			Naam : <asp:TextBox ID="Naam" runat="server" Text='<%# Bind("Naam") %>' TextMode="SingleLine"/></br>
 			Beschrijving : <asp:TextBox ID="Beschrijving" runat="server" Text='<%# Bind("Beschrijving") %>' TextMode="MultiLine" /></br>
 			Nummer : <asp:TextBox ID="Nummer" runat="server" Text='<%# Bind("Nummer") %>' TextMode="Number" Enabled="false" /></br>
@@ -60,5 +62,3 @@
         </fieldset>
     </EditItemTemplate>
 </asp:FormView>
-    </contenttemplate>
-</asp:UpdatePanel>

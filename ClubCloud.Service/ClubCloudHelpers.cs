@@ -45,6 +45,17 @@ namespace ClubCloud.Service
             dbTypeMapEntry
             = new DbTypeMapEntry(typeof(DateTime), DbType.DateTime, SqlDbType.DateTime);
             _DbTypeList.Add(dbTypeMapEntry);
+            dbTypeMapEntry
+            = new DbTypeMapEntry(typeof(DateTime), DbType.DateTime, SqlDbType.DateTime2);
+            _DbTypeList.Add(dbTypeMapEntry);
+
+            dbTypeMapEntry
+            = new DbTypeMapEntry(typeof(DateTime), DbType.DateTime, SqlDbType.Time);
+            _DbTypeList.Add(dbTypeMapEntry);
+
+            dbTypeMapEntry
+            = new DbTypeMapEntry(typeof(DateTime), DbType.DateTime, SqlDbType.Date);
+            _DbTypeList.Add(dbTypeMapEntry);
 
             dbTypeMapEntry
             = new DbTypeMapEntry(typeof(Decimal), DbType.Decimal, SqlDbType.Decimal);

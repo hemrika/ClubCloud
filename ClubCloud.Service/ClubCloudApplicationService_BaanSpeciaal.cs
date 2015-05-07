@@ -150,25 +150,32 @@ namespace ClubCloud.Service
     		{
     			querybuilder.Append(" WHERE ");
     
-    			foreach (System.Web.UI.WebControls.Parameter parameter in parameters)
-    			{
-    				Type type = TypeConvertor.ToNetType(parameter.DbType);
-    				if(type == typeof(DateTime))
-    				{
-    					querybuilder.Append(parameter.Name + " >= " + parameter.Name + and);
-    				}
-    				else
-    				{
-    					querybuilder.Append(parameter.Name + " = @" + parameter.Name + and);
-    				}
-    				object value = TypeDescriptor.GetConverter(type).ConvertFrom(parameter.DefaultValue);// typeof(string)));
+        		foreach (System.Web.UI.WebControls.Parameter parameter in parameters)
+        		{
+                    object value = null;
     
-    				sqlparams.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });
-    				sqlparamscount.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });
-    			}
+        			Type type = TypeConvertor.ToNetType(parameter.DbType);
+        			if(type == typeof(DateTime))
+        			{    					
+                        IFormatProvider culture = new System.Globalization.CultureInfo("nl-NL", true);
+                        value = DateTime.Parse(parameter.DefaultValue, culture, System.Globalization.DateTimeStyles.AssumeLocal);
+                        querybuilder.Append(parameter.Name + " >= @" + parameter.Name + and);
+        			}
+        			else
+        			{
+                        value = TypeDescriptor.GetConverter(type).ConvertFrom(parameter.DefaultValue);
+                        querybuilder.Append(parameter.Name + " = @" + parameter.Name + and);
+        			}
     
-    			querybuilder.Remove(querybuilder.Length - and.Length, and.Length);
+                    if (value != null)
+                    {
+                        sqlparams.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });
+                        sqlparamscount.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });
+                    }
+        		}
     
+                if (querybuilder.Length > and.Length)
+        			querybuilder.Remove(querybuilder.Length - and.Length, and.Length);
     		}
     
     		if (!string.IsNullOrWhiteSpace(selectArgs.SortExpression))
@@ -203,14 +210,14 @@ namespace ClubCloud.Service
                     var fts = BeheerFullTextInterceptor.Fts(prefixText);
     				
     
-    			entities = beheerModel.ClubCloud_BanenSpeciaal.Where(e => e.Naam.Contains(fts)  || e.Baansoort.Contains(fts)  || e.Actief.Contains(fts) ).ToList();
+    			entities = beheerModel.ClubCloud_BanenSpeciaal.Where(e => e.Naam.Contains(fts)  || e.Actief.Contains(fts) ).ToList();
     
     				
                 }
     			else
     			{
     
-    			entities = beheerModel.Database.SqlQuery<ClubCloud_BaanSpeciaal>("SELECT * FROM ClubCloud_BaanSpeciaal WHERE  Naam LIKE '%"+ prefixText +"%' OR  Baansoort LIKE '%"+ prefixText +"%' OR  Actief LIKE '%"+ prefixText +"%'").ToList();
+    			entities = beheerModel.Database.SqlQuery<ClubCloud_BaanSpeciaal>("SELECT * FROM ClubCloud_BaanSpeciaal WHERE  Naam LIKE '%"+ prefixText +"%' OR  Actief LIKE '%"+ prefixText +"%'").ToList();
     
     				
     			}

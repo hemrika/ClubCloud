@@ -327,10 +327,12 @@ using System.Linq;
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
 		modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
 <#
 	foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
     {
 #>
+		//<#=code.Escape(entitySet)#>
 		<#=codeStringGenerator.DBGeneratedOption(entitySet)#>
 <#
     }
@@ -346,12 +348,12 @@ using System.Linq;
 
 		base.OnModelCreating(modelBuilder);
     }
-
 <#
     foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
     {
 #>
     <#=codeStringGenerator.DbSet(entitySet)#>
+
 <#
     }
 

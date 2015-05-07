@@ -60,7 +60,7 @@
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Sponsor_Vereniging" />
         <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Sponsor_Afbeelding" Width="1.5" PointX="17.5" PointY="16.75" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Sponsor_Sponsor_Afbeelding" />
-        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baanblok" Width="1.5" PointX="5.625" PointY="17.75" />
+        <EntityTypeShape EntityType="BeheerClubCloud.ClubCloud_Baanblok" Width="1.875" PointX="5.625" PointY="17.75" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baan_Baanblok" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baanblok_Accommodatie" />
         <AssociationConnector Association="BeheerClubCloud.ClubCloud_Baanblok_Baantype" />

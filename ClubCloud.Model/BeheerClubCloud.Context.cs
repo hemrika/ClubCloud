@@ -248,63 +248,93 @@ namespace ClubCloud.Model
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
     		modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+    
+    		//ClubCloud_Settings
     		modelBuilder.Entity<ClubCloud_Setting>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Verenigingen
     		modelBuilder.Entity<ClubCloud_Vereniging>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Gebruikers
     		modelBuilder.Entity<ClubCloud_Gebruiker>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Accommodaties
     		modelBuilder.Entity<ClubCloud_Accommodatie>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Nationaliteiten
     		modelBuilder.Entity<ClubCloud_Nationaliteit>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Districten
     		modelBuilder.Entity<ClubCloud_District>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Functies
     		modelBuilder.Entity<ClubCloud_Functie>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Lidmaatschappen
     		modelBuilder.Entity<ClubCloud_Lidmaatschap>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Profielen
     		modelBuilder.Entity<ClubCloud_Profiel>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     modelBuilder.Entity<ClubCloud_Profiel>().Property(e => e.Datum).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Functionarissen
     		modelBuilder.Entity<ClubCloud_Functionaris>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Bestuursorganen
     		modelBuilder.Entity<ClubCloud_Bestuursorgaan>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Rechtsvormen
     		modelBuilder.Entity<ClubCloud_Rechtsvorm>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Addressen
     		modelBuilder.Entity<ClubCloud_Address>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Regios
     		modelBuilder.Entity<ClubCloud_Regio>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Baansoorten
     		modelBuilder.Entity<ClubCloud_Baansoort>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Baantypes
     		modelBuilder.Entity<ClubCloud_Baantype>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Banen
     		modelBuilder.Entity<ClubCloud_Baan>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Bouwaarden
     		modelBuilder.Entity<ClubCloud_Bouwaard>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_BanenSpeciaal
     		modelBuilder.Entity<ClubCloud_BaanSpeciaal>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Reserveringen
     		modelBuilder.Entity<ClubCloud_Reservering>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Afhangen
     		modelBuilder.Entity<ClubCloud_Afhang>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Baanschemas
     		modelBuilder.Entity<ClubCloud_Baanschema>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Fotos
     		modelBuilder.Entity<ClubCloud_Foto>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Lidmaatschapsoorten
     		modelBuilder.Entity<ClubCloud_Lidmaatschapsoort>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Sponsoren
     		modelBuilder.Entity<ClubCloud_Sponsor>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Sponsor_Afbeeldingen
     		modelBuilder.Entity<ClubCloud_Sponsor_Afbeelding>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Baanblokken
     		modelBuilder.Entity<ClubCloud_Baanblok>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Baantoplagen
     		modelBuilder.Entity<ClubCloud_Baantoplaag>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
+    		//ClubCloud_Landen
     		modelBuilder.Entity<ClubCloud_Land>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     
     		modelBuilder.Configurations.Add(new ClubCloud_Accommodatie_Mapping());
@@ -339,35 +369,63 @@ namespace ClubCloud.Model
     
     		base.OnModelCreating(modelBuilder);
         }
-    
         public virtual DbSet<ClubCloud_Setting> ClubCloud_Settings { get; set; }
+    
         public virtual DbSet<ClubCloud_Vereniging> ClubCloud_Verenigingen { get; set; }
+    
         public virtual DbSet<ClubCloud_Gebruiker> ClubCloud_Gebruikers { get; set; }
+    
         public virtual DbSet<ClubCloud_Accommodatie> ClubCloud_Accommodaties { get; set; }
+    
         public virtual DbSet<ClubCloud_Nationaliteit> ClubCloud_Nationaliteiten { get; set; }
+    
         public virtual DbSet<ClubCloud_District> ClubCloud_Districten { get; set; }
+    
         public virtual DbSet<ClubCloud_Functie> ClubCloud_Functies { get; set; }
+    
         public virtual DbSet<ClubCloud_Lidmaatschap> ClubCloud_Lidmaatschappen { get; set; }
+    
         public virtual DbSet<ClubCloud_Profiel> ClubCloud_Profielen { get; set; }
+    
         public virtual DbSet<ClubCloud_Functionaris> ClubCloud_Functionarissen { get; set; }
+    
         public virtual DbSet<ClubCloud_Bestuursorgaan> ClubCloud_Bestuursorganen { get; set; }
+    
         public virtual DbSet<ClubCloud_Rechtsvorm> ClubCloud_Rechtsvormen { get; set; }
+    
         public virtual DbSet<ClubCloud_Address> ClubCloud_Addressen { get; set; }
+    
         public virtual DbSet<ClubCloud_Regio> ClubCloud_Regios { get; set; }
+    
         public virtual DbSet<ClubCloud_Baansoort> ClubCloud_Baansoorten { get; set; }
+    
         public virtual DbSet<ClubCloud_Baantype> ClubCloud_Baantypes { get; set; }
+    
         public virtual DbSet<ClubCloud_Baan> ClubCloud_Banen { get; set; }
+    
         public virtual DbSet<ClubCloud_Bouwaard> ClubCloud_Bouwaarden { get; set; }
+    
         public virtual DbSet<ClubCloud_BaanSpeciaal> ClubCloud_BanenSpeciaal { get; set; }
+    
         public virtual DbSet<ClubCloud_Reservering> ClubCloud_Reserveringen { get; set; }
+    
         public virtual DbSet<ClubCloud_Afhang> ClubCloud_Afhangen { get; set; }
+    
         public virtual DbSet<ClubCloud_Baanschema> ClubCloud_Baanschemas { get; set; }
+    
         public virtual DbSet<ClubCloud_Foto> ClubCloud_Fotos { get; set; }
+    
         public virtual DbSet<ClubCloud_Lidmaatschapsoort> ClubCloud_Lidmaatschapsoorten { get; set; }
+    
         public virtual DbSet<ClubCloud_Sponsor> ClubCloud_Sponsoren { get; set; }
+    
         public virtual DbSet<ClubCloud_Sponsor_Afbeelding> ClubCloud_Sponsor_Afbeeldingen { get; set; }
+    
         public virtual DbSet<ClubCloud_Baanblok> ClubCloud_Baanblokken { get; set; }
+    
         public virtual DbSet<ClubCloud_Baantoplaag> ClubCloud_Baantoplagen { get; set; }
+    
         public virtual DbSet<ClubCloud_Land> ClubCloud_Landen { get; set; }
+    
     }
 }

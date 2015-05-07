@@ -80,6 +80,7 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
     <WebPartPages:AllowFraming runat="server" />
+    
     <script src="cloud/three.min.js" type="text/javascript"></script>
     <script src="cloud/Detector.js" type="text/javascript"></script>
 

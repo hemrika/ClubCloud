@@ -4614,7 +4614,7 @@
 
             if (specialebaan.sgt_soort_baan != null)
             {
-                entity.Baansoort = specialebaan.sgt_soort_baan.name;
+                entity.Baansoort = (BaanSoort)specialebaan.sgt_soort_baan.Value;
             }
 
             if (specialebaan.sgt_toplaagid != null)
@@ -6560,6 +6560,7 @@
                                     FunctieToEntity(functie, entity, settings);
                                     beheerModel.ClubCloud_Functies.AddOrUpdate(entity);
 
+                                    CreateOrUpdateRoleFunctie(entity, settings);
                                     /*
                                     ClubCloud_Functie functie = beheerModel.ClubCloud_Functies.Find(entity.sgt_alg_functieid.Value);
 
@@ -8527,34 +8528,20 @@
 
                                 List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_lidmaatschap", out moreRecords, ref pageNum, expression);
 
-                                foreach (sgt_alg_lidmaatschap entity in entities)
+                                foreach (sgt_alg_lidmaatschap lidmaatschap in entities)
                                 {
-                                    ClubCloud_Lidmaatschap lidmaatschap = beheerModel.ClubCloud_Lidmaatschappen.Find(entity.sgt_alg_lidmaatschapid.Value);
+                                    ClubCloud_Lidmaatschap entity = beheerModel.ClubCloud_Lidmaatschappen.Find(lidmaatschap.sgt_alg_lidmaatschapid.Value);
 
-                                    if (lidmaatschap == null)
+                                    if (entity == null)
                                     {
-                                        lidmaatschap = beheerModel.ClubCloud_Lidmaatschappen.Create();
-                                        lidmaatschap.Id = entity.sgt_alg_lidmaatschapid.Value;
-
-                                        EntityToLidmaatschap(entity, lidmaatschap, bondsnummer, settings);
-                                        beheerModel.ClubCloud_Lidmaatschappen.Add(lidmaatschap);
-                                        //lidmaatschappen.Add(lidmaatschap);
-
-                                    }
-                                    else
-                                    {
-                                        EntityToLidmaatschap(entity, lidmaatschap, bondsnummer, settings);
-                                        //lidmaatschappen.Add(lidmaatschap);
+                                        entity = beheerModel.ClubCloud_Lidmaatschappen.Create();
+                                        entity.Id = lidmaatschap.sgt_alg_lidmaatschapid.Value;
                                     }
 
-                                    beheerModel.SaveChanges();
-                                    /*
-                                    if (entity.sgt_lidid != null)
-                                    {
-                                        GebruikerById(bondsnummer, entity.sgt_lidid.Value);
-                                    }
-                                    */
+                                    LidmaatschapToEntity(lidmaatschap, entity, bondsnummer, settings);
+                                    beheerModel.ClubCloud_Lidmaatschappen.AddOrUpdate(entity);
                                 }
+                                beheerModel.SaveChanges();
                             }
                         }
                     }
@@ -9018,33 +9005,26 @@
                             {
                                 List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_lidmaatschap", out moreRecords, ref pageNum);
 
-                                foreach (sgt_alg_lidmaatschap entity in entities)
+                                foreach (sgt_alg_lidmaatschap lidmaatschap in entities)
                                 {
-                                    ClubCloud_Lidmaatschap lidmaatschap = beheerModel.ClubCloud_Lidmaatschappen.Find(entity.sgt_alg_lidmaatschapid.Value);
+                                    ClubCloud_Lidmaatschap entity = beheerModel.ClubCloud_Lidmaatschappen.Find(lidmaatschap.sgt_alg_lidmaatschapid.Value);
 
-                                    if (lidmaatschap == null)
+                                    if (entity == null)
                                     {
-                                        lidmaatschap = beheerModel.ClubCloud_Lidmaatschappen.Create();
-                                        lidmaatschap.Id = entity.sgt_alg_lidmaatschapid.Value;
-
-                                        EntityToLidmaatschap(entity, lidmaatschap, bondsnummer, settings);
-                                        beheerModel.ClubCloud_Lidmaatschappen.Add(lidmaatschap);
-                                        //lidmaatschappen.Add(lidmaatschap);
-
+                                        entity = beheerModel.ClubCloud_Lidmaatschappen.Create();
+                                        entity.Id = lidmaatschap.sgt_alg_lidmaatschapid.Value;
                                     }
-                                    else
-                                    {
-                                        EntityToLidmaatschap(entity, lidmaatschap, bondsnummer, settings);
+                                        LidmaatschapToEntity(lidmaatschap, entity, bondsnummer, settings);
+                                        beheerModel.ClubCloud_Lidmaatschappen.Add(entity);
                                         //lidmaatschappen.Add(lidmaatschap);
-                                    }
                                     /*
                                     if (entity.sgt_lidid != null)
                                     {
                                         GebruikerById(bondsnummer, entity.sgt_lidid.Value);
                                     }
                                     */
-                                    beheerModel.SaveChanges();
                                 }
+                                beheerModel.SaveChanges();
                             }
                         }
                     }
@@ -9246,28 +9226,20 @@
 
                                 List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_lidmaatschap", out moreRecords, ref pageNum, expression);
 
-                                foreach (sgt_alg_lidmaatschap entity in entities)
+                                foreach (sgt_alg_lidmaatschap lidmaatschap in entities)
                                 {
-                                    ClubCloud_Lidmaatschap lidmaatschap = beheerModel.ClubCloud_Lidmaatschappen.Find(entity.sgt_alg_lidmaatschapid.Value);
+                                    ClubCloud_Lidmaatschap entity = beheerModel.ClubCloud_Lidmaatschappen.Find(lidmaatschap.sgt_alg_lidmaatschapid.Value);
 
-                                    if (lidmaatschap == null)
+                                    if (entity == null)
                                     {
-                                        lidmaatschap = beheerModel.ClubCloud_Lidmaatschappen.Create();
-                                        lidmaatschap.Id = entity.sgt_alg_lidmaatschapid.Value;
+                                        entity = beheerModel.ClubCloud_Lidmaatschappen.Create();
+                                        entity.Id = lidmaatschap.sgt_alg_lidmaatschapid.Value;
+                                    }
+                                    LidmaatschapToEntity(lidmaatschap, entity, bondsnummer, settings);
 
-                                        EntityToLidmaatschap(entity, lidmaatschap, bondsnummer, settings);
-
-                                        beheerModel.ClubCloud_Lidmaatschappen.Add(lidmaatschap);
+                                       beheerModel.ClubCloud_Lidmaatschappen.AddOrUpdate(entity);
                                         //lidmaatschappen.Add(lidmaatschap);
 
-                                    }
-                                    else
-                                    {
-                                        EntityToLidmaatschap(entity, lidmaatschap, bondsnummer, settings);
-                                        //lidmaatschappen.Add(lidmaatschap);
-                                    }
-
-                                    beheerModel.SaveChanges();
                                     /*
                                     if (entity.sgt_lidid != null)
                                     {
@@ -9275,11 +9247,12 @@
                                     }
                                     */
                                 }
+                                beheerModel.SaveChanges();
                             }
                         }
                     }
                 }
-                lidmaatschappen = beheerModel.ClubCloud_Lidmaatschappen.Where(f => f.VerenigingId == verenigingId && f.Actief == Sgt_alg_functionarisState.Active.ToString()).ToList();
+                lidmaatschappen = beheerModel.ClubCloud_Lidmaatschappen.Where(f => f.VerenigingId == verenigingId && f.Actief == "Actief").ToList();
             }
             return lidmaatschappen;
         }
@@ -12500,7 +12473,7 @@
         /// <returns></returns>
         public ClubCloud_Setting GetClubCloudSettings(string bondsnummer)
         {
-            ClubCloud_Setting currentsettings = new ClubCloud_Setting();
+            ClubCloud_Setting currentsettings = null;// new ClubCloud_Setting();
             int nummer;
 
             if (!int.TryParse(bondsnummer, out nummer))
@@ -12511,7 +12484,8 @@
             try
             {
                 currentsettings = beheerModel.ClubCloud_Settings.Find(nummer);
-                beheerModel.ObjectContext.Refresh(RefreshMode.StoreWins, currentsettings);
+                if(currentsettings != null)
+                    beheerModel.ObjectContext.Refresh(RefreshMode.StoreWins, currentsettings);
             }
             catch
             {
@@ -12524,8 +12498,11 @@
                 currentsettings = beheerModel.ClubCloud_Settings.Create();
                 currentsettings.Id = nummer;
 
+                currentsettings.Gewijzigd = DateTime.Now;
+                beheerModel.ClubCloud_Settings.AddOrUpdate(currentsettings);
+                beheerModel.SaveChanges();
+
                 ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Where(g => g.Bondsnummer == nummer.ToString()).FirstOrDefault();
-                ClubCloud_Vereniging vereniging = null;
 
                 if (gebruiker != null)
                 {
@@ -12533,7 +12510,9 @@
                     currentsettings.ClubCloud_Gebruiker = gebruiker;
                 }
 
-                if (gebruiker.VerenigingId.HasValue)
+                ClubCloud_Vereniging vereniging = null;
+
+                if (gebruiker != null && gebruiker.VerenigingId.HasValue)
                     vereniging = beheerModel.ClubCloud_Verenigingen.Find(gebruiker.VerenigingId.Value);
 
                 if (vereniging != null)
@@ -12543,7 +12522,7 @@
                 }
 
                 currentsettings.Gewijzigd = DateTime.Now;
-                beheerModel.ClubCloud_Settings.Add(currentsettings);
+                beheerModel.ClubCloud_Settings.AddOrUpdate(currentsettings);
                 beheerModel.SaveChanges();
             }
             /*
@@ -12560,6 +12539,7 @@
             */
 
             currentsettings = beheerModel.ClubCloud_Settings.Find(nummer);
+
             if (currentsettings != null)
                 beheerModel.ObjectContext.Refresh(RefreshMode.StoreWins, currentsettings);
 
@@ -13151,8 +13131,8 @@
 			{
 				afhang = beheerModel.ClubCloud_Afhangen.Create();
 				afhang.Id = Guid.NewGuid();
-				afhang.MaandBegin = Month.januari;
-				afhang.MaandEinde = Month.december;
+				afhang.MaandBegin = MonthSoort.januari;
+                afhang.MaandEinde = MonthSoort.december;
 				afhang.BaanBegin = TimeSpan.FromHours(8);
 				afhang.BaanEinde = TimeSpan.FromHours(23);
 				afhang.VerenigingId = verenigingId;
@@ -13689,7 +13669,7 @@
 
 			if (banen != null && banen.Count > 0 || refresh)
 			{
-				Month maand = (Month)Enum.Parse(typeof(Model.Month), date.Month.ToString());
+                MonthSoort maand = (MonthSoort)Enum.Parse(typeof(Model.MonthSoort), date.Month.ToString());
 				foreach (ClubCloud_Baan baan in banen)
 				{
 					List<ClubCloud_Baanschema> schemaperbaan = beheerModel.ClubCloud_Baanschemas.Where(b => b.BaanId.Value == baan.Id && b.VerenigingId == verenigingId && b.Beschikbaar == true && b.MaandBegin <= maand && b.MaandEinde >= maand).ToList();

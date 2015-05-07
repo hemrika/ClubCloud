@@ -7,11 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClubCloud.Administratie.WebControls {
-    
-    
-    public partial class ClubCloud_Reservering_InsertUserControl {
-        
+namespace ClubCloud.Administratie.WebControls
+{
+    public partial class ClubCloud_Reservering_InsertUserControl 
+    {
         /// <summary>
         /// ClubCloud_Reservering_DataSource control.
         /// </summary>
@@ -19,17 +18,35 @@ namespace ClubCloud.Administratie.WebControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Reservering_DataSource;
-        
-        /// <summary>
-        /// udp_profiel control.
+    	protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Reservering_DataSource;
+    
+    	/// <summary>
+        /// udp_ClubCloud_Reservering control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udp_profiel;
-        
+        //protected global::System.Web.UI.UpdatePanel udp_Reservering;
+    
+        /// <summary>
+        /// Reservering_Validator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator Reservering_Validator;
+    
+    	/// <summary>
+        /// Reservering_Summary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary Reservering_Summary;
+    
         /// <summary>
         /// InsertReserveringform control.
         /// </summary>
@@ -38,5 +55,7 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FormView InsertReserveringform;
+    
     }
 }
+

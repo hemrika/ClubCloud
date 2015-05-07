@@ -880,8 +880,9 @@ namespace ClubCloud.Zimbra.Client
                 ClubCloud.Service.ClubCloudServiceClient client = new ClubCloud.Service.ClubCloudServiceClient(context);
                 Model.ClubCloud_Setting settings = new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = new Guid("02ADA6C7-80F9-4671-91F9-898EA5DA3CCD") };
                 ClubCloud.Model.ClubCloud_Vereniging vereniging = client.GetVerenigingById(new Guid("02ADA6C7-80F9-4671-91F9-898EA5DA3CCD"), false, settings);
-                List<Model.ClubCloud_Bouwaard> bouwaarden = client.GetBouwaarden(false, settings);
-
+                //List<Model.ClubCloud_Bouwaard> bouwaarden = client.GetBouwaarden(false, settings);
+                List<Model.ClubCloud_Functie> functies = client.GetFuncties(true, settings);
+                int count = functies.Count;
                 //ClubCloud.Model.ClubCloud_Vereniging vereniging = client.GetVerenigingByNummer("12073385", "82503", false);
                 //ClubCloud.Model.ClubCloud_Functie functie =  client.GetFunctieById(Guid.Parse("FD9FE656-31BC-E411-9299-0050569F0030"), false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
                 //functie.Meervoud = "Beschermheren";

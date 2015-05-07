@@ -3,10 +3,12 @@
 <%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Import Namespace="AjaxControlToolkit" %>
 <%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
+<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Accommodaties.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_AccommodatiesUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Accommodatie_DataSource" runat="server" OnDataBinding="tmr_loader_Accommodaties_Tick" ViewName="ClubCloud_Accommodaties_View" />
@@ -15,12 +17,12 @@
 		<asp:Timer runat="server" ID="tmr_loader_Accommodaties" OnTick="tmr_loader_Accommodaties_Tick" interval="500" />
 <SharePoint:MenuTemplate ID="AccommodatieMenu" runat="server" LargeIconMode="true">
 	<SharePoint:MenuItemTemplate ID="Accommodatie_Details" runat="server" Text="Details van %Naam%" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Accommodatie.aspx?Id=%Id%', title:'Details van %Naam%', autoSize:true});" Title="Details van %Naam%"></SharePoint:MenuItemTemplate>
-    <SharePoint:MenuItemTemplate ID="Baanblokken" runat="server" Text="Baanblokken" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baanblokken.aspx?AccommodatieId=%Id%',title:'Baanblokken', autoSize:true});" Title="Baanblokken"></SharePoint:MenuItemTemplate>
-    <SharePoint:MenuItemTemplate ID="Banen" runat="server" Text="Banen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Banen.aspx?AccommodatieId=%Id%',title:'Banen', autoSize:true});" Title="Banen"></SharePoint:MenuItemTemplate>
-    <SharePoint:MenuItemTemplate ID="BanenSpeciaal" runat="server" Text="BanenSpeciaal" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'BanenSpeciaal.aspx?AccommodatieId=%Id%',title:'BanenSpeciaal', autoSize:true});" Title="BanenSpeciaal"></SharePoint:MenuItemTemplate>
-    <SharePoint:MenuItemTemplate ID="Addressen" runat="server" Text="Addressen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Addressen.aspx?AccommodatieId=%Id%',title:'Addressen', autoSize:true});" Title="Addressen"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Baanblokken" runat="server" Text="Baanblokken" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baanblokken.aspx?AccommodatieId=%Id%',title:'Baanblokken', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" Title="Baanblokken"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Banen" runat="server" Text="Banen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Banen.aspx?AccommodatieId=%Id%',title:'Banen', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" Title="Banen"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="BanenSpeciaal" runat="server" Text="BanenSpeciaal" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'BanenSpeciaal.aspx?AccommodatieId=%Id%',title:'BanenSpeciaal', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" Title="BanenSpeciaal"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Addressen" runat="server" Text="Addressen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Addressen.aspx?AccommodatieId=%Id%',title:'Addressen', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" Title="Addressen"></SharePoint:MenuItemTemplate>
 </SharePoint:MenuTemplate>
-<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Accommodatie_Insert.aspx', title:'Toevoegen Accommodatie'});" href="#" target="_self" title="Toevoegen" >Toevoegen Accommodatie</a>
+<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Accommodatie_Insert.aspx', title:'Toevoegen Accommodatie', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="Toevoegen" >Toevoegen Accommodatie</a>
 <br/>
 <asp:panel runat="server" ID="pnl_Accommodaties" >
 <SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="Accommodaties_Grid" runat="server" />
@@ -36,6 +38,8 @@
     PageSize="30"
     ShowFooter="true"
     ShowHeader="true"
+	EnableViewState="false"
+	ViewStateMode="Disabled"
 	OnDataBinding="tmr_loader_Accommodaties_Tick" >
     <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
@@ -48,7 +52,7 @@
 			    <asp:LinkButton ForeColor="White" ID="Naam_Sort" runat="server" Text="Naam" CommandName="Sort" CommandArgument="Naam"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("Naam") %>" title="<%# Eval("Naam") %>" name="<%# Eval("Naam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Accommodatie.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Naam") %>', autoSize:true});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("Naam") %>" title="<%# Eval("Naam") %>" name="<%# Eval("Naam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Accommodatie.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Naam") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("Naam") %>
                 </a>
 			</ItemTemplate>

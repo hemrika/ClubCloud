@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClubCloud.Model</RootNamespace>
     <AssemblyName>ClubCloud.Model</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -110,61 +110,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="BeheerPropertyDescriptor.cs" />
-    <Compile Include="ClubCloud_Land.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Days.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Facebook.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Financieel.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GeslachtSoort.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Month.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Privacy.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProcessorArchitecture.cs">
-      <DependentUpon>StoreClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ReserveringSoort.cs">
-      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StoreClubCloud.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StoreClubCloud.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StoreConfiguration.cs" />
-    <Compile Include="BeheerConfiguration.cs" />
-    <Compile Include="BeheerEncryption.cs" />
-    <Compile Include="BeheerFullTextInterceptor.cs" />
-    <Compile Include="BeheerInitializer.cs" />
-    <Compile Include="BeheerTransaction.cs" />
-    <Compile Include="BoekhoudingClubCloud.Context.cs">
-      <DependentUpon>BoekhoudingClubCloud.Context.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="BoekhoudingClubCloud.cs">
-      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="BoekhoudingClubCloud.Designer.cs">
-      <DependentUpon>BoekhoudingClubCloud.edmx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="BoekhoudingConfiguration.cs" />
-    <Compile Include="BoekhoudingInitializer.cs" />
     <Compile Include="ClubCloud_Accommodatie.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
@@ -216,7 +161,9 @@
     <Compile Include="ClubCloud_Gebruiker.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
-    <Compile Include="ClubCloud_Gebruiker_DataView.cs" />
+    <Compile Include="ClubCloud_Land.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="ClubCloud_Lidmaatschap.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
@@ -250,6 +197,59 @@
     <Compile Include="ClubCloud_Vereniging.cs">
       <DependentUpon>BeheerClubCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="DaysSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Facebook.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Financieel.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeslachtSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MonthSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Privacy.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessorArchitecture.cs">
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReserveringSoort.cs">
+      <DependentUpon>BeheerClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreClubCloud.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreClubCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreConfiguration.cs" />
+    <Compile Include="BeheerConfiguration.cs" />
+    <Compile Include="BeheerEncryption.cs" />
+    <Compile Include="BeheerFullTextInterceptor.cs" />
+    <Compile Include="BeheerInitializer.cs" />
+    <Compile Include="BeheerTransaction.cs" />
+    <Compile Include="BoekhoudingClubCloud.Context.cs">
+      <DependentUpon>BoekhoudingClubCloud.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="BoekhoudingClubCloud.cs">
+      <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="BoekhoudingClubCloud.Designer.cs">
+      <DependentUpon>BoekhoudingClubCloud.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="BoekhoudingConfiguration.cs" />
+    <Compile Include="BoekhoudingInitializer.cs" />
+    <Compile Include="ClubCloud_Gebruiker_DataView.cs" />
     <Compile Include="CostCenter.cs">
       <DependentUpon>BoekhoudingClubCloud.tt</DependentUpon>
     </Compile>

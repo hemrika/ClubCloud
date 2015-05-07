@@ -15,6 +15,7 @@ namespace ClubCloud.Administratie.WebControls
     using System.Web.UI.Design;
     using System.Web.UI.WebControls;
     using System.Data.Entity.Infrastructure;
+    using System.Web.ModelBinding;
     
     //[Designer(typeof(ClubCloud_BaanDataSourceViewDesigner)),ToolboxData("<{0}:ClubCloud_Banen_View runat=\"server\"></{0}:ClubCloud_Banen_View>")]
     [System.ComponentModel.DataObject(true)]
@@ -60,6 +61,7 @@ namespace ClubCloud.Administratie.WebControls
             }
         }
     
+    	/*
         partial void OnClubCloud_BaanSaving(ClubCloud_Baan baan);
     
         partial void OnClubCloud_BaanCreating(ClubCloud_Baan baan);
@@ -72,16 +74,19 @@ namespace ClubCloud.Administratie.WebControls
     
         partial void OnClubCloud_BaanDeleting(ClubCloud_Baan baan);
         partial void OnClubCloud_BaanDeleted(ClubCloud_Baan baan);
+    	*/
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
-        public ClubCloud_Baan SelectBaan() //(string Id)
+        public ClubCloud_Baan SelectBaan([QueryString] Guid? Id) //(string Id)
         {
     		ClubCloud_Baan entity = null;
     
     		if (SPContext.Current.Web.CurrentUser != null)
     		{
-    			string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-    			ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+                int bondsnummer;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                    Settings = Client.GetSettingById(bondsnummer);
     
     			if (Settings != null && Settings.VerenigingId != null)
     			{
@@ -89,30 +94,36 @@ namespace ClubCloud.Administratie.WebControls
     
     				if (Settings.ClubCloud_Vereniging != null)
     				{
-    					Guid Id = Guid.Empty;
-    					foreach (Parameter where in WhereParameters)
-    					{
-    						if (where.Name == "Id")
-    						{
-    							if(Guid.TryParse(where.DefaultValue, out Id))
-    							{
-    								break;
-    							}
-    						}
-    					}
+    
+    				    if (Id == null)
+                        {
+                            Guid queryId = Guid.Empty;
+                            foreach (Parameter where in WhereParameters)
+                            {
+                                if (where.Name == "Id")
+                                {
+                                    if (Guid.TryParse(where.DefaultValue, out queryId))
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+    
+                            Id = queryId;
+                        }
     
     					if(Id == Guid.Empty)
     					{
     										
     					}
     
-    					entity = Client.GetBaanById(Id, false, Settings);
+    					entity = Client.GetBaanById(Id.Value, false, Settings);
     
     					if(entity != null || entity.Id != Guid.Empty)
     					{
-    						entity.ClubCloud_Baanblok  = Client.GetBaanblokForBaanById(Id, false, Settings);
-    						entity.ClubCloud_Accommodatie  = Client.GetAccommodatieForBaanById(Id, false, Settings);
-    						entity.ClubCloud_Baanschema  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanschema>(Client.GetBaanschemasForBaanById(Id, false, Settings));
+    						entity.ClubCloud_Baanblok  = Client.GetBaanblokForBaanById(Id.Value, false, Settings);
+    						entity.ClubCloud_Accommodatie  = Client.GetAccommodatieForBaanById(Id.Value, false, Settings);
+    						entity.ClubCloud_Baanschema  = new System.Collections.ObjectModel.ObservableCollection<ClubCloud_Baanschema>(Client.GetBaanschemasForBaanById(Id.Value, false, Settings));
     					}
     				}
     			}
@@ -121,13 +132,15 @@ namespace ClubCloud.Administratie.WebControls
     		return entity;
         }
     
-    	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
+    	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Fill, true)]
         public IQueryable<ClubCloud_Baan> SelectBanen(string sortByExpression, int startRowIndex, int maximumRows, out int totalRowCount)//, bool retrieveTotalRowCount = true)
         {
             if(SPContext.Current.Web.CurrentUser != null)
             {
-                string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+                int bondsnummer;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                    Settings = Client.GetSettingById(bondsnummer);
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
@@ -143,7 +156,7 @@ namespace ClubCloud.Administratie.WebControls
     					collection.Add(new Parameter { DefaultValue = "{"+Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie.Id.ToString()+"}" , Name = "AccommodatieId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
     				}
     
-                
+            		    
                     foreach (Parameter where in WhereParameters)
                     {
                         if (collection.Any(w => w.Name == where.Name))
@@ -159,7 +172,7 @@ namespace ClubCloud.Administratie.WebControls
                     }
     
     				DataSourceSelectArguments selectArgs = new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression };
-                    ClubCloud_Baan_View queryresult = Client.GetBanenByQuery(userId, Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
+                    ClubCloud_Baan_View queryresult = Client.GetBanenByQuery(bondsnummer.ToString(), Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
     
                     totalRowCount = queryresult.TotalRowCount;
     
@@ -188,8 +201,10 @@ namespace ClubCloud.Administratie.WebControls
         {
             if(SPContext.Current.Web.CurrentUser != null)
             {
-                string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+                int bondsnummer;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                    Settings = Client.GetSettingById(bondsnummer);
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
@@ -219,16 +234,17 @@ namespace ClubCloud.Administratie.WebControls
     
     
     
+    	/*
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
         protected override IEnumerable ExecuteSelect(DataSourceSelectArguments selectArgs)
         {
-            DataSet ds = new DataSet("result");
-    
             if(SPContext.Current.Web.CurrentUser != null)
             {
-                string userId = SPContext.Current.Web.CurrentUser.UserId.NameId;
-                ClubCloud_Setting Settings = Client.GetClubCloudSettings(userId);
+                int bondsnummer;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                    Settings = Client.GetSettingById(bondsnummer);
     
                 if(Settings != null && Settings.VerenigingId != null) 
                 {
@@ -270,16 +286,17 @@ namespace ClubCloud.Administratie.WebControls
             //return new DataView();
     		return null;
         }
+    	*/
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Delete, true)]
     	public bool DeleteBaan(ClubCloud_Baan entity)
         { 
             if (SPContext.Current.Web.CurrentUser != null)
             {
-                int result;
+                int bondsnummer;
                 ClubCloud_Setting Settings = null;
-                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
-                    Settings = Client.GetSettingById(result);
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                    Settings = Client.GetSettingById(bondsnummer);
     
                 if (Settings != null && Settings.VerenigingId != null)
                 {
@@ -289,6 +306,7 @@ namespace ClubCloud.Administratie.WebControls
     		return false;
     	}
     
+    	/*
         protected override int ExecuteDelete(IDictionary keys, IDictionary oldValues)
         {
             int count = 0;
@@ -318,26 +336,34 @@ namespace ClubCloud.Administratie.WebControls
             }
             return count;
         }
+    	*/
     
     	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Insert, true)]
-    	public virtual System.Guid InsertBaan(ClubCloud_Baan entity)
+    	public int InsertBaan(ClubCloud_Baan entity)
     	{
             if (SPContext.Current.Web.CurrentUser != null)
             {
-                int result;
+                int bondsnummer;
                 ClubCloud_Setting Settings = null;
-                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
-                    Settings = Client.GetSettingById(result);
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                    Settings = Client.GetSettingById(bondsnummer);
     
                 if (Settings != null && Settings.VerenigingId != null)
                 {
+    				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+    				if(Settings.ClubCloud_Vereniging != null)
+    				{
+    					entity.AccommodatieId = Settings.ClubCloud_Vereniging.AccommodatieId.Value;
+    				}
                     entity = Client.SetBaan(entity, Settings);
+    				this.OnDataSourceViewChanged(EventArgs.Empty);
                 }
             }
-    		return entity.Id;
+    
+    		return 1;
     	}
     
-    
+    	/*
         protected override int ExecuteInsert(IDictionary values)
         {
             int count = 0;
@@ -357,16 +383,17 @@ namespace ClubCloud.Administratie.WebControls
     
             return count;
         }
+    	*/
     
         [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Update, true)]
         public void UpdateBaan(ClubCloud_Baan entity) 
     	{
             if (SPContext.Current.Web.CurrentUser != null)
             {
-                int result;
+                int bondsnummer;
                 ClubCloud_Setting Settings = null;
-                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out result))
-                    Settings = Client.GetSettingById(result);
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                    Settings = Client.GetSettingById(bondsnummer);
     
                 if (Settings != null && Settings.VerenigingId != null)
                 {
@@ -376,10 +403,12 @@ namespace ClubCloud.Administratie.WebControls
     					entity.AccommodatieId = Settings.ClubCloud_Vereniging.AccommodatieId.Value;
     				}
                     Client.SetBaan(entity, Settings);
+    				this.OnDataSourceViewChanged(EventArgs.Empty);
                 }
             }
     	}
     
+    	/*
         protected override int ExecuteUpdate(IDictionary keys, IDictionary values, IDictionary oldValues)
         {
             int count = 0;
@@ -399,10 +428,33 @@ namespace ClubCloud.Administratie.WebControls
     
             return count;
         }
+    	*/
     
+    	/*
         protected override int ExecuteCommand(string commandName, IDictionary keys, IDictionary values)
         {
             return base.ExecuteCommand(commandName, keys, values);
+        }
+    	*/
+    
+        public override void Insert(IDictionary values, DataSourceViewOperationCallback callback)
+        {
+            base.Insert(values, callback);
+        }
+    
+        public override void Delete(IDictionary keys, IDictionary oldValues, DataSourceViewOperationCallback callback)
+        {
+            base.Delete(keys, oldValues, callback);
+        }
+    
+        public override void Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback)
+        {
+            base.Select(arguments, callback);
+        }
+    
+        public override void Update(IDictionary keys, IDictionary values, IDictionary oldValues, DataSourceViewOperationCallback callback)
+        {
+            base.Update(keys, values, oldValues, callback);
         }
     }
     

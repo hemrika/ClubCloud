@@ -17,13 +17,17 @@ namespace ClubCloud.Administratie.WebControls
             ClubCloud_Baanblok_DataSource.Assembly = typeof(ClubCloud_Baanblok_EditUserControl).Assembly;
     
     		ClubCloud_Baanblok_DataSource.View.WhereParameters = new ParameterCollection();
-            string value = Request.QueryString["Id"];
-            if(value != null)
+    
+            foreach (string key in Request.QueryString.Keys)
             {
-                Guid DefaultValue = Guid.Empty;
-                if(Guid.TryParse(value,out DefaultValue))
-                    ClubCloud_Baanblok_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = "Id", DbType = DbType.Guid, Direction = ParameterDirection.Input });
-            }
+                string value = Request.QueryString[key];
+                if (value != null || !string.IsNullOrWhiteSpace(value))
+                {
+                    Guid DefaultValue = Guid.Empty;
+                    if (Guid.TryParse(value, out DefaultValue))
+                        ClubCloud_Baanblok_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+                }
+    		}    
         }
     
     	[Browsable(true)]
@@ -53,21 +57,44 @@ namespace ClubCloud.Administratie.WebControls
             Response.Redirect(string.Format("Baanblok.aspx?Id={0}", e.CommandArgument.ToString()));
         }
     
-        public string CheckForNull(string input)
+    	protected void UpdateBaanblokform_ItemUpdated(object sender, FormViewUpdatedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(input))
-                return string.Empty;
+    		/*
+            if (e.Exception != null)
+            {
+                Baanblok_Validator.ErrorMessage = e.Exception.Message;
+                e.ExceptionHandled = true;
+                e.KeepInInsertMode = true;
+            }
+            else
+            {
+                if (Request.QueryString.AllKeys.Contains("IsDlg"))
+                {
+                    Response.Write("<script type='text/javascript'>window.frameElement.commitPopup()</script>");
+                    Response.Flush();
+                    Response.End();
+                }
+                else
+                {
+                    Response.Redirect("Baanblokken.aspx");
+                }
+            }
+    		*/
+            System.Collections.Specialized.OrderedDictionary inserted = (System.Collections.Specialized.OrderedDictionary)e.NewValues;
+            object value = inserted["Id"];
     
-            return input;
-        }
-    
-        public Guid CheckForNull(Nullable<Guid> input)
-        {
-            if (input.HasValue)
-                return input.Value;
+            if(Request.QueryString.AllKeys.Contains("IsDlg"))
+        		Response.Redirect(string.Format("Baanblok.aspx?Id={0}&IsDlg=1", value));
         
-            return Guid.Empty;
-        }
+            Response.Redirect(string.Format("Baanblok.aspx?Id={0}", value));
+    
+            int keys = e.Keys.Count;
+            int newv = e.NewValues.Count;
+            int oldv = e.OldValues.Count;
+            int rows = e.AffectedRows;
+            Exception ex = e.Exception;
+        }	
+    
     }
 }
 

@@ -20,18 +20,21 @@ namespace ClubCloud.Administratie.WebControls
     
     		ClubCloud_Baan_DataSource.View.WhereParameters = new ParameterCollection();
     
-            foreach (string key in Request.QueryString.Keys)
+            if (Request.QueryString.HasKeys())
             {
-                string value = Request.QueryString[key];
-                if (value != null || !string.IsNullOrWhiteSpace(value))
+                foreach (String key in Request.QueryString.AllKeys)
                 {
-                    Guid DefaultValue = Guid.Empty;
-                    if (Guid.TryParse(value, out DefaultValue))
+                    string value = Request.QueryString[key];
+                    if (value != null)
                     {
-                        ClubCloud_Baan_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
-                    }
-                }
-            }
+                        Guid DefaultValue = Guid.Empty;
+                        if (Guid.TryParse(value, out DefaultValue))
+    					{
+    						ClubCloud_Baan_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+    					}
+    				}      
+    			}
+    		}
     		*/
         }
     
@@ -50,18 +53,21 @@ namespace ClubCloud.Administratie.WebControls
     
     		ClubCloud_Baan_DataSource.View.WhereParameters = new ParameterCollection();
     
-            foreach (string key in Request.QueryString.Keys)
+            if (Request.QueryString.HasKeys())
             {
-                string value = Request.QueryString[key];
-                if (value != null || !string.IsNullOrWhiteSpace(value))
+                foreach (String key in Request.QueryString.AllKeys)
                 {
-                    Guid DefaultValue = Guid.Empty;
-                    if (Guid.TryParse(value, out DefaultValue))
+                    string value = Request.QueryString[key];
+                    if (value != null)
                     {
-                        ClubCloud_Baan_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
-                    }
-                }
-            }
+                        Guid DefaultValue = Guid.Empty;
+                        if (Guid.TryParse(value, out DefaultValue))
+    					{
+    						ClubCloud_Baan_DataSource.View.WhereParameters.Add(new Parameter { DefaultValue = "{" + DefaultValue.ToString() + "}", Name = key, DbType = DbType.Guid, Direction = ParameterDirection.Input });
+    					}
+    				}      
+    			}
+    		}
     
     		udp_Banen_progress.Visible = false;
     	}

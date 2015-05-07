@@ -1013,8 +1013,8 @@ namespace ClubCloud.Provider
                 List<Zimbra.Global.attrN> attributes = new List<Zimbra.Global.attrN>(){
                     new Zimbra.Global.attrN{ name = "zimbraMailStatus" , Value = "disabled"},
                     new Zimbra.Global.attrN{ name = "displayName" , Value = Titlename},
-                    new Zimbra.Global.attrN{ name = "zimbraDistributionListSubscriptionPolicy" , Value = "REJECT"},
-                    new Zimbra.Global.attrN{ name = "zimbraDistributionListUnsubscriptionPolicy" , Value = "REJECT"}
+                    new Zimbra.Global.attrN{ name = "zimbraDistributionListSubscriptionPolicy" , Value = "APPROVAL"},
+                    new Zimbra.Global.attrN{ name = "zimbraDistributionListUnsubscriptionPolicy" , Value = "APPROVAL"}
                 };
                 
                 Zimbra.Administration.CreateDistributionListRequest dlrequest = new Zimbra.Administration.CreateDistributionListRequest { dynamic = true, name = email, a = attributes };
@@ -1100,15 +1100,19 @@ namespace ClubCloud.Provider
                 string email = Regex.Replace(roleName, @"[^A-Za-z0-9]+", "")+ "@" + domain;
 
                 List<Zimbra.Global.attrN> attributes = new List<Zimbra.Global.attrN>(){
-                    new Zimbra.Global.attrN{ name = "zimbraIsACLGroup" , Value = "TRUE"},
-                    new Zimbra.Global.attrN{ name = "zimbraMailStatus" , Value = "enabled"},
-                    new Zimbra.Global.attrN{ name = "displayName" , Value = Titlename},
+                    new Zimbra.Global.attrN{ name = "zimbraMailAlias" , Value = email},
                     new Zimbra.Global.attrN{ name = "zimbraHideInGal" , Value = "TRUE"},
-                    new Zimbra.Global.attrN{ name = "zimbraDistributionListSubscriptionPolicy" , Value = "REJECT"},
-                    new Zimbra.Global.attrN{ name = "zimbraDistributionListUnsubscriptionPolicy" , Value = "REJECT"},
-                    new Zimbra.Global.attrN{ name = "zimbraPrefReplyToEnabled" , Value = "TRUE"},
+                    new Zimbra.Global.attrN{ name = "mail" , Value = email},
+                    new Zimbra.Global.attrN{ name = "displayName" , Value = Titlename},
+                    new Zimbra.Global.attrN{ name = "description" , Value = Titlename},
+                    new Zimbra.Global.attrN{ name = "cn" , Value = Titlename.ToLower()},
+                    new Zimbra.Global.attrN{ name = "zimbraMailStatus" , Value = "disabled"},
+                    new Zimbra.Global.attrN{ name = "zimbraPrefReplyToAddress" , Value = email},
                     new Zimbra.Global.attrN{ name = "zimbraPrefReplyToDisplay" , Value = Titlename},
-                    new Zimbra.Global.attrN{ name = "zimbraPrefReplyToAddress" , Value = email}
+                    new Zimbra.Global.attrN{ name = "zimbraIsACLGroup" , Value = "TRUE"},
+                    new Zimbra.Global.attrN{ name = "zimbraPrefReplyToEnabled" , Value = "TRUE"},
+                    new Zimbra.Global.attrN{ name = "zimbraDistributionListSubscriptionPolicy" , Value = "APPROVAL"},
+                    new Zimbra.Global.attrN{ name = "zimbraDistributionListUnsubscriptionPolicy" , Value = "APPROVAL"},                                        
                 };
 
                 Zimbra.Administration.CreateDistributionListRequest dlrequest = new Zimbra.Administration.CreateDistributionListRequest { dynamic = true, name = email, a = attributes };

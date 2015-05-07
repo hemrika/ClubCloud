@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/25/2015 09:46:54
+-- Date Created: 05/06/2015 10:39:19
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Model\BeheerClubCloud.edmx
 -- --------------------------------------------------
 
@@ -638,7 +638,7 @@ GO
 CREATE TABLE [dbo].[ClubCloud_BanenSpeciaal] (
     [Id] uniqueidentifier  NOT NULL,
     [Naam] nvarchar(max)  NOT NULL,
-    [Baansoort] nvarchar(max)  NOT NULL,
+    [Baansoort] int  NOT NULL,
     [AccommodatieId] uniqueidentifier  NULL,
     [Actief] nvarchar(max)  NOT NULL,
     [BaantoplaagId] uniqueidentifier  NULL
@@ -652,7 +652,7 @@ CREATE TABLE [dbo].[ClubCloud_Reserveringen] (
     [Datum] datetime  NOT NULL,
     [Tijd] time  NOT NULL,
     [Duur] time  NOT NULL,
-    [Soort] int  NOT NULL,
+    [ReserveringSoort] int  NOT NULL,
     [Beschrijving] nvarchar(max)  NOT NULL,
     [Gebruiker_Een] uniqueidentifier  NULL,
     [Gebruiker_Twee] uniqueidentifier  NULL,

@@ -10,10 +10,9 @@
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Reservering_Insert.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_Reservering_InsertUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Reservering_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Reserveringen_View" />
-<asp:UpdatePanel ID="udp_profiel" runat="server" UpdateMode="Always">
-    <contenttemplate>
-<asp:ValidationSummary ShowModelStateErrors="true" runat="server" />
-<asp:FormView runat="server" ID="InsertReserveringform" DefaultMode="Insert" RenderOuterTable="False" OnCallingDataMethods="InsertReserveringform_CallingDataMethods" SelectMethod="SelectReservering" InsertMethod="InsertReservering" DataKeyNames="Id">
+<asp:CustomValidator ID="Reservering_Validator" Display="Dynamic" runat="server" />
+<asp:ValidationSummary ShowModelStateErrors="true" runat="server" ID="Reservering_Summary" />
+<asp:FormView runat="server" ID="InsertReserveringform" DefaultMode="Insert" RenderOuterTable="False" OnCallingDataMethods="InsertReserveringform_CallingDataMethods" SelectMethod="SelectReservering" InsertMethod="InsertReservering" DataKeyNames="Id" OnItemInserted="InsertReserveringform_ItemInserted">
     <EmptyDataTemplate>
         <h1 class="title-regular clearfix">
             Geen Reservering gevonden</h1>
@@ -23,20 +22,23 @@
             OnClick="GoBack" SkinID="Button" />
     </EmptyDataTemplate>
     <HeaderTemplate>
-        <asp:LinkButton CssClass="button big" ID="btn_goback_top" runat="server" Text="Terug naar Reserveringen" CausesValidation="false" OnClick="GoBack" OnCommand="GoBack" CommandArgument='<%# Eval("Id") %>'/>
+        <asp:LinkButton CssClass="button big" ID="btn_goback_top" runat="server" Text="Terug naar Reserveringen" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);"/>
         <asp:LinkButton CssClass="button big" ID="btn_update_top" runat="server" Text="Save" CommandName="Insert" CausesValidation="true" />
     </HeaderTemplate>
     <FooterTemplate>
-        <asp:LinkButton CssClass="button big" ID="btn_goback_bottom" runat="server" Text="Terug naar Reserveringen" CausesValidation="false" OnClick="GoBack" OnCommand="GoBack" CommandArgument='<%# Eval("Id") %>'/>
+        <asp:LinkButton CssClass="button big" ID="btn_goback_bottom" runat="server" Text="Terug naar Reserveringen" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);"/>
         <asp:LinkButton CssClass="button big" ID="btn_update_bottom" runat="server" Text="Save" CommandName="Insert" CausesValidation="true" />
     </FooterTemplate>
     <InsertItemTemplate>
         <fieldset>
             Baan : <asp:DropDownList ID="BaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanId") %>' SelectMethod="SelectBaan" OnCallingDataMethods="InsertReserveringform_CallingDataMethods" /></br>
 			Datum : <asp:TextBox ID="Datum" runat="server" Text='<%# Bind("Datum") %>' TextMode="Date" /></br>
+			<ajaxToolkit:CalendarExtender ID="Datum_CalendarExtender" runat="server" BehaviorID="Datum_CalendarExtender" TargetControlID="Datum" />
 			Tijd : <asp:TextBox ID="Tijd" runat="server" Text='<%# Bind("Tijd") %>' TextMode="Time" /></br>
+			<ajaxToolkit:MaskedEditExtender ID="Tijd_MaskedEditExtender" runat="server" BehaviorID="Tijd_MaskedEditExtender" TargetControlID="Tijd" Mask="99:99" MaskType="Time"  />
 			Duur : <asp:TextBox ID="Duur" runat="server" Text='<%# Bind("Duur") %>' TextMode="Time" /></br>
-			_Reservering : <asp:DropDownList ID="ReserveringSoort" runat="server" DataTextField="Key" DataValueField="Value" SelectedValue='<%# Bind("ReserveringSoort") %>' SelectMethod="Select_Reservering" OnCallingDataMethods="InsertReserveringform_CallingDataMethods" /></br>
+			<ajaxToolkit:MaskedEditExtender ID="Duur_MaskedEditExtender" runat="server" BehaviorID="Duur_MaskedEditExtender" TargetControlID="Duur" Mask="99:99:99" MaskType="Number"  />
+			_Reservering : <asp:DropDownList ID="ReserveringSoort" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("ReserveringSoort") %>' SelectMethod="Select_Reservering" OnCallingDataMethods="InsertReserveringform_CallingDataMethods" /></br>
 			Beschrijving : <asp:TextBox ID="Beschrijving" runat="server" Text='<%# Bind("Beschrijving") %>' TextMode="MultiLine" /></br>
 			<asp:HiddenField ID="Gebruiker_Een" Value='<%# Bind("Gebruiker_Een") %>' runat="server" />
 			<asp:HiddenField ID="Gebruiker_Twee" Value='<%# Bind("Gebruiker_Twee") %>' runat="server" />
@@ -46,5 +48,3 @@
         </fieldset>
     </InsertItemTemplate>
 </asp:FormView>
-    </contenttemplate>
-</asp:UpdatePanel>

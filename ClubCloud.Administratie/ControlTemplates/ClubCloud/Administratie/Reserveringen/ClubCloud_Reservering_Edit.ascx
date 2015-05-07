@@ -10,10 +10,9 @@
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Reservering_Edit.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_Reservering_EditUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Reservering_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Reserveringen_View" />
-<asp:UpdatePanel ID="udp_Reservering" runat="server" UpdateMode="Always">
-    <contenttemplate>
-<asp:ValidationSummary ShowModelStateErrors="true" runat="server" />
-<asp:FormView runat="server" ID="EditReserveringform" DefaultMode="Edit" RenderOuterTable="False" OnCallingDataMethods="EditReserveringform_CallingDataMethods" SelectMethod="SelectReservering" UpdateMethod="UpdateReservering" DataKeyNames="Id">
+<asp:CustomValidator ID="Reservering_Validator" Display="Dynamic" runat="server" />
+<asp:ValidationSummary ShowModelStateErrors="true" runat="server" ID="Reservering_Summary" />
+<asp:FormView runat="server" ID="EditReserveringform" DefaultMode="Edit" RenderOuterTable="False" OnCallingDataMethods="EditReserveringform_CallingDataMethods" SelectMethod="SelectReservering" UpdateMethod="UpdateReservering" DataKeyNames="Id" OnItemUpdated="UpdateReserveringform_ItemUpdated">
     <EmptyDataTemplate>
         <h1 class="title-regular clearfix">
             Geen Reservering gevonden</h1>
@@ -32,9 +31,14 @@
     </FooterTemplate>
     <EditItemTemplate>
         <fieldset>
-			<asp:HiddenField ID="BaanId" Value='<%# Bind("BaanId") %>' runat="server" />
+			<asp:HiddenField ID="Id" Value='<%# Bind("Id") %>' runat="server" />
+            Baan : <asp:DropDownList ID="BaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanId") %>' SelectMethod="SelectBaan" OnCallingDataMethods="EditReserveringform_CallingDataMethods" /></br>
 			Datum : <asp:TextBox ID="Datum" runat="server" Text='<%# Bind("Datum") %>' TextMode="Date" /></br>
-			_Reservering : <asp:DropDownList ID="ReserveringSoort" runat="server" DataTextField="Key" DataValueField="Value" SelectedValue='<%# Bind("ReserveringSoort") %>' SelectMethod="Select_Reservering" OnCallingDataMethods="EditReserveringform_CallingDataMethods" /></br>
+
+			Tijd : <asp:TextBox ID="Tijd" runat="server" Text='<%# Bind("Tijd") %>' TextMode="Time" /></br>
+
+			Duur : <asp:TextBox ID="Duur" runat="server" Text='<%# Bind("Duur") %>' TextMode="Time" /></br>
+			_Reservering : <asp:DropDownList ID="ReserveringSoort" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("ReserveringSoort") %>' SelectMethod="Select_Reservering" OnCallingDataMethods="EditReserveringform_CallingDataMethods" /></br>
 			Beschrijving : <asp:TextBox ID="Beschrijving" runat="server" Text='<%# Bind("Beschrijving") %>' TextMode="MultiLine" /></br>
 			<asp:HiddenField ID="Gebruiker_Een" Value='<%# Bind("Gebruiker_Een") %>' runat="server" />
 			<asp:HiddenField ID="Gebruiker_Twee" Value='<%# Bind("Gebruiker_Twee") %>' runat="server" />
@@ -44,5 +48,3 @@
         </fieldset>
     </EditItemTemplate>
 </asp:FormView>
-    </contenttemplate>
-</asp:UpdatePanel>

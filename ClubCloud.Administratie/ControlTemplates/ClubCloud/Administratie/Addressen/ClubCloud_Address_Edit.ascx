@@ -1,17 +1,18 @@
 <%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Import Namespace="AjaxControlToolkit" %>
 <%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
+<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Address_Edit.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_Address_EditUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Address_DataSource" runat="server" OnDataBinding="Page_Load" ViewName="ClubCloud_Addressen_View" />
-<asp:UpdatePanel ID="udp_Address" runat="server" UpdateMode="Always">
-    <contenttemplate>
-<asp:ValidationSummary ShowModelStateErrors="true" runat="server" />
-<asp:FormView runat="server" ID="EditAddressform" DefaultMode="Edit" RenderOuterTable="False" OnCallingDataMethods="EditAddressform_CallingDataMethods" SelectMethod="SelectAddress" UpdateMethod="UpdateAddress" DataKeyNames="Id">
+<asp:CustomValidator ID="Address_Validator" Display="Dynamic" runat="server" />
+<asp:ValidationSummary ShowModelStateErrors="true" runat="server" ID="Address_Summary" />
+<asp:FormView runat="server" ID="EditAddressform" DefaultMode="Edit" RenderOuterTable="False" OnCallingDataMethods="EditAddressform_CallingDataMethods" SelectMethod="SelectAddress" UpdateMethod="UpdateAddress" DataKeyNames="Id" OnItemUpdated="UpdateAddressform_ItemUpdated">
     <EmptyDataTemplate>
         <h1 class="title-regular clearfix">
             Geen Address gevonden</h1>
@@ -30,10 +31,13 @@
     </FooterTemplate>
     <EditItemTemplate>
         <fieldset>
+			<asp:HiddenField ID="Id" Value='<%# Bind("Id") %>' runat="server" />
 			<asp:HiddenField ID="ParentId" Value='<%# Bind("ParentId") %>' runat="server" />
 			Stad : <asp:TextBox ID="Stad" runat="server" Text='<%# Bind("Stad") %>' TextMode="SingleLine"/></br>
 			Provincie : <asp:TextBox ID="Provincie" runat="server" Text='<%# Bind("Provincie") %>' TextMode="SingleLine"/></br>
-			Naam : <asp:DropDownList ID="Naam" runat="server" DataTextField="Key" DataValueField="Value" SelectedValue='<%# Bind("Naam") %>' SelectMethod="SelectNaam" OnCallingDataMethods="EditAddressform_CallingDataMethods" /></br>
+			<asp:HiddenField ID="Latitude" Value='<%# Bind("Latitude") %>' runat="server" />
+			<asp:HiddenField ID="Longitude" Value='<%# Bind("Longitude") %>' runat="server" />
+			Naam : <asp:DropDownList ID="Naam" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Naam") %>' SelectMethod="SelectNaam" OnCallingDataMethods="EditAddressform_CallingDataMethods" /></br>
 			Postcode : <asp:TextBox ID="Postcode" runat="server" Text='<%# Bind("Postcode") %>' TextMode="SingleLine"/></br>
 			Straat : <asp:TextBox ID="Straat" runat="server" Text='<%# Bind("Straat") %>' TextMode="SingleLine"/></br>
 			Nummer : <asp:TextBox ID="Nummer" runat="server" Text='<%# Bind("Nummer") %>' TextMode="Number" Enabled="false" /></br>
@@ -45,11 +49,10 @@
 			TelefoonPrimair : <asp:TextBox ID="TelefoonPrimair" runat="server" Text='<%# Bind("TelefoonPrimair") %>' TextMode="Phone" /></br>
 			TelefoonSecundair : <asp:TextBox ID="TelefoonSecundair" runat="server" Text='<%# Bind("TelefoonSecundair") %>' TextMode="Phone" /></br>
 			TelefoonTertiair : <asp:TextBox ID="TelefoonTertiair" runat="server" Text='<%# Bind("TelefoonTertiair") %>' TextMode="Phone" /></br>
+			<asp:HiddenField ID="GeoLocation" Value='<%# Bind("GeoLocation") %>' runat="server" />
 			Gewijzigd : <asp:TextBox ID="Gewijzigd" runat="server" Text='<%# Bind("Gewijzigd") %>' TextMode="Date" /></br>
 			Gemeente : <asp:TextBox ID="Gemeente" runat="server" Text='<%# Bind("Gemeente") %>' TextMode="SingleLine"/></br>
 			AddressGeheim : <asp:Checkbox ID="AddressGeheim" runat="server" Checked='<%# Bind("AddressGeheim") %>' /></br>
         </fieldset>
     </EditItemTemplate>
 </asp:FormView>
-    </contenttemplate>
-</asp:UpdatePanel>

@@ -22,7 +22,7 @@
     {
         private ZimbraMembershipProvider m_membershipProvider;
 
-        internal ZimbraMembershipProvider ZimbraProvider
+        internal ZimbraMembershipProvider ZimbraMembershipProvider
         {
             get
             {
@@ -31,6 +31,20 @@
                     this.m_membershipProvider = System.Web.Security.Membership.Providers["ZimbraMembershipProvider"] as ZimbraMembershipProvider;
                 }
                 return this.m_membershipProvider;
+            }
+        }
+
+        private ZimbraRoleProvider m_roleProvider;
+
+        internal ZimbraRoleProvider ZimbraRoleProvider
+        {
+            get
+            {
+                if (this.m_roleProvider == null)
+                {
+                    this.m_roleProvider = System.Web.Security.Roles.Providers["ZimbraRoleProvider"] as ZimbraRoleProvider;
+                }
+                return this.m_roleProvider;
             }
         }
 
@@ -59,7 +73,7 @@
                 //ClubCloud_Setting updatesettings = beheerModel.ClubCloud_Settings.SingleOrDefault(g => g.GebruikerId == gebruiker.Id);
                 if (settings != null)// && updatesettings.Id != null)
                 {
-                    ZimbraMembershipUser zuser = await ZimbraProvider.GetZimbraUserAsync(gebruiker.Bondsnummer, false);
+                    ZimbraMembershipUser zuser = await ZimbraMembershipProvider.GetZimbraUserAsync(gebruiker.Bondsnummer, false);
 
                     MembershipCreateStatus status = MembershipCreateStatus.Success;
 
@@ -79,7 +93,7 @@
                         string password = gebruiker.Achternaam[0] + gebruiker.Bondsnummer + '!';
                         string email = string.IsNullOrEmpty(gebruiker.EmailKNLTB) ? gebruiker.Bondsnummer + "@clubcloud.nl" : gebruiker.EmailKNLTB;
 
-                        Tuple<MembershipCreateStatus, MembershipUser> result = await ZimbraProvider.CreateUserAsync(gebruiker.Bondsnummer + "@clubcloud.nl", password, email, "Wat uw verenigingsnummer?", nummer, true, null);
+                        Tuple<MembershipCreateStatus, MembershipUser> result = await ZimbraMembershipProvider.CreateUserAsync(gebruiker.Bondsnummer + "@clubcloud.nl", password, email, "Wat uw verenigingsnummer?", nummer, true, null);
 
                         if (result.Item1 == MembershipCreateStatus.Success)
                         {
@@ -147,7 +161,7 @@
                     }
 
                     if (zuser != null && status == MembershipCreateStatus.Success)
-                        await ZimbraProvider.UpdateZimbraUserAsync(zuser);
+                        await ZimbraMembershipProvider.UpdateZimbraUserAsync(zuser);
                 }
                 //}
 
@@ -170,7 +184,7 @@
 
                 if (settings != null)
                 {
-                    ZimbraMembershipUser zuser = await ZimbraProvider.GetZimbraUserAsync(vereniging.Nummer, false);
+                    ZimbraMembershipUser zuser = await ZimbraMembershipProvider.GetZimbraUserAsync(vereniging.Nummer, false);
                     MembershipCreateStatus status = MembershipCreateStatus.Success;
 
                     if (zuser == null)
@@ -178,7 +192,7 @@
 
                         string password = vereniging.Naam[0] + vereniging.Nummer + '!';
                         string email = string.IsNullOrEmpty(vereniging.EmailKNLTB) ? vereniging.Nummer + "@clubcloud.nl" : vereniging.EmailKNLTB;
-                        Tuple<MembershipCreateStatus, MembershipUser> result = await ZimbraProvider.CreateUserAsync(vereniging.Nummer + "@clubcloud.nl", password, email, "Wat uw verenigingsnummer?", vereniging.Nummer, true, null);
+                        Tuple<MembershipCreateStatus, MembershipUser> result = await ZimbraMembershipProvider.CreateUserAsync(vereniging.Nummer + "@clubcloud.nl", password, email, "Wat uw verenigingsnummer?", vereniging.Nummer, true, null);
 
                         if (result.Item1 == MembershipCreateStatus.Success)
                         {
@@ -241,7 +255,61 @@
 
 
                     if (zuser != null && status == MembershipCreateStatus.Success)
-                        await ZimbraProvider.UpdateZimbraUserAsync(zuser);
+                        await ZimbraMembershipProvider.UpdateZimbraUserAsync(zuser);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private async Task<bool> CreateOrUpdateGroupFunctie(ClubCloud_Functie functie, ClubCloud_Setting settings = null)
+        {
+            try
+            {
+                if (settings == null)
+                {
+                    return false;
+                }
+
+                if (settings != null)
+                {
+                    if(await ZimbraRoleProvider.GroupExistsAsync(functie.Naam)) return true;
+
+                    await ZimbraRoleProvider.CreateGroupAsync(functie.Naam);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="functie"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        private async Task<bool> CreateOrUpdateRoleFunctie(ClubCloud_Functie functie, ClubCloud_Setting settings = null)
+        {
+            try
+            {
+                if (settings == null)
+                {
+                    return false;
+                }
+
+                if (settings != null)
+                {
+                    if (await ZimbraRoleProvider.GroupExistsAsync(functie.Naam)) return true;
+
+                    await ZimbraRoleProvider.CreateRoleAsync(functie.Naam);
                 }
 
                 return true;

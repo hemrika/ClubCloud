@@ -3,10 +3,12 @@
 <%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Import Namespace="AjaxControlToolkit" %>
 <%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
+<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Banen.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_BanenUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Baan_DataSource" runat="server" OnDataBinding="tmr_loader_Banen_Tick" ViewName="ClubCloud_Banen_View" />
@@ -15,9 +17,9 @@
 		<asp:Timer runat="server" ID="tmr_loader_Banen" OnTick="tmr_loader_Banen_Tick" interval="500" />
 <SharePoint:MenuTemplate ID="BaanMenu" runat="server" LargeIconMode="true">
 	<SharePoint:MenuItemTemplate ID="Baan_Details" runat="server" Text="Details van %Naam%" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baan.aspx?Id=%Id%', title:'Details van %Naam%', autoSize:true});" Title="Details van %Naam%"></SharePoint:MenuItemTemplate>
-    <SharePoint:MenuItemTemplate ID="Baanschemas" runat="server" Text="Baanschemas" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baanschemas.aspx?BaanId=%Id%',title:'Baanschemas', autoSize:true});" Title="Baanschemas"></SharePoint:MenuItemTemplate>
+    <SharePoint:MenuItemTemplate ID="Baanschemas" runat="server" Text="Baanschemas" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baanschemas.aspx?BaanId=%Id%',title:'Baanschemas', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" Title="Baanschemas"></SharePoint:MenuItemTemplate>
 </SharePoint:MenuTemplate>
-<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baan_Insert.aspx', title:'Toevoegen Baan'});" href="#" target="_self" title="Toevoegen" >Toevoegen Baan</a>
+<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baan_Insert.aspx', title:'Toevoegen Baan', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="Toevoegen" >Toevoegen Baan</a>
 <br/>
 <asp:panel runat="server" ID="pnl_Banen" >
 <SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="Banen_Grid" runat="server" />
@@ -33,6 +35,8 @@
     PageSize="30"
     ShowFooter="true"
     ShowHeader="true"
+	EnableViewState="false"
+	ViewStateMode="Disabled"
 	OnDataBinding="tmr_loader_Banen_Tick" >
     <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
@@ -45,7 +49,7 @@
 			    <asp:LinkButton ForeColor="White" ID="Naam_Sort" runat="server" Text="Naam" CommandName="Sort" CommandArgument="Naam"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("Naam") %>" title="<%# Eval("Naam") %>" name="<%# Eval("Naam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baan.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Naam") %>', autoSize:true});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("Naam") %>" title="<%# Eval("Naam") %>" name="<%# Eval("Naam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baan.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Naam") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("Naam") %>
                 </a>
 			</ItemTemplate>

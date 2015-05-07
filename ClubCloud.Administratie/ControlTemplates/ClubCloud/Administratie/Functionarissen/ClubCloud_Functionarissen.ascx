@@ -3,10 +3,12 @@
 <%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Import Namespace="AjaxControlToolkit" %>
 <%@ Register TagPrefix="Common" Namespace="ClubCloud.Common.Controls" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
+<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Functionarissen.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_FunctionarissenUserControl" %>
 <Common:ClubCloudDataSource ID="ClubCloud_Functionaris_DataSource" runat="server" OnDataBinding="tmr_loader_Functionarissen_Tick" ViewName="ClubCloud_Functionarissen_View" />
@@ -16,7 +18,7 @@
 <SharePoint:MenuTemplate ID="FunctionarisMenu" runat="server" LargeIconMode="true">
 	<SharePoint:MenuItemTemplate ID="Functionaris_Details" runat="server" Text="Details van %Naam%" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Functionaris.aspx?Id=%Id%', title:'Details van %Naam%', autoSize:true});" Title="Details van %Naam%"></SharePoint:MenuItemTemplate>
 </SharePoint:MenuTemplate>
-<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Functionaris_Insert.aspx', title:'Toevoegen Functionaris'});" href="#" target="_self" title="Toevoegen" >Toevoegen Functionaris</a>
+<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Functionaris_Insert.aspx', title:'Toevoegen Functionaris', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="Toevoegen" >Toevoegen Functionaris</a>
 <br/>
 <asp:panel runat="server" ID="pnl_Functionarissen" >
 <SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="Functionarissen_Grid" runat="server" />
@@ -32,10 +34,11 @@
     PageSize="30"
     ShowFooter="true"
     ShowHeader="true"
+	EnableViewState="false"
+	ViewStateMode="Disabled"
     GroupField="ClubCloud_Functie_Naam"
     GroupDisplayTextField="ClubCloud_Functie_Naam"
     GroupFieldDisplayName="Functie"
-    ViewStateMode="Disabled"
     AllowGrouping="true"
     AllowGroupCollapse="true"
     DisplayGroupFieldName="true"
@@ -51,7 +54,7 @@
 			    <asp:LinkButton ForeColor="White" ID="Id_Sort" runat="server" Text="Naam" CommandName="Sort" CommandArgument="Id"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("Id") %>" title="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" name="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Functionaris.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>', autoSize:true});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("Id") %>" title="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" name="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Functionaris.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>
                 </a>
 			</ItemTemplate>
