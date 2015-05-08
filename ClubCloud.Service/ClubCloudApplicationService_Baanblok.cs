@@ -112,6 +112,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_Baanblok tobedeleted = null;
     		try
     		{
@@ -123,7 +124,7 @@ namespace ClubCloud.Service
     				beheerModel.ClubCloud_Baanblokken.Remove(tobedeleted);
     				beheerModel.SaveChanges();
     			}
-    			return true;
+    			succes = true;
     		}
             finally
             {
@@ -131,7 +132,7 @@ namespace ClubCloud.Service
     				try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
             }
     
-    		return false;
+    		return succes;
     	}
     
     
@@ -315,6 +316,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_Baanblok result = null;
     
     		try
@@ -328,14 +330,14 @@ namespace ClubCloud.Service
     			if (result != null)
     				//return result.ClubCloud_Baanblokken.Count == ;
     
-    			return false;
+    			succes = false;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -378,6 +380,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		try
     		{		
     			entity = beheerModel.ClubCloud_Baanblokken.Find(entity.Id);	
@@ -388,14 +391,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Accommodatie = Accommodatie;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes = true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -438,6 +441,7 @@ namespace ClubCloud.Service
     			ValidateSettings(ref settings);
     
     		ClubCloud_Baanblok entity = null;
+    		bool succes = false;
     
     		try
     		{		
@@ -449,14 +453,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Accommodatie = Accommodatie;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes= true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -498,6 +502,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		try
     		{		
     			entity = beheerModel.ClubCloud_Baanblokken.Find(entity.Id);	
@@ -508,14 +513,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Baantype = Baantype;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes = true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -558,6 +563,7 @@ namespace ClubCloud.Service
     			ValidateSettings(ref settings);
     
     		ClubCloud_Baanblok entity = null;
+    		bool succes = false;
     
     		try
     		{		
@@ -569,14 +575,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Baantype = Baantype;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes= true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -618,6 +624,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		try
     		{		
     			entity = beheerModel.ClubCloud_Baanblokken.Find(entity.Id);	
@@ -628,14 +635,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Baansoort = Baansoort;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes = true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -678,6 +685,7 @@ namespace ClubCloud.Service
     			ValidateSettings(ref settings);
     
     		ClubCloud_Baanblok entity = null;
+    		bool succes = false;
     
     		try
     		{		
@@ -689,14 +697,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Baansoort = Baansoort;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes= true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     }

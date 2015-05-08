@@ -124,7 +124,7 @@ namespace ClubCloud.Common
 
             var systemwebextensionsscriptingscriptResourceHandler = new SPWebConfigModification
             {
-                Name = "scriptResourceHandler",
+                Name = "scriptResourceHandler[@enableCompression='true'][@enableCaching='true']",
                 Owner = "ClubCloud",
                 Sequence = 2,
                 Path = "configuration/system.web.extensions/scripting",
@@ -132,7 +132,7 @@ namespace ClubCloud.Common
                 Value = "<scriptResourceHandler enableCompression=\"true\" enableCaching=\"true\"/>"
 
             };
-            _modifications.Add(systemwebextensionsscripting);
+            _modifications.Add(systemwebextensionsscriptingscriptResourceHandler);
 
         }
 

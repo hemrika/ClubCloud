@@ -57,7 +57,7 @@ namespace ClubCloud.Service
                     return default(string[]);
                 }
                 
-                return customers.ToArray(); ;
+                //return customers.ToArray(); ;
             }
             else
             {

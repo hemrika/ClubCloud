@@ -6,7 +6,10 @@
 		Path="ClubCloudDesign"
 		Url="_catalogs/masterpage"
 		RootWebOnly="FALSE">
-    <File Path="ClubCloud.master" Url="ClubCloud.master" Type="GhostableInLibrary" />
+    <File Path="ClubCloud.master" Url="ClubCloud.master" Type="GhostableInLibrary" >
+      <Property Name="UIVersion" Value="15" />
+      <Property Name="ContentTypeId" Value="0x010105" />
+    </File>
     <File Path="ClubCloud\css\clubcloud.css" Url="ClubCloud/css/clubcloud.css" Type="GhostableInLibrary" />
     <File Path="ClubCloud\css\hover-min.css" Url="ClubCloud/css/hover-min.css" Type="GhostableInLibrary" />
     <File Path="ClubCloud\css\hover.css" Url="ClubCloud/css/hover.css" Type="GhostableInLibrary" />
@@ -96,5 +99,6 @@
     <File Path="ClubCloud\jquery.ui.widget.min.js" Url="ClubCloud/jquery.ui.widget.min.js" Type="GhostableInLibrary" />
     <File Path="ClubCloud\style.css" Url="ClubCloud/style.css" Type="GhostableInLibrary" />
     <File Path="ClubCloud\symple_accordion.js" Url="ClubCloud/symple_accordion.js" Type="GhostableInLibrary" />
+    <File Path="ClubCloud\images\SITEICON.PNG" Url="ClubCloudDesign/ClubCloud/images/SITEICON.PNG" />
   </Module>
 </Elements>

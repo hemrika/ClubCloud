@@ -64,6 +64,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B39F
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Administratie", "ClubCloud.Administratie\ClubCloud.Administratie.csproj", "{DB188B7A-705D-49DD-B842-9EAFBA850C83}"
+	ProjectSection(ProjectDependencies) = postProject
+		{718DE400-472A-4F4D-A91C-3C6C9503D365} = {718DE400-472A-4F4D-A91C-3C6C9503D365}
+		{AD85F97C-F475-41CC-A98E-F8056D918F4A} = {AD85F97C-F475-41CC-A98E-F8056D918F4A}
+		{F2138894-1B9E-4EE4-954B-2414A1C74051} = {F2138894-1B9E-4EE4-954B-2414A1C74051}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubCloud.Afhangen", "ClubCloud.Afhangen\ClubCloud.Afhangen.csproj", "{BDF54BF1-9C01-40FA-9337-96E1490FE192}"
 EndProject

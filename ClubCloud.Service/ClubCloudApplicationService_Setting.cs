@@ -112,6 +112,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_Setting tobedeleted = null;
     		try
     		{
@@ -123,7 +124,7 @@ namespace ClubCloud.Service
     				beheerModel.ClubCloud_Settings.Remove(tobedeleted);
     				beheerModel.SaveChanges();
     			}
-    			return true;
+    			succes = true;
     		}
             finally
             {
@@ -131,7 +132,7 @@ namespace ClubCloud.Service
     				try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
             }
     
-    		return false;
+    		return succes;
     	}
     
     
@@ -269,6 +270,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		try
     		{		
     			entity = beheerModel.ClubCloud_Settings.Find(entity.Id);	
@@ -279,14 +281,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Gebruiker = Gebruiker;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes = true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -329,6 +331,7 @@ namespace ClubCloud.Service
     			ValidateSettings(ref settings);
     
     		ClubCloud_Setting entity = null;
+    		bool succes = false;
     
     		try
     		{		
@@ -340,14 +343,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Gebruiker = Gebruiker;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes= true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -389,6 +392,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		try
     		{		
     			entity = beheerModel.ClubCloud_Settings.Find(entity.Id);	
@@ -399,14 +403,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Vereniging = Vereniging;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes = true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -449,6 +453,7 @@ namespace ClubCloud.Service
     			ValidateSettings(ref settings);
     
     		ClubCloud_Setting entity = null;
+    		bool succes = false;
     
     		try
     		{		
@@ -460,14 +465,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Vereniging = Vereniging;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes= true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     }

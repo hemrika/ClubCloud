@@ -92,5 +92,6 @@
     <ProjectItemFile Source="ClubCloud\jquery.ui.widget.min.js" Target="ClubCloudDesign\ClubCloud\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\style.css" Target="ClubCloudDesign\ClubCloud\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\symple_accordion.js" Target="ClubCloudDesign\ClubCloud\" Type="ElementFile" />
+    <ProjectItemFile Source="ClubCloud\images\SITEICON.PNG" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
   </Files>
 </ProjectItem>

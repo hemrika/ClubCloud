@@ -112,6 +112,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_Reservering tobedeleted = null;
     		try
     		{
@@ -123,7 +124,7 @@ namespace ClubCloud.Service
     				beheerModel.ClubCloud_Reserveringen.Remove(tobedeleted);
     				beheerModel.SaveChanges();
     			}
-    			return true;
+    			succes = true;
     		}
             finally
             {
@@ -131,7 +132,7 @@ namespace ClubCloud.Service
     				try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
             }
     
-    		return false;
+    		return succes;
     	}
     
     

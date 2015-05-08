@@ -112,6 +112,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_Accommodatie tobedeleted = null;
     		try
     		{
@@ -123,7 +124,7 @@ namespace ClubCloud.Service
     				beheerModel.ClubCloud_Accommodaties.Remove(tobedeleted);
     				beheerModel.SaveChanges();
     			}
-    			return true;
+    			succes = true;
     		}
             finally
             {
@@ -131,7 +132,7 @@ namespace ClubCloud.Service
     				try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
             }
     
-    		return false;
+    		return succes;
     	}
     
     
@@ -315,6 +316,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_Accommodatie result = null;
     
     		try
@@ -328,14 +330,14 @@ namespace ClubCloud.Service
     			if (result != null)
     				//return result.ClubCloud_Accommodaties.Count == ;
     
-    			return false;
+    			succes = false;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -378,6 +380,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		try
     		{		
     			entity = beheerModel.ClubCloud_Accommodaties.Find(entity.Id);	
@@ -388,14 +391,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_District = District;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes = true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -438,6 +441,7 @@ namespace ClubCloud.Service
     			ValidateSettings(ref settings);
     
     		ClubCloud_Accommodatie entity = null;
+    		bool succes = false;
     
     		try
     		{		
@@ -449,14 +453,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_District = District;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes= true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -498,6 +502,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		try
     		{		
     			entity = beheerModel.ClubCloud_Accommodaties.Find(entity.Id);	
@@ -508,14 +513,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Regio = Regio;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes = true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -558,6 +563,7 @@ namespace ClubCloud.Service
     			ValidateSettings(ref settings);
     
     		ClubCloud_Accommodatie entity = null;
+    		bool succes = false;
     
     		try
     		{		
@@ -569,14 +575,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Regio = Regio;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes= true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -664,6 +670,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_Accommodatie result = null;
     
     		try
@@ -677,14 +684,14 @@ namespace ClubCloud.Service
     			if (result != null)
     				//return result.ClubCloud_Accommodaties.Count == ;
     
-    			return false;
+    			succes = false;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -773,6 +780,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_Accommodatie result = null;
     
     		try
@@ -786,14 +794,14 @@ namespace ClubCloud.Service
     			if (result != null)
     				//return result.ClubCloud_Accommodaties.Count == ;
     
-    			return false;
+    			succes = false;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -882,6 +890,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_Accommodatie result = null;
     
     		try
@@ -895,14 +904,14 @@ namespace ClubCloud.Service
     			if (result != null)
     				//return result.ClubCloud_Accommodaties.Count == ;
     
-    			return false;
+    			succes = false;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -991,6 +1000,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_Accommodatie result = null;
     
     		try
@@ -1004,14 +1014,14 @@ namespace ClubCloud.Service
     			if (result != null)
     				//return result.ClubCloud_Accommodaties.Count == ;
     
-    			return false;
+    			succes = false;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     

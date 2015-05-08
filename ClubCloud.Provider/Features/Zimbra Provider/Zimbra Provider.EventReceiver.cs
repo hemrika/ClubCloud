@@ -35,6 +35,39 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
 
                     //SPSite site = webApp.Sites.Where(p => p.ServerRelativeUrl.Equals("/", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
                     CreateVirtualDirectory(webApp);
+
+                    SPWebApplication wap = SPWebService.ContentService.WebApplications[webApp.Id];
+
+                    List<SPWebConfigModification> process = new List<SPWebConfigModification>();
+                    process.AddRange(ZimbraWebConfigModification.Modifications);
+
+                    foreach (SPWebConfigModification mod in process)
+                    {
+                        try
+                        {
+                            if (!wap.WebConfigModifications.Contains(mod))
+                            {
+                                wap.WebConfigModifications.Add(mod);
+                            }
+
+                            if (!SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Contains(mod))
+                            {
+                                SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Add(mod);
+                            }
+                        }
+                        catch { };
+                    }
+
+                    try
+                    {
+                        wap.Update(false);
+                        SPWebService.ContentService.WebApplications[wap.Id].Update(false);
+                        SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
+                        //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
+                        wap.WebConfigModifications.Clear();
+                        wap.Update(false);
+                    }
+                    catch { };
                 }
             });
         }
@@ -50,6 +83,39 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
 
                     //SPSite site = webApp.Sites.Where(p => p.ServerRelativeUrl.Equals("/", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
                     RemoveVirtualDirectory(webApp);
+
+                    SPWebApplication wap = SPWebService.ContentService.WebApplications[webApp.Id];
+
+                    List<SPWebConfigModification> process = new List<SPWebConfigModification>();
+                    process.AddRange(ZimbraWebConfigModification.Modifications);
+
+                    foreach (SPWebConfigModification mod in process)
+                    {
+                        try
+                        {
+                            if (wap.WebConfigModifications.Contains(mod))
+                            {
+                                wap.WebConfigModifications.Remove(mod);
+                            }
+
+                            if (SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Contains(mod))
+                            {
+                                SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
+                            }
+                        }
+                        catch { };
+                    }
+
+                    try
+                    {
+                        wap.Update(false);
+                        SPWebService.ContentService.WebApplications[wap.Id].Update(false);
+                        SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
+                        //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
+                        wap.WebConfigModifications.Clear();
+                        wap.Update();
+                    }
+                    catch { };
                 }
             });
         }

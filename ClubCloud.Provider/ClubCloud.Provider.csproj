@@ -178,6 +178,7 @@
     <Compile Include="ZimbraGroupEventReceiver.cs" />
     <Compile Include="ZimbraUserIdentity.cs" />
     <Compile Include="ZimbraUserSettingsProvider.cs" />
+    <Compile Include="ZimbraWebConfigModification.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Features\Zimbra Receivers\Zimbra Receivers.feature">

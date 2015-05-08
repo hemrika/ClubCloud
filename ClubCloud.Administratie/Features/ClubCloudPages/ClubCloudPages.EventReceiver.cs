@@ -4,7 +4,7 @@ using System.Security.Permissions;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Security;
 
-namespace ClubCloud.Administratie.Features.ClubCloudDesign
+namespace ClubCloud.Administratie.Features.ClubCloudPages
 {
     /// <summary>
     /// This class handles events raised during feature activation, deactivation, installation, uninstallation, and upgrade.
@@ -13,8 +13,8 @@ namespace ClubCloud.Administratie.Features.ClubCloudDesign
     /// The GUID attached to this class may be used during packaging and should not be modified.
     /// </remarks>
 
-    [Guid("6c26d96a-9a6f-479d-a931-3b9fd67c0de4")]
-    public class ClubCloudDesignEventReceiver : SPFeatureReceiver
+    [Guid("d5efd220-64ea-460d-8107-e37d55cd915b")]
+    public class ClubCloudPagesEventReceiver : SPFeatureReceiver
     {
         // Uncomment the method below to handle the event raised after a feature has been activated.
 
@@ -24,19 +24,8 @@ namespace ClubCloud.Administratie.Features.ClubCloudDesign
             try
             {
                 var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.MasterUrl = site.RootWeb.ServerRelativeUrl + "_catalogs/masterpage/ClubCloud.master";
-                site.RootWeb.CustomMasterUrl = site.RootWeb.ServerRelativeUrl + "_catalogs/masterpage/ClubCloud.master";
-                site.RootWeb.Update();
-            }
-            catch { }
-
-            try
-            {
-                var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.Title = "Administratie";
-                site.RootWeb.SiteLogoUrl = site.RootWeb.ServerRelativeUrl + "_catalogs/masterpage/ClubCloud/images/siteicon.png";
-                site.RootWeb.SiteLogoDescription = "ClubCloud Administratie omgeving";
-                site.RootWeb.Update();
+                site.RootWeb.RootFolder.WelcomePage = "default.aspx";
+                site.RootWeb.RootFolder.Update(); 
             }
             catch { }
 
@@ -57,7 +46,7 @@ namespace ClubCloud.Administratie.Features.ClubCloudDesign
                 site.WebApplication.Update();
             }
             catch { }
-            
+
             //Documenten standaard openen in clienttoepassingen
             try
             {
@@ -78,9 +67,8 @@ namespace ClubCloud.Administratie.Features.ClubCloudDesign
             try
             {
                 var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.MasterUrl = site.RootWeb.ServerRelativeUrl + "_catalogs/masterpage/seattle.master";
-                site.RootWeb.CustomMasterUrl = site.RootWeb.ServerRelativeUrl + "_catalogs/masterpage/seattle.master";
-                site.RootWeb.Update();
+                site.RootWeb.RootFolder.WelcomePage = "default.aspx";
+                site.RootWeb.RootFolder.Update();
             }
             catch { }
 

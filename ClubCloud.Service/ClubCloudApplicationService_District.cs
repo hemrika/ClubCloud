@@ -112,6 +112,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_District tobedeleted = null;
     		try
     		{
@@ -123,7 +124,7 @@ namespace ClubCloud.Service
     				beheerModel.ClubCloud_Districten.Remove(tobedeleted);
     				beheerModel.SaveChanges();
     			}
-    			return true;
+    			succes = true;
     		}
             finally
             {
@@ -131,7 +132,7 @@ namespace ClubCloud.Service
     				try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
             }
     
-    		return false;
+    		return succes;
     	}
     
     
@@ -315,6 +316,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_District result = null;
     
     		try
@@ -328,14 +330,14 @@ namespace ClubCloud.Service
     			if (result != null)
     				//return result.ClubCloud_Districten.Count == ;
     
-    			return false;
+    			succes = false;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -424,6 +426,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_District result = null;
     
     		try
@@ -437,14 +440,14 @@ namespace ClubCloud.Service
     			if (result != null)
     				//return result.ClubCloud_Districten.Count == ;
     
-    			return false;
+    			succes = false;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -487,6 +490,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		try
     		{		
     			entity = beheerModel.ClubCloud_Districten.Find(entity.Id);	
@@ -497,14 +501,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Regio = Regio;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes = true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -547,6 +551,7 @@ namespace ClubCloud.Service
     			ValidateSettings(ref settings);
     
     		ClubCloud_District entity = null;
+    		bool succes = false;
     
     		try
     		{		
@@ -558,14 +563,14 @@ namespace ClubCloud.Service
     			entity.ClubCloud_Regio = Regio;
     
     			beheerModel.SaveChanges();
-    			return true;
+    			succes= true;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     
@@ -653,6 +658,7 @@ namespace ClubCloud.Service
     		if(settings != null)
     			ValidateSettings(ref settings);
     
+    		bool succes = false;
     		ClubCloud_District result = null;
     
     		try
@@ -666,14 +672,14 @@ namespace ClubCloud.Service
     			if (result != null)
     				//return result.ClubCloud_Districten.Count == ;
     
-    			return false;
+    			succes = false;
             }
             finally
             {
     			if(entity != null)
     				try { beheerModel.ObjectContext.Detach(entity); } catch{}
             }
-    		return false;
+    		return succes;
     	}
     
     

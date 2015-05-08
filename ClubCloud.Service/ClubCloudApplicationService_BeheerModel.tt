@@ -227,6 +227,7 @@ internal partial class ClubCloudApplicationService
 		if(settings != null)
 			ValidateSettings(ref settings);
 
+		bool succes = false;
 		<#=code.Escape(entity)#> tobedeleted = null;
 		try
 		{
@@ -238,7 +239,7 @@ internal partial class ClubCloudApplicationService
 				beheerModel.<#=code.Escape(entitySet)#>.Remove(tobedeleted);
 				beheerModel.SaveChanges();
 			}
-			return true;
+			succes = true;
 		}
         finally
         {
@@ -246,7 +247,7 @@ internal partial class ClubCloudApplicationService
 				try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
         }
 
-		return false;
+		return succes;
 	}
 
 <#
@@ -511,6 +512,7 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 		if(settings != null)
 			ValidateSettings(ref settings);
 
+		bool succes = false;
 		<#=code.Escape(entity)#> result = null;
 
 		try
@@ -524,14 +526,14 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			if (result != null)
 				//return result.<#=code.Escape(entitySet)#>.Count == ;
 
-			return false;
+			succes = false;
         }
         finally
         {
 			if(entity != null)
 				try { beheerModel.ObjectContext.Detach(entity); } catch{}
         }
-		return false;
+		return succes;
 	}
 
 <#
@@ -583,6 +585,7 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 		if(settings != null)
 			ValidateSettings(ref settings);
 
+		bool succes = false;
 		try
 		{		
 			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);	
@@ -593,14 +596,14 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
 
 			beheerModel.SaveChanges();
-			return true;
+			succes = true;
         }
         finally
         {
 			if(entity != null)
 				try { beheerModel.ObjectContext.Detach(entity); } catch{}
         }
-		return false;
+		return succes;
 	}
 
 <#
@@ -648,6 +651,7 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			ValidateSettings(ref settings);
 
 		<#=code.Escape(entity)#> entity = null;
+		bool succes = false;
 
 		try
 		{		
@@ -659,14 +663,14 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
 
 			beheerModel.SaveChanges();
-			return true;
+			succes= true;
         }
         finally
         {
 			if(entity != null)
 				try { beheerModel.ObjectContext.Detach(entity); } catch{}
         }
-		return false;
+		return succes;
 	}
 <#
     }
