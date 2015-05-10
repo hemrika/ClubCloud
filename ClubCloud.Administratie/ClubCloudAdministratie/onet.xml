@@ -1,13 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Title="ClubCloudAdministratie" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" EnableMinimalDownload="false" HideSiteContentsLink="true">
+<Project Title="ClubCloud Administratie" Revision="2" ListDir="" xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" EnableMinimalDownload="false" HideSiteContentsLink="true">
   <NavBars>
   </NavBars>
   <Configurations>
-    <Configuration ID="0" Name="ClubCloudAdministratie" >
+    <Configuration ID="-1" Name="NewWeb" />
+    <Configuration ID="0" Name="ClubCloud Administratie" >
       <Lists/>
       <SiteFeatures>
+        <!-- BasicWebParts Feature -->
+        <Feature ID="00BFEA71-1C5E-4A24-B310-BA51C3EB7A57" />
+        <!-- Three-state Workflow Feature -->
+        <Feature ID="FDE5D850-671E-4143-950A-87B473922DC7" />
+        <!-- Asset Library -->
+        <!-- <Feature ID="4BCCCD62-DCAF-46dc-A7D4-E38277EF33F4" /> -->
+        <!-- Help -->
+        <Feature ID="071DE60D-4B02-4076-B001-B456E93146FE" />
+        <!-- Design -->
+        <Feature ID="d8462e0b-5399-460b-bead-33f727528679" />
       </SiteFeatures>
       <WebFeatures>
+        <!-- SiteNotebook Feature -->
+        <Feature ID="F151BB39-7C3B-414F-BB36-6BF18872052F" />
+        <!-- TeamCollab Feature -->
+        <Feature ID="00BFEA71-4EA5-48D4-A4AD-7EA5C011ABE5" />
+        <!-- MDS -->
+        <Feature ID="87294C72-F260-42f3-A41B-981A2FFCE37A" />
+        <!-- Announcements Lists -->
+        <Feature ID="00BFEA71-D1CE-42de-9C63-A44004CE0104" />
+        <!-- Phone Call Memo List -->
+        <Feature ID="239650e3-ee0b-44a0-a22a-48292402b8d8" />
+        <!-- Issues Lists -->
+        <Feature ID="00BFEA71-5932-4F9C-AD71-1557E5751100" />
+        <!-- Document Libraries -->
+        <!-- <Feature ID="6E53DD27-98F2-4AE5-85A0-E9A8EF4AA6DF" /> -->
+        <!-- Links Lists-->
+        <Feature ID="00BFEA71-2062-426C-90BF-714C59600103" />
+        <!-- Pages -->
+        <Feature ID="f50811c4-ae25-4ea5-a36a-f42f5f9e81b0" />
+        <!-- Zimbra Receiver -->
+        <Feature ID="27829f49-e2cf-4991-b4d4-632e869c50fd" />
       </WebFeatures>
       <Modules>
         <Module Name="DefaultBlank" />
@@ -20,4 +51,5 @@
       </File>
     </Module>
   </Modules>
+  <ServerEmailFooter>$Resources:ServerEmailFooter;</ServerEmailFooter>
 </Project>

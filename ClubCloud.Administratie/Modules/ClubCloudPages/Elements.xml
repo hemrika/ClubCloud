@@ -4,156 +4,153 @@
 		Path="ClubCloudPages"
 		Url=""
 		RootWebOnly="FALSE">
-    <File Path="Default.aspx" Url="Default.aspx" NavBarHome="True" IgnoreIfAlreadyExists="true" Type="Ghostable">
-      <NavBarPage Name="~siteTitle" ID="1002" Position="Start" />
-      <NavBarPage Name="~siteTitle" ID="0" Position="Start" />
-    </File>
+    <File Path="Default.aspx" Url="Default.aspx" IgnoreIfAlreadyExists="false" ReplaceContent="true" Type="Ghostable" />
     <File Path="favicon.ico" Url="favicon.ico" Type="Ghostable"  />
-    <File Path="browserconfig.xml" Url="browserconfig.xml" />
-    <File Path="Land_Search.aspx" Url="Land_Search.aspx" />
-    <File Path="Land_Edit.aspx" Url="Land_Edit.aspx" />
-    <File Path="Land_Insert.aspx" Url="Land_Insert.aspx" />
-    <File Path="Land.aspx" Url="Land.aspx" />
-    <File Path="Landen.aspx" Url="Landen.aspx" />
-    <File Path="Baantoplaag_Search.aspx" Url="Baantoplaag_Search.aspx" />
-    <File Path="Baantoplaag_Edit.aspx" Url="Baantoplaag_Edit.aspx" />
-    <File Path="Baantoplaag_Insert.aspx" Url="Baantoplaag_Insert.aspx" />
-    <File Path="Baantoplaag.aspx" Url="Baantoplaag.aspx" />
-    <File Path="Baantoplagen.aspx" Url="Baantoplagen.aspx" />
-    <File Path="Baanblok_Search.aspx" Url="Baanblok_Search.aspx" />
-    <File Path="Baanblok_Edit.aspx" Url="Baanblok_Edit.aspx" />
-    <File Path="Baanblok_Insert.aspx" Url="Baanblok_Insert.aspx" />
-    <File Path="Baanblok.aspx" Url="Baanblok.aspx" />
-    <File Path="Baanblokken.aspx" Url="Baanblokken.aspx" />
-    <File Path="Afbeelding_Search.aspx" Url="Afbeelding_Search.aspx" />
-    <File Path="Afbeelding_Edit.aspx" Url="Afbeelding_Edit.aspx" />
-    <File Path="Afbeelding_Insert.aspx" Url="Afbeelding_Insert.aspx" />
-    <File Path="Afbeelding.aspx" Url="Afbeelding.aspx" />
-    <File Path="Afbeeldingen.aspx" Url="Afbeeldingen.aspx" />
-    <File Path="Sponsor_Search.aspx" Url="Sponsor_Search.aspx" />
-    <File Path="Sponsor_Edit.aspx" Url="Sponsor_Edit.aspx" />
-    <File Path="Sponsor_Insert.aspx" Url="Sponsor_Insert.aspx" />
-    <File Path="Sponsor.aspx" Url="Sponsor.aspx" />
-    <File Path="Sponsoren.aspx" Url="Sponsoren.aspx" />
-    <File Path="Lidmaatschapsoort_Search.aspx" Url="Lidmaatschapsoort_Search.aspx" />
-    <File Path="Lidmaatschapsoort_Edit.aspx" Url="Lidmaatschapsoort_Edit.aspx" />
-    <File Path="Lidmaatschapsoort_Insert.aspx" Url="Lidmaatschapsoort_Insert.aspx" />
-    <File Path="Lidmaatschapsoort.aspx" Url="Lidmaatschapsoort.aspx" />
-    <File Path="Lidmaatschapsoorten.aspx" Url="Lidmaatschapsoorten.aspx" />
-    <File Path="Foto_Search.aspx" Url="Foto_Search.aspx" />
-    <File Path="Foto_Edit.aspx" Url="Foto_Edit.aspx" />
-    <File Path="Foto_Insert.aspx" Url="Foto_Insert.aspx" />
-    <File Path="Foto.aspx" Url="Foto.aspx" />
-    <File Path="Fotos.aspx" Url="Fotos.aspx" />
-    <File Path="Baanschema_Search.aspx" Url="Baanschema_Search.aspx" />
-    <File Path="Baanschema_Edit.aspx" Url="Baanschema_Edit.aspx" />
-    <File Path="Baanschema_Insert.aspx" Url="Baanschema_Insert.aspx" />
-    <File Path="Baanschema.aspx" Url="Baanschema.aspx" />
-    <File Path="Baanschemas.aspx" Url="Baanschemas.aspx" />
-    <File Path="Afhang_Search.aspx" Url="Afhang_Search.aspx" />
-    <File Path="Afhang_Edit.aspx" Url="Afhang_Edit.aspx" />
-    <File Path="Afhang_Insert.aspx" Url="Afhang_Insert.aspx" />
-    <File Path="Afhang.aspx" Url="Afhang.aspx" />
-    <File Path="Afhangen.aspx" Url="Afhangen.aspx" />
-    <File Path="Reservering_Search.aspx" Url="Reservering_Search.aspx" />
-    <File Path="Reservering_Edit.aspx" Url="Reservering_Edit.aspx" />
-    <File Path="Reservering_Insert.aspx" Url="Reservering_Insert.aspx" />
-    <File Path="Reservering.aspx" Url="Reservering.aspx" />
-    <File Path="Reserveringen.aspx" Url="Reserveringen.aspx" />
-    <File Path="BaanSpeciaal_Search.aspx" Url="BaanSpeciaal_Search.aspx" />
-    <File Path="BaanSpeciaal_Edit.aspx" Url="BaanSpeciaal_Edit.aspx" />
-    <File Path="BaanSpeciaal_Insert.aspx" Url="BaanSpeciaal_Insert.aspx" />
-    <File Path="BaanSpeciaal.aspx" Url="BaanSpeciaal.aspx" />
-    <File Path="BanenSpeciaal.aspx" Url="BanenSpeciaal.aspx" />
-    <File Path="Bouwaard_Search.aspx" Url="Bouwaard_Search.aspx" />
-    <File Path="Bouwaard_Edit.aspx" Url="Bouwaard_Edit.aspx" />
-    <File Path="Bouwaard_Insert.aspx" Url="Bouwaard_Insert.aspx" />
-    <File Path="Bouwaard.aspx" Url="Bouwaard.aspx" />
-    <File Path="Bouwaarden.aspx" Url="Bouwaarden.aspx" />
-    <File Path="Baan_Search.aspx" Url="Baan_Search.aspx" />
-    <File Path="Baan_Edit.aspx" Url="Baan_Edit.aspx" />
-    <File Path="Baan_Insert.aspx" Url="Baan_Insert.aspx" />
-    <File Path="Baan.aspx" Url="Baan.aspx" />
-    <File Path="Banen.aspx" Url="Banen.aspx" />
-    <File Path="Baantype_Search.aspx" Url="Baantype_Search.aspx" />
-    <File Path="Baantype_Edit.aspx" Url="Baantype_Edit.aspx" />
-    <File Path="Baantype_Insert.aspx" Url="Baantype_Insert.aspx" />
-    <File Path="Baantype.aspx" Url="Baantype.aspx" />
-    <File Path="Baantypes.aspx" Url="Baantypes.aspx" />
-    <File Path="Baansoort_Search.aspx" Url="Baansoort_Search.aspx" />
-    <File Path="Baansoort_Edit.aspx" Url="Baansoort_Edit.aspx" />
-    <File Path="Baansoort_Insert.aspx" Url="Baansoort_Insert.aspx" />
-    <File Path="Baansoort.aspx" Url="Baansoort.aspx" />
-    <File Path="Baansoorten.aspx" Url="Baansoorten.aspx" />
-    <File Path="Regio_Search.aspx" Url="Regio_Search.aspx" />
-    <File Path="Regio_Edit.aspx" Url="Regio_Edit.aspx" />
-    <File Path="Regio_Insert.aspx" Url="Regio_Insert.aspx" />
-    <File Path="Regio.aspx" Url="Regio.aspx" />
-    <File Path="Regios.aspx" Url="Regios.aspx" />
-    <File Path="Address_Search.aspx" Url="Address_Search.aspx" />
-    <File Path="Address_Edit.aspx" Url="Address_Edit.aspx" />
-    <File Path="Address_Insert.aspx" Url="Address_Insert.aspx" />
-    <File Path="Address.aspx" Url="Address.aspx" />
-    <File Path="Addressen.aspx" Url="Addressen.aspx" />
-    <File Path="Rechtsvorm_Search.aspx" Url="Rechtsvorm_Search.aspx" />
-    <File Path="Rechtsvorm_Edit.aspx" Url="Rechtsvorm_Edit.aspx" />
-    <File Path="Rechtsvorm_Insert.aspx" Url="Rechtsvorm_Insert.aspx" />
-    <File Path="Rechtsvorm.aspx" Url="Rechtsvorm.aspx" />
-    <File Path="Rechtsvormen.aspx" Url="Rechtsvormen.aspx" />
-    <File Path="Bestuursorgaan_Search.aspx" Url="Bestuursorgaan_Search.aspx" />
-    <File Path="Bestuursorgaan_Edit.aspx" Url="Bestuursorgaan_Edit.aspx" />
-    <File Path="Bestuursorgaan_Insert.aspx" Url="Bestuursorgaan_Insert.aspx" />
-    <File Path="Bestuursorgaan.aspx" Url="Bestuursorgaan.aspx" />
-    <File Path="Bestuursorganen.aspx" Url="Bestuursorganen.aspx" />
-    <File Path="Functionaris_Search.aspx" Url="Functionaris_Search.aspx" />
-    <File Path="Functionaris_Edit.aspx" Url="Functionaris_Edit.aspx" />
-    <File Path="Functionaris_Insert.aspx" Url="Functionaris_Insert.aspx" />
-    <File Path="Functionaris.aspx" Url="Functionaris.aspx" />
-    <File Path="Functionarissen.aspx" Url="Functionarissen.aspx" />
-    <File Path="Profiel_Search.aspx" Url="Profiel_Search.aspx" />
-    <File Path="Profiel_Edit.aspx" Url="Profiel_Edit.aspx" />
-    <File Path="Profiel_Insert.aspx" Url="Profiel_Insert.aspx" />
-    <File Path="Profiel.aspx" Url="Profiel.aspx" />
-    <File Path="Profielen.aspx" Url="Profielen.aspx" />
-    <File Path="Lidmaatschap_Search.aspx" Url="Lidmaatschap_Search.aspx" />
-    <File Path="Lidmaatschap_Edit.aspx" Url="Lidmaatschap_Edit.aspx" />
-    <File Path="Lidmaatschap_Insert.aspx" Url="Lidmaatschap_Insert.aspx" />
-    <File Path="Lidmaatschap.aspx" Url="Lidmaatschap.aspx" />
-    <File Path="Lidmaatschappen.aspx" Url="Lidmaatschappen.aspx" />
-    <File Path="Functie_Search.aspx" Url="Functie_Search.aspx" />
-    <File Path="Functie_Edit.aspx" Url="Functie_Edit.aspx" />
-    <File Path="Functie_Insert.aspx" Url="Functie_Insert.aspx" />
-    <File Path="Functie.aspx" Url="Functie.aspx" />
-    <File Path="Functies.aspx" Url="Functies.aspx" />
-    <File Path="District_Search.aspx" Url="District_Search.aspx" />
-    <File Path="District_Edit.aspx" Url="District_Edit.aspx" />
-    <File Path="District_Insert.aspx" Url="District_Insert.aspx" />
-    <File Path="District.aspx" Url="District.aspx" />
-    <File Path="Districten.aspx" Url="Districten.aspx" />
-    <File Path="Nationaliteit_Search.aspx" Url="Nationaliteit_Search.aspx" />
-    <File Path="Nationaliteit_Edit.aspx" Url="Nationaliteit_Edit.aspx" />
-    <File Path="Nationaliteit_Insert.aspx" Url="Nationaliteit_Insert.aspx" />
-    <File Path="Nationaliteit.aspx" Url="Nationaliteit.aspx" />
-    <File Path="Nationaliteiten.aspx" Url="Nationaliteiten.aspx" />
-    <File Path="Accommodatie_Search.aspx" Url="Accommodatie_Search.aspx" />
-    <File Path="Accommodatie_Edit.aspx" Url="Accommodatie_Edit.aspx" />
-    <File Path="Accommodatie_Insert.aspx" Url="Accommodatie_Insert.aspx" />
-    <File Path="Accommodatie.aspx" Url="Accommodatie.aspx" />
-    <File Path="Accommodaties.aspx" Url="Accommodaties.aspx" />
-    <File Path="Gebruiker_Search.aspx" Url="Gebruiker_Search.aspx" />
-    <File Path="Gebruiker_Edit.aspx" Url="Gebruiker_Edit.aspx" />
-    <File Path="Gebruiker_Insert.aspx" Url="Gebruiker_Insert.aspx" />
-    <File Path="Gebruiker.aspx" Url="Gebruiker.aspx" />
-    <File Path="Gebruikers.aspx" Url="Gebruikers.aspx" />
-    <File Path="Vereniging_Search.aspx" Url="Vereniging_Search.aspx" />
-    <File Path="Vereniging_Edit.aspx" Url="Vereniging_Edit.aspx" />
-    <File Path="Vereniging_Insert.aspx" Url="Vereniging_Insert.aspx" />
-    <File Path="Vereniging.aspx" Url="Vereniging.aspx" />
-    <File Path="Verenigingen.aspx" Url="Verenigingen.aspx" />
-    <File Path="Setting_Search.aspx" Url="Setting_Search.aspx" />
-    <File Path="Setting_Edit.aspx" Url="Setting_Edit.aspx" />
-    <File Path="Setting_Insert.aspx" Url="Setting_Insert.aspx" />
-    <File Path="Setting.aspx" Url="Setting.aspx" />
-    <File Path="Settings.aspx" Url="Settings.aspx" />
+    <File Path="browserconfig.xml" Url="browserconfig.xml" Type="Ghostable" />
+    <File Path="Land_Search.aspx" Url="Land_Search.aspx" Type="Ghostable" />
+    <File Path="Land_Edit.aspx" Url="Land_Edit.aspx" Type="Ghostable" />
+    <File Path="Land_Insert.aspx" Url="Land_Insert.aspx" Type="Ghostable" />
+    <File Path="Land.aspx" Url="Land.aspx" Type="Ghostable" />
+    <File Path="Landen.aspx" Url="Landen.aspx" Type="Ghostable" />
+    <File Path="Baantoplaag_Search.aspx" Url="Baantoplaag_Search.aspx" Type="Ghostable" />
+    <File Path="Baantoplaag_Edit.aspx" Url="Baantoplaag_Edit.aspx" Type="Ghostable" />
+    <File Path="Baantoplaag_Insert.aspx" Url="Baantoplaag_Insert.aspx" Type="Ghostable" />
+    <File Path="Baantoplaag.aspx" Url="Baantoplaag.aspx" Type="Ghostable" />
+    <File Path="Baantoplagen.aspx" Url="Baantoplagen.aspx" Type="Ghostable" />
+    <File Path="Baanblok_Search.aspx" Url="Baanblok_Search.aspx" Type="Ghostable" />
+    <File Path="Baanblok_Edit.aspx" Url="Baanblok_Edit.aspx" Type="Ghostable" />
+    <File Path="Baanblok_Insert.aspx" Url="Baanblok_Insert.aspx" Type="Ghostable" />
+    <File Path="Baanblok.aspx" Url="Baanblok.aspx" Type="Ghostable" />
+    <File Path="Baanblokken.aspx" Url="Baanblokken.aspx" Type="Ghostable" />
+    <File Path="Afbeelding_Search.aspx" Url="Afbeelding_Search.aspx" Type="Ghostable" />
+    <File Path="Afbeelding_Edit.aspx" Url="Afbeelding_Edit.aspx" Type="Ghostable" />
+    <File Path="Afbeelding_Insert.aspx" Url="Afbeelding_Insert.aspx" Type="Ghostable" />
+    <File Path="Afbeelding.aspx" Url="Afbeelding.aspx" Type="Ghostable" />
+    <File Path="Afbeeldingen.aspx" Url="Afbeeldingen.aspx" Type="Ghostable" />
+    <File Path="Sponsor_Search.aspx" Url="Sponsor_Search.aspx" Type="Ghostable" />
+    <File Path="Sponsor_Edit.aspx" Url="Sponsor_Edit.aspx" Type="Ghostable" />
+    <File Path="Sponsor_Insert.aspx" Url="Sponsor_Insert.aspx" Type="Ghostable" />
+    <File Path="Sponsor.aspx" Url="Sponsor.aspx" Type="Ghostable" />
+    <File Path="Sponsoren.aspx" Url="Sponsoren.aspx" Type="Ghostable" />
+    <File Path="Lidmaatschapsoort_Search.aspx" Url="Lidmaatschapsoort_Search.aspx" Type="Ghostable" />
+    <File Path="Lidmaatschapsoort_Edit.aspx" Url="Lidmaatschapsoort_Edit.aspx" Type="Ghostable" />
+    <File Path="Lidmaatschapsoort_Insert.aspx" Url="Lidmaatschapsoort_Insert.aspx" Type="Ghostable" />
+    <File Path="Lidmaatschapsoort.aspx" Url="Lidmaatschapsoort.aspx" Type="Ghostable" />
+    <File Path="Lidmaatschapsoorten.aspx" Url="Lidmaatschapsoorten.aspx" Type="Ghostable" />
+    <File Path="Foto_Search.aspx" Url="Foto_Search.aspx" Type="Ghostable" />
+    <File Path="Foto_Edit.aspx" Url="Foto_Edit.aspx" Type="Ghostable" />
+    <File Path="Foto_Insert.aspx" Url="Foto_Insert.aspx" Type="Ghostable" />
+    <File Path="Foto.aspx" Url="Foto.aspx" Type="Ghostable" />
+    <File Path="Fotos.aspx" Url="Fotos.aspx" Type="Ghostable" />
+    <File Path="Baanschema_Search.aspx" Url="Baanschema_Search.aspx" Type="Ghostable" />
+    <File Path="Baanschema_Edit.aspx" Url="Baanschema_Edit.aspx" Type="Ghostable" />
+    <File Path="Baanschema_Insert.aspx" Url="Baanschema_Insert.aspx" Type="Ghostable" />
+    <File Path="Baanschema.aspx" Url="Baanschema.aspx" Type="Ghostable" />
+    <File Path="Baanschemas.aspx" Url="Baanschemas.aspx" Type="Ghostable" />
+    <File Path="Afhang_Search.aspx" Url="Afhang_Search.aspx" Type="Ghostable" />
+    <File Path="Afhang_Edit.aspx" Url="Afhang_Edit.aspx" Type="Ghostable" />
+    <File Path="Afhang_Insert.aspx" Url="Afhang_Insert.aspx" Type="Ghostable" />
+    <File Path="Afhang.aspx" Url="Afhang.aspx" Type="Ghostable" />
+    <File Path="Afhangen.aspx" Url="Afhangen.aspx" Type="Ghostable" />
+    <File Path="Reservering_Search.aspx" Url="Reservering_Search.aspx" Type="Ghostable" />
+    <File Path="Reservering_Edit.aspx" Url="Reservering_Edit.aspx" Type="Ghostable" />
+    <File Path="Reservering_Insert.aspx" Url="Reservering_Insert.aspx" Type="Ghostable" />
+    <File Path="Reservering.aspx" Url="Reservering.aspx" Type="Ghostable" />
+    <File Path="Reserveringen.aspx" Url="Reserveringen.aspx" Type="Ghostable" />
+    <File Path="BaanSpeciaal_Search.aspx" Url="BaanSpeciaal_Search.aspx" Type="Ghostable" />
+    <File Path="BaanSpeciaal_Edit.aspx" Url="BaanSpeciaal_Edit.aspx" Type="Ghostable" />
+    <File Path="BaanSpeciaal_Insert.aspx" Url="BaanSpeciaal_Insert.aspx" Type="Ghostable" />
+    <File Path="BaanSpeciaal.aspx" Url="BaanSpeciaal.aspx" Type="Ghostable" />
+    <File Path="BanenSpeciaal.aspx" Url="BanenSpeciaal.aspx" Type="Ghostable" />
+    <File Path="Bouwaard_Search.aspx" Url="Bouwaard_Search.aspx" Type="Ghostable" />
+    <File Path="Bouwaard_Edit.aspx" Url="Bouwaard_Edit.aspx" Type="Ghostable" />
+    <File Path="Bouwaard_Insert.aspx" Url="Bouwaard_Insert.aspx" Type="Ghostable" />
+    <File Path="Bouwaard.aspx" Url="Bouwaard.aspx" Type="Ghostable" />
+    <File Path="Bouwaarden.aspx" Url="Bouwaarden.aspx" Type="Ghostable" />
+    <File Path="Baan_Search.aspx" Url="Baan_Search.aspx" Type="Ghostable" />
+    <File Path="Baan_Edit.aspx" Url="Baan_Edit.aspx" Type="Ghostable" />
+    <File Path="Baan_Insert.aspx" Url="Baan_Insert.aspx" Type="Ghostable" />
+    <File Path="Baan.aspx" Url="Baan.aspx" Type="Ghostable" />
+    <File Path="Banen.aspx" Url="Banen.aspx" Type="Ghostable" />
+    <File Path="Baantype_Search.aspx" Url="Baantype_Search.aspx" Type="Ghostable" />
+    <File Path="Baantype_Edit.aspx" Url="Baantype_Edit.aspx" Type="Ghostable" />
+    <File Path="Baantype_Insert.aspx" Url="Baantype_Insert.aspx" Type="Ghostable" />
+    <File Path="Baantype.aspx" Url="Baantype.aspx" Type="Ghostable" />
+    <File Path="Baantypes.aspx" Url="Baantypes.aspx" Type="Ghostable" />
+    <File Path="Baansoort_Search.aspx" Url="Baansoort_Search.aspx" Type="Ghostable" />
+    <File Path="Baansoort_Edit.aspx" Url="Baansoort_Edit.aspx" Type="Ghostable" />
+    <File Path="Baansoort_Insert.aspx" Url="Baansoort_Insert.aspx" Type="Ghostable" />
+    <File Path="Baansoort.aspx" Url="Baansoort.aspx" Type="Ghostable" />
+    <File Path="Baansoorten.aspx" Url="Baansoorten.aspx" Type="Ghostable" />
+    <File Path="Regio_Search.aspx" Url="Regio_Search.aspx" Type="Ghostable" />
+    <File Path="Regio_Edit.aspx" Url="Regio_Edit.aspx" Type="Ghostable" />
+    <File Path="Regio_Insert.aspx" Url="Regio_Insert.aspx" Type="Ghostable" />
+    <File Path="Regio.aspx" Url="Regio.aspx" Type="Ghostable" />
+    <File Path="Regios.aspx" Url="Regios.aspx" Type="Ghostable" />
+    <File Path="Address_Search.aspx" Url="Address_Search.aspx" Type="Ghostable" />
+    <File Path="Address_Edit.aspx" Url="Address_Edit.aspx" Type="Ghostable" />
+    <File Path="Address_Insert.aspx" Url="Address_Insert.aspx" Type="Ghostable" />
+    <File Path="Address.aspx" Url="Address.aspx" Type="Ghostable" />
+    <File Path="Addressen.aspx" Url="Addressen.aspx" Type="Ghostable" />
+    <File Path="Rechtsvorm_Search.aspx" Url="Rechtsvorm_Search.aspx" Type="Ghostable" />
+    <File Path="Rechtsvorm_Edit.aspx" Url="Rechtsvorm_Edit.aspx" Type="Ghostable" />
+    <File Path="Rechtsvorm_Insert.aspx" Url="Rechtsvorm_Insert.aspx" Type="Ghostable" />
+    <File Path="Rechtsvorm.aspx" Url="Rechtsvorm.aspx" Type="Ghostable" />
+    <File Path="Rechtsvormen.aspx" Url="Rechtsvormen.aspx" Type="Ghostable" />
+    <File Path="Bestuursorgaan_Search.aspx" Url="Bestuursorgaan_Search.aspx" Type="Ghostable" />
+    <File Path="Bestuursorgaan_Edit.aspx" Url="Bestuursorgaan_Edit.aspx" Type="Ghostable" />
+    <File Path="Bestuursorgaan_Insert.aspx" Url="Bestuursorgaan_Insert.aspx" Type="Ghostable" />
+    <File Path="Bestuursorgaan.aspx" Url="Bestuursorgaan.aspx" Type="Ghostable" />
+    <File Path="Bestuursorganen.aspx" Url="Bestuursorganen.aspx" Type="Ghostable" />
+    <File Path="Functionaris_Search.aspx" Url="Functionaris_Search.aspx" Type="Ghostable" />
+    <File Path="Functionaris_Edit.aspx" Url="Functionaris_Edit.aspx" Type="Ghostable" />
+    <File Path="Functionaris_Insert.aspx" Url="Functionaris_Insert.aspx" Type="Ghostable" />
+    <File Path="Functionaris.aspx" Url="Functionaris.aspx" Type="Ghostable" />
+    <File Path="Functionarissen.aspx" Url="Functionarissen.aspx" Type="Ghostable" />
+    <File Path="Profiel_Search.aspx" Url="Profiel_Search.aspx" Type="Ghostable" />
+    <File Path="Profiel_Edit.aspx" Url="Profiel_Edit.aspx" Type="Ghostable" />
+    <File Path="Profiel_Insert.aspx" Url="Profiel_Insert.aspx" Type="Ghostable" />
+    <File Path="Profiel.aspx" Url="Profiel.aspx" Type="Ghostable" />
+    <File Path="Profielen.aspx" Url="Profielen.aspx" Type="Ghostable" />
+    <File Path="Lidmaatschap_Search.aspx" Url="Lidmaatschap_Search.aspx" Type="Ghostable" />
+    <File Path="Lidmaatschap_Edit.aspx" Url="Lidmaatschap_Edit.aspx" Type="Ghostable" />
+    <File Path="Lidmaatschap_Insert.aspx" Url="Lidmaatschap_Insert.aspx" Type="Ghostable" />
+    <File Path="Lidmaatschap.aspx" Url="Lidmaatschap.aspx" Type="Ghostable" />
+    <File Path="Lidmaatschappen.aspx" Url="Lidmaatschappen.aspx" Type="Ghostable" />
+    <File Path="Functie_Search.aspx" Url="Functie_Search.aspx" Type="Ghostable" />
+    <File Path="Functie_Edit.aspx" Url="Functie_Edit.aspx" Type="Ghostable" />
+    <File Path="Functie_Insert.aspx" Url="Functie_Insert.aspx" Type="Ghostable" />
+    <File Path="Functie.aspx" Url="Functie.aspx" Type="Ghostable" />
+    <File Path="Functies.aspx" Url="Functies.aspx" Type="Ghostable" />
+    <File Path="District_Search.aspx" Url="District_Search.aspx" Type="Ghostable" />
+    <File Path="District_Edit.aspx" Url="District_Edit.aspx" Type="Ghostable" />
+    <File Path="District_Insert.aspx" Url="District_Insert.aspx" Type="Ghostable" />
+    <File Path="District.aspx" Url="District.aspx" Type="Ghostable" />
+    <File Path="Districten.aspx" Url="Districten.aspx" Type="Ghostable" />
+    <File Path="Nationaliteit_Search.aspx" Url="Nationaliteit_Search.aspx" Type="Ghostable" />
+    <File Path="Nationaliteit_Edit.aspx" Url="Nationaliteit_Edit.aspx" Type="Ghostable" />
+    <File Path="Nationaliteit_Insert.aspx" Url="Nationaliteit_Insert.aspx" Type="Ghostable" />
+    <File Path="Nationaliteit.aspx" Url="Nationaliteit.aspx" Type="Ghostable" />
+    <File Path="Nationaliteiten.aspx" Url="Nationaliteiten.aspx" Type="Ghostable" />
+    <File Path="Accommodatie_Search.aspx" Url="Accommodatie_Search.aspx" Type="Ghostable" />
+    <File Path="Accommodatie_Edit.aspx" Url="Accommodatie_Edit.aspx" Type="Ghostable" />
+    <File Path="Accommodatie_Insert.aspx" Url="Accommodatie_Insert.aspx" Type="Ghostable" />
+    <File Path="Accommodatie.aspx" Url="Accommodatie.aspx" Type="Ghostable" />
+    <File Path="Accommodaties.aspx" Url="Accommodaties.aspx" Type="Ghostable" />
+    <File Path="Gebruiker_Search.aspx" Url="Gebruiker_Search.aspx" Type="Ghostable" />
+    <File Path="Gebruiker_Edit.aspx" Url="Gebruiker_Edit.aspx" Type="Ghostable" />
+    <File Path="Gebruiker_Insert.aspx" Url="Gebruiker_Insert.aspx" Type="Ghostable" />
+    <File Path="Gebruiker.aspx" Url="Gebruiker.aspx" Type="Ghostable" />
+    <File Path="Gebruikers.aspx" Url="Gebruikers.aspx" Type="Ghostable" />
+    <File Path="Vereniging_Search.aspx" Url="Vereniging_Search.aspx" Type="Ghostable" />
+    <File Path="Vereniging_Edit.aspx" Url="Vereniging_Edit.aspx" Type="Ghostable" />
+    <File Path="Vereniging_Insert.aspx" Url="Vereniging_Insert.aspx" Type="Ghostable" />
+    <File Path="Vereniging.aspx" Url="Vereniging.aspx" Type="Ghostable" />
+    <File Path="Verenigingen.aspx" Url="Verenigingen.aspx" Type="Ghostable" />
+    <File Path="Setting_Search.aspx" Url="Setting_Search.aspx" Type="Ghostable" />
+    <File Path="Setting_Edit.aspx" Url="Setting_Edit.aspx" Type="Ghostable" />
+    <File Path="Setting_Insert.aspx" Url="Setting_Insert.aspx" Type="Ghostable" />
+    <File Path="Setting.aspx" Url="Setting.aspx" Type="Ghostable" />
+    <File Path="Settings.aspx" Url="Settings.aspx" Type="Ghostable" />
   </Module>
 </Elements>

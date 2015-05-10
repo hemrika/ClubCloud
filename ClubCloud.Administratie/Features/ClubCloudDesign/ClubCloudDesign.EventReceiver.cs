@@ -12,7 +12,6 @@ namespace ClubCloud.Administratie.Features.ClubCloudDesign
     /// <remarks>
     /// The GUID attached to this class may be used during packaging and should not be modified.
     /// </remarks>
-
     [Guid("6c26d96a-9a6f-479d-a931-3b9fd67c0de4")]
     public class ClubCloudDesignEventReceiver : SPFeatureReceiver
     {
@@ -24,8 +23,8 @@ namespace ClubCloud.Administratie.Features.ClubCloudDesign
             try
             {
                 var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.MasterUrl = site.RootWeb.ServerRelativeUrl + "_catalogs/masterpage/ClubCloud.master";
-                site.RootWeb.CustomMasterUrl = site.RootWeb.ServerRelativeUrl + "_catalogs/masterpage/ClubCloud.master";
+                site.RootWeb.MasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/ClubCloud.master").Replace("//","/");
+                site.RootWeb.CustomMasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/ClubCloud.master").Replace("//","/");
                 site.RootWeb.Update();
             }
             catch { }
@@ -34,7 +33,7 @@ namespace ClubCloud.Administratie.Features.ClubCloudDesign
             {
                 var site = (SPSite)properties.Feature.Parent;
                 site.RootWeb.Title = "Administratie";
-                site.RootWeb.SiteLogoUrl = site.RootWeb.ServerRelativeUrl + "_catalogs/masterpage/ClubCloud/images/siteicon.png";
+                site.RootWeb.SiteLogoUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/ClubCloud/images/siteicon.png").Replace("//", "/");
                 site.RootWeb.SiteLogoDescription = "ClubCloud Administratie omgeving";
                 site.RootWeb.Update();
             }
@@ -78,8 +77,8 @@ namespace ClubCloud.Administratie.Features.ClubCloudDesign
             try
             {
                 var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.MasterUrl = site.RootWeb.ServerRelativeUrl + "_catalogs/masterpage/seattle.master";
-                site.RootWeb.CustomMasterUrl = site.RootWeb.ServerRelativeUrl + "_catalogs/masterpage/seattle.master";
+                site.RootWeb.MasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/seattle.master").Replace("//","/");
+                site.RootWeb.CustomMasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/seattle.master").Replace("//", "/");
                 site.RootWeb.Update();
             }
             catch { }

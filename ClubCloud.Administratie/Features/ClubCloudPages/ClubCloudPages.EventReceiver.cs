@@ -24,7 +24,8 @@ namespace ClubCloud.Administratie.Features.ClubCloudPages
             try
             {
                 var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.RootFolder.WelcomePage = "default.aspx";
+                site.RootWeb.RootFolder.WelcomePage = "/default.aspx";
+                site.RootWeb.AnonymousState = SPWeb.WebAnonymousState.On;
                 site.RootWeb.RootFolder.Update(); 
             }
             catch { }
@@ -67,7 +68,8 @@ namespace ClubCloud.Administratie.Features.ClubCloudPages
             try
             {
                 var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.RootFolder.WelcomePage = "default.aspx";
+                site.RootWeb.RootFolder.WelcomePage = "/default.aspx";
+                site.RootWeb.AnonymousState = SPWeb.WebAnonymousState.Disabled;
                 site.RootWeb.RootFolder.Update();
             }
             catch { }

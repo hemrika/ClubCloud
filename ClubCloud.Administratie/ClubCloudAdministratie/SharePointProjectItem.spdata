@@ -3,6 +3,6 @@
   <Files>
     <ProjectItemFile Source="default.aspx" Target="SiteTemplates\ClubCloudAdministratie\" Type="TemplateFile" />
     <ProjectItemFile Source="onet.xml" Target="SiteTemplates\ClubCloudAdministratie\Xml\" Type="TemplateFile" />
-    <ProjectItemFile Source="webtemp_ClubCloudAdministratie.xml" Target="1033\xml\" Type="TemplateFile" />
+    <ProjectItemFile Source="webtemp_ClubCloudAdministratie.xml" Target="1043\xml\" Type="TemplateFile" />
   </Files>
 </ProjectItem>

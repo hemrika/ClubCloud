@@ -139,15 +139,5 @@ namespace ClubCloud.Afhangen
             ClubCloud_Afhang settings = Client.GetVerenigingAfhangSettings("00000000", vereniging.Id, false);
             //Client.VerenigingenUpdate("12073385", true);
         }
-
-        protected void DatePicker_Select(object sender, Syncfusion.JavaScript.Web.DatePickerSelectEventArgs e)
-        {
-
-        }
-
-        protected void TimePicker_Select(object sender, Syncfusion.JavaScript.Web.TimePickerEventArgs e)
-        {
-
-        }
     }
 }

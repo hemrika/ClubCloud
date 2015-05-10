@@ -40,24 +40,6 @@ namespace ClubCloud.Afhangen {
         protected global::System.Web.UI.Timer tmr_loader_afhangen;
         
         /// <summary>
-        /// DatePicker control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Syncfusion.JavaScript.Web.DatePicker DatePicker;
-        
-        /// <summary>
-        /// TimePicker control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Syncfusion.JavaScript.Web.TimePicker TimePicker;
-        
-        /// <summary>
         /// SpelersCount control.
         /// </summary>
         /// <remarks>
@@ -164,24 +146,6 @@ namespace ClubCloud.Afhangen {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox DateDay;
-        
-        /// <summary>
-        /// NumericTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Syncfusion.JavaScript.Web.NumericTextBox NumericTextBox;
-        
-        /// <summary>
-        /// CheckBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Syncfusion.JavaScript.Web.CheckBox CheckBox;
         
         /// <summary>
         /// lbl_result control.

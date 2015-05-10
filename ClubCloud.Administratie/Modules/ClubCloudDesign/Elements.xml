@@ -99,6 +99,6 @@
     <File Path="ClubCloud\jquery.ui.widget.min.js" Url="ClubCloud/jquery.ui.widget.min.js" Type="GhostableInLibrary" />
     <File Path="ClubCloud\style.css" Url="ClubCloud/style.css" Type="GhostableInLibrary" />
     <File Path="ClubCloud\symple_accordion.js" Url="ClubCloud/symple_accordion.js" Type="GhostableInLibrary" />
-    <File Path="ClubCloud\images\SITEICON.PNG" Url="ClubCloudDesign/ClubCloud/images/SITEICON.PNG" />
+    <File Path="ClubCloud\images\SITEICON.PNG" Url="ClubCloud/images/SITEICON.PNG" />
   </Module>
 </Elements>

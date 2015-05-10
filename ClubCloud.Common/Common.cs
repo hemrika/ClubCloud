@@ -64,7 +64,7 @@ namespace ClubCloud.Common
 
             var UnobtrusiveValidationMode = new SPWebConfigModification
             {
-                Name = "UnobtrusiveValidationMode",
+                Name = "add[@key='ValidationSettings:UnobtrusiveValidationMode'][@value='None']",
                 Owner = "ClubCloud",
                 Sequence = 2,
                 Path = "configuration/appSettings",
@@ -76,7 +76,7 @@ namespace ClubCloud.Common
 
             var MaxConcurrentCompilations = new SPWebConfigModification
             {
-                Name = "MaxConcurrentCompilations",
+                Name = "add[@key='aspnet:MaxConcurrentCompilations'][@value='0']",
                 Owner = "ClubCloud",
                 Sequence = 2,
                 Path = "configuration/appSettings",
