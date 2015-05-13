@@ -128,6 +128,9 @@ namespace ClubCloud.Model
         		{
                     foreach (DbEntityEntry entry in dbucex.Entries)
                     {
+                        DbPropertyValues currentValues = null;
+                        DbPropertyValues originalValues = null;
+    
                         switch (entry.State)
                         {
                             case EntityState.Deleted:
@@ -135,7 +138,7 @@ namespace ClubCloud.Model
                                 entry.State = EntityState.Deleted;
                                 break;
                             case EntityState.Modified:
-                                DbPropertyValues currentValues = entry.CurrentValues.Clone();
+                                currentValues = entry.CurrentValues.Clone();
                                 entry.Reload();
                                 if (entry.State == EntityState.Detached)
                                     Set(ObjectContext.GetObjectType(entry.Entity.GetType())).Add(entry.Entity);
@@ -143,6 +146,25 @@ namespace ClubCloud.Model
                                 {
                                     entry.Reload();
                                     entry.CurrentValues.SetValues(currentValues);
+                                }
+                                break;
+                            case EntityState.Added:
+    
+                                currentValues = entry.CurrentValues;
+                                try { originalValues = entry.GetDatabaseValues();} catch { };
+    
+                                if (originalValues != null)
+                                {
+                                    try
+                                    {
+                                        entry.Reload();
+                                        entry.CurrentValues.SetValues(currentValues);
+                                    }
+                                    catch { };
+                                }
+                                else
+                                {
+                                    try { entry.State = EntityState.Detached; ObjectContext.Detach(entry.Entity); break; } catch { };
                                 }
                                 break;
                             default:
@@ -156,6 +178,9 @@ namespace ClubCloud.Model
         		{
                     foreach (DbEntityEntry entry in dbuex.Entries)
                     {
+                        DbPropertyValues currentValues = null;
+                        DbPropertyValues originalValues = null;
+    
                         switch (entry.State)
                         {
                             case EntityState.Deleted:
@@ -163,7 +188,7 @@ namespace ClubCloud.Model
                                 entry.State = EntityState.Deleted;
                                 break;
                             case EntityState.Modified:
-                                DbPropertyValues currentValues = entry.CurrentValues.Clone();
+                                currentValues = entry.CurrentValues.Clone();
                                 entry.Reload();
                                 if (entry.State == EntityState.Detached)
                                     Set(ObjectContext.GetObjectType(entry.Entity.GetType())).Add(entry.Entity);
@@ -171,6 +196,26 @@ namespace ClubCloud.Model
                                 {
                                     entry.Reload();
                                     entry.CurrentValues.SetValues(currentValues);
+                                }
+                                break;
+                            case EntityState.Added:
+    
+                                currentValues = entry.CurrentValues;
+                                try { originalValues = entry.GetDatabaseValues();} catch { };
+    
+                                if (originalValues != null)
+                                {
+                                    try
+                                    {
+                                        entry.Reload();
+                                        entry.CurrentValues.SetValues(currentValues);
+                                    }
+                                    catch { };
+    								break;
+                                }
+                                else
+                                {
+                                    try { entry.State = EntityState.Detached; ObjectContext.Detach(entry.Entity); break; } catch { };
                                 }
                                 break;
                             default:
@@ -184,6 +229,9 @@ namespace ClubCloud.Model
         		{
                     foreach (DbEntityValidationResult result in dbevex.EntityValidationErrors)
                     {
+                        DbPropertyValues currentValues = null;
+                        DbPropertyValues originalValues = null;
+    
                         switch (result.Entry.State)
                         {
                             case EntityState.Deleted:
@@ -191,7 +239,7 @@ namespace ClubCloud.Model
                                 result.Entry.State = EntityState.Deleted;
                                 break;
                             case EntityState.Modified:
-                                DbPropertyValues currentValues = result.Entry.CurrentValues.Clone();
+                                currentValues = result.Entry.CurrentValues.Clone();
                                 result.Entry.Reload();
                                 if (result.Entry.State == EntityState.Detached)
                                     Set(ObjectContext.GetObjectType(result.Entry.Entity.GetType())).Add(result.Entry.Entity);
@@ -201,10 +249,30 @@ namespace ClubCloud.Model
                                     result.Entry.CurrentValues.SetValues(currentValues);
                                 }
                                 break;
-                            default:
-                                //result.Entry.Reload();
+                            case EntityState.Added:
+    
+                                currentValues = result.Entry.CurrentValues;
+    							try { originalValues = result.Entry.GetDatabaseValues();} catch { };
+    
+                                if (originalValues != null)
+                                {
+                                    try
+                                    {
+                                        result.Entry.Reload();
+                                        result.Entry.CurrentValues.SetValues(currentValues);
+                                    }
+                                    catch { };
+    								break;
+                                }
+                                else
+                                {
+                                    try { result.Entry.State = EntityState.Detached; ObjectContext.Detach(result.Entry.Entity); break; } catch { };
+                                }
                                 break;
-                        }
+                            default:
+                                //entry.Reload();
+                                break;
+    					}
                     }
         		}
     			//An attempt was made to use unsupported behavior such as executing multiple asynchronous commands concurrently on the same context instance.
@@ -248,6 +316,7 @@ namespace ClubCloud.Model
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
     		modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+    		modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
     
     		//ClubCloud_Settings
     		modelBuilder.Entity<ClubCloud_Setting>().Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);

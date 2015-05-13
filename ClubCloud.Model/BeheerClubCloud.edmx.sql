@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/06/2015 10:39:19
+-- Date Created: 05/12/2015 07:12:04
 -- Generated from EDMX file: C:\Source\ClubCloud\ClubCloud.Model\BeheerClubCloud.edmx
 -- --------------------------------------------------
 
@@ -323,7 +323,7 @@ CREATE TABLE [dbo].[ClubCloud_Verenigingen] (
     [TelefoonOverig] nvarchar(max)  NOT NULL,
     [Website] nvarchar(max)  NOT NULL,
     [FTPsite] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL,
+    [Actief] int  NOT NULL,
     [Oprichting] datetime  NULL,
     [Erkenning] datetime  NULL,
     [Gestopt] datetime  NULL,
@@ -365,7 +365,7 @@ CREATE TABLE [dbo].[ClubCloud_Gebruikers] (
     [NationaliteitId] uniqueidentifier  NULL,
     [Website] nvarchar(max)  NOT NULL,
     [FTPsite] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL,
+    [Actief] int  NOT NULL,
     [Beroep] nvarchar(max)  NOT NULL,
     [Kinderen] bit  NOT NULL,
     [KinderenAantal] int  NOT NULL,
@@ -421,7 +421,7 @@ CREATE TABLE [dbo].[ClubCloud_Accommodaties] (
     [WasruimteClubhuisAanwezig] bit  NOT NULL,
     [DistrictId] uniqueidentifier  NULL,
     [RegioId] uniqueidentifier  NULL,
-    [Actief] nvarchar(max)  NOT NULL,
+    [Actief] int  NOT NULL,
     [Gewijzigd] datetime  NOT NULL
 );
 GO
@@ -441,7 +441,7 @@ CREATE TABLE [dbo].[ClubCloud_Districten] (
     [Beschrijving] nvarchar(max)  NOT NULL,
     [Omschrijving] nvarchar(max)  NOT NULL,
     [RegioId] uniqueidentifier  NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -454,7 +454,7 @@ CREATE TABLE [dbo].[ClubCloud_Functies] (
     [Omschrijving] nvarchar(max)  NOT NULL,
     [Toegang] bit  NOT NULL,
     [Code] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -480,7 +480,7 @@ CREATE TABLE [dbo].[ClubCloud_Lidmaatschappen] (
     [SpeelsterkteDubbel] int  NOT NULL,
     [SpeelsterkteEnkel] int  NOT NULL,
     [Autorisatie] bit  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL,
+    [Actief] int  NOT NULL,
     [Gewijzigd] datetime  NOT NULL
 );
 GO
@@ -501,7 +501,7 @@ CREATE TABLE [dbo].[ClubCloud_Profielen] (
     [Dubbel_Rating_Eindejaar] decimal(18,0)  NOT NULL,
     [Enkel_Rating_Actueel] decimal(18,0)  NOT NULL,
     [Dubbel_Rating_Actueel] decimal(18,0)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL,
+    [Actief] int  NOT NULL,
     [Gewijzigd] datetime  NOT NULL
 );
 GO
@@ -517,7 +517,7 @@ CREATE TABLE [dbo].[ClubCloud_Functionarissen] (
     [TermijnBegin] datetime  NULL,
     [TermijnEinde] datetime  NULL,
     [Autorisatie] bit  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL,
+    [Actief] int  NOT NULL,
     [Gewijzigd] datetime  NOT NULL
 );
 GO
@@ -529,7 +529,7 @@ CREATE TABLE [dbo].[ClubCloud_Bestuursorganen] (
     [Beschrijving] nvarchar(max)  NULL,
     [VerenigingId] uniqueidentifier  NULL,
     [Groep] nvarchar(max)  NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -541,7 +541,7 @@ CREATE TABLE [dbo].[ClubCloud_Rechtsvormen] (
     [Code] nvarchar(max)  NOT NULL,
     [Beschrijving] nvarchar(max)  NOT NULL,
     [Meervoud] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -558,7 +558,7 @@ CREATE TABLE [dbo].[ClubCloud_Addressen] (
     [Straat] nvarchar(max)  NOT NULL,
     [Nummer] nvarchar(max)  NOT NULL,
     [LandId] uniqueidentifier  NULL,
-    [Actief] nvarchar(max)  NOT NULL,
+    [Actief] int  NOT NULL,
     [Fax] nvarchar(max)  NOT NULL,
     [Toevoeging] nvarchar(max)  NOT NULL,
     [Postbus] nvarchar(max)  NOT NULL,
@@ -580,7 +580,7 @@ CREATE TABLE [dbo].[ClubCloud_Regios] (
     [TelefoonAvond] nvarchar(max)  NULL,
     [TelefoonOverdag] nvarchar(max)  NULL,
     [Fax] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -593,7 +593,7 @@ CREATE TABLE [dbo].[ClubCloud_Baansoorten] (
     [Meervoud] nvarchar(max)  NOT NULL,
     [Omschrijving] nvarchar(max)  NOT NULL,
     [Code] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -605,7 +605,7 @@ CREATE TABLE [dbo].[ClubCloud_Baantypes] (
     [Meervoud] nvarchar(max)  NOT NULL,
     [Omschrijving] nvarchar(max)  NOT NULL,
     [Code] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -618,7 +618,7 @@ CREATE TABLE [dbo].[ClubCloud_Banen] (
     [AccommodatieId] uniqueidentifier  NULL,
     [Status] nvarchar(max)  NOT NULL,
     [Keuring] datetime  NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -630,7 +630,7 @@ CREATE TABLE [dbo].[ClubCloud_Bouwaarden] (
     [Code] nvarchar(max)  NOT NULL,
     [Beschrijving] nvarchar(max)  NOT NULL,
     [Meervoud] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -640,7 +640,7 @@ CREATE TABLE [dbo].[ClubCloud_BanenSpeciaal] (
     [Naam] nvarchar(max)  NOT NULL,
     [Baansoort] int  NOT NULL,
     [AccommodatieId] uniqueidentifier  NULL,
-    [Actief] nvarchar(max)  NOT NULL,
+    [Actief] int  NOT NULL,
     [BaantoplaagId] uniqueidentifier  NULL
 );
 GO
@@ -715,7 +715,7 @@ CREATE TABLE [dbo].[ClubCloud_Lidmaatschapsoorten] (
     [DagEinde] time  NOT NULL,
     [Contributie] bit  NOT NULL,
     [Tarief] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -745,7 +745,7 @@ CREATE TABLE [dbo].[ClubCloud_Baanblokken] (
     [BaansoortId] uniqueidentifier  NULL,
     [Verlichting] bit  NOT NULL,
     [Locatie] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 
@@ -757,7 +757,7 @@ CREATE TABLE [dbo].[ClubCloud_Baantoplagen] (
     [Meervoud] nvarchar(max)  NOT NULL,
     [Omschrijving] nvarchar(max)  NOT NULL,
     [Code] nvarchar(max)  NOT NULL,
-    [Actief] nvarchar(max)  NOT NULL
+    [Actief] int  NOT NULL
 );
 GO
 

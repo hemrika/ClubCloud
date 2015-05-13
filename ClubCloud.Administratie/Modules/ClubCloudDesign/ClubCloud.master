@@ -29,11 +29,11 @@
 	<SharePoint:ProjectProperty Property="Title" runat="server" /></asp:ContentPlaceHolder>
 </SharePoint:PageTitle>
 <SharePoint:SPShortcutIcon runat="server" IconUrl="/_layouts/15/images/favicon.ico?rev=23" />
-<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjax.js" defer="defer" async=""></script>
-<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxWebForms.js" defer="defer" async=""></script>
-<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxApplicationServices.js" defer="defer" async=""></script>
-<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxTimer.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.min.js" defer="defer" async=""></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjax.js" async=""></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxWebForms.js" async=""></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxApplicationServices.js" async=""></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxTimer.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.min.js" async=""></script>
 <SharePoint:CssLink runat="server" Version="15" />
 <SharePoint:CacheManifestLink runat="server" />
 <!-- ===== STARTER: Additional header placeholder - overridden by asp:content on pages or page layouts  =========================== -->
@@ -42,7 +42,7 @@
 <![endif]--><!--[if IE 9]>
 <link rel="stylesheet" type="text/css" href="#" media="all" />
 <![endif]--><!--[if lt IE 9]>
-<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript" defer="defer" async=""></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript" async=""></script>
 <![endif]--><!--[if IE 7]>
 <link rel="stylesheet" href="/_catalogs/masterpage/ClubCloud/css-ie7-fix.css" type="text/css" media="all" />
 <![endif]-->
@@ -240,18 +240,18 @@
 </div>
 <!-- End Body Wrapper -->
 
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/ddsmoothmenu.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.isotope.min.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/selectnav.min.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.slickforms.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.easytabs.min.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.themepunch.plugins.min.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.themepunch.revolution.min.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.fancybox.pack.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/fancybox/helpers/jquery.fancybox-buttons0ff5.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/fancybox/helpers/jquery.fancybox-thumbs0ff5.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/fancybox/helpers/jquery.fancybox-mediae209.js" defer="defer" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/scripts.js" defer="defer" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/ddsmoothmenu.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.isotope.min.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/selectnav.min.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.slickforms.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.easytabs.min.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.themepunch.plugins.min.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.themepunch.revolution.min.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.fancybox.pack.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/fancybox/helpers/jquery.fancybox-buttons0ff5.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/fancybox/helpers/jquery.fancybox-thumbs0ff5.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/fancybox/helpers/jquery.fancybox-mediae209.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/scripts.js" async=""></script>
 <script type="text/javascript" >
     $(document).ready(function () {
 

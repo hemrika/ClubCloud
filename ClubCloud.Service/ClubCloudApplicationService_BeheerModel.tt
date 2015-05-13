@@ -193,7 +193,8 @@ internal partial class ClubCloudApplicationService
 		{
 			entity = Set<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, settings);
 
-			beheerModel.<#=code.Escape(entitySet)#>.AddOrUpdate(entity);
+			if(entity != null)
+				beheerModel.<#=code.Escape(entitySet)#>.AddOrUpdate(entity);
 		
 			beheerModel.SaveChanges();
 
@@ -436,9 +437,10 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			if(entity != null && entity.<#=code.Escape(endEntity)#> != null && entity.<#=code.Escape(endEntity)#>.Count == 0)
 				beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			result = entity.<#=code.Escape(endEntity)#>.ToList();
+			if(entity != null)
+				result = entity.<#=code.Escape(endEntity)#>.ToList();
 
-			if(result == null || result.Count == 0 || refresh)
+			if(result == null || result.Count == 0 || refresh && entity != null)
 				result = Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, refresh, settings);
 
 			if(result != null)
@@ -482,7 +484,8 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			if(entity != null && entity.<#=code.Escape(endEntity)#> != null && entity.<#=code.Escape(endEntity)#>.Count == 0)
 				beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			result = entity.<#=code.Escape(endEntity)#>.ToList();
+			if(entity != null)
+				result = entity.<#=code.Escape(endEntity)#>.ToList();
 
 			if(result == null || result.Count == 0 || refresh)
 				result = Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
@@ -560,9 +563,10 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
 				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			result = entity.<#=code.Escape(endEntity)#>;
+			if(entity != null)
+				result = entity.<#=code.Escape(endEntity)#>;
 
-			if (result == null || refresh)
+			if (result == null || refresh && entity != null)
 				result = Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, refresh, settings);
 
 			if (result != null)
@@ -593,7 +597,8 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
 				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
+			if(entity != null)
+				entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
 
 			beheerModel.SaveChanges();
 			succes = true;
@@ -626,7 +631,8 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
 				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			result = entity.<#=code.Escape(endEntity)#>;
+			if(entity != null)
+				result = entity.<#=code.Escape(endEntity)#>;
 
 			if (result == null || refresh)
 				result = Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
@@ -660,7 +666,8 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
 				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
+			if(entity != null)
+				entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
 
 			beheerModel.SaveChanges();
 			succes= true;

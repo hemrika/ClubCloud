@@ -431,6 +431,10 @@ namespace ClubCloud.Zimbra.Client
                 //ConditionExpression conditiontype = new ConditionExpression { AttributeName = "objecttypecode", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
                 //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { conditionid } };
 
+                ConditionExpression condition = new ConditionExpression { AttributeName = "contactid", Operator = ConditionOperator.Equal, uitype = "contactid", Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
+                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                LinkEntity link = new LinkEntity { LinkToEntityName = "contact", LinkFromAttributeName = "sgt_functionarisid", LinkToAttributeName = "contactid", LinkCriteria = expression };
+                //List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_functionaris", out moreRecords, ref pageNum, null, link);
 
                 PagingInfo pageInfo = new PagingInfo();
                 pageInfo.Count = 50; // the number of rows in each batch
@@ -452,16 +456,16 @@ namespace ClubCloud.Zimbra.Client
                 //sgt_alg_district
                 //systemuser
                 //FilterExpression expression = new FilterExpression();
-                query.EntityName = "sgt_alg_pb_mutatie_leden";
+                query.EntityName = "sgt_alg_functionaris";
                 query.ColumnSet = cols;
                 //query.Criteria = expression;
-                //query.LinkEntities = new LinkEntity[] { null };
+                query.LinkEntities = new LinkEntity[] { link };
                 query.PageInfo = pageInfo;
                 query.Distinct = true;
 
                 // Create the request object.
                 RetrieveMultipleRequest request = new RetrieveMultipleRequest();
-                request.ReturnDynamicEntities = true;
+                //request.ReturnDynamicEntities = true;
                 // Set the properties of the request object.
                 request.Query = query;
 
@@ -472,11 +476,11 @@ namespace ClubCloud.Zimbra.Client
                     results = (RetrieveMultipleResponse)service.Execute(request);
 
                     List<BusinessEntity> entities = results.BusinessEntityCollection.BusinessEntities.ToList<BusinessEntity>();
-                    foreach (sgt_alg_pb_mutatie_leden entity in entities)
+                    foreach (sgt_alg_functionaris entity in entities)
                     {
                         //entity.sgt_spelerid
-                        string sentity = SerializeObjectList<sgt_alg_pb_mutatie_leden>(entity);
-                        WriteToXmlFile<sgt_alg_pb_mutatie_leden>(@"C:\sgt_alg_pb_mutatie_leden.xml", entity, true);
+                        string sentity = SerializeObjectList<sgt_alg_functionaris>(entity);
+                        WriteToXmlFile<sgt_alg_functionaris>(@"C:\sgt_alg_functionaris.xml", entity, true);
                     }
                 }
                 catch (Exception ex)

@@ -23,6 +23,7 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
     public class Zimbra_ProviderEventReceiver : SPFeatureReceiver
     {
         SPFeaturePropertyCollection configurationproperties = null;
+        SPDiagnosticsService diagSvc = SPDiagnosticsService.Local;
 
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
@@ -55,7 +56,13 @@ namespace ClubCloud.Provider.Features.Zimbra_Provider
                                 SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Add(mod);
                             }
                         }
-                        catch { };
+                        catch (Exception ex)
+                        {
+                            diagSvc.WriteEvent(0,
+                                new SPDiagnosticsCategory("ClubCloud", TraceSeverity.Monitorable, EventSeverity.Warning),
+                                EventSeverity.Error,
+                                "Exception occured {0}", new object[] { ex });
+                        }
                     }
 
                     try

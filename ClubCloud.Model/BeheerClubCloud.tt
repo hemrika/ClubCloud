@@ -28,6 +28,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Data.Entity.ModelConfiguration;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 <#=codeStringGenerator.WriteEntityTypeSerializationInfo(entity)#>
 <#=codeStringGenerator.EntityClassOpening(entity)#>
@@ -72,6 +74,22 @@ using System.Collections.Generic;
     {
         foreach (var edmProperty in simpleProperties)
         {
+#>
+<#	if(ef.IsKey(edmProperty))
+   {
+#>      
+    [Key()]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
+<#
+	}
+
+	if (edmProperty.Documentation != null)
+    {
+#>
+	[Display(Name = "<#=code.Escape(edmProperty.Documentation.Summary)#>")]
+	[Description("<#=code.Escape(edmProperty.Documentation.LongDescription)#>")]	
+<#
+	}
 #>
 	[DataMember]
     <#=codeStringGenerator.Property(edmProperty)#>
@@ -198,8 +216,16 @@ var entityKey = entity.KeyMembers.FirstOrDefault();
 public class <#=code.Escape(entity)#>_Mapping : EntityTypeConfiguration<<#=code.Escape(entity)#>>
 {
 	public <#=code.Escape(entity)#>_Mapping() 
-	{			
+	{
+<#
+		//if(typeMapper.GetTypeName(entityKey.TypeUsage) != "int")
+        //{
+#>
+		//<#=code.Escape(typeMapper.GetTypeName(entityKey.TypeUsage))#>
 		HasKey(m => m.<#=code.Escape(entityKey)#>);
+<#
+		//}
+#>
 	}
 }
 

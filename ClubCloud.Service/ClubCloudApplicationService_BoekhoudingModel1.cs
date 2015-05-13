@@ -22,7 +22,7 @@ namespace ClubCloud.Service
     			if (_boekhoudingModel == null)
     			{
     					
-    				_boekhoudingModel = new BoekhoudingContainer(GetConnectionString());
+    				_boekhoudingModel = new BoekhoudingContainer(GetConnectionString("ClubCloudService_Boekhouding"));
                     _boekhoudingModel.Database.Connection.StateChange += BoekhoudingModel_Connection_StateChange;
                     _boekhoudingModel.Database.Connection.Disposed += BoekhoudingModel_Connection_Disposed;
                     _boekhoudingModel.ObjectContext.SavingChanges += BoekhoudingModel_ObjectContext_SavingChanges;

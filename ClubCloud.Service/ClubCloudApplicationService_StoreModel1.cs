@@ -22,7 +22,7 @@ namespace ClubCloud.Service
     			if (_storeModel == null)
     			{
     					
-    				_storeModel = new StoreContainer(GetConnectionString());
+    				_storeModel = new StoreContainer(GetConnectionString("ClubCloudService_Store"));
                     _storeModel.Database.Connection.StateChange += StoreModel_Connection_StateChange;
                     _storeModel.Database.Connection.Disposed += StoreModel_Connection_Disposed;
                     _storeModel.ObjectContext.SavingChanges += StoreModel_ObjectContext_SavingChanges;

@@ -263,7 +263,7 @@
     <Property Name="TelefoonOverig" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FTPsite" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
     <Property Name="Oprichting" Type="datetime" Nullable="true" />
     <Property Name="Erkenning" Type="datetime" Nullable="true" />
     <Property Name="Gestopt" Type="datetime" Nullable="true" />
@@ -305,7 +305,7 @@
     <Property Name="NationaliteitId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FTPsite" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
     <Property Name="Beroep" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Kinderen" Type="bit" Nullable="false" />
     <Property Name="KinderenAantal" Type="int" Nullable="false" />
@@ -361,7 +361,7 @@
     <Property Name="WasruimteClubhuisAanwezig" Type="bit" Nullable="false" />
     <Property Name="DistrictId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="RegioId" Type="uniqueidentifier" Nullable="true" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
     <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Nationaliteiten">
@@ -381,7 +381,7 @@
     <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Omschrijving" Type="nvarchar(max)" Nullable="false" />
     <Property Name="RegioId" Type="uniqueidentifier" Nullable="true" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Functies">
     <Key>
@@ -394,7 +394,7 @@
     <Property Name="Omschrijving" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Toegang" Type="bit" Nullable="false" />
     <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Lidmaatschappen">
     <Key>
@@ -420,7 +420,7 @@
     <Property Name="SpeelsterkteDubbel" Type="int" Nullable="false" />
     <Property Name="SpeelsterkteEnkel" Type="int" Nullable="false" />
     <Property Name="Autorisatie" Type="bit" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
     <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Profielen">
@@ -442,7 +442,7 @@
     <Property Name="Dubbel_Rating_Eindejaar" Type="decimal" Nullable="false" />
     <Property Name="Enkel_Rating_Actueel" Type="decimal" Nullable="false" />
     <Property Name="Dubbel_Rating_Actueel" Type="decimal" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
     <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Functionarissen">
@@ -458,7 +458,7 @@
     <Property Name="TermijnBegin" Type="datetime" Nullable="true" />
     <Property Name="TermijnEinde" Type="datetime" Nullable="true" />
     <Property Name="Autorisatie" Type="bit" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
     <Property Name="Gewijzigd" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Bestuursorganen">
@@ -470,7 +470,7 @@
     <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="true" />
     <Property Name="VerenigingId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Groep" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Rechtsvormen">
     <Key>
@@ -482,7 +482,7 @@
     <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Meervoud" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Addressen">
     <Key>
@@ -499,7 +499,7 @@
     <Property Name="Straat" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Nummer" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LandId" Type="uniqueidentifier" Nullable="true" DefaultValue="1aedac02-b67a-4fc1-8fe7-5b7e3fcff5f5" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
     <Property Name="Fax" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Toevoeging" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Postbus" Type="nvarchar(max)" Nullable="false" />
@@ -521,7 +521,7 @@
     <Property Name="TelefoonAvond" Type="nvarchar(max)" Nullable="true" />
     <Property Name="TelefoonOverdag" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Fax" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Baansoorten">
     <Key>
@@ -534,7 +534,7 @@
     <Property Name="Meervoud" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Omschrijving" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Baantypes">
     <Key>
@@ -546,7 +546,7 @@
     <Property Name="Meervoud" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Omschrijving" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Banen">
     <Key>
@@ -559,7 +559,7 @@
     <Property Name="AccommodatieId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Keuring" Type="datetime" Nullable="true" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Bouwaarden">
     <Key>
@@ -571,7 +571,7 @@
     <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Beschrijving" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Meervoud" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_BanenSpeciaal">
     <Key>
@@ -581,7 +581,7 @@
     <Property Name="Naam" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Baansoort" Type="int" Nullable="false" />
     <Property Name="AccommodatieId" Type="uniqueidentifier" Nullable="true" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
     <Property Name="BaantoplaagId" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="ClubCloud_Reserveringen">
@@ -656,7 +656,7 @@
     <Property Name="DagEinde" Type="time" Nullable="false" />
     <Property Name="Contributie" Type="bit" Nullable="false" />
     <Property Name="Tarief" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Sponsoren">
     <Key>
@@ -686,7 +686,7 @@
     <Property Name="BaansoortId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Verlichting" Type="bit" Nullable="false" />
     <Property Name="Locatie" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Baantoplagen">
     <Key>
@@ -698,7 +698,7 @@
     <Property Name="Meervoud" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Omschrijving" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Actief" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ClubCloud_Landen">
     <Key>
@@ -1501,7 +1501,7 @@
           <Property Name="NationaliteitId" Type="Guid" Nullable="true" />
           <Property Name="Website" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FTPsite" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <Property Name="Beroep" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Kinderen" Type="Boolean" Nullable="false" />
           <Property Name="KinderenAantal" Type="Int32" Nullable="false" />
@@ -1548,7 +1548,7 @@
           <Property Name="TelefoonOverig" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Website" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="FTPsite" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_Functionaris_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Functionaris" />
           <NavigationProperty Name="ClubCloud_Lidmaatschap" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Lidmaatschap" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Lidmaatschap" />
           <NavigationProperty Name="ClubCloud_Bestuursorgaan" Relationship="BeheerClubCloud.ClubCloud_Bestuursorgaan_Vereniging" FromRole="ClubCloud_Vereniging" ToRole="ClubCloud_Bestuursorgaan" />
@@ -1573,7 +1573,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" annotation:StoreGeneratedPattern="None" Nullable="false" />
+          <Property Name="Id" Type="Int32" annotation:StoreGeneratedPattern="None" Nullable="false" >
+            <Documentation>
+              <Summary>Summery</Summary>
+              <LongDescription>Long Description</LongDescription>
+            </Documentation>
+          </Property>
           <Property Name="GebruikerId" Type="Guid" Nullable="true" />
           <Property Name="VerenigingId" Type="Guid" Nullable="true" />
           <Property Name="Agree" Type="Boolean" Nullable="false" DefaultValue="False" />
@@ -1662,7 +1667,7 @@
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Accommodatie" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Vereniging" />
           <Property Name="DistrictId" Type="Guid" Nullable="true" />
           <Property Name="RegioId" Type="Guid" Nullable="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_Accommodatie_District" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_District" />
           <NavigationProperty Name="ClubCloud_Regio" Relationship="BeheerClubCloud.ClubCloud_Accommodatie_Regio" FromRole="ClubCloud_Accommodatie" ToRole="ClubCloud_Regio" />
@@ -1689,7 +1694,7 @@
           <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="RegioId" Type="Guid" Nullable="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_Functionaris_District" FromRole="ClubCloud_District" ToRole="ClubCloud_Functionaris" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_District" FromRole="ClubCloud_District" ToRole="ClubCloud_Vereniging" />
           <NavigationProperty Name="ClubCloud_Regio" Relationship="BeheerClubCloud.ClubCloud_District_Regio" FromRole="ClubCloud_District" ToRole="ClubCloud_Regio" />
@@ -1706,7 +1711,7 @@
           <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Toegang" Type="Boolean" Nullable="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_Functie_Functionaris" FromRole="ClubCloud_Functie" ToRole="ClubCloud_Functionaris" />
         </EntityType>
         <EntityType Name="ClubCloud_Lidmaatschap">
@@ -1733,7 +1738,7 @@
           <Property Name="SpeelsterkteDubbel" Type="Int32" Nullable="false" />
           <Property Name="SpeelsterkteEnkel" Type="Int32" Nullable="false" />
           <Property Name="Autorisatie" Type="Boolean" Nullable="false" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCloud_Vereniging" />
           <NavigationProperty Name="ClubCloud_Gebruiker" Relationship="BeheerClubCloud.ClubCloud_Gebruiker_Lidmaatschap" FromRole="ClubCloud_Lidmaatschap" ToRole="ClubCloud_Gebruiker" />
@@ -1759,7 +1764,7 @@
           <Property Name="Dubbel_Rating_Eindejaar" Type="Decimal" Nullable="false" />
           <Property Name="Enkel_Rating_Actueel" Type="Decimal" Nullable="false" />
           <Property Name="Dubbel_Rating_Actueel" Type="Decimal" Nullable="false" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
         </EntityType>
         <EntityType Name="ClubCloud_Functionaris">
@@ -1775,7 +1780,7 @@
           <Property Name="TermijnBegin" Type="DateTime" Precision="3" Nullable="true" />
           <Property Name="TermijnEinde" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Autorisatie" Type="Boolean" Nullable="false" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <Property Name="Gewijzigd" Type="DateTime" Nullable="false" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="ClubCloud_Functie" Relationship="BeheerClubCloud.ClubCloud_Functie_Functionaris" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Functie" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Functionaris_Vereniging" FromRole="ClubCloud_Functionaris" ToRole="ClubCloud_Vereniging" />
@@ -1864,7 +1869,7 @@
           <Property Name="Beschrijving" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
           <Property Name="VerenigingId" Type="Guid" Nullable="true" />
           <Property Name="Groep" Type="String" Nullable="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Functionaris" Relationship="BeheerClubCloud.ClubCloud_Functionaris_Bestuursorgaan" FromRole="ClubCloud_Bestuursorgaan" ToRole="ClubCloud_Functionaris" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Bestuursorgaan_Vereniging" FromRole="ClubCloud_Bestuursorgaan" ToRole="ClubCloud_Vereniging" />
         </EntityType>
@@ -1914,7 +1919,7 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Rechtsvorm" FromRole="ClubCloud_Rechtsvorm" ToRole="ClubCloud_Vereniging" />
         </EntityType>
         <Association Name="ClubCloud_Vereniging_Rechtsvorm">
@@ -1944,7 +1949,7 @@
           <Property Name="Straat" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Nummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="LandId" Type="Guid" Nullable="true" DefaultValue="1AEDAC02-B67A-4FC1-8FE7-5B7E3FCFF5F5" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <Property Name="Fax" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Toevoeging" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Postbus" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
@@ -1995,7 +2000,7 @@
           <Property Name="TelefoonAvond" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="TelefoonOverdag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="Fax" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_Vereniging" />
           <NavigationProperty Name="ClubCloud_District" Relationship="BeheerClubCloud.ClubCloud_District_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_District" />
           <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_Accommodatie_Regio" FromRole="ClubCloud_Regio" ToRole="ClubCloud_Accommodatie" />
@@ -2072,7 +2077,7 @@
           <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Baantype" Relationship="BeheerClubCloud.ClubCloud_Baansoort_Baantype" FromRole="ClubCloud_Baansoort" ToRole="ClubCloud_Baantype" />
           <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_Baanblok_Baansoort" FromRole="ClubCloud_Baansoort" ToRole="ClubCloud_Baanblok" />
         </EntityType>
@@ -2086,7 +2091,7 @@
           <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Baansoort" Relationship="BeheerClubCloud.ClubCloud_Baansoort_Baantype" FromRole="ClubCloud_Baantype" ToRole="ClubCloud_Baansoort" />
           <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_Baanblok_Baantype" FromRole="ClubCloud_Baantype" ToRole="ClubCloud_Baanblok" />
         </EntityType>
@@ -2102,7 +2107,7 @@
           <Property Name="AccommodatieId" Type="Guid" Nullable="true" />
           <Property Name="Status" Type="String" Nullable="false" />
           <Property Name="Keuring" Type="DateTime" Nullable="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_Baan_Baanblok" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Baanblok" />
           <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_Baan_Accommodatie" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Accommodatie" />
           <NavigationProperty Name="ClubCloud_Baanschema" Relationship="BeheerClubCloud.ClubCloud_Baanschema_Baan" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Baanschema" />
@@ -2117,7 +2122,7 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
         </EntityType>
         <EntityType Name="ClubCloud_BaanSpeciaal">
           <Key>
@@ -2127,7 +2132,7 @@
           <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Baansoort" Type="BeheerClubCloud.BaanSoort" Nullable="false" />
           <Property Name="AccommodatieId" Type="Guid" Nullable="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaal_Accommodatie" FromRole="ClubCloud_BaanSpeciaal" ToRole="ClubCloud_Accommodatie" />
           <NavigationProperty Name="ClubCloud_Baantoplaag" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaal_Baantoplaag" FromRole="ClubCloud_BaanSpeciaal" ToRole="ClubCloud_Baantoplaag" />
           <Property Name="BaantoplaagId" Type="Guid" Nullable="true" />
@@ -2370,7 +2375,7 @@
           <NavigationProperty Name="ClubCloud_Lidmaatschap" Relationship="BeheerClubCloud.ClubCloud_LidmaatschapSoort_Lidmaatschap" FromRole="ClubCLoud_LidmaatschapSoort" ToRole="ClubCloud_Lidmaatschap" />
           <Property Name="Contributie" Type="Boolean" Nullable="false" />
           <Property Name="Tarief" Type="String" Nullable="false" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_Vereniging" Relationship="BeheerClubCloud.ClubCloud_Vereniging_Lidmaatschapsoort" FromRole="ClubCloud_Lidmaatschapsoort" ToRole="ClubCloud_Vereniging" />
         </EntityType>
         <Association Name="ClubCloud_LidmaatschapSoort_Lidmaatschap">
@@ -2444,7 +2449,7 @@
           <Property Name="BaansoortId" Type="Guid" Nullable="true" />
           <Property Name="Verlichting" Type="Boolean" Nullable="false" />
           <Property Name="Locatie" Type="String" Nullable="false" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
         </EntityType>
         <Association Name="ClubCloud_Baan_Baanblok">
           <End Type="BeheerClubCloud.ClubCloud_Baan" Role="ClubCloud_Baan" Multiplicity="*" />
@@ -2528,7 +2533,7 @@
           <Property Name="Meervoud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Omschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Actief" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
           <NavigationProperty Name="ClubCloud_BaanSpeciaal" Relationship="BeheerClubCloud.ClubCloud_BaanSpeciaal_Baantoplaag" FromRole="ClubCloud_Baantoplaag" ToRole="ClubCloud_BaanSpeciaal" />
         </EntityType>
         <Association Name="ClubCloud_BaanSpeciaal_Baantoplaag">
@@ -2665,6 +2670,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EnumType Name="ActiefSoort" IsFlags="true">
+          <Member Name="Onbekend" Value="0" />
+          <Member Name="Actief" Value="1" />
+          <Member Name="Inactief" Value="2" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

@@ -289,8 +289,8 @@ namespace ClubCloud.Provider
 
                 try
                 {
-                    while(!zimbraServer.AuthenticatedAdmin.Value)
-                    {
+                    //while(!zimbraServer.AuthenticatedAdmin.Value)
+                    //{
                         try
                         {
                             AdminToken = zimbraServer.Authenticate(zimbraconfiguration.Server.UserName, zimbraconfiguration.Server.Password, zimbraconfiguration.Server.IsAdmin);
@@ -303,7 +303,7 @@ namespace ClubCloud.Provider
                             zimbraServer.TriggerWebSite();
                             System.Threading.Thread.Sleep(1000);
                         }
-                    }
+                    //}
 
                     using (Zimbra.Administration.GetVersionInfoResponse response = await zimbraServer.Message(new Zimbra.Administration.GetVersionInfoRequest()) as Zimbra.Administration.GetVersionInfoResponse)
                     {

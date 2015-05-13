@@ -13,7 +13,7 @@ namespace ClubCloud.Zimbra.Administration
 
         private string _message;
 
-        [System.Xml.Serialization.XmlElementAttribute()]
+        //[System.Xml.Serialization.XmlElementAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
         [MessageBodyMember]
         public string message

@@ -472,6 +472,12 @@ namespace ClubCloud.Service
         void NationaliteitenUpdate(string bondsnummer, bool refresh);
 
         [OperationContract]
+        void LandenUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
+        void BouwaardenUpdate(string bondsnummer, bool refresh);
+
+        [OperationContract]
         void DistrictenUpdate(string bondsnummer, bool refresh);
 
         [OperationContract]
@@ -491,6 +497,14 @@ namespace ClubCloud.Service
 
         [OperationContract]
         void BanenUpdate(string bondsnummer, bool refresh);
+
+        /*
+        [OperationContract]
+        void AccommodatiesUpdate(string bondsnummer, bool refresh);
+        */
+
+        [OperationContract]
+        bool AccommodatiesUpdate(string bondsnummer, int pageNum, bool refresh);
 
         [OperationContract]
         void VerenigingZimbra(string bondsnummer, ClubCloud_Vereniging vereniging);
@@ -547,7 +561,10 @@ namespace ClubCloud.Service
         [OperationContract]
         List<ApplicationProcessorArchitecture> GetApplicationProcessorArchitecture(int applicationVersionId, string version);
 
-        #endregion        
-    
+        #endregion
+
+
+
+        
     }
 }

@@ -5,6 +5,7 @@ using ClubCloud.Zimbra.Service;
 using System;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.IO;
 using System.Net;
 using System.Reflection;
 using System.ServiceModel;
@@ -277,11 +278,28 @@ namespace ClubCloud.Zimbra
             return AuthToken;
         }
 
+        private CookieContainer _Container;
+        IAsyncResult result;
+
         public void TriggerWebSite()
         {
             try
             {
                 string URLAuth = "https://" + configuration.Server.ServerName + ":7071/zimbraAdmin/";
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URLAuth);
+
+                request.CookieContainer = _Container;
+                request.Method = "POST";
+                request.Accept = "text/html, application/xhtml+xml, */*";
+                request.Headers.Add(HttpRequestHeader.AcceptLanguage, "nl-NL,nl;q=0.8,en-US;q=0.6,en-GB;q=0.4,en;q=0.2");
+                request.UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.3; WOW64; Trident/7.0)";
+                request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+                request.Host = "mail.clubcloud.nl";
+                request.KeepAlive = true;
+                request.BeginGetRequestStream(RequestCallback, request);
+
+                /*
                 WebClient webClient = new WebClient();
 
                 NameValueCollection formData = new NameValueCollection();
@@ -291,8 +309,47 @@ namespace ClubCloud.Zimbra
                 byte[] responseBytes = webClient.UploadValues(URLAuth, "POST", formData);
                 string resultAuthTicket = Encoding.UTF8.GetString(responseBytes);
                 webClient.Dispose();
+                */
             }
-            catch { }
+            catch(Exception ex)
+            {
+                string message = ex.Message;
+            }
+        }
+
+        private void RequestCallback(IAsyncResult ar)
+        {
+            try
+            {
+                var postData = string.Format("ZLoginUserName={0}&ZLoginPassword={1}", System.Uri.EscapeDataString(configuration.Server.UserName), System.Uri.EscapeDataString(configuration.Server.Password));
+                var request = (HttpWebRequest)ar.AsyncState;
+                var stream = request.EndGetRequestStream(ar);
+
+                using (var sw = new StreamWriter(stream))
+                {
+                    sw.Write(postData);
+                }
+
+                request.BeginGetResponse(ResponseCallback, request);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void ResponseCallback(IAsyncResult ar)
+        {
+            try
+            {
+                var request = (HttpWebRequest)ar.AsyncState;
+                var response = request.EndGetResponse(ar);
+                result = ar;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private void GetVersionInfo(bool asAdmin = false)

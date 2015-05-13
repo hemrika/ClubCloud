@@ -30,6 +30,7 @@ namespace ClubCloud.Zimbra.Administration
         }
 
         [System.Runtime.Serialization.DataMemberAttribute()]
+
         public string authToken
         {
             get

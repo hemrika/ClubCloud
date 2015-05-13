@@ -3,12 +3,6 @@
   <assemblies>
     <customAssembly location="AjaxControlToolkit.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\AjaxControlToolkit.dll" />
     <customAssembly location="AjaxMin.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\AjaxMin.dll" />
-    <customAssembly location="Syncfusion.Core.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.Core.dll" />
-    <customAssembly location="Syncfusion.EJ.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.EJ.dll" />
-    <customAssembly location="Syncfusion.EJ.Web.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.EJ.Web.dll" />
-    <customAssembly location="Syncfusion.Linq.Base.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.Linq.Base.dll" />
-    <customAssembly location="Syncfusion.Shared.Base.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.Shared.Base.dll" />
-    <customAssembly location="Syncfusion.Shared.Web.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Syncfusion.Shared.Web.dll" />
     <customAssembly location="HtmlAgilityPack.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\HtmlAgilityPack.dll" />
   </assemblies>
   <features>

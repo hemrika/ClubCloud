@@ -18,6 +18,7 @@ namespace ClubCloud.Zimbra.Administration
 
         //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [MessageBodyMember]
         public string name
         {
             get
@@ -37,6 +38,7 @@ namespace ClubCloud.Zimbra.Administration
 
         //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [MessageBodyMember]
         public bool dynamic
         {
             get

@@ -926,6 +926,29 @@ namespace ClubCloud.Service
             return;
         }
 
+        public void LandenUpdate(string bondsnummer, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+            delegate(IClubCloudApplicationService channel)
+            {
+                channel.LandenUpdate(bondsnummer, refresh);
+            }, false);
+
+            return;
+
+        }
+
+        public void BouwaardenUpdate(string bondsnummer, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+            delegate(IClubCloudApplicationService channel)
+            {
+                channel.BouwaardenUpdate(bondsnummer, refresh);
+            }, false);
+
+            return;
+        }
+
         public void DistrictenUpdate(string bondsnummer, bool refresh)
         {
             this.ExecuteOnChannel<IClubCloudApplicationService>(
@@ -1056,6 +1079,33 @@ namespace ClubCloud.Service
                 }, false);
 
             return;
+        }
+
+        /*
+        public void AccommodatiesUpdate(string bondsnummer, bool refresh)
+        {
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    channel.AccommodatiesUpdate(bondsnummer, refresh);
+                }, false);
+
+            return;
+
+        }
+        */
+
+        public bool AccommodatiesUpdate(string bondsnummer, int pageNum, bool refresh)
+        {
+            bool response = false;
+            this.ExecuteOnChannel<IClubCloudApplicationService>(
+                delegate(IClubCloudApplicationService channel)
+                {
+                    response = channel.AccommodatiesUpdate(bondsnummer, pageNum, refresh);
+                }, false);
+
+            return response;
+
         }
 
         public bool VerenigingenUpdate(string bondsnummer, int pageNum, bool refresh)
@@ -1547,5 +1597,9 @@ namespace ClubCloud.Service
         }
 
         #endregion
+
+
+
+
     }
 }

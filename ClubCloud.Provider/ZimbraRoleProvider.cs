@@ -36,7 +36,8 @@ namespace ClubCloud.Provider
 
         #region Initialisation
 
-        public ZimbraRoleProvider() : base()
+        public ZimbraRoleProvider()
+            : base()
         {
             SetConfiguration();
         }
@@ -181,21 +182,21 @@ namespace ClubCloud.Provider
 
                 try
                 {
-                    while (!zimbraServer.AuthenticatedAdmin.Value)
+                    //while (!zimbraServer.AuthenticatedAdmin.Value)
+                    //{
+                    try
                     {
-                        try
-                        {
-                            AdminToken = zimbraServer.Authenticate(zimbraconfiguration.Server.UserName, zimbraconfiguration.Server.Password, zimbraconfiguration.Server.IsAdmin);
-                        }
-                        catch { }
-
-                        if (string.IsNullOrEmpty(AdminToken))
-                        {
-                            //zimbraServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName);
-                            zimbraServer.TriggerWebSite();
-                            System.Threading.Thread.Sleep(1000);
-                        }
+                        AdminToken = zimbraServer.Authenticate(zimbraconfiguration.Server.UserName, zimbraconfiguration.Server.Password, zimbraconfiguration.Server.IsAdmin);
                     }
+                    catch { }
+
+                    if (string.IsNullOrEmpty(AdminToken))
+                    {
+                        //zimbraServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName);
+                        //zimbraServer.TriggerWebSite();
+                        System.Threading.Thread.Sleep(1000);
+                    }
+                    //}
 
                     using (Zimbra.Administration.GetVersionInfoResponse response = await zimbraServer.Message(new Zimbra.Administration.GetVersionInfoRequest()) as Zimbra.Administration.GetVersionInfoResponse)
                     {
@@ -247,62 +248,61 @@ namespace ClubCloud.Provider
             {
                 List<string> users = new List<string>();
                 string dl_id = null;
-                SPContext context = SPContext.Current;
-                string domain = null;
-                if (context != null)
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
+
+                Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", usernameToMatch);
+
+                Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                List<Zimbra.Global.accountInfo> accounts = sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; });
+
+                if (accounts.Count > 0)
                 {
-                    domain = GetZimbraDomain(context.Site.Url);
+                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
 
-                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                    srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", usernameToMatch);
-
-                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                    List<Zimbra.Global.accountInfo> accounts = sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; });
-
-                    if (accounts.Count > 0)
+                    if (response != null)
                     {
-                        Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                        Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
-
-                        if (response != null)
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                         {
-                            foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                            if (!dl.dynamic)
                             {
-                                if (!dl.dynamic)
+                                List<Zimbra.Global.attrN> attributes = dl.a;
+                                string displayName = dl.id;
+                                foreach (Zimbra.Global.attrN attr in attributes)
                                 {
-                                    List<Zimbra.Global.attrN> attributes = dl.a;
-                                    string displayName = dl.id;
-                                    foreach (Zimbra.Global.attrN attr in attributes)
+                                    if (attr.name == "displayName" && attr.Value == groupName)
                                     {
-                                        if (attr.name == "displayName" && attr.Value == groupName)
-                                        {
-                                            dl_id = dl.id;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        if (!string.IsNullOrEmpty(dl_id))
-                        {
-                            Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl_id } };
-                            Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
-
-                            if (dlresponse != null)
-                            {
-                                foreach (string member in dlresponse.dl.dlm)
-                                {
-                                    Zimbra.Global.accountInfo account = accounts.Find(a => a.name.Equals(member));
-                                    if (account != null)
-                                    {
-                                        users.Add(account.a.Single<Zimbra.Global.attrN>(a => a.name == "displayName").Value);
+                                        dl_id = dl.id;
+                                        break;
                                     }
                                 }
                             }
                         }
                     }
+
+                    if (!string.IsNullOrEmpty(dl_id))
+                    {
+                        Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl_id } };
+                        Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
+
+                        if (dlresponse != null)
+                        {
+                            foreach (string member in dlresponse.dl.dlm)
+                            {
+                                Zimbra.Global.accountInfo account = accounts.Find(a => a.name.Equals(member));
+                                if (account != null)
+                                {
+                                    users.Add(account.a.Single<Zimbra.Global.attrN>(a => a.name == "displayName").Value);
+                                }
+                            }
+                        }
+                    }
                 }
+
                 return users.ToArray();
             }
             catch (Exception ex)
@@ -338,62 +338,61 @@ namespace ClubCloud.Provider
             {
                 List<string> users = new List<string>();
                 string dl_id = null;
-                SPContext context = SPContext.Current;
-                string domain = null;
-                if (context != null)
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
+
+                Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", usernameToMatch);
+
+                Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                List<Zimbra.Global.accountInfo> accounts = sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; });
+
+                if (accounts.Count > 0)
                 {
-                    domain = GetZimbraDomain(context.Site.Url);
+                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
 
-                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                    srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", usernameToMatch);
-
-                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                    List<Zimbra.Global.accountInfo> accounts = sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; });
-
-                    if (accounts.Count > 0)
+                    if (response != null)
                     {
-                        Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                        Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
-
-                        if (response != null)
+                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                         {
-                            foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                            if (dl.dynamic)
                             {
-                                if (dl.dynamic)
+                                List<Zimbra.Global.attrN> attributes = dl.a;
+                                string displayName = dl.id;
+                                foreach (Zimbra.Global.attrN attr in attributes)
                                 {
-                                    List<Zimbra.Global.attrN> attributes = dl.a;
-                                    string displayName = dl.id;
-                                    foreach (Zimbra.Global.attrN attr in attributes)
+                                    if (attr.name == "displayName" && attr.Value == roleName)
                                     {
-                                        if (attr.name == "displayName" && attr.Value == roleName)
-                                        {
-                                            dl_id = dl.id;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        if (!string.IsNullOrEmpty(dl_id))
-                        {
-                            Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl_id } };
-                            Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
-
-                            if (dlresponse != null)
-                            {
-                                foreach (string member in dlresponse.dl.dlm)
-                                {
-                                    Zimbra.Global.accountInfo account = accounts.Find(a => a.name.Equals(member));
-                                    if (account != null)
-                                    {
-                                        users.Add(account.a.Single<Zimbra.Global.attrN>(a => a.name == "displayName").Value);
+                                        dl_id = dl.id;
+                                        break;
                                     }
                                 }
                             }
                         }
                     }
+
+                    if (!string.IsNullOrEmpty(dl_id))
+                    {
+                        Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl_id } };
+                        Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
+
+                        if (dlresponse != null)
+                        {
+                            foreach (string member in dlresponse.dl.dlm)
+                            {
+                                Zimbra.Global.accountInfo account = accounts.Find(a => a.name.Equals(member));
+                                if (account != null)
+                                {
+                                    users.Add(account.a.Single<Zimbra.Global.attrN>(a => a.name == "displayName").Value);
+                                }
+                            }
+                        }
+                    }
                 }
+
                 return users.ToArray();
             }
             catch (Exception ex)
@@ -429,38 +428,37 @@ namespace ClubCloud.Provider
                 List<string> groups = new List<string>();
                 groups.Add(AllAuthenticatedUsersRoleName);
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if(response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (!dl.dynamic)
                         {
-                            if(!dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.name;
+                            displayName = attributes.SingleOrDefault(a => a.name == "displayName").Value;
+                            /*
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.name;
-                                displayName = attributes.SingleOrDefault(a => a.name == "displayName").Value;
-                                /*
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName")
                                 {
-                                    if (attr.name == "displayName")
-                                    {
-                                        displayName = attr.Value;
-                                        break;
-                                    }
+                                    displayName = attr.Value;
+                                    break;
                                 }
-                                */
-                                groups.Add(displayName);
                             }
+                            */
+                            groups.Add(displayName);
                         }
                     }
                 }
-
                 return groups.ToArray();
             }
             catch (Exception ex)
@@ -497,38 +495,37 @@ namespace ClubCloud.Provider
                 List<string> roles = new List<string>();
                 roles.Add(AllAuthenticatedUsersRoleName);
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (dl.dynamic)
                         {
-                            if (dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.name;
+                            displayName = attributes.SingleOrDefault(a => a.name == "displayName").Value;
+                            /*
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.name;
-                                displayName = attributes.SingleOrDefault(a => a.name == "displayName").Value;
-                                /*
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName")
                                 {
-                                    if (attr.name == "displayName")
-                                    {
-                                        displayName = attr.Value;
-                                        break;
-                                    }
+                                    displayName = attr.Value;
+                                    break;
                                 }
-                                */
-                                roles.Add(displayName);
                             }
+                            */
+                            roles.Add(displayName);
                         }
                     }
                 }
-
                 return roles.ToArray();
             }
             catch (Exception ex)
@@ -562,7 +559,7 @@ namespace ClubCloud.Provider
 
                 Zimbra.Administration.GetAccountMembershipRequest request = new Zimbra.Administration.GetAccountMembershipRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username } };
                 Zimbra.Administration.GetAccountMembershipResponse respons = await zimbraServer.Message(request) as Zimbra.Administration.GetAccountMembershipResponse;
-                
+
                 List<Zimbra.Global.dlInfo> dls = respons.dl;
 
                 foreach (Zimbra.Global.dlInfo dl in dls)
@@ -707,39 +704,39 @@ namespace ClubCloud.Provider
             {
                 List<string> users = new List<string>();
                 string dl_id = null;
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (!dl.dynamic)
                         {
-                            if (!dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            if (attributes.Count(a => a.name == "displayName" && a.Value == groupName) > 0)
+                                dl_id = dl.id;
+                            /*
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                if (attributes.Count(a => a.name == "displayName" && a.Value == groupName) > 0)
-                                    dl_id = dl.id;
-                                /*
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && attr.Value == groupName)
                                 {
-                                    if (attr.name == "displayName" && attr.Value == groupName)
-                                    {
-                                        dl_id = dl.id;
-                                        break;
-                                    }
+                                    dl_id = dl.id;
+                                    break;
                                 }
-                                */
                             }
+                            */
                         }
                     }
                 }
 
-                if(!string.IsNullOrEmpty(dl_id))
+                if (!string.IsNullOrEmpty(dl_id))
                 {
                     Zimbra.Administration.GetDistributionListRequest dlrequest = new Zimbra.Administration.GetDistributionListRequest { dl = new Zimbra.Global.DistributionListSelector { by = Zimbra.Global.DistributionListBy.id, Value = dl_id } };
                     Zimbra.Administration.GetDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.GetDistributionListResponse;
@@ -785,34 +782,34 @@ namespace ClubCloud.Provider
             {
                 List<string> user = new List<string>();
                 string dl_id = null;
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (dl.dynamic)
                         {
-                            if (dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            if (attributes.Count(a => a.name == "displayName" && a.Value == roleName) > 0)
+                                dl_id = dl.id;
+                            /*
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                if (attributes.Count(a => a.name == "displayName" && a.Value == roleName) > 0)
-                                    dl_id = dl.id;
-                                /*
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && attr.Value == roleName)
                                 {
-                                    if (attr.name == "displayName" && attr.Value == roleName)
-                                    {
-                                        dl_id = dl.id;
-                                        break;
-                                    }
+                                    dl_id = dl.id;
+                                    break;
                                 }
-                                */
                             }
+                            */
                         }
                     }
                 }
@@ -857,35 +854,35 @@ namespace ClubCloud.Provider
             {
                 bool inGroup = false;
 
-                SPContext context = SPContext.Current;
-                if (context != null)
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
+
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
                 {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
-
-                    if (response != null)
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (!dl.dynamic)
                         {
-                            if (!dl.dynamic)
-                            {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                if (attributes.Count(a => a.name == "displayName" && a.Value == groupName) > 0)
-                                    inGroup = dl.dlm.Contains(username);
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            if (attributes.Count(a => a.name == "displayName" && a.Value == groupName) > 0)
+                                inGroup = dl.dlm.Contains(username);
 
-                                /*
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                            /*
+                            foreach (Zimbra.Global.attrN attr in attributes)
+                            {
+                                if (attr.name == "displayName" && attr.Value == groupName)
                                 {
-                                    if (attr.name == "displayName" && attr.Value == groupName)
-                                    {
-                                        inGroup = dl.dlm.Contains(username);
-                                        break;
-                                    }
+                                    inGroup = dl.dlm.Contains(username);
+                                    break;
                                 }
-                                */
                             }
+                            */
                         }
                     }
                 }
@@ -925,34 +922,34 @@ namespace ClubCloud.Provider
             {
                 bool inRole = false;
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (dl.dynamic)
                         {
-                            if (dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            if (attributes.Count(a => a.name == "displayName" && a.Value == roleName) > 0)
+                                inRole = dl.dlm.Contains(username);
+                            /*
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                if (attributes.Count(a => a.name == "displayName" && a.Value == roleName) > 0)
-                                    inRole = dl.dlm.Contains(username);
-                                /*
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && attr.Value == roleName)
                                 {
-                                    if (attr.name == "displayName" && attr.Value == roleName)
-                                    {
-                                        inRole = dl.dlm.Contains(username);
-                                        break;
-                                    }
+                                    inRole = dl.dlm.Contains(username);
+                                    break;
                                 }
-                                */
                             }
+                            */
                         }
                     }
                 }
@@ -972,6 +969,15 @@ namespace ClubCloud.Provider
         #endregion
 
         #region Create
+
+        /// <summary>
+        /// Creates an ACL distribution List with mailbox
+        /// </summary>
+        /// <param name="roleName"></param>
+        public void CreateGroup(string roleName)
+        {
+            Task.Run(async () => await CreateGroupAsync(roleName));
+        }
 
         /// <summary>
         /// Creates a non ACL distribution List with no mailbox
@@ -1005,19 +1011,35 @@ namespace ClubCloud.Provider
                     </CreateDistributionListRequest>
                 */
 
-                SPContext context = SPContext.Current;
-                string domain = GetZimbraDomain(context.Site.Url);
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
+
                 string Titlename = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(groupName);
                 string email = Regex.Replace(groupName, @"[^A-Za-z0-9]+", "") + "@" + domain;
 
                 List<Zimbra.Global.attrN> attributes = new List<Zimbra.Global.attrN>(){
-                    new Zimbra.Global.attrN{ name = "zimbraMailStatus" , Value = "disabled"},
+                    //new Zimbra.Global.attrN{ name = "zimbraMailAlias" , Value = email},
+                    new Zimbra.Global.attrN{ name = "zimbraHideInGal" , Value = "TRUE"},
+                    //new Zimbra.Global.attrN{ name = "objectClass" , Value = "groupOfURLs"},
+                    //new Zimbra.Global.attrN{ name = "objectClass" , Value = "dgIdentityAux"},
+                    //new Zimbra.Global.attrN{ name = "objectClass" , Value = "zimbraGroup"},
+                    //new Zimbra.Global.attrN{ name = "zimbraMailHost" , Value = zimbraconfiguration.Server.ServerName},
+                    //new Zimbra.Global.attrN{ name = "mail" , Value = email},
                     new Zimbra.Global.attrN{ name = "displayName" , Value = Titlename},
+                    new Zimbra.Global.attrN{ name = "description" , Value = Titlename},
+                    //new Zimbra.Global.attrN{ name = "cn" , Value = Titlename.ToLower()},
+                    new Zimbra.Global.attrN{ name = "zimbraMailStatus" , Value = "disabled"},
+                    new Zimbra.Global.attrN{ name = "zimbraPrefReplyToAddress" , Value = email},
+                    new Zimbra.Global.attrN{ name = "zimbraPrefReplyToDisplay" , Value = Titlename},
+                    new Zimbra.Global.attrN{ name = "zimbraIsACLGroup" , Value = "FALSE"},
+                    new Zimbra.Global.attrN{ name = "zimbraPrefReplyToEnabled" , Value = "TRUE"},
                     new Zimbra.Global.attrN{ name = "zimbraDistributionListSubscriptionPolicy" , Value = "APPROVAL"},
-                    new Zimbra.Global.attrN{ name = "zimbraDistributionListUnsubscriptionPolicy" , Value = "APPROVAL"}
-                };
-                
-                Zimbra.Administration.CreateDistributionListRequest dlrequest = new Zimbra.Administration.CreateDistributionListRequest { dynamic = true, name = email, a = attributes };
+                    new Zimbra.Global.attrN{ name = "zimbraDistributionListUnsubscriptionPolicy" , Value = "APPROVAL"},  
+                    };
+
+                Zimbra.Administration.CreateDistributionListRequest dlrequest = new Zimbra.Administration.CreateDistributionListRequest { dynamic = false, name = email, a = attributes };
                 Zimbra.Administration.CreateDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.CreateDistributionListResponse;
 
                 /*
@@ -1034,20 +1056,13 @@ namespace ClubCloud.Provider
 
                 Zimbra.Account.DistributionListActionResponse acresponse = await zimbraServer.Message(acrequest) as Zimbra.Account.DistributionListActionResponse;
                 */
+
             }
             catch (Exception ex)
             {
                 string message = String.Format("Role Provider {0}: {1}", this.applicationName, ex.Message);
                 LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
             }
-            /*
-            Zimbra.Administration.GetAccountInfoRequest request = new Zimbra.Administration.GetAccountInfoRequest { account = new Zimbra.Global.accountSelector { by = Zimbra.Global.accountBy.Name, Value = username } };
-            Zimbra.Administration.GetAccountInfoResponse response = zimbraServer.Message(request) as Zimbra.Administration.GetAccountInfoResponse;
-            if (response != null)
-            {
-
-            }
-            */
         }
 
         /// <summary>
@@ -1094,18 +1109,25 @@ namespace ClubCloud.Provider
                 <a xmlns="" n="zimbraPrefReplyToAddress">ac@clubcloud.nl</a>
                 */
 
-                SPContext context = SPContext.Current;
-                string domain = GetZimbraDomain(context.Site.Url);
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
+
                 string Titlename = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(roleName);
-                string email = Regex.Replace(roleName, @"[^A-Za-z0-9]+", "")+ "@" + domain;
+                string email = Regex.Replace(roleName, @"[^A-Za-z0-9]+", "") + "@" + domain;
 
                 List<Zimbra.Global.attrN> attributes = new List<Zimbra.Global.attrN>(){
-                    new Zimbra.Global.attrN{ name = "zimbraMailAlias" , Value = email},
+                    //new Zimbra.Global.attrN{ name = "zimbraMailAlias" , Value = email},
                     new Zimbra.Global.attrN{ name = "zimbraHideInGal" , Value = "TRUE"},
-                    new Zimbra.Global.attrN{ name = "mail" , Value = email},
+                    //new Zimbra.Global.attrN{ name = "objectClass" , Value = "groupOfURLs"},
+                    //new Zimbra.Global.attrN{ name = "objectClass" , Value = "dgIdentityAux"},
+                    //new Zimbra.Global.attrN{ name = "objectClass" , Value = "zimbraGroup"},
+                    //new Zimbra.Global.attrN{ name = "zimbraMailHost" , Value = zimbraconfiguration.Server.ServerName},
+                    //new Zimbra.Global.attrN{ name = "mail" , Value = email},
                     new Zimbra.Global.attrN{ name = "displayName" , Value = Titlename},
                     new Zimbra.Global.attrN{ name = "description" , Value = Titlename},
-                    new Zimbra.Global.attrN{ name = "cn" , Value = Titlename.ToLower()},
+                    //new Zimbra.Global.attrN{ name = "cn" , Value = Titlename.ToLower()},
                     new Zimbra.Global.attrN{ name = "zimbraMailStatus" , Value = "disabled"},
                     new Zimbra.Global.attrN{ name = "zimbraPrefReplyToAddress" , Value = email},
                     new Zimbra.Global.attrN{ name = "zimbraPrefReplyToDisplay" , Value = Titlename},
@@ -1113,7 +1135,7 @@ namespace ClubCloud.Provider
                     new Zimbra.Global.attrN{ name = "zimbraPrefReplyToEnabled" , Value = "TRUE"},
                     new Zimbra.Global.attrN{ name = "zimbraDistributionListSubscriptionPolicy" , Value = "APPROVAL"},
                     new Zimbra.Global.attrN{ name = "zimbraDistributionListUnsubscriptionPolicy" , Value = "APPROVAL"},                                        
-                };
+                    };
 
                 Zimbra.Administration.CreateDistributionListRequest dlrequest = new Zimbra.Administration.CreateDistributionListRequest { dynamic = true, name = email, a = attributes };
                 Zimbra.Administration.CreateDistributionListResponse dlresponse = await zimbraServer.Message(dlrequest) as Zimbra.Administration.CreateDistributionListResponse;
@@ -1252,41 +1274,42 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (dl.dynamic)
                         {
-                            if (dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && groupNames.Contains(attr.Value))
                                 {
-                                    if (attr.name == "displayName" && groupNames.Contains(attr.Value))
-                                    {
-                                        dls.Add(dl);
-                                    }
+                                    dls.Add(dl);
                                 }
                             }
                         }
                     }
-
-                    foreach (string username in usernames)
-                    {
-                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
-
-                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
-                    }
                 }
+
+                foreach (string username in usernames)
+                {
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                    srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                    accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                }
+
 
                 if (dls.Count > 0 && accounts.Count > 0)
                 {
@@ -1348,41 +1371,42 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (!dl.dynamic)
                         {
-                            if (dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && roleNames.Contains(attr.Value))
                                 {
-                                    if (attr.name == "displayName" && roleNames.Contains(attr.Value))
-                                    {
-                                        dls.Add(dl);
-                                    }
+                                    dls.Add(dl);
                                 }
                             }
                         }
                     }
-
-                    foreach (string username in usernames)
-                    {
-                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
-
-                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
-                    }
                 }
+
+                foreach (string username in usernames)
+                {
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                    srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                    accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                }
+
 
                 if (dls.Count > 0 && accounts.Count > 0)
                 {
@@ -1428,41 +1452,42 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (dl.dynamic)
                         {
-                            if (dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && roleNames.Contains(attr.Value))
                                 {
-                                    if (attr.name == "displayName" && roleNames.Contains(attr.Value))
-                                    {
-                                        dls.Add(dl);
-                                    }
+                                    dls.Add(dl);
                                 }
                             }
                         }
                     }
-
-                    foreach (string username in usernames)
-                    {
-                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
-
-                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
-                    }
                 }
+
+                foreach (string username in usernames)
+                {
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                    srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                    accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                }
+
 
                 if (dls.Count > 0 && accounts.Count > 0)
                 {
@@ -1509,41 +1534,42 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (!dl.dynamic)
                         {
-                            if (!dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && roleNames.Contains(attr.Value))
                                 {
-                                    if (attr.name == "displayName" && roleNames.Contains(attr.Value))
-                                    {
-                                        dls.Add(dl);
-                                    }
+                                    dls.Add(dl);
                                 }
                             }
                         }
                     }
-
-                    foreach (string username in usernames)
-                    {
-                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
-
-                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
-                    }
                 }
+
+                foreach (string username in usernames)
+                {
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                    srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                    accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                }
+
 
                 if (dls.Count > 0 && accounts.Count > 0)
                 {
@@ -1605,41 +1631,42 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (dl.dynamic)
                         {
-                            if (dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && roleNames.Contains(attr.Value))
                                 {
-                                    if (attr.name == "displayName" && roleNames.Contains(attr.Value))
-                                    {
-                                        dls.Add(dl);
-                                    }
+                                    dls.Add(dl);
                                 }
                             }
                         }
                     }
-
-                    foreach (string username in usernames)
-                    {
-                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
-
-                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
-                    }
                 }
+
+                foreach (string username in usernames)
+                {
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                    srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                    accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                }
+
 
                 if (dls.Count > 0 && accounts.Count > 0)
                 {
@@ -1691,42 +1718,43 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (!dl.dynamic)
                         {
-                            if (!dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && groupNames.Contains(attr.Value))
                                 {
-                                    if (attr.name == "displayName" && groupNames.Contains(attr.Value))
-                                    {
-                                        dls.Add(dl);
-                                    }
+                                    dls.Add(dl);
                                 }
                             }
                         }
                     }
-
-                    foreach (string username in usernames)
-                    {
-                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
-
-                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));                        
-                    }
-
                 }
+
+                foreach (string username in usernames)
+                {
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                    srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                    accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                }
+
+
 
                 if (dls.Count > 0 && accounts.Count > 0)
                 {
@@ -1778,42 +1806,43 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (dl.dynamic)
                         {
-                            if (!dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && groupNames.Contains(attr.Value))
                                 {
-                                    if (attr.name == "displayName" && groupNames.Contains(attr.Value))
-                                    {
-                                        dls.Add(dl);
-                                    }
+                                    dls.Add(dl);
                                 }
                             }
                         }
                     }
-
-                    foreach (string username in usernames)
-                    {
-                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
-
-                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
-                    }
-
                 }
+
+                foreach (string username in usernames)
+                {
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                    srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                    accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                }
+
+
 
                 if (dls.Count > 0 && accounts.Count > 0)
                 {
@@ -1865,42 +1894,51 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (!dl.dynamic)
                         {
-                            if (dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+
+                            attrN displayName = attributes.Find(a => a.name == "displayName" && groupNames.Contains(a.Value));
+
+                            if (displayName != null && groupNames.Contains(displayName.Value))
+                                dls.Add(dl);
+                            /*
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+                            string displayName = dl.id;
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && groupNames.Contains(attr.Value))
                                 {
-                                    if (attr.name == "displayName" && groupNames.Contains(attr.Value))
-                                    {
-                                        dls.Add(dl);
-                                    }
+                                        
                                 }
                             }
+                            */
                         }
                     }
-
-                    foreach (string username in usernames)
-                    {
-                        Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
-                        srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
-
-                        Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
-                        accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
-                    }
-
                 }
+
+                foreach (string username in usernames)
+                {
+                    Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
+                    srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", username);
+
+                    Zimbra.Administration.SearchDirectoryResponse sresponse = await zimbraServer.Message(srequest) as Zimbra.Administration.SearchDirectoryResponse;
+                    accounts.AddRange(sresponse.Items.ConvertAll<Zimbra.Global.accountInfo>(delegate(object o) { return o as Zimbra.Global.accountInfo; }));
+                }
+
+
 
                 if (dls.Count > 0 && accounts.Count > 0)
                 {
@@ -1953,42 +1991,48 @@ namespace ClubCloud.Provider
 
             try
             {
-                if(groupName == AllAuthenticatedUsersRoleName) return true;
+                groupName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(groupName);
+
+                if (groupName == AllAuthenticatedUsersRoleName) return true;
 
                 bool groupExists = false;
 
-                SPContext context = SPContext.Current;
-                if (context != null)
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
+
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
                 {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
-
-                    if (response != null)
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (!dl.dynamic)
                         {
-                            if (!dl.dynamic)
-                            {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                if (attributes.Count(a => a.name == "displayName" && a.Value == groupName) > 0)
-                                    groupExists = true;
+                            List<Zimbra.Global.attrN> attributes = dl.a;
 
-                                /*
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                            attrN displayName = attributes.Find(a => a.name == "displayName" && a.Value == groupName);
+
+                            if (displayName != null && displayName.Value == groupName)
+                                groupExists = true; break;
+
+                            //if (attributes.Count(a => a.name == "displayName" && a.Value == groupName) > 0)
+                            /*
+                            foreach (Zimbra.Global.attrN attr in attributes)
+                            {
+                                if (attr.name == "displayName" && attr.Value == groupName)
                                 {
-                                    if (attr.name == "displayName" && attr.Value == groupName)
-                                    {
-                                        groupExists = true;
-                                        break;
-                                    }
+                                    groupExists = true;
+                                    break;
                                 }
-                                */
                             }
+                            */
                         }
                     }
                 }
+
 
                 return groupExists;
             }
@@ -2033,41 +2077,46 @@ namespace ClubCloud.Provider
 
             try
             {
+                roleName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(roleName);
+
                 if (roleName == AllAuthenticatedUsersRoleName) return true;
 
                 bool roleExists = false;
 
-                SPContext context = SPContext.Current;
-                if (context != null)
-                {
-                    string domain = GetZimbraDomain(context.Site.Url);
-                    Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
-                    Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+                SPContext spcontext = SPContext.Current;
+                string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
+                if (spcontext != null)
+                    domain = GetZimbraDomain(spcontext.Site.Url);
 
-                    if (response != null)
+                Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
+                Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
+
+                if (response != null)
+                {
+                    foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
+                        if (dl.dynamic)
                         {
-                            if (dl.dynamic)
+                            List<Zimbra.Global.attrN> attributes = dl.a;
+
+                            attrN displayName = attributes.Find(a => a.name == "displayName" && a.Value == roleName);
+
+                            if (displayName != null && displayName.Value == roleName)
+                                roleExists = true; break;
+                            /*
+                            foreach (Zimbra.Global.attrN attr in attributes)
                             {
-                                List<Zimbra.Global.attrN> attributes = dl.a;
-                                string displayName = dl.id;
-                                if (attributes.Count(a => a.name == "displayName" && a.Value == roleName) > 0)
-                                    roleExists = true;
-                                /*
-                                foreach (Zimbra.Global.attrN attr in attributes)
+                                if (attr.name == "displayName" && attr.Value == roleName)
                                 {
-                                    if (attr.name == "displayName" && attr.Value == roleName)
-                                    {
-                                        roleExists = true;
-                                        break;
-                                    }
+                                    roleExists = true;
+                                    break;
                                 }
-                                */
                             }
+                            */
                         }
                     }
                 }
+
 
                 return roleExists;
             }
@@ -2093,10 +2142,20 @@ namespace ClubCloud.Provider
         {
             StringBuilder returnUrl = new StringBuilder();
 
+            if (!url.StartsWith("http"))
+                url = "http://" + url;
+
             Uri uri = new Uri(url);
             if (uri.HostNameType == UriHostNameType.Dns)
             {
                 string[] parts = uri.DnsSafeHost.Split(new char[] { '.' });
+
+                if (uri.DnsSafeHost == zimbraconfiguration.Server.ServerName)
+                {
+                    returnUrl.Append(parts[1] + "." + parts[2]);
+                    return returnUrl.ToString();
+                }
+
                 if (parts.Length > 1)
                 {
                     if (parts.Length == 2)

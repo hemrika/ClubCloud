@@ -15,8 +15,19 @@ namespace ClubCloud.Model
 
         protected override void Seed(Model.BeheerContainer context)
         {
-            //context.ClubCloud_Verenigingen.AddOrUpdate
-            //  This method will be called after migrating to the latest version.
+            base.Seed(context);
+
+            try
+            {
+                context.ClubCloud_Settings.AddOrUpdate(
+                    new ClubCloud_Setting { Access = true, Agree = true, GebruikerId = new Guid("6F0DF085-8B6C-414C-9A2E-27DC351B0C39"), Id = 12073385, Password = "yByDYj2MctGhkpH0ZEGrww==", VerenigingId = new Guid("02ADA6C7-80F9-4671-91F9-898EA5DA3CCD"), Gewijzigd = DateTime.Now }
+                    );
+                context.SaveChanges();
+            }
+            catch { };
+
+            
+                //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.

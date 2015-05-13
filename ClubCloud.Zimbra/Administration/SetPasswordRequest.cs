@@ -15,6 +15,7 @@ namespace ClubCloud.Zimbra.Administration
 
         private string _newPassword;
 
+        [System.Runtime.Serialization.DataMemberAttribute()]
         [MessageBodyMember]
         public string id
         {
@@ -32,6 +33,8 @@ namespace ClubCloud.Zimbra.Administration
                 }
             }
         }
+
+        [System.Runtime.Serialization.DataMemberAttribute()]
         [MessageBodyMember]
         public string newPassword
         {

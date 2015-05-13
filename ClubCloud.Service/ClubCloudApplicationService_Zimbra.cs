@@ -48,6 +48,7 @@
             }
         }
 
+        /*
         private ZimbraServer _zimbra;
 
         internal ZimbraServer Zimbra
@@ -62,6 +63,14 @@
                 return this._zimbra;
             }
         }
+        */
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gebruiker"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
         private async Task<bool> CreateOrUpdateMembershipGebruiker(ClubCloud_Gebruiker gebruiker, ClubCloud_Setting settings = null)
         {
             try
@@ -173,6 +182,12 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vereniging"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
         private async Task<bool> CreateOrUpdateMembershipVereniging(ClubCloud_Vereniging vereniging, ClubCloud_Setting settings = null)
         {
             try
@@ -266,6 +281,12 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="functie"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
         private async Task<bool> CreateOrUpdateGroupFunctie(ClubCloud_Functie functie, ClubCloud_Setting settings = null)
         {
             try
@@ -307,7 +328,7 @@
 
                 if (settings != null)
                 {
-                    if (await ZimbraRoleProvider.GroupExistsAsync(functie.Naam)) return true;
+                    if (await ZimbraRoleProvider.RoleExistsAsync(functie.Naam)) return true;
 
                     await ZimbraRoleProvider.CreateRoleAsync(functie.Naam);
                 }
@@ -320,6 +341,52 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="functie"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        private async Task<bool> CreateOrUpdateRoleFunctionaris(ClubCloud_Functionaris functionaris, ClubCloud_Setting settings = null)
+        {
+            try
+            {
+                if (settings == null)
+                {
+                    return false;
+                }
+
+                if (settings != null)
+                {
+                    if (functionaris != null && functionaris.ClubCloud_Gebruiker == null)
+                        beheerModel.Entry(functionaris).Reference(e => e.ClubCloud_Gebruiker).Load();
+
+                    if (functionaris.ClubCloud_Gebruiker == null)
+                        functionaris.ClubCloud_Gebruiker = GetGebruikerById(functionaris.GebruikerId.Value, false, settings);
+
+                    if (functionaris != null && functionaris.ClubCloud_Functie == null)
+                        beheerModel.Entry(functionaris).Reference(e => e.ClubCloud_Functie).Load();
+
+                    if (functionaris.ClubCloud_Functie == null)
+                        functionaris.ClubCloud_Functie = GetFunctieById(functionaris.FunctieId.Value, false, settings);
+
+                    if (functionaris.Actief == ActiefSoort.Actief)
+                    {
+                        await ZimbraRoleProvider.AddUsersToRolesAsync(new string[] { functionaris.ClubCloud_Gebruiker.Bondsnummer }, new string[] { functionaris.ClubCloud_Functie.Naam });
+                    }
+                    else
+                    {
+                        await ZimbraRoleProvider.RemoveUsersFromRolesAsync(new string[] { functionaris.ClubCloud_Gebruiker.Bondsnummer }, new string[] { functionaris.ClubCloud_Functie.Naam });
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         /*
         public bool SendMessage(MailMessage message, ClubCloud_Setting settings = null)
         {

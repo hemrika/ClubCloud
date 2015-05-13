@@ -20,51 +20,55 @@ namespace ClubCloud.Administratie.Features.ClubCloudDesign
         [SharePointPermission(SecurityAction.LinkDemand, ObjectModel = true)]
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
-            try
+            SPSecurity.RunWithElevatedPrivileges(delegate()
             {
-                var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.MasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/ClubCloud.master").Replace("//","/");
-                site.RootWeb.CustomMasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/ClubCloud.master").Replace("//","/");
-                site.RootWeb.Update();
-            }
-            catch { }
 
-            try
-            {
-                var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.Title = "Administratie";
-                site.RootWeb.SiteLogoUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/ClubCloud/images/siteicon.png").Replace("//", "/");
-                site.RootWeb.SiteLogoDescription = "ClubCloud Administratie omgeving";
-                site.RootWeb.Update();
-            }
-            catch { }
+                try
+                {
+                    var site = (SPSite)properties.Feature.Parent;
+                    site.RootWeb.MasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/ClubCloud.master").Replace("//", "/");
+                    site.RootWeb.CustomMasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/ClubCloud.master").Replace("//", "/");
+                    site.RootWeb.Update();
+                }
+                catch { }
 
-            //Minimale downloadstrategie
-            try
-            {
-                var site = (SPSite)properties.Feature.Parent;
-                site.Features.Remove(new Guid("87294c72-f260-42f3-a41b-981a2ffce37a"), true);
-                site.WebApplication.Update();
-            }
-            catch { }
+                try
+                {
+                    var site = (SPSite)properties.Feature.Parent;
+                    site.RootWeb.Title = "Administratie";
+                    site.RootWeb.SiteLogoUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/ClubCloud/images/siteicon.png").Replace("//", "/");
+                    site.RootWeb.SiteLogoDescription = "ClubCloud Administratie omgeving";
+                    site.RootWeb.Update();
+                }
+                catch { }
 
-            //Weergave voor mobiele browsers
-            try
-            {
-                var site = (SPSite)properties.Feature.Parent;
-                site.Features.Remove(new Guid("d95c97f3-e528-4da2-ae9f-32b3535fbb59"), true);
-                site.WebApplication.Update();
-            }
-            catch { }
-            
-            //Documenten standaard openen in clienttoepassingen
-            try
-            {
-                var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.Features.Add(new Guid("8a4b8de2-6fd8-41e9-923c-c7c3c00f8295"), true);
-                site.RootWeb.Update();
-            }
-            catch { }
+                //Minimale downloadstrategie
+                try
+                {
+                    var site = (SPSite)properties.Feature.Parent;
+                    site.Features.Remove(new Guid("87294c72-f260-42f3-a41b-981a2ffce37a"), true);
+                    site.WebApplication.Update();
+                }
+                catch { }
+
+                //Weergave voor mobiele browsers
+                try
+                {
+                    var site = (SPSite)properties.Feature.Parent;
+                    site.Features.Remove(new Guid("d95c97f3-e528-4da2-ae9f-32b3535fbb59"), true);
+                    site.WebApplication.Update();
+                }
+                catch { }
+
+                //Documenten standaard openen in clienttoepassingen
+                try
+                {
+                    var site = (SPSite)properties.Feature.Parent;
+                    site.RootWeb.Features.Add(new Guid("8a4b8de2-6fd8-41e9-923c-c7c3c00f8295"), true);
+                    site.RootWeb.Update();
+                }
+                catch { }
+            });
         }
 
         /// <summary>
@@ -74,41 +78,45 @@ namespace ClubCloud.Administratie.Features.ClubCloudDesign
         [SharePointPermission(SecurityAction.LinkDemand, ObjectModel = true)]
         public override void FeatureDeactivating(SPFeatureReceiverProperties properties)
         {
-            try
+            SPSecurity.RunWithElevatedPrivileges(delegate()
             {
-                var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.MasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/seattle.master").Replace("//","/");
-                site.RootWeb.CustomMasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/seattle.master").Replace("//", "/");
-                site.RootWeb.Update();
-            }
-            catch { }
 
-            //Minimale downloadstrategie
-            try
-            {
-                var site = (SPSite)properties.Feature.Parent;
-                site.Features.Add(new Guid("87294c72-f260-42f3-a41b-981a2ffce37a"), true);
-                site.WebApplication.Update();
-            }
-            catch { }
+                try
+                {
+                    var site = (SPSite)properties.Feature.Parent;
+                    site.RootWeb.MasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/seattle.master").Replace("//", "/");
+                    site.RootWeb.CustomMasterUrl = (site.RootWeb.ServerRelativeUrl + "/_catalogs/masterpage/seattle.master").Replace("//", "/");
+                    site.RootWeb.Update();
+                }
+                catch { }
 
-            //Weergave voor mobiele browsers
-            try
-            {
-                var site = (SPSite)properties.Feature.Parent;
-                site.Features.Add(new Guid("d95c97f3-e528-4da2-ae9f-32b3535fbb59"), true);
-                site.WebApplication.Update();
-            }
-            catch { }
+                //Minimale downloadstrategie
+                try
+                {
+                    var site = (SPSite)properties.Feature.Parent;
+                    site.Features.Add(new Guid("87294c72-f260-42f3-a41b-981a2ffce37a"), true);
+                    site.WebApplication.Update();
+                }
+                catch { }
 
-            //Documenten standaard openen in clienttoepassingen
-            try
-            {
-                var site = (SPSite)properties.Feature.Parent;
-                site.RootWeb.Features.Remove(new Guid("8a4b8de2-6fd8-41e9-923c-c7c3c00f8295"), true);
-                site.RootWeb.Update();
-            }
-            catch { }
+                //Weergave voor mobiele browsers
+                try
+                {
+                    var site = (SPSite)properties.Feature.Parent;
+                    site.Features.Add(new Guid("d95c97f3-e528-4da2-ae9f-32b3535fbb59"), true);
+                    site.WebApplication.Update();
+                }
+                catch { }
+
+                //Documenten standaard openen in clienttoepassingen
+                try
+                {
+                    var site = (SPSite)properties.Feature.Parent;
+                    site.RootWeb.Features.Remove(new Guid("8a4b8de2-6fd8-41e9-923c-c7c3c00f8295"), true);
+                    site.RootWeb.Update();
+                }
+                catch { }
+            });
 
         }
 

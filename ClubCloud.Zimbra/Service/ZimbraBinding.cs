@@ -11,6 +11,7 @@ using System.Web.Administration;
 using System.Dynamic;
 using System.Collections.Specialized;
 using System.Reflection;
+using System.Net;
 namespace ClubCloud.Zimbra.Service
 {
     internal class ZimbraBinding : BasicHttpsBinding

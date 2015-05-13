@@ -13,8 +13,9 @@ namespace ClubCloud.Zimbra.Administration
 
         private System.Nullable<bool> _applyConfig;
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        //[System.Xml.Serialization.XmlAttributeAttribute()]
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [MessageBodyMember]
         public bool applyConfig
         {
             get

@@ -3,6 +3,7 @@ using ClubCloud.Zimbra.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ namespace ClubCloud.Zimbra.Administration
         internal ZimbraAdminSoapClient(ZimbraBinding binding, ZimbraEndpointAddress remoteAddress) :
             base(binding, remoteAddress)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, err) => true;
         }
 
         protected override zimbraAdminSoap CreateChannel()
@@ -28,7 +31,15 @@ namespace ClubCloud.Zimbra.Administration
 
         public AuthResponse AccountAuth(AuthRequest request)
         {
-            return base.Channel.AccountAuth(request);
+            try
+            {
+                return base.Channel.AccountAuth(request);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return null;
+            }
         }
 
         public GetVersionInfoResponse GetVersionInfoRequest(GetVersionInfoRequest request)

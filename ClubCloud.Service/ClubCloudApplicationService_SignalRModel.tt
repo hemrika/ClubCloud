@@ -43,7 +43,7 @@ internal partial class ClubCloudApplicationService
 			if (_signalRModel == null)
 			{
 					
-				_signalRModel = new SignalRContainer(GetConnectionString());
+				_signalRModel = new SignalRContainer(GetConnectionString("ClubCloudService_SignalR"));
                 _signalRModel.Database.Connection.StateChange += SignalRModel_Connection_StateChange;
                 _signalRModel.Database.Connection.Disposed += SignalRModel_Connection_Disposed;
                 _signalRModel.ObjectContext.SavingChanges += SignalRModel_ObjectContext_SavingChanges;

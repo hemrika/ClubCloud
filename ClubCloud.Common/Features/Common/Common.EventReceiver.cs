@@ -5,6 +5,7 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.SharePoint.Utilities;
 
 namespace ClubCloud.Common.Features.Common
 {
@@ -20,187 +21,236 @@ namespace ClubCloud.Common.Features.Common
     {
         // Uncomment the method below to handle the event raised after a feature has been activated.
         internal SPWebApplication webApp;
+        SPFeaturePropertyCollection configurationproperties = null;
+        SPDiagnosticsService diagSvc = SPDiagnosticsService.Local;
 
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
-            ClubCloud.Common.RemoteAdministrator.Enable();
-             
-            FeatureCleaning(properties);
-            SetCustomPages(properties);
-
-            if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
+            SPSecurity.RunWithElevatedPrivileges(delegate()
             {
-                webApp = properties.Feature.Parent as SPWebApplication;
-                SPWebApplication wap = SPWebService.ContentService.WebApplications[webApp.Id];
 
-                List<SPWebConfigModification> process = new List<SPWebConfigModification>();
-                process.AddRange(ClubCloud.Common.Common.Modifications);
-                //process.AddRange(Syncfusion.Modifications);
-                process.AddRange(Ajax.Modifications);
-                //process.AddRange(CrossSiteScripting.Modifications);
+                ClubCloud.Common.RemoteAdministrator.Enable();
 
-                foreach (SPWebConfigModification mod in process)
+                //using (new SPMonitoredScope("Common Feature Cleaning"))
+                //{
+                //    FeatureCleaning(properties);
+                //    SetCustomPages(properties);
+                //}
+
+                configurationproperties = properties.Feature.Properties;
+                if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
                 {
-                    try
-                    {
-                        if (!wap.WebConfigModifications.Contains(mod))
-                        {
-                            wap.WebConfigModifications.Add(mod);
-                        }
+                    webApp = properties.Feature.Parent as SPWebApplication;
+                    SPWebApplication wap = SPWebService.ContentService.WebApplications[webApp.Id];
 
-                        if (!SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Contains(mod))
+                    List<SPWebConfigModification> process = new List<SPWebConfigModification>();
+                    process.AddRange(ClubCloud.Common.Common.Modifications);
+                    //process.AddRange(Syncfusion.Modifications);
+                    process.AddRange(Ajax.Modifications);
+                    //process.AddRange(CrossSiteScripting.Modifications);
+
+                    foreach (SPWebConfigModification mod in process)
+                    {
+                        using (new SPMonitoredScope("Common Feature Activated"))
                         {
-                            SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Add(mod);
+                            try
+                            {
+                                if (!wap.WebConfigModifications.Contains(mod))
+                                {
+                                    wap.WebConfigModifications.Add(mod);
+                                }
+
+                                if (!SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Contains(mod))
+                                {
+                                    SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Add(mod);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                diagSvc.WriteEvent(0,
+                                    new SPDiagnosticsCategory("ClubCloud", TraceSeverity.Monitorable, EventSeverity.Warning),
+                                    EventSeverity.Error,
+                                    "Exception occured {0}", new object[] { ex });
+                            }
                         }
                     }
-                    catch { };
-                }
+                    using (new SPMonitoredScope("Common Feature Activated"))
+                    {
 
-                try
-                {
-                    wap.Update(false);
-                    SPWebService.ContentService.WebApplications[wap.Id].Update(false);
-                    SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
-                    //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
-                    wap.WebConfigModifications.Clear();
-                    wap.Update(false);
+                        try
+                        {
+                            wap.Update(false);
+                            SPWebService.ContentService.WebApplications[wap.Id].Update(false);
+                            SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
+                            //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
+                            wap.WebConfigModifications.Clear();
+                            wap.Update(false);
+                        }
+                        catch (Exception ex)
+                        {
+                            diagSvc.WriteEvent(0,
+                                new SPDiagnosticsCategory("ClubCloud", TraceSeverity.Monitorable, EventSeverity.Warning),
+                                EventSeverity.Error,
+                                "Exception occured {0}", new object[] { ex });
+                        }
+                    }
                 }
-                catch { };
-            }
-
+            });
         }
 
 
         public override void FeatureDeactivating(SPFeatureReceiverProperties properties)
         {
-            ClubCloud.Common.RemoteAdministrator.Enable();
-            
-            //FeatureCleaning(properties);
-            
-            if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
+            SPSecurity.RunWithElevatedPrivileges(delegate()
             {
-                webApp = properties.Feature.Parent as SPWebApplication;
-                SPWebApplication wap = SPWebService.ContentService.WebApplications[webApp.Id];
-                
-                List<SPWebConfigModification> process = new List<SPWebConfigModification>();
-                process.AddRange(ClubCloud.Common.Common.Modifications);
-                process.AddRange(Syncfusion.Modifications);
-                process.AddRange(Ajax.Modifications);
-                //process.AddRange(CrossSiteScripting.Modifications);
 
-                foreach (SPWebConfigModification mod in process)
+                ClubCloud.Common.RemoteAdministrator.Enable();
+
+                //FeatureCleaning(properties);
+                configurationproperties = properties.Feature.Properties;
+                if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
                 {
-                    try
+                    webApp = properties.Feature.Parent as SPWebApplication;
+                    SPWebApplication wap = SPWebService.ContentService.WebApplications[webApp.Id];
+
+                    List<SPWebConfigModification> process = new List<SPWebConfigModification>();
+                    process.AddRange(ClubCloud.Common.Common.Modifications);
+                    //process.AddRange(Syncfusion.Modifications);
+                    process.AddRange(Ajax.Modifications);
+                    //process.AddRange(CrossSiteScripting.Modifications);
+
+                    foreach (SPWebConfigModification mod in process)
                     {
-                        if (wap.WebConfigModifications.Contains(mod))
+                        using (new SPMonitoredScope("Common Feature Deactivating"))
                         {
-                            wap.WebConfigModifications.Remove(mod);
-                        }
 
-                        if (SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Contains(mod))
-                        {
-                            SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
-                        }
-                    }
-                    catch { };
-                }
-
-                try
-                {
-                    wap.Update(false);
-                    SPWebService.ContentService.WebApplications[wap.Id].Update(false);
-                    SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
-                    //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
-                    wap.WebConfigModifications.Clear();
-                    wap.Update();
-                }
-                catch { };
-                
-
-                //FeatureUninstalling(properties);
-                //List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
-                /*
-                foreach (SPWebConfigModification mod in webApp.WebConfigModifications)
-                {
-                    string name = mod.Name;
-                    string owner = mod.Owner;
-                    string path = mod.Path;
-                    Microsoft.SharePoint.Administration.SPWebConfigModification.SPWebConfigModificationType type = mod.Type;
-                    string value = mod.Value;
-
-                    if (mod.Name == "ClubCloudSaveControls")
-                    {
-                        mod.Name = "SafeControl[@Assembly='ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e'][@Namespace='ClubCloud.Common.Controls'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']";
-                        mod.Value = "<SafeControl Assembly='ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e' Namespace='ClubCloud.Common.Controls' TypeName='*' Safe='True' SafeAgainstScript='True' />";
-
-                        //toDelete.Add(mod);
-                    }
-
-                }
-                */
-                /*
-                foreach (SPWebApplication wap in SPWebService.ContentService.WebApplications)
-                {
-                    List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
-                    try
-                    {
-                        Debug.Write(wap.Name);
-                        //Console.WriteLine(wap.Name);
-                        //Console.WriteLine("==========================================================");
-                        foreach (SPWebConfigModification mod in wap.WebConfigModifications)
-                        {
-                            string name = mod.Name;
-                            string owner = mod.Owner;
-                            string path = mod.Path;
-                            Microsoft.SharePoint.Administration.SPWebConfigModification.SPWebConfigModificationType type = mod.Type;
-                            string value = mod.Value;
-
-                            //Console.WriteLine(mod.ToString());
-                            Debug.Write(mod.ToString());
-                            if (mod.Owner.Contains("ClubCloud") || mod.Owner.Contains("Syncfusion") || mod.Owner.Contains("ajax") || mod.Owner.Contains("Ajax")) // == "ClubCloudCommonSaveControls" || mod.Owner == "ClubCloudCommonControls")
+                            try
                             {
-                                toDelete.Add(mod);
+                                if (wap.WebConfigModifications.Contains(mod))
+                                {
+                                    wap.WebConfigModifications.Remove(mod);
+                                }
+
+                                if (SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Contains(mod))
+                                {
+                                    SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                diagSvc.WriteEvent(0,
+                                    new SPDiagnosticsCategory("ClubCloud", TraceSeverity.Monitorable, EventSeverity.Warning),
+                                    EventSeverity.Error,
+                                    "Exception occured {0}", new object[] { ex });
                             }
                         }
+                    }
+                    using (new SPMonitoredScope("Common Feature Deactivating"))
+                    {
 
-                        foreach (SPWebConfigModification mod in toDelete)
+                        try
                         {
-                                wap.WebConfigModifications.Remove(mod);
-                                SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
+                            wap.Update(false);
+                            SPWebService.ContentService.WebApplications[wap.Id].Update(false);
+                            SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
+                            //webApp.Farm.Services.GetValue<SPWebService>().ApplyWebConfigModifications();
+                            wap.WebConfigModifications.Clear();
+                            wap.Update();
+                        }
+                        catch (Exception ex)
+                        {
+                            diagSvc.WriteEvent(0,
+                                new SPDiagnosticsCategory("ClubCloud", TraceSeverity.Monitorable, EventSeverity.Warning),
+                                EventSeverity.Error,
+                                "Exception occured {0}", new object[] { ex });
+                        }
+                    }
+
+                    //FeatureUninstalling(properties);
+                    //List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
+                    /*
+                    foreach (SPWebConfigModification mod in webApp.WebConfigModifications)
+                    {
+                        string name = mod.Name;
+                        string owner = mod.Owner;
+                        string path = mod.Path;
+                        Microsoft.SharePoint.Administration.SPWebConfigModification.SPWebConfigModificationType type = mod.Type;
+                        string value = mod.Value;
+
+                        if (mod.Name == "ClubCloudSaveControls")
+                        {
+                            mod.Name = "SafeControl[@Assembly='ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e'][@Namespace='ClubCloud.Common.Controls'][@TypeName='*'][@Safe='True'][SafeAgainstScript='True']";
+                            mod.Value = "<SafeControl Assembly='ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e' Namespace='ClubCloud.Common.Controls' TypeName='*' Safe='True' SafeAgainstScript='True' />";
+
+                            //toDelete.Add(mod);
                         }
 
-                        SPWebService.ContentService.WebApplications[wap.Id].Update();
-                        SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
-
-
-                        Console.WriteLine("==========================================================");
-
                     }
-                    catch(Exception ex)
+                    */
+                    /*
+                    foreach (SPWebApplication wap in SPWebService.ContentService.WebApplications)
                     {
-                        Debug.Write(ex.ToString());
+                        List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
+                        try
+                        {
+                            Debug.Write(wap.Name);
+                            //Console.WriteLine(wap.Name);
+                            //Console.WriteLine("==========================================================");
+                            foreach (SPWebConfigModification mod in wap.WebConfigModifications)
+                            {
+                                string name = mod.Name;
+                                string owner = mod.Owner;
+                                string path = mod.Path;
+                                Microsoft.SharePoint.Administration.SPWebConfigModification.SPWebConfigModificationType type = mod.Type;
+                                string value = mod.Value;
+
+                                //Console.WriteLine(mod.ToString());
+                                Debug.Write(mod.ToString());
+                                if (mod.Owner.Contains("ClubCloud") || mod.Owner.Contains("Syncfusion") || mod.Owner.Contains("ajax") || mod.Owner.Contains("Ajax")) // == "ClubCloudCommonSaveControls" || mod.Owner == "ClubCloudCommonControls")
+                                {
+                                    toDelete.Add(mod);
+                                }
+                            }
+
+                            foreach (SPWebConfigModification mod in toDelete)
+                            {
+                                    wap.WebConfigModifications.Remove(mod);
+                                    SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
+                            }
+
+                            SPWebService.ContentService.WebApplications[wap.Id].Update();
+                            SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
+
+
+                            Console.WriteLine("==========================================================");
+
+                        }
+                        catch(Exception ex)
+                        {
+                            Debug.Write(ex.ToString());
+                        }
+
                     }
+                    */
+                    /*
+                    foreach (SPWebConfigModification mod in toDelete)
+                    {
 
+                        webApp.WebConfigModifications.Remove(mod);
+                        SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Remove(mod);
+                    }
+                    */
+                    /*
+                    try
+                    {
+                        webApp.Update();
+                        SPWebService.ContentService.WebApplications[webApp.Id].Update();
+                        SPWebService.ContentService.WebApplications[webApp.Id].WebService.ApplyWebConfigModifications();
+                    }
+                    catch { };
+                    */
                 }
-                */
-                /*
-                foreach (SPWebConfigModification mod in toDelete)
-                {
-
-                    webApp.WebConfigModifications.Remove(mod);
-                    SPWebService.ContentService.WebApplications[webApp.Id].WebConfigModifications.Remove(mod);
-                }
-                */
-                /*
-                try
-                {
-                    webApp.Update();
-                    SPWebService.ContentService.WebApplications[webApp.Id].Update();
-                    SPWebService.ContentService.WebApplications[webApp.Id].WebService.ApplyWebConfigModifications();
-                }
-                catch { };
-                */
-            }
+            });
         }
 
 
@@ -219,41 +269,53 @@ namespace ClubCloud.Common.Features.Common
         {
             ClubCloud.Common.RemoteAdministrator.Enable();
             bool found = false;
-            foreach (SPWebApplication wap in SPWebService.ContentService.WebApplications)
+            if (properties.Feature.Parent.GetType() == typeof(SPWebApplication))
             {
-                List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
-                
-                try
-                {
+                //foreach (SPWebApplication wap in SPWebService.ContentService.WebApplications)
+                //{
+                    SPWebApplication wap = properties.Feature.Parent as SPWebApplication;
+                    List<SPWebConfigModification> toDelete = new List<SPWebConfigModification>();
 
-                    foreach (SPWebConfigModification mod in wap.WebConfigModifications)
+                    try
                     {
-                        if (mod.Owner.Contains("ClubCloud"))
+
+                        foreach (SPWebConfigModification mod in wap.WebConfigModifications)
                         {
-                            toDelete.Add(mod);
-                            found = true;
+                            if (mod.Owner.Contains("ClubCloud"))
+                            {
+                                toDelete.Add(mod);
+                                found = true;
+                            }
                         }
-                    }
 
-                    foreach (SPWebConfigModification mod in toDelete)
+                        foreach (SPWebConfigModification mod in toDelete)
+                        {
+                            wap.WebConfigModifications.Remove(mod);
+                            SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
+                        }
+
+                        wap.Update(false);
+                        SPWebService.ContentService.WebApplications[wap.Id].Update(false);
+                        SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
+
+                    }
+                    catch (Exception ex)
                     {
-                        wap.WebConfigModifications.Remove(mod);
-                        SPWebService.ContentService.WebApplications[wap.Id].WebConfigModifications.Remove(mod);
+                        diagSvc.WriteEvent(0,
+                            new SPDiagnosticsCategory("ClubCloud", TraceSeverity.Monitorable, EventSeverity.Warning),
+                            EventSeverity.Error,
+                            "Exception occured {0}", new object[] { ex });
+                        found = true;
                     }
 
-                    wap.Update(false);
-                    SPWebService.ContentService.WebApplications[wap.Id].Update(false);
-                    SPWebService.ContentService.WebApplications[wap.Id].WebService.ApplyWebConfigModifications();
-                    
-                }
-                catch { found = true; }
-                finally { toDelete = new List<SPWebConfigModification>(); }
+                    finally { toDelete = new List<SPWebConfigModification>(); }
+                //}
             }
-            
-            if (found)
-            {
-                FeatureUninstalling(properties);
-            }
+
+            //if (found)
+            //{
+            //    FeatureUninstalling(properties);
+            //}
         }
 
         // Uncomment the method below to handle the event raised when a feature is upgrading.
@@ -295,13 +357,20 @@ namespace ClubCloud.Common.Features.Common
                     wap.WebConfigModifications.Clear();
                     wap.Update();
                 }
-                catch { found = true; }
+                catch (Exception ex)
+                {
+                    diagSvc.WriteEvent(0,
+                        new SPDiagnosticsCategory("ClubCloud", TraceSeverity.Monitorable, EventSeverity.Warning),
+                        EventSeverity.Error,
+                        "Exception occured {0}", new object[] { ex });
+                    found = true;
+                }
                 finally { toDelete = new List<SPWebConfigModification>(); }
 
-                if(found)
-                {
-                    FeatureUninstalling(properties);
-                }
+                //if(found)
+                //{
+                //    FeatureUninstalling(properties);
+                //}
             }
         }
 

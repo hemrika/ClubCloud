@@ -189,7 +189,15 @@
 #endif
 */
                 if (bondsnummer != "0000000")
-				    bondsnummer = string.Empty;
+                {
+                    if (settings == null)
+                    {
+                        settings = beheerModel.ClubCloud_Settings.Find(int.Parse(bondsnummer));
+
+                        if (!settings.Access && string.IsNullOrWhiteSpace(settings.Password))
+                            bondsnummer = string.Empty;
+                    }
+                }
 			}
 		}
 
@@ -694,12 +702,41 @@
 
                             if (accommodatie != null && accommodatie.sgt_alg_accommodatieid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Accommodaties.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Accommodaties.Create();
+
                                 entity.Id = accommodatie.sgt_alg_accommodatieid.Value;
 
                                 AccommodatieToEntity(accommodatie, entity, settings);
 
                                 beheerModel.ClubCloud_Accommodaties.AddOrUpdate(entity);
+                                beheerModel.SaveChanges();
+
+                                if (accommodatie.sgt_alg_accommodatieid.Value != null)
+                                {
+                                    List<ClubCloud_Address> addressen = GetAddressenForAccommodatieById(settings.Id.ToString(), accommodatie.sgt_alg_accommodatieid.Value, false, settings);
+
+                                    if (addressen != null && addressen.Count > 0)
+                                    {
+                                        foreach (ClubCloud_Address address in addressen)
+                                        {
+                                            entity.ClubCloud_Address.Add(address);
+                                        }
+                                    }
+                                }
+
+                                if (accommodatie.sgt_districtid != null)
+                                {
+                                    ClubCloud_District district = GetDistrictById(accommodatie.sgt_districtid.Value, false, settings);
+                                    entity.ClubCloud_District = district;
+                                }
+
+                                if (accommodatie.sgt_regioid != null)
+                                {
+                                    ClubCloud_Regio regio = GetRegioById(accommodatie.sgt_regioid.Value, false, settings);
+                                    entity.ClubCloud_Regio = regio;
+                                }
+
                                 beheerModel.SaveChanges();
                             }
                         }
@@ -759,6 +796,37 @@
 
                                     beheerModel.ClubCloud_Accommodaties.AddOrUpdate(entity);
                                 }
+
+                                beheerModel.SaveChanges();
+
+                                foreach (sgt_alg_accommodatie accommodatie in entities)
+                                {
+                                    if (accommodatie.sgt_alg_accommodatieid.Value != null)
+                                    {
+                                        List<ClubCloud_Address> addressen = GetAddressenForAccommodatieById(settings.Id.ToString(), accommodatie.sgt_alg_accommodatieid.Value, false, settings);
+
+                                        if (addressen != null && addressen.Count > 0)
+                                        {
+                                            foreach (ClubCloud_Address address in addressen)
+                                            {
+                                                entity.ClubCloud_Address.Add(address);
+                                            }
+                                        }
+                                    }
+
+                                    if (accommodatie.sgt_districtid != null)
+                                    {
+                                        ClubCloud_District district = GetDistrictById(accommodatie.sgt_districtid.Value, false, settings);
+                                        entity.ClubCloud_District = district;
+                                    }
+
+                                    if (accommodatie.sgt_regioid != null)
+                                    {
+                                        ClubCloud_Regio regio = GetRegioById(accommodatie.sgt_regioid.Value, false, settings);
+                                        entity.ClubCloud_Regio = regio;
+                                    }
+                                }
+
                                 beheerModel.SaveChanges();
                             }
                         }
@@ -899,6 +967,13 @@
 
                                         beheerModel.ClubCloud_Verenigingen.AddOrUpdate(entity);
 
+                                    }
+                                    beheerModel.SaveChanges();
+
+                                    foreach (account account in entities)
+                                    {
+                                        ClubCloud_Vereniging entity = beheerModel.ClubCloud_Verenigingen.Find(account.accountid.Value);
+                                        accommodatie.ClubCloud_Vereniging.Add(entity);
                                     }
                                     beheerModel.SaveChanges();
                                 }
@@ -1096,7 +1171,13 @@
                                         beheerModel.ClubCloud_Baanblokken.AddOrUpdate(entity);
 
                                     }
+                                    beheerModel.SaveChanges();
 
+                                    foreach (sgt_alg_baanblok baanblok in entities)
+                                    {
+                                        ClubCloud_Baanblok entity = beheerModel.ClubCloud_Baanblokken.Find(baanblok.sgt_alg_baanblokid.Value);
+                                        accommodatie.ClubCloud_Baanblok.Add(entity);
+                                    }
                                     beheerModel.SaveChanges();
                                 }
                             }
@@ -1230,12 +1311,28 @@
                                             beheerModel.ClubCloud_Banen.Add(entity);
                                          */
                                     }
+                                    accommodatie.BanenAantal = banen_totaal;
+                                    beheerModel.SaveChanges();
+
+                                    foreach (sgt_alg_baan baan in entities)
+                                    {
+                                        if (baan.sgt_baanblokid != null)
+                                        {
+                                            ClubCloud_Baanblok baanblok = GetBaanblokById(baan.sgt_baanblokid.Value, false, settings);
+                                            if (baanblok != null)
+                                                entity.ClubCloud_Baanblok = baanblok;
+                                        }
+                                    }
+
+                                    foreach (sgt_alg_baan baan in entities)
+                                    {
+                                        ClubCloud_Baan entity = beheerModel.ClubCloud_Banen.Find(baan.sgt_alg_baanid.Value);
+                                        accommodatie.ClubCloud_Baan.Add(entity);
+                                    }
 
                                     beheerModel.SaveChanges();
-                                }
 
-                                accommodatie.BanenAantal = banen_totaal;
-                                beheerModel.SaveChanges();
+                                }
                             }
                         }
                     }
@@ -1448,7 +1545,11 @@
 
                                     foreach (sgt_alg_speciale_baan baanspeciaal in entities)
                                     {
-                                        ClubCloud_BaanSpeciaal entity = beheerModel.ClubCloud_BanenSpeciaal.Create();
+                                        ClubCloud_BaanSpeciaal entity = beheerModel.ClubCloud_BanenSpeciaal.Find(baanspeciaal.sgt_alg_speciale_baanid.Value);
+
+                                        if(entity == null)
+                                            entity = beheerModel.ClubCloud_BanenSpeciaal.Create();
+
                                         entity.Id = baanspeciaal.sgt_alg_speciale_baanid.Value;
 
                                         BaanspeciaalToEntity(baanspeciaal, entity, settings);
@@ -1512,6 +1613,26 @@
                                         }
                                         */
 
+                                    }
+                                    beheerModel.SaveChanges();
+
+                                    foreach (sgt_alg_speciale_baan baanspeciaal in entities)
+                                    {
+                                        ClubCloud_BaanSpeciaal entity = beheerModel.ClubCloud_BanenSpeciaal.Find(baanspeciaal.sgt_alg_speciale_baanid.Value);
+
+                                        if (specialebaan.sgt_accomodatieid != null)
+                                        {
+                                            ClubCloud_Accommodatie accommodatie = GetAccommodatieById(specialebaan.sgt_accomodatieid.Value, false, settings);
+                                            if (accommodatie != null)
+                                                entity.ClubCloud_Accommodatie = accommodatie;
+                                        }
+
+                                        if (specialebaan.sgt_toplaagid != null)
+                                        {
+                                            ClubCloud_Baantoplaag toplaag = GetBaantoplaagById(specialebaan.sgt_toplaagid.Value, false, settings);
+                                            if (toplaag != null)
+                                                entity.ClubCloud_Baantoplaag = toplaag;
+                                        }
                                     }
                                     beheerModel.SaveChanges();
                                 }
@@ -1581,52 +1702,96 @@
                                 int pageNum = 1;
                                 while (moreRecords)
                                 {
-                                    //qwerty
                                     sgt_alg_accommodatie accommodatie = RetrieveEntity(service, "sgt_alg_accommodatie", Id) as sgt_alg_accommodatie;
 
                                     if (accommodatie != null && accommodatie.sgt_alg_accommodatieid.Value == Id)
                                     {
-                                        entity = beheerModel.ClubCloud_Accommodaties.Create();
-                                        entity.Id = accommodatie.sgt_alg_accommodatieid.Value;
+                                        List<ClubCloud_Address> entities = beheerModel.ClubCloud_Addressen.Where(b => b.ParentId.Value == Id).ToList();
 
-                                        AccommodatieToEntity(accommodatie, entity, settings);
+                                        ClubCloud_Address bezoek_entity = null;
+                                        ClubCloud_Address post_entity = null;
 
-                                        beheerModel.ClubCloud_Accommodaties.AddOrUpdate(entity);
+                                        if (entities != null && entities.Count > 0)
+                                        {
+                                            bezoek_entity = entities.SingleOrDefault(a => a.Naam == AddressSoort.Bezoekadres);
+                                            post_entity = entities.SingleOrDefault(a => a.Naam == AddressSoort.Postadres);
+                                        }
+
+                                        if (bezoek_entity == null)
+                                        { bezoek_entity = beheerModel.ClubCloud_Addressen.Create(); bezoek_entity.Id = Guid.NewGuid(); bezoek_entity.ParentId = Id; }
+
+                                        if (post_entity == null)
+                                        { post_entity = beheerModel.ClubCloud_Addressen.Create(); post_entity.Id = Guid.NewGuid(); post_entity.ParentId = Id; }
+
+
+                                        if (accommodatie.sgt_bezoekadreslandcodeid != null)
+                                        {
+                                            //ClubCloud_Land land = GetLandById(accommodatie.sgt_bezoekadreslandcodeid.Value, false, settings);
+                                            //bezoek_entity.ClubCloud_Land = land;
+                                            bezoek_entity.LandId = accommodatie.sgt_bezoekadreslandcodeid.Value;
+                                        }
+
+                                        bezoek_entity.Gemeente = accommodatie.sgt_bezoekadres_gemeente;
+                                        bezoek_entity.Nummer = accommodatie.sgt_bezoekadres_huisnummer;
+                                        bezoek_entity.Stad = accommodatie.sgt_bezoekadres_plaats;
+                                        bezoek_entity.Postcode = accommodatie.sgt_bezoekadres_postcode;
+                                        bezoek_entity.Straat = accommodatie.sgt_bezoekadres_straat;
+                                        bezoek_entity.Toevoeging = accommodatie.sgt_bezoekadres_toevoeging;
+                                        bezoek_entity.Actief = ActiefSoort.Actief;
+                                        beheerModel.ClubCloud_Addressen.AddOrUpdate(bezoek_entity);
+
+                                        if (accommodatie.sgt_postadreslandcodeid != null)
+                                        {
+                                            //ClubCloud_Land land = GetLandById(accommodatie.sgt_postadreslandcodeid.Value, false, settings);
+                                            //post_entity.ClubCloud_Land = land;
+                                            post_entity.LandId = accommodatie.sgt_bezoekadreslandcodeid.Value;
+                                        }
+
+                                        post_entity.Gemeente = accommodatie.sgt_bezoekadres_gemeente;
+                                        post_entity.Nummer = accommodatie.sgt_bezoekadres_huisnummer;
+                                        post_entity.Stad = accommodatie.sgt_bezoekadres_plaats;
+                                        post_entity.Postcode = accommodatie.sgt_bezoekadres_postcode;
+                                        post_entity.Straat = accommodatie.sgt_bezoekadres_straat;
+                                        post_entity.Toevoeging = accommodatie.sgt_bezoekadres_toevoeging;
+                                        post_entity.Actief = ActiefSoort.Actief;
+                                        beheerModel.ClubCloud_Addressen.AddOrUpdate(post_entity);
+
+                                        beheerModel.SaveChanges();
+
+                                        bezoek_entity.ClubCloud_Accommodatie = entity;
+                                        if (accommodatie.sgt_bezoekadreslandcodeid != null)
+                                        {
+                                            ClubCloud_Land land = GetLandById(accommodatie.sgt_bezoekadreslandcodeid.Value, false, settings);
+                                            bezoek_entity.ClubCloud_Land = land;
+                                            //bezoek_entity.LandId = accommodatie.sgt_bezoekadreslandcodeid.Value;
+                                        }
+
+                                        post_entity.ClubCloud_Accommodatie = entity;
+                                        if (accommodatie.sgt_postadreslandcodeid != null)
+                                        {
+                                            ClubCloud_Land land = GetLandById(accommodatie.sgt_postadreslandcodeid.Value, false, settings);
+                                            post_entity.ClubCloud_Land = land;
+                                            //post_entity.LandId = accommodatie.sgt_bezoekadreslandcodeid.Value;
+                                        }
+
+                                        beheerModel.SaveChanges();
+
+                                        bezoek_entity.ClubCloud_Accommodatie = entity;
+                                        post_entity.ClubCloud_Accommodatie = entity;
+                                        entity.ClubCloud_Address.Add(bezoek_entity);
+                                        entity.ClubCloud_Address.Add(post_entity);
+
                                         beheerModel.SaveChanges();
                                     }
-                                    /*
-                                    ConditionExpression condition = new ConditionExpression { AttributeName = "parentid", Operator = ConditionOperator.Equal, Values = new object[1] { Id } };
-                                    FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-
-                                    List<BusinessEntity> entities = RetrieveMultiple(service, "customeraddress", out moreRecords, ref pageNum, expression);
-
-                                    foreach (customeraddress address in entities)
-                                    {
-                                        ClubCloud_Address entity = beheerModel.ClubCloud_Addressen.Find(address.customeraddressid.Value);
-
-                                        if (entity == null)
-                                            entity = beheerModel.ClubCloud_Addressen.Create();
-
-                                        entity.Id = address.customeraddressid.Value;
-
-                                        AddressToEntity(address, entity, settings);
-
-                                        beheerModel.ClubCloud_Addressen.AddOrUpdate(entity);
-                                    }
-                                    */
+                                    
                                 }
-                                beheerModel.SaveChanges();
+
                             }
+
                         }
                     }
 
                     result = beheerModel.ClubCloud_Addressen.Where(b => b.ParentId.Value == Id).ToList();
-
-                    foreach (ClubCloud_Address address in result)
-                    {
-                        entity.ClubCloud_Address.Add(address);
-                    }
-                    beheerModel.SaveChanges();
                 }
             }
             return result;
@@ -1905,15 +2070,15 @@
 
             if (accommodatie.sgt_districtid != null)
             {
-                ClubCloud_District district = GetDistrictById(accommodatie.sgt_districtid.Value, false, settings);
-                entity.ClubCloud_District = district;
+                //ClubCloud_District district = GetDistrictById(accommodatie.sgt_districtid.Value, false, settings);
+                //entity.ClubCloud_District = district;
                 entity.DistrictId = accommodatie.sgt_districtid.Value;
             }
 
             if (accommodatie.sgt_regioid != null)
             {
-                ClubCloud_Regio regio = GetRegioById(accommodatie.sgt_regioid.Value, false, settings);
-                entity.ClubCloud_Regio = regio;
+                //ClubCloud_Regio regio = GetRegioById(accommodatie.sgt_regioid.Value, false, settings);
+                //entity.ClubCloud_Regio = regio;
                 entity.RegioId = accommodatie.sgt_regioid.Value;
             }
 
@@ -1924,135 +2089,6 @@
             Accommodatie.Actief = entity.statuscode.name;
             */
 
-            if (accommodatie.sgt_alg_accommodatieid.Value != null)
-            {
-                List<ClubCloud_Address> addressen = GetAddressenForAccommodatieById(settings.Id.ToString(), accommodatie.sgt_alg_accommodatieid.Value, false, settings);
-
-                if (addressen.Count > 0)
-                {
-                    foreach (ClubCloud_Address addr in addressen)
-                    {
-
-                        ClubCloud_Address address = beheerModel.ClubCloud_Addressen.Find(addr.Id);
-
-                        if (address.Naam == AddressSoort.Bezoekadres)//.Equals("Bezoekadres", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            address.Naam = AddressSoort.Bezoekadres;
-                            //address.Fax
-                            if (accommodatie.sgt_bezoekadreslandcodeid != null)
-                                address.LandId = accommodatie.sgt_bezoekadreslandcodeid.Value;
-                            //address.Latitude
-                            //address.Longitude
-                            address.Nummer = accommodatie.sgt_bezoekadres_huisnummer;
-                            if (accommodatie.sgt_alg_accommodatieid != null)
-                                address.ParentId = accommodatie.sgt_alg_accommodatieid.Value;
-                            //address.Postbus
-                            address.Gemeente = accommodatie.sgt_bezoekadres_gemeente;
-                            address.Postcode = accommodatie.sgt_bezoekadres_postcode;
-                            address.Provincie = accommodatie.sgt_bezoekadres_gemeente;
-                            address.Stad = accommodatie.sgt_bezoekadres_plaats;
-                            address.Straat = accommodatie.sgt_bezoekadres_straat;
-                            //address.TelefoonPrimair
-                            //address.TelefoonSecundair
-                            //address.TelefoonTertiair
-                            address.Toevoeging = accommodatie.sgt_bezoekadres_toevoeging;
-                            address.Actief = accommodatie.statuscode.name;
-                            address.ParentId = accommodatie.sgt_alg_accommodatieid.Value;
-                            address.Gewijzigd = DateTime.Now;
-                        }
-
-                        if (address.Naam == AddressSoort.Postadres)//.Equals("Postadres", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            address.Naam = AddressSoort.Postadres;
-                            //address.Fax
-                            if (accommodatie.sgt_bezoekadreslandcodeid != null)
-                                address.LandId = accommodatie.sgt_postadreslandcodeid.Value;
-                            //address.Latitude
-                            //address.Longitude
-                            address.Nummer = accommodatie.sgt_postadres_huisnummer;
-                            if (accommodatie.sgt_alg_accommodatieid != null)
-                                address.ParentId = accommodatie.sgt_alg_accommodatieid.Value;
-                            //address.Postbus
-                            address.Gemeente = accommodatie.sgt_postadres_gemeente;
-                            address.Postcode = accommodatie.sgt_postadres_postcode;
-                            address.Provincie = accommodatie.sgt_postadres_gemeente;
-                            address.Stad = accommodatie.sgt_postadres_plaats;
-                            address.Straat = accommodatie.sgt_postadres_straat;
-                            //address.TelefoonPrimair
-                            //address.TelefoonSecundair
-                            //address.TelefoonTertiair
-                            address.Toevoeging = accommodatie.sgt_postadres_toevoeging;
-                            address.Actief = accommodatie.statuscode.name;
-                            address.ParentId = accommodatie.sgt_alg_accommodatieid.Value;
-                            address.Gewijzigd = DateTime.Now;
-                        }
-                        beheerModel.SaveChanges();
-                    }
-
-                }
-                else
-                {
-                    ClubCloud_Address bezoek_address = beheerModel.ClubCloud_Addressen.Create();
-                    //qwerty
-                    bezoek_address.Id = Guid.NewGuid();
-                    bezoek_address.ParentId = accommodatie.sgt_alg_accommodatieid.Value;
-                    bezoek_address.Naam = AddressSoort.Bezoekadres;// "Bezoekadres";
-                    //bezoek_address.Fax
-                    if (accommodatie.sgt_bezoekadreslandcodeid != null)
-                        bezoek_address.LandId = accommodatie.sgt_bezoekadreslandcodeid.Value;
-                    //bezoek_address.Latitude
-                    //bezoek_address.Longitude
-                    bezoek_address.Nummer = accommodatie.sgt_bezoekadres_huisnummer;
-                    if (accommodatie.sgt_alg_accommodatieid != null)
-                        bezoek_address.ParentId = accommodatie.sgt_alg_accommodatieid.Value;
-                    //bezoek_address.Postbus
-                    bezoek_address.Gemeente = accommodatie.sgt_bezoekadres_gemeente;
-                    bezoek_address.Postcode = accommodatie.sgt_bezoekadres_postcode;
-                    bezoek_address.Provincie = accommodatie.sgt_bezoekadres_gemeente;
-                    bezoek_address.Stad = accommodatie.sgt_bezoekadres_plaats;
-                    bezoek_address.Straat = accommodatie.sgt_bezoekadres_straat;
-                    //bezoek_address.TelefoonPrimair
-                    //bezoek_address.TelefoonSecundair
-                    //bezoek_address.TelefoonTertiair
-                    bezoek_address.Toevoeging = accommodatie.sgt_bezoekadres_toevoeging;
-                    bezoek_address.Actief = accommodatie.statuscode.name;
-                    bezoek_address.Gewijzigd = DateTime.Now;
-                    beheerModel.ClubCloud_Addressen.Add(bezoek_address);
-                    beheerModel.SaveChanges();
-
-                    entity.ClubCloud_Address.Add(bezoek_address);
-
-                    ClubCloud_Address post_address = beheerModel.ClubCloud_Addressen.Create();
-
-                    post_address.Id = Guid.NewGuid();
-                    post_address.ParentId = accommodatie.sgt_alg_accommodatieid.Value;
-                    post_address.Naam = AddressSoort.Postadres;//"Postadres";
-                    //post_address.Fax
-                    if (accommodatie.sgt_postadreslandcodeid != null)
-                        post_address.LandId = accommodatie.sgt_postadreslandcodeid.Value;
-                    //post_address.Latitude
-                    //post_address.Longitude
-                    post_address.Nummer = accommodatie.sgt_postadres_huisnummer;
-                    if (accommodatie.sgt_alg_accommodatieid != null)
-                        post_address.ParentId = accommodatie.sgt_alg_accommodatieid.Value;
-                    //post_address.Postbus
-                    post_address.Gemeente = accommodatie.sgt_postadres_gemeente;
-                    post_address.Postcode = accommodatie.sgt_postadres_postcode;
-                    post_address.Provincie = accommodatie.sgt_postadres_gemeente;
-                    post_address.Stad = accommodatie.sgt_postadres_plaats;
-                    post_address.Straat = accommodatie.sgt_postadres_straat;
-                    //post_address.TelefoonPrimair
-                    //post_address.TelefoonSecundair
-                    //post_address.TelefoonTertiair
-                    post_address.Toevoeging = accommodatie.sgt_postadres_toevoeging;
-                    post_address.Actief = accommodatie.statuscode.name;
-                    post_address.Gewijzigd = DateTime.Now;
-                    beheerModel.ClubCloud_Addressen.Add(post_address);
-                    beheerModel.SaveChanges();
-
-                    entity.ClubCloud_Address.Add(post_address);
-                }
-            }
         }
 
         /// <summary>
@@ -2060,7 +2096,7 @@
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="accommodatie"></param>
-        private void EntityToAccommodatie(sgt_alg_accommodatie entity, ClubCloud_Accommodatie accommodatie, ClubCloud_Setting settings)
+        private void EntityToAccommodatie(sgt_alg_accommodatie accommodatie, ClubCloud_Accommodatie entity, ClubCloud_Setting settings)
         {
 
         }
@@ -2101,7 +2137,9 @@
 
                             if (address != null && address.customeraddressid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Addressen.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Addressen.Create();
+
                                 entity.Id = address.customeraddressid.Value;
 
                                 AddressToEntity(address, entity, settings);
@@ -2928,12 +2966,30 @@
 
                             if (baan != null && baan.sgt_alg_baanid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Banen.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Banen.Create();
+
                                 entity.Id = baan.sgt_alg_baanid.Value;
 
                                 BaanToEntity(baan, entity, settings);
 
                                 beheerModel.ClubCloud_Banen.AddOrUpdate(entity);
+
+                                beheerModel.SaveChanges();
+
+                                if (baan.sgt_accommodatieid != null)
+                                {
+                                    ClubCloud_Accommodatie accommodatie = GetAccommodatieById(baan.sgt_accommodatieid.Value, false, settings);
+                                    if (accommodatie != null)
+                                        entity.ClubCloud_Accommodatie = accommodatie;
+                                }
+
+                                if (baan.sgt_baanblokid != null)
+                                {
+                                    ClubCloud_Baanblok baanblok = GetBaanblokById(baan.sgt_baanblokid.Value, false, settings);
+                                    if (baanblok != null)
+                                        entity.ClubCloud_Baanblok = baanblok;
+                                }
 
                                 beheerModel.SaveChanges();
                             }
@@ -2992,6 +3048,26 @@
 
                                     BaanToEntity(baan, entity, settings);
                                     beheerModel.ClubCloud_Banen.AddOrUpdate(entity);                                    
+                                }
+                                beheerModel.SaveChanges();
+
+                                foreach (sgt_alg_baan baan in entities)
+                                {
+                                    ClubCloud_Baan entity = beheerModel.ClubCloud_Banen.Find(baan.sgt_alg_baanid.Value);
+
+                                    if (baan.sgt_accommodatieid != null)
+                                    {
+                                        ClubCloud_Accommodatie accommodatie = GetAccommodatieById(baan.sgt_accommodatieid.Value, false, settings);
+                                        if (accommodatie != null)
+                                            entity.ClubCloud_Accommodatie = accommodatie;
+                                    }
+
+                                    if (baan.sgt_baanblokid != null)
+                                    {
+                                        ClubCloud_Baanblok baanblok = GetBaanblokById(baan.sgt_baanblokid.Value, false, settings);
+                                        if (baanblok != null)
+                                            entity.ClubCloud_Baanblok = baanblok;
+                                    }
                                 }
                                 beheerModel.SaveChanges();
                             }
@@ -3248,17 +3324,17 @@
 
             if (baan.sgt_accommodatieid != null)
             {
-                ClubCloud_Accommodatie accommodatie = GetAccommodatieById(baan.sgt_accommodatieid.Value, false, settings);
-                if (accommodatie != null)
-                    entity.ClubCloud_Accommodatie = accommodatie;
+                //ClubCloud_Accommodatie accommodatie = GetAccommodatieById(baan.sgt_accommodatieid.Value, false, settings);
+                //if (accommodatie != null)
+                //    entity.ClubCloud_Accommodatie = accommodatie;
                 entity.AccommodatieId = baan.sgt_accommodatieid.Value;
             }
 
             if (baan.sgt_baanblokid != null)
             {
-                ClubCloud_Baanblok baanblok = GetBaanblokById(baan.sgt_baanblokid.Value, false, settings);
-                if (baanblok != null)
-                    entity.ClubCloud_Baanblok = baanblok;
+                //ClubCloud_Baanblok baanblok = GetBaanblokById(baan.sgt_baanblokid.Value, false, settings);
+                //if (baanblok != null)
+                //    entity.ClubCloud_Baanblok = baanblok;
                 entity.BaanblokId = baan.sgt_baanblokid.Value;
             }
 
@@ -3268,7 +3344,7 @@
             if (baan.sgt_datum_keuring != null)
                 entity.Keuring = DateTime.Parse(baan.sgt_datum_keuring.Value);
 
-            entity.Actief = baan.statuscode.name;
+            entity.Actief = (ActiefSoort)baan.statuscode.Value;
         }
 
         #endregion
@@ -3309,12 +3385,38 @@
 
                             if (baanblok != null && baanblok.sgt_alg_baanblokid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Baanblokken.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Baanblokken.Create();
+
                                 entity.Id = baanblok.sgt_alg_baanblokid.Value;
 
                                 BaanblokToEntity(baanblok, entity, settings);
 
                                 beheerModel.ClubCloud_Baanblokken.AddOrUpdate(entity);
+
+                                beheerModel.SaveChanges();
+
+                                if (baanblok.sgt_accommodatieid != null)
+                                {
+                                    ClubCloud_Accommodatie accommodatie = GetAccommodatieById(baanblok.sgt_accommodatieid.Value, false, settings);
+                                    if (accommodatie != null)
+                                        entity.ClubCloud_Accommodatie = accommodatie;
+                                }
+
+                                if (baanblok.sgt_baansoortid != null)
+                                {
+                                    ClubCloud_Baansoort baansoort = GetBaansoortById(baanblok.sgt_baansoortid.Value, false, settings);
+                                    if (baansoort != null)
+                                        entity.ClubCloud_Baansoort = baansoort;
+                                }
+
+                                if (baanblok.sgt_baantypeid != null)
+                                {
+                                    ClubCloud_Baantype baantype = GetBaantypeById(baanblok.sgt_baantypeid.Value, false, settings);
+                                    if (baantype != null)
+                                        entity.ClubCloud_Baantype = baantype;
+                                }
+
                                 beheerModel.SaveChanges();
                             }
                         }
@@ -3367,14 +3469,41 @@
                                     ClubCloud_Baanblok entity = beheerModel.ClubCloud_Baanblokken.Find(baanblok.sgt_alg_baanblokid.Value);
 
                                     if (entity == null)
-                                    {
                                         entity = beheerModel.ClubCloud_Baanblokken.Create();
-                                        entity.Id = baanblok.sgt_alg_baanblokid.Value;
-                                    }
+
+                                    entity.Id = baanblok.sgt_alg_baanblokid.Value;
 
                                     BaanblokToEntity(baanblok, entity, settings);
 
                                     beheerModel.ClubCloud_Baanblokken.AddOrUpdate(entity);
+                                }
+
+                                beheerModel.SaveChanges();
+
+                                foreach (sgt_alg_baanblok baanblok in entities)
+                                {
+                                    ClubCloud_Baanblok entity = beheerModel.ClubCloud_Baanblokken.Find(baanblok.sgt_alg_baanblokid.Value);
+
+                                    if (baanblok.sgt_accommodatieid != null)
+                                    {
+                                        ClubCloud_Accommodatie accommodatie = GetAccommodatieById(baanblok.sgt_accommodatieid.Value, false, settings);
+                                        if (accommodatie != null)
+                                            entity.ClubCloud_Accommodatie = accommodatie;
+                                    }
+
+                                    if (baanblok.sgt_baansoortid != null)
+                                    {
+                                        ClubCloud_Baansoort baansoort = GetBaansoortById(baanblok.sgt_baansoortid.Value, false, settings);
+                                        if (baansoort != null)
+                                            entity.ClubCloud_Baansoort = baansoort;
+                                    }
+
+                                    if (baanblok.sgt_baantypeid != null)
+                                    {
+                                        ClubCloud_Baantype baantype = GetBaantypeById(baanblok.sgt_baantypeid.Value, false, settings);
+                                        if (baantype != null)
+                                            entity.ClubCloud_Baantype = baantype;
+                                    }
                                 }
 
                                 beheerModel.SaveChanges();
@@ -3619,25 +3748,25 @@
 
             if (baanblok.sgt_accommodatieid != null)
             {
-                ClubCloud_Accommodatie accommodatie = GetAccommodatieById(baanblok.sgt_accommodatieid.Value, false, settings);
-                if (accommodatie != null)
-                    entity.ClubCloud_Accommodatie = accommodatie;
+                //ClubCloud_Accommodatie accommodatie = GetAccommodatieById(baanblok.sgt_accommodatieid.Value, false, settings);
+                //if (accommodatie != null)
+                //    entity.ClubCloud_Accommodatie = accommodatie;
                 entity.AccommodatieId = baanblok.sgt_accommodatieid.Value;
             }
 
             if (baanblok.sgt_baansoortid != null)
             {
-                ClubCloud_Baansoort baansoort = GetBaansoortById(baanblok.sgt_baansoortid.Value, false,settings);
-                if (baansoort != null)
-                    entity.ClubCloud_Baansoort = baansoort;
+                //ClubCloud_Baansoort baansoort = GetBaansoortById(baanblok.sgt_baansoortid.Value, false,settings);
+                //if (baansoort != null)
+                //    entity.ClubCloud_Baansoort = baansoort;
                 entity.BaansoortId = baanblok.sgt_baansoortid.Value;
             }
 
             if (baanblok.sgt_baantypeid != null)
             {
-                ClubCloud_Baantype baantype = GetBaantypeById(baanblok.sgt_baantypeid.Value, false, settings);
-                if (baantype != null)
-                    entity.ClubCloud_Baantype = baantype;
+                //ClubCloud_Baantype baantype = GetBaantypeById(baanblok.sgt_baantypeid.Value, false, settings);
+                //if (baantype != null)
+                //    entity.ClubCloud_Baantype = baantype;
                 entity.BaantypeId = baanblok.sgt_baantypeid.Value;
             }
 
@@ -3651,7 +3780,7 @@
                 entity.Locatie = baanblok.sgt_locatie_bb.name; ;
             }
 
-            entity.Actief = baanblok.statuscode.name;
+            entity.Actief = (ActiefSoort)baanblok.statuscode.Value;
         }
 
         /// <summary>
@@ -3851,99 +3980,26 @@
 
                             if (baansoort != null && baansoort.sgt_alg_baansoortid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Baansoorten.Create();
+                                if(entity == null)
+                                    entity = beheerModel.ClubCloud_Baansoorten.Create();
+
                                 entity.Id = baansoort.sgt_alg_baansoortid.Value;
 
                                 BaansoortToEntity(baansoort, entity, settings);
 
                                 beheerModel.ClubCloud_Baansoorten.AddOrUpdate(entity);
+
                                 beheerModel.SaveChanges();
 
-                                /*
-                                bool moreRecords = true;
-                                int pageNum = 1;
-                                while (moreRecords)
+                                if (baansoort.sgt_baantypeid != null)
                                 {
-                                    ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_baansoortid", Operator = ConditionOperator.Equal, Values = new object[1] { baansoortId } };
-                                    FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                                    ClubCloud_Baantype baantype = GetBaantypeById(baansoort.sgt_baantypeid.Value, false, settings);
+                                    if (baantype != null)
+                                        entity.ClubCloud_Baantype = baantype;
+                                    entity.BaantypeId = baansoort.sgt_baantypeid.Value;
+                                }
 
-                                    List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_baansoort", out moreRecords, ref pageNum, expression);
-
-                                    foreach (sgt_alg_baansoort entity in entities)
-                                    {
-                                        baansoort = beheerModel.ClubCloud_Baansoorten.Find(entity.sgt_alg_baansoortid.Value);
-
-                                        if (baansoort == null)
-                                        {
-                                            baansoort.Id = entity.sgt_alg_baansoortid.Value;
-                                            baansoort.Naam = entity.sgt_alg_baansoort1;
-
-                                            if (entity.sgt_beschrijving != null)
-                                            {
-                                                baansoort.Beschrijving = entity.sgt_beschrijving;
-                                            }
-
-                                            if (entity.sgt_omschrijving != null)
-                                            {
-                                                baansoort.Omschrijving = entity.sgt_omschrijving;
-                                            }
-
-                                            if (entity.sgt_baantypeid != null)
-                                            {
-                                                ClubCloud_Baantype baantype = GetBaantypeById(bondsnummer, entity.sgt_baantypeid.Value, false);
-                                                baansoort.ClubCloud_Baantype = baantype;
-                                                baansoort.BaantypeId = entity.sgt_baantypeid.Value;
-                                            }
-
-                                            if (entity.sgt_verkorte_code != null)
-                                            {
-                                                baansoort.Code = entity.sgt_verkorte_code;
-                                            }
-
-                                            if (entity.sgt_meervoudsnaam != null)
-                                            {
-                                                baansoort.Meervoud = entity.sgt_meervoudsnaam;
-                                            }
-
-                                            baansoort.Actief = entity.statuscode.name;
-
-                                            beheerModel.ClubCloud_Baansoorten.Add(baansoort);
-                                        }
-                                        else
-                                        {
-                                            baansoort.Naam = entity.sgt_alg_baansoort1;
-                                            if (entity.sgt_beschrijving != null)
-                                            {
-                                                baansoort.Beschrijving = entity.sgt_beschrijving;
-                                            }
-
-                                            if (entity.sgt_omschrijving != null)
-                                            {
-                                                baansoort.Omschrijving = entity.sgt_omschrijving;
-                                            }
-
-                                            if (entity.sgt_baantypeid != null)
-                                            {
-                                                ClubCloud_Baantype baantype = GetBaantypeById(bondsnummer, entity.sgt_baantypeid.Value, false);
-                                                baansoort.ClubCloud_Baantype = baantype;
-                                                baansoort.BaantypeId = entity.sgt_baantypeid.Value;
-                                            }
-
-                                            if (entity.sgt_verkorte_code != null)
-                                            {
-                                                baansoort.Code = entity.sgt_verkorte_code;
-                                            }
-
-                                            if (entity.sgt_meervoudsnaam != null)
-                                            {
-                                                baansoort.Meervoud = entity.sgt_meervoudsnaam;
-                                            }
-
-                                            baansoort.Actief = entity.statuscode.name;
-                                        }
-                                        beheerModel.SaveChanges();
-                                    }
-                                    */
+                                beheerModel.SaveChanges();
                             }
                         }
                     }
@@ -3988,86 +4044,32 @@
 
                                 foreach (sgt_alg_baansoort baansoort in entities)
                                 {
-                                    ClubCloud_Baansoort entity = beheerModel.ClubCloud_Baansoorten.Create();
+                                    ClubCloud_Baansoort entity = beheerModel.ClubCloud_Baansoorten.Find(baansoort.sgt_alg_baansoortid.Value);
+
+                                    if(entity == null)
+                                        entity = beheerModel.ClubCloud_Baansoorten.Create();
+
                                     entity.Id = baansoort.sgt_alg_baansoortid.Value;
 
                                     BaansoortToEntity(baansoort, entity, settings);
 
                                     beheerModel.ClubCloud_Baansoorten.AddOrUpdate(entity);
-
-                                    /*
-                                    ClubCloud_Baansoort baansoort = beheerModel.ClubCloud_Baansoorten.Find(entity.sgt_alg_baansoortid.Value);
-
-                                    if (baansoort == null)
-                                    {
-                                        baansoort = beheerModel.ClubCloud_Baansoorten.Create();
-                                        baansoort.Id = entity.sgt_alg_baansoortid.Value;
-                                        baansoort.Naam = entity.sgt_alg_baansoort1;
-
-                                        if (entity.sgt_beschrijving != null)
-                                        {
-                                            baansoort.Beschrijving = entity.sgt_beschrijving;
-                                        }
-
-                                        if (entity.sgt_omschrijving != null)
-                                        {
-                                            baansoort.Omschrijving = entity.sgt_omschrijving;
-                                        }
-
-                                        if (entity.sgt_baantypeid != null)
-                                        {
-                                            ClubCloud_Baantype baantype = GetBaantypeById(bondsnummer, entity.sgt_baantypeid.Value, false);
-                                            baansoort.ClubCloud_Baantype = baantype;
-                                            baansoort.BaantypeId = entity.sgt_baantypeid.Value;
-                                        }
-
-                                        if (entity.sgt_verkorte_code != null)
-                                        {
-                                            baansoort.Code = entity.sgt_verkorte_code;
-                                        }
-
-                                        if (entity.sgt_meervoudsnaam != null)
-                                        {
-                                            baansoort.Meervoud = entity.sgt_meervoudsnaam;
-                                        }
-                                        baansoort.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_Baansoorten.Add(baansoort);
-                                    }
-                                    else
-                                    {
-                                        baansoort.Naam = entity.sgt_alg_baansoort1;
-                                        if (entity.sgt_beschrijving != null)
-                                        {
-                                            baansoort.Beschrijving = entity.sgt_beschrijving;
-                                        }
-
-                                        if (entity.sgt_omschrijving != null)
-                                        {
-                                            baansoort.Omschrijving = entity.sgt_omschrijving;
-                                        }
-
-                                        if (entity.sgt_baantypeid != null)
-                                        {
-                                            ClubCloud_Baantype baantype = GetBaantypeById(bondsnummer, entity.sgt_baantypeid.Value, false);
-                                            baansoort.ClubCloud_Baantype = baantype;
-                                            baansoort.BaantypeId = entity.sgt_baantypeid.Value;
-                                        }
-
-                                        if (entity.sgt_verkorte_code != null)
-                                        {
-                                            baansoort.Code = entity.sgt_verkorte_code;
-                                        }
-
-                                        if (entity.sgt_meervoudsnaam != null)
-                                        {
-                                            baansoort.Meervoud = entity.sgt_meervoudsnaam;
-                                        }
-                                        baansoort.Actief = entity.statuscode.name;
-                                    }
-                                    beheerModel.SaveChanges();
-                                    */
                                 }
+
+                                beheerModel.SaveChanges();
+
+                                foreach (sgt_alg_baansoort baansoort in entities)
+                                {
+                                    ClubCloud_Baansoort entity = beheerModel.ClubCloud_Baansoorten.Find(baansoort.sgt_alg_baansoortid.Value);
+                                    if (baansoort.sgt_baantypeid != null)
+                                    {
+                                        ClubCloud_Baantype baantype = GetBaantypeById(baansoort.sgt_baantypeid.Value, false, settings);
+                                        if (baantype != null)
+                                            entity.ClubCloud_Baantype = baantype;
+                                        entity.BaantypeId = baansoort.sgt_baantypeid.Value;
+                                    }
+                                }
+
                                 beheerModel.SaveChanges();
                             }
                         }
@@ -4213,9 +4215,9 @@
 
             if (baansoort.sgt_baantypeid != null)
             {
-                ClubCloud_Baantype baantype = GetBaantypeById(baansoort.sgt_baantypeid.Value, false, settings);
-                if(baantype != null)
-                    entity.ClubCloud_Baantype = baantype;
+                //ClubCloud_Baantype baantype = GetBaantypeById(baansoort.sgt_baantypeid.Value, false, settings);
+                //if(baantype != null)
+                //    entity.ClubCloud_Baantype = baantype;
                 entity.BaantypeId = baansoort.sgt_baantypeid.Value;
             }
 
@@ -4228,7 +4230,7 @@
             {
                 entity.Meervoud = baansoort.sgt_meervoudsnaam;
             }
-            entity.Actief = baansoort.statuscode.name;
+            entity.Actief = (ActiefSoort)baansoort.statuscode.Value;
         }
 
         private void EntityToBaansoort(sgt_alg_baansoort baansoort, ClubCloud_Baansoort entity, ClubCloud_Setting settings)
@@ -4273,84 +4275,30 @@
 
                             if (specialebaan != null && specialebaan.sgt_alg_speciale_baanid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_BanenSpeciaal.Create();
+                                if(entity == null)
+                                    entity = beheerModel.ClubCloud_BanenSpeciaal.Create();
+
                                 entity.Id = specialebaan.sgt_alg_speciale_baanid.Value;
                                 BaanspeciaalToEntity(specialebaan, entity, settings);
+
                                 beheerModel.ClubCloud_BanenSpeciaal.AddOrUpdate(entity);
-                            
 
-                            /*
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
-                            {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_speciale_baanid", Operator = ConditionOperator.Equal, Values = new object[1] { Id } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                                beheerModel.SaveChanges();
 
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_speciale_baan", out moreRecords, ref pageNum, expression);
-
-                                foreach (sgt_alg_speciale_baan entity in entities)
+                                if (specialebaan.sgt_accomodatieid != null)
                                 {
-                                    baanspeciaal = beheerModel.ClubCloud_BanenSpeciaal.Find(entity.sgt_alg_speciale_baanid.Value);
-
-                                    if (baanspeciaal == null)
-                                    {
-                                        baanspeciaal = beheerModel.ClubCloud_BanenSpeciaal.Create();
-                                        baanspeciaal.Id = entity.sgt_alg_speciale_baanid.Value;
-                                        baanspeciaal.Naam = entity.sgt_name;
-
-                                        if (entity.sgt_accomodatieid != null)
-                                        {
-                                            ClubCloud_Accommodatie accommodatie = GetAccommodatieById(bondsnummer, entity.sgt_accomodatieid.Value, false);
-                                            baanspeciaal.ClubCloud_Accommodatie = accommodatie;
-                                            baanspeciaal.AccommodatieId = entity.sgt_accomodatieid.Value;
-                                        }
-
-                                        if (entity.sgt_soort_baan != null)
-                                        {
-                                            baanspeciaal.Baansoort = entity.sgt_soort_baan.name;
-                                        }
-
-                                        if (entity.sgt_toplaagid != null)
-                                        {
-                                            ClubCloud_Baantoplaag toplaag = GetBaanToplaagById(bondsnummer, entity.sgt_toplaagid.Value, false);
-                                            baanspeciaal.ClubCloud_Baantoplaag = toplaag;
-                                            baanspeciaal.BaantoplaagId = entity.sgt_toplaagid.Value;
-                                        }
-
-                                        baanspeciaal.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_BanenSpeciaal.Add(baanspeciaal);
-                                    }
-                                    else
-                                    {
-                                        baanspeciaal.Naam = entity.sgt_name;
-
-                                        if (entity.sgt_accomodatieid != null)
-                                        {
-                                            ClubCloud_Accommodatie accommodatie = GetAccommodatieById(bondsnummer, entity.sgt_accomodatieid.Value, false);
-                                            baanspeciaal.ClubCloud_Accommodatie = accommodatie;
-                                            baanspeciaal.AccommodatieId = entity.sgt_accomodatieid.Value;
-                                        }
-
-                                        if (entity.sgt_soort_baan != null)
-                                        {
-                                            baanspeciaal.Baansoort = entity.sgt_soort_baan.name;
-                                        }
-
-                                        if (entity.sgt_toplaagid != null)
-                                        {
-                                            ClubCloud_Baantoplaag toplaag = GetBaanToplaagById(bondsnummer, entity.sgt_toplaagid.Value, false);
-                                            baanspeciaal.ClubCloud_Baantoplaag = toplaag;
-                                            baanspeciaal.BaantoplaagId = entity.sgt_toplaagid.Value;
-                                        }
-
-                                        baanspeciaal.Actief = entity.statuscode.name;
-                                    }
-
-                                    beheerModel.SaveChanges();
+                                    ClubCloud_Accommodatie accommodatie = GetAccommodatieById(specialebaan.sgt_accomodatieid.Value, false, settings);
+                                    if(accommodatie != null)
+                                        entity.ClubCloud_Accommodatie = accommodatie;
                                 }
-                                */
+
+                                if (specialebaan.sgt_toplaagid != null)
+                                {
+                                    ClubCloud_Baantoplaag toplaag = GetBaantoplaagById(specialebaan.sgt_toplaagid.Value, false, settings);
+                                    if(toplaag != null)
+                                        entity.ClubCloud_Baantoplaag = toplaag;
+                                }
+
                                 beheerModel.SaveChanges();
                             }
                         }
@@ -4395,72 +4343,37 @@
 
                                 foreach (sgt_alg_speciale_baan specialebaan in entities)
                                 {
-                                    ClubCloud_BaanSpeciaal entity = beheerModel.ClubCloud_BanenSpeciaal.Create();
+                                    ClubCloud_BaanSpeciaal entity = beheerModel.ClubCloud_BanenSpeciaal.Find(specialebaan.sgt_alg_speciale_baanid.Value);
+
+                                    if(entity == null)
+                                        entity = beheerModel.ClubCloud_BanenSpeciaal.Create();
+
                                     entity.Id = specialebaan.sgt_alg_speciale_baanid.Value;
                                     BaanspeciaalToEntity(specialebaan, entity, settings);
                                     beheerModel.ClubCloud_BanenSpeciaal.AddOrUpdate(entity);
-
-                                    /*
-                                    ClubCloud_BaanSpeciaal baanspeciaal = beheerModel.ClubCloud_BanenSpeciaal.Find(entity.sgt_alg_speciale_baanid.Value);
-
-                                    if (baanspeciaal == null)
-                                    {
-                                        baanspeciaal = beheerModel.ClubCloud_BanenSpeciaal.Create();
-                                        baanspeciaal.Id = entity.sgt_alg_speciale_baanid.Value;
-
-                                        baanspeciaal.Naam = entity.sgt_name;
-
-                                        if (entity.sgt_accomodatieid != null)
-                                        {
-                                            ClubCloud_Accommodatie accommodatie = GetAccommodatieById(bondsnummer, entity.sgt_accomodatieid.Value, false);
-                                            baanspeciaal.ClubCloud_Accommodatie = accommodatie;
-                                            baanspeciaal.AccommodatieId = entity.sgt_accomodatieid.Value;
-                                        }
-
-                                        if (entity.sgt_soort_baan != null)
-                                        {
-                                            baanspeciaal.Baansoort = entity.sgt_soort_baan.name;
-                                        }
-
-                                        if (entity.sgt_toplaagid != null)
-                                        {
-                                            ClubCloud_Baantoplaag toplaag = GetBaanToplaagById(bondsnummer, entity.sgt_toplaagid.Value, false);
-                                            baanspeciaal.ClubCloud_Baantoplaag = toplaag;
-                                            baanspeciaal.BaantoplaagId = entity.sgt_toplaagid.Value;
-                                        }
-
-                                        baanspeciaal.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_BanenSpeciaal.Add(baanspeciaal);
-                                    }
-                                    else
-                                    {
-                                        baanspeciaal.Naam = entity.sgt_name;
-
-                                        if (entity.sgt_accomodatieid != null)
-                                        {
-                                            ClubCloud_Accommodatie accommodatie = GetAccommodatieById(bondsnummer, entity.sgt_accomodatieid.Value, false);
-                                            baanspeciaal.ClubCloud_Accommodatie = accommodatie;
-                                            baanspeciaal.AccommodatieId = entity.sgt_accomodatieid.Value;
-                                        }
-
-                                        if (entity.sgt_soort_baan != null)
-                                        {
-                                            baanspeciaal.Baansoort = entity.sgt_soort_baan.name;
-                                        }
-
-                                        if (entity.sgt_toplaagid != null)
-                                        {
-                                            ClubCloud_Baantoplaag toplaag = GetBaanToplaagById(bondsnummer, entity.sgt_toplaagid.Value, false);
-                                            baanspeciaal.ClubCloud_Baantoplaag = toplaag;
-                                            baanspeciaal.BaantoplaagId = entity.sgt_toplaagid.Value;
-                                        }
-
-                                        baanspeciaal.Actief = entity.statuscode.name;
-                                    }
-                                    */
-                                    beheerModel.SaveChanges();
                                 }
+                                beheerModel.SaveChanges();
+
+                                foreach (sgt_alg_speciale_baan specialebaan in entities)
+                                {
+                                    ClubCloud_BaanSpeciaal entity = beheerModel.ClubCloud_BanenSpeciaal.Find(specialebaan.sgt_alg_speciale_baanid.Value);
+
+                                    if (specialebaan.sgt_accomodatieid != null)
+                                    {
+                                        ClubCloud_Accommodatie accommodatie = GetAccommodatieById(specialebaan.sgt_accomodatieid.Value, false, settings);
+                                        if (accommodatie != null)
+                                            entity.ClubCloud_Accommodatie = accommodatie;
+                                    }
+
+                                    if (specialebaan.sgt_toplaagid != null)
+                                    {
+                                        ClubCloud_Baantoplaag toplaag = GetBaantoplaagById(specialebaan.sgt_toplaagid.Value, false, settings);
+                                        if (toplaag != null)
+                                            entity.ClubCloud_Baantoplaag = toplaag;
+                                    }
+                                }
+
+                                beheerModel.SaveChanges();
                             }
                         }
                     }
@@ -4606,9 +4519,9 @@
 
             if (specialebaan.sgt_accomodatieid != null)
             {
-                ClubCloud_Accommodatie accommodatie = GetAccommodatieById(specialebaan.sgt_accomodatieid.Value, false, settings);
-                if(accommodatie != null)
-                    entity.ClubCloud_Accommodatie = accommodatie;
+                //ClubCloud_Accommodatie accommodatie = GetAccommodatieById(specialebaan.sgt_accomodatieid.Value, false, settings);
+                //if(accommodatie != null)
+                //    entity.ClubCloud_Accommodatie = accommodatie;
                 entity.AccommodatieId = specialebaan.sgt_accomodatieid.Value;
             }
 
@@ -4619,13 +4532,13 @@
 
             if (specialebaan.sgt_toplaagid != null)
             {
-                ClubCloud_Baantoplaag toplaag = GetBaantoplaagById(specialebaan.sgt_toplaagid.Value, false, settings);
-                if(toplaag != null)
-                    entity.ClubCloud_Baantoplaag = toplaag;
+                //ClubCloud_Baantoplaag toplaag = GetBaantoplaagById(specialebaan.sgt_toplaagid.Value, false, settings);
+                //if(toplaag != null)
+                //    entity.ClubCloud_Baantoplaag = toplaag;
                 entity.BaantoplaagId = specialebaan.sgt_toplaagid.Value;
             }
 
-            entity.Actief = specialebaan.statuscode.name;
+            entity.Actief = (ActiefSoort)specialebaan.statuscode.Value;
         }
 
         /// <summary>
@@ -4676,86 +4589,15 @@
 
                             if (toplaag != null && toplaag.sgt_alg_toplaagid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Baantoplagen.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Baantoplagen.Create();
+
                                 entity.Id = toplaag.sgt_alg_toplaagid.Value;
+
                                 BaantoplaagToEntity(toplaag, entity, settings);
+
                                 beheerModel.ClubCloud_Baantoplagen.AddOrUpdate(entity);
 
-                            /*
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
-                            {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_toplaagid", Operator = ConditionOperator.Equal, Values = new object[1] { toplaagId } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_toplaag", out moreRecords, ref pageNum, expression);
-
-                                foreach (sgt_alg_toplaag entity in entities)
-                                {
-                                    baantoplaag = beheerModel.ClubCloud_Baantoplagen.Find(entity.sgt_alg_toplaagid.Value);
-
-                                    if (baantoplaag == null)
-                                    {
-                                        baantoplaag = beheerModel.ClubCloud_Baantoplagen.Create();
-                                        baantoplaag.Id = entity.sgt_alg_toplaagid.Value;
-                                        baantoplaag.Naam = entity.sgt_alg_toplaag1;
-
-                                        if (entity.sgt_beschrijving != null)
-                                        {
-                                            baantoplaag.Beschrijving = entity.sgt_beschrijving;
-                                        }
-
-                                        if (entity.sgt_omschrijving != null)
-                                        {
-                                            baantoplaag.Omschrijving = entity.sgt_omschrijving;
-                                        }
-
-                                        if (entity.sgt_verkorte_code != null)
-                                        {
-                                            baantoplaag.Code = entity.sgt_verkorte_code;
-                                        }
-
-                                        if (entity.sgt_meervoudsnaam != null)
-                                        {
-                                            baantoplaag.Meervoud = entity.sgt_meervoudsnaam;
-                                        }
-
-                                        baantoplaag.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_Baantoplagen.Add(baantoplaag);
-
-                                    }
-                                    else
-                                    {
-                                        baantoplaag.Naam = entity.sgt_alg_toplaag1;
-
-                                        if (entity.sgt_beschrijving != null)
-                                        {
-                                            baantoplaag.Beschrijving = entity.sgt_beschrijving;
-                                        }
-
-                                        if (entity.sgt_omschrijving != null)
-                                        {
-                                            baantoplaag.Omschrijving = entity.sgt_omschrijving;
-                                        }
-
-                                        if (entity.sgt_verkorte_code != null)
-                                        {
-                                            baantoplaag.Code = entity.sgt_verkorte_code;
-                                        }
-
-                                        if (entity.sgt_meervoudsnaam != null)
-                                        {
-                                            baantoplaag.Meervoud = entity.sgt_meervoudsnaam;
-                                        }
-
-                                        baantoplaag.Actief = entity.statuscode.name;
-                                    }
-                                
-                                    beheerModel.SaveChanges();
-                                }
-                                */
                                 beheerModel.SaveChanges();
                             }
                             
@@ -4801,71 +4643,14 @@
 
                                 foreach (sgt_alg_toplaag toplaag in entities)
                                 {
-                                    ClubCloud_Baantoplaag entity = beheerModel.ClubCloud_Baantoplagen.Create();
+                                    ClubCloud_Baantoplaag entity = beheerModel.ClubCloud_Baantoplagen.Find(toplaag.sgt_alg_toplaagid.Value);
+
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Baantoplagen.Create();
+
                                     entity.Id = toplaag.sgt_alg_toplaagid.Value;
                                     BaantoplaagToEntity(toplaag, entity, settings);
                                     beheerModel.ClubCloud_Baantoplagen.AddOrUpdate(entity);
-
-                                    /*
-                                    ClubCloud_Baantoplaag baantoplaag = beheerModel.ClubCloud_Baantoplagen.Find(entity.sgt_alg_toplaagid.Value);
-
-                                    if (baantoplaag == null)
-                                    {
-                                        baantoplaag = beheerModel.ClubCloud_Baantoplagen.Create();
-                                        baantoplaag.Id = entity.sgt_alg_toplaagid.Value;
-                                        baantoplaag.Naam = entity.sgt_alg_toplaag1;
-
-                                        if (entity.sgt_beschrijving != null)
-                                        {
-                                            baantoplaag.Beschrijving = entity.sgt_beschrijving;
-                                        }
-
-                                        if (entity.sgt_omschrijving != null)
-                                        {
-                                            baantoplaag.Omschrijving = entity.sgt_omschrijving;
-                                        }
-
-                                        if (entity.sgt_verkorte_code != null)
-                                        {
-                                            baantoplaag.Code = entity.sgt_verkorte_code;
-                                        }
-
-                                        if (entity.sgt_meervoudsnaam != null)
-                                        {
-                                            baantoplaag.Meervoud = entity.sgt_meervoudsnaam;
-                                        }
-
-                                        baantoplaag.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_Baantoplagen.Add(baantoplaag);
-                                    }
-                                    else
-                                    {
-                                        baantoplaag.Naam = entity.sgt_alg_toplaag1;
-
-                                        if (entity.sgt_beschrijving != null)
-                                        {
-                                            baantoplaag.Beschrijving = entity.sgt_beschrijving;
-                                        }
-
-                                        if (entity.sgt_omschrijving != null)
-                                        {
-                                            baantoplaag.Omschrijving = entity.sgt_omschrijving;
-                                        }
-
-                                        if (entity.sgt_verkorte_code != null)
-                                        {
-                                            baantoplaag.Code = entity.sgt_verkorte_code;
-                                        }
-
-                                        if (entity.sgt_meervoudsnaam != null)
-                                        {
-                                            baantoplaag.Meervoud = entity.sgt_meervoudsnaam;
-                                        }
-                                        baantoplaag.Actief = entity.statuscode.name;
-                                    }
-                                    beheerModel.SaveChanges();
-                                    */
                                 }
                                 beheerModel.SaveChanges();
                             }
@@ -4968,7 +4753,7 @@
                 entity.Meervoud = toplaag.sgt_meervoudsnaam;
             }
 
-            entity.Actief = toplaag.statuscode.name;
+            entity.Actief = (ActiefSoort)toplaag.statuscode.Value;
         }
 
         /// <summary>
@@ -5019,84 +4804,14 @@
 
                             if (baantype != null && baantype.sgt_alg_baantypeid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Baantypes.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Baantypes.Create();
+
                                 entity.Id = baantype.sgt_alg_baantypeid.Value;
+
                                 BaantypeToEntity(baantype, entity, settings);
+
                                 beheerModel.ClubCloud_Baantypes.AddOrUpdate(entity);
-
-                            /*
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
-                            {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_baantypeid", Operator = ConditionOperator.Equal, Values = new object[1] { baantypeId } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_baantype", out moreRecords, ref pageNum, expression);
-
-                                foreach (sgt_alg_baantype entity in entities)
-                                {
-                                    baantype = beheerModel.ClubCloud_Baantypes.Find(entity.sgt_alg_baantypeid.Value);
-
-                                    if (baantype == null)
-                                    {
-                                        baantype = beheerModel.ClubCloud_Baantypes.Create();
-                                        baantype.Id = entity.sgt_alg_baantypeid.Value;
-                                        baantype.Naam = entity.sgt_alg_baantype1;
-
-                                        if (entity.sgt_beschrijving != null)
-                                        {
-                                            baantype.Beschrijving = entity.sgt_beschrijving;
-                                        }
-
-                                        if (entity.sgt_omschrijving != null)
-                                        {
-                                            baantype.Omschrijving = entity.sgt_omschrijving;
-                                        }
-
-                                        if (entity.sgt_verkorte_code != null)
-                                        {
-                                            baantype.Code = entity.sgt_verkorte_code;
-                                        }
-
-                                        if (entity.sgt_meervoudsnaam != null)
-                                        {
-                                            baantype.Meervoud = entity.sgt_meervoudsnaam;
-                                        }
-
-                                        baantype.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_Baantypes.Add(baantype);
-                                    }
-                                    else
-                                    {
-                                        baantype.Naam = entity.sgt_alg_baantype1;
-
-                                        if (entity.sgt_beschrijving != null)
-                                        {
-                                            baantype.Beschrijving = entity.sgt_beschrijving;
-                                        }
-
-                                        if (entity.sgt_omschrijving != null)
-                                        {
-                                            baantype.Omschrijving = entity.sgt_omschrijving;
-                                        }
-
-                                        if (entity.sgt_verkorte_code != null)
-                                        {
-                                            baantype.Code = entity.sgt_verkorte_code;
-                                        }
-
-                                        if (entity.sgt_meervoudsnaam != null)
-                                        {
-                                            baantype.Meervoud = entity.sgt_meervoudsnaam;
-                                        }
-
-                                        baantype.Actief = entity.statuscode.name;
-                                    }
-                                    beheerModel.SaveChanges();
-                                }
-                                */
                             }
                             beheerModel.SaveChanges();
                         }
@@ -5140,72 +4855,16 @@
 
                                 foreach (sgt_alg_baantype baantype in entities)
                                 {
-                                    ClubCloud_Baantype entity = beheerModel.ClubCloud_Baantypes.Create();
+                                    ClubCloud_Baantype entity = beheerModel.ClubCloud_Baantypes.Find(baantype.sgt_alg_baantypeid.Value);
+
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Baantypes.Create();
+
                                     entity.Id = baantype.sgt_alg_baantypeid.Value;
+
                                     BaantypeToEntity(baantype, entity, settings);
+
                                     beheerModel.ClubCloud_Baantypes.AddOrUpdate(entity);
-
-                                    /*
-                                    ClubCloud_Baantype baantype = beheerModel.ClubCloud_Baantypes.Find(entity.sgt_alg_baantypeid.Value);
-
-                                    if (baantype == null)
-                                    {
-                                        baantype = beheerModel.ClubCloud_Baantypes.Create();
-                                        baantype.Id = entity.sgt_alg_baantypeid.Value;
-                                        baantype.Naam = entity.sgt_alg_baantype1;
-
-                                        if (entity.sgt_beschrijving != null)
-                                        {
-                                            baantype.Beschrijving = entity.sgt_beschrijving;
-                                        }
-
-                                        if (entity.sgt_omschrijving != null)
-                                        {
-                                            baantype.Omschrijving = entity.sgt_omschrijving;
-                                        }
-
-                                        if (entity.sgt_verkorte_code != null)
-                                        {
-                                            baantype.Code = entity.sgt_verkorte_code;
-                                        }
-
-                                        if (entity.sgt_meervoudsnaam != null)
-                                        {
-                                            baantype.Meervoud = entity.sgt_meervoudsnaam;
-                                        }
-
-                                        baantype.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_Baantypes.Add(baantype);
-                                    }
-                                    else
-                                    {
-                                        baantype.Naam = entity.sgt_alg_baantype1;
-
-                                        if (entity.sgt_beschrijving != null)
-                                        {
-                                            baantype.Beschrijving = entity.sgt_beschrijving;
-                                        }
-
-                                        if (entity.sgt_omschrijving != null)
-                                        {
-                                            baantype.Omschrijving = entity.sgt_omschrijving;
-                                        }
-
-                                        if (entity.sgt_verkorte_code != null)
-                                        {
-                                            baantype.Code = entity.sgt_verkorte_code;
-                                        }
-
-                                        if (entity.sgt_meervoudsnaam != null)
-                                        {
-                                            baantype.Meervoud = entity.sgt_meervoudsnaam;
-                                        }
-
-                                        baantype.Actief = entity.statuscode.name;
-                                    }
-                                    beheerModel.SaveChanges();
-                                    */
                                 }
                                 beheerModel.SaveChanges();
                             }
@@ -5350,7 +5009,7 @@
                 entity.Meervoud = baantype.sgt_meervoudsnaam;
             }
 
-            entity.Actief = baantype.statuscode.name;
+            entity.Actief = (ActiefSoort)baantype.statuscode.Value;
         }
 
         /// <summary>
@@ -5403,80 +5062,26 @@
 
                             if (bestuursorgaan != null && bestuursorgaan.sgt_alg_bestuursorgaanid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Bestuursorganen.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Bestuursorganen.Create();
+
                                 entity.Id = bestuursorgaan.sgt_alg_bestuursorgaanid.Value;
+
                                 BestuursorgaanToEntity(bestuursorgaan, entity, settings);
+
                                 beheerModel.ClubCloud_Bestuursorganen.AddOrUpdate(entity);
 
-                            /*
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
-                            {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_bestuursorgaanid", Operator = ConditionOperator.Equal, Values = new object[1] { Id } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_bestuursorgaan", out moreRecords, ref pageNum, expression);
-
-                                foreach (sgt_alg_bestuursorgaan entity in entities)
-                                {
-                                    bestuursorgaan = beheerModel.ClubCloud_Bestuursorganen.Find(entity.sgt_alg_bestuursorgaanid.Value);
-
-                                    if (bestuursorgaan == null)
-                                    {
-                                        bestuursorgaan = beheerModel.ClubCloud_Bestuursorganen.Create();
-                                        bestuursorgaan.Id = entity.sgt_alg_bestuursorgaanid.Value;
-                                        bestuursorgaan.Naam = entity.sgt_alg_bestuursorgaan1;
-                                        bestuursorgaan.Beschrijving = string.IsNullOrWhiteSpace(entity.sgt_beschrijving) ? "" : entity.sgt_beschrijving;
-
-                                        if (entity.sgt_basisorganisatieid != null)
-                                        {
-                                            ClubCloud_Vereniging vereniging = GetVerenigingById(bondsnummer, entity.sgt_basisorganisatieid.Value, false, settings);
-                                            if (vereniging != null)
-                                                bestuursorgaan.ClubCloud_Vereniging = vereniging;
-
-                                            bestuursorgaan.VerenigingId = entity.sgt_basisorganisatieid.Value;
-                                        }
-
-                                        if (entity.sgt_typebestuursorgaanid != null)
-                                        {
-                                            bestuursorgaan.Groep = string.IsNullOrWhiteSpace(entity.sgt_typebestuursorgaanid.name) ? "" : entity.sgt_typebestuursorgaanid.name;
-                                        }
-                                        else
-                                        {
-                                            bestuursorgaan.Groep = "";
-                                        }
-                                        bestuursorgaan.Actief = entity.statuscode.name;
-                                        beheerModel.ClubCloud_Bestuursorganen.Add(bestuursorgaan);
-                                    }
-                                    else
-                                    {
-                                        bestuursorgaan.Naam = entity.sgt_alg_bestuursorgaan1;
-                                        bestuursorgaan.Beschrijving = string.IsNullOrWhiteSpace(entity.sgt_beschrijving) ? "" : entity.sgt_beschrijving;
-
-                                        if (entity.sgt_basisorganisatieid != null)
-                                        {
-                                            ClubCloud_Vereniging vereniging = GetVerenigingById(bondsnummer, entity.sgt_basisorganisatieid.Value, false, settings);
-                                            if (vereniging != null)
-                                                bestuursorgaan.ClubCloud_Vereniging = vereniging;
-
-                                            bestuursorgaan.VerenigingId = entity.sgt_basisorganisatieid.Value;
-                                        }
-
-                                        if (entity.sgt_typebestuursorgaanid != null)
-                                        {
-                                            bestuursorgaan.Groep = string.IsNullOrWhiteSpace(entity.sgt_typebestuursorgaanid.name) ? "" : entity.sgt_typebestuursorgaanid.name;
-                                        }
-                                        else
-                                        {
-                                            bestuursorgaan.Groep = "";
-                                        }
-                                        bestuursorgaan.Actief = entity.statuscode.name;
-                                    }
-                                    beheerModel.SaveChanges();
-                                }
-                                */
                                 beheerModel.SaveChanges();
+
+                                if (bestuursorgaan.sgt_basisorganisatieid != null)
+                                {
+                                    ClubCloud_Vereniging vereniging = GetVerenigingById(bestuursorgaan.sgt_basisorganisatieid.Value, false, settings);
+                                    if (vereniging != null)
+                                        entity.ClubCloud_Vereniging = vereniging;
+                                }
+
+                                beheerModel.SaveChanges();
+
                             }
                         }
                     }
@@ -5522,71 +5127,27 @@
 
                                 foreach (sgt_alg_bestuursorgaan bestuursorgaan in entities)
                                 {
-                                    ClubCloud_Bestuursorgaan entity = beheerModel.ClubCloud_Bestuursorganen.Create();
+                                    ClubCloud_Bestuursorgaan entity = beheerModel.ClubCloud_Bestuursorganen.Find(bestuursorgaan.sgt_alg_bestuursorgaanid.Value);
+
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Bestuursorganen.Create();
+
                                     entity.Id = bestuursorgaan.sgt_alg_bestuursorgaanid.Value;
                                     BestuursorgaanToEntity(bestuursorgaan, entity, settings);
                                     beheerModel.ClubCloud_Bestuursorganen.AddOrUpdate(entity);
+                                }
+                                beheerModel.SaveChanges();
 
-                                    /*
-                                    ClubCloud_Bestuursorgaan bestuursorgaan = beheerModel.ClubCloud_Bestuursorganen.Find(entity.sgt_alg_bestuursorgaanid.Value);
+                                foreach (sgt_alg_bestuursorgaan bestuursorgaan in entities)
+                                {
+                                    ClubCloud_Bestuursorgaan entity = beheerModel.ClubCloud_Bestuursorganen.Find(bestuursorgaan.sgt_alg_bestuursorgaanid.Value);
 
-                                    if (bestuursorgaan == null)
+                                    if (bestuursorgaan.sgt_basisorganisatieid != null)
                                     {
-                                        bestuursorgaan = beheerModel.ClubCloud_Bestuursorganen.Create();
-                                        bestuursorgaan.Id = entity.sgt_alg_bestuursorgaanid.Value;
-                                        bestuursorgaan.Naam = entity.sgt_alg_bestuursorgaan1;
-                                        bestuursorgaan.Beschrijving = string.IsNullOrWhiteSpace(entity.sgt_beschrijving) ? "" : entity.sgt_beschrijving;
-
-                                        if (entity.sgt_basisorganisatieid != null)
-                                        {
-                                            ClubCloud_Vereniging vereniging = GetVerenigingById(bondsnummer, entity.sgt_basisorganisatieid.Value, false, settings);
-                                            if (vereniging != null)
-                                                bestuursorgaan.ClubCloud_Vereniging = vereniging;
-
-                                            bestuursorgaan.VerenigingId = entity.sgt_basisorganisatieid.Value;
-                                        }
-
-                                        if (entity.sgt_typebestuursorgaanid != null)
-                                        {
-                                            bestuursorgaan.Groep = string.IsNullOrWhiteSpace(entity.sgt_typebestuursorgaanid.name) ? "" : entity.sgt_typebestuursorgaanid.name;
-                                        }
-                                        else
-                                        {
-                                            bestuursorgaan.Groep = "";
-                                        }
-
-                                        //bestuursorgaan.TypeId = entity.sgt_typebestuursorgaanid.Value;
-                                        bestuursorgaan.Actief = entity.statuscode.name;
-                                        beheerModel.ClubCloud_Bestuursorganen.Add(bestuursorgaan);
-                                        //bestuursorganen.Add(bestuursorgaan);
+                                        ClubCloud_Vereniging vereniging = GetVerenigingById(bestuursorgaan.sgt_basisorganisatieid.Value, false, settings);
+                                        if (vereniging != null)
+                                            entity.ClubCloud_Vereniging = vereniging;
                                     }
-                                    else
-                                    {
-                                        bestuursorgaan.Naam = entity.sgt_alg_bestuursorgaan1;
-                                        bestuursorgaan.Beschrijving = string.IsNullOrWhiteSpace(entity.sgt_beschrijving) ? "" : entity.sgt_beschrijving;
-
-                                        if (entity.sgt_basisorganisatieid != null)
-                                        {
-                                            ClubCloud_Vereniging vereniging = GetVerenigingById(bondsnummer, entity.sgt_basisorganisatieid.Value, false, settings);
-                                            if (vereniging != null)
-                                                bestuursorgaan.ClubCloud_Vereniging = vereniging;
-
-                                            bestuursorgaan.VerenigingId = entity.sgt_basisorganisatieid.Value;
-                                        }
-
-                                        if (entity.sgt_typebestuursorgaanid != null)
-                                        {
-                                            bestuursorgaan.Groep = string.IsNullOrWhiteSpace(entity.sgt_typebestuursorgaanid.name) ? "" : entity.sgt_typebestuursorgaanid.name;
-                                        }
-                                        else
-                                        {
-                                            bestuursorgaan.Groep = "";
-                                        }
-                                        bestuursorgaan.Actief = entity.statuscode.name;
-                                    }
-
-                                    beheerModel.SaveChanges();
-                                    */
                                 }
                                 beheerModel.SaveChanges();
                             }
@@ -5725,9 +5286,9 @@
 
             if (bestuursorgaan.sgt_basisorganisatieid != null)
             {
-                ClubCloud_Vereniging vereniging = GetVerenigingById(bestuursorgaan.sgt_basisorganisatieid.Value, false, settings);
-                if (vereniging != null)
-                    entity.ClubCloud_Vereniging = vereniging;
+                //ClubCloud_Vereniging vereniging = GetVerenigingById(bestuursorgaan.sgt_basisorganisatieid.Value, false, settings);
+                //if (vereniging != null)
+                //    entity.ClubCloud_Vereniging = vereniging;
 
                 entity.VerenigingId = bestuursorgaan.sgt_basisorganisatieid.Value;
             }
@@ -5741,7 +5302,7 @@
                 entity.Groep = "";
             }
 
-            entity.Actief = bestuursorgaan.statuscode.name;
+            entity.Actief = (ActiefSoort)bestuursorgaan.statuscode.Value;
         }
 
         /// <summary>
@@ -5794,7 +5355,9 @@
 
                             if (bouwaard != null && bouwaard.sgt_alg_bouwaardid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Bouwaarden.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Bouwaarden.Create();
+
                                 entity.Id = bouwaard.sgt_alg_bouwaardid.Value;
                                 BouwaardToEntity(bouwaard, entity, settings);
                                 beheerModel.ClubCloud_Bouwaarden.AddOrUpdate(entity);
@@ -5845,7 +5408,11 @@
 
                                 foreach (sgt_alg_bouwaard bouwaard in entities)
                                 {
-                                    ClubCloud_Bouwaard entity = beheerModel.ClubCloud_Bouwaarden.Create();
+                                    ClubCloud_Bouwaard entity = beheerModel.ClubCloud_Bouwaarden.Find(bouwaard.sgt_alg_bouwaardid.Value);
+
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Bouwaarden.Create();
+
                                     entity.Id = bouwaard.sgt_alg_bouwaardid.Value;
                                     BouwaardToEntity(bouwaard, entity, settings);
                                     beheerModel.ClubCloud_Bouwaarden.AddOrUpdate(entity);
@@ -5901,7 +5468,7 @@
                 entity.Meervoud = bouwaard.sgt_meervoudsnaam;
             }
 
-            entity.Actief = bouwaard.statuscode.name;
+            entity.Actief = (ActiefSoort)bouwaard.statuscode.Value;
         }
 
         private void EntityToBouwaard(sgt_alg_bouwaard bouwaard, ClubCloud_Bouwaard entity, ClubCloud_Setting settings)
@@ -5944,10 +5511,23 @@
 
                             if (district != null && district.sgt_alg_districtid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Districten.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Districten.Create();
+
                                 entity.Id = district.sgt_alg_districtid.Value;
+
                                 DistrictToEntity(district, entity, settings);
+
                                 beheerModel.ClubCloud_Districten.AddOrUpdate(entity);
+
+                                beheerModel.SaveChanges();
+
+                                if (district.sgt_regioid != null)
+                                {
+                                    ClubCloud_Regio regio = GetRegioById(district.sgt_regioid.Value, false, settings);
+                                    if (regio != null)
+                                        entity.ClubCloud_Regio = regio;
+                                }
 
                                 beheerModel.SaveChanges();
                             }
@@ -5994,56 +5574,31 @@
 
                                 foreach (sgt_alg_district district in entities)
                                 {
-                                    ClubCloud_District entity = beheerModel.ClubCloud_Districten.Create();
+                                    ClubCloud_District entity = beheerModel.ClubCloud_Districten.Find(district.sgt_alg_districtid.Value);
+
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Districten.Create();
+
                                     entity.Id = district.sgt_alg_districtid.Value;
                                     DistrictToEntity(district, entity, settings);
                                     beheerModel.ClubCloud_Districten.AddOrUpdate(entity);
-
-                                    /*
-                                    ClubCloud_District district = beheerModel.ClubCloud_Districten.Find(entity.sgt_alg_districtid.Value);
-
-                                    if (district == null)
-                                    {
-                                        district = beheerModel.ClubCloud_Districten.Create();
-                                        district.Id = entity.sgt_alg_districtid.Value;
-                                        district.Beschrijving = entity.sgt_beschrijving;
-                                        district.Naam = entity.sgt_alg_district1;
-                                        district.Omschrijving = entity.sgt_omschrijving;
-                                        district.Beschrijving = entity.sgt_beschrijving;
-
-                                        if (entity.sgt_regioid != null)
-                                        {
-                                            ClubCloud_Regio regio = GetRegioById(bondsnummer, entity.sgt_regioid.Value, false);
-                                            district.ClubCloud_Regio = regio;
-                                            district.RegioId = entity.sgt_regioid.Value;
-                                        }
-
-                                        district.Actief = entity.statuscode.name;
-                                        beheerModel.ClubCloud_Districten.Add(district);
-                                        //districten.Add(district);
-                                    }
-                                    else
-                                    {
-                                        district.Beschrijving = entity.sgt_beschrijving;
-                                        district.Naam = entity.sgt_alg_district1;
-                                        district.Omschrijving = entity.sgt_omschrijving;
-                                        district.Beschrijving = entity.sgt_beschrijving;
-
-                                        if (entity.sgt_regioid != null)
-                                        {
-                                            ClubCloud_Regio regio = GetRegioById(bondsnummer, entity.sgt_regioid.Value, false);
-                                            district.ClubCloud_Regio = regio;
-                                            district.RegioId = entity.sgt_regioid.Value;
-                                        }
-
-                                        district.Actief = entity.statuscode.name;
-                                        //districten.Add(district);
-                                    }
-
-                                    beheerModel.SaveChanges();
-                                    */
                                 }
                                 beheerModel.SaveChanges();
+
+                                foreach (sgt_alg_district district in entities)
+                                {
+                                    ClubCloud_District entity = beheerModel.ClubCloud_Districten.Find(district.sgt_alg_districtid.Value);
+
+                                    if (district.sgt_regioid != null)
+                                    {
+                                        ClubCloud_Regio regio = GetRegioById(district.sgt_regioid.Value, false, settings);
+                                        if (regio != null)
+                                            entity.ClubCloud_Regio = regio;
+                                    }
+                                }
+
+                                beheerModel.SaveChanges();
+
                             }
                         }
                     }
@@ -6203,13 +5758,13 @@
 
             if (district.sgt_regioid != null)
             {
-                ClubCloud_Regio regio = GetRegioById(district.sgt_regioid.Value, false, settings);
-                if(regio != null)
-                    entity.ClubCloud_Regio = regio;
+                //ClubCloud_Regio regio = GetRegioById(district.sgt_regioid.Value, false, settings);
+                //if(regio != null)
+                //    entity.ClubCloud_Regio = regio;
                 entity.RegioId = district.sgt_regioid.Value;
             }
 
-            entity.Actief = district.statuscode.name;
+            entity.Actief = (ActiefSoort)district.statuscode.Value;
         }
 
         /// <summary>
@@ -6432,10 +5987,16 @@
 
                             if (functie != null && functie.sgt_alg_functieid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Functies.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Functies.Create();
+
                                 entity.Id = functie.sgt_alg_functieid.Value;
+
                                 FunctieToEntity(functie, entity, settings);
+
                                 beheerModel.ClubCloud_Functies.AddOrUpdate(entity);
+
+                                bool result = CreateOrUpdateRoleFunctie(entity, settings).Result;//.RunSynchronously();
 
                                 beheerModel.SaveChanges();
                             }
@@ -6445,84 +6006,6 @@
                 entity = beheerModel.ClubCloud_Functies.Find(Id);
             }
             return entity;
-
-            /*
-            ClubCloud_Functie functie = new ClubCloud_Functie();
-
-            functie = beheerModel.ClubCloud_Functies.Find(functieId);
-
-            if (functie == null || refresh)
-            {
-                if (settings == null)
-                {
-                    settings = GetSettings(bondsnummer);
-                }
-
-                if (settings != null && settings.Access && !string.IsNullOrWhiteSpace(settings.Password))
-                {
-                    CookieContainer cc = RequestContainer(settings.Id.ToString(), settings.Password);
-
-                    if (cc != null)
-                    {
-                        using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
-                        {
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
-                            {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_functieid", Operator = ConditionOperator.Equal, Values = new object[1] { functieId } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_functie", out moreRecords, ref pageNum);
-
-                                foreach (sgt_alg_functie entity in entities)
-                                {
-                                    functie = beheerModel.ClubCloud_Functies.Find(entity.sgt_alg_functieid.Value);
-
-                                    if (functie == null)
-                                    {
-                                        functie = beheerModel.ClubCloud_Functies.Create();
-                                        functie.Id = entity.sgt_alg_functieid.Value;
-                                        functie.Beschrijving = entity.sgt_beschrijving;
-                                        functie.Code = entity.sgt_verkorte_code;
-                                        functie.Meervoud = entity.sgt_meervoudsnaam;
-                                        functie.Naam = entity.sgt_alg_functie1;
-                                        functie.Omschrijving = entity.sgt_omschrijving;
-                                        if (entity.sgt_toegang_crm_toegestaan != null)
-                                        {
-                                            functie.Toegang = entity.sgt_toegang_crm_toegestaan.Value;
-                                        }
-
-                                        functie.Actief = entity.statuscode.name;
-                                        beheerModel.ClubCloud_Functies.Add(functie);
-                                    }
-                                    else
-                                    {
-                                        functie.Beschrijving = entity.sgt_beschrijving;
-                                        functie.Code = entity.sgt_verkorte_code;
-                                        functie.Meervoud = entity.sgt_meervoudsnaam;
-                                        functie.Naam = entity.sgt_alg_functie1;
-                                        functie.Omschrijving = entity.sgt_omschrijving;
-                                        if (entity.sgt_toegang_crm_toegestaan != null)
-                                        {
-                                            functie.Toegang = entity.sgt_toegang_crm_toegestaan.Value;
-                                        }
-
-                                        functie.Actief = entity.statuscode.name;
-                                    }
-
-                                    beheerModel.SaveChanges();
-
-                                }
-                            }
-                        }
-                    }
-                }
-                functie = beheerModel.ClubCloud_Functies.Find(functieId);
-            }
-            
-            return functie;
-            */
         }
 
         /// <summary>
@@ -6555,50 +6038,18 @@
 
                                 foreach (sgt_alg_functie functie in entities)
                                 {
-                                    ClubCloud_Functie entity = beheerModel.ClubCloud_Functies.Create();
+                                    ClubCloud_Functie entity = beheerModel.ClubCloud_Functies.Find(functie.sgt_alg_functieid.Value);
+
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Functies.Create();
+
                                     entity.Id = functie.sgt_alg_functieid.Value;
+
                                     FunctieToEntity(functie, entity, settings);
+
                                     beheerModel.ClubCloud_Functies.AddOrUpdate(entity);
 
-                                    CreateOrUpdateRoleFunctie(entity, settings);
-                                    /*
-                                    ClubCloud_Functie functie = beheerModel.ClubCloud_Functies.Find(entity.sgt_alg_functieid.Value);
-
-                                    if (functie == null)
-                                    {
-                                        functie = beheerModel.ClubCloud_Functies.Create();
-                                        functie.Id = entity.sgt_alg_functieid.Value;
-                                        functie.Beschrijving = entity.sgt_beschrijving;
-                                        functie.Code = entity.sgt_verkorte_code;
-                                        functie.Meervoud = entity.sgt_meervoudsnaam;
-                                        functie.Naam = entity.sgt_alg_functie1;
-                                        functie.Omschrijving = entity.sgt_omschrijving;
-                                        if (entity.sgt_toegang_crm_toegestaan != null)
-                                        {
-                                            functie.Toegang = entity.sgt_toegang_crm_toegestaan.Value;
-                                        }
-                                        functie.Actief = entity.statuscode.name;
-                                        beheerModel.ClubCloud_Functies.Add(functie);
-                                        //functies.Add(functie);
-                                    }
-                                    else
-                                    {
-                                        functie.Beschrijving = entity.sgt_beschrijving;
-                                        functie.Code = entity.sgt_verkorte_code;
-                                        functie.Meervoud = entity.sgt_meervoudsnaam;
-                                        functie.Naam = entity.sgt_alg_functie1;
-                                        functie.Omschrijving = entity.sgt_omschrijving;
-                                        if (entity.sgt_toegang_crm_toegestaan != null)
-                                        {
-                                            functie.Toegang = entity.sgt_toegang_crm_toegestaan.Value;
-                                        }
-
-                                        functie.Actief = entity.statuscode.name;
-                                        //functies.Add(functie);
-                                    }
-
-                                    beheerModel.SaveChanges();
-                                    */
+                                    bool result = CreateOrUpdateRoleFunctie(entity, settings).Result;//.RunSynchronously();
                                 }
                                 beheerModel.SaveChanges();
                             }
@@ -6688,7 +6139,7 @@
                 entity.Toegang = functie.sgt_toegang_crm_toegestaan.Value;
             }
 
-            entity.Actief = functie.statuscode.name;
+            entity.Actief = (ActiefSoort)functie.statuscode.Value;
         }
 
         private void EntityToFunctie(sgt_alg_functie functie, ClubCloud_Functie entity, ClubCloud_Setting settings)
@@ -6733,12 +6184,49 @@
 
                             if (functionaris != null && functionaris.sgt_alg_functionarisid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Functionarissen.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Functionarissen.Create();
+
                                 entity.Id = functionaris.sgt_alg_functionarisid.Value;
+
                                 FunctionarisToEntity(functionaris, entity, settings);
+
                                 beheerModel.ClubCloud_Functionarissen.AddOrUpdate(entity);
 
                                 beheerModel.SaveChanges();
+
+                                if (functionaris.sgt_functieid != null)
+                                {
+                                    ClubCloud_Functie functie = GetFunctieById(functionaris.sgt_functieid.Value, false, settings);
+                                    entity.ClubCloud_Functie = functie;
+                                    //entity.FunctieId = functionaris.sgt_functieid.Value;
+                                }
+
+                                if (functionaris.sgt_functionarisid != null)
+                                {
+                                    ClubCloud_Gebruiker gebruiker = GetGebruikerById(functionaris.sgt_functionarisid.Value, false, settings);
+                                    entity.ClubCloud_Gebruiker = gebruiker;
+                                    //entity.GebruikerId = functionaris.sgt_functionarisid.Value;
+                                }
+
+                                ClubCloud_Vereniging vereniging = null;
+                                if (functionaris.sgt_basisorganisatieid != null)
+                                {
+                                    vereniging = GetVerenigingById(functionaris.sgt_basisorganisatieid.Value, false, settings);
+                                    entity.ClubCloud_Vereniging = vereniging;
+                                    //entity.VerenigingId = functionaris.sgt_basisorganisatieid.Value;
+                                }
+
+                                if (functionaris.sgt_bestuursorgaanid != null)
+                                {
+                                    ClubCloud_Bestuursorgaan orgaan = GetBestuursorgaanById(functionaris.sgt_bestuursorgaanid.Value, false, settings);
+                                    entity.ClubCloud_Bestuursorgaan = orgaan;
+                                    //entity.BestuursorgaanId = functionaris.sgt_bestuursorgaanid.Value;
+                                }
+
+                                beheerModel.SaveChanges();
+
+                                bool succes = CreateOrUpdateRoleFunctionaris(functionaris, settings).Result;
                             }
                         }
                     }
@@ -6782,12 +6270,60 @@
 
                                 foreach (sgt_alg_functionaris functionaris in entities)
                                 {
-                                    ClubCloud_Functionaris entity = beheerModel.ClubCloud_Functionarissen.Create();
+                                    ClubCloud_Functionaris entity = beheerModel.ClubCloud_Functionarissen.Find(functionaris.sgt_alg_functionarisid.Value);
+
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Functionarissen.Create();
+
                                     entity.Id = functionaris.sgt_alg_functionarisid.Value;
+
                                     FunctionarisToEntity(functionaris, entity, settings);
+
                                     beheerModel.ClubCloud_Functionarissen.AddOrUpdate(entity);
                                 }
                                 beheerModel.SaveChanges();
+
+                                foreach (sgt_alg_functionaris functionaris in entities)
+                                {
+                                    ClubCloud_Functionaris entity = beheerModel.ClubCloud_Functionarissen.Find(functionaris.sgt_alg_functionarisid.Value);
+
+                                    if (functionaris.sgt_functieid != null)
+                                    {
+                                        ClubCloud_Functie functie = GetFunctieById(functionaris.sgt_functieid.Value, false, settings);
+                                        entity.ClubCloud_Functie = functie;
+                                        //entity.FunctieId = functionaris.sgt_functieid.Value;
+                                    }
+
+                                    if (functionaris.sgt_functionarisid != null)
+                                    {
+                                        ClubCloud_Gebruiker gebruiker = GetGebruikerById(functionaris.sgt_functionarisid.Value, false, settings);
+                                        entity.ClubCloud_Gebruiker = gebruiker;
+                                        //entity.GebruikerId = functionaris.sgt_functionarisid.Value;
+                                    }
+
+                                    ClubCloud_Vereniging vereniging = null;
+                                    if (functionaris.sgt_basisorganisatieid != null)
+                                    {
+                                        vereniging = GetVerenigingById(functionaris.sgt_basisorganisatieid.Value, false, settings);
+                                        entity.ClubCloud_Vereniging = vereniging;
+                                        //entity.VerenigingId = functionaris.sgt_basisorganisatieid.Value;
+                                    }
+
+                                    if (functionaris.sgt_bestuursorgaanid != null)
+                                    {
+                                        ClubCloud_Bestuursorgaan orgaan = GetBestuursorgaanById(functionaris.sgt_bestuursorgaanid.Value, false, settings);
+                                        entity.ClubCloud_Bestuursorgaan = orgaan;
+                                        //entity.BestuursorgaanId = functionaris.sgt_bestuursorgaanid.Value;
+                                    }
+                                }
+
+                                beheerModel.SaveChanges();
+
+                                foreach (sgt_alg_functionaris functionaris in entities)
+                                {
+                                    ClubCloud_Functionaris entity = beheerModel.ClubCloud_Functionarissen.Find(functionaris.sgt_alg_functionarisid.Value);
+                                    bool succes = CreateOrUpdateRoleFunctionaris(functionaris, settings).Result;
+                                }
                             }
                         }
                     }
@@ -7566,30 +7102,30 @@
         {
             if (functionaris.sgt_functieid != null)
             {
-                ClubCloud_Functie functie = GetFunctieById(functionaris.sgt_functieid.Value, false, settings);
-                entity.ClubCloud_Functie = functie;
+                //ClubCloud_Functie functie = GetFunctieById(functionaris.sgt_functieid.Value, false, settings);
+                //entity.ClubCloud_Functie = functie;
                 entity.FunctieId = functionaris.sgt_functieid.Value;
             }
 
             if (functionaris.sgt_functionarisid != null)
             {
-                ClubCloud_Gebruiker gebruiker = GetGebruikerById(functionaris.sgt_functionarisid.Value, false, settings);
-                entity.ClubCloud_Gebruiker = gebruiker;
+                //ClubCloud_Gebruiker gebruiker = GetGebruikerById(functionaris.sgt_functionarisid.Value, false, settings);
+                //entity.ClubCloud_Gebruiker = gebruiker;
                 entity.GebruikerId = functionaris.sgt_functionarisid.Value;
             }
 
             ClubCloud_Vereniging vereniging = null;
             if (functionaris.sgt_basisorganisatieid != null)
             {
-                vereniging = GetVerenigingById(functionaris.sgt_basisorganisatieid.Value, false, settings);
-                entity.ClubCloud_Vereniging = vereniging;
+                //vereniging = GetVerenigingById(functionaris.sgt_basisorganisatieid.Value, false, settings);
+                //entity.ClubCloud_Vereniging = vereniging;
                 entity.VerenigingId = functionaris.sgt_basisorganisatieid.Value;
             }
 
             if (functionaris.sgt_bestuursorgaanid != null)
             {
-                ClubCloud_Bestuursorgaan orgaan = GetBestuursorgaanById(functionaris.sgt_bestuursorgaanid.Value, false, settings);
-                entity.ClubCloud_Bestuursorgaan = orgaan;
+                //ClubCloud_Bestuursorgaan orgaan = GetBestuursorgaanById(functionaris.sgt_bestuursorgaanid.Value, false, settings);
+                //entity.ClubCloud_Bestuursorgaan = orgaan;
                 entity.BestuursorgaanId = functionaris.sgt_bestuursorgaanid.Value;
             }
 
@@ -7617,7 +7153,7 @@
             {
                 entity.Autorisatie = functionaris.sgt_autorisatie_gezet.Value;
             }
-            entity.Actief = functionaris.statuscode.name;
+            entity.Actief = (ActiefSoort)functionaris.statuscode.Value;
             entity.Gewijzigd = DateTime.Now;
         }
 
@@ -7669,66 +7205,17 @@
 
                             if (contact != null && contact.contactid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Gebruikers.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Gebruikers.Create();
+
                                 entity.Id = contact.contactid.Value;
                                 GebruikerToEntity(contact, entity, settings);
                                 beheerModel.ClubCloud_Gebruikers.AddOrUpdate(entity);
 
+                                //CreateOrUpdateMembershipGebruiker(gebruiker, settings);
+
                                 beheerModel.SaveChanges();
                             }
-                            /*
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
-                            {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "contactid", Operator = ConditionOperator.Equal, Values = new object[1] { gebruikerId } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "contact", out moreRecords, ref pageNum, expression);
-
-                                foreach (contact entity in entities)
-                                {
-                                    if (settings.Id == int.Parse(entity.sgt_bondsnummer) && (settings.GebruikerId == null || settings.VerenigingId == null))
-                                    {
-                                        ClubCloud_Setting updatesettings = beheerModel.ClubCloud_Settings.Find(settings.Id);
-                                        if (entity.sgt_primaire_vereniging_id != null)
-                                            updatesettings.VerenigingId = entity.sgt_primaire_vereniging_id.Value;
-
-                                        if (entity.contactid != null)
-                                            updatesettings.GebruikerId = entity.contactid.Value;
-
-                                        beheerModel.SaveChanges();
-                                        settings = updatesettings;
-                                    }
-
-                                    gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
-
-                                    if (gebruiker == null)
-                                    {
-                                        gebruiker = beheerModel.ClubCloud_Gebruikers.Create();
-                                        gebruiker.Id = entity.contactid.Value;
-
-                                        ContactToGebruiker(entity, entity.sgt_primaire_vereniging_id.Value, gebruiker, bondsnummer, settings);
-
-                                        beheerModel.ClubCloud_Gebruikers.Add(gebruiker);
-
-                                    }
-                                    else
-                                    {
-                                        ContactToGebruiker(entity, entity.sgt_primaire_vereniging_id.Value, gebruiker, bondsnummer, settings);
-                                    }
-
-                                    beheerModel.SaveChanges();
-
-                                    CreateOrUpdateMembershipGebruiker(gebruiker, settings);
-
-                                    if (entity.sgt_is_functionaris != null && entity.sgt_is_functionaris.Value)
-                                    {
-                                        GetFunctionarissenForGebruikerById(bondsnummer, entity.contactid.Value, false, settings);
-                                    }
-                                }
-                            }
-                            */
                         }
                     }
                 }
@@ -7744,9 +7231,109 @@
         /// <param name="refresh"></param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        private List<ClubCloud_Gebruiker> GetGebruikers(string bondnummer, bool refresh, ClubCloud_Setting settings)
+        private List<ClubCloud_Gebruiker> GetGebruikers(string bondsnummer, bool refresh, ClubCloud_Setting settings)
         {
-            throw new NotImplementedException();
+            List<ClubCloud_Gebruiker> gebruikers = new List<ClubCloud_Gebruiker>();
+            if (settings == null)
+                settings = GetSettings(bondsnummer);
+
+            ClubCloud_Vereniging vereniging = GetVerenigingById(settings.VerenigingId.Value, false, settings);
+            gebruikers = beheerModel.ClubCloud_Gebruikers.Where(g => g.VerenigingId == vereniging.Id).ToList();
+
+            if (gebruikers != null && gebruikers.Count == 0 || refresh)
+            {
+                if (settings == null)
+                    settings = GetSettings(bondsnummer);
+
+                if (settings != null && settings.Access && !string.IsNullOrWhiteSpace(settings.Password))
+                {
+                    CookieContainer cc = RequestContainer(settings.Id.ToString(), settings.Password);
+
+                    if (cc != null)
+                    {
+                        using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
+                        {
+                            bool moreRecords = true;
+                            int pageNum = 1;
+                            while (moreRecords)
+                            {
+                                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_primaire_vereniging_id", Operator = ConditionOperator.Equal, Values = new object[1] { vereniging.Id } };
+                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                                List<BusinessEntity> entities = RetrieveMultiple(service, "contact", out moreRecords, ref pageNum, expression);
+
+                                foreach (contact entity in entities)
+                                {
+                                    ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
+
+                                    if (gebruiker == null)
+                                        gebruiker = beheerModel.ClubCloud_Gebruikers.Create();
+
+                                    gebruiker.Id = entity.contactid.Value;
+
+                                    GebruikerToEntity(entity, gebruiker, settings);
+
+                                    beheerModel.ClubCloud_Gebruikers.AddOrUpdate(gebruiker);
+                                }
+                                beheerModel.SaveChanges();
+
+                                foreach (contact entity in entities)
+                                {
+                                    int _bondsnummer;
+                                    if (int.TryParse(entity.sgt_bondsnummer, out _bondsnummer))
+                                    {
+                                        ClubCloud_Setting usersettings = beheerModel.ClubCloud_Settings.Find(entity.sgt_bondsnummer);
+
+                                        if (usersettings == null)
+                                        {
+                                            usersettings = beheerModel.ClubCloud_Settings.Create();
+                                            usersettings.Id = _bondsnummer;
+                                            usersettings.Access = false;
+                                            usersettings.Agree = false;
+                                            usersettings.facebook_allow = false;
+                                            usersettings.facebook_setting = Facebook.None;
+                                            usersettings.financieel = Financieel.None;
+                                            usersettings.privacy = Privacy.None;
+                                            usersettings.twitter_allow = false;
+                                            usersettings.twitter_setting = Twitter.None;
+                                        }
+
+                                        if (entity.parentcustomerid != null)
+                                            usersettings.VerenigingId = entity.parentcustomerid.Value;
+
+                                        if (entity.contactid != null)
+                                            usersettings.GebruikerId = entity.contactid.Value;
+
+                                        usersettings.Gewijzigd = DateTime.Now;
+                                        beheerModel.ClubCloud_Settings.AddOrUpdate(usersettings);
+                                    }
+                                }
+                                beheerModel.SaveChanges();
+
+                                foreach (contact entity in entities)
+                                {
+                                    ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
+                                    bool result = CreateOrUpdateMembershipGebruiker(gebruiker, settings).Result;
+                                }
+
+                                foreach (contact entity in entities)
+                                {
+                                    ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
+
+                                    if (entity.sgt_is_functionaris != null && entity.sgt_is_functionaris.Value)
+                                    {
+                                        GetFunctionarissenForGebruikerById(bondsnummer, entity.contactid.Value, refresh, settings);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                gebruikers = beheerModel.ClubCloud_Gebruikers.Where(g => g.VerenigingId == vereniging.Id).ToList();
+            }
+
+            return gebruikers;
         }
 
         /// <summary>
@@ -7792,10 +7379,103 @@
             List<ClubCloud_Functionaris> result = null;
 
             ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(Id);
+
             if (gebruiker != null)
             {
                 if (gebruiker.ClubCloud_Functionaris == null || gebruiker.ClubCloud_Functionaris.Count == 0)
                 {
+                    result = beheerModel.ClubCloud_Functionarissen.Where(v => v.GebruikerId.Value == Id).ToList();
+
+                    foreach (ClubCloud_Functionaris functionaris in result)
+                    {
+                        gebruiker.ClubCloud_Functionaris.Add(functionaris);
+                    }
+                    beheerModel.SaveChanges();
+                }
+
+                if (refresh)
+                {
+                    if (settings == null)
+                        settings = GetSettings(bondsnummer);
+
+                    if (settings != null && settings.Access && !string.IsNullOrWhiteSpace(settings.Password))
+                    {
+                        CookieContainer cc = RequestContainer(settings.Id.ToString(), settings.Password);
+
+                        if (cc != null)
+                        {
+                            using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
+                            {
+                                bool moreRecords = true;
+                                int pageNum = 1;
+                                while (moreRecords)
+                                {
+                                    ConditionExpression condition = new ConditionExpression { AttributeName = "contactid", Operator = ConditionOperator.Equal, uitype = "contactid", Values = new object[1] { gebruiker.Id } };
+                                    FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                                    LinkEntity link = new LinkEntity { LinkToEntityName = "contact", LinkFromAttributeName = "sgt_functionarisid", LinkToAttributeName = "contactid", LinkCriteria = expression };
+                                    List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_functionaris", out moreRecords, ref pageNum, null, link);
+
+                                    foreach (sgt_alg_functionaris functionaris in entities)
+                                    {
+                                        ClubCloud_Functionaris entity = beheerModel.ClubCloud_Functionarissen.Find(functionaris.sgt_alg_functionarisid.Value);
+
+                                        if (entity == null)
+                                            entity = beheerModel.ClubCloud_Functionarissen.Create();
+
+                                        entity.Id = functionaris.sgt_alg_functionarisid.Value;
+
+                                        FunctionarisToEntity(functionaris, entity, settings);
+
+                                        beheerModel.ClubCloud_Functionarissen.AddOrUpdate(entity);
+                                    }
+                                    beheerModel.SaveChanges();
+
+                                    foreach (sgt_alg_functionaris functionaris in entities)
+                                    {
+                                        ClubCloud_Functionaris entity = beheerModel.ClubCloud_Functionarissen.Find(functionaris.sgt_alg_functionarisid.Value);
+
+                                        if (functionaris.sgt_functieid != null)
+                                        {
+                                            ClubCloud_Functie functie = GetFunctieById(functionaris.sgt_functieid.Value, false, settings);
+                                            entity.ClubCloud_Functie = functie;
+                                            //entity.FunctieId = functionaris.sgt_functieid.Value;
+                                        }
+
+                                        if (functionaris.sgt_functionarisid != null)
+                                        {
+                                            ClubCloud_Gebruiker gebruiker = GetGebruikerById(functionaris.sgt_functionarisid.Value, false, settings);
+                                            entity.ClubCloud_Gebruiker = gebruiker;
+                                            //entity.GebruikerId = functionaris.sgt_functionarisid.Value;
+                                        }
+
+                                        ClubCloud_Vereniging vereniging = null;
+                                        if (functionaris.sgt_basisorganisatieid != null)
+                                        {
+                                            vereniging = GetVerenigingById(functionaris.sgt_basisorganisatieid.Value, false, settings);
+                                            entity.ClubCloud_Vereniging = vereniging;
+                                            //entity.VerenigingId = functionaris.sgt_basisorganisatieid.Value;
+                                        }
+
+                                        if (functionaris.sgt_bestuursorgaanid != null)
+                                        {
+                                            ClubCloud_Bestuursorgaan orgaan = GetBestuursorgaanById(functionaris.sgt_bestuursorgaanid.Value, false, settings);
+                                            entity.ClubCloud_Bestuursorgaan = orgaan;
+                                            //entity.BestuursorgaanId = functionaris.sgt_bestuursorgaanid.Value;
+                                        }
+                                    }
+
+                                    beheerModel.SaveChanges();
+
+                                    foreach (sgt_alg_functionaris functionaris in entities)
+                                    {
+                                        ClubCloud_Functionaris entity = beheerModel.ClubCloud_Functionarissen.Find(functionaris.sgt_alg_functionarisid.Value);
+                                        bool succes = CreateOrUpdateRoleFunctionaris(entity, settings).Result;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     result = beheerModel.ClubCloud_Functionarissen.Where(v => v.GebruikerId.Value == Id).ToList();
 
                     foreach (ClubCloud_Functionaris functionaris in result)
@@ -8515,10 +8195,6 @@
                     {
                         using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
                         {
-
-                            //CrmService.CrmCookieContainer = cc;
-                            //ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
-
                             bool moreRecords = true;
                             int pageNum = 1;
                             while (moreRecords)
@@ -8678,7 +8354,7 @@
             ClubCloud_Address post = GetAddressById(contact.address2_addressid.Value, false, settings);
             entity.ClubCloud_Address.Add(post);
 
-            entity.Actief = contact.statuscode.name;
+            entity.Actief = (ActiefSoort)contact.statuscode.Value;
             entity.Gewijzigd = DateTime.Now;
         }
 
@@ -8724,7 +8400,9 @@
 
                             if (land != null && land.sgt_alg_landcodeid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Landen.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Landen.Create();
+
                                 entity.Id = land.sgt_alg_landcodeid.Value;
                                 entity.Naam = land.sgt_omschrijving;
                                 entity.Code = land.sgt_alg_landcode1;
@@ -8777,42 +8455,16 @@
 
                                 foreach (sgt_alg_landcode land in entities)
                                 {
-                                    ClubCloud_Land entity = beheerModel.ClubCloud_Landen.Create();
+                                    ClubCloud_Land entity = beheerModel.ClubCloud_Landen.Find(land.sgt_alg_landcodeid.Value);
+
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Landen.Create();
+
                                     entity.Id = land.sgt_alg_landcodeid.Value;
                                     entity.Naam = land.sgt_omschrijving;
                                     entity.Code = land.sgt_alg_landcode1;
 
                                     beheerModel.ClubCloud_Landen.AddOrUpdate(entity);
-                                    
-
-                                    /*
-                                    ClubCloud_Land land = beheerModel.ClubCloud_Landen.Find(entity.sgt_alg_landcodeid.Value);
-
-                                    if (land == null)
-                                    {
-                                        land = beheerModel.ClubCloud_Lidmaatschapsoorten.Create();
-                                        land.Id = entity.sgt_alg_soort_lidmaatschapid.Value;
-                                        land.Naam = entity.sgt_alg_soort_lidmaatschap1;
-                                        land.Beschrijving = entity.sgt_beschrijving;
-                                        land.Contributie = entity.sgt_contributie.Value;
-                                        land.Omschrijving = entity.sgt_omschrijving;
-                                        land.Code = entity.sgt_verkorte_code;
-                                        land.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_Lidmaatschapsoorten.Add(land);
-                                    }
-                                    else
-                                    {
-                                        land.Naam = entity.sgt_alg_soort_lidmaatschap1;
-                                        land.Beschrijving = entity.sgt_beschrijving;
-                                        land.Contributie = entity.sgt_contributie.Value;
-                                        land.Omschrijving = entity.sgt_omschrijving;
-                                        land.Code = entity.sgt_verkorte_code;
-                                        land.Actief = entity.statuscode.name;
-                                    }
-
-                                    beheerModel.SaveChanges();
-                                    */
                                 }
                                 beheerModel.SaveChanges();
                             }
@@ -8918,7 +8570,9 @@
 
                             if (lidmaatschap != null && lidmaatschap.sgt_alg_lidmaatschapid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Lidmaatschappen.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Lidmaatschappen.Create();
+
                                 entity.Id = lidmaatschap.sgt_alg_lidmaatschapid.Value;
 
                                 LidmaatschapToEntity(lidmaatschap, entity, bondsnummer, settings);
@@ -8926,44 +8580,6 @@
                                 beheerModel.ClubCloud_Lidmaatschappen.AddOrUpdate(entity);
                                 beheerModel.SaveChanges();
                             }
-
-                            /*
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
-                            {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_lidmaatschapid", Operator = ConditionOperator.Equal, Values = new object[1] { lidmaatschapId } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_lidmaatschap", out moreRecords, ref pageNum, expression);
-
-                                foreach (sgt_alg_lidmaatschap entity in entities)
-                                {
-                                    lidmaatschap = beheerModel.ClubCloud_Lidmaatschappen.Find(entity.sgt_alg_lidmaatschapid.Value);
-
-                                    if (lidmaatschap == null)
-                                    {
-                                        lidmaatschap = beheerModel.ClubCloud_Lidmaatschappen.Create();
-                                        lidmaatschap.Id = entity.sgt_alg_lidmaatschapid.Value;
-
-                                        EntityToLidmaatschap(entity, lidmaatschap, bondsnummer);
-                                        beheerModel.ClubCloud_Lidmaatschappen.Add(lidmaatschap);
-                                    }
-                                    else
-                                    {
-                                        EntityToLidmaatschap(entity, lidmaatschap, bondsnummer);
-
-                                    }
-
-                                    //if (entity.sgt_lidid != null)
-                                    //{
-                                    //    GebruikerById(bondsnummer, entity.sgt_lidid.Value);
-                                    //}
-
-                                    beheerModel.SaveChanges();
-                                }
-                            }
-                            */
                         }
                     }
                 }
@@ -9010,19 +8626,12 @@
                                     ClubCloud_Lidmaatschap entity = beheerModel.ClubCloud_Lidmaatschappen.Find(lidmaatschap.sgt_alg_lidmaatschapid.Value);
 
                                     if (entity == null)
-                                    {
                                         entity = beheerModel.ClubCloud_Lidmaatschappen.Create();
-                                        entity.Id = lidmaatschap.sgt_alg_lidmaatschapid.Value;
-                                    }
-                                        LidmaatschapToEntity(lidmaatschap, entity, bondsnummer, settings);
-                                        beheerModel.ClubCloud_Lidmaatschappen.Add(entity);
-                                        //lidmaatschappen.Add(lidmaatschap);
-                                    /*
-                                    if (entity.sgt_lidid != null)
-                                    {
-                                        GebruikerById(bondsnummer, entity.sgt_lidid.Value);
-                                    }
-                                    */
+
+                                    entity.Id = lidmaatschap.sgt_alg_lidmaatschapid.Value;
+
+                                    LidmaatschapToEntity(lidmaatschap, entity, bondsnummer, settings);
+                                    beheerModel.ClubCloud_Lidmaatschappen.Add(entity);
                                 }
                                 beheerModel.SaveChanges();
                             }
@@ -9196,7 +8805,7 @@
         {
             List<ClubCloud_Lidmaatschap> lidmaatschappen = new List<ClubCloud_Lidmaatschap>();
 
-            lidmaatschappen = beheerModel.ClubCloud_Lidmaatschappen.Where(f => f.VerenigingId == verenigingId && f.Actief == Sgt_alg_functionarisState.Active.ToString()).ToList();
+            lidmaatschappen = beheerModel.ClubCloud_Lidmaatschappen.Where(f => f.VerenigingId == verenigingId && f.Actief == ActiefSoort.Actief).ToList();
 
             if (lidmaatschappen != null && lidmaatschappen.Count == 0 || refresh)
             {
@@ -9213,10 +8822,6 @@
                     {
                         using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
                         {
-
-                            //CrmService.CrmCookieContainer = cc;
-                            //ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
-
                             bool moreRecords = true;
                             int pageNum = 1;
                             while (moreRecords)
@@ -9231,28 +8836,20 @@
                                     ClubCloud_Lidmaatschap entity = beheerModel.ClubCloud_Lidmaatschappen.Find(lidmaatschap.sgt_alg_lidmaatschapid.Value);
 
                                     if (entity == null)
-                                    {
                                         entity = beheerModel.ClubCloud_Lidmaatschappen.Create();
-                                        entity.Id = lidmaatschap.sgt_alg_lidmaatschapid.Value;
-                                    }
+
+                                    entity.Id = lidmaatschap.sgt_alg_lidmaatschapid.Value;
+
                                     LidmaatschapToEntity(lidmaatschap, entity, bondsnummer, settings);
 
-                                       beheerModel.ClubCloud_Lidmaatschappen.AddOrUpdate(entity);
-                                        //lidmaatschappen.Add(lidmaatschap);
-
-                                    /*
-                                    if (entity.sgt_lidid != null)
-                                    {
-                                        GebruikerById(bondsnummer, entity.sgt_lidid.Value);
-                                    }
-                                    */
+                                    beheerModel.ClubCloud_Lidmaatschappen.AddOrUpdate(entity);
                                 }
                                 beheerModel.SaveChanges();
                             }
                         }
                     }
                 }
-                lidmaatschappen = beheerModel.ClubCloud_Lidmaatschappen.Where(f => f.VerenigingId == verenigingId && f.Actief == "Actief").ToList();
+                lidmaatschappen = beheerModel.ClubCloud_Lidmaatschappen.Where(f => f.VerenigingId == verenigingId && f.Actief == ActiefSoort.Actief).ToList();
             }
             return lidmaatschappen;
         }
@@ -9289,7 +8886,7 @@
                 ClubCloud_Lidmaatschapsoort soort = GetLidmaatschapsoortById(bondsnummer,lidmaatschap.sgt_soort_lidmaatschapid.Value, false, settings);
                 //lidmaatschap.SoortNaam = entity.sgt_soort_lidmaatschapid.name;
                 entity.ClubCloud_Lidmaatschapsoort = soort;
-                entity.LidmaatschapsoortId = soort.Id;//entity.sgt_soort_lidmaatschapid.Value;
+                entity.LidmaatschapsoortId = lidmaatschap.sgt_soort_lidmaatschapid.Value;
             }
 
             if (lidmaatschap.sgt_verenigingid != null)
@@ -9299,13 +8896,11 @@
                 entity.VerenigingId = lidmaatschap.sgt_verenigingid.Value;
             }
 
-            //entity.sgt_toernooiorganisatieid.name;
-            //entity.sgt_toernooiorganisatieid.type;
-            //entity.sgt_toernooiorganisatieid.Value;
             if (lidmaatschap.sgt_lidmaatschap_vanaf != null)
             {
                 entity.Begin = DateTime.Parse(lidmaatschap.sgt_lidmaatschap_vanaf.Value);
             }
+
             if (lidmaatschap.sgt_lidmaatschap_beeindigd != null)
             {
                 entity.Einde = DateTime.Parse(lidmaatschap.sgt_lidmaatschap_beeindigd.Value);
@@ -9324,7 +8919,6 @@
             if (lidmaatschap.sgt_pastypeid != null)
             {
                 entity.PasTypeNaam = lidmaatschap.sgt_pastypeid.name;
-                //lidmaatschap.PasTypeId = entity.sgt_pastypeid.type;
                 entity.PasTypeId = lidmaatschap.sgt_pastypeid.Value;
             }
 
@@ -9339,6 +8933,7 @@
             {
                 entity.PasNood = lidmaatschap.sgt_noodpas_nodig.Value;
             }
+
             if (lidmaatschap.sgt_datum_laatste_noodpas != null)
             {
                 entity.PasNoodDatum = DateTime.Parse(lidmaatschap.sgt_datum_laatste_noodpas.Value);
@@ -9358,7 +8953,7 @@
                 entity.SpeelsterkteEnkel = lidmaatschap.sgt_speelsterkte_enkel.Value;
             }
 
-            entity.Actief = lidmaatschap.statuscode.name;
+            entity.Actief = (ActiefSoort)lidmaatschap.statuscode.Value;
             entity.Gewijzigd = DateTime.Now;
         }
 
@@ -9410,7 +9005,9 @@
 
                             if (lidmaatschapsoort != null && lidmaatschapsoort.sgt_alg_soort_lidmaatschapid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Lidmaatschapsoorten.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Lidmaatschapsoorten.Create();
+
                                 entity.Id = lidmaatschapsoort.sgt_alg_soort_lidmaatschapid.Value;
 
                                 LidmaatschapsoortToEntity(lidmaatschapsoort, entity, settings);
@@ -9418,52 +9015,6 @@
                                 beheerModel.ClubCloud_Lidmaatschapsoorten.AddOrUpdate(entity);
                                 beheerModel.SaveChanges();
                             }
-
-                            /*
-                            //CrmService.CrmCookieContainer = cc;
-                            //ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
-
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
-                            {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_soort_lidmaatschapid", Operator = ConditionOperator.Equal, Values = new object[1] { Id } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_soort_lidmaatschap", out moreRecords, ref pageNum, expression);
-
-                                foreach (sgt_alg_soort_lidmaatschap entity in entities)
-                                {
-                                    lidmaatschapsoort = beheerModel.ClubCloud_Lidmaatschapsoorten.Find(entity.sgt_alg_soort_lidmaatschapid.Value);
-
-                                    if (lidmaatschapsoort == null)
-                                    {
-                                        lidmaatschapsoort = beheerModel.ClubCloud_Lidmaatschapsoorten.Create();
-                                        lidmaatschapsoort.Id = entity.sgt_alg_soort_lidmaatschapid.Value;
-                                        lidmaatschapsoort.Naam = entity.sgt_alg_soort_lidmaatschap1;
-                                        lidmaatschapsoort.Beschrijving = entity.sgt_beschrijving;
-                                        lidmaatschapsoort.Contributie = entity.sgt_contributie.Value;
-                                        lidmaatschapsoort.Omschrijving = entity.sgt_omschrijving;
-                                        lidmaatschapsoort.Code = entity.sgt_verkorte_code;
-                                        lidmaatschapsoort.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_Lidmaatschapsoorten.Add(lidmaatschapsoort);
-
-                                    }
-                                    else
-                                    {
-                                        lidmaatschapsoort.Naam = entity.sgt_alg_soort_lidmaatschap1;
-                                        lidmaatschapsoort.Beschrijving = entity.sgt_beschrijving;
-                                        lidmaatschapsoort.Contributie = entity.sgt_contributie.Value;
-                                        lidmaatschapsoort.Omschrijving = entity.sgt_omschrijving;
-                                        lidmaatschapsoort.Code = entity.sgt_verkorte_code;
-                                        lidmaatschapsoort.Actief = entity.statuscode.name;
-                                    }
-
-                                    beheerModel.SaveChanges();
-                                }
-                            }
-                            */
                         }
                     }
                 }
@@ -9507,35 +9058,20 @@
 
                                 List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_soort_lidmaatschap", out moreRecords, ref pageNum);
 
-                                foreach (sgt_alg_soort_lidmaatschap entity in entities)
+                                foreach (sgt_alg_soort_lidmaatschap lidmaatschapsoort in entities)
                                 {
-                                    ClubCloud_Lidmaatschapsoort lidmaatschapsoort = beheerModel.ClubCloud_Lidmaatschapsoorten.Find(entity.sgt_alg_soort_lidmaatschapid.Value);
+                                    ClubCloud_Lidmaatschapsoort entity = beheerModel.ClubCloud_Lidmaatschapsoorten.Find(lidmaatschapsoort.sgt_alg_soort_lidmaatschapid.Value);
 
-                                    if (lidmaatschapsoort == null)
-                                    {
-                                        lidmaatschapsoort = beheerModel.ClubCloud_Lidmaatschapsoorten.Create();
-                                        lidmaatschapsoort.Id = entity.sgt_alg_soort_lidmaatschapid.Value;
-                                        lidmaatschapsoort.Naam = entity.sgt_alg_soort_lidmaatschap1;
-                                        lidmaatschapsoort.Beschrijving = entity.sgt_beschrijving;
-                                        lidmaatschapsoort.Contributie = entity.sgt_contributie.Value;
-                                        lidmaatschapsoort.Omschrijving = entity.sgt_omschrijving;
-                                        lidmaatschapsoort.Code = entity.sgt_verkorte_code;
-                                        lidmaatschapsoort.Actief = entity.statuscode.name;
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Lidmaatschapsoorten.Create();
 
-                                        beheerModel.ClubCloud_Lidmaatschapsoorten.Add(lidmaatschapsoort);
-                                    }
-                                    else
-                                    {
-                                        lidmaatschapsoort.Naam = entity.sgt_alg_soort_lidmaatschap1;
-                                        lidmaatschapsoort.Beschrijving = entity.sgt_beschrijving;
-                                        lidmaatschapsoort.Contributie = entity.sgt_contributie.Value;
-                                        lidmaatschapsoort.Omschrijving = entity.sgt_omschrijving;
-                                        lidmaatschapsoort.Code = entity.sgt_verkorte_code;
-                                        lidmaatschapsoort.Actief = entity.statuscode.name;
-                                    }
+                                    LidmaatschapsoortToEntity(lidmaatschapsoort, entity, settings);
 
-                                    beheerModel.SaveChanges();
+                                    beheerModel.ClubCloud_Lidmaatschapsoorten.AddOrUpdate(entity);
+
                                 }
+                                beheerModel.SaveChanges();
+
                             }
                         }
                     }
@@ -9645,7 +9181,7 @@
             entity.Contributie = lidmaatschapsoort.sgt_contributie.Value;
             entity.Omschrijving = lidmaatschapsoort.sgt_omschrijving;
             entity.Code = lidmaatschapsoort.sgt_verkorte_code;
-            entity.Actief = lidmaatschapsoort.statuscode.name;
+            entity.Actief = (ActiefSoort)lidmaatschapsoort.statuscode.Value;
         }
 
         private void EntityToLidmaatschapsoort(sgt_alg_soort_lidmaatschap lidmaatschapsoort, ClubCloud_Lidmaatschapsoort entity, ClubCloud_Setting settings)
@@ -9688,7 +9224,9 @@
 
                             if (nationaliteit != null && nationaliteit.sgt_alg_nationaliteitid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Nationaliteiten.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Nationaliteiten.Create();
+
                                 entity.Id = nationaliteit.sgt_alg_nationaliteitid.Value;
                                 entity.Naam = nationaliteit.sgt_alg_nationaliteit1;
                                 entity.Code = nationaliteit.sgt_verkorte_code;
@@ -9734,28 +9272,20 @@
                             {
                                 List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_nationaliteit", out moreRecords, ref pageNum);
 
-                                foreach (sgt_alg_nationaliteit entity in entities)
+                                foreach (sgt_alg_nationaliteit nationaliteit in entities)
                                 {
-                                    ClubCloud_Nationaliteit nationaliteit = beheerModel.ClubCloud_Nationaliteiten.Find(entity.sgt_alg_nationaliteitid.Value);
+                                    ClubCloud_Nationaliteit entity = beheerModel.ClubCloud_Nationaliteiten.Find(nationaliteit.sgt_alg_nationaliteitid.Value);
 
-                                    if (nationaliteit == null)
-                                    {
-                                        nationaliteit = beheerModel.ClubCloud_Nationaliteiten.Create();
-                                        nationaliteit.Id = entity.sgt_alg_nationaliteitid.Value;
-                                        nationaliteit.Naam = entity.sgt_alg_nationaliteit1;
-                                        nationaliteit.Code = entity.sgt_verkorte_code;
-                                        beheerModel.ClubCloud_Nationaliteiten.Add(nationaliteit);
-                                        nationaliteiten.Add(nationaliteit);
-                                    }
-                                    else
-                                    {
-                                        nationaliteit.Naam = entity.sgt_alg_nationaliteit1;
-                                        nationaliteit.Code = entity.sgt_verkorte_code;
-                                        nationaliteiten.Add(nationaliteit);
-                                    }
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Nationaliteiten.Create();
 
-                                    beheerModel.SaveChanges();
+                                    entity.Id = nationaliteit.sgt_alg_nationaliteitid.Value;
+                                    entity.Naam = nationaliteit.sgt_alg_nationaliteit1;
+                                    entity.Code = nationaliteit.sgt_verkorte_code;
+                                    beheerModel.ClubCloud_Nationaliteiten.AddOrUpdate(entity);
                                 }
+                                beheerModel.SaveChanges();
+
                             }
                         }
                     }
@@ -10131,7 +9661,7 @@
             if (entity.sgt_datum_dss != null)
                 profiel.Datum = DateTime.Parse(entity.sgt_datum_dss.Value);
 
-            profiel.Actief = entity.statuscode.name;
+            profiel.Actief = (ActiefSoort)entity.statuscode.Value;
             profiel.Gewijzigd = DateTime.Now;
 
         }
@@ -10174,52 +9704,14 @@
 
                             if (rechtsvorm != null && rechtsvorm.sgt_alg_rechtsvormid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Rechtsvormen.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Rechtsvormen.Create();
+
                                 entity.Id = rechtsvorm.sgt_alg_rechtsvormid.Value;
                                 RechtsvormToEntity(rechtsvorm, entity, settings);
                                 beheerModel.ClubCloud_Rechtsvormen.AddOrUpdate(entity);
                                 beheerModel.SaveChanges();
                             } 
-
-                            /*
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
-                            {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_alg_rechtsvormid", Operator = ConditionOperator.Equal, Values = new object[1] { rechtsvormId } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_rechtsvorm", out moreRecords, ref pageNum, expression);
-
-                                foreach (sgt_alg_rechtsvorm entity in entities)
-                                {
-                                    rechtsvorm = beheerModel.ClubCloud_Rechtsvormen.Find(entity.sgt_alg_rechtsvormid.Value);
-
-                                    if (rechtsvorm == null)
-                                    {
-                                        rechtsvorm = beheerModel.ClubCloud_Rechtsvormen.Create();
-                                        rechtsvorm.Id = entity.sgt_alg_rechtsvormid.Value;
-                                        rechtsvorm.Naam = entity.sgt_alg_rechtsvorm1;
-                                        rechtsvorm.Omschrijving = entity.sgt_omschrijving;
-                                        rechtsvorm.Beschrijving = entity.sgt_beschrijving;
-                                        rechtsvorm.Meervoud = entity.sgt_meervoudsnaam;
-                                        rechtsvorm.Code = entity.sgt_verkorte_code;
-                                        rechtsvorm.Actief = entity.statuscode.name;
-                                        beheerModel.ClubCloud_Rechtsvormen.Add(rechtsvorm);
-                                    }
-                                    else
-                                    {
-                                        rechtsvorm.Naam = entity.sgt_alg_rechtsvorm1;
-                                        rechtsvorm.Omschrijving = entity.sgt_omschrijving;
-                                        rechtsvorm.Beschrijving = entity.sgt_beschrijving;
-                                        rechtsvorm.Meervoud = entity.sgt_meervoudsnaam;
-                                        rechtsvorm.Code = entity.sgt_verkorte_code;
-                                        rechtsvorm.Actief = entity.statuscode.name;
-                                    }
-                                    beheerModel.SaveChanges();
-                                }
-                            }
-                            */
                         }
                     }
                 }
@@ -10264,39 +9756,14 @@
 
                                 foreach (sgt_alg_rechtsvorm rechtsvorm in entities)
                                 {
-                                    ClubCloud_Rechtsvorm entity = beheerModel.ClubCloud_Rechtsvormen.Create();
+                                    ClubCloud_Rechtsvorm entity = beheerModel.ClubCloud_Rechtsvormen.Find(rechtsvorm.sgt_alg_rechtsvormid.Value);
+
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Rechtsvormen.Create();
+
                                     entity.Id = rechtsvorm.sgt_alg_rechtsvormid.Value;
                                     RechtsvormToEntity(rechtsvorm, entity, settings);
                                     beheerModel.ClubCloud_Rechtsvormen.AddOrUpdate(entity);
-
-                                    /*
-                                    ClubCloud_Rechtsvorm rechtsvorm = beheerModel.ClubCloud_Rechtsvormen.Find(entity.sgt_alg_rechtsvormid.Value);
-
-                                    if (rechtsvorm == null)
-                                    {
-                                        rechtsvorm = beheerModel.ClubCloud_Rechtsvormen.Create();
-                                        rechtsvorm.Id = entity.sgt_alg_rechtsvormid.Value;
-                                        rechtsvorm.Naam = entity.sgt_alg_rechtsvorm1;
-                                        rechtsvorm.Omschrijving = entity.sgt_omschrijving;
-                                        rechtsvorm.Beschrijving = entity.sgt_beschrijving;
-                                        rechtsvorm.Meervoud = entity.sgt_meervoudsnaam;
-                                        rechtsvorm.Code = entity.sgt_verkorte_code;
-                                        rechtsvorm.Actief = entity.statuscode.name;
-                                        beheerModel.ClubCloud_Rechtsvormen.Add(rechtsvorm);
-                                        //rechtsvormen.Add(rechtsvorm);
-                                    }
-                                    else
-                                    {
-                                        rechtsvorm.Naam = entity.sgt_alg_rechtsvorm1;
-                                        rechtsvorm.Omschrijving = entity.sgt_omschrijving;
-                                        rechtsvorm.Beschrijving = entity.sgt_beschrijving;
-                                        rechtsvorm.Meervoud = entity.sgt_meervoudsnaam;
-                                        rechtsvorm.Code = entity.sgt_verkorte_code;
-                                        rechtsvorm.Actief = entity.statuscode.name;
-                                        //rechtsvormen.Add(rechtsvorm);
-                                    }
-                                    beheerModel.SaveChanges();
-                                    */
                                 }
                                 beheerModel.SaveChanges();
                             }
@@ -10375,7 +9842,7 @@
             entity.Beschrijving = rechtsvorm.sgt_beschrijving;
             entity.Meervoud = rechtsvorm.sgt_meervoudsnaam;
             entity.Code = rechtsvorm.sgt_verkorte_code;
-            entity.Actief = rechtsvorm.statuscode.name;
+            entity.Actief = (ActiefSoort)rechtsvorm.statuscode.Value;
         }
 
         private void EntityToRechtsvorm(sgt_alg_rechtsvorm rechtsvorm, ClubCloud_Rechtsvorm entity, ClubCloud_Setting settings)
@@ -10393,17 +9860,17 @@
         /// 
         /// </summary>
         /// <param name="bondsnummer"></param>
-        /// <param name="regioId"></param>
+        /// <param name="Id"></param>
         /// <param name="naam"></param>
         /// <param name="refresh"></param>
         /// <returns></returns>
-        private ClubCloud_Regio GetRegioById(string bondsnummer, Guid regioId, bool refresh = false, ClubCloud_Setting settings = null)
+        private ClubCloud_Regio GetRegioById(string bondsnummer, Guid Id, bool refresh = false, ClubCloud_Setting settings = null)
         {
-            ClubCloud_Regio regio = new ClubCloud_Regio();
+            ClubCloud_Regio entity = new ClubCloud_Regio();
 
-            regio = beheerModel.ClubCloud_Regios.Find(regioId);
+            entity = beheerModel.ClubCloud_Regios.Find(Id);
 
-            if (regio == null && refresh)
+            if (entity == null && refresh)
             {
                 if (settings == null)
                 {
@@ -10418,101 +9885,45 @@
                     {
                         using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
                         {
+                            account regio = RetrieveEntity(service, "account", Id) as account;
 
-                            //CrmService.CrmCookieContainer = cc;
-                            //ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
-
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
+                            if (regio != null && regio.accountid.Value == Id)
                             {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "accountid", Operator = ConditionOperator.Equal, Values = new object[1] { regioId } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Regios.Create();
 
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "account", out moreRecords, ref pageNum, expression);
+                                entity.Id = regio.accountid.Value;
+                                entity.Naam = string.IsNullOrWhiteSpace(regio.name) ? "" : regio.name;
+                                entity.EmailKNLTB = string.IsNullOrWhiteSpace(regio.emailaddress1) ? "" : regio.emailaddress1;
+                                entity.TelefoonOverdag = string.IsNullOrWhiteSpace(regio.telephone1) ? "" : regio.telephone1;
+                                entity.TelefoonAvond = string.IsNullOrWhiteSpace(regio.telephone2) ? "" : regio.telephone2;
+                                entity.Fax = string.IsNullOrWhiteSpace(regio.fax) ? "" : regio.fax;
 
-                                foreach (account entity in entities)
+                                if (regio.address1_addressid != null)
                                 {
-                                    regio = beheerModel.ClubCloud_Regios.Find(entity.accountid.Value);
-
-                                    if (regio == null)
-                                    {
-                                        regio = beheerModel.ClubCloud_Regios.Create();
-                                        regio.Id = entity.accountid.Value;
-                                        regio.Naam = string.IsNullOrWhiteSpace(entity.name) ? "" : entity.name; //entity.name;
-                                        regio.EmailKNLTB = string.IsNullOrWhiteSpace(entity.emailaddress1) ? "" : entity.emailaddress1; //entity.emailaddress1;
-                                        regio.TelefoonOverdag = string.IsNullOrWhiteSpace(entity.telephone1) ? "" : entity.telephone1; //entity.telephone1;
-                                        regio.TelefoonAvond = string.IsNullOrWhiteSpace(entity.telephone2) ? "" : entity.telephone2; //entity.telephone2;
-                                        regio.Fax = string.IsNullOrWhiteSpace(entity.fax) ? "" : entity.fax; //entity.fax;
-
-                                        if (entity.address1_addressid != null)
-                                        {
-                                            ClubCloud_Address bezoek = GetAddressById(bondsnummer, entity.address1_addressid.Value, false, settings);
-                                            regio.ClubCloud_Address.Add(bezoek);
-                                            //vereniging.ClubCloud_Address.Add(bezoek);
-                                        }
-                                        if (entity.address2_addressid != null)
-                                        {
-                                            ClubCloud_Address post = GetAddressById(bondsnummer, entity.address2_addressid.Value, false, settings);
-                                            regio.ClubCloud_Address.Add(post);
-                                            //vereniging.ClubCloud_Address.Add(post);
-                                        }
-
-                                        regio.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_Regios.Add(regio);
-
-                                    }
-                                    else
-                                    {
-                                        regio.Naam = string.IsNullOrWhiteSpace(entity.name) ? "" : entity.name; //entity.name;
-                                        regio.EmailKNLTB = string.IsNullOrWhiteSpace(entity.emailaddress1) ? "" : entity.emailaddress1; //entity.emailaddress1;
-                                        regio.TelefoonOverdag = string.IsNullOrWhiteSpace(entity.telephone1) ? "" : entity.telephone1; //entity.telephone1;
-                                        regio.TelefoonAvond = string.IsNullOrWhiteSpace(entity.telephone2) ? "" : entity.telephone2; //entity.telephone2;
-                                        regio.Fax = string.IsNullOrWhiteSpace(entity.fax) ? "" : entity.fax; //entity.fax;
-
-                                        if (entity.address1_addressid != null)
-                                        {
-                                            ClubCloud_Address bezoek = GetAddressById(bondsnummer, entity.address1_addressid.Value, false, settings);
-                                            regio.ClubCloud_Address.Add(bezoek);
-                                            //vereniging.ClubCloud_Address.Add(bezoek);
-                                        }
-                                        if (entity.address2_addressid != null)
-                                        {
-                                            ClubCloud_Address post = GetAddressById(bondsnummer, entity.address2_addressid.Value, false, settings);
-                                            regio.ClubCloud_Address.Add(post);
-                                            //vereniging.ClubCloud_Address.Add(post);
-                                        }
-
-                                        regio.Actief = entity.statuscode.name;
-                                    }
-
-                                    beheerModel.SaveChanges();
-
-                                    /*
-                                    if (entity.address1_addressid != null)
-                                    {
-                                        ClubCloud_Address bezoek = GetAddressById(bondsnummer, entity.address1_addressid.Value, false, settings);
-                                        regio.ClubCloud_Address.Add(bezoek);
-                                        //vereniging.ClubCloud_Address.Add(bezoek);
-                                    }
-                                    if (entity.address2_addressid != null)
-                                    {
-                                        ClubCloud_Address post = GetAddressById(bondsnummer, entity.address2_addressid.Value, false, settings);
-                                        regio.ClubCloud_Address.Add(post);
-                                        //vereniging.ClubCloud_Address.Add(post);
-                                    }
-                                    beheerModel.SaveChanges();
-                                    */
+                                    ClubCloud_Address bezoek = GetAddressById(bondsnummer, regio.address1_addressid.Value, false, settings);
+                                    entity.ClubCloud_Address.Add(bezoek);
+                                    //vereniging.ClubCloud_Address.Add(bezoek);
                                 }
+                                if (regio.address2_addressid != null)
+                                {
+                                    ClubCloud_Address post = GetAddressById(bondsnummer, regio.address2_addressid.Value, false, settings);
+                                    entity.ClubCloud_Address.Add(post);
+                                    //vereniging.ClubCloud_Address.Add(post);
+                                }
+
+                                entity.Actief = (ActiefSoort)regio.statuscode.Value;
+
+                                beheerModel.ClubCloud_Regios.AddOrUpdate(entity);
                             }
+                            beheerModel.SaveChanges();
                         }
                     }
 
                 }
-                regio = beheerModel.ClubCloud_Regios.Find(regioId);
+                entity = beheerModel.ClubCloud_Regios.Find(Id);
             }
-            return regio;
+            return entity;
         }
 
         /// <summary>
@@ -10542,9 +9953,6 @@
                     {
                         using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
                         {
-                            //CrmService.CrmCookieContainer = cc;
-                            //ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
-
                             bool moreRecords = true;
                             int pageNum = 1;
                             while (moreRecords)
@@ -10554,78 +9962,39 @@
 
                                 List<BusinessEntity> entities = RetrieveMultiple(service, "account", out moreRecords, ref pageNum, expression);
 
-                                foreach (account entity in entities)
+                                foreach (account regio in entities)
                                 {
-                                    ClubCloud_Regio regio = beheerModel.ClubCloud_Regios.Find(entity.accountid.Value);
+                                    ClubCloud_Regio entity = beheerModel.ClubCloud_Regios.Find(regio.accountid.Value);
 
-                                    if (regio == null)
+                                    if (entity == null)
+                                        entity = beheerModel.ClubCloud_Regios.Create();
+
+
+                                    entity.Id = regio.accountid.Value;
+                                    entity.Naam = string.IsNullOrWhiteSpace(regio.name) ? "" : regio.name; //entity.name;
+                                    entity.EmailKNLTB = string.IsNullOrWhiteSpace(regio.emailaddress1) ? "" : regio.emailaddress1; //entity.emailaddress1;
+                                    entity.TelefoonOverdag = string.IsNullOrWhiteSpace(regio.telephone1) ? "" : regio.telephone1; //entity.telephone1;
+                                    entity.TelefoonAvond = string.IsNullOrWhiteSpace(regio.telephone2) ? "" : regio.telephone2; //entity.telephone2;
+                                    entity.Fax = string.IsNullOrWhiteSpace(regio.fax) ? "" : regio.fax; //entity.fax;
+
+                                    if (regio.address1_addressid != null)
                                     {
-                                        regio = beheerModel.ClubCloud_Regios.Create();
-                                        regio.Id = entity.accountid.Value;
-                                        regio.Naam = string.IsNullOrWhiteSpace(entity.name) ? "" : entity.name; //entity.name;
-                                        regio.EmailKNLTB = string.IsNullOrWhiteSpace(entity.emailaddress1) ? "" : entity.emailaddress1; //entity.emailaddress1;
-                                        regio.TelefoonOverdag = string.IsNullOrWhiteSpace(entity.telephone1) ? "" : entity.telephone1; //entity.telephone1;
-                                        regio.TelefoonAvond = string.IsNullOrWhiteSpace(entity.telephone2) ? "" : entity.telephone2; //entity.telephone2;
-                                        regio.Fax = string.IsNullOrWhiteSpace(entity.fax) ? "" : entity.fax; //entity.fax;
-
-                                        if (entity.address1_addressid != null)
-                                        {
-                                            ClubCloud_Address bezoek = GetAddressById(bondsnummer, entity.address1_addressid.Value, false, settings);
-                                            regio.ClubCloud_Address.Add(bezoek);
-                                            //vereniging.ClubCloud_Address.Add(bezoek);
-                                        }
-                                        if (entity.address2_addressid != null)
-                                        {
-                                            ClubCloud_Address post = GetAddressById(bondsnummer, entity.address2_addressid.Value, false, settings);
-                                            regio.ClubCloud_Address.Add(post);
-                                            //vereniging.ClubCloud_Address.Add(post);
-                                        }
-
-                                        regio.Actief = entity.statuscode.name;
-
-                                        beheerModel.ClubCloud_Regios.Add(regio);
-                                    }
-                                    else
-                                    {
-                                        regio.Naam = string.IsNullOrWhiteSpace(entity.name) ? "" : entity.name; //entity.name;
-                                        regio.EmailKNLTB = string.IsNullOrWhiteSpace(entity.emailaddress1) ? "" : entity.emailaddress1; //entity.emailaddress1;
-                                        regio.TelefoonOverdag = string.IsNullOrWhiteSpace(entity.telephone1) ? "" : entity.telephone1; //entity.telephone1;
-                                        regio.TelefoonAvond = string.IsNullOrWhiteSpace(entity.telephone2) ? "" : entity.telephone2; //entity.telephone2;
-                                        regio.Fax = string.IsNullOrWhiteSpace(entity.fax) ? "" : entity.fax; //entity.fax;
-
-                                        if (entity.address1_addressid != null)
-                                        {
-                                            ClubCloud_Address bezoek = GetAddressById(bondsnummer, entity.address1_addressid.Value, false, settings);
-                                            regio.ClubCloud_Address.Add(bezoek);
-                                            //vereniging.ClubCloud_Address.Add(bezoek);
-                                        }
-                                        if (entity.address2_addressid != null)
-                                        {
-                                            ClubCloud_Address post = GetAddressById(bondsnummer, entity.address2_addressid.Value, false, settings);
-                                            regio.ClubCloud_Address.Add(post);
-                                            //vereniging.ClubCloud_Address.Add(post);
-                                        }
-
-                                        regio.Actief = entity.statuscode.name;
-                                    }
-
-                                    beheerModel.SaveChanges();
-                                    /*
-                                    if (entity.address1_addressid != null)
-                                    {
-                                        ClubCloud_Address bezoek = GetAddressById(bondsnummer, entity.address1_addressid.Value, false, settings);
-                                        regio.ClubCloud_Address.Add(bezoek);
+                                        ClubCloud_Address bezoek = GetAddressById(bondsnummer, regio.address1_addressid.Value, false, settings);
+                                        entity.ClubCloud_Address.Add(bezoek);
                                         //vereniging.ClubCloud_Address.Add(bezoek);
                                     }
-                                    if (entity.address2_addressid != null)
+                                    if (regio.address2_addressid != null)
                                     {
-                                        ClubCloud_Address post = GetAddressById(bondsnummer, entity.address2_addressid.Value, false, settings);
-                                        regio.ClubCloud_Address.Add(post);
+                                        ClubCloud_Address post = GetAddressById(bondsnummer, regio.address2_addressid.Value, false, settings);
+                                        entity.ClubCloud_Address.Add(post);
                                         //vereniging.ClubCloud_Address.Add(post);
                                     }
-                                    beheerModel.SaveChanges();
-                                    */
+
+                                    entity.Actief = (ActiefSoort)regio.statuscode.Value;
+
+                                    beheerModel.ClubCloud_Regios.AddOrUpdate(entity);
                                 }
+                                beheerModel.SaveChanges();
                             }
                         }
                     }
@@ -10693,9 +10062,6 @@
                     {
                         using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
                         {
-                            //CrmService.CrmCookieContainer = cc;
-                            //ClubCloud.KNLTB.ServIt.CrmService.CrmService service = new KNLTB.ServIt.CrmService.CrmService(cc);
-
                             bool moreRecords = true;
                             int pageNum = 1;
                             while (moreRecords)
@@ -10725,7 +10091,7 @@
                                             district.RegioId = entity.sgt_regioid.Value;
                                         }
 
-                                        district.Actief = entity.statuscode.name;
+                                        district.Actief = (ActiefSoort)entity.statuscode.Value;
                                         beheerModel.ClubCloud_Districten.Add(district);
                                     }
                                     else
@@ -10743,7 +10109,7 @@
                                             district.RegioId = entity.sgt_regioid.Value;
                                         }
 
-                                        district.Actief = entity.statuscode.name;
+                                        district.Actief = (ActiefSoort)entity.statuscode.Value;
                                     }
 
                                     beheerModel.SaveChanges();
@@ -11211,7 +10577,9 @@
 
                             if (account != null && account.accountid.Value == Id)
                             {
-                                entity = beheerModel.ClubCloud_Verenigingen.Create();
+                                if (entity == null)
+                                    entity = beheerModel.ClubCloud_Verenigingen.Create();
+
                                 entity.Id = account.accountid.Value;
 
                                 VerenigingToEntity(account, entity, settings);
@@ -11219,43 +10587,6 @@
                                 beheerModel.ClubCloud_Verenigingen.AddOrUpdate(entity);
                                 beheerModel.SaveChanges();
                             }
-
-                            /*
-                            bool moreRecords = true;
-                            int pageNum = 1;
-                            while (moreRecords)
-                            {
-                                ConditionExpression condition = new ConditionExpression { AttributeName = "accountid", Operator = ConditionOperator.Equal, Values = new object[1] { verenigingId } };
-                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-
-                                List<BusinessEntity> entities = RetrieveMultiple(service, "account", out moreRecords, ref pageNum, expression);
-
-                                foreach (account entity in entities)
-                                {
-                                    vereniging = beheerModel.ClubCloud_Verenigingen.Find(entity.accountid.Value);
-
-                                    if (vereniging == null)
-                                    {
-                                        vereniging = beheerModel.ClubCloud_Verenigingen.Create();
-                                        vereniging.Id = entity.accountid.Value;
-
-                                        entityToVereniging(entity, vereniging, bondsnummer, settings);
-
-                                        beheerModel.ClubCloud_Verenigingen.AddOrUpdate(vereniging);
-
-                                    }
-                                    else
-                                    {
-                                        entityToVereniging(entity, vereniging, bondsnummer, settings);
-
-                                    }
-
-                                    beheerModel.SaveChanges();
-
-                                    //GetClubCloudSettings(vereniging.Nummer);
-                                }
-                            }
-                            */
                         }
                     }
                 }
@@ -11274,7 +10605,54 @@
         /// <returns></returns>
         private List<ClubCloud_Vereniging> GetVerenigingen(string bondsnummer, bool refresh, ClubCloud_Setting settings)
         {
-            throw new NotImplementedException();
+            List<ClubCloud_Vereniging> verenigingen = new List<ClubCloud_Vereniging>();
+
+            verenigingen = beheerModel.ClubCloud_Verenigingen.ToList();
+
+            if (verenigingen == null || verenigingen.Count == 0 || refresh)
+            {
+                if (settings == null)
+                {
+                    settings = GetSettings(bondsnummer);
+                }
+                if (settings != null && settings.Access && !string.IsNullOrWhiteSpace(settings.Password))
+                {
+                    CookieContainer cc = RequestContainer(settings.Id.ToString(), settings.Password);
+
+                    if (cc != null)
+                    {
+                        using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
+                        {
+                            bool moreRecords = true;
+                            int pageNum = 1;
+                            while (moreRecords)
+                            {
+                                ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_vereniging", Operator = ConditionOperator.Equal, Values = new object[1] { true } };
+                                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
+                                List<BusinessEntity> entities = RetrieveMultiple(service, "account", out moreRecords, ref pageNum, expression);
+
+                                foreach (account entity in entities)
+                                {
+                                    ClubCloud_Vereniging vereniging = beheerModel.ClubCloud_Verenigingen.Find(entity.accountid.Value);
+
+                                    if (vereniging == null)
+                                        vereniging = beheerModel.ClubCloud_Verenigingen.Create();
+
+                                    vereniging.Id = entity.accountid.Value;
+                                    VerenigingToEntity(entity, vereniging, settings);
+
+                                    beheerModel.ClubCloud_Verenigingen.AddOrUpdate(vereniging);
+                                }
+                                beheerModel.SaveChanges();
+                            }
+                        }
+                    }
+                }
+                verenigingen = beheerModel.ClubCloud_Verenigingen.ToList();
+            }
+            return verenigingen;
+
         }
 
         /// <summary>
@@ -11512,7 +10890,7 @@
                                         {
                                             bestuursorgaan.Groep = "";
                                         }
-                                        bestuursorgaan.Actief = entity.statuscode.name;
+                                        bestuursorgaan.Actief = (ActiefSoort)entity.statuscode.Value;
                                         beheerModel.ClubCloud_Bestuursorganen.Add(bestuursorgaan);
                                         //bestuursorganen.Add(bestuursorgaan);
                                     }
@@ -11538,7 +10916,7 @@
                                         {
                                             bestuursorgaan.Groep = "";
                                         }
-                                        bestuursorgaan.Actief = entity.statuscode.name;
+                                        bestuursorgaan.Actief = (ActiefSoort)entity.statuscode.Value;
                                     }
                                     beheerModel.SaveChanges();
                                 }
@@ -11879,36 +11257,70 @@
 
                                     List<BusinessEntity> entities = RetrieveMultiple(service, "contact", out moreRecords, ref pageNum, expression);
 
-                                    foreach (contact contact in entities)
+                                    foreach (contact entity in entities)
                                     {
-                                        ClubCloud_Gebruiker entity = beheerModel.ClubCloud_Gebruikers.Find(contact.contactid.Value);
+                                        ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
 
-                                        if (entity == null)
-                                            entity = beheerModel.ClubCloud_Gebruikers.Create();
+                                        if (gebruiker == null)
+                                            gebruiker = beheerModel.ClubCloud_Gebruikers.Create();
 
-                                        entity.Id = contact.contactid.Value;
+                                        gebruiker.Id = entity.contactid.Value;
 
-                                        GebruikerToEntity(contact, entity, settings);
+                                        GebruikerToEntity(entity, gebruiker, settings);
 
-                                        beheerModel.ClubCloud_Gebruikers.AddOrUpdate(entity);
-
-                                        /*
-                                        if (settings.Id == int.Parse(entity.sgt_bondsnummer) && (settings.GebruikerId == null || settings.VerenigingId == null))
-                                        {
-                                            ClubCloud_Setting updatesettings = beheerModel.ClubCloud_Settings.Find(settings.Id);
-                                            if (entity.parentcustomerid != null)
-                                                updatesettings.VerenigingId = entity.parentcustomerid.Value;
-
-                                            if (entity.contactid != null)
-                                                updatesettings.GebruikerId = entity.contactid.Value;
-
-                                            beheerModel.SaveChanges();
-                                            settings = updatesettings;
-                                        }
-                                        */
-
+                                        beheerModel.ClubCloud_Gebruikers.AddOrUpdate(gebruiker);
                                     }
                                     beheerModel.SaveChanges();
+
+                                    foreach (contact entity in entities)
+                                    {
+                                        int _bondsnummer;
+                                        if (int.TryParse(entity.sgt_bondsnummer, out _bondsnummer))
+                                        {
+                                            ClubCloud_Setting usersettings = beheerModel.ClubCloud_Settings.Find(entity.sgt_bondsnummer);
+
+                                            if (usersettings == null)
+                                            {
+                                                usersettings = beheerModel.ClubCloud_Settings.Create();
+                                                usersettings.Id = _bondsnummer;
+                                                usersettings.Access = false;
+                                                usersettings.Agree = false;
+                                                usersettings.facebook_allow = false;
+                                                usersettings.facebook_setting = Facebook.None;
+                                                usersettings.financieel = Financieel.None;
+                                                usersettings.privacy = Privacy.None;
+                                                usersettings.twitter_allow = false;
+                                                usersettings.twitter_setting = Twitter.None;
+                                            }
+
+                                            if (entity.parentcustomerid != null)
+                                                usersettings.VerenigingId = entity.parentcustomerid.Value;
+
+                                            if (entity.contactid != null)
+                                                usersettings.GebruikerId = entity.contactid.Value;
+
+                                            usersettings.Gewijzigd = DateTime.Now;
+                                            beheerModel.ClubCloud_Settings.AddOrUpdate(usersettings);
+                                        }
+                                    }
+                                    beheerModel.SaveChanges();
+
+                                    foreach (contact entity in entities)
+                                    {
+                                        ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
+                                        bool succes = CreateOrUpdateMembershipGebruiker(gebruiker, settings).Result;
+                                    }
+
+                                    foreach (contact entity in entities)
+                                    {
+                                        ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
+
+                                        if (entity.sgt_is_functionaris != null && entity.sgt_is_functionaris.Value)
+                                        {
+                                            GetFunctionarissenForGebruikerById(bondsnummer, entity.contactid.Value, refresh, settings);
+                                        }
+                                    }
+
                                 }
                             }
                         }
@@ -12239,14 +11651,14 @@
                                         vereniging = beheerModel.ClubCloud_Verenigingen.Create();
                                         vereniging.Id = entity.accountid.Value;
 
-                                        entityToVereniging(entity, vereniging, bondsnummer, settings);
+                                        VerenigingToEntity(entity, vereniging, settings);
 
                                         beheerModel.ClubCloud_Verenigingen.Add(vereniging);
 
                                     }
                                     else
                                     {
-                                        entityToVereniging(entity, vereniging, bondsnummer, settings);
+                                        VerenigingToEntity(entity, vereniging, settings);
 
                                     }
 
@@ -12351,7 +11763,7 @@
             {
                 vereniging.Maanden = entity.sgt_aantal_maanden_geopend.Value;
             }
-            vereniging.Actief = entity.statuscode.name;
+            vereniging.Actief = (ActiefSoort)entity.statuscode.Value;
             vereniging.Gewijzigd = DateTime.Now;
 
 
@@ -12398,23 +11810,25 @@
                 entity.AccommodatieId = account.sgt_hoofdaccomodatieid.Value;
             }
 
-            if (account.address1_addressid != null)
-            {
-                ClubCloud_Address bezoek = GetAddressById(account.address1_addressid.Value, false, settings);
-                entity.ClubCloud_Address.Add(bezoek);
-            }
-            if (account.address2_addressid != null)
-            {
-                ClubCloud_Address post = GetAddressById(account.address2_addressid.Value, false, settings);
-                entity.ClubCloud_Address.Add(post);
-            }
-
             if (account.parentaccountid != null)
             {
                 ClubCloud_Regio regio = GetRegioById(account.parentaccountid.Value, false, settings);
                 entity.ClubCloud_Regio = regio;
                 entity.RegioId = account.parentaccountid.Value;
             }
+
+            if (account.address1_addressid != null)
+            {
+                ClubCloud_Address bezoek = GetAddressById(account.address1_addressid.Value, false, settings);
+                entity.ClubCloud_Address.Add(bezoek);
+            }
+
+            if (account.address2_addressid != null)
+            {
+                ClubCloud_Address post = GetAddressById(account.address2_addressid.Value, false, settings);
+                entity.ClubCloud_Address.Add(post);
+            }
+
 
             entity.EmailKNLTB = account.emailaddress1;
             entity.EmailWebSite = account.emailaddress2;
@@ -12425,7 +11839,8 @@
             entity.Beschrijving = account.description;
             entity.TelefoonOverdag = account.telephone1;
             entity.TelefoonAvond = account.telephone2;
-            entity.TelefoonOverig = account.telephone1;
+            entity.TelefoonOverig = account.telephone3;
+
             if (account.sgt_datum_oprichting != null)
             {
                 entity.Oprichting = DateTime.Parse(account.sgt_datum_oprichting.Value);
@@ -12442,7 +11857,7 @@
             {
                 entity.Maanden = account.sgt_aantal_maanden_geopend.Value;
             }
-            entity.Actief = account.statuscode.name;
+            entity.Actief = (ActiefSoort)account.statuscode.Value;
             entity.Gewijzigd = DateTime.Now;
         }
 
@@ -13914,21 +13329,34 @@
 			beheerModel.Database.Initialize(refresh);
 			ClubCloud_Setting settings = GetSettings(bondsnummer);
 
-			CookieContainer cc = RequestContainer(settings.Id.ToString(), settings.Password);
+            if (settings != null)
+            {
+                CookieContainer cc = RequestContainer(settings.Id.ToString(), settings.Password);
 
-			if (cc != null)
-			{
-				using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
-				{
-					WhoAmIResponse response = service.Execute(new WhoAmIRequest()) as WhoAmIResponse;
-				}
-			}
+                if (cc != null)
+                {
+                    using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
+                    {
+                        WhoAmIResponse response = service.Execute(new WhoAmIRequest()) as WhoAmIResponse;
+                    }
+                }
+            }
 		}
 
 		public void NationaliteitenUpdate(string bondsnummer, bool refresh)
 		{
 			GetNationaliteiten(bondsnummer, true, null);
 		}
+
+        public void LandenUpdate(string bondsnummer, bool refresh)
+        {
+            GetLanden(bondsnummer, true, null);
+        }
+
+        public void BouwaardenUpdate(string bondsnummer, bool refresh)
+        {
+            GetBouwaarden(bondsnummer, true, null);
+        }
 
 		public void DistrictenUpdate(string bondsnummer, bool refresh)
 		{
@@ -13990,6 +13418,72 @@
 			GetBanen(bondsnummer, true, null);
 		}
 
+        /*
+        public void AccommodatiesUpdate(string bondsnummer, bool refresh)
+        {
+            GetAccommodaties(bondsnummer, true, null);
+        }
+        */
+
+        public bool AccommodatiesUpdate(string bondsnummer, int pageNum, bool refresh)
+        {
+            bool moreRecords = true;
+
+            ClubCloud_Setting settings = GetSettings(bondsnummer);
+
+            if (settings != null && settings.Access && !string.IsNullOrWhiteSpace(settings.Password))
+            {
+                CookieContainer cc = RequestContainer(settings.Id.ToString(), settings.Password);
+
+                if (cc != null)
+                {
+                    using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
+                    {
+                        List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_accommodatie", out moreRecords, ref pageNum);
+
+                        foreach (sgt_alg_accommodatie accommodatie in entities)
+                        {
+                            ClubCloud_Accommodatie entity = beheerModel.ClubCloud_Accommodaties.Find(accommodatie.sgt_alg_accommodatieid.Value);
+
+                            if (entity == null)
+                                entity = beheerModel.ClubCloud_Accommodaties.Create();
+
+                            entity.Id = accommodatie.sgt_alg_accommodatieid.Value;
+
+                            AccommodatieToEntity(accommodatie, entity, settings);
+
+                            beheerModel.ClubCloud_Accommodaties.AddOrUpdate(entity);
+                        }
+
+                        beheerModel.SaveChanges();
+
+                        foreach (sgt_alg_accommodatie accommodatie in entities)
+                        {
+                            if (accommodatie.sgt_alg_accommodatieid.Value != null)
+                            {
+                                ClubCloud_Accommodatie entity = beheerModel.ClubCloud_Accommodaties.Find(accommodatie.sgt_alg_accommodatieid.Value);
+
+                                if (entity != null)
+                                {
+                                    List<ClubCloud_Address> addressen = GetAddressenForAccommodatieById(settings.Id.ToString(), accommodatie.sgt_alg_accommodatieid.Value, refresh, settings);
+
+                                    if (addressen != null && addressen.Count > 0)
+                                    {
+                                        foreach (ClubCloud_Address address in addressen)
+                                        {
+                                            entity.ClubCloud_Address.Add(address);
+                                        }
+                                        beheerModel.SaveChanges();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return moreRecords;
+        }
+        
 		/// <summary>
 		/// 
 		/// </summary>
@@ -14017,27 +13511,19 @@
 
 						List<BusinessEntity> entities = RetrieveMultiple(service, "account", out moreRecords, ref pageNum, expression);
 
-						foreach (account entity in entities)
-						{
-							ClubCloud_Vereniging vereniging = beheerModel.ClubCloud_Verenigingen.Find(entity.accountid.Value);
+                        foreach (account entity in entities)
+                        {
+                            ClubCloud_Vereniging vereniging = beheerModel.ClubCloud_Verenigingen.Find(entity.accountid.Value);
 
-							if (vereniging == null)
-							{
-								vereniging = beheerModel.ClubCloud_Verenigingen.Create();
-								vereniging.Id = entity.accountid.Value;
-								entityToVereniging(entity, vereniging, bondsnummer, settings);
+                            if (vereniging == null)
+                                vereniging = beheerModel.ClubCloud_Verenigingen.Create();
 
-								beheerModel.ClubCloud_Verenigingen.Add(vereniging);
+                            vereniging.Id = entity.accountid.Value;
+                            VerenigingToEntity(entity, vereniging, settings);
 
-							}
-							else
-							{
-								entityToVereniging(entity, vereniging, bondsnummer, settings);
-
-							}
-
-							beheerModel.SaveChanges();
-						}
+                            beheerModel.ClubCloud_Verenigingen.AddOrUpdate(vereniging);
+                        }
+                        beheerModel.SaveChanges();
 					}
 				}
 			}
@@ -14057,56 +13543,78 @@
 
 				if (cc != null)
 				{
-					using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
-					{
+                    using (ClubCloud.KNLTB.ServIt.CrmService.CrmService service = CrmServices[settings.Id.ToString()])
+                    {
 
-						ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_primaire_vereniging_id", Operator = ConditionOperator.Equal, Values = new object[1] { vereniging.Id } };
-						FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                        ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_primaire_vereniging_id", Operator = ConditionOperator.Equal, Values = new object[1] { vereniging.Id } };
+                        FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
 
-						List<BusinessEntity> entities = RetrieveMultiple(service, "contact", out moreRecords, ref pageNum, expression);
+                        List<BusinessEntity> entities = RetrieveMultiple(service, "contact", out moreRecords, ref pageNum, expression);
 
-						foreach (contact entity in entities)
-						{
-							if (settings.Id == int.Parse(entity.sgt_bondsnummer) && (settings.GebruikerId == null || settings.VerenigingId == null))
-							{
-								ClubCloud_Setting updatesettings = beheerModel.ClubCloud_Settings.Find(settings.Id);
-								if (entity.parentcustomerid != null)
-									updatesettings.VerenigingId = entity.parentcustomerid.Value;
+                        foreach (contact entity in entities)
+                        {
+                            ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
 
-								if (entity.contactid != null)
-									updatesettings.GebruikerId = entity.contactid.Value;
+                            if (gebruiker == null)
+                                gebruiker = beheerModel.ClubCloud_Gebruikers.Create();
 
-								beheerModel.SaveChanges();
-								settings = updatesettings;
-							}
+                            gebruiker.Id = entity.contactid.Value;
 
-							ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
+                            GebruikerToEntity(entity, gebruiker, settings);
 
-							if (gebruiker == null)
-							{
-								gebruiker = beheerModel.ClubCloud_Gebruikers.Create();
-								gebruiker.Id = entity.contactid.Value;
+                            beheerModel.ClubCloud_Gebruikers.AddOrUpdate(gebruiker);
+                        }
+                        beheerModel.SaveChanges();
 
-                                GebruikerToEntity(entity, gebruiker, settings);
+                        foreach (contact entity in entities)
+                        {
+                            int _bondsnummer;
+                            if (int.TryParse(entity.sgt_bondsnummer, out _bondsnummer))
+                            {
+                                ClubCloud_Setting usersettings = beheerModel.ClubCloud_Settings.Find(entity.sgt_bondsnummer);
 
-								beheerModel.ClubCloud_Gebruikers.Add(gebruiker);
-							}
-							else
-							{
-                                GebruikerToEntity(entity, gebruiker, settings);
-							}
+                                if (usersettings == null)
+                                {
+                                    usersettings = beheerModel.ClubCloud_Settings.Create();
+                                    usersettings.Id = _bondsnummer;
+                                    usersettings.Access = false;
+                                    usersettings.Agree = false;
+                                    usersettings.facebook_allow = false;
+                                    usersettings.facebook_setting = Facebook.None;
+                                    usersettings.financieel = Financieel.None;
+                                    usersettings.privacy = Privacy.None;
+                                    usersettings.twitter_allow = false;
+                                    usersettings.twitter_setting = Twitter.None;
+                                }
 
-							beheerModel.SaveChanges();
+                                if (entity.parentcustomerid != null)
+                                    usersettings.VerenigingId = entity.parentcustomerid.Value;
 
-							CreateOrUpdateMembershipGebruiker(gebruiker, settings);
+                                if (entity.contactid != null)
+                                    usersettings.GebruikerId = entity.contactid.Value;
 
-							if (entity.sgt_is_functionaris != null && entity.sgt_is_functionaris.Value)
-							{
-								GetFunctionarissenForGebruikerById(bondsnummer, entity.contactid.Value, false, settings);
-							}
+                                usersettings.Gewijzigd = DateTime.Now;
+                                beheerModel.ClubCloud_Settings.AddOrUpdate(usersettings);
+                            }
+                        }
+                        beheerModel.SaveChanges();
 
-						}
-					}
+                        foreach (contact entity in entities)
+                        {
+                            ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
+                            bool result = CreateOrUpdateMembershipGebruiker(gebruiker, settings).Result;
+                        }
+
+                        foreach (contact entity in entities)
+                        {
+                            ClubCloud_Gebruiker gebruiker = beheerModel.ClubCloud_Gebruikers.Find(entity.contactid.Value);
+
+                            if (entity.sgt_is_functionaris != null && entity.sgt_is_functionaris.Value)
+                            {
+                                GetFunctionarissenForGebruikerById(bondsnummer, entity.contactid.Value, refresh, settings);
+                            }
+                        }
+                    }
 				}
 			}
 			return moreRecords;
