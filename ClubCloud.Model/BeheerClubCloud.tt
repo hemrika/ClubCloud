@@ -78,7 +78,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 <#	if(ef.IsKey(edmProperty))
    {
 #>      
-    [Key()]
+    //[Key()]
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
 <#
 	}
@@ -86,7 +86,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 	if (edmProperty.Documentation != null)
     {
 #>
-	[Display(Name = "<#=code.Escape(edmProperty.Documentation.Summary)#>")]
+	[DisplayName("<#=code.Escape(edmProperty.Documentation.Summary)#>")]
 	[Description("<#=code.Escape(edmProperty.Documentation.LongDescription)#>")]	
 <#
 	}

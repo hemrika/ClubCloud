@@ -42,7 +42,7 @@
 			Straat : <asp:TextBox ID="Straat" runat="server" Text='<%# Bind("Straat") %>' TextMode="SingleLine"/></br>
 			Nummer : <asp:TextBox ID="Nummer" runat="server" Text='<%# Bind("Nummer") %>' TextMode="Number" Enabled="false" /></br>
             Land : <asp:DropDownList ID="LandId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("LandId") %>' SelectMethod="SelectLand" OnCallingDataMethods="EditAddressform_CallingDataMethods" /></br>
-			Actief : <asp:TextBox ID="Actief" runat="server" Text='<%# Bind("Actief") %>' TextMode="SingleLine"/></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditAddressform_CallingDataMethods" /></br>
 			Fax : <asp:TextBox ID="Fax" runat="server" Text='<%# Bind("Fax") %>' TextMode="Phone" /></br>
 			Toevoeging : <asp:TextBox ID="Toevoeging" runat="server" Text='<%# Bind("Toevoeging") %>' TextMode="SingleLine"/></br>
 			Postbus : <asp:TextBox ID="Postbus" runat="server" Text='<%# Bind("Postbus") %>' TextMode="SingleLine"/></br>

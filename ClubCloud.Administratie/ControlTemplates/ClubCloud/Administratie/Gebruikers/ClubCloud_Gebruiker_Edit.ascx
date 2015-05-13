@@ -62,7 +62,7 @@
             Nationaliteit : <asp:DropDownList ID="NationaliteitId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("NationaliteitId") %>' SelectMethod="SelectNationaliteit" OnCallingDataMethods="EditGebruikerform_CallingDataMethods" /></br>
 			Website : <asp:TextBox ID="Website" runat="server" Text='<%# Bind("Website") %>' TextMode="SingleLine"/></br>
 			FTPsite : <asp:TextBox ID="FTPsite" runat="server" Text='<%# Bind("FTPsite") %>' TextMode="SingleLine"/></br>
-			Actief : <asp:TextBox ID="Actief" runat="server" Text='<%# Bind("Actief") %>' TextMode="SingleLine"/></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditGebruikerform_CallingDataMethods" /></br>
 			Beroep : <asp:TextBox ID="Beroep" runat="server" Text='<%# Bind("Beroep") %>' TextMode="SingleLine"/></br>
 			Kinderen : <asp:Checkbox ID="Kinderen" runat="server" Checked='<%# Bind("Kinderen") %>' /></br>
 			KinderenAantal : <asp:TextBox ID="KinderenAantal" runat="server" Text='<%# Bind("KinderenAantal") %>' TextMode="Number" /></br>

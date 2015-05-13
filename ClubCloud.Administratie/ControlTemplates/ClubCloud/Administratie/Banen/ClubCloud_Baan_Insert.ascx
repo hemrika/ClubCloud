@@ -38,7 +38,7 @@
 			Status : <asp:TextBox ID="Status" runat="server" Text='<%# Bind("Status") %>' TextMode="SingleLine"/></br>
 			Keuring : <asp:TextBox ID="Keuring" runat="server" Text='<%# Bind("Keuring") %>' TextMode="Date" /></br>
 			<ajaxToolkit:CalendarExtender ID="Keuring_CalendarExtender" runat="server" BehaviorID="Keuring_CalendarExtender" TargetControlID="Keuring" />
-			Actief : <asp:TextBox ID="Actief" runat="server" Text='<%# Bind("Actief") %>' TextMode="SingleLine"/></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertBaanform_CallingDataMethods" /></br>
         </fieldset>
     </InsertItemTemplate>
 </asp:FormView>

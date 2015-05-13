@@ -15,6 +15,7 @@
     using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using System.Web.Security;
 
@@ -134,10 +135,14 @@
                             zuser.employeeNumber = gebruiker.Id.ToString();
                             zuser.givenName = gebruiker.Voornamen;
                             zuser.initials = gebruiker.Voorletters;
-                            zuser.telephoneNumber = gebruiker.Mobiel;
                             zuser.zimbraPrefMailForwardingAddress = gebruiker.EmailKNLTB;
-                            zuser.homePhone = gebruiker.TelefoonAvond;
-                            zuser.mobile = gebruiker.Mobiel;
+
+                            if (!string.IsNullOrWhiteSpace(gebruiker.TelefoonOverdag))
+                                zuser.telephoneNumber = Regex.Replace(gebruiker.TelefoonOverdag, @"[^A-Za-z0-9+ -]+", "");                            
+                            if (!string.IsNullOrWhiteSpace(gebruiker.TelefoonAvond))
+                                zuser.homePhone = Regex.Replace(gebruiker.TelefoonAvond, @"[^A-Za-z0-9+ -]+", "");
+                            if (!string.IsNullOrWhiteSpace(gebruiker.Mobiel))
+                                zuser.mobile = Regex.Replace(gebruiker.Mobiel, @"[^A-Za-z0-9+ -]+", "");
                         }
 
                         if (nationaliteit != null)
@@ -237,11 +242,14 @@
                             zuser.displayName = vereniging.Naam;
                             zuser.employeeNumber = vereniging.Id.ToString();
                             zuser.givenName = vereniging.Naam;
-                            zuser.homePhone = vereniging.TelefoonOverdag;
-                            zuser.mobile = vereniging.TelefoonOverig;
                             zuser.o = vereniging.Nummer;
-                            zuser.telephoneNumber = vereniging.TelefoonAvond;
                             zuser.zimbraPrefMailForwardingAddress = vereniging.EmailKNLTB;
+
+                            if (!string.IsNullOrWhiteSpace(vereniging.TelefoonOverdag))
+                                zuser.telephoneNumber = Regex.Replace(vereniging.TelefoonOverdag, @"[^A-Za-z0-9+ -]+", "");
+                            if (!string.IsNullOrWhiteSpace(vereniging.TelefoonAvond))
+                                zuser.homePhone = Regex.Replace(vereniging.TelefoonAvond, @"[^A-Za-z0-9+ -]+", "");
+                            //zuser.mobile = Regex.Replace(gebruiker.TelefoonAvond, @"[^A-Za-z0-9+ -]+", ""); vereniging.TelefoonOverig;
                             //zuser.co = gebruiker.NationaliteitId.ToString();
                             //zuser.initials = gebruiker.Voorletters;
                         }

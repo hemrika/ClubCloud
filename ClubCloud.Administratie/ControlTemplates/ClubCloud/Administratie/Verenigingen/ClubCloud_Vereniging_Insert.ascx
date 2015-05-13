@@ -52,7 +52,7 @@
 			TelefoonOverig : <asp:TextBox ID="TelefoonOverig" runat="server" Text='<%# Bind("TelefoonOverig") %>' TextMode="Phone" /></br>
 			Website : <asp:TextBox ID="Website" runat="server" Text='<%# Bind("Website") %>' TextMode="SingleLine"/></br>
 			FTPsite : <asp:TextBox ID="FTPsite" runat="server" Text='<%# Bind("FTPsite") %>' TextMode="SingleLine"/></br>
-			Actief : <asp:TextBox ID="Actief" runat="server" Text='<%# Bind("Actief") %>' TextMode="SingleLine"/></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertVerenigingform_CallingDataMethods" /></br>
 			Oprichting : <asp:TextBox ID="Oprichting" runat="server" Text='<%# Bind("Oprichting") %>' TextMode="Date" /></br>
 			<ajaxToolkit:CalendarExtender ID="Oprichting_CalendarExtender" runat="server" BehaviorID="Oprichting_CalendarExtender" TargetControlID="Oprichting" />
 			Erkenning : <asp:TextBox ID="Erkenning" runat="server" Text='<%# Bind("Erkenning") %>' TextMode="Date" /></br>

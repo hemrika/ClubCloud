@@ -269,6 +269,47 @@ namespace ClubCloud.Administratie.WebControls
     	}
     
     
+    	//public Hashtable SelectActief()
+    	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]    
+    	public IQueryable<DictionaryEntry> SelectActief()
+        {
+            if(SPContext.Current.Web.CurrentUser != null)
+            {
+                int bondsnummer;
+                ClubCloud_Setting Settings = null;
+                if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+                    Settings = Client.GetSettingById(bondsnummer);
+    
+    			if(Settings != null && Settings.VerenigingId != null) 
+                {
+                    List<DictionaryEntry> result = new List<DictionaryEntry>();
+                	Array values = Enum.GetValues(typeof(ActiefSoort));
+                    Array.Sort(values);
+                    foreach (int value in values)
+                    {
+                        result.Add(new DictionaryEntry(value, (ActiefSoort)value));
+                    }
+                    return result.AsQueryable<DictionaryEntry>();
+        		}
+    			/*
+                if(Settings != null && Settings.VerenigingId != null) 
+                {
+                    Hashtable ht = new Hashtable();
+    				ht.Add(string.Empty,"Onbekend");
+        			Array values = Enum.GetValues(typeof(ActiefSoort));
+                    Array.Sort(values);
+                    foreach (int value in values)
+                    {
+                        string name = ((ActiefSoort)value).ToString();
+                        ht.Add(name,name);
+                    }    
+        			return ht;
+    			}
+    			*/
+    		}
+    
+    		return null;
+    	}
     
     	/*
         [SPDisposeCheckIgnore(SPDisposeCheckID.SPDisposeCheckID_140, "RootWeb disposed automatically")]

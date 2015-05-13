@@ -63,7 +63,7 @@
 			WasruimteClubhuisAanwezig : <asp:Checkbox ID="WasruimteClubhuisAanwezig" runat="server" Checked='<%# Bind("WasruimteClubhuisAanwezig") %>' /></br>
 			<asp:HiddenField ID="DistrictId" Value='<%# Bind("DistrictId") %>' runat="server" />
 			<asp:HiddenField ID="RegioId" Value='<%# Bind("RegioId") %>' runat="server" />
-			Actief : <asp:TextBox ID="Actief" runat="server" Text='<%# Bind("Actief") %>' TextMode="SingleLine"/></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditAccommodatieform_CallingDataMethods" /></br>
 			Gewijzigd : <asp:TextBox ID="Gewijzigd" runat="server" Text='<%# Bind("Gewijzigd") %>' TextMode="Date" /></br>
         </fieldset>
     </EditItemTemplate>

@@ -55,7 +55,7 @@
 			SpeelsterkteDubbel : <asp:TextBox ID="SpeelsterkteDubbel" runat="server" Text='<%# Bind("SpeelsterkteDubbel") %>' TextMode="Number" /></br>
 			SpeelsterkteEnkel : <asp:TextBox ID="SpeelsterkteEnkel" runat="server" Text='<%# Bind("SpeelsterkteEnkel") %>' TextMode="Number" /></br>
 			Autorisatie : <asp:Checkbox ID="Autorisatie" runat="server" Checked='<%# Bind("Autorisatie") %>' /></br>
-			Actief : <asp:TextBox ID="Actief" runat="server" Text='<%# Bind("Actief") %>' TextMode="SingleLine"/></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertLidmaatschapform_CallingDataMethods" /></br>
 			Gewijzigd : <asp:TextBox ID="Gewijzigd" runat="server" Text='<%# Bind("Gewijzigd") %>' TextMode="Date" /></br>
 			<ajaxToolkit:CalendarExtender ID="Gewijzigd_CalendarExtender" runat="server" BehaviorID="Gewijzigd_CalendarExtender" TargetControlID="Gewijzigd" />
         </fieldset>

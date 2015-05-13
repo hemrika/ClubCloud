@@ -302,7 +302,7 @@ namespace ClubCloud.Service.Administration
                         try
                         {
 
-                            moreRecords = ServiceClient.GebruikersUpdate("12073385", nummer, pageNum, false);
+                            moreRecords = ServiceClient.GebruikersUpdate("12073385", nummer, pageNum, true);
                             pageNum++;
                         }
                         catch (Exception)
@@ -313,7 +313,7 @@ namespace ClubCloud.Service.Administration
 
                     try
                     {
-                        ClubCloud_Vereniging vereniging = ServiceClient.GetVerenigingByNummer("12073385", nummer, false);
+                        ClubCloud_Vereniging vereniging = ServiceClient.GetVerenigingByNummer("12073385", nummer, true);
                         ServiceClient.LidmaatschappenUpdate("12073385", vereniging.Id, true);
                     }
                     catch { }

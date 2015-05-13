@@ -38,7 +38,7 @@
 			<asp:HiddenField ID="AccommodatieId" Value='<%# Bind("AccommodatieId") %>' runat="server" />
 			Status : <asp:TextBox ID="Status" runat="server" Text='<%# Bind("Status") %>' TextMode="SingleLine"/></br>
 			Keuring : <asp:TextBox ID="Keuring" runat="server" Text='<%# Bind("Keuring") %>' TextMode="Date" /></br>
-			Actief : <asp:TextBox ID="Actief" runat="server" Text='<%# Bind("Actief") %>' TextMode="SingleLine"/></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditBaanform_CallingDataMethods" /></br>
         </fieldset>
     </EditItemTemplate>
 </asp:FormView>

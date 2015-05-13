@@ -37,7 +37,7 @@
             Baansoort : <asp:DropDownList ID="BaansoortId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaansoortId") %>' SelectMethod="SelectBaansoort" OnCallingDataMethods="InsertBaanblokform_CallingDataMethods" /></br>
 			Verlichting : <asp:Checkbox ID="Verlichting" runat="server" Checked='<%# Bind("Verlichting") %>' /></br>
 			Locatie : <asp:TextBox ID="Locatie" runat="server" Text='<%# Bind("Locatie") %>' TextMode="SingleLine"/></br>
-			Actief : <asp:TextBox ID="Actief" runat="server" Text='<%# Bind("Actief") %>' TextMode="SingleLine"/></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertBaanblokform_CallingDataMethods" /></br>
         </fieldset>
     </InsertItemTemplate>
 </asp:FormView>

@@ -1635,6 +1635,8 @@ namespace ClubCloud.Provider
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
                 if (spcontext != null)
                     domain = GetZimbraDomain(spcontext.Site.Url);
+                
+                //Zimbra.Administration.GetDistributionListRequest reqquest = new Zimbra.Administration.GetDistributionListRequest { name = "" };
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -2009,31 +2011,19 @@ namespace ClubCloud.Provider
                 {
                     foreach (Zimbra.Global.DistributionListInfo dl in response.dl)
                     {
-                        if (!dl.dynamic)
+                        if (dl.dynamic)
                         {
                             List<Zimbra.Global.attrN> attributes = dl.a;
-
-                            attrN displayName = attributes.Find(a => a.name == "displayName" && a.Value == groupName);
-
-                            if (displayName != null && displayName.Value == groupName)
-                                groupExists = true; break;
-
-                            //if (attributes.Count(a => a.name == "displayName" && a.Value == groupName) > 0)
-                            /*
                             foreach (Zimbra.Global.attrN attr in attributes)
                             {
                                 if (attr.name == "displayName" && attr.Value == groupName)
                                 {
-                                    groupExists = true;
-                                    break;
+                                    groupExists = true; break;
                                 }
                             }
-                            */
                         }
                     }
                 }
-
-
                 return groupExists;
             }
             catch (Exception ex)
@@ -2098,26 +2088,16 @@ namespace ClubCloud.Provider
                         if (dl.dynamic)
                         {
                             List<Zimbra.Global.attrN> attributes = dl.a;
-
-                            attrN displayName = attributes.Find(a => a.name == "displayName" && a.Value == roleName);
-
-                            if (displayName != null && displayName.Value == roleName)
-                                roleExists = true; break;
-                            /*
                             foreach (Zimbra.Global.attrN attr in attributes)
                             {
                                 if (attr.name == "displayName" && attr.Value == roleName)
                                 {
-                                    roleExists = true;
-                                    break;
+                                    roleExists = true; break;
                                 }
                             }
-                            */
                         }
                     }
                 }
-
-
                 return roleExists;
             }
             catch (Exception ex)
