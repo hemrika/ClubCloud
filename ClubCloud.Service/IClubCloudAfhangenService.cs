@@ -17,8 +17,8 @@ namespace ClubCloud.Service
     /// <summary>
     ///
     /// </summary>
+    [ServiceKnownType("GetKnownTypes", typeof(BeheerContainer_KnownTypes))]
     [ServiceContract(Namespace = "http://clubcloud.nl/", Name = "ClubCloudAfhangen")]
-
     public interface IClubCloudAfhangenService
     {
         #region Afhangen

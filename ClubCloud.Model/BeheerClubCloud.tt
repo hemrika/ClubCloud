@@ -687,7 +687,7 @@ public class CodeStringGenerator
 		{
 			output.AppendFormat("[KnownType(typeof({0}))]{1}", sItem, Environment.NewLine);
 		}
-		output.AppendLine("[DataContract(IsReference = true)]");
+		output.AppendLine("[DataContract]"); //(IsReference = true)]");
 		output.AppendFormat("[TypeDescriptionProvider(typeof({0}_TypeDescriptionProvider))]", type.Name, Environment.NewLine);
 		return output.ToString();
 	}

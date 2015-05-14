@@ -17,6 +17,7 @@ namespace ClubCloud.Service
     /// <summary>
     /// The Service Contract.
     /// </summary>
+    [ServiceKnownType("GetKnownTypes", typeof(BeheerContainer_KnownTypes))]
     [ServiceContract(Namespace = "http://clubcloud.nl/", Name = "ClubCloudService")]
     [System.Runtime.InteropServices.Guid("23c6e4c4-d8d7-4bef-8d11-420c88bbefc2")]
     internal partial interface IClubCloudApplicationService

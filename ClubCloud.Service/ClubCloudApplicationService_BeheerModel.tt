@@ -31,6 +31,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Validation;
+using System.Reflection;
 
 internal partial class ClubCloudApplicationService
 {	
@@ -84,6 +85,25 @@ internal partial class ClubCloudApplicationService
 		{
 			error.Entry.State = EntityState.Detached;
 		}
+	}
+}
+
+
+public static class <#=code.Escape(container)#>_KnownTypes
+{
+	public static IEnumerable<Type> GetKnownTypes(ICustomAttributeProvider provider)
+	{
+		System.Collections.Generic.List<System.Type> knownTypes = new System.Collections.Generic.List<System.Type>();
+<#
+foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
+{
+	var entity = entitySet.ElementType;
+#>
+		knownTypes.Add(typeof(<#=code.Escape(entity)#>));
+<#
+}
+#>
+		return knownTypes;
 	}
 }
 

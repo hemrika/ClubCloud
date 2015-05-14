@@ -7,6 +7,7 @@
     <projectOutputAssembly location="ClubCloud.Model.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.Model\ClubCloud.Model.csproj" />
     <projectOutputAssembly location="ClubCloud.Store.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\ClubCloud.Store\ClubCloud.Store.csproj" />
     <customAssembly location="ClubCloud.KNLTB.XmlSerializers.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\ClubCloud.KNLTB.XmlSerializers.dll" />
+    <customAssembly location="Newtonsoft.Json.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\Common\Newtonsoft.Json.dll" />
   </assemblies>
   <features>
     <featureReference itemId="95303089-9602-4186-a353-cb5f1405a9ac" />

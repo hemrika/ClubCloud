@@ -19,11 +19,129 @@ namespace ClubCloud.Service
     /// <summary>
     ///
     /// </summary>
+    [ServiceKnownType("GetKnownTypes", typeof(BeheerContainer_KnownTypes))]
     [ServiceContract(Namespace = "http://clubcloud.nl/", Name = "ClubCloudMobiel")]
     public interface IClubCloudMobielService
     {
         #region Afhangen
 
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetAccommodatieForVereniging", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Accommodatie GetAccommodatieForVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetAddressen", ResponseFormat = WebMessageFormat.Json)]
+        List<ClubCloud.Model.ClubCloud_Address> GetAddressen();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetAddressenForAccommodatie/{AccommodatieId}", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Address> GetAddressenForAccommodatie(string AccommodatieId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetAddressenForVereniging", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Address> GetAddressenForVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetAfhangenForVereniging", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Afhang> GetAfhangenForVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetBaanblokkenForAccommodatie/{AccommodatieId}", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baanblok> GetBaanblokkenForAccommodatie(string AccommodatieId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetBaanschemasForVereniging", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baanschema> GetBaanschemasForVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetBanenForAccommodatie/{AccommodatieId}", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baan> GetBanenForAccommodatie(string AccommodatieId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetBanenSpeciaalForAccommodatie/{AccommodatieId}", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_BaanSpeciaal> GetBanenSpeciaalForAccommodatie(string AccommodatieId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetBestuursorganenForVereniging", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Bestuursorgaan> GetBestuursorganenForVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetDistrictForVereniging", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_District GetDistrictForVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetFoto", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Foto GetFoto();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetFunctionarissen", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Functionaris> GetFunctionarissen();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetFunctionarissenForVereniging", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Functionaris> GetFunctionarissenForVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetGebruiker", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Gebruiker GetGebruiker();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetGebruikerByNummer/{nummer}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Gebruiker GetGebruikerByNummer(string nummer);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetLidmaatschappen", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Lidmaatschap> GetLidmaatschappen();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetLidmaatschapsoortenForVereniging", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Lidmaatschapsoort> GetLidmaatschapsoortenForVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetNationaliteit", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Nationaliteit GetNationaliteit();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetProfielen", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Profiel> GetProfielen();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetRegioForVereniging", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Regio GetRegioForVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetSettings", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Setting GetSettings();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetSponsorenForVereniging", ResponseFormat = WebMessageFormat.Json)]
+        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Sponsor> GetSponsorenForVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetAccommodatie/{AccommodatieId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Accommodatie GetAccommodatie(string AccommodatieId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVereniging", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Vereniging GetVereniging();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingByLocation/{Latitude}/{Longitude}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Vereniging GetVerenigingByLocation(string Latitude, string Longitude);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingByNummer/{verenigingNummer}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Vereniging GetVerenigingByNummer(string verenigingNummer);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Login/{username}/{password}", ResponseFormat = WebMessageFormat.Json)]
+        LoginResult Login(string username, string password);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "LoginMode", ResponseFormat = WebMessageFormat.Json)]
+        System.Web.Configuration.AuthenticationMode LoginMode();
+
+        /*
         [OperationContract]
         [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "LoginMode", ResponseFormat = WebMessageFormat.Json)]
         AuthenticationMode LoginMode();
@@ -35,101 +153,10 @@ namespace ClubCloud.Service
 
         [OperationContract]
         [ServiceKnownType(typeof(ClubCloud_Setting))]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetClubCloudSettings")]//, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetClubCloudSettings", ResponseFormat = WebMessageFormat.Json)]
         ClubCloud_Setting GetClubCloudSettings();
-
-
-        [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "DeleteReservering/{verenigingId}/{reserveringId}", ResponseFormat = WebMessageFormat.Json)]
-        bool DeleteReservering(string verenigingId, string reserveringId);
-
-        /*
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Baanschema))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baanschema> GetBaanSchemaByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Baanschema))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baanschema> GetBaanSchemaByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Baan))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baan> GetBanenByAccommodatieId(string bondsnummer, Guid verenigingId, Guid accommodatieId, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Baan))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Baan> GetBanenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Gebruiker> GetGebruikersByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
         */
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetGebruikerByNummer/{bondsnummer}/{verenigingId}/{nummer}")]//, ResponseFormat = WebMessageFormat.Json)]
-        ClubCloud.Model.ClubCloud_Gebruiker GetGebruikerByNummer(string bondsnummer, string verenigingId, string nummer);
-        /*
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Foto))]
-        ClubCloud.Model.ClubCloud_Foto GetFotoByNummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
-        */
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Foto))]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetFotoById/{bondsnummer}/{verenigingId}/{gebruikerId}")]//, ResponseFormat = WebMessageFormat.Json)]
-        ClubCloud.Model.ClubCloud_Foto GetFotoById(string bondsnummer, string verenigingId, string gebruikerId);
         
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Gebruiker))]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetGebruikerById/{bondsnummer}/{verenigingId}/{gebruikerId}")]//, ResponseFormat = WebMessageFormat.Json)]
-        ClubCloud.Model.ClubCloud_Gebruiker GetGebruikerById(string bondsnummer, string verenigingId, string gebruikerId);
-        /*
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        ClubCloud.Model.ClubCloud_Reservering GetReserveringByReserveringId(string bondsnummer, Guid verenigingId, Guid reserveringId, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Reservering> GetReserveringenByBaanId(string bondsnummer, Guid verenigingId, Guid baanId, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Reservering> GetReserveringenByBondsnummer(string bondsnummer, Guid verenigingId, string nummer, bool refresh = false);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Reservering> GetReserveringenByVerenigingId(string bondsnummer, Guid verenigingId, bool refresh = false);
-        */
-        /*
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
-        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "DeleteReservering/{verenigingId}/{reserveringId}")]
-        ClubCloud.Model.ClubCloud_Vereniging GetVerenigingByLocation(string bondsnummer, double Latitude, double Longitude, bool refresh = false);
-        */
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingByNummer/{bondsnummer}/{verenigingNummer}")]//, ResponseFormat = WebMessageFormat.Json)]
-        ClubCloud.Model.ClubCloud_Vereniging GetVerenigingByNummer(string bondsnummer, string verenigingNummer);
-        
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingById/{bondsnummer}/{verenigingId}")]
-        ClubCloud.Model.ClubCloud_Vereniging GetVerenigingById(string bondsnummer, string verenigingId);
-        
-        
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Vereniging))]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingSettings/{bondsnummer}/{verenigingId}")]//, ResponseFormat = WebMessageFormat.Json)]
-        ClubCloud.Model.ClubCloud_Afhang GetVerenigingAfhangSettings(string bondsnummer, string verenigingId);
-
-        /*
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        ClubCloud.Model.ClubCloud_Reservering AddReservering(string bondsnummer, Guid verenigingId, Guid baanId, Guid[] gebruikers, DateTime Datum, TimeSpan Tijd, TimeSpan Duur, ReserveringSoort Soort = ReserveringSoort.Afhangen, bool final = false, bool push = false, string Beschrijving = "");
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Reservering))]
-        ClubCloud.Model.ClubCloud_Reservering UpdateReservering(string bondsnummer, Guid verenigingId, ClubCloud.Model.ClubCloud_Reservering reservering, bool final = false, bool push = false);
-        */
         #endregion
 
     }
