@@ -1763,6 +1763,7 @@
                                         bezoek_entity.LandId = accommodatie.sgt_bezoekadreslandcodeid.Value;
                                     }
 
+                                    bezoek_entity.Naam = AddressSoort.Bezoekadres;
                                     bezoek_entity.Gemeente = accommodatie.sgt_bezoekadres_gemeente;
                                     bezoek_entity.Nummer = accommodatie.sgt_bezoekadres_huisnummer;
                                     bezoek_entity.Stad = accommodatie.sgt_bezoekadres_plaats;
@@ -1779,6 +1780,7 @@
                                         post_entity.LandId = accommodatie.sgt_bezoekadreslandcodeid.Value;
                                     }
 
+                                    post_entity.Naam = AddressSoort.Postadres;
                                     post_entity.Gemeente = accommodatie.sgt_bezoekadres_gemeente;
                                     post_entity.Nummer = accommodatie.sgt_bezoekadres_huisnummer;
                                     post_entity.Stad = accommodatie.sgt_bezoekadres_plaats;
@@ -14016,25 +14018,97 @@
 
                         foreach (sgt_alg_accommodatie accommodatie in entities)
                         {
-                            ClubCloud_Accommodatie entity = beheerModel.ClubCloud_Accommodaties.Find(accommodatie.sgt_alg_accommodatieid.Value);
-
                             if (accommodatie.sgt_alg_accommodatieid.Value != null)
                             {
-                                GetAddressenForAccommodatieById(settings.Id.ToString(), accommodatie.sgt_alg_accommodatieid.Value, refresh, settings);
-                            }
 
-                            if (accommodatie.sgt_districtid != null)
-                            {
-                                ClubCloud_District district = GetDistrictById(accommodatie.sgt_districtid.Value, false, settings);
-                                if(district != null)
-                                    entity.ClubCloud_District = district;
-                            }
+                                ClubCloud_Accommodatie entity = beheerModel.ClubCloud_Accommodaties.Find(accommodatie.sgt_alg_accommodatieid.Value);
 
-                            if (accommodatie.sgt_regioid != null)
-                            {
-                                ClubCloud_Regio regio = GetRegioById(accommodatie.sgt_regioid.Value, false, settings);
-                                if(regio != null)
-                                    entity.ClubCloud_Regio = regio;
+                                List<ClubCloud_Address> adressen = beheerModel.ClubCloud_Addressen.Where(b => b.ParentId.Value == accommodatie.sgt_alg_accommodatieid.Value).ToList();
+
+                                ClubCloud_Address bezoek_entity = null;
+                                ClubCloud_Address post_entity = null;
+
+                                if (adressen != null && adressen.Count > 0)
+                                {
+                                    bezoek_entity = adressen.SingleOrDefault(a => a.Naam == AddressSoort.Bezoekadres);
+                                    post_entity = adressen.SingleOrDefault(a => a.Naam == AddressSoort.Postadres);
+                                }
+
+                                if (bezoek_entity == null)
+                                { bezoek_entity = beheerModel.ClubCloud_Addressen.Create(); bezoek_entity.Id = Guid.NewGuid(); bezoek_entity.ParentId = accommodatie.sgt_alg_accommodatieid.Value; }
+
+                                if (post_entity == null)
+                                { post_entity = beheerModel.ClubCloud_Addressen.Create(); post_entity.Id = Guid.NewGuid(); post_entity.ParentId = accommodatie.sgt_alg_accommodatieid.Value; }
+
+
+                                if (accommodatie.sgt_bezoekadreslandcodeid != null)
+                                {
+                                    bezoek_entity.LandId = accommodatie.sgt_bezoekadreslandcodeid.Value;
+                                }
+
+                                bezoek_entity.Naam = AddressSoort.Bezoekadres;
+                                bezoek_entity.Gemeente = accommodatie.sgt_bezoekadres_gemeente;
+                                bezoek_entity.Nummer = accommodatie.sgt_bezoekadres_huisnummer;
+                                bezoek_entity.Stad = accommodatie.sgt_bezoekadres_plaats;
+                                bezoek_entity.Postcode = accommodatie.sgt_bezoekadres_postcode;
+                                bezoek_entity.Straat = accommodatie.sgt_bezoekadres_straat;
+                                bezoek_entity.Toevoeging = accommodatie.sgt_bezoekadres_toevoeging;
+                                bezoek_entity.Actief = ActiefSoort.Actief;
+                                bezoek_entity.Gewijzigd = DateTime.Now;
+
+                                beheerModel.ClubCloud_Addressen.AddOrUpdate(bezoek_entity);
+
+                                if (accommodatie.sgt_postadreslandcodeid != null)
+                                {
+                                    post_entity.LandId = accommodatie.sgt_bezoekadreslandcodeid.Value;
+                                }
+
+                                post_entity.Naam = AddressSoort.Postadres;
+                                post_entity.Gemeente = accommodatie.sgt_bezoekadres_gemeente;
+                                post_entity.Nummer = accommodatie.sgt_bezoekadres_huisnummer;
+                                post_entity.Stad = accommodatie.sgt_bezoekadres_plaats;
+                                post_entity.Postcode = accommodatie.sgt_bezoekadres_postcode;
+                                post_entity.Straat = accommodatie.sgt_bezoekadres_straat;
+                                post_entity.Toevoeging = accommodatie.sgt_bezoekadres_toevoeging;
+                                post_entity.Actief = ActiefSoort.Actief;
+                                post_entity.Gewijzigd = DateTime.Now;
+
+                                beheerModel.ClubCloud_Addressen.AddOrUpdate(post_entity);
+
+                                beheerModel.SaveChanges();
+
+                                bezoek_entity.ClubCloud_Accommodatie = entity;
+                                if (accommodatie.sgt_bezoekadreslandcodeid != null)
+                                {
+                                    ClubCloud_Land land = GetLandById(accommodatie.sgt_bezoekadreslandcodeid.Value, false, settings);
+                                    bezoek_entity.ClubCloud_Land = land;
+                                }
+
+                                post_entity.ClubCloud_Accommodatie = entity;
+                                if (accommodatie.sgt_postadreslandcodeid != null)
+                                {
+                                    ClubCloud_Land land = GetLandById(accommodatie.sgt_postadreslandcodeid.Value, false, settings);
+                                    post_entity.ClubCloud_Land = land;
+                                }
+
+                                beheerModel.SaveChanges();
+
+
+                                if (accommodatie.sgt_districtid != null)
+                                {
+                                    ClubCloud_District district = GetDistrictById(accommodatie.sgt_districtid.Value, false, settings);
+                                    if (district != null)
+                                        entity.ClubCloud_District = district;
+                                }
+
+                                if (accommodatie.sgt_regioid != null)
+                                {
+                                    ClubCloud_Regio regio = GetRegioById(accommodatie.sgt_regioid.Value, false, settings);
+                                    if (regio != null)
+                                        entity.ClubCloud_Regio = regio;
+                                }
+
+                                beheerModel.SaveChanges();
                             }
                         }
 
