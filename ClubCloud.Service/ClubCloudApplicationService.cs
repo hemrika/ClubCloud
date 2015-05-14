@@ -9420,6 +9420,8 @@
                                     if (entity == null)
                                         entity = beheerModel.ClubCloud_Lidmaatschapsoorten.Create();
 
+                                    entity.Id = lidmaatschapsoort.sgt_alg_soort_lidmaatschapid.Value;
+
                                     LidmaatschapsoortToEntity(lidmaatschapsoort, entity, settings);
 
                                     beheerModel.ClubCloud_Lidmaatschapsoorten.AddOrUpdate(entity);
