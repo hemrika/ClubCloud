@@ -35,21 +35,21 @@
 </style>
 <script type="text/javascript">
     function OnClientPopulating(sender, e) {
-    sender._element.className = "wizardSearch";
-}
-function OnClientCompleted(sender, e) {
-    sender._element.className = "";
-}
+        sender._element.className = "wizardSearch";
+    }
+    function OnClientCompleted(sender, e) {
+        sender._element.className = "";
+    }
 
-function ValidateBank(sender, e) {
-    $.getJSON('http://openiban.nl/openibanfree?bban=557308453', function (data) {
-        alert(data.iban);
-    });
+    function ValidateBank(sender, e) {
+        $.getJSON('http://openiban.nl/openibanfree?bban=557308453', function (data) {
+            alert(data.iban);
+        });
 
-}
+    }
 
-function SetContextKey() {
-    $find('<%=Verenigingsnummer_AutoCompleteExtender.ClientID%>').set_contextKey($get("<%=tbx_verenigingsnummer.ClientID %>").value);
+    function SetContextKey() {
+        $find('<%=Verenigingsnummer_AutoCompleteExtender.ClientID%>').set_contextKey($get("<%=tbx_verenigingsnummer.ClientID %>").value);
 }
 </script>
 
@@ -63,24 +63,23 @@ function SetContextKey() {
 </asp:UpdateProgress>
     <asp:UpdatePanel ID="udp_aanmelden" runat="server" UpdateMode="Always">
         <ContentTemplate>
-            <asp:Timer runat="server" ID="tmr_loader_aanmelden" OnTick="tmr_loader_aanmelden_Tick" Interval="50" />
             <asp:Wizard ID="wzd_aanmelden" runat="server" Width="100%" FinishPreviousButtonText="Vorige" FinishPreviousButtonType="Link" CancelButtonText="Stoppen" CancelButtonType="Link" FinishCompleteButtonText="Aanmelden" FinishCompleteButtonType="Link" StartNextButtonStyle-BorderStyle="NotSet" StartNextButtonText="Volgende" StartNextButtonType="Link" StepNextButtonText="Volgende" StepNextButtonType="Link" StepPreviousButtonText="Vorige" StepPreviousButtonType="Link" Height="100%" OnFinishButtonClick="wzd_aanmelden_FinishButtonClick" OnNextButtonClick="wzd_aanmelden_NextButtonClick" OnActiveStepChanged="wzd_aanmelden_ActiveStepChanged" OnPreRender="wzd_aanmelden_PreRender" OnLoad="wzd_aanmelden_Load" DisplaySideBar="False">
                 <NavigationButtonStyle CssClass="button big" />
-                <NavigationStyle CssClass="button big" />
+                <NavigationStyle CssClass="light" />
                 <StartNextButtonStyle CssClass="button big" />
                 <StepNextButtonStyle CssClass="button big" />
                 <StepPreviousButtonStyle CssClass="button big" />
                 <CancelButtonStyle CssClass="button big" />
                 <FinishCompleteButtonStyle CssClass="button big" />
                 <FinishPreviousButtonStyle CssClass="button big" />
-                <StepStyle CssClass="button big" />
+                <StepStyle CssClass="light" />
                 <WizardSteps>
                     <asp:WizardStep ID="wzd_vereniging" runat="server" Title="Uw vereniging" StepType="Start">
                         <asp:Panel runat="server" ID="pnl_vereniging" CssClass="forms">
                             <br />
                             <div class="three-fourth info" style="overflow:visible;">
                                 <fieldset >
-                                    <legend style="width:100%" ><i class="icon-address special"></i><h2>Vereniging</h2></legend>
+                                    <legend style="width:100%" class="services" ><i class="icon-address special"></i><h2>Vereniging</h2></legend>
                                     <br />
                                     <p>
                                         <label>Verenigingsnummer : </label>
@@ -158,19 +157,18 @@ function SetContextKey() {
                                     Op alle aanbiedingen en overeenkomsten zijn de Nederland ICT Voorwaarden van toepassing, gedeponeerd bij de Kamer van Koophandel te Midden-Nederland onder nummer 30174840.<br />
                                     <a href="https://onedrive.live.com/embed?cid=E2EF8A57AA853CB3&resid=E2EF8A57AA853CB3%21128&authkey=AFHwySTc3F1Vxi0&em=2" target="_blank">Voorwaarden lezen</a>
                                 </p>
-                                <asp:CheckBox ID="voorwaarden" runat="server" Checked="false" Text=" " CssClass="regular-checkbox" /> &nbsp;&nbsp;Akkoord met de voorwaarden.
+                                Opmerkingen :<asp:TextBox ID="opmerkingen" runat="server" TextMode="MultiLine" Rows="10" /><br />
+                                <asp:CheckBox ID="akkoord" runat="server" Checked="false" Text=" " CssClass="regular-checkbox" /> &nbsp;&nbsp;Akkoord met de voorwaarden.
                             </div>
                         </asp:Panel>
                     </asp:WizardStep>
                     <asp:WizardStep ID="wzd_klaar" runat="server" Title="Vervolg" StepType="Complete">
-                        <i class="icon-info special"></i>
-                        <div class="info">
-                            <h3 class="lined">Het vervolg</h3>
-                            <p>
-                                Bedankt voor het aanmelden van uw club. Wij zullen uw aanmelding zo snel mogelijk verwerken.
-                                Binnenkost zullen wij contact opnemen om de verdere afhandeling te regelen.                      
-                            </p>
-                        </div>
+            		  <h1 class="lined aligncenter">Het vervolg</h1>
+            		  <i class="icon-info special"></i>
+            		  <p class="description">
+                            Bedankt voor het aanmelden van uw club. Wij zullen uw aanmelding zo snel mogelijk verwerken.<br/>
+                            Binnenkort zullen wij contact opnemen om de verdere afhandeling te regelen.
+                          </p>
                     </asp:WizardStep>
                 </WizardSteps>
                 <HeaderTemplate>
@@ -189,10 +187,6 @@ function SetContextKey() {
             </asp:Wizard>
             <ClubCloud:ClubCloudDataSource ID="VerenigingDataSource" runat="server" />
         </ContentTemplate>
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="tmr_loader_aanmelden" EventName="Tick" />
-        </Triggers>
     </asp:UpdatePanel>
 <asp:Label ID="lbl_result" runat="server"></asp:Label>
-<!-- <asp:AsyncPostBackTrigger ControlID="tbx_verenigingsnummer" EventName="TextChanged" /> -->
 </div>

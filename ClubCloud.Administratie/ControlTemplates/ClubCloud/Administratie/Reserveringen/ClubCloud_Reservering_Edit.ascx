@@ -32,13 +32,13 @@
     <EditItemTemplate>
         <fieldset>
 			<asp:HiddenField ID="Id" Value='<%# Bind("Id") %>' runat="server" />
-            Baan : <asp:DropDownList ID="BaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanId") %>' SelectMethod="SelectBaan" OnCallingDataMethods="EditReserveringform_CallingDataMethods" /></br>
+            Baan : <asp:DropDownList ID="BaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanId") %>' SelectMethod="SelectBaan" OnCallingDataMethods="EditReserveringform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			Datum : <asp:TextBox ID="Datum" runat="server" Text='<%# Bind("Datum") %>' TextMode="Date" /></br>
 
 			Tijd : <asp:TextBox ID="Tijd" runat="server" Text='<%# Bind("Tijd") %>' TextMode="Time" /></br>
 
 			Duur : <asp:TextBox ID="Duur" runat="server" Text='<%# Bind("Duur") %>' TextMode="Time" /></br>
-			_Reservering : <asp:DropDownList ID="ReserveringSoort" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("ReserveringSoort") %>' SelectMethod="Select_Reservering" OnCallingDataMethods="EditReserveringform_CallingDataMethods" /></br>
+			_Reservering : <asp:DropDownList ID="ReserveringSoort" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("ReserveringSoort") %>' SelectMethod="Select_Reservering" OnCallingDataMethods="EditReserveringform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			Beschrijving : <asp:TextBox ID="Beschrijving" runat="server" Text='<%# Bind("Beschrijving") %>' TextMode="MultiLine" /></br>
 			<asp:HiddenField ID="Gebruiker_Een" Value='<%# Bind("Gebruiker_Een") %>' runat="server" />
 			<asp:HiddenField ID="Gebruiker_Twee" Value='<%# Bind("Gebruiker_Twee") %>' runat="server" />

@@ -23,7 +23,39 @@ namespace ClubCloud.Service
     [ServiceContract(Namespace = "http://clubcloud.nl/", Name = "ClubCloudMobiel")]
     public interface IClubCloudMobielService
     {
-        #region Afhangen
+        #region Mobiel
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetLand/{LandId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Land GetLand(string LandId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetDistrict/{DistrictId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_District GetDistrict(string DistrictId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetRegio/{RegioId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Regio GetRegio(string RegioId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetRechtsvorm/{RechtsvormId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Rechtsvorm GetRechtsvorm(string RechtsvormId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetBestuursorgaan/{BestuursorgaanId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Bestuursorgaan GetBestuursorgaan(string BestuursorgaanId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetFunctie/{FunctieId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Functie GetFunctie(string FunctieId);        
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetLidmaatschapsoort/{LidmaatschapsoortId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Lidmaatschapsoort GetLidmaatschapsoort(string LidmaatschapsoortId);        
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetNationaliteit/{NationaliteitId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Nationaliteit GetNationaliteit(string NationaliteitId);        
 
         [OperationContract]
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetAccommodatieForVereniging", ResponseFormat = WebMessageFormat.Json)]
@@ -90,6 +122,10 @@ namespace ClubCloud.Service
         ClubCloud.Model.ClubCloud_Gebruiker GetGebruikerByNummer(string nummer);
 
         [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetGebruikerById/{GebruikerId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Gebruiker GetGebruikerById(string GebruikerId);
+
+        [OperationContract]
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetLidmaatschappen", ResponseFormat = WebMessageFormat.Json)]
         System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Lidmaatschap> GetLidmaatschappen();
 
@@ -98,8 +134,8 @@ namespace ClubCloud.Service
         System.Collections.Generic.List<ClubCloud.Model.ClubCloud_Lidmaatschapsoort> GetLidmaatschapsoortenForVereniging();
 
         [OperationContract]
-        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetNationaliteit", ResponseFormat = WebMessageFormat.Json)]
-        ClubCloud.Model.ClubCloud_Nationaliteit GetNationaliteit();
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetNationaliteitForGebruiker", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud.Model.ClubCloud_Nationaliteit GetNationaliteitForGebruiker();
 
         [OperationContract]
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetProfielen", ResponseFormat = WebMessageFormat.Json)]
@@ -141,22 +177,10 @@ namespace ClubCloud.Service
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "LoginMode", ResponseFormat = WebMessageFormat.Json)]
         System.Web.Configuration.AuthenticationMode LoginMode();
 
-        /*
         [OperationContract]
-        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "LoginMode", ResponseFormat = WebMessageFormat.Json)]
-        AuthenticationMode LoginMode();
-
-        [OperationContract]
-        [ServiceKnownType(typeof(LoginResult))]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Login/{username}/{password}", ResponseFormat= WebMessageFormat.Json)]
-        LoginResult Login(string username, string password);
-
-        [OperationContract]
-        [ServiceKnownType(typeof(ClubCloud_Setting))]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetClubCloudSettings", ResponseFormat = WebMessageFormat.Json)]
-        ClubCloud_Setting GetClubCloudSettings();
-        */
-        
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetReserveringen", ResponseFormat = WebMessageFormat.Json)]
+        List<ClubCloud_Reservering> GetReserveringen();
+      
         #endregion
 
     }

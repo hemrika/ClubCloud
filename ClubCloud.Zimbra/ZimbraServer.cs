@@ -167,7 +167,7 @@ namespace ClubCloud.Zimbra
             {
                 configuration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
             }
-            catch { };
+            catch (Exception ex) { throw ex; }
 
             if (configuration == null)
             {
@@ -191,7 +191,7 @@ namespace ClubCloud.Zimbra
             {
                 configuration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
             }
-            catch { };
+            catch (Exception ex) { throw ex; }
 
             if (configuration == null)
             {
@@ -214,68 +214,77 @@ namespace ClubCloud.Zimbra
                 if (configuration == null)
                     configuration = (ZimbraConfigurationSection)ConfigurationManager.GetSection("Zimbra/Configuration");
             }
-            catch { };
+            catch (Exception ex) { throw ex; }
+
+            if (configuration == null)
+            {
+                configuration = new ZimbraConfigurationSection();
+            }
 
             return Authenticate(configuration.Server.UserName, configuration.Server.Password, configuration.Server.IsAdmin);
         }
 
         public string Authenticate(string UserName, string Password, bool IsAdmin = false)
         {
-            //configuration.Server.UserName = UserName;
-            //configuration.Server.Password = Password;
-            //configuration.Server.IsAdmin = IsAdmin;
-
-            string AuthToken = string.Empty;
-
-            if (IsAdmin)
+            try
             {
-                //ZimbraEndpointAddress.ZimbraHeaderContext = new ZimbraHeaderContext();
+                //configuration.Server.UserName = UserName;
+                //configuration.Server.Password = Password;
+                //configuration.Server.IsAdmin = IsAdmin;
 
-                Zimbra.Administration.AuthResponse response;
-                if (administration == null)
-                {
-                    administration = new ZimbraAdminSoapClient(binding, remoteAddressAdmin);
-                }
-                Zimbra.Administration.AuthRequest request = new Administration.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.AdministratorName, Value = UserName }, password = Password };
-                response = administration.AccountAuth(request);
-                if (!string.IsNullOrEmpty(response.authToken))
-                {
-                    ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
-                    ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = true };
-                    ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
-                    //ZimbraEndpointAddress.ZimbraHeaderContext.account.by = accountBy.name;
+                string AuthToken = string.Empty;
 
-                    AuthenticatedAdminLifetime = response.lifetime;
-                    AuthenticatedAdmin = true;
-                    AuthToken = response.authToken;
+                if (IsAdmin)
+                {
+                    //ZimbraEndpointAddress.ZimbraHeaderContext = new ZimbraHeaderContext();
+
+                    Zimbra.Administration.AuthResponse response;
+                    if (administration == null)
+                    {
+                        administration = new ZimbraAdminSoapClient(binding, remoteAddressAdmin);
+                    }
+                    Zimbra.Administration.AuthRequest request = new Administration.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.AdministratorName, Value = UserName }, password = Password };
+                    response = administration.AccountAuth(request);
+                    if (!string.IsNullOrEmpty(response.authToken))
+                    {
+                        ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
+                        ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = true };
+                        ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
+                        //ZimbraEndpointAddress.ZimbraHeaderContext.account.by = accountBy.name;
+
+                        AuthenticatedAdminLifetime = response.lifetime;
+                        AuthenticatedAdmin = true;
+                        AuthToken = response.authToken;
+                    }
                 }
+                else
+                {
+                    //ZimbraEndpointAddress.ZimbraHeaderContext = new ZimbraHeaderContext();
+
+                    Zimbra.Account.AuthResponse response;
+                    if (account == null)
+                    {
+                        account = new ZimbraAccountSoapClient(binding, remoteAddress);
+                    }
+                    Zimbra.Account.AuthRequest request = new Account.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.Name, Value = UserName }, password = Password };
+                    response = account.AccountAuth(request);
+                    if (!string.IsNullOrEmpty(response.authToken))
+                    {
+                        AuthenticatedLifetime = response.lifetime;
+                        Authenticated = true;
+                        AuthToken = response.authToken;
+                    }
+
+                    //ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
+                    //ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = true };
+                    //ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
+
+                }
+
+                //GetVersioInfo(asAdmin);
+                return AuthToken;
             }
-            else
-            {
-                //ZimbraEndpointAddress.ZimbraHeaderContext = new ZimbraHeaderContext();
-
-                Zimbra.Account.AuthResponse response;
-                if (account == null)
-                {
-                    account = new ZimbraAccountSoapClient(binding, remoteAddress);
-                }
-                Zimbra.Account.AuthRequest request = new Account.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.Name, Value = UserName }, password = Password };
-                response = account.AccountAuth(request);
-                if (!string.IsNullOrEmpty(response.authToken))
-                {
-                    AuthenticatedLifetime = response.lifetime;
-                    Authenticated = true;
-                    AuthToken = response.authToken;
-                }
-
-                //ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
-                //ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = true };
-                //ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
-
-            }
-
-            //GetVersioInfo(asAdmin);
-            return AuthToken;
+            catch (Exception ex) { throw ex; }
         }
 
         private CookieContainer _Container;

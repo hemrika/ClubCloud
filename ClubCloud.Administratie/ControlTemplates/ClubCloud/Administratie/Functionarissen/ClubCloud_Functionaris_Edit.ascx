@@ -32,15 +32,15 @@
     <EditItemTemplate>
         <fieldset>
 			<asp:HiddenField ID="Id" Value='<%# Bind("Id") %>' runat="server" />
-            Functie : <asp:DropDownList ID="FunctieId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("FunctieId") %>' SelectMethod="SelectFunctie" OnCallingDataMethods="EditFunctionarisform_CallingDataMethods" /></br>
+            Functie : <asp:DropDownList ID="FunctieId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("FunctieId") %>' SelectMethod="SelectFunctie" OnCallingDataMethods="EditFunctionarisform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			<asp:HiddenField ID="VerenigingId" Value='<%# Bind("VerenigingId") %>' runat="server" />
 			<asp:HiddenField ID="GebruikerId" Value='<%# Bind("GebruikerId") %>' runat="server" />
-            Bestuursorgaan : <asp:DropDownList ID="BestuursorgaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BestuursorgaanId") %>' SelectMethod="SelectBestuursorgaan" OnCallingDataMethods="EditFunctionarisform_CallingDataMethods" /></br>
+            Bestuursorgaan : <asp:DropDownList ID="BestuursorgaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BestuursorgaanId") %>' SelectMethod="SelectBestuursorgaan" OnCallingDataMethods="EditFunctionarisform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			<asp:HiddenField ID="DistrictId" Value='<%# Bind("DistrictId") %>' runat="server" />
 			TermijnBegin : <asp:TextBox ID="TermijnBegin" runat="server" Text='<%# Bind("TermijnBegin") %>' TextMode="Date" /></br>
 			TermijnEinde : <asp:TextBox ID="TermijnEinde" runat="server" Text='<%# Bind("TermijnEinde") %>' TextMode="Date" /></br>
 			Autorisatie : <asp:Checkbox ID="Autorisatie" runat="server" Checked='<%# Bind("Autorisatie") %>' /></br>
-			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditFunctionarisform_CallingDataMethods" /></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditFunctionarisform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			Gewijzigd : <asp:TextBox ID="Gewijzigd" runat="server" Text='<%# Bind("Gewijzigd") %>' TextMode="Date" /></br>
         </fieldset>
     </EditItemTemplate>

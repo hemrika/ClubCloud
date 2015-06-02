@@ -34,11 +34,11 @@
 			<asp:HiddenField ID="Id" Value='<%# Bind("Id") %>' runat="server" />
 			Naam : <asp:TextBox ID="Naam" runat="server" Text='<%# Bind("Naam") %>' TextMode="SingleLine"/></br>
 			<asp:HiddenField ID="AccommodatieId" Value='<%# Bind("AccommodatieId") %>' runat="server" />
-            Baantype : <asp:DropDownList ID="BaantypeId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaantypeId") %>' SelectMethod="SelectBaantype" OnCallingDataMethods="EditBaanblokform_CallingDataMethods" /></br>
-            Baansoort : <asp:DropDownList ID="BaansoortId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaansoortId") %>' SelectMethod="SelectBaansoort" OnCallingDataMethods="EditBaanblokform_CallingDataMethods" /></br>
+            Baantype : <asp:DropDownList ID="BaantypeId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaantypeId") %>' SelectMethod="SelectBaantype" OnCallingDataMethods="EditBaanblokform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
+            Baansoort : <asp:DropDownList ID="BaansoortId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaansoortId") %>' SelectMethod="SelectBaansoort" OnCallingDataMethods="EditBaanblokform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			Verlichting : <asp:Checkbox ID="Verlichting" runat="server" Checked='<%# Bind("Verlichting") %>' /></br>
 			Locatie : <asp:TextBox ID="Locatie" runat="server" Text='<%# Bind("Locatie") %>' TextMode="SingleLine"/></br>
-			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditBaanblokform_CallingDataMethods" /></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditBaanblokform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
         </fieldset>
     </EditItemTemplate>
 </asp:FormView>

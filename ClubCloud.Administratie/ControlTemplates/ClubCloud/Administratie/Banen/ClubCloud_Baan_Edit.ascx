@@ -34,11 +34,11 @@
 			<asp:HiddenField ID="Id" Value='<%# Bind("Id") %>' runat="server" />
 			Naam : <asp:TextBox ID="Naam" runat="server" Text='<%# Bind("Naam") %>' TextMode="SingleLine"/></br>
 			Nummer : <asp:TextBox ID="Nummer" runat="server" Text='<%# Bind("Nummer") %>' TextMode="Number" /></br>
-            Baanblok : <asp:DropDownList ID="BaanblokId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanblokId") %>' SelectMethod="SelectBaanblok" OnCallingDataMethods="EditBaanform_CallingDataMethods" /></br>
+            Baanblok : <asp:DropDownList ID="BaanblokId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanblokId") %>' SelectMethod="SelectBaanblok" OnCallingDataMethods="EditBaanform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			<asp:HiddenField ID="AccommodatieId" Value='<%# Bind("AccommodatieId") %>' runat="server" />
 			Status : <asp:TextBox ID="Status" runat="server" Text='<%# Bind("Status") %>' TextMode="SingleLine"/></br>
 			Keuring : <asp:TextBox ID="Keuring" runat="server" Text='<%# Bind("Keuring") %>' TextMode="Date" /></br>
-			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditBaanform_CallingDataMethods" /></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditBaanform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
         </fieldset>
     </EditItemTemplate>
 </asp:FormView>

@@ -12,11 +12,15 @@ namespace ClubCloud.Model
     using System;
     using System.Runtime.Serialization;
     
+    [DataContract]
     [Flags]
     public enum ActiefSoort : int
     {
-        Onbekend = 0,
-        Actief = 1,
-        Inactief = 2
+    	[EnumMember]
+    	Onbekend = 0,
+    	[EnumMember]
+    	Actief = 1,
+    	[EnumMember]
+    	Inactief = 2
     }
 }

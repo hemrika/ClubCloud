@@ -5,6 +5,7 @@
 namespace ClubCloud.Service
 {
     using ClubCloud.Model;
+    using Microsoft.SharePoint.Utilities;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;

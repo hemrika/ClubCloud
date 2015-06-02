@@ -36,7 +36,7 @@
 			Beschrijving : <asp:TextBox ID="Beschrijving" runat="server" Text='<%# Bind("Beschrijving") %>' TextMode="MultiLine" /></br>
 			Nummer : <asp:TextBox ID="Nummer" runat="server" Text='<%# Bind("Nummer") %>' TextMode="Number" Enabled="false" /></br>
 			<asp:HiddenField ID="DistrictId" Value='<%# Bind("DistrictId") %>' runat="server" />
-            Rechtsvorm : <asp:DropDownList ID="RechtsvormId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("RechtsvormId") %>' SelectMethod="SelectRechtsvorm" OnCallingDataMethods="EditVerenigingform_CallingDataMethods" /></br>
+            Rechtsvorm : <asp:DropDownList ID="RechtsvormId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("RechtsvormId") %>' SelectMethod="SelectRechtsvorm" OnCallingDataMethods="EditVerenigingform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			<asp:HiddenField ID="AccommodatieId" Value='<%# Bind("AccommodatieId") %>' runat="server" />
 			<asp:HiddenField ID="RegioId" Value='<%# Bind("RegioId") %>' runat="server" />
 			BankNummer : <asp:TextBox ID="BankNummer" runat="server" Text='<%# Bind("BankNummer") %>' TextMode="Number" Enabled="false" /></br>
@@ -53,7 +53,7 @@
 			TelefoonOverig : <asp:TextBox ID="TelefoonOverig" runat="server" Text='<%# Bind("TelefoonOverig") %>' TextMode="Phone" /></br>
 			Website : <asp:TextBox ID="Website" runat="server" Text='<%# Bind("Website") %>' TextMode="SingleLine"/></br>
 			FTPsite : <asp:TextBox ID="FTPsite" runat="server" Text='<%# Bind("FTPsite") %>' TextMode="SingleLine"/></br>
-			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditVerenigingform_CallingDataMethods" /></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditVerenigingform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			Oprichting : <asp:TextBox ID="Oprichting" runat="server" Text='<%# Bind("Oprichting") %>' TextMode="Date" /></br>
 			Erkenning : <asp:TextBox ID="Erkenning" runat="server" Text='<%# Bind("Erkenning") %>' TextMode="Date" /></br>
 			Gestopt : <asp:TextBox ID="Gestopt" runat="server" Text='<%# Bind("Gestopt") %>' TextMode="Date" /></br>

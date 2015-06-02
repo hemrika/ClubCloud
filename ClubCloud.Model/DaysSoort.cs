@@ -12,15 +12,23 @@ namespace ClubCloud.Model
     using System;
     using System.Runtime.Serialization;
     
+    [DataContract]
     [Flags]
     public enum DaysSoort : int
     {
-        maandag = 1,
-        dinsdag = 2,
-        woensdag = 3,
-        donderdag = 4,
-        vrijdag = 5,
-        zaterdag = 6,
-        zondag = 0
+    	[EnumMember]
+    	maandag = 1,
+    	[EnumMember]
+    	dinsdag = 2,
+    	[EnumMember]
+    	woensdag = 3,
+    	[EnumMember]
+    	donderdag = 4,
+    	[EnumMember]
+    	vrijdag = 5,
+    	[EnumMember]
+    	zaterdag = 6,
+    	[EnumMember]
+    	zondag = 0
     }
 }

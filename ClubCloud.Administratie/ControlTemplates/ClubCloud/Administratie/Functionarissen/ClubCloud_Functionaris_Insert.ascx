@@ -31,17 +31,17 @@
     </FooterTemplate>
     <InsertItemTemplate>
         <fieldset>
-            Functie : <asp:DropDownList ID="FunctieId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("FunctieId") %>' SelectMethod="SelectFunctie" OnCallingDataMethods="InsertFunctionarisform_CallingDataMethods" /></br>
+            Functie : <asp:DropDownList ID="FunctieId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("FunctieId") %>' SelectMethod="SelectFunctie" OnCallingDataMethods="InsertFunctionarisform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			<asp:HiddenField ID="VerenigingId" Value='<%# Bind("VerenigingId") %>' runat="server" />
 			<asp:HiddenField ID="GebruikerId" Value='<%# Bind("GebruikerId") %>' runat="server" />
-            Bestuursorgaan : <asp:DropDownList ID="BestuursorgaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BestuursorgaanId") %>' SelectMethod="SelectBestuursorgaan" OnCallingDataMethods="InsertFunctionarisform_CallingDataMethods" /></br>
+            Bestuursorgaan : <asp:DropDownList ID="BestuursorgaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BestuursorgaanId") %>' SelectMethod="SelectBestuursorgaan" OnCallingDataMethods="InsertFunctionarisform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			<asp:HiddenField ID="DistrictId" Value='<%# Bind("DistrictId") %>' runat="server" />
 			TermijnBegin : <asp:TextBox ID="TermijnBegin" runat="server" Text='<%# Bind("TermijnBegin") %>' TextMode="Date" /></br>
 			<ajaxToolkit:CalendarExtender ID="TermijnBegin_CalendarExtender" runat="server" BehaviorID="TermijnBegin_CalendarExtender" TargetControlID="TermijnBegin" />
 			TermijnEinde : <asp:TextBox ID="TermijnEinde" runat="server" Text='<%# Bind("TermijnEinde") %>' TextMode="Date" /></br>
 			<ajaxToolkit:CalendarExtender ID="TermijnEinde_CalendarExtender" runat="server" BehaviorID="TermijnEinde_CalendarExtender" TargetControlID="TermijnEinde" />
 			Autorisatie : <asp:Checkbox ID="Autorisatie" runat="server" Checked='<%# Bind("Autorisatie") %>' /></br>
-			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertFunctionarisform_CallingDataMethods" /></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertFunctionarisform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			Gewijzigd : <asp:TextBox ID="Gewijzigd" runat="server" Text='<%# Bind("Gewijzigd") %>' TextMode="Date" /></br>
 			<ajaxToolkit:CalendarExtender ID="Gewijzigd_CalendarExtender" runat="server" BehaviorID="Gewijzigd_CalendarExtender" TargetControlID="Gewijzigd" />
         </fieldset>

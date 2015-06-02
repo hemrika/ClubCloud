@@ -33,12 +33,12 @@
         <fieldset>
 			Naam : <asp:TextBox ID="Naam" runat="server" Text='<%# Bind("Naam") %>' TextMode="SingleLine"/></br>
 			Nummer : <asp:TextBox ID="Nummer" runat="server" Text='<%# Bind("Nummer") %>' TextMode="Number" /></br>
-            Baanblok : <asp:DropDownList ID="BaanblokId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanblokId") %>' SelectMethod="SelectBaanblok" OnCallingDataMethods="InsertBaanform_CallingDataMethods" /></br>
+            Baanblok : <asp:DropDownList ID="BaanblokId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanblokId") %>' SelectMethod="SelectBaanblok" OnCallingDataMethods="InsertBaanform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			<asp:HiddenField ID="AccommodatieId" Value='<%# Bind("AccommodatieId") %>' runat="server" />
 			Status : <asp:TextBox ID="Status" runat="server" Text='<%# Bind("Status") %>' TextMode="SingleLine"/></br>
 			Keuring : <asp:TextBox ID="Keuring" runat="server" Text='<%# Bind("Keuring") %>' TextMode="Date" /></br>
 			<ajaxToolkit:CalendarExtender ID="Keuring_CalendarExtender" runat="server" BehaviorID="Keuring_CalendarExtender" TargetControlID="Keuring" />
-			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertBaanform_CallingDataMethods" /></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertBaanform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
         </fieldset>
     </InsertItemTemplate>
 </asp:FormView>

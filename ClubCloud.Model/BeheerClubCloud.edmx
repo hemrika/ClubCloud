@@ -1531,7 +1531,12 @@
           <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Nummer" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="Max" Unicode="true" FixedLength="false" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
           <Property Name="DistrictId" Type="Guid" Nullable="true" />
-          <Property Name="RechtsvormId" Type="Guid" Nullable="true" />
+          <Property Name="RechtsvormId" Type="Guid" Nullable="true" >
+            <Documentation>
+              <Summary>Rechtsvorm</Summary>
+              <LongDescription>De rechtsvorm waaronder uw vereniging is ingeschreven bij de KvK.</LongDescription>
+            </Documentation>
+          </Property>
           <Property Name="AccommodatieId" Type="Guid" Nullable="true" />
           <Property Name="RegioId" Type="Guid" Nullable="true" />
           <Property Name="BankNummer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />

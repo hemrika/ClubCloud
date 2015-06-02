@@ -14,7 +14,6 @@ namespace ClubCloud.Service
     {
         public ClubCloud_Setting GetSettingById(int Id, bool refresh = false, ClubCloud_Setting settings = null)
         {
-    
             ClubCloud_Setting response = null;
     
             this.ExecuteOnChannel<IClubCloudApplicationService>(

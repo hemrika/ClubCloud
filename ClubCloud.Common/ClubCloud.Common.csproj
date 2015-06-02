@@ -81,6 +81,7 @@
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonLogger.cs" />
     <Compile Include="Controls\ClubCloudDataSourceDesigner.cs" />
     <Compile Include="Controls\SharePointPermission.cs" />
     <Compile Include="Controls\SPGridViewSearch.cs" />
@@ -98,6 +99,11 @@
     <Compile Include="Features\Common\Common.EventReceiver.cs">
       <DependentUpon>Common.feature</DependentUpon>
     </Compile>
+    <Compile Include="Mail\Email.cs" />
+    <Compile Include="Mail\EmailExtensions.cs" />
+    <Compile Include="Mail\EmailTemplate.cs" />
+    <Compile Include="Mail\EmailTemplateParameters.cs" />
+    <Compile Include="Mail\EmailTracking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ajax.cs" />
     <Compile Include="Syncfusion.cs" />

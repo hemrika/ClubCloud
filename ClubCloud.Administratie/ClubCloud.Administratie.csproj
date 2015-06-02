@@ -81,6 +81,7 @@
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministratieLogger.cs" />
     <Compile Include="ControlTemplates\ClubCloud\Administratie\Accommodaties\ClubCloud_Accommodatie.ascx.cs">
       <DependentUpon>ClubCloud_Accommodaties.tt</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -492,6 +493,26 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ClubCloudAdministratie\webtemp_ClubCloudAdministratie.xml" />
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruikers.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschappen.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Reserveringen\ClubCloud_Reserveringen.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Reserveringen.tt</DependentUpon>
+    </Content>
+    <Content Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Verenigingen.ascx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
+    </Content>
     <Content Include="Features\ClubCloudDesign\ClubCloudDesign.Template.xml">
       <DependentUpon>ClubCloudDesign.feature</DependentUpon>
     </Content>
@@ -585,11 +606,6 @@
     <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker.ascx">
       <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
     </Content>
-    <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruikers.ascx">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
-    </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Gebruikers\ClubCloud_Gebruiker_Edit.ascx">
       <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
     </Content>
@@ -597,11 +613,6 @@
       <DependentUpon>ClubCloud_Gebruikers.tt</DependentUpon>
     </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap.ascx">
-      <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
-    </Content>
-    <Content Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschappen.ascx">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>ClubCloud_Lidmaatschappen.tt</DependentUpon>
     </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Lidmaatschappen\ClubCloud_Lidmaatschap_Edit.ascx">
@@ -613,11 +624,6 @@
     <Content Include="ControlTemplates\ClubCloud\Administratie\Reserveringen\ClubCloud_Reservering.ascx">
       <DependentUpon>ClubCloud_Reserveringen.tt</DependentUpon>
     </Content>
-    <Content Include="ControlTemplates\ClubCloud\Administratie\Reserveringen\ClubCloud_Reserveringen.ascx">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClubCloud_Reserveringen.tt</DependentUpon>
-    </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Reserveringen\ClubCloud_Reservering_Edit.ascx">
       <DependentUpon>ClubCloud_Reserveringen.tt</DependentUpon>
     </Content>
@@ -625,11 +631,6 @@
       <DependentUpon>ClubCloud_Reserveringen.tt</DependentUpon>
     </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging.ascx">
-      <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
-    </Content>
-    <Content Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Verenigingen.ascx">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>ClubCloud_Verenigingen.tt</DependentUpon>
     </Content>
     <Content Include="ControlTemplates\ClubCloud\Administratie\Verenigingen\ClubCloud_Vereniging_Edit.ascx">

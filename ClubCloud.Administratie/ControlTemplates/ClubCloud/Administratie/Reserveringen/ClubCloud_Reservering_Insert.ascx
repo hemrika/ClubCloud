@@ -31,14 +31,14 @@
     </FooterTemplate>
     <InsertItemTemplate>
         <fieldset>
-            Baan : <asp:DropDownList ID="BaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanId") %>' SelectMethod="SelectBaan" OnCallingDataMethods="InsertReserveringform_CallingDataMethods" /></br>
+            Baan : <asp:DropDownList ID="BaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanId") %>' SelectMethod="SelectBaan" OnCallingDataMethods="InsertReserveringform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			Datum : <asp:TextBox ID="Datum" runat="server" Text='<%# Bind("Datum") %>' TextMode="Date" /></br>
 			<ajaxToolkit:CalendarExtender ID="Datum_CalendarExtender" runat="server" BehaviorID="Datum_CalendarExtender" TargetControlID="Datum" />
 			Tijd : <asp:TextBox ID="Tijd" runat="server" Text='<%# Bind("Tijd") %>' TextMode="Time" /></br>
 			<ajaxToolkit:MaskedEditExtender ID="Tijd_MaskedEditExtender" runat="server" BehaviorID="Tijd_MaskedEditExtender" TargetControlID="Tijd" Mask="99:99" MaskType="Time"  />
 			Duur : <asp:TextBox ID="Duur" runat="server" Text='<%# Bind("Duur") %>' TextMode="Time" /></br>
 			<ajaxToolkit:MaskedEditExtender ID="Duur_MaskedEditExtender" runat="server" BehaviorID="Duur_MaskedEditExtender" TargetControlID="Duur" Mask="99:99:99" MaskType="Number"  />
-			_Reservering : <asp:DropDownList ID="ReserveringSoort" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("ReserveringSoort") %>' SelectMethod="Select_Reservering" OnCallingDataMethods="InsertReserveringform_CallingDataMethods" /></br>
+			_Reservering : <asp:DropDownList ID="ReserveringSoort" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("ReserveringSoort") %>' SelectMethod="Select_Reservering" OnCallingDataMethods="InsertReserveringform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			Beschrijving : <asp:TextBox ID="Beschrijving" runat="server" Text='<%# Bind("Beschrijving") %>' TextMode="MultiLine" /></br>
 			<asp:HiddenField ID="Gebruiker_Een" Value='<%# Bind("Gebruiker_Een") %>' runat="server" />
 			<asp:HiddenField ID="Gebruiker_Twee" Value='<%# Bind("Gebruiker_Twee") %>' runat="server" />

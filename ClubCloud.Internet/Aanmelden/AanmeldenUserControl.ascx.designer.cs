@@ -31,15 +31,6 @@ namespace ClubCloud.Internet {
         protected global::System.Web.UI.UpdatePanel udp_aanmelden;
         
         /// <summary>
-        /// tmr_loader_aanmelden control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.Timer tmr_loader_aanmelden;
-        
-        /// <summary>
         /// wzd_aanmelden control.
         /// </summary>
         /// <remarks>
@@ -139,13 +130,22 @@ namespace ClubCloud.Internet {
         protected global::System.Web.UI.WebControls.Panel pnl_aanmelden;
         
         /// <summary>
-        /// voorwaarden control.
+        /// opmerkingen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox voorwaarden;
+        protected global::System.Web.UI.WebControls.TextBox opmerkingen;
+        
+        /// <summary>
+        /// akkoord control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox akkoord;
         
         /// <summary>
         /// wzd_klaar control.

@@ -31,12 +31,12 @@
     </FooterTemplate>
     <InsertItemTemplate>
         <fieldset>
-            Baan : <asp:DropDownList ID="BaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanId") %>' SelectMethod="SelectBaan" OnCallingDataMethods="InsertBaanschemaform_CallingDataMethods" /></br>
+            Baan : <asp:DropDownList ID="BaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanId") %>' SelectMethod="SelectBaan" OnCallingDataMethods="InsertBaanschemaform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			<asp:HiddenField ID="VerenigingId" Value='<%# Bind("VerenigingId") %>' runat="server" />
 			Beschikbaar : <asp:Checkbox ID="Beschikbaar" runat="server" Checked='<%# Bind("Beschikbaar") %>' /></br>
-			MaandBegin : <asp:DropDownList ID="MaandBegin" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("MaandBegin") %>' SelectMethod="SelectMaandBegin" OnCallingDataMethods="InsertBaanschemaform_CallingDataMethods" /></br>
-			MaandEinde : <asp:DropDownList ID="MaandEinde" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("MaandEinde") %>' SelectMethod="SelectMaandEinde" OnCallingDataMethods="InsertBaanschemaform_CallingDataMethods" /></br>
-			Dag : <asp:DropDownList ID="Dag" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Dag") %>' SelectMethod="SelectDag" OnCallingDataMethods="InsertBaanschemaform_CallingDataMethods" /></br>
+			MaandBegin : <asp:DropDownList ID="MaandBegin" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("MaandBegin") %>' SelectMethod="SelectMaandBegin" OnCallingDataMethods="InsertBaanschemaform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
+			MaandEinde : <asp:DropDownList ID="MaandEinde" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("MaandEinde") %>' SelectMethod="SelectMaandEinde" OnCallingDataMethods="InsertBaanschemaform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
+			Dag : <asp:DropDownList ID="Dag" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Dag") %>' SelectMethod="SelectDag" OnCallingDataMethods="InsertBaanschemaform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			DagBegin : <asp:TextBox ID="DagBegin" runat="server" Text='<%# Bind("DagBegin") %>' TextMode="Time" /></br>
 			<ajaxToolkit:MaskedEditExtender ID="DagBegin_MaskedEditExtender" runat="server" BehaviorID="DagBegin_MaskedEditExtender" TargetControlID="DagBegin" Mask="99:99" MaskType="Time"  />
 			DagEinde : <asp:TextBox ID="DagEinde" runat="server" Text='<%# Bind("DagEinde") %>' TextMode="Time" /></br>

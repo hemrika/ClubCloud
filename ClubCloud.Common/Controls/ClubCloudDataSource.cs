@@ -68,8 +68,9 @@ namespace ClubCloud.Common.Controls
                             }
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
                         _view = null;
                         //SPUtility.TransferToErrorPage(ex.Message);
                     }

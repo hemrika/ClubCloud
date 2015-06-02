@@ -59,10 +59,10 @@
 			Geboorteplaats : <asp:TextBox ID="Geboorteplaats" runat="server" Text='<%# Bind("Geboorteplaats") %>' TextMode="SingleLine"/></br>
 			OverlijdensDatum : <asp:TextBox ID="OverlijdensDatum" runat="server" Text='<%# Bind("OverlijdensDatum") %>' TextMode="Date" /></br>
 			AddressGeheim : <asp:Checkbox ID="AddressGeheim" runat="server" Checked='<%# Bind("AddressGeheim") %>' /></br>
-            Nationaliteit : <asp:DropDownList ID="NationaliteitId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("NationaliteitId") %>' SelectMethod="SelectNationaliteit" OnCallingDataMethods="EditGebruikerform_CallingDataMethods" /></br>
+            Nationaliteit : <asp:DropDownList ID="NationaliteitId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("NationaliteitId") %>' SelectMethod="SelectNationaliteit" OnCallingDataMethods="EditGebruikerform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			Website : <asp:TextBox ID="Website" runat="server" Text='<%# Bind("Website") %>' TextMode="SingleLine"/></br>
 			FTPsite : <asp:TextBox ID="FTPsite" runat="server" Text='<%# Bind("FTPsite") %>' TextMode="SingleLine"/></br>
-			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditGebruikerform_CallingDataMethods" /></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="EditGebruikerform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			Beroep : <asp:TextBox ID="Beroep" runat="server" Text='<%# Bind("Beroep") %>' TextMode="SingleLine"/></br>
 			Kinderen : <asp:Checkbox ID="Kinderen" runat="server" Checked='<%# Bind("Kinderen") %>' /></br>
 			KinderenAantal : <asp:TextBox ID="KinderenAantal" runat="server" Text='<%# Bind("KinderenAantal") %>' TextMode="Number" /></br>
@@ -72,7 +72,7 @@
 			FotoId : <asp:TextBox ID="FotoId" runat="server" Text='<%# Bind("FotoId") %>' TextMode="Number" /></br>
 			<asp:HiddenField ID="VerenigingId" Value='<%# Bind("VerenigingId") %>' runat="server" />
 			Volledigenaam : <asp:TextBox ID="Volledigenaam" runat="server" Text='<%# Bind("Volledigenaam") %>' TextMode="SingleLine"/></br>
-			Geslacht : <asp:DropDownList ID="Geslacht" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Geslacht") %>' SelectMethod="SelectGeslacht" OnCallingDataMethods="EditGebruikerform_CallingDataMethods" /></br>
+			Geslacht : <asp:DropDownList ID="Geslacht" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Geslacht") %>' SelectMethod="SelectGeslacht" OnCallingDataMethods="EditGebruikerform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			Gewijzigd : <asp:TextBox ID="Gewijzigd" runat="server" Text='<%# Bind("Gewijzigd") %>' TextMode="Date" /></br>
         </fieldset>
     </EditItemTemplate>

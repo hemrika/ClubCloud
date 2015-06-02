@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Web;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint.IdentityModel;
+using Microsoft.SharePoint.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -226,76 +227,86 @@ namespace ClubCloud.Provider
 
         public async Task InitializeAsync(string name, System.Collections.Specialized.NameValueCollection config)
         {
-            try
+            using (new SPMonitoredScope("Initialize Zimbra Membership Provider"))
             {
-                base.Initialize(name, config);
-            }
-            catch { };
-
-            /*
-            if (HostingEnvironment.IsHosted)
-            {
-                NamedPermissionSet permission = HttpRuntime.GetNamedPermissionSet();
-                AspNetHostingPermission aspNetHostingPermission = (AspNetHostingPermission)permission.GetPermission(typeof(AspNetHostingPermission));
-                if (!(aspNetHostingPermission != null && aspNetHostingPermission.Level >= AspNetHostingPermissionLevel.Low))
-                {
-                    string message = String.Format("Error while initializing settings Membership Provider {0}: {1}", this.applicationName, "Zimbra Provider kan niet in AspNetHostingPermissionLevel.Low werken.");
-                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                    throw new ProviderException(message);
-                }
-            }
-            */
-            if (this.Initialized)
-            {
-                return;
-            }
-
-            if (string.IsNullOrEmpty(name))
-            {
-                this.applicationName = "ZimbraMembershipProvider";
-            }
-            else
-            {
-                this.applicationName = name;
-            }
-
-            try
-            {
-                zimbraSettings = ZimbraProviderSettings.Current;
-
-                if (zimbraSettings != null && !String.IsNullOrEmpty(zimbraSettings.ZimbraServer) && !String.IsNullOrEmpty(zimbraSettings.ZimbraUserName) && !String.IsNullOrEmpty(zimbraSettings.ZimbraPassword))
-                {
-                    zimbraconfiguration.Server.UserName = zimbraSettings.ZimbraUserName;
-                    zimbraconfiguration.Server.Password = zimbraSettings.ZimbraPassword;
-                    zimbraconfiguration.Server.ServerName = zimbraSettings.ZimbraServer;
-                    zimbraconfiguration.Server.IsAdmin = true;
-                    /*
-                    string message = String.Format("Error while initializing settings Role Provider {0}: {1}", this.applicationName, "The setting for Zimbra are not complete.");
-                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                    throw new ProviderException(message);
-                    */
-                }
-            }
-            catch (ZimbraSettingsException zex)
-            {
-                string message = String.Format("Error while initializing settings Membership Provider {0}: {1}", this.applicationName, zex.Message);
-                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                throw new ProviderException(message, zex);
-            }
-
-            if (!string.IsNullOrEmpty(zimbraconfiguration.Server.ServerName))
-            {
-                zimbraServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName);
 
                 try
                 {
-                    //while(!zimbraServer.AuthenticatedAdmin.Value)
-                    //{
+                    base.Initialize(name, config);
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                }
+
+                /*
+                if (HostingEnvironment.IsHosted)
+                {
+                    NamedPermissionSet permission = HttpRuntime.GetNamedPermissionSet();
+                    AspNetHostingPermission aspNetHostingPermission = (AspNetHostingPermission)permission.GetPermission(typeof(AspNetHostingPermission));
+                    if (!(aspNetHostingPermission != null && aspNetHostingPermission.Level >= AspNetHostingPermissionLevel.Low))
+                    {
+                        string message = String.Format("Error while initializing settings Membership Provider {0}: {1}", this.applicationName, "Zimbra Provider kan niet in AspNetHostingPermissionLevel.Low werken.");
+                        LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                        throw new ProviderException(message);
+                    }
+                }
+                */
+                if (this.Initialized)
+                {
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    this.applicationName = "ZimbraMembershipProvider";
+                }
+                else
+                {
+                    this.applicationName = name;
+                }
+
+                try
+                {
+                    zimbraSettings = ZimbraProviderSettings.Current;
+
+                    if (zimbraSettings != null && !String.IsNullOrEmpty(zimbraSettings.ZimbraServer) && !String.IsNullOrEmpty(zimbraSettings.ZimbraUserName) && !String.IsNullOrEmpty(zimbraSettings.ZimbraPassword))
+                    {
+                        zimbraconfiguration.Server.UserName = zimbraSettings.ZimbraUserName;
+                        zimbraconfiguration.Server.Password = zimbraSettings.ZimbraPassword;
+                        zimbraconfiguration.Server.ServerName = zimbraSettings.ZimbraServer;
+                        zimbraconfiguration.Server.IsAdmin = true;
+                        /*
+                        string message = String.Format("Error while initializing settings Role Provider {0}: {1}", this.applicationName, "The setting for Zimbra are not complete.");
+                        LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                        throw new ProviderException(message);
+                        */
+                    }
+                }
+                catch (ZimbraSettingsException zex)
+                {
+                    Logger.WriteLog(Logger.Category.Unexpected, zex.Source, zex.Message);
+                    string message = String.Format("Error while initializing settings Membership Provider {0}: {1}", this.applicationName, zex.Message);
+                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                    throw new ProviderException(message, zex);
+                }
+
+                if (!string.IsNullOrEmpty(zimbraconfiguration.Server.ServerName))
+                {
+                    zimbraServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName);
+
+                    try
+                    {
+                        //while(!zimbraServer.AuthenticatedAdmin.Value)
+                        //{
                         try
                         {
                             AdminToken = zimbraServer.Authenticate(zimbraconfiguration.Server.UserName, zimbraconfiguration.Server.Password, zimbraconfiguration.Server.IsAdmin);
                         }
-                        catch { }
+                        catch(Exception ex) 
+                        {
+                            Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                        }
 
                         if (string.IsNullOrEmpty(AdminToken))
                         {
@@ -303,33 +314,35 @@ namespace ClubCloud.Provider
                             zimbraServer.TriggerWebSite();
                             System.Threading.Thread.Sleep(1000);
                         }
-                    //}
+                        //}
 
-                    using (Zimbra.Administration.GetVersionInfoResponse response = await zimbraServer.Message(new Zimbra.Administration.GetVersionInfoRequest()) as Zimbra.Administration.GetVersionInfoResponse)
-                    {
-                        if (response != null)
+                        using (Zimbra.Administration.GetVersionInfoResponse response = await zimbraServer.Message(new Zimbra.Administration.GetVersionInfoRequest()) as Zimbra.Administration.GetVersionInfoResponse)
                         {
-                            zimbraVersion = response.info;
-                        }
-                        else
-                        {
-                            string message = String.Format("Error while getting VersionInfo for {0}: {1}", this.applicationName, "The Zimbra server returned no VersionInfo.");
-                            LogToULS(message, TraceSeverity.Unexpected, EventSeverity.Information);
+                            if (response != null)
+                            {
+                                zimbraVersion = response.info;
+                            }
+                            else
+                            {
+                                string message = String.Format("Error while getting VersionInfo for {0}: {1}", this.applicationName, "The Zimbra server returned no VersionInfo.");
+                                LogToULS(message, TraceSeverity.Unexpected, EventSeverity.Information);
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                        string message = String.Format("Error while initializing settings Membership Provider {0}: {1}", this.applicationName, ex.Message);
+                        LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
+                        throw new ProviderException(message, ex);
+                    }
+
+                    await GetPasswordProperties();
+
+                    await GetLockProperties();
+
+                    this.Initialized = true;
                 }
-                catch (Exception ex)
-                {
-                    string message = String.Format("Error while initializing settings Membership Provider {0}: {1}", this.applicationName, ex.Message);
-                    LogToULS(message, TraceSeverity.Unexpected, EventSeverity.ErrorCritical);
-                    throw new ProviderException(message, ex);
-                }
-
-                await GetPasswordProperties();
-
-                await GetLockProperties();
-
-                this.Initialized = true;
             }
         }
 
@@ -341,6 +354,7 @@ namespace ClubCloud.Provider
             }
             catch (Exception ex)
             {
+                Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
                 string messsage = ex.Message;
             }
 
@@ -365,8 +379,9 @@ namespace ClubCloud.Provider
                         propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
                 }
             }
         }
@@ -386,8 +401,9 @@ namespace ClubCloud.Provider
                         propertyInfo.SetValue(this, Convert.ChangeType(item.Value, propertyInfo.PropertyType), null);
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
                 }
             }
         }
@@ -1697,9 +1713,7 @@ namespace ClubCloud.Provider
                 SPDiagnosticsService ds = SPDiagnosticsService.Local;
                 ds.WriteTrace(0, category, traceSeverity, message);
             }
-            catch
-            {
-            }
+            catch (Exception ex) { Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message); }
         }
 
         #endregion

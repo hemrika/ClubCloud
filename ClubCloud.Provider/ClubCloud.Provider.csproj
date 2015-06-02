@@ -89,6 +89,7 @@
     <Compile Include="ZimbraClaimSecurityTrimmedControl.cs" />
     <Compile Include="ZimbraClaimConverter.cs" />
     <Compile Include="ProviderLogging.cs" />
+    <Compile Include="ZimbraLogger.cs" />
     <Compile Include="ZimbraRoleConverter.cs" />
     <Compile Include="ZimbraRolesSecurityTrimmedControl.cs" />
     <Compile Include="Features\Zimbra Claims\Zimbra Claims.EventReceiver.cs">

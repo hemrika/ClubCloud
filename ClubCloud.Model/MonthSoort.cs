@@ -12,21 +12,35 @@ namespace ClubCloud.Model
     using System;
     using System.Runtime.Serialization;
     
+    [DataContract]
     [Flags]
     public enum MonthSoort : int
     {
-        januari = 1,
-        februari = 2,
-        maart = 3,
-        april = 4,
-        mei = 5,
-        juni = 6,
-        juli = 7,
-        augustus = 8,
-        september = 9,
-        oktober = 10,
-        november = 11,
-        december = 12,
-        Onbekend = 0
+    	[EnumMember]
+    	januari = 1,
+    	[EnumMember]
+    	februari = 2,
+    	[EnumMember]
+    	maart = 3,
+    	[EnumMember]
+    	april = 4,
+    	[EnumMember]
+    	mei = 5,
+    	[EnumMember]
+    	juni = 6,
+    	[EnumMember]
+    	juli = 7,
+    	[EnumMember]
+    	augustus = 8,
+    	[EnumMember]
+    	september = 9,
+    	[EnumMember]
+    	oktober = 10,
+    	[EnumMember]
+    	november = 11,
+    	[EnumMember]
+    	december = 12,
+    	[EnumMember]
+    	Onbekend = 0
     }
 }

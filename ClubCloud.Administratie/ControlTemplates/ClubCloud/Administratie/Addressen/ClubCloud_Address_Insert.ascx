@@ -36,12 +36,12 @@
 			Provincie : <asp:TextBox ID="Provincie" runat="server" Text='<%# Bind("Provincie") %>' TextMode="SingleLine"/></br>
 			<asp:HiddenField ID="Latitude" Value='<%# Bind("Latitude") %>' runat="server" />
 			<asp:HiddenField ID="Longitude" Value='<%# Bind("Longitude") %>' runat="server" />
-			Naam : <asp:DropDownList ID="Naam" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Naam") %>' SelectMethod="SelectNaam" OnCallingDataMethods="InsertAddressform_CallingDataMethods" /></br>
+			Naam : <asp:DropDownList ID="Naam" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Naam") %>' SelectMethod="SelectNaam" OnCallingDataMethods="InsertAddressform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			Postcode : <asp:TextBox ID="Postcode" runat="server" Text='<%# Bind("Postcode") %>' TextMode="SingleLine"/></br>
 			Straat : <asp:TextBox ID="Straat" runat="server" Text='<%# Bind("Straat") %>' TextMode="SingleLine"/></br>
 			Nummer : <asp:TextBox ID="Nummer" runat="server" Text='<%# Bind("Nummer") %>' TextMode="Number" Enabled="false" /></br>
-            Land : <asp:DropDownList ID="LandId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("LandId") %>' SelectMethod="SelectLand" OnCallingDataMethods="InsertAddressform_CallingDataMethods" /></br>
-			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertAddressform_CallingDataMethods" /></br>
+            Land : <asp:DropDownList ID="LandId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("LandId") %>' SelectMethod="SelectLand" OnCallingDataMethods="InsertAddressform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertAddressform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			Fax : <asp:TextBox ID="Fax" runat="server" Text='<%# Bind("Fax") %>' TextMode="Phone" /></br>
 			Toevoeging : <asp:TextBox ID="Toevoeging" runat="server" Text='<%# Bind("Toevoeging") %>' TextMode="SingleLine"/></br>
 			Postbus : <asp:TextBox ID="Postbus" runat="server" Text='<%# Bind("Postbus") %>' TextMode="SingleLine"/></br>

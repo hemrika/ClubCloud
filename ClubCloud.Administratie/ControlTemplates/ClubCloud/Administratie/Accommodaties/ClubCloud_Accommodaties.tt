@@ -958,7 +958,7 @@ fileManager.StartNewFile(entity.Name+"_Edit.ascx");
 				if(!string.IsNullOrWhiteSpace(edmname))
 				{
 #>
-            <#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Edit<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
+            <#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Edit<#=code.Escape(entityName)#>form_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 <#
 					continue;
 				}
@@ -1070,7 +1070,7 @@ fileManager.StartNewFile(entity.Name+"_Edit.ascx");
 				if(edmname == entityName)
 					edmname = "_"+edmname;
 #>
-			<#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Edit<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
+			<#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Edit<#=code.Escape(entityName)#>form_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 <#
 				continue;
             }
@@ -1332,7 +1332,7 @@ fileManager.StartNewFile(entity.Name+"_Insert.ascx");
 				if(!string.IsNullOrWhiteSpace(edmname))
 				{
 #>
-            <#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Insert<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
+            <#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Insert<#=code.Escape(entityName)#>form_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 <#
 					continue;
 				}
@@ -1340,7 +1340,6 @@ fileManager.StartNewFile(entity.Name+"_Insert.ascx");
 
 			if(typeMapper.GetTypeName(edmProperty.TypeUsage) == "double" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<double>")
             {
-
 #>
 			<asp:HiddenField ID="<#=code.Escape(edmProperty.Name)#>" Value='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' runat="server" />
 <#
@@ -1457,7 +1456,7 @@ fileManager.StartNewFile(entity.Name+"_Insert.ascx");
 				if(edmname == entityName)
 					edmname = "_"+edmname;
 #>
-			<#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Insert<#=code.Escape(entityName)#>form_CallingDataMethods" /></br>
+			<#=code.Escape(edmname)#> : <asp:DropDownList ID="<#=code.Escape(edmProperty.Name)#>" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("<#=code.Escape(edmProperty.Name)#>") %>' SelectMethod="Select<#=code.Escape(edmname)#>" OnCallingDataMethods="Insert<#=code.Escape(entityName)#>form_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 <#
 				continue;
             }
@@ -1655,6 +1654,7 @@ using System.Web.UI.Design;
 using System.Web.UI.WebControls;
 using System.Data.Entity.Infrastructure;
 using System.Web.ModelBinding;
+using Microsoft.SharePoint.Utilities;
 
 //[Designer(typeof(<#=code.Escape(entity)#>DataSourceViewDesigner)),ToolboxData("<{0}:<#=code.Escape(entitySet)#>_View runat=\"server\"></{0}:<#=code.Escape(entitySet)#>_View>")]
 [System.ComponentModel.DataObject(true)]
@@ -1720,109 +1720,113 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
     {
 		<#=code.Escape(entity)#> entity = null;
 
-		if (SPContext.Current.Web.CurrentUser != null)
-		{
-            int bondsnummer;
-            ClubCloud_Setting Settings = null;
-            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
-                Settings = Client.GetSettingById(bondsnummer);
-
-			if (Settings != null && Settings.VerenigingId != null)
-			{
-				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
-
-				if (Settings.ClubCloud_Vereniging != null)
-				{
-
-				    if (<#=code.Escape(primarykey.Name)#> == null)
-                    {
-                        Guid queryId = Guid.Empty;
-                        foreach (Parameter where in WhereParameters)
-                        {
-                            if (where.Name == "<#=code.Escape(primarykey.Name)#>")
-                            {
-                                if (Guid.TryParse(where.DefaultValue, out queryId))
-                                {
-                                    break;
-                                }
-                            }
-                        }
-
-                        <#=code.Escape(primarykey.Name)#> = queryId;
-                    }
-
-					if(<#=code.Escape(primarykey.Name)#> == Guid.Empty)
-					{
-					<#
-						if(entityName == "Vereniging")
-						{
-					#>
-
-						<#=code.Escape(primarykey.Name)#> = Settings.VerenigingId.Value;
-					<#
-						}
-					#>
-					<#
-						if(entityName == "Accommodatie")
-						{
-					#>
-
-    					Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);    
-						<#=code.Escape(primarykey.Name)#> = Settings.ClubCloud_Vereniging.AccommodatieId.Value;
-					<#
-						}
-					#>
-
-					}
-
-					entity = Client.Get<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>.Value, false, Settings);
-
-					if(entity != null || entity.<#=code.Escape(primarykey.Name)#> != Guid.Empty)
-					{
-<#
-	
-    if (navigationProperties.Any())
-    {
-#>
-<#
-        foreach (var navigationProperty in navigationProperties)
+	    using (new SPMonitoredScope("<#=code.Escape(entitySetName)#> Select<#=entityName#>"))
         {
 
-			var endEntity = navigationProperty.ToEndMember.GetEntityType();
-			var endentityName = endEntity.Name.Split('_').Last();
-			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endentitySetName = endEntitySet.Name.Split('_').Last();
+			if (SPContext.Current.Web.CurrentUser != null)
+			{
+				int bondsnummer;
+				ClubCloud_Setting Settings = null;
+				if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+					Settings = Client.GetSettingById(bondsnummer);
+
+				if (Settings != null && Settings.VerenigingId != null)
+				{
+					Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+
+					if (Settings.ClubCloud_Vereniging != null)
+					{
+
+						if (<#=code.Escape(primarykey.Name)#> == null)
+						{
+							Guid queryId = Guid.Empty;
+							foreach (Parameter where in WhereParameters)
+							{
+								if (where.Name == "<#=code.Escape(primarykey.Name)#>")
+								{
+									if (Guid.TryParse(where.DefaultValue, out queryId))
+									{
+										break;
+									}
+								}
+							}
+
+							<#=code.Escape(primarykey.Name)#> = queryId;
+						}
+
+						if(<#=code.Escape(primarykey.Name)#> == Guid.Empty)
+						{
+						<#
+							if(entityName == "Vereniging")
+							{
+						#>
+
+							<#=code.Escape(primarykey.Name)#> = Settings.VerenigingId.Value;
+						<#
+							}
+						#>
+						<#
+							if(entityName == "Accommodatie")
+							{
+						#>
+
+    						Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);    
+							<#=code.Escape(primarykey.Name)#> = Settings.ClubCloud_Vereniging.AccommodatieId.Value;
+						<#
+							}
+						#>
+
+						}
+
+						entity = Client.Get<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>.Value, false, Settings);
+
+						if(entity != null || entity.<#=code.Escape(primarykey.Name)#> != Guid.Empty)
+						{
+	<#
+	
+		if (navigationProperties.Any())
+		{
+	#>
+	<#
+			foreach (var navigationProperty in navigationProperties)
+			{
+
+				var endEntity = navigationProperty.ToEndMember.GetEntityType();
+				var endentityName = endEntity.Name.Split('_').Last();
+				var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
+				var endentitySetName = endEntitySet.Name.Split('_').Last();
 					
 
-			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
-            {
-				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties" || endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
+				if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
+				{
+					if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties" || endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 
 
-#>
-						entity.<#=code.Escape(navigationProperty.Name)#>  = new System.Collections.ObjectModel.ObservableCollection<<#=code.Escape(endEntity)#>>(Client.Get<#=code.Escape(endentitySetName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>.Value, false, Settings));
-<#
-			}
-			else
-            {
-				if(entity.Name == "ClubCloud_Reservering" && endEntity.Name == "ClubCloud_Gebruiker")
-                {
-					var gebruiker = navigationProperty.Name.Replace("ClubCloud_",String.Empty);
-#>
-						if(entity.<#=code.Escape(gebruiker)#> != null)
-							entity.<#=code.Escape(navigationProperty.Name)#>  = Client.Get<#=code.Escape(endentityName)#>ById(entity.<#=code.Escape(gebruiker)#>.Value, false, Settings);
-<#
-                }
-				else
-                {
-#>
-						entity.<#=code.Escape(navigationProperty.Name)#>  = Client.Get<#=code.Escape(endentityName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>.Value, false, Settings);
-<#
+	#>
+							entity.<#=code.Escape(navigationProperty.Name)#>  = new System.Collections.ObjectModel.ObservableCollection<<#=code.Escape(endEntity)#>>(Client.Get<#=code.Escape(endentitySetName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>.Value, false, Settings));
+	<#
 				}
-            }
-        }
-    }
-#>
+				else
+				{
+					if(entity.Name == "ClubCloud_Reservering" && endEntity.Name == "ClubCloud_Gebruiker")
+					{
+						var gebruiker = navigationProperty.Name.Replace("ClubCloud_",String.Empty);
+	#>
+							if(entity.<#=code.Escape(gebruiker)#> != null)
+								entity.<#=code.Escape(navigationProperty.Name)#>  = Client.Get<#=code.Escape(endentityName)#>ById(entity.<#=code.Escape(gebruiker)#>.Value, false, Settings);
+	<#
+					}
+					else
+					{
+	#>
+							entity.<#=code.Escape(navigationProperty.Name)#>  = Client.Get<#=code.Escape(endentityName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(primarykey.Name)#>.Value, false, Settings);
+	<#
+					}
+				}
+			}
+		}
+	#>
+						}
 					}
 				}
 			}
@@ -1834,151 +1838,155 @@ public partial class <#=code.Escape(entitySet)#>_View : ClubCloudDataSourceView
 	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Fill, true)]
     public IQueryable<<#=code.Escape(entity)#>> Select<#=code.Escape(entitySetName)#>(string sortByExpression, int startRowIndex, int maximumRows, out int totalRowCount)//, bool retrieveTotalRowCount = true)
     {
-        if(SPContext.Current.Web.CurrentUser != null)
+		using (new SPMonitoredScope("<#=code.Escape(entitySetName)#> Select<#=code.Escape(entitySetName)#>"))
         {
-            int bondsnummer;
-            ClubCloud_Setting Settings = null;
-            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
-                Settings = Client.GetSettingById(bondsnummer);
 
-            if(Settings != null && Settings.VerenigingId != null) 
-            {
-                List<Parameter> collection = new List<Parameter>();
-
-            <#
-
-            if (navigationProperties.Any() && entitySetName != "Addressen")
-            {
-                foreach (var navigationProperty in navigationProperties)
-                {
-                    var endType = typeMapper.GetTypeName(navigationProperty.ToEndMember.GetEntityType());
-
-                    if(endType == "ClubCloud_Vereniging" && navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
-                    {
-        #>
-
-				collection.Add(new Parameter { DefaultValue = "{"+Settings.VerenigingId.Value.ToString()+"}" , Name = "VerenigingId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
-        
-		<#
-                    }
-                    if(endType == "ClubCloud_Accommodatie" && navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
-                    {
-        #>
-
-				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
-
-				if(Settings.ClubCloud_Vereniging != null)
-				{
-					Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie = Client.GetAccommodatieById(Settings.ClubCloud_Vereniging.AccommodatieId.Value, false, Settings);
-					if(Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie != null)
-					collection.Add(new Parameter { DefaultValue = "{"+Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie.Id.ToString()+"}" , Name = "AccommodatieId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
-				}
-
-        <#
-                    }
-                }
-            }
-        #>
-		<#
-			if(entitySetName == "Reserveringen")
+			if(SPContext.Current.Web.CurrentUser != null)
 			{
-		#>
+				int bondsnummer;
+				ClubCloud_Setting Settings = null;
+				if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+					Settings = Client.GetSettingById(bondsnummer);
 
-				collection.Add(new Parameter { DefaultValue = DateTime.Now.Date.ToString() , Name = "Datum", DbType = DbType.DateTime, Direction = ParameterDirection.Input });
-		<#
-			}
-		#>
+				if(Settings != null && Settings.VerenigingId != null) 
+				{
+					List<Parameter> collection = new List<Parameter>();
+
+				<#
+
+				if (navigationProperties.Any() && entitySetName != "Addressen")
+				{
+					foreach (var navigationProperty in navigationProperties)
+					{
+						var endType = typeMapper.GetTypeName(navigationProperty.ToEndMember.GetEntityType());
+
+						if(endType == "ClubCloud_Vereniging" && navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+						{
+			#>
+
+					collection.Add(new Parameter { DefaultValue = "{"+Settings.VerenigingId.Value.ToString()+"}" , Name = "VerenigingId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+        
+			<#
+						}
+						if(endType == "ClubCloud_Accommodatie" && navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+						{
+			#>
+
+					Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+
+					if(Settings.ClubCloud_Vereniging != null)
+					{
+						Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie = Client.GetAccommodatieById(Settings.ClubCloud_Vereniging.AccommodatieId.Value, false, Settings);
+						if(Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie != null)
+						collection.Add(new Parameter { DefaultValue = "{"+Settings.ClubCloud_Vereniging.ClubCloud_Accommodatie.Id.ToString()+"}" , Name = "AccommodatieId", DbType = DbType.Guid, Direction = ParameterDirection.Input });
+					}
+
+			<#
+						}
+					}
+				}
+			#>
+			<#
+				if(entitySetName == "Reserveringen")
+				{
+			#>
+
+					collection.Add(new Parameter { DefaultValue = DateTime.Now.Date.ToString() , Name = "Datum", DbType = DbType.DateTime, Direction = ParameterDirection.Input });
+			<#
+				}
+			#>
     
-                foreach (Parameter where in WhereParameters)
-                {
-                    if (collection.Any(w => w.Name == where.Name))
-                    {
-                        int index = collection.FindIndex(p => p.Name == where.Name);
-                        if (index >= 0)
-                            collection[index] = where;
-                    }
-                    else
-                    {
-                        collection.Add(where);
-                    }
-                }
+					foreach (Parameter where in WhereParameters)
+					{
+						if (collection.Any(w => w.Name == where.Name))
+						{
+							int index = collection.FindIndex(p => p.Name == where.Name);
+							if (index >= 0)
+								collection[index] = where;
+						}
+						else
+						{
+							collection.Add(where);
+						}
+					}
 
-<#
-if(entitySetName == "Functionarissen")
-{
-#>
-				if(String.IsNullOrWhiteSpace(sortByExpression))
-				{
-					sortByExpression = "FunctieId";
-				}
-				else
-				{
-					if(!sortByExpression.Contains("FunctieId"))
-						sortByExpression += ", FunctieId";
-				}
-<#
-}
-#>
-				DataSourceSelectArguments selectArgs = new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression };
-                <#=code.Escape(entity)#>_View queryresult = Client.Get<#=code.Escape(entitySetName)#>ByQuery(bondsnummer.ToString(), Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
-
-                totalRowCount = queryresult.TotalRowCount;
-
-<#
-    if (navigationProperties.Any())
-    {
-#>
-				
-				if(totalRowCount > 0)
-				{
-                    foreach (<#=code.Escape(entity)#> <#=code.Escape(entityName)#> in queryresult.<#=code.Escape(entity)#>)
-                    {
-<#
-        foreach (var navigationProperty in navigationProperties)
-        {
-
-			var endEntity = navigationProperty.ToEndMember.GetEntityType();
-			var endentityName = endEntity.Name.Split('_').Last();
-			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endentitySetName = endEntitySet.Name.Split('_').Last();
-			
-			
-			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
-            {
-				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
-
-#>
-						<#=code.Escape(entityName)#>.<#=code.Escape(navigationProperty.Name)#>  = new System.Collections.ObjectModel.ObservableCollection<<#=code.Escape(endEntity)#>>(Client.Get<#=code.Escape(endentitySetName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(entityName)#>.<#=code.Escape(primarykey.Name)#>, false, Settings));
-<#
-			}
-			else
-            {
-				if(entity.Name == "ClubCloud_Reservering" && endEntity.Name == "ClubCloud_Gebruiker")
-                {
-					var gebruiker = navigationProperty.Name.Replace("ClubCloud_",String.Empty);
-#>
-						if(<#=code.Escape(entityName)#>.<#=code.Escape(gebruiker)#> != null)
-							<#=code.Escape(entityName)#>.<#=code.Escape(navigationProperty.Name)#>  = Client.Get<#=code.Escape(endentityName)#>ById(<#=code.Escape(entityName)#>.<#=code.Escape(gebruiker)#>.Value, false, Settings);
-<#
-                }
-				else
-                {
-#>
-						<#=code.Escape(entityName)#>.<#=code.Escape(navigationProperty.Name)#>  = Client.Get<#=code.Escape(endentityName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(entityName)#>.<#=code.Escape(primarykey.Name)#>, false, Settings);
-<#
-				}
-            }
-        }
-#>
-                        
-                    }
-				}
-<#
+	<#
+	if(entitySetName == "Functionarissen")
+	{
+	#>
+					if(String.IsNullOrWhiteSpace(sortByExpression))
+					{
+						sortByExpression = "FunctieId";
+					}
+					else
+					{
+						if(!sortByExpression.Contains("FunctieId"))
+							sortByExpression += ", FunctieId";
+					}
+	<#
 	}
-#>
-				return queryresult.<#=code.Escape(entity)#>.AsQueryable<<#=code.Escape(entity)#>>();
-            }
-        }
+	#>
+					DataSourceSelectArguments selectArgs = new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression };
+					<#=code.Escape(entity)#>_View queryresult = Client.Get<#=code.Escape(entitySetName)#>ByQuery(bondsnummer.ToString(), Settings.VerenigingId.Value, new DataSourceSelectArguments{ MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = sortByExpression }, collection);
+
+					totalRowCount = queryresult.TotalRowCount;
+
+	<#
+		if (navigationProperties.Any())
+		{
+	#>
+				
+					if(totalRowCount > 0)
+					{
+						foreach (<#=code.Escape(entity)#> <#=code.Escape(entityName)#> in queryresult.<#=code.Escape(entity)#>)
+						{
+	<#
+			foreach (var navigationProperty in navigationProperties)
+			{
+
+				var endEntity = navigationProperty.ToEndMember.GetEntityType();
+				var endentityName = endEntity.Name.Split('_').Last();
+				var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
+				var endentitySetName = endEntitySet.Name.Split('_').Last();
+			
+			
+				if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
+				{
+					if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
+
+	#>
+							<#=code.Escape(entityName)#>.<#=code.Escape(navigationProperty.Name)#>  = new System.Collections.ObjectModel.ObservableCollection<<#=code.Escape(endEntity)#>>(Client.Get<#=code.Escape(endentitySetName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(entityName)#>.<#=code.Escape(primarykey.Name)#>, false, Settings));
+	<#
+				}
+				else
+				{
+					if(entity.Name == "ClubCloud_Reservering" && endEntity.Name == "ClubCloud_Gebruiker")
+					{
+						var gebruiker = navigationProperty.Name.Replace("ClubCloud_",String.Empty);
+	#>
+							if(<#=code.Escape(entityName)#>.<#=code.Escape(gebruiker)#> != null)
+								<#=code.Escape(entityName)#>.<#=code.Escape(navigationProperty.Name)#>  = Client.Get<#=code.Escape(endentityName)#>ById(<#=code.Escape(entityName)#>.<#=code.Escape(gebruiker)#>.Value, false, Settings);
+	<#
+					}
+					else
+					{
+	#>
+							<#=code.Escape(entityName)#>.<#=code.Escape(navigationProperty.Name)#>  = Client.Get<#=code.Escape(endentityName)#>For<#=entityName#>By<#=code.Escape(primarykey.Name)#>(<#=code.Escape(entityName)#>.<#=code.Escape(primarykey.Name)#>, false, Settings);
+	<#
+					}
+				}
+			}
+	#>
+                        
+						}
+					}
+	<#
+		}
+	#>
+					return queryresult.<#=code.Escape(entity)#>.AsQueryable<<#=code.Escape(entity)#>>();
+				}
+			}
+		}
 
         totalRowCount = 0;
 		return null;
@@ -2004,59 +2012,63 @@ if(entitySetName == "Functionarissen")
 	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]
     public IQueryable<<#=code.Escape(endEntity)#>> Select<#=code.Escape(endentityName)#>()
     {
-        if(SPContext.Current.Web.CurrentUser != null)
+		using (new SPMonitoredScope("<#=code.Escape(entitySetName)#> Select<#=code.Escape(endentityName)#>"))
         {
-            int bondsnummer;
-            ClubCloud_Setting Settings = null;
-            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
-                Settings = Client.GetSettingById(bondsnummer);
 
-            if(Settings != null && Settings.VerenigingId != null) 
-            {
-				List<<#=code.Escape(endEntity)#>> result = null;
-<#
-				var endNavigationProperties = typeMapper.GetNavigationProperties(endEntity);
+			if(SPContext.Current.Web.CurrentUser != null)
+			{
+				int bondsnummer;
+				ClubCloud_Setting Settings = null;
+				if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+					Settings = Client.GetSettingById(bondsnummer);
 
-				if (endNavigationProperties.Any())
+				if(Settings != null && Settings.VerenigingId != null) 
 				{
-					var EndNavigationProperty = endNavigationProperties.Where(enp => enp.Name == "ClubCloud_Accommodatie").FirstOrDefault();
+					List<<#=code.Escape(endEntity)#>> result = null;
+	<#
+					var endNavigationProperties = typeMapper.GetNavigationProperties(endEntity);
 
-					if(EndNavigationProperty != null && EndNavigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+					if (endNavigationProperties.Any())
 					{
-#>
+						var EndNavigationProperty = endNavigationProperties.Where(enp => enp.Name == "ClubCloud_Accommodatie").FirstOrDefault();
 
-				//Get By <#=code.Escape(EndNavigationProperty)#>
-				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
-				result = Client.Get<#=code.Escape(endentitySetName)#>ForAccommodatieById(Settings.ClubCloud_Vereniging.AccommodatieId.Value, false, Settings);
+						if(EndNavigationProperty != null && EndNavigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+						{
+	#>
 
-<#
+					//Get By <#=code.Escape(EndNavigationProperty)#>
+					Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+					result = Client.Get<#=code.Escape(endentitySetName)#>ForAccommodatieById(Settings.ClubCloud_Vereniging.AccommodatieId.Value, false, Settings);
+
+	<#
+						}
+
+						EndNavigationProperty = endNavigationProperties.Where(enp => enp.Name == "ClubCloud_Vereniging").FirstOrDefault();
+
+						if(EndNavigationProperty != null && EndNavigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+						{
+	#>
+
+					//Get By <#=code.Escape(EndNavigationProperty)#>
+					result = Client.Get<#=code.Escape(endentitySetName)#>ForVerenigingById(Settings.VerenigingId.Value, false, Settings);
+
+	<#
+						}
 					}
+	#>
 
-					EndNavigationProperty = endNavigationProperties.Where(enp => enp.Name == "ClubCloud_Vereniging").FirstOrDefault();
-
-					if(EndNavigationProperty != null && EndNavigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+					if(result == null)
 					{
-#>
-
-				//Get By <#=code.Escape(EndNavigationProperty)#>
-				result = Client.Get<#=code.Escape(endentitySetName)#>ForVerenigingById(Settings.VerenigingId.Value, false, Settings);
-
-<#
-					}
-                }
-#>
-
-				if(result == null || result.Count == 0)
-				{
-					result = Client.Get<#=code.Escape(endentitySetName)#>(false, Settings);
+						result = Client.Get<#=code.Escape(endentitySetName)#>(false, Settings);
 				
-				}
+					}
 
-                //Default
-                result = result.OrderBy(r => r.Naam).ToList();    				
-                result.Insert(0, new <#=code.Escape(endEntity)#> { Naam = "Onbekend" });
+					//Default
+					result = result.OrderBy(r => r.Naam).ToList();    				
+					//result.Insert(0, new <#=code.Escape(endEntity)#> { Naam = "Onbekend" });
     
-    			return result.AsQueryable<<#=code.Escape(endEntity)#>>();
+    				return result.AsQueryable<<#=code.Escape(endEntity)#>>();
+				}
 			}
 		}
 
@@ -2083,39 +2095,43 @@ if(entitySetName == "Functionarissen")
 	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Select, true)]    
 	public IQueryable<DictionaryEntry> Select<#=code.Escape(edmname)#>()
     {
-        if(SPContext.Current.Web.CurrentUser != null)
+		using (new SPMonitoredScope("<#=code.Escape(entitySetName)#> Select<#=code.Escape(edmname)#>"))
         {
-            int bondsnummer;
-            ClubCloud_Setting Settings = null;
-            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
-                Settings = Client.GetSettingById(bondsnummer);
 
-			if(Settings != null && Settings.VerenigingId != null) 
-            {
-                List<DictionaryEntry> result = new List<DictionaryEntry>();
-            	Array values = Enum.GetValues(typeof(<#=code.Escape(edmProperty.TypeUsage)#>));
-                Array.Sort(values);
-                foreach (int value in values)
-                {
-                    result.Add(new DictionaryEntry(value, (<#=code.Escape(edmProperty.TypeUsage)#>)value));
-                }
-                return result.AsQueryable<DictionaryEntry>();
-    		}
-			/*
-            if(Settings != null && Settings.VerenigingId != null) 
-            {
-                Hashtable ht = new Hashtable();
-				ht.Add(string.Empty,"Onbekend");
-    			Array values = Enum.GetValues(typeof(<#=code.Escape(edmProperty.TypeUsage)#>));
-                Array.Sort(values);
-                foreach (int value in values)
-                {
-                    string name = ((<#=code.Escape(edmProperty.TypeUsage)#>)value).ToString();
-                    ht.Add(name,name);
-                }    
-    			return ht;
+			if(SPContext.Current.Web.CurrentUser != null)
+			{
+				int bondsnummer;
+				ClubCloud_Setting Settings = null;
+				if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+					Settings = Client.GetSettingById(bondsnummer);
+
+				if(Settings != null && Settings.VerenigingId != null) 
+				{
+					List<DictionaryEntry> result = new List<DictionaryEntry>();
+            		Array values = Enum.GetValues(typeof(<#=code.Escape(edmProperty.TypeUsage)#>));
+					Array.Sort(values);
+					foreach (int value in values)
+					{
+						result.Add(new DictionaryEntry(value, (<#=code.Escape(edmProperty.TypeUsage)#>)value));
+					}
+					return result.AsQueryable<DictionaryEntry>();
+    			}
+				/*
+				if(Settings != null && Settings.VerenigingId != null) 
+				{
+					Hashtable ht = new Hashtable();
+					ht.Add(string.Empty,"Onbekend");
+    				Array values = Enum.GetValues(typeof(<#=code.Escape(edmProperty.TypeUsage)#>));
+					Array.Sort(values);
+					foreach (int value in values)
+					{
+						string name = ((<#=code.Escape(edmProperty.TypeUsage)#>)value).ToString();
+						ht.Add(name,name);
+					}    
+    				return ht;
+				}
+				*/
 			}
-			*/
 		}
 
 		return null;
@@ -2213,18 +2229,22 @@ if(entitySetName == "Functionarissen")
 	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Delete, true)]
 	public bool Delete<#=code.Escape(entityName)#>(<#=code.Escape(entity)#> entity)
     { 
-        if (SPContext.Current.Web.CurrentUser != null)
+		using (new SPMonitoredScope("<#=code.Escape(entitySetName)#> Delete<#=code.Escape(entityName)#>"))
         {
-            int bondsnummer;
-            ClubCloud_Setting Settings = null;
-            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
-                Settings = Client.GetSettingById(bondsnummer);
 
-            if (Settings != null && Settings.VerenigingId != null)
-            {
-                return Client.Delete<#=code.Escape(entityName)#>(entity, Settings);
-            }
-        }
+			if (SPContext.Current.Web.CurrentUser != null)
+			{
+				int bondsnummer;
+				ClubCloud_Setting Settings = null;
+				if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+					Settings = Client.GetSettingById(bondsnummer);
+
+				if (Settings != null && Settings.VerenigingId != null)
+				{
+					return Client.Delete<#=code.Escape(entityName)#>(entity, Settings);
+				}
+			}
+		}
 		return false;
 	}
 
@@ -2272,43 +2292,47 @@ if(entitySetName == "Functionarissen")
 	[System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Insert, true)]
 	public int Insert<#=code.Escape(entityName)#>(<#=code.Escape(entity)#> entity)
 	{
-        if (SPContext.Current.Web.CurrentUser != null)
+		using (new SPMonitoredScope("<#=code.Escape(entitySetName)#> Insert<#=code.Escape(entityName)#>"))
         {
-            int bondsnummer;
-            ClubCloud_Setting Settings = null;
-            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
-                Settings = Client.GetSettingById(bondsnummer);
 
-            if (Settings != null && Settings.VerenigingId != null)
-            {
-<#
-    if (simpleProperties.Any())
-    {
-        foreach (var edmProperty in simpleProperties)
-        {
-			if(edmProperty.Name == "VerenigingId")
-            {
-#>
-				entity.VerenigingId = Settings.VerenigingId.Value;
-<#
-			}
-			if(edmProperty.Name == "AccommodatieId")
-            {
-#>
-				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
-				if(Settings.ClubCloud_Vereniging != null)
+			if (SPContext.Current.Web.CurrentUser != null)
+			{
+				int bondsnummer;
+				ClubCloud_Setting Settings = null;
+				if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+					Settings = Client.GetSettingById(bondsnummer);
+
+				if (Settings != null && Settings.VerenigingId != null)
 				{
-					entity.AccommodatieId = Settings.ClubCloud_Vereniging.AccommodatieId.Value;
+	<#
+		if (simpleProperties.Any())
+		{
+			foreach (var edmProperty in simpleProperties)
+			{
+				if(edmProperty.Name == "VerenigingId")
+				{
+	#>
+					entity.VerenigingId = Settings.VerenigingId.Value;
+	<#
 				}
-<#
+				if(edmProperty.Name == "AccommodatieId")
+				{
+	#>
+					Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+					if(Settings.ClubCloud_Vereniging != null)
+					{
+						entity.AccommodatieId = Settings.ClubCloud_Vereniging.AccommodatieId.Value;
+					}
+	<#
+				}
 			}
-        }
-    }
-#>
-                entity = Client.Set<#=code.Escape(entityName)#>(entity, Settings);
-				this.OnDataSourceViewChanged(EventArgs.Empty);
-            }
-        }
+		}
+	#>
+					entity = Client.Set<#=code.Escape(entityName)#>(entity, Settings);
+					this.OnDataSourceViewChanged(EventArgs.Empty);
+				}
+			}
+		}
 
 		return 1;
 	}
@@ -2338,43 +2362,47 @@ if(entitySetName == "Functionarissen")
     [System.ComponentModel.DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType.Update, true)]
     public void Update<#=code.Escape(entityName)#>(<#=code.Escape(entity)#> entity) 
 	{
-        if (SPContext.Current.Web.CurrentUser != null)
+		using (new SPMonitoredScope("<#=code.Escape(entitySetName)#> Update<#=code.Escape(entityName)#>"))
         {
-            int bondsnummer;
-            ClubCloud_Setting Settings = null;
-            if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
-                Settings = Client.GetSettingById(bondsnummer);
 
-            if (Settings != null && Settings.VerenigingId != null)
-            {
-<#
-    if (simpleProperties.Any())
-    {
-        foreach (var edmProperty in simpleProperties)
-        {
-			if(edmProperty.Name == "VerenigingId")
-            {
-#>
-				entity.VerenigingId = Settings.VerenigingId.Value;
-<#
-			}
-			if(edmProperty.Name == "AccommodatieId")
-            {
-#>
-				Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
-				if(Settings.ClubCloud_Vereniging != null)
+			if (SPContext.Current.Web.CurrentUser != null)
+			{
+				int bondsnummer;
+				ClubCloud_Setting Settings = null;
+				if (int.TryParse(SPContext.Current.Web.CurrentUser.UserId.NameId, out bondsnummer))
+					Settings = Client.GetSettingById(bondsnummer);
+
+				if (Settings != null && Settings.VerenigingId != null)
 				{
-					entity.AccommodatieId = Settings.ClubCloud_Vereniging.AccommodatieId.Value;
+	<#
+		if (simpleProperties.Any())
+		{
+			foreach (var edmProperty in simpleProperties)
+			{
+				if(edmProperty.Name == "VerenigingId")
+				{
+	#>
+					entity.VerenigingId = Settings.VerenigingId.Value;
+	<#
 				}
-<#
+				if(edmProperty.Name == "AccommodatieId")
+				{
+	#>
+					Settings.ClubCloud_Vereniging = Client.GetVerenigingById(Settings.VerenigingId.Value,false, Settings);
+					if(Settings.ClubCloud_Vereniging != null)
+					{
+						entity.AccommodatieId = Settings.ClubCloud_Vereniging.AccommodatieId.Value;
+					}
+	<#
+				}
 			}
-        }
-    }
-#>
-                Client.Set<#=code.Escape(entityName)#>(entity, Settings);
-				this.OnDataSourceViewChanged(EventArgs.Empty);
-            }
-        }
+		}
+	#>
+					Client.Set<#=code.Escape(entityName)#>(entity, Settings);
+					this.OnDataSourceViewChanged(EventArgs.Empty);
+				}
+			}
+		}
 	}
 
 	/*

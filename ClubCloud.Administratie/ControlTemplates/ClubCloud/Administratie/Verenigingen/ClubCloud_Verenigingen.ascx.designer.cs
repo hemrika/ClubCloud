@@ -7,11 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClubCloud.Administratie.WebControls
-{
-    public partial class ClubCloud_VerenigingenUserControl 
-    {
+namespace ClubCloud.Administratie.WebControls {
     
+    
+    public partial class ClubCloud_VerenigingenUserControl {
+        
+        /// <summary>
+        /// ClubCloud_Vereniging_DataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Vereniging_DataSource;
+        
         /// <summary>
         /// udp_Verenigingen control.
         /// </summary>
@@ -20,34 +29,16 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel udp_Verenigingen;
-    
-    	/// <summary>
-    	/// tmr_loader_Verenigingen control.
-    	/// </summary>
-    	/// <remarks>
-    	/// Auto-generated field.
-    	/// To modify move field declaration from designer file to code-behind file.
-    	/// </remarks>
-    	protected global::System.Web.UI.Timer tmr_loader_Verenigingen;
-            
-    	/// <summary>
-    	/// pnl_Verenigingen control.
-    	/// </summary>
-    	/// <remarks>
-    	/// Auto-generated field.
-    	/// To modify move field declaration from designer file to code-behind file.
-    	/// </remarks>
-    	protected global::System.Web.UI.WebControls.Panel pnl_Verenigingen;
-    
-    	/// <summary>
-    	/// udp_Verenigingen_progress control.
-    	/// </summary>
-    	/// <remarks>
-    	/// Auto-generated field.
-    	/// To modify move field declaration from designer file to code-behind file.
-    	/// </remarks>
-    	protected global::System.Web.UI.UpdateProgress udp_Verenigingen_progress;
-    
+        
+        /// <summary>
+        /// tmr_loader_Verenigingen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer tmr_loader_Verenigingen;
+        
         /// <summary>
         /// VerenigingMenu control.
         /// </summary>
@@ -56,8 +47,8 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuTemplate VerenigingMenu;
-    
-    	/// <summary>
+        
+        /// <summary>
         /// Vereniging_Details control.
         /// </summary>
         /// <remarks>
@@ -65,7 +56,7 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Vereniging_Details;
-    
+        
         /// <summary>
         /// Functionarissen control.
         /// </summary>
@@ -74,7 +65,7 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Functionarissen;
-    
+        
         /// <summary>
         /// Lidmaatschappen control.
         /// </summary>
@@ -83,7 +74,7 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Lidmaatschappen;
-    
+        
         /// <summary>
         /// Bestuursorganen control.
         /// </summary>
@@ -92,7 +83,7 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Bestuursorganen;
-    
+        
         /// <summary>
         /// Addressen control.
         /// </summary>
@@ -101,7 +92,7 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Addressen;
-    
+        
         /// <summary>
         /// Afhangen control.
         /// </summary>
@@ -110,7 +101,7 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Afhangen;
-    
+        
         /// <summary>
         /// Sponsoren control.
         /// </summary>
@@ -119,7 +110,7 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Sponsoren;
-    
+        
         /// <summary>
         /// Baanschemas control.
         /// </summary>
@@ -128,7 +119,7 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Baanschemas;
-    
+        
         /// <summary>
         /// Lidmaatschapsoorten control.
         /// </summary>
@@ -137,16 +128,16 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Lidmaatschapsoorten;
-    
+        
         /// <summary>
-        /// ClubCloud_Vereniging_DataSource control.
+        /// pnl_Verenigingen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-    	protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Vereniging_DataSource;
-    
+        protected global::System.Web.UI.WebControls.Panel pnl_Verenigingen;
+        
         /// <summary>
         /// spgvpager_top control.
         /// </summary>
@@ -155,16 +146,16 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_top;
-    
+        
         /// <summary>
-        /// ClubCloud_Verenigingen_Grid control.
+        /// Verenigingen_Grid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.SPGridView Verenigingen_Grid;
-    
+        
         /// <summary>
         /// spgvpager_bottom control.
         /// </summary>
@@ -173,7 +164,7 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_bottom;
-            
+        
         /// <summary>
         /// lblMessage control.
         /// </summary>
@@ -182,6 +173,14 @@ namespace ClubCloud.Administratie.WebControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
+        /// udp_Verenigingen_progress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress udp_Verenigingen_progress;
     }
 }
-

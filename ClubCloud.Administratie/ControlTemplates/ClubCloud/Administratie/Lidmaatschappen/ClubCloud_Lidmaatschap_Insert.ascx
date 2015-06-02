@@ -32,7 +32,7 @@
     <InsertItemTemplate>
         <fieldset>
 			Bondsnummer : <asp:TextBox ID="Bondsnummer" runat="server" Text='<%# Bind("Bondsnummer") %>' TextMode="Number" Enabled="false" /></br>
-            Lidmaatschapsoort : <asp:DropDownList ID="LidmaatschapsoortId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("LidmaatschapsoortId") %>' SelectMethod="SelectLidmaatschapsoort" OnCallingDataMethods="InsertLidmaatschapform_CallingDataMethods" /></br>
+            Lidmaatschapsoort : <asp:DropDownList ID="LidmaatschapsoortId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("LidmaatschapsoortId") %>' SelectMethod="SelectLidmaatschapsoort" OnCallingDataMethods="InsertLidmaatschapform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			Begin : <asp:TextBox ID="Begin" runat="server" Text='<%# Bind("Begin") %>' TextMode="Date" /></br>
 			<ajaxToolkit:CalendarExtender ID="Begin_CalendarExtender" runat="server" BehaviorID="Begin_CalendarExtender" TargetControlID="Begin" />
 			Einde : <asp:TextBox ID="Einde" runat="server" Text='<%# Bind("Einde") %>' TextMode="Date" /></br>
@@ -55,7 +55,7 @@
 			SpeelsterkteDubbel : <asp:TextBox ID="SpeelsterkteDubbel" runat="server" Text='<%# Bind("SpeelsterkteDubbel") %>' TextMode="Number" /></br>
 			SpeelsterkteEnkel : <asp:TextBox ID="SpeelsterkteEnkel" runat="server" Text='<%# Bind("SpeelsterkteEnkel") %>' TextMode="Number" /></br>
 			Autorisatie : <asp:Checkbox ID="Autorisatie" runat="server" Checked='<%# Bind("Autorisatie") %>' /></br>
-			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertLidmaatschapform_CallingDataMethods" /></br>
+			Actief : <asp:DropDownList ID="Actief" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Actief") %>' SelectMethod="SelectActief" OnCallingDataMethods="InsertLidmaatschapform_CallingDataMethods" ><asp:ListItem  Text="Onbekend" Value="00000000-0000-0000-0000-000000000000" Selected="True"></asp:ListItem></asp:DropDownList></br>
 			Gewijzigd : <asp:TextBox ID="Gewijzigd" runat="server" Text='<%# Bind("Gewijzigd") %>' TextMode="Date" /></br>
 			<ajaxToolkit:CalendarExtender ID="Gewijzigd_CalendarExtender" runat="server" BehaviorID="Gewijzigd_CalendarExtender" TargetControlID="Gewijzigd" />
         </fieldset>

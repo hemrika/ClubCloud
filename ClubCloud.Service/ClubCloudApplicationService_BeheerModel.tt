@@ -26,6 +26,7 @@ if (!typeMapper.VerifyCaseInsensitiveTypeUniqueness(typeMapper.GetAllGlobalItems
 BeginNamespace(code);
 #>
 using ClubCloud.Model;
+using Microsoft.SharePoint.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -123,6 +124,7 @@ foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
 	BeginNamespace(code);
 #>
 using ClubCloud.Model;
+using Microsoft.SharePoint.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -146,24 +148,31 @@ internal partial class ClubCloudApplicationService
 
 		<#=code.Escape(entity)#> result = null;
 
-		try
-		{			
-			result = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Get<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>"))
+		{
+
+			try
+			{			
+				result = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
 		
-			if (result == null || refresh)
-				result = Get<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
+				if (result == null || refresh)
+					result = Get<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
 
-			if (result != null)
-				return result;
+				if (result != null)
+					return result;	
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(result != null)
+					try { beheerModel.ObjectContext.Detach(result);} catch{}
+			}
+		}
 
-			return new <#=code.Escape(entity)#>();
-        }
-        finally
-        {
-			if(result != null)
-				try { beheerModel.ObjectContext.Detach(result);} catch{}
-        }
-
+		return new <#=code.Escape(entity)#>();
 	}
 <#
     }
@@ -175,31 +184,38 @@ internal partial class ClubCloudApplicationService
 			ValidateSettings(ref settings);
 
 		List<<#=code.Escape(entity)#>> result = null;
-		
-		try
+
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Get<#=code.Escape(EntitySetName)#>"))
 		{
-			result = beheerModel.<#=code.Escape(entitySet)#>.ToList<<#=code.Escape(entity)#>>();
 		
-			if (result == null || result.Count == 0 || refresh)		
-				result = Get<#=code.Escape(EntitySetName)#>(settings.Id.ToString(), refresh, settings);
-
-			if(result != null)
-				return result;
-
-			return new List<<#=code.Escape(entity)#>>();
-        }
-        finally
-        {
-			if(result != null)
+			try
 			{
-				foreach (object item in result)
+				result = beheerModel.<#=code.Escape(entitySet)#>.ToList<<#=code.Escape(entity)#>>();
+		
+				if (result == null || result.Count == 0 || refresh)		
+					result = Get<#=code.Escape(EntitySetName)#>(settings.Id.ToString(), refresh, settings);
+
+				if(result != null)
+					return result;		
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(result != null)
 				{
-					if(item != null)
-						try {beheerModel.ObjectContext.Detach(item); } catch{}
+					foreach (object item in result)
+					{
+						if(item != null)
+							try {beheerModel.ObjectContext.Detach(item); } catch{}
+					}
 				}
 			}
-        }
+		}
 
+		return new List<<#=code.Escape(entity)#>>();
 	}
 
 	public <#=code.Escape(entity)#> Set<#=code.Escape(EntityName)#>(<#=code.Escape(entity)#> entity, ClubCloud_Setting settings = null)
@@ -209,24 +225,33 @@ internal partial class ClubCloudApplicationService
 
 		<#=code.Escape(entity)#> tobeupdated = null;
 		
-		try
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Set<#=code.Escape(EntityName)#>"))
 		{
-			entity = Set<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, settings);
 
-			if(entity != null)
-				beheerModel.<#=code.Escape(entitySet)#>.AddOrUpdate(entity);
+			try
+			{
+				entity = Set<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, settings);
+
+				if(entity != null)
+					beheerModel.<#=code.Escape(entitySet)#>.AddOrUpdate(entity);
 		
-			beheerModel.SaveChanges();
+				beheerModel.SaveChanges();
 
-			tobeupdated = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);
-			return tobeupdated;
-        }
-        finally
-        {
-			if(tobeupdated != null)
-				try { beheerModel.ObjectContext.Detach(tobeupdated); } catch{}
-        }
+				tobeupdated = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);
+				return tobeupdated;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(tobeupdated != null)
+					try { beheerModel.ObjectContext.Detach(tobeupdated); } catch{}
+			}
+		}
 
+		return null;
 	}
 
 <#
@@ -250,23 +275,32 @@ internal partial class ClubCloudApplicationService
 
 		bool succes = false;
 		<#=code.Escape(entity)#> tobedeleted = null;
-		try
+
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Delete<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>"))
 		{
 
-			tobedeleted = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
-		
-			if (tobedeleted != null)
+			try
 			{
-				beheerModel.<#=code.Escape(entitySet)#>.Remove(tobedeleted);
-				beheerModel.SaveChanges();
+
+				tobedeleted = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
+		
+				if (tobedeleted != null)
+				{
+					beheerModel.<#=code.Escape(entitySet)#>.Remove(tobedeleted);
+					beheerModel.SaveChanges();
+				}
+				succes = true;
 			}
-			succes = true;
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(tobedeleted != null)
+					try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
+			}
 		}
-        finally
-        {
-			if(tobedeleted != null)
-				try { beheerModel.ObjectContext.Detach(tobedeleted); } catch{}
-        }
 
 		return succes;
 	}
@@ -282,54 +316,59 @@ internal partial class ClubCloudApplicationService
 
 		<#=code.Escape(entity)#>_View view = new <#=code.Escape(entity)#>_View();
 
-		StringBuilder querybuilder = new StringBuilder("SELECT * FROM dbo.<#=code.Escape(entity)#>");
-		List<SqlParameter> sqlparams = new List<SqlParameter>();
-		List<SqlParameter> sqlparamscount = new List<SqlParameter>();
-		string and = " AND ";
-		if (parameters != null && parameters.Count > 0)
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Get<#=code.Escape(EntitySetName)#>ByQuery"))
 		{
-			querybuilder.Append(" WHERE ");
 
-    		foreach (System.Web.UI.WebControls.Parameter parameter in parameters)
-    		{
-                object value = null;
+			StringBuilder querybuilder = new StringBuilder("SELECT * FROM dbo.<#=code.Escape(entity)#>");
+			List<SqlParameter> sqlparams = new List<SqlParameter>();
+			List<SqlParameter> sqlparamscount = new List<SqlParameter>();
+			string and = " AND ";
+			if (parameters != null && parameters.Count > 0)
+			{
+				querybuilder.Append(" WHERE ");
 
-    			Type type = TypeConvertor.ToNetType(parameter.DbType);
-    			if(type == typeof(DateTime))
-    			{    					
-                    IFormatProvider culture = new System.Globalization.CultureInfo("nl-NL", true);
-                    value = DateTime.Parse(parameter.DefaultValue, culture, System.Globalization.DateTimeStyles.AssumeLocal);
-                    querybuilder.Append(parameter.Name + " >= @" + parameter.Name + and);
-    			}
-    			else
+    			foreach (System.Web.UI.WebControls.Parameter parameter in parameters)
     			{
-                    value = TypeDescriptor.GetConverter(type).ConvertFrom(parameter.DefaultValue);
-                    querybuilder.Append(parameter.Name + " = @" + parameter.Name + and);
+					object value = null;
+
+    				Type type = TypeConvertor.ToNetType(parameter.DbType);
+    				if(type == typeof(DateTime))
+    				{    					
+						IFormatProvider culture = new System.Globalization.CultureInfo("nl-NL", true);
+						value = DateTime.Parse(parameter.DefaultValue, culture, System.Globalization.DateTimeStyles.AssumeLocal);
+						querybuilder.Append(parameter.Name + " >= @" + parameter.Name + and);
+    				}
+    				else
+    				{
+						value = TypeDescriptor.GetConverter(type).ConvertFrom(parameter.DefaultValue);
+						querybuilder.Append(parameter.Name + " = @" + parameter.Name + and);
+    				}
+
+					if (value != null)
+					{
+						sqlparams.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });
+						sqlparamscount.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });
+					}
     			}
 
-                if (value != null)
-                {
-                    sqlparams.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });
-                    sqlparamscount.Add(new SqlParameter { Value = value, ParameterName = "@" + parameter.Name, DbType = parameter.DbType, Direction = parameter.Direction });
-                }
-    		}
+				if (querybuilder.Length > and.Length)
+    				querybuilder.Remove(querybuilder.Length - and.Length, and.Length);
+			}
 
-            if (querybuilder.Length > and.Length)
-    			querybuilder.Remove(querybuilder.Length - and.Length, and.Length);
+			if (!string.IsNullOrWhiteSpace(selectArgs.SortExpression))
+			{
+				querybuilder.Append(" ORDER BY " + selectArgs.SortExpression);
+			}
+
+			view.<#=code.Escape(entity)#> = beheerModel.Database.SqlQuery<<#=code.Escape(entity)#>>(querybuilder.ToString(), sqlparams.ToArray()).Skip(selectArgs.StartRowIndex).Take(selectArgs.MaximumRows).ToList<<#=code.Escape(entity)#>>();
+
+			if (selectArgs.RetrieveTotalRowCount)
+			{
+
+				view.TotalRowCount = beheerModel.Database.SqlQuery<<#=code.Escape(entity)#>>(querybuilder.ToString(), sqlparamscount.ToArray()).Count();
+			}
 		}
 
-		if (!string.IsNullOrWhiteSpace(selectArgs.SortExpression))
-		{
-			querybuilder.Append(" ORDER BY " + selectArgs.SortExpression);
-		}
-
-		view.<#=code.Escape(entity)#> = beheerModel.Database.SqlQuery<<#=code.Escape(entity)#>>(querybuilder.ToString(), sqlparams.ToArray()).Skip(selectArgs.StartRowIndex).Take(selectArgs.MaximumRows).ToList<<#=code.Escape(entity)#>>();
-
-		if (selectArgs.RetrieveTotalRowCount)
-		{
-
-			view.TotalRowCount = beheerModel.Database.SqlQuery<<#=code.Escape(entity)#>>(querybuilder.ToString(), sqlparamscount.ToArray()).Count();
-		}
 		return view;
 	}
 
@@ -339,82 +378,90 @@ internal partial class ClubCloudApplicationService
 			ValidateSettings(ref _settings);
 
         List<string> <#=code.Escape(EntitySetName.ToLower())#> = new List<string>();
-        try
-        {
-            bool enabled = beheerModel.Database.SqlQuery<bool>("SELECT (CAST((FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))AS BIT))").FirstOrDefault();
 
-            List<<#=code.Escape(entity)#>> entities = null;
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Get<#=code.Escape(EntitySetName)#>BySearch"))
+		{
 
-            if (enabled)
-            {
-                var fts = BeheerFullTextInterceptor.Fts(prefixText);
-				
-<#
-var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.TypeUsage.ToString() == "Edm.String");
-#>
-<#
-	StringBuilder lnq = new StringBuilder("entities = beheerModel."+entitySet+".Where(e => ");
-    
-    if (simpleProperties.Any())
-    {
-		int i = 0;
-		int t = simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String").Count();
-        foreach (var edmProperty in simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String"))
-        {
-			i++;			
-			var or = " || ";
-			if (i == t)
-				or = "";
-
-			lnq.Append("e."+edmProperty+".Contains(fts) "+ or);
-			
-			if (i == t)
-				lnq.Append(").ToList();");
-			
-		}
-#>
-
-			<#=code.Escape(lnq.ToString())#>
-
-<#
-    }
-#>				
-            }
-			else
+			try
 			{
-<#
-	StringBuilder lk = new StringBuilder("entities = beheerModel.Database.SqlQuery<"+entity.Name+">(\"SELECT * FROM "+entity.Name+" WHERE ");
+				bool enabled = false; //beheerModel.Database.SqlQuery<bool>("SELECT (CAST((FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))AS BIT))").FirstOrDefault();
 
-    if (simpleProperties.Any())
-    {
-		int i = 0;
-		int t = simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String").Count();
-        foreach (var edmProperty in simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String"))
-        {
-			i++;			
-			var or = " OR ";
-			if (i == t)
-				or = "";
+				List<<#=code.Escape(entity)#>> entities = null;
 
-			lk.Append(" "+edmProperty+" LIKE '%\"+ prefixText +\"%'"+ or);
+				if (enabled)
+				{
+					var fts = BeheerFullTextInterceptor.Fts(prefixText);
+				
+	<#
+	var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.TypeUsage.ToString() == "Edm.String");
+	#>
+	<#
+		StringBuilder lnq = new StringBuilder("entities = beheerModel."+entitySet+".Where(e => ");
+    
+		if (simpleProperties.Any())
+		{
+			int i = 0;
+			int t = simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String").Count();
+			foreach (var edmProperty in simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String"))
+			{
+				i++;			
+				var or = " || ";
+				if (i == t)
+					or = "";
+
+				lnq.Append("e."+edmProperty+".Contains(fts) "+ or);
 			
-			if (i == t)
-				lk.Append("\").ToList();");
+				if (i == t)
+					lnq.Append(").ToList();");
 			
-		}
-#>
-
-			<#=code.Escape(lk.ToString())#>
-
-<#
-    }
-#>				
 			}
+	#>
 
-			if (entities != null && entities.Count > 0)
-				return entities;
-        }
-        catch { };
+				<#=code.Escape(lnq.ToString())#>
+
+	<#
+		}
+	#>				
+				}
+				else
+				{
+	<#
+		StringBuilder lk = new StringBuilder("entities = beheerModel.Database.SqlQuery<"+entity.Name+">(\"SELECT * FROM "+entity.Name+" WHERE ");
+
+		if (simpleProperties.Any())
+		{
+			int i = 0;
+			int t = simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String").Count();
+			foreach (var edmProperty in simpleProperties.Where(edm => edm.TypeUsage.ToString() == "Edm.String"))
+			{
+				i++;			
+				var or = " OR ";
+				if (i == t)
+					or = "";
+
+				lk.Append(" "+edmProperty+" LIKE '%\"+ prefixText +\"%'"+ or);
+			
+				if (i == t)
+					lk.Append("\").ToList();");
+			
+			}
+	#>
+
+				<#=code.Escape(lk.ToString())#>
+
+	<#
+		}
+	#>				
+				}
+
+				if (entities != null && entities.Count > 0)
+					return entities;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+		}
 
         return new List<<#=code.Escape(entity)#>>();
 	}
@@ -451,37 +498,44 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 
 		List<<#=code.Escape(endEntity)#>> result = null;
 
-		try
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>"))
 		{
-			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);
-			if(entity != null && entity.<#=code.Escape(endEntity)#> != null && entity.<#=code.Escape(endEntity)#>.Count == 0)
-				beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			if(entity != null)
-				result = entity.<#=code.Escape(endEntity)#>.ToList();
-
-			if(result == null || result.Count == 0 || refresh && entity != null)
-				result = Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, refresh, settings);
-
-			if(result != null)
-				return result;
-
-			return new List<<#=code.Escape(endEntity)#>>();
-		}
-	    finally
-	    {
-			if(entity != null)
-				try { beheerModel.ObjectContext.Detach(entity); } catch{}
-			if(result != null)
+			try
 			{
-				foreach (object item in result)
+				entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);
+				if(entity != null && entity.<#=code.Escape(endEntity)#> != null && entity.<#=code.Escape(endEntity)#>.Count == 0)
+					beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
+
+				if(entity != null)
+					result = entity.<#=code.Escape(endEntity)#>.ToList();
+
+				if(result == null || result.Count == 0 || refresh && entity != null)
+					result = Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, refresh, settings);
+
+				if(result != null)
+					return result;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(entity != null)
+					try { beheerModel.ObjectContext.Detach(entity); } catch{}
+				if(result != null)
 				{
-					if(item != null)
-						try { beheerModel.ObjectContext.Detach(item); } catch{}
+					foreach (object item in result)
+					{
+						if(item != null)
+							try { beheerModel.ObjectContext.Detach(item); } catch{}
+					}
 				}
 			}
-		}	
+		}
 
+		return new List<<#=code.Escape(endEntity)#>>();
 	}
 
 <#
@@ -498,36 +552,44 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 		<#=code.Escape(entity)#> entity = null;
 		List<<#=code.Escape(endEntity)#>> result = null;
 
-		try
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>"))
 		{
-			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
-			if(entity != null && entity.<#=code.Escape(endEntity)#> != null && entity.<#=code.Escape(endEntity)#>.Count == 0)
-				beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			if(entity != null)
-				result = entity.<#=code.Escape(endEntity)#>.ToList();
-
-			if(result == null || result.Count == 0 || refresh)
-				result = Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
-
-			if(result != null)
-				return result;
-
-			return new List<<#=code.Escape(endEntity)#>>();
-		}
-	    finally
-	    {
-			if(entity != null)
-				try { beheerModel.ObjectContext.Detach(entity); } catch{}
-			if(result != null)
+			try
 			{
-				foreach (object item in result)
+				entity = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
+				if(entity != null && entity.<#=code.Escape(endEntity)#> != null && entity.<#=code.Escape(endEntity)#>.Count == 0)
+					beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
+
+				if(entity != null)
+					result = entity.<#=code.Escape(endEntity)#>.ToList();
+
+				if(result == null || result.Count == 0 || refresh)
+					result = Get<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
+
+				if(result != null)
+					return result;			
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(entity != null)
+					try { beheerModel.ObjectContext.Detach(entity); } catch{}
+				if(result != null)
 				{
-					if(item != null)
-						try { beheerModel.ObjectContext.Detach(item); } catch{}
+					foreach (object item in result)
+					{
+						if(item != null)
+							try { beheerModel.ObjectContext.Detach(item); } catch{}
+					}
 				}
 			}
-		}	
+		}
+
+		return new List<<#=code.Escape(endEntity)#>>();	
 	}
 
 	public bool Set<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>(List<<#=code.Escape(endEntity)#>> <#=code.Escape(endEntitySetName)#>, <#=code.Escape(entity)#> entity, bool refresh = false, ClubCloud_Setting settings = null)
@@ -538,24 +600,33 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 		bool succes = false;
 		<#=code.Escape(entity)#> result = null;
 
-		try
-		{			
-			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(keyMember.Name)#>);
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Set<#=code.Escape(endEntitySetName)#>For<#=code.Escape(EntityName)#>"))
+		{
+
+			try
+			{			
+				entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(keyMember.Name)#>);
 		
-			if (entity != null)
-				beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
-				//result = Get<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
+				if (entity != null)
+					beheerModel.Entry(entity).Collection(e => e.<#=code.Escape(endEntity)#>).Load();
+					//result = Get<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
 
-			if (result != null)
-				//return result.<#=code.Escape(entitySet)#>.Count == ;
+				if (result != null)
+					//return result.<#=code.Escape(entitySet)#>.Count == ;
 
-			succes = false;
-        }
-        finally
-        {
-			if(entity != null)
-				try { beheerModel.ObjectContext.Detach(entity); } catch{}
-        }
+				succes = false;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(entity != null)
+					try { beheerModel.ObjectContext.Detach(entity); } catch{}
+			}
+		}
+
 		return succes;
 	}
 
@@ -577,31 +648,38 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 
 		<#=code.Escape(endEntity)#> result = null;
 
-		try
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>"))
 		{
-			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);
-			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
-				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			if(entity != null)
-				result = entity.<#=code.Escape(endEntity)#>;
+			try
+			{
+				entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);
+				if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
+					beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			if (result == null || refresh && entity != null)
-				result = Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, refresh, settings);
+				if(entity != null)
+					result = entity.<#=code.Escape(endEntity)#>;
 
-			if (result != null)
-				return result;
+				if (result == null || refresh && entity != null)
+					result = Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>(settings.Id.ToString(), entity, refresh, settings);
 
-			return new <#=code.Escape(endEntity)#>();
+				if (result != null)
+					return result;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(entity != null)
+					try { beheerModel.ObjectContext.Detach(entity); } catch{}
+				if(result != null)
+					try { beheerModel.ObjectContext.Detach(result); } catch{}
+			}
 		}
-        finally
-        {
-			if(entity != null)
-				try { beheerModel.ObjectContext.Detach(entity); } catch{}
-            if(result != null)
-				try { beheerModel.ObjectContext.Detach(result); } catch{}
-        }
 
+		return new <#=code.Escape(endEntity)#>();
 	}
 
 	public bool Set<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>(<#=code.Escape(endEntity)#> <#=code.Escape(endEntityName)#>, <#=code.Escape(entity)#> entity , bool refresh = false, ClubCloud_Setting settings = null)
@@ -610,24 +688,34 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 			ValidateSettings(ref settings);
 
 		bool succes = false;
-		try
-		{		
-			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);	
 
-			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
-				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Set<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>"))
+		{
 
-			if(entity != null)
-				entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
+			try
+			{		
+				entity = beheerModel.<#=code.Escape(entitySet)#>.Find(entity.<#=code.Escape(entityKey.Name)#>);	
 
-			beheerModel.SaveChanges();
-			succes = true;
-        }
-        finally
-        {
-			if(entity != null)
-				try { beheerModel.ObjectContext.Detach(entity); } catch{}
-        }
+				if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
+					beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
+
+				if(entity != null)
+					entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
+
+				beheerModel.SaveChanges();
+				succes = true;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(entity != null)
+					try { beheerModel.ObjectContext.Detach(entity); } catch{}
+			}
+		}
+
 		return succes;
 	}
 
@@ -645,30 +733,38 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 		<#=code.Escape(entity)#> entity = null;
 		<#=code.Escape(endEntity)#> result = null;
 
-		try
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>"))
 		{
-			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
-			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
-				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			if(entity != null)
-				result = entity.<#=code.Escape(endEntity)#>;
+			try
+			{
+				entity = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);
+				if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
+					beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			if (result == null || refresh)
-				result = Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
+				if(entity != null)
+					result = entity.<#=code.Escape(endEntity)#>;
 
-			if (result != null)
-				return result;
+				if (result == null || refresh)
+					result = Get<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(settings.Id.ToString(), <#=code.Escape(keyMember.Name)#>, refresh, settings);
 
-			return new <#=code.Escape(endEntity)#>();
+				if (result != null)
+					return result;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(entity != null)
+					try { beheerModel.ObjectContext.Detach(entity); } catch{}
+				if(result != null)
+					try { beheerModel.ObjectContext.Detach(result); } catch{}
+			}
 		}
-        finally
-        {
-			if(entity != null)
-				try { beheerModel.ObjectContext.Detach(entity); } catch{}
-            if(result != null)
-				try { beheerModel.ObjectContext.Detach(result); } catch{}
-        }
+
+		return new <#=code.Escape(endEntity)#>();
 	}
 
 	public bool Set<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>(<#=code.Escape(endEntity)#> <#=code.Escape(endEntityName)#>, <#=code.Escape(keyMember.TypeUsage)#> <#=code.Escape(keyMember.Name)#> , bool refresh = false, ClubCloud_Setting settings = null)
@@ -679,24 +775,33 @@ var simpleProperties = typeMapper.GetSimpleProperties(entity).Where(edm => edm.T
 		<#=code.Escape(entity)#> entity = null;
 		bool succes = false;
 
-		try
-		{		
-			entity = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);	
+		using (new SPMonitoredScope("<#=code.Escape(EntitySetName)#> Set<#=code.Escape(endEntityName)#>For<#=code.Escape(EntityName)#>By<#=code.Escape(keyMember.Name)#>"))
+		{
 
-			if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
-				beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
+			try
+			{		
+				entity = beheerModel.<#=code.Escape(entitySet)#>.Find(<#=code.Escape(keyMember.Name)#>);	
 
-			if(entity != null)
-				entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
+				if(entity != null && entity.<#=code.Escape(endEntity)#> == null)
+					beheerModel.Entry(entity).Reference(e => e.<#=code.Escape(endEntity)#>).Load();
 
-			beheerModel.SaveChanges();
-			succes= true;
-        }
-        finally
-        {
-			if(entity != null)
-				try { beheerModel.ObjectContext.Detach(entity); } catch{}
-        }
+				if(entity != null)
+					entity.<#=code.Escape(endEntity)#> = <#=code.Escape(endEntityName)#>;
+
+				beheerModel.SaveChanges();
+				succes= true;
+			}
+			catch (Exception ex)
+			{
+				Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+			}
+			finally
+			{
+				if(entity != null)
+					try { beheerModel.ObjectContext.Detach(entity); } catch{}
+			}
+		}
+				
 		return succes;
 	}
 <#

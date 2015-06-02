@@ -32,12 +32,12 @@
     <EditItemTemplate>
         <fieldset>
 			<asp:HiddenField ID="Id" Value='<%# Bind("Id") %>' runat="server" />
-            Baan : <asp:DropDownList ID="BaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanId") %>' SelectMethod="SelectBaan" OnCallingDataMethods="EditBaanschemaform_CallingDataMethods" /></br>
+            Baan : <asp:DropDownList ID="BaanId" runat="server" DataTextField="Naam" DataValueField="Id" SelectedValue='<%# Bind("BaanId") %>' SelectMethod="SelectBaan" OnCallingDataMethods="EditBaanschemaform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 			<asp:HiddenField ID="VerenigingId" Value='<%# Bind("VerenigingId") %>' runat="server" />
 			Beschikbaar : <asp:Checkbox ID="Beschikbaar" runat="server" Checked='<%# Bind("Beschikbaar") %>' /></br>
-			MaandBegin : <asp:DropDownList ID="MaandBegin" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("MaandBegin") %>' SelectMethod="SelectMaandBegin" OnCallingDataMethods="EditBaanschemaform_CallingDataMethods" /></br>
-			MaandEinde : <asp:DropDownList ID="MaandEinde" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("MaandEinde") %>' SelectMethod="SelectMaandEinde" OnCallingDataMethods="EditBaanschemaform_CallingDataMethods" /></br>
-			Dag : <asp:DropDownList ID="Dag" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Dag") %>' SelectMethod="SelectDag" OnCallingDataMethods="EditBaanschemaform_CallingDataMethods" /></br>
+			MaandBegin : <asp:DropDownList ID="MaandBegin" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("MaandBegin") %>' SelectMethod="SelectMaandBegin" OnCallingDataMethods="EditBaanschemaform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
+			MaandEinde : <asp:DropDownList ID="MaandEinde" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("MaandEinde") %>' SelectMethod="SelectMaandEinde" OnCallingDataMethods="EditBaanschemaform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
+			Dag : <asp:DropDownList ID="Dag" runat="server" DataTextField="Value" DataValueField="Value" SelectedValue='<%# Bind("Dag") %>' SelectMethod="SelectDag" OnCallingDataMethods="EditBaanschemaform_CallingDataMethods" AppendDataBoundItems="true"><asp:ListItem  Text="Onbekend" Value="" Selected="True"></asp:ListItem> </asp:DropDownList></br>
 
 			DagBegin : <asp:TextBox ID="DagBegin" runat="server" Text='<%# Bind("DagBegin") %>' TextMode="Time" /></br>
 
