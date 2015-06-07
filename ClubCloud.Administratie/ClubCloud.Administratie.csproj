@@ -725,7 +725,6 @@
     <Content Include="Modules\ClubCloudDesign\ClubCloud\jquery.ui.core.min.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\jquery.ui.widget.min.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\ddsmoothmenu.js" />
-    <Content Include="Modules\ClubCloudDesign\ClubCloud\js\ddsmoothmenu_3.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\fancybox\blank.gif" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\fancybox\fancybox_loading.gif" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\fancybox\fancybox_overlay.png" />
@@ -741,14 +740,17 @@
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\fancybox\helpers\jquery.fancybox-thumbs0ff5.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\fancybox\jquery.fancybox.css" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.easytabs.min.js" />
-    <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.easytabs.min_old.js" />
+    <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.fancybox-buttons.js" />
+    <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.fancybox-media.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.fancybox-thumbs.js" />
-    <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.fancybox.pack.js" />
+    <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.fancybox.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.fitvids.js" />
+    <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.forms.min.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.isotope.min.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.min.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.min_183.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.slickforms.js" />
+    <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.themepunch.tools.min.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.themepunch.plugins.min.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\jquery.themepunch.revolution.min.js" />
     <Content Include="Modules\ClubCloudDesign\ClubCloud\js\scripts.js" />

@@ -53,7 +53,7 @@
 }
 </script>
 
-<div class="first dark">
+<div class="first dark forms">
 <asp:UpdateProgress ID="udp_progress" runat="server" AssociatedUpdatePanelID="udp_aanmelden">
     <ProgressTemplate>
         <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0; left: 0; width: 100%; height: 100%;  -moz-opacity: 0.8; opacity: 0.8; filter: alpha(opacity=80); -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)'; z-index: 10000;">
@@ -136,9 +136,9 @@
                                                 <asp:TextBox ID="Naam" TextMode="SingleLine" runat="server" Width="80%" placeholder="Uw Naam"/>
                                                 <label>Telefoon Overdag : </label>
                                                 <asp:TextBox ID="TelefoonOverdag" TextMode="SingleLine" runat="server" Width="80%" placeholder="Telefoon overdag"/><br />
-                                                <label>Telefoon Avond </label>
+                                                <label>Telefoon Avond :</label>
                                                 <asp:TextBox ID="TelefoonAvond" TextMode="SingleLine" runat="server" Width="80%" placeholder="Telefoon avond"/><br />
-                                                <label>Email </label>
+                                                <label>Email :</label>
                                                 <asp:TextBox ID="Email" TextMode="SingleLine" runat="server" Width="80%" placeholder="Uw email"/><br />
                                             </InsertItemTemplate>
                                         </asp:FormView>
@@ -153,12 +153,13 @@
                             <i class="icon-pencil special"></i>
                             <div class="three-fourth info ">
                                 <h3 class="lined">Aanmelden</h3>
-                                <p>
-                                    Op alle aanbiedingen en overeenkomsten zijn de Nederland ICT Voorwaarden van toepassing, gedeponeerd bij de Kamer van Koophandel te Midden-Nederland onder nummer 30174840.<br />
+                                <p class="description">
+                                    Op alle aanbiedingen en overeenkomsten zijn de Nederland ICT Voorwaarden van toepassing, gedeponeerd bij de Kamer van Koophandel te Midden-Nederland onder nummer 30174840.
                                     <a href="https://onedrive.live.com/embed?cid=E2EF8A57AA853CB3&resid=E2EF8A57AA853CB3%21128&authkey=AFHwySTc3F1Vxi0&em=2" target="_blank">Voorwaarden lezen</a>
                                 </p>
-                                Opmerkingen :<asp:TextBox ID="opmerkingen" runat="server" TextMode="MultiLine" Rows="10" /><br />
-                                <asp:CheckBox ID="akkoord" runat="server" Checked="false" Text=" " CssClass="regular-checkbox" /> &nbsp;&nbsp;Akkoord met de voorwaarden.
+                                <label>Opmerkingen :</label>
+                                <asp:TextBox ID="opmerkingen" runat="server" TextMode="MultiLine" Rows="10" /><br />
+                                <asp:CheckBox ID="akkoord" runat="server" Checked="false" Text="&nbsp;&nbsp;Akkoord met de voorwaarden" TextAlign="Left"  CssClass="regular-checkbox" />
                             </div>
                         </asp:Panel>
                     </asp:WizardStep>

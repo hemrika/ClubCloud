@@ -45,11 +45,8 @@
     <File Path="ClubCloud\images\metrotile.png" Url="ClubCloud/images/metrotile.png" Type="GhostableInLibrary" />
     <File Path="ClubCloud\images\timer.png" Url="ClubCloud/images/timer.png" Type="GhostableInLibrary" />
     <File Path="ClubCloud\js\ddsmoothmenu.js" Url="ClubCloud/js/ddsmoothmenu.js" Type="GhostableInLibrary" />
-    <File Path="ClubCloud\js\ddsmoothmenu_3.js" Url="ClubCloud/js/ddsmoothmenu_3.js" Type="GhostableInLibrary" />
     <File Path="ClubCloud\js\jquery.easytabs.min.js" Url="ClubCloud/js/jquery.easytabs.min.js" Type="GhostableInLibrary" />
-    <File Path="ClubCloud\js\jquery.easytabs.min_old.js" Url="ClubCloud/js/jquery.easytabs.min_old.js" Type="GhostableInLibrary" />
     <File Path="ClubCloud\js\jquery.fancybox-thumbs.js" Url="ClubCloud/js/jquery.fancybox-thumbs.js" Type="GhostableInLibrary" />
-    <File Path="ClubCloud\js\jquery.fancybox.pack.js" Url="ClubCloud/js/jquery.fancybox.pack.js" Type="GhostableInLibrary" />
     <File Path="ClubCloud\js\jquery.fitvids.js" Url="ClubCloud/js/jquery.fitvids.js" Type="GhostableInLibrary" />
     <File Path="ClubCloud\js\jquery.isotope.min.js" Url="ClubCloud/js/jquery.isotope.min.js" Type="GhostableInLibrary" />
     <File Path="ClubCloud\js\jquery.min.js" Url="ClubCloud/js/jquery.min.js" Type="GhostableInLibrary" />
@@ -100,5 +97,10 @@
     <File Path="ClubCloud\style.css" Url="ClubCloud/style.css" Type="GhostableInLibrary" />
     <File Path="ClubCloud\symple_accordion.js" Url="ClubCloud/symple_accordion.js" Type="GhostableInLibrary" />
     <File Path="ClubCloud\images\SITEICON.PNG" Url="ClubCloud/images/SITEICON.PNG" />
+    <File Path="ClubCloud\js\jquery.themepunch.tools.min.js" Url="ClubCloudDesign/ClubCloud/js/jquery.themepunch.tools.min.js" />
+    <File Path="ClubCloud\js\jquery.forms.min.js" Url="ClubCloudDesign/ClubCloud/js/jquery.forms.min.js" />
+    <File Path="ClubCloud\js\jquery.fancybox.js" Url="ClubCloudDesign/ClubCloud/js/jquery.fancybox.js" />
+    <File Path="ClubCloud\js\jquery.fancybox-buttons.js" Url="ClubCloudDesign/ClubCloud/js/jquery.fancybox-buttons.js" />
+    <File Path="ClubCloud\js\jquery.fancybox-media.js" Url="ClubCloudDesign/ClubCloud/js/jquery.fancybox-media.js" />
   </Module>
 </Elements>

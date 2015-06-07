@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="MailTemplate" Url="SiteAssets/Templates" >
+    <File Path="MailTemplate\aanmelden.xsl" Url="aanmelden.xsl" Type="GhostableInLibrary" />
+  </Module>
+</Elements>

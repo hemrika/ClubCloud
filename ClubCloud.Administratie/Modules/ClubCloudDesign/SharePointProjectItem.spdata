@@ -38,11 +38,8 @@
     <ProjectItemFile Source="ClubCloud\images\metrotile.png" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\images\timer.png" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\js\ddsmoothmenu.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
-    <ProjectItemFile Source="ClubCloud\js\ddsmoothmenu_3.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\js\jquery.easytabs.min.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
-    <ProjectItemFile Source="ClubCloud\js\jquery.easytabs.min_old.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\js\jquery.fancybox-thumbs.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
-    <ProjectItemFile Source="ClubCloud\js\jquery.fancybox.pack.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\js\jquery.fitvids.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\js\jquery.isotope.min.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\js\jquery.min.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
@@ -93,5 +90,10 @@
     <ProjectItemFile Source="ClubCloud\style.css" Target="ClubCloudDesign\ClubCloud\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\symple_accordion.js" Target="ClubCloudDesign\ClubCloud\" Type="ElementFile" />
     <ProjectItemFile Source="ClubCloud\images\SITEICON.PNG" Target="ClubCloudDesign\ClubCloud\images\" Type="ElementFile" />
+    <ProjectItemFile Source="ClubCloud\js\jquery.themepunch.tools.min.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
+    <ProjectItemFile Source="ClubCloud\js\jquery.forms.min.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
+    <ProjectItemFile Source="ClubCloud\js\jquery.fancybox.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
+    <ProjectItemFile Source="ClubCloud\js\jquery.fancybox-buttons.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
+    <ProjectItemFile Source="ClubCloud\js\jquery.fancybox-media.js" Target="ClubCloudDesign\ClubCloud\js\" Type="ElementFile" />
   </Files>
 </ProjectItem>

@@ -2576,10 +2576,10 @@ h1.page-title {
 }
 .forms label {
 	display: block;
-	float: left;
-	width: 95px;
+	/*float: left;*/
+	/* width: 95px; */
 	padding-top: 7px;
-	font-size: 13px;
+	font-size: 18px;
 	clear: both;
 }
 .forms fieldset .text-input-row, .comment-form div.name-field, .comment-form div.email-field, .comment-form div.website-field {

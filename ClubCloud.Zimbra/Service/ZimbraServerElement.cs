@@ -72,5 +72,42 @@ namespace ClubCloud.Zimbra.Service
             set
             { this["ClassOfService"] = value; }
         }
+
+        [ConfigurationProperty("SendMailHost", DefaultValue = "mail.clubcloud.nl", IsRequired = false)]
+        public string SendMailHost
+        {
+            get
+            { return (string)this["SendMailHost"]; }
+            set
+            { this["SendMailHost"] = value; }
+        }
+
+        [ConfigurationProperty("SendMailPort", DefaultValue = "587", IsRequired = false)]
+        public int SendMailPort
+        {
+            get
+            { return (int)this["SendMailPort"]; }
+            set
+            { this["SendMailPort"] = value; }
+        }
+
+        [ConfigurationProperty("SendMailUserName", DefaultValue = "admin@clubcloud.nl", IsRequired = false)]
+        public string SendMailUserName
+        {
+            get
+            { return (string)this["SendMailUserName"]; }
+            set
+            { this["SendMailUserName"] = value; }
+        }
+
+        [ConfigurationProperty("SendMailPassword", DefaultValue = "", IsRequired = false)]
+        public string SendMailPassword
+        {
+            get
+            { return (string)this["SendMailPassword"]; }
+            set
+            { this["SendMailPassword"] = value; }
+        }
+            
     }
 }

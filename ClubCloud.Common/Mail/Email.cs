@@ -22,7 +22,9 @@ namespace ClubCloud.Common.Mail
         /// <param name="body">E-mail body content</param>
         public static void Send(string recipient, string subject, string body)
         {
-            MailMessage mailMessage = CreateMailMessage(recipient, subject, body);
+            MailMessage mailMessage = CreateMailMessage(body);
+            mailMessage.Subject = subject;
+            mailMessage.To.Add(new MailAddress(recipient));
             Send(mailMessage);
         }
 
@@ -56,27 +58,58 @@ namespace ClubCloud.Common.Mail
         /// Sends the E-mail using the configured delivery method.
         /// </summary>
         /// <param name="mailMessage">MailMessage instance to be sent</param>
-        public static void Send(MailMessage mailMessage)
+        public static void Send(MailMessage message, SmtpClient client = null)
         {
-            SmtpClient smtpClient = new SmtpClient();
+            if (client == null)
+                client = new SmtpClient();
 
-            if (smtpClient.DeliveryMethod == SmtpDeliveryMethod.SpecifiedPickupDirectory)
-            {
-                smtpClient.PickupDirectoryLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, smtpClient.PickupDirectoryLocation);
-            }
-            else if (smtpClient.DeliveryMethod == SmtpDeliveryMethod.Network)
-            {
-                // Live Id requires SSL
-                smtpClient.EnableSsl = false;
-            }
+            if (client.DeliveryMethod == null)
+                client.DeliveryMethod = SmtpDeliveryMethod.PickupDirectoryFromIis; client.EnableSsl = false;
+
+            if (client.DeliveryMethod == SmtpDeliveryMethod.Network)
+                client.EnableSsl = true;
+
+            if (string.IsNullOrWhiteSpace(client.Host))
+                return;
+
+            int output;
+            if (!int.TryParse(client.Port.ToString(), out output))
+                return;
+
+            if (client.Credentials == null)
+                return;
 
             try
             {
-                smtpClient.Send(mailMessage);
+                client.SendCompleted += client_SendCompleted;
+                client.Send(message);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+            }
+        }
+
+        static void client_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            try
+            {
+                MailMessage message = (MailMessage)e.UserState;
+
+                if (e.Cancelled)
+                {
+                    Logger.WriteLog(Logger.Category.Unexpected, "ClubCLoud.Common.Mail", message.Subject);
+                }
+                if (e.Error != null)
+                {
+                    Logger.WriteLog(Logger.Category.Unexpected, e.Error.Source, e.Error.Message);
+                }
+
+                message.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
             }
         }
 
@@ -87,7 +120,7 @@ namespace ClubCloud.Common.Mail
         /// <param name="subject">E-mail subject</param>
         /// <param name="body">E-mail body content</param>
         /// <returns>MailMessage instance to be sent</returns>
-        public static MailMessage CreateMailMessage(string recipient, string subject, string body)
+        public static MailMessage CreateMailMessage(string body)
         {
             MailMessage mailMessage = new MailMessage();
 
@@ -208,8 +241,8 @@ namespace ClubCloud.Common.Mail
             AlternateView view = AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html);
             mailMessage.AlternateViews.Add(view);
             */
-            mailMessage.To.Add(recipient);
-            mailMessage.Subject = subject;
+            //mailMessage.To.Add(recipient);
+            //mailMessage.Subject = subject;
             mailMessage.IsBodyHtml = true;
             mailMessage.Body = body;
 
@@ -228,7 +261,9 @@ namespace ClubCloud.Common.Mail
         {
             string body = EmailTemplate.GenerateEmailBody(templatePath, templateProperties);
 
-            MailMessage mailMessage = CreateMailMessage(recipient, subject, body);
+            MailMessage mailMessage = CreateMailMessage(body);
+            mailMessage.Subject = subject;
+            mailMessage.To.Add(new MailAddress(recipient));
 
             return mailMessage;
         }
@@ -245,7 +280,9 @@ namespace ClubCloud.Common.Mail
         {
             string body = EmailTemplate.GenerateEmailBody(templatePath, xmlInputData);
 
-            MailMessage mailMessage = CreateMailMessage(recipient, subject, body);
+            MailMessage mailMessage = CreateMailMessage(body);
+            mailMessage.Subject = subject;
+            mailMessage.To.Add(new MailAddress(recipient));
 
             return mailMessage;
         }

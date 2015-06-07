@@ -5,6 +5,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 
 namespace ClubCloud.Zimbra.Service
 {
@@ -15,6 +16,7 @@ namespace ClubCloud.Zimbra.Service
         {
             get
             {
+                //ProtectSection();
                 return (ZimbraServerElement)this["Server"];
             }
             set
@@ -26,10 +28,28 @@ namespace ClubCloud.Zimbra.Service
         {
             get
             {
+                //ProtectSection();
                 return (ZimbraBindingElement)this["Binding"];
             }
             set
             { this["Binding"] = value; }
+        }
+
+        public void ProtectSection()
+        {
+            if (!this.SectionInformation.IsProtected)
+            {
+                this.SectionInformation.ProtectSection("DataProtectionConfigurationProvider");
+                this.CurrentConfiguration.Save();
+            }
+        }
+        private void UnProtectSection(string sectionName)
+        {
+            if (this.SectionInformation.IsProtected)
+            {
+                this.SectionInformation.UnprotectSection();
+                this.CurrentConfiguration.Save();
+            }
         }
     }
 }
