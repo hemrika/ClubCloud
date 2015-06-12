@@ -292,7 +292,18 @@ namespace ClubCloud.Internet
                         });
                 xmlInputData.Root.Add(aanmelden);
 
-                EmailTracking tracking = new EmailTracking { CampaignName = "Aanmelden", CampaignSource = "WebSite", ClientId = vereniging.Nummer, RecipientId = gebruiker.Bondsnummer, TrackingId = "UA-9934149-20" };
+                EmailTracking tracking = new EmailTracking
+                {
+                    CampaignName = "Aanmelden",
+                    CampaignSource = "WebSite",
+                    ClientId = vereniging.Id,
+                    RecipientId = vereniging.Nummer,
+                    TrackingId = "UA-9934149-20",
+                    CampagneContent = "aanmelden",
+                    CampagneMedium = "email",
+                    CampagneTerm = "aanmelden"
+                };
+
                 xmlInputData.Root.Add(tracking.ToXElement<EmailTracking>());
 
                 XElement content = new XElement("Content",
@@ -374,13 +385,6 @@ namespace ClubCloud.Internet
                                 body = GenerateEmailBody(template, xmlInputData);
 
                                 web.AllowUnsafeUpdates = false;
-                                /*
-                                SPFolder folder = web.Folders["SiteAssets"].SubFolders["Templates"];                                
-                                string url = folder.Url + "/aanmelden.xsl";
-                                SPFile tempFile = web.GetFile(url);
-                                byte[] obj = null;
-                                obj = (byte[])tempFile.OpenBinary();
-                                */
                                 
                                 MailMessage message = Email.CreateMailMessage(body);
 
@@ -400,6 +404,7 @@ namespace ClubCloud.Internet
                                 SmtpClient client = new SmtpClient(ZimbraConfiguration.Server.SendMailHost, zimbraconfiguration.Server.SendMailPort);
                                 client.Credentials = new System.Net.NetworkCredential(ZimbraConfiguration.Server.SendMailUserName, ZimbraConfiguration.Server.SendMailPassword);
                                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure | DeliveryNotificationOptions.OnSuccess | DeliveryNotificationOptions.Delay;
                                 Email.Send(message, client);
                             }
                         }

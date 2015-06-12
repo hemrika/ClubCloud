@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/" >
   <Module Name="Aanmelden" List="113" Url="_catalogs/wp">
-    <File Path="Aanmelden\Aanmelden.webpart" Url="ClubCloud.Internet_Aanmelden.webpart" Type="GhostableInLibrary" >
+    <File Path="Aanmelden\Aanmelden.webpart" Url="ClubCloud.Aanmelden.webpart" Type="GhostableInLibrary" >
       <Property Name="Group" Value="Custom" />
     </File>
   </Module>

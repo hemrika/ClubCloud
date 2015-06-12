@@ -29,6 +29,18 @@ using ClubCloud.KNLTB.ServIt.MetadataService;
 using System.ServiceModel.Channels;
 using Microsoft.SharePoint;
 using System.Text.RegularExpressions;
+using System.Web.UI.WebControls;
+using System.Web.UI;
+using ClubCloud.Service;
+using ClubCloud.Model;
+using System.Net.Mail;
+using System.Threading;
+using ClubCloud.Common.Mail;
+using System.Xml.Linq;
+using Microsoft.SharePoint.Administration;
+using System.Xml.Xsl;
+using System.Xml.XPath;
+using System.Globalization;
 
 namespace ClubCloud.Zimbra.Client
 {
@@ -873,39 +885,113 @@ namespace ClubCloud.Zimbra.Client
 
         private void button2_Click(object sender, EventArgs e)
         {
+            /*
             string nummer = textBox1.Text.Trim();
 
             string found = Regex.Match(nummer, @"\d+").Value;
             Console.WriteLine(nummer);
-            
-            using (SPSite site = new SPSite("https://mijn.clubcloud.nl/"))
+            */
+            try
             {
-                SPServiceContext context = SPServiceContext.GetContext(site);
-                ClubCloud.Service.ClubCloudServiceClient client = new ClubCloud.Service.ClubCloudServiceClient(context);
-                Model.ClubCloud_Setting settings = new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = new Guid("02ADA6C7-80F9-4671-91F9-898EA5DA3CCD") };
-                ClubCloud.Model.ClubCloud_Vereniging vereniging = client.GetVerenigingById(new Guid("02ADA6C7-80F9-4671-91F9-898EA5DA3CCD"), false, settings);
-                //List<Model.ClubCloud_Bouwaard> bouwaarden = client.GetBouwaarden(false, settings);
-                List<Model.ClubCloud_Functie> functies = client.GetFuncties(true, settings);
-                int count = functies.Count;
-                //ClubCloud.Model.ClubCloud_Vereniging vereniging = client.GetVerenigingByNummer("12073385", "82503", false);
-                //ClubCloud.Model.ClubCloud_Functie functie =  client.GetFunctieById(Guid.Parse("FD9FE656-31BC-E411-9299-0050569F0030"), false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
-                //functie.Meervoud = "Beschermheren";
-                //functie = client.SetFunctie(functie, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                using (SPSite site = new SPSite("https://development.clubcloud.nl/"))
+                {
+                    SPServiceContext context = SPServiceContext.GetContext(site);
 
-                //functie = new Model.ClubCloud_Functie { Actief = "Actief", Beschrijving = "Lorem Ipsum", Code = "LI", Meervoud = "lorem ipsums", Naam = "lorem ipsum", Omschrijving = "lorem ipsums", Toegang = false };
-                //functie = client.SetFunctie(functie, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
-                //Guid id = functie.Id;
-                //List<ClubCloud.Model.ClubCloud_Functionaris> functionarissen= client.GetFunctionarissenForVereniging(vereniging,false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
-                //ClubCloud.Model.ClubCloud_Accommodatie accommodatie = client.GetAccommodatieForVereniging(vereniging, false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
-                //List<ClubCloud.Model.ClubCloud_Baan> banen = client.GetBanenForAccommodatie(accommodatie, false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
-                //int aantal = banen.Count;
-                //ClubCloud.Model.ClubCloud_Gebruiker gebruiker = client.GetGebruikerByNummer("12073385", vereniging.Id, nummer, false);
-                //client.LidmaatschappenUpdate("12073385", vereniging.Id, true);
-                //client.VerenigingenUpdate("12073385", true);
-                //client.VerenigingZimbra("12073385", vereniging);
-                //client.GebruikerZimbra("12073385", gebruiker);
-            }  
-           
+                    ClubCloud.Service.ClubCloudServiceClient Client = new ClubCloud.Service.ClubCloudServiceClient(context);
+
+                    bool more = true;
+                    int startRowIndex = 0;
+                    int maximumRows = 50;
+                    int totalrows = 0;
+                    int processed = 0;
+
+                    List<Parameter> collection = new List<Parameter>();
+                    DataSourceSelectArguments selectArgs = new DataSourceSelectArguments { MaximumRows = 50, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = "" };
+                    ClubCloud_Vereniging_View queryresult = Client.GetVerenigingenByQuery("00000000", Guid.NewGuid(), new DataSourceSelectArguments { MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = "" }, collection);
+
+                    totalrows = queryresult.TotalRowCount;
+
+                    while (more)
+                    {
+                        foreach (ClubCloud_Vereniging vereniging in queryresult.ClubCloud_Vereniging)
+                        {
+                            int nummer;
+                            if (!int.TryParse(vereniging.Nummer, out nummer))
+                                break;
+
+                            MailMessage message = BuidMailMessage(vereniging);
+
+                            if (message == null)
+                                break;
+
+                            List<string> emails = new List<string>();
+
+                            if (!string.IsNullOrWhiteSpace(vereniging.EmailKNLTB))
+                                emails.Add(vereniging.EmailKNLTB);
+
+                            if (!string.IsNullOrWhiteSpace(vereniging.EmailOverig))
+                                emails.Add(vereniging.EmailKNLTB);
+
+                            if (!string.IsNullOrWhiteSpace(vereniging.EmailWebSite))
+                                emails.Add(vereniging.EmailWebSite);
+
+                            foreach (string email in emails.Distinct())
+                            {
+                                message.To.Add(new MailAddress(email, vereniging.Naam, Encoding.UTF8));
+                            }
+
+                            message.CC.Add(new MailAddress("info@clubcloud.nl", "ClubCloud"));
+                            message.From = new MailAddress("info@clubcloud.nl", "ClubCloud");
+                            message.Sender = new MailAddress("info@clubcloud.nl", "ClubCloud");
+                            message.ReplyToList.Add(new MailAddress("info@clubcloud.nl", "ClubCloud"));
+                            message.Priority = MailPriority.Normal;
+                            message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure | DeliveryNotificationOptions.OnSuccess | DeliveryNotificationOptions.Delay;
+
+                            message.Subject = string.Format("ClubCloud : De slimme keuze voor {0}", vereniging.Naam);
+                            Thread.Sleep(500);
+                        }
+
+                        processed += maximumRows;
+
+                        if (processed == totalrows || processed > totalrows || queryresult.ClubCloud_Vereniging.Count == 0)
+                            more = false;
+
+                        startRowIndex += maximumRows;
+                        selectArgs = new DataSourceSelectArguments { MaximumRows = 50, StartRowIndex = startRowIndex, RetrieveTotalRowCount = false, SortExpression = "" };
+                        queryresult = Client.GetVerenigingenByQuery("00000000", Guid.NewGuid(), new DataSourceSelectArguments { MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = "" }, collection);
+                    }
+
+                    int result = processed;
+
+                    //Model.ClubCloud_Setting settings = new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = new Guid("02ADA6C7-80F9-4671-91F9-898EA5DA3CCD") };
+                    //ClubCloud.Model.ClubCloud_Vereniging vereniging = client.GetVerenigingById(new Guid("02ADA6C7-80F9-4671-91F9-898EA5DA3CCD"), false, settings);
+                    //List<Model.ClubCloud_Bouwaard> bouwaarden = client.GetBouwaarden(false, settings);
+                    //List<Model.ClubCloud_Functie> functies = client.GetFuncties(true, settings);
+                    //int count = functies.Count;
+                    //ClubCloud.Model.ClubCloud_Vereniging vereniging = client.GetVerenigingByNummer("12073385", "82503", false);
+                    //ClubCloud.Model.ClubCloud_Functie functie =  client.GetFunctieById(Guid.Parse("FD9FE656-31BC-E411-9299-0050569F0030"), false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                    //functie.Meervoud = "Beschermheren";
+                    //functie = client.SetFunctie(functie, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+
+                    //functie = new Model.ClubCloud_Functie { Actief = "Actief", Beschrijving = "Lorem Ipsum", Code = "LI", Meervoud = "lorem ipsums", Naam = "lorem ipsum", Omschrijving = "lorem ipsums", Toegang = false };
+                    //functie = client.SetFunctie(functie, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                    //Guid id = functie.Id;
+                    //List<ClubCloud.Model.ClubCloud_Functionaris> functionarissen= client.GetFunctionarissenForVereniging(vereniging,false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                    //ClubCloud.Model.ClubCloud_Accommodatie accommodatie = client.GetAccommodatieForVereniging(vereniging, false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                    //List<ClubCloud.Model.ClubCloud_Baan> banen = client.GetBanenForAccommodatie(accommodatie, false, new Model.ClubCloud_Setting { Id = 12073385, VerenigingId = vereniging.Id });
+                    //int aantal = banen.Count;
+                    //ClubCloud.Model.ClubCloud_Gebruiker gebruiker = client.GetGebruikerByNummer("12073385", vereniging.Id, nummer, false);
+                    //client.LidmaatschappenUpdate("12073385", vereniging.Id, true);
+                    //client.VerenigingenUpdate("12073385", true);
+                    //client.VerenigingZimbra("12073385", vereniging);
+                    //client.GebruikerZimbra("12073385", gebruiker);
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+        
             /*
             contact contact= new KNLTB.ServIt.CrmService.contact{ };
             TargetCreateContact ccontact = new TargetCreateContact { Contact = contact };
@@ -956,6 +1042,178 @@ namespace ClubCloud.Zimbra.Client
 
             //int l = response.Length;
             */
+        }
+
+        private MailMessage BuidMailMessage(ClubCloud_Vereniging vereniging)
+        {
+            MailMessage message = null;
+
+            XDocument xmlInputData = new XDocument(new XElement("Properties"));
+
+            XElement elements = new XElement("Elements",
+                        new object[]{
+                        new XElement("HEADER"),
+                        new XElement("FEATURED_AREA"),
+                        new XElement("FULL_WIDTH_COLUMN"),
+                        new XElement("INTRO"),
+                        new XElement("HALF_COLUMN_FEATURES"),
+                        new XElement("HALF_COLUMN_TOP_IMAGE"),
+                        new XElement("ONE_THIRD_TWO_THIRD_COLUMN_LEFT_IMAGE"),
+                        new XElement("TWO_THIRD_ONE_THIRD_COLUMN_RIGHT_IMAGE"),
+                        new XElement("CENTRECOURT"),
+                        new XElement("BOTTOM_CALL_TO_ACTION"),
+                        new XElement("FOOTER")
+                        });
+            xmlInputData.Root.Add(elements);
+
+            xmlInputData.Root.Add(vereniging.ToXElement<ClubCloud_Vereniging>());
+
+            EmailTracking track = new EmailTracking
+            {
+                CampaignName = "Introductie",
+                CampaignSource = "Nieuwsbrief",
+                CampagneMedium = "email",
+                ClientId = vereniging.Id,
+                RecipientId = vereniging.Nummer,
+                TrackingId = "UA-9934149-20",
+                CampagneContent = "Introductie",
+                CampagneTerm = "Introductie"
+            };
+
+            xmlInputData.Root.Add(track.ToXElement<EmailTracking>());
+
+            XElement content = new XElement("Content",
+                new XElement("Subject", string.Format("ClubCloud : De slimme keuze voor {0}", vereniging.Naam)));
+            xmlInputData.Root.Add(content);
+
+            SPSecurity.RunWithElevatedPrivileges(delegate()
+            {
+                try
+                {
+                    using (SPSite currentSite = new SPSite("https://development.clubcloud.nl/"))
+                    {
+                        using (SPWeb web = currentSite.OpenWeb(currentSite.RootWeb.ID))
+                        {
+                            SPDocumentLibrary SiteAssets = null;
+                            SPDocumentLibrary SitePages = null;
+                            SPFolder Templates = null;
+                            SPFolder Online = null;
+                            SPFile Aanmelden = null;
+                            SPFile Webversion = null;
+                            SPItem WebversionItem = null;
+
+                            XmlReader template = null;
+
+                            SPList assets = web.Lists.TryGetList("SiteAssets");
+
+                            if (assets == null)
+                                assets = web.Lists.TryGetList("Siteactiva");
+
+                            if (assets != null)
+                                SiteAssets = (SPDocumentLibrary)assets;
+
+                            if (SiteAssets != null)
+                                Templates = SiteAssets.RootFolder.SubFolders["Templates"];
+
+                            SPList pages = web.Lists.TryGetList("SitePages");
+
+                            if (pages == null)
+                                pages = web.Lists.TryGetList("Sitepagina's");
+
+                            if (pages != null)
+                                SitePages = (SPDocumentLibrary)pages;
+
+                            if (SitePages != null)
+                                Online = SitePages.RootFolder.SubFolders["Online"];
+
+                            if (Templates != null && Templates.Exists)
+                                Aanmelden = Templates.Files["template.xsl"];
+
+                            if (Aanmelden != null && Aanmelden.Exists)
+                                template = XmlReader.Create(Aanmelden.OpenBinaryStream());
+
+                            if (template == null)
+                                throw new FileNotFoundException("Template not Found", Aanmelden.Url);
+
+                            string body = GenerateEmailBody(template, xmlInputData);
+
+                            web.AllowUnsafeUpdates = true;
+
+                            if (Online != null && Online.Exists)
+                            {
+                                Webversion = Online.Files.Add(Guid.NewGuid() + ".aspx", System.Text.Encoding.UTF8.GetBytes(body), true);
+                                WebversionItem = pages.GetItemByUniqueId(Webversion.UniqueId);
+                                WebversionItem["Title"] = string.Format("ClubCloud : De slimme keuze voor {0}", vereniging.Naam);
+                                WebversionItem.Update();
+                            }
+
+                            if (Webversion != null && Webversion.Exists)
+                            {
+                                XElement online = new XElement("Online",
+                                    new object[]{
+                                            new XElement("WebVersion", string.Format("{0}/{1}", currentSite.Url,Webversion.Url))
+                                    });
+                                xmlInputData.Root.Add(online);
+                            }
+
+                            if (Aanmelden != null && Aanmelden.Exists)
+                                template = XmlReader.Create(Aanmelden.OpenBinaryStream());
+
+                            body = GenerateEmailBody(template, xmlInputData);
+
+                            web.AllowUnsafeUpdates = false;
+
+                            message = Email.CreateMailMessage(body);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                }
+            });
+
+            return message;
+        }
+
+        private static string GenerateEmailBody(XmlReader template, XNode xmlInputData)
+        {
+            string strHtml = string.Empty;
+            MemoryStream memoryStream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(memoryStream, Encoding.UTF8);
+            XmlTextWriter htmlWriter = new XmlTextWriter(writer);
+            StreamReader streamReader = new StreamReader(memoryStream);
+
+            try
+            {
+                // Load the style sheet.
+                XsltSettings setting = new XsltSettings { EnableScript = true, EnableDocumentFunction = true };
+                XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
+                xslCompiledTransform.Load(template, setting, null);
+
+                xslCompiledTransform.Transform(
+                    xmlInputData.CreateNavigator(),
+                    null,
+                    htmlWriter);
+
+                memoryStream.Position = 0;
+                strHtml = streamReader.ReadToEnd();
+            }
+            catch (XsltException xsltException)
+            {
+                strHtml = string.Format(CultureInfo.InvariantCulture, "Error: {0}\n\tFileName: {1}\n\tLine Number: {2} - Position: {3}", new object[] { xsltException.Message, xsltException.SourceUri, xsltException.LineNumber, xsltException.LinePosition });
+            }
+            catch (Exception ex)
+            {
+                strHtml = string.Format(CultureInfo.InvariantCulture, "Error: {0}", ex.Message);
+            }
+            finally
+            {
+                streamReader.Close();
+                memoryStream.Close();
+            }
+
+            return strHtml;
         }
     }
 }

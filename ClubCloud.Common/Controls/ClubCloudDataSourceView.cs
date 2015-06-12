@@ -26,7 +26,6 @@ namespace ClubCloud.Common.Controls
 
         public static void  ObjectToTableConvert(Object p_obj, ref DataSet p_ds, String p_tableName)
         {
-            
             Type t = p_obj.GetType();
             PropertyInfo[] tmpP = t.GetProperties();// (BindingFlags.GetField);
             if (p_ds.Tables[p_tableName] == null)
@@ -97,6 +96,13 @@ namespace ClubCloud.Common.Controls
             }
         }
 
+        private Page _parent;
+
+        public virtual Page Parent
+        {
+            get { return _parent; }
+            set { _parent = value; }
+        }
         public virtual ParameterCollection WhereParameters
         {
             get

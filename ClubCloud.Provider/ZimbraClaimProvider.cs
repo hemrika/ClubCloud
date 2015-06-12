@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -22,17 +23,38 @@ namespace ClubCloud.Provider
         public ZimbraClaimProvider()
             : base(ZimbraDisplayName)
         {
-
+            ServicePointManager.ServerCertificateValidationCallback += delegate { return true; };
         }
 
         public ZimbraClaimProvider(string displayName)
             : base(ZimbraDisplayName)
         {
+            ServicePointManager.ServerCertificateValidationCallback += delegate { return true; };
         }
 
         internal static string ZimbraName = "ZimbraClaimProvider";
         internal static string ZimbraDisplayName = "Zimbra Claim Provider";
         internal static string ZimbraDescription = "Zimbra Claim Provider";
+
+        public override bool SupportsEntityInformation
+        {
+            get { return true; }
+        }
+
+        public override bool SupportsHierarchy
+        {
+            get { return true; }
+        }
+
+        public override bool SupportsResolve
+        {
+            get { return true; }
+        }
+
+        public override bool SupportsSearch
+        {
+            get { return true; }
+        }
 
         public override string Name
         {
@@ -296,7 +318,7 @@ namespace ClubCloud.Provider
 
         protected override void FillHierarchy(Uri context, string[] entityTypes, string hierarchyNodeID, int numberOfLevels, Microsoft.SharePoint.WebControls.SPProviderHierarchyTree hierarchy)
         {
-            //throw new NotImplementedException();
+            hierarchy.AddChild(new Microsoft.SharePoint.WebControls.SPProviderHierarchyNode("ZimbraClaimProvider", "Users", "Users", true));
         }
 
         protected override void FillResolve(Uri context, string[] entityTypes, Microsoft.SharePoint.Administration.Claims.SPClaim resolveInput, List<Microsoft.SharePoint.WebControls.PickerEntity> resolved)
@@ -489,25 +511,6 @@ namespace ClubCloud.Provider
         }
 
 
-        public override bool SupportsEntityInformation
-        {
-            get { return true; }
-        }
-
-        public override bool SupportsHierarchy
-        {
-            get { return true; }
-        }
-
-        public override bool SupportsResolve
-        {
-            get { return true; }
-        }
-
-        public override bool SupportsSearch
-        {
-            get { return true; }
-        }
 
         /*
         #region ULS

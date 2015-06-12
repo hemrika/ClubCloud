@@ -88,6 +88,15 @@
       <DependentUpon>Aanmelden.feature</DependentUpon>
     </Compile>
     <Compile Include="InternetLogger.cs" />
+    <Compile Include="Mailing\MailingWebpart.cs" />
+    <Compile Include="Mailing\MailingUserControl.ascx.cs">
+      <DependentUpon>MailingUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mailing\MailingUserControl.ascx.designer.cs">
+      <DependentUpon>MailingUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mailing\Mailing_View.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +107,10 @@
     <None Include="app.config" />
     <None Include="Features\Aanmelden\Aanmelden.feature">
       <FeatureId>{7e69b3b7-b4ef-42a8-9d19-6315d3cd67f5}</FeatureId>
+    </None>
+    <None Include="Mailing\Mailing.webpart" />
+    <None Include="Mailing\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{16373660-fb2e-4e4e-a8c5-a617a533cb89}</SharePointProjectItemId>
     </None>
     <None Include="MailTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3a800498-170a-4785-abb1-a9996f66023a}</SharePointProjectItemId>
@@ -136,8 +149,11 @@
     <Content Include="Features\Aanmelden\Aanmelden.Template.xml">
       <DependentUpon>Aanmelden.feature</DependentUpon>
     </Content>
+    <Content Include="Mailing\Elements.xml" />
+    <Content Include="Mailing\MailingUserControl.ascx" />
     <Content Include="MailTemplate\aanmelden.xsl" />
     <Content Include="MailTemplate\Elements.xml" />
+    <Content Include="MailTemplate\template.xsl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

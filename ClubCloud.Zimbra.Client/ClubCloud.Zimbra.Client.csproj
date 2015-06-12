@@ -91,6 +91,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClubCloud.Common\ClubCloud.Common.csproj">
+      <Project>{90fe486f-d24e-4290-8e0b-633fa72e5314}</Project>
+      <Name>ClubCloud.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClubCloud.KNLTB\ClubCloud.KNLTB.csproj">
       <Project>{b98cd37b-e5d0-49e4-a765-f8fba945e050}</Project>
       <Name>ClubCloud.KNLTB</Name>

@@ -761,8 +761,13 @@ namespace ClubCloud.Provider
                 throw new ProviderException(message);
             }
 
-            
-            SPContext context = SPContext.Current;
+
+            SPContext context = null;
+            if (SPContext.Current == null)
+                context = SPContext.GetContext(HttpContext.Current);
+            else
+                context = SPContext.Current;
+
             string domain = null;
             totalRecords = 0;
             if (context != null)
@@ -847,7 +852,12 @@ namespace ClubCloud.Provider
             }
 
             MembershipUserCollection users = new MembershipUserCollection();
-            SPContext context = SPContext.Current;
+            SPContext context = null;
+            if (SPContext.Current == null)
+                context = SPContext.GetContext(HttpContext.Current);
+            else
+                context = SPContext.Current;
+
             string domain = null;
             int totalRecords = 0;
             if (context != null)
@@ -942,7 +952,12 @@ namespace ClubCloud.Provider
             }
 
             MembershipUserCollection users = new MembershipUserCollection();
-            SPContext context = SPContext.Current;
+            SPContext context = null;
+            if (SPContext.Current == null)
+                context = SPContext.GetContext(HttpContext.Current);
+            else
+                context = SPContext.Current;
+
             string domain = null;
             totalRecords = 0;
             if (context != null)

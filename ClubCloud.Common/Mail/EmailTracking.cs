@@ -10,15 +10,21 @@ namespace ClubCloud.Common.Mail
     {
         private string _TrackingId;
 
+        /// <summary>
+        /// tid
+        /// </summary>
         public string TrackingId
         {
             get { return _TrackingId; }
             set { _TrackingId = value; }
         }
 
-        private string _ClientId;
+        private Guid _ClientId;
 
-        public string ClientId
+        /// <summary>
+        /// cid
+        /// </summary>
+        public Guid ClientId
         {
             get { return _ClientId; }
             set { _ClientId = value; }
@@ -34,6 +40,9 @@ namespace ClubCloud.Common.Mail
 
         private string _CampaignSource;
 
+        /// <summary>
+        /// utm_source or cs
+        /// </summary>
         public string CampaignSource
         {
             get { return _CampaignSource; }
@@ -42,34 +51,47 @@ namespace ClubCloud.Common.Mail
 
         private string _CampaignName;
 
+        /// <summary>
+        /// utm_campaign or cn
+        /// </summary>
         public string CampaignName
         {
             get { return _CampaignName; }
             set { _CampaignName = value; }
         }
 
-        /*
-        public static XElement ToXElement<T>(this T obj)
+        private string _CampagneMedium;
+
+        /// <summary>
+        /// utm_medium or cm
+        /// </summary>
+        public string CampagneMedium
         {
-            using (var memoryStream = new MemoryStream())
-            {
-                using (TextWriter streamWriter = new StreamWriter(memoryStream))
-                {
-                    var xmlSerializer = new XmlSerializer(typeof(T));
-                    xmlSerializer.Serialize(streamWriter, obj);
-                    return XElement.Parse(Encoding.ASCII.GetString(memoryStream.ToArray()));
-                }
-            }
+            get { return _CampagneMedium; }
+            set { _CampagneMedium = value; }
         }
 
-        public static T FromXElement<T>(this XElement xElement)
+        private string _CampagneTerm;
+
+        /// <summary>
+        /// utm_term
+        /// </summary>
+        public string CampagneTerm
         {
-            using (var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(xElement.ToString())))
-            {
-                var xmlSerializer = new XmlSerializer(typeof(T));
-                return (T)xmlSerializer.Deserialize(memoryStream);
-            }
+            get { return _CampagneTerm; }
+            set { _CampagneTerm = value; }
         }
-        */
+
+        private string _CampagneContent;
+
+        /// <summary>
+        /// utm_content
+        /// </summary>
+        public string CampagneContent
+        {
+            get { return _CampagneContent; }
+            set { _CampagneContent = value; }
+        }
+
     }
 }

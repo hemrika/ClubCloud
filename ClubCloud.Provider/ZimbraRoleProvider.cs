@@ -257,10 +257,16 @@ namespace ClubCloud.Provider
             {
                 List<string> users = new List<string>();
                 string dl_id = null;
-                SPContext spcontext = SPContext.Current;
+
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
                 srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", usernameToMatch);
@@ -347,10 +353,15 @@ namespace ClubCloud.Provider
             {
                 List<string> users = new List<string>();
                 string dl_id = null;
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.SearchDirectoryRequest srequest = new Zimbra.Administration.SearchDirectoryRequest { applyConfig = false, applyCos = false, domain = domain, limit = 50, countOnly = false, offset = 0, sortAscending = true, sortBy = "name", types = "accounts" };
                 srequest.query = String.Format("(|(mail=*{0}*)(cn=*{0}*)(sn=*{0}*)(gn=*{0}*)(displayName=*{0}*)(zimbraMailDeliveryAddress=*{0}*)(zimbraPrefMailForwardingAddress=*{0}*)(zimbraMail=*{0}*)(zimbraMailAlias=*{0}*))", usernameToMatch);
@@ -437,10 +448,15 @@ namespace ClubCloud.Provider
                 List<string> groups = new List<string>();
                 groups.Add(AllAuthenticatedUsersRoleName);
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -504,10 +520,15 @@ namespace ClubCloud.Provider
                 List<string> roles = new List<string>();
                 roles.Add(AllAuthenticatedUsersRoleName);
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -713,10 +734,15 @@ namespace ClubCloud.Provider
             {
                 List<string> users = new List<string>();
                 string dl_id = null;
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -791,10 +817,15 @@ namespace ClubCloud.Provider
             {
                 List<string> user = new List<string>();
                 string dl_id = null;
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -863,10 +894,15 @@ namespace ClubCloud.Provider
             {
                 bool inGroup = false;
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -931,10 +967,15 @@ namespace ClubCloud.Provider
             {
                 bool inRole = false;
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -1020,10 +1061,15 @@ namespace ClubCloud.Provider
                     </CreateDistributionListRequest>
                 */
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 string Titlename = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(groupName);
                 string email = Regex.Replace(groupName, @"[^A-Za-z0-9]+", "") + "@" + domain;
@@ -1118,10 +1164,15 @@ namespace ClubCloud.Provider
                 <a xmlns="" n="zimbraPrefReplyToAddress">ac@clubcloud.nl</a>
                 */
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 string Titlename = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(roleName);
                 string email = Regex.Replace(roleName, @"[^A-Za-z0-9]+", "") + "@" + domain;
@@ -1283,10 +1334,15 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -1380,10 +1436,15 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -1461,10 +1522,15 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -1543,10 +1609,15 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -1640,10 +1711,15 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
                 
                 //Zimbra.Administration.GetDistributionListRequest reqquest = new Zimbra.Administration.GetDistributionListRequest { name = "" };
 
@@ -1729,10 +1805,15 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -1817,10 +1898,15 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -1905,10 +1991,15 @@ namespace ClubCloud.Provider
                 List<DistributionListInfo> dls = new List<DistributionListInfo>();
                 List<Zimbra.Global.accountInfo> accounts = new List<accountInfo>();
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -2008,10 +2099,15 @@ namespace ClubCloud.Provider
 
                 bool groupExists = false;
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;
@@ -2082,10 +2178,15 @@ namespace ClubCloud.Provider
 
                 bool roleExists = false;
 
-                SPContext spcontext = SPContext.Current;
+                SPContext context = null;
+                if (SPContext.Current == null)
+                    context = SPContext.GetContext(HttpContext.Current);
+                else
+                    context = SPContext.Current;
+
                 string domain = GetZimbraDomain(zimbraconfiguration.Server.ServerName);
-                if (spcontext != null)
-                    domain = GetZimbraDomain(spcontext.Site.Url);
+                if (context != null)
+                    domain = GetZimbraDomain(context.Site.Url);
 
                 Zimbra.Administration.GetAllDistributionListsRequest request = new Zimbra.Administration.GetAllDistributionListsRequest { domain = new Zimbra.Global.domainSelector { by = Zimbra.Global.domainBy.name, Value = domain } };
                 Zimbra.Administration.GetAllDistributionListsResponse response = await zimbraServer.Message(request) as Zimbra.Administration.GetAllDistributionListsResponse;

@@ -2582,6 +2582,14 @@ h1.page-title {
 	font-size: 18px;
 	clear: both;
 }
+
+.forms input[type=checkbox] + label {
+    display: inline-block;
+    margin-left: 0.5em;
+    margin-right: 2em;
+    line-height: 1em;
+}
+
 .forms fieldset .text-input-row, .comment-form div.name-field, .comment-form div.email-field, .comment-form div.website-field {
 	position: relative;
 	width: 32%;

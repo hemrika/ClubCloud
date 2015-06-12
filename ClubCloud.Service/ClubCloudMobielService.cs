@@ -26,6 +26,7 @@ namespace ClubCloud.Service
     using System.Net;
     using System.Runtime.Serialization;
     using ClubCloud.Service.Attributes;
+    using Microsoft.SharePoint.Administration.Claims;
 
     public enum LoginErrorCode
     {
@@ -44,6 +45,8 @@ namespace ClubCloud.Service
         public int TimeoutSeconds;
 
         public string Message;
+
+        public string FedAuth;
     }
 
     /// <summary>
@@ -62,11 +65,12 @@ namespace ClubCloud.Service
 
         public LoginResult Login(string username, string password)
         {
+            SPFederationAuthenticationModule federationAuthenticationModule = FederatedAuthentication.WSFederationAuthenticationModule as SPFederationAuthenticationModule;
+
             SPSessionAuthenticationModule sessionAuthenticationModule = FederatedAuthentication.SessionAuthenticationModule as SPSessionAuthenticationModule;
             sessionAuthenticationModule.CookieHandler.HideFromClientScript = false;
 
             TimeSpan formsAuthenticationTimeout = TimeSpan.FromMinutes(30);
-
             try
             {
                 if (AuthenticationMode.Forms != SPSecurity.AuthenticationMode || sessionAuthenticationModule == null)
@@ -80,15 +84,12 @@ namespace ClubCloud.Service
                     return new LoginResult { ErrorCode = LoginErrorCode.PasswordNotMatch, Message = "PasswordNotMatch" };
                 }
 
-
-                TimeSpan PersistentSessionLifetime = sessionAuthenticationModule.CookieHandler.PersistentSessionLifetime.Value;
-                Microsoft.IdentityModel.Tokens.SessionSecurityToken token = sessionAuthenticationModule.ContextSessionSecurityToken;
-
                 return new LoginResult
                 {
                     ErrorCode = LoginErrorCode.NoError,
                     CookieName = sessionAuthenticationModule.CookieHandler.Name,
-                    TimeoutSeconds = (int)Math.Floor(formsAuthenticationTimeout.TotalSeconds),
+                    TimeoutSeconds = sessionAuthenticationModule.CookieHandler.PersistentSessionLifetime.Value.Seconds,
+                    FedAuth = HttpContext.Current.Response.Cookies.Get(sessionAuthenticationModule.CookieHandler.Name).Value
                 };
             }
             catch (Exception ex)
@@ -98,10 +99,7 @@ namespace ClubCloud.Service
                 {
                     ErrorCode = LoginErrorCode.Exception,
                     Message = ex.Message
-                    //CookieName = sessionAuthenticationModule.CookieHandler.Name,
-                    //TimeoutSeconds = (int)Math.Floor(formsAuthenticationTimeout.TotalSeconds)
                 };
-
             }
         }
 

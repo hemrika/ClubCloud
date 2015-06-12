@@ -54,14 +54,14 @@
 </script>
 
 <div class="first dark forms">
-<asp:UpdateProgress ID="udp_progress" runat="server" AssociatedUpdatePanelID="udp_aanmelden">
+<asp:UpdateProgress ID="udp_progress" runat="server" AssociatedUpdatePanelID="udp_aanmelden" DynamicLayout="true" >
     <ProgressTemplate>
         <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0; left: 0; width: 100%; height: 100%;  -moz-opacity: 0.8; opacity: 0.8; filter: alpha(opacity=80); -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)'; z-index: 10000;">
         <div class="bubbles aligncenter" style="top:48%; z-index: 10000;">laden...</div>
         </div>
     </ProgressTemplate>
 </asp:UpdateProgress>
-    <asp:UpdatePanel ID="udp_aanmelden" runat="server" UpdateMode="Always">
+    <asp:UpdatePanel ID="udp_aanmelden" runat="server" UpdateMode="Conditional" RenderMode="Block"  ChildrenAsTriggers="true">
         <ContentTemplate>
             <asp:Wizard ID="wzd_aanmelden" runat="server" Width="100%" FinishPreviousButtonText="Vorige" FinishPreviousButtonType="Link" CancelButtonText="Stoppen" CancelButtonType="Link" FinishCompleteButtonText="Aanmelden" FinishCompleteButtonType="Link" StartNextButtonStyle-BorderStyle="NotSet" StartNextButtonText="Volgende" StartNextButtonType="Link" StepNextButtonText="Volgende" StepNextButtonType="Link" StepPreviousButtonText="Vorige" StepPreviousButtonType="Link" Height="100%" OnFinishButtonClick="wzd_aanmelden_FinishButtonClick" OnNextButtonClick="wzd_aanmelden_NextButtonClick" OnActiveStepChanged="wzd_aanmelden_ActiveStepChanged" OnPreRender="wzd_aanmelden_PreRender" OnLoad="wzd_aanmelden_Load" DisplaySideBar="False">
                 <NavigationButtonStyle CssClass="button big" />
@@ -159,7 +159,7 @@
                                 </p>
                                 <label>Opmerkingen :</label>
                                 <asp:TextBox ID="opmerkingen" runat="server" TextMode="MultiLine" Rows="10" /><br />
-                                <asp:CheckBox ID="akkoord" runat="server" Checked="false" Text="&nbsp;&nbsp;Akkoord met de voorwaarden" TextAlign="Left"  CssClass="regular-checkbox" />
+                                <asp:CheckBox ID="akkoord" runat="server" Checked="false" Text="&nbsp;&nbsp;Akkoord met de voorwaarden" TextAlign="Right"  CssClass="regular-checkbox" />
                             </div>
                         </asp:Panel>
                     </asp:WizardStep>

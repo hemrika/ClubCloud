@@ -2,5 +2,6 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Module Name="MailTemplate" Url="SiteAssets/Templates" >
     <File Path="MailTemplate\aanmelden.xsl" Url="aanmelden.xsl" Type="GhostableInLibrary" />
+    <File Path="MailTemplate\template.xsl" Url="template.xsl" Type="GhostableInLibrary" />
   </Module>
 </Elements>

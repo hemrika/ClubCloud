@@ -189,12 +189,9 @@
                 <table class="table-wrapper" bgcolor="#297DED" width="90%" border="0" align="center" cellpadding="0" cellspacing="0" style="">
                   <!-- START OF VERTICAL SPACER-->
                   <tr>
-                    <td height="10" style="padding:0; line-height: 0;">
-
-                    </td>
+                    <td height="10" style="padding:0; line-height: 0;"><!-- VERTICAL SPACER--></td>
                   </tr>
                   <!-- END OF VERTICAL SPACER-->
-
                   <tr>
                     <td>
                       <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -264,10 +261,10 @@
           <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
               <td valign="top" align="center">
-                <table class="table-wrapper" bgcolor="#f9f9f9" border="0" align="center" cellpadding="0" cellspacing="0" >
+                <table class="table-wrapper" bgcolor="#f9f9f9" width="90%" border="0" align="center" cellpadding="0" cellspacing="0" >
                   <tr>
                     <td>
-                      <table class="table-inner" border="0" align="center" cellpadding="0" cellspacing="0">
+                      <table class="table-inner" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
                         <tr>
                           <td valign="middle" style="padding: 90px 0px;">
                             <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0">
@@ -295,7 +292,7 @@
                               <tr>
                                 <td class="center" align="center" style="padding: 0; margin: 0; font-weight:normal; font-size:14px ; color:#646464; font-family:  'Open Sans', Arial, sans-serif; line-height: 24px;mso-line-height-rule: exactly;">
                                     Bedankt voor het aanmelden bij ClubCloud.<br/>
-                                    Er zal speodig met uw contact worden opgenomen.<br/>
+                                    Er zal spoedig contact met u worden opgenomen.<br/>
                                 </td>
                               </tr>
                               <!-- END OF TEXT-->
@@ -325,7 +322,7 @@
 		                <table class="table-wrapper" bgcolor="#ffffff" width="90%" border="0" align="center" cellpadding="0" cellspacing="0" style="">
 		                  <tr>
 		                    <td>		                    
-		                      <table class="table-inner" border="0" align="center" cellpadding="0" cellspacing="0">
+		                      <table class="table-inner" width="540" border="0" align="center" cellpadding="0" cellspacing="0">
 		                        <tr>
 		                          <td valign="top" style="padding-top: 60px; padding-bottom: 60px;">
 		                          
@@ -335,7 +332,7 @@
 											<td align="center" valign="top" style="padding-top: 20px;">
 											<table border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0;">
 												<tr>
-													<td align="center" style="padding-bottom: 3px; font-weight: bold; font-family: 'Open Sans', Arial, sans-serif; color: #767676; font-size: 18px; line-height: 28px; mso-line-height-rule: exactly;">
+													<td align="center" style="padding-bottom: 3px; font-weight: bold; font-family: 'Open Sans', Arial, sans-serif; color: #767676; font-size: 24px; line-height: 42px; mso-line-height-rule: exactly;">
 													Aanmelding voor <xsl:value-of select="$Vereniging/Naam"/> ( <xsl:value-of select="$Vereniging/Nummer"/> )
 													</td>
 												</tr>
@@ -354,14 +351,14 @@
 										</tr>
 										<tr>
 											<td align="center" style="padding-top: 0px; margin: 0; font-weight: normal; font-weight: normal; font-size: 13px; color: #797979; font-family: 'Open Sans', Arial, sans-serif; line-height: 23px; mso-line-height-rule: exactly;">
-											<span>KvKnummer: <xsl:value-of select="$Vereniging/KvKnummer"/></span><br />
-											<span>KvKplaats: <xsl:value-of select="$Vereniging/KvKplaats"/></span><br />
-											<span>BankNummer: <xsl:value-of select="$Vereniging/BankNummer"/></span><br />
-											<span>BankIban: <xsl:value-of select="$Vereniging/BankIban"/></span><br />
-											<span>BankPlaats: <xsl:value-of select="$Vereniging/BankPlaats"/></span><br />
-											<span>TelefoonOverdag: <xsl:value-of select="$Vereniging/TelefoonOverdag"/></span><br />
-											<span>TelefoonAvond: <xsl:value-of select="$Vereniging/TelefoonAvond"/></span><br />
-											<span>EmailKNLTB: <xsl:value-of select="$Vereniging/EmailKNLTB"/></span><br />																																
+											<span>KvK nummer: <xsl:value-of select="$Vereniging/KvKnummer"/></span><br />
+											<span>KvK plaats: <xsl:value-of select="$Vereniging/KvKplaats"/></span><br />
+											<span>Bank Nummer: <xsl:value-of select="$Vereniging/BankNummer"/></span><br />
+											<span>Bank Iban: <xsl:value-of select="$Vereniging/BankIban"/></span><br />
+											<span>Bank Plaats: <xsl:value-of select="$Vereniging/BankPlaats"/></span><br />
+											<span>Telefoon Overdag: <xsl:value-of select="$Vereniging/TelefoonOverdag"/></span><br />
+											<span>Telefoon Avond: <xsl:value-of select="$Vereniging/TelefoonAvond"/></span><br />
+											<span>Email: <xsl:value-of select="$Vereniging/EmailKNLTB"/></span><br />																																
 											</td>
 										</tr>
 											</table>
@@ -400,7 +397,7 @@
 											<td align="center" valign="top" style="padding-top: 20px;">
 											<table border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0;">
 												<tr>
-													<td align="center" style="padding-bottom: 3px; font-weight: bold; font-family: 'Open Sans', Arial, sans-serif; color: #767676; font-size: 18px; line-height: 28px; mso-line-height-rule: exactly;">
+													<td align="center" style="padding-bottom: 3px; font-weight: bold; font-family: 'Open Sans', Arial, sans-serif; color: #767676; font-size: 24px; line-height: 42px; mso-line-height-rule: exactly;">
 													Aangemeld door <xsl:value-of select="$Gebruiker/Volledigenaam"/> ( <xsl:value-of select="$Gebruiker/Bondsnummer"/> )													
 													</td>
 												</tr>
@@ -419,9 +416,9 @@
 										</tr>
 										<tr>
 											<td align="center" style="padding-top: 0px; margin: 0; font-weight: normal; font-weight: normal; font-size: 13px; color: #797979; font-family: 'Open Sans', Arial, sans-serif; line-height: 23px; mso-line-height-rule: exactly;">
-											<span>TelefoonOverdag: <xsl:value-of select="$Gebruiker/TelefoonOverdag"/></span><br />
-											<span>TelefoonAvond: <xsl:value-of select="$Gebruiker/TelefoonAvond"/></span><br />
-											<span>EmailKNLTB: <xsl:value-of select="$Gebruiker/EmailKNLTB"/></span><br />																																
+											<span>Telefoon Overdag: <xsl:value-of select="$Gebruiker/TelefoonOverdag"/></span><br />
+											<span>Telefoon Avond: <xsl:value-of select="$Gebruiker/TelefoonAvond"/></span><br />
+											<span>Email: <xsl:value-of select="$Gebruiker/EmailKNLTB"/></span><br />																																
 											</td>
 										</tr>
 											</table>
@@ -481,10 +478,9 @@
 											<span>Op <xsl:value-of select="Extension:Now()"/> heeft uw </span><br />
 											<span><xsl:value-of select="$Vereniging/Naam"/> ( <xsl:value-of select="$Vereniging/Nummer"/> )</span><br />
 											<span>zich aangemeld door <xsl:value-of select="$Gebruiker/Volledigenaam"/> ( <xsl:value-of select="$Gebruiker/Bondsnummer"/> )</span><br />																																											
-											<span>Opmerkingen <xsl:value-of select="$Aanmelden/Opmerkingen"/></span><br />																																																						
 											<span>Akkoord gegaan op <xsl:value-of select="$Aanmelden/Datum"/></span><br />																																																						
 											<span>Computer : <xsl:value-of select="$Aanmelden/IP"/></span><br />																																																																												
-											</td>
+											<span>Opmerkingen <xsl:value-of select="$Aanmelden/Opmerkingen"/></span><br />																																																																	</td>
 										</tr>
 											</table>
 										</td>
@@ -531,7 +527,7 @@
                               <tr>
                                 <td class="center" align="center" style="padding-bottom: 20px;font-weight: bold; font-family:  'Open Sans', Arial, sans-serif; color:#616161; font-size:24px; line-height:34px; mso-line-height-rule: exactly;">
                                   <span>
-                                    Welkom bij volgende generatie van tennis
+                                    Welkom bij volgende generatie voor uw vereniging
                                   </span>
                                 </td>
                               </tr>
@@ -541,7 +537,7 @@
                               <tr>
                                 <td class="center" align="center" style="padding: 0px; margin: 0; font-weight:normal; font-weight:normal; font-size:13px ; color:#616161; font-family:  'Open Sans', Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;">
                                   <span>
-                                    De nieuwe generatie voor uw vereniging en tennis. Binnenkort kunt u voorlopen en beter uw vereniging beheren.
+                                    Binnenkort kunt u gebruik gaat maken van ClubCloud.
                                   </span>
                                 </td>
                               </tr>

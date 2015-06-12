@@ -86,6 +86,7 @@
     <Compile Include="Features\Zimbra Receivers\Zimbra Receivers.EventReceiver.cs">
       <DependentUpon>Zimbra Receivers.feature</DependentUpon>
     </Compile>
+    <Compile Include="ZimbraClaimAttribute.cs" />
     <Compile Include="ZimbraClaimSecurityTrimmedControl.cs" />
     <Compile Include="ZimbraClaimConverter.cs" />
     <Compile Include="ProviderLogging.cs" />
