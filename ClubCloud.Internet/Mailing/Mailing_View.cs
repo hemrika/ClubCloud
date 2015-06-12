@@ -186,81 +186,92 @@ namespace ClubCloud.Internet
 
                             bool more = true;
                             int startRowIndex = 0;
-                            int maximumRows = 50;
+                            int maximumRows = 30;
                             int totalrows = 0;
 
                             List<Parameter> collection = new List<Parameter>();
-                            DataSourceSelectArguments selectArgs = new DataSourceSelectArguments { MaximumRows = 50, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = "" };
-                            ClubCloud_Vereniging_View queryresult = Client.GetVerenigingenByQuery("00000000", Guid.NewGuid(), new DataSourceSelectArguments { MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = "" }, collection);
-
-                            totalrows = queryresult.TotalRowCount;
-
+                            ClubCloud_Vereniging_View queryresult = null;
                             while (more)
                             {
-                                foreach (ClubCloud_Vereniging vereniging in queryresult.ClubCloud_Vereniging)
+                                try
                                 {
-                                    int nummer;
-                                    if (int.TryParse(vereniging.Nummer, out nummer))
+
+                                    queryresult = Client.GetVerenigingenByQuery("00000000", Guid.NewGuid(), new DataSourceSelectArguments { MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = "" }, collection);
+                                    totalrows = queryresult.TotalRowCount;
+
+                                    foreach (ClubCloud_Vereniging vereniging in queryresult.ClubCloud_Vereniging)
                                     {
-
-                                        MailMessage message = BuidMailMessage(vereniging);
-
-                                        if (message != null)
+                                        int nummer;
+                                        if (int.TryParse(vereniging.Nummer, out nummer))
                                         {
-                                            List<string> emails = new List<string>();
 
-                                            if (!string.IsNullOrWhiteSpace(vereniging.EmailKNLTB))
-                                                emails.Add(vereniging.EmailKNLTB);
+                                            MailMessage message = BuidMailMessage(vereniging);
 
-                                            if (!string.IsNullOrWhiteSpace(vereniging.EmailOverig))
-                                                emails.Add(vereniging.EmailKNLTB);
-
-                                            if (!string.IsNullOrWhiteSpace(vereniging.EmailWebSite))
-                                                emails.Add(vereniging.EmailWebSite);
-
-                                            foreach (string email in emails.Distinct())
+                                            if (message != null)
                                             {
+                                                List<string> emails = new List<string>();
+
+                                                if (!string.IsNullOrWhiteSpace(vereniging.EmailKNLTB))
+                                                    emails.Add(vereniging.EmailKNLTB);
+
+                                                if (!string.IsNullOrWhiteSpace(vereniging.EmailOverig))
+                                                    emails.Add(vereniging.EmailKNLTB);
+
+                                                if (!string.IsNullOrWhiteSpace(vereniging.EmailWebSite))
+                                                    emails.Add(vereniging.EmailWebSite);
+
+                                                foreach (string email in emails.Distinct())
+                                                {
+                                                    try
+                                                    {
+                                                        message.To.Add(new MailAddress(email.ToLower(), vereniging.Naam, Encoding.UTF8));
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+                                                        Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                                                    }
+                                                }
+
+                                                message.CC.Add(new MailAddress("info@clubcloud.nl", "ClubCloud"));
+                                                message.From = new MailAddress("info@clubcloud.nl", "ClubCloud");
+                                                message.Sender = new MailAddress("info@clubcloud.nl", "ClubCloud");
+                                                message.ReplyToList.Add(new MailAddress("info@clubcloud.nl", "ClubCloud"));
+                                                message.Priority = MailPriority.Normal;
+                                                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure | DeliveryNotificationOptions.OnSuccess | DeliveryNotificationOptions.Delay;
+
+                                                message.Subject = string.Format("ClubCloud : De slimme keuze voor {0}", vereniging.Naam);
+
                                                 try
                                                 {
-                                                    message.To.Add(new MailAddress(email, vereniging.Naam, Encoding.UTF8));
+                                                    Email.Send(message, client);
                                                 }
                                                 catch (Exception ex)
                                                 {
                                                     Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
                                                 }
+                                                finally
+                                                {
+                                                    message.Dispose();
+                                                }
+
+                                                Thread.Sleep(500);
                                             }
-
-                                            message.CC.Add(new MailAddress("info@clubcloud.nl", "ClubCloud"));
-                                            message.From = new MailAddress("info@clubcloud.nl", "ClubCloud");
-                                            message.Sender = new MailAddress("info@clubcloud.nl", "ClubCloud");
-                                            message.ReplyToList.Add(new MailAddress("info@clubcloud.nl", "ClubCloud"));
-                                            message.Priority = MailPriority.Normal;
-                                            message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure | DeliveryNotificationOptions.OnSuccess | DeliveryNotificationOptions.Delay;
-
-                                            message.Subject = string.Format("ClubCloud : De slimme keuze voor {0}", vereniging.Naam);
-
-                                            try
-                                            {
-                                                Email.Send(message, client);
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
-                                            }                                            
-
-                                            Thread.Sleep(50);
                                         }
                                     }
+
+                                    processed += maximumRows;
+                                    startRowIndex += maximumRows;
+
+                                    if (processed >= totalrows || (queryresult != null && queryresult.ClubCloud_Vereniging.Count == 0))
+                                        more = false;
+
                                 }
-
-                                processed += maximumRows;
-
-                                if (processed == totalrows || processed > totalrows || queryresult.ClubCloud_Vereniging.Count == 0)
-                                    more = false;
-
-                                startRowIndex += maximumRows;
-                                selectArgs = new DataSourceSelectArguments { MaximumRows = 50, StartRowIndex = startRowIndex, RetrieveTotalRowCount = false, SortExpression = "" };
-                                queryresult = Client.GetVerenigingenByQuery("00000000", Guid.NewGuid(), new DataSourceSelectArguments { MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = true, SortExpression = "" }, collection);
+                                catch (Exception ex)
+                                {
+                                    Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                                }
+                                //selectArgs = new DataSourceSelectArguments { MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = false, SortExpression = "" };
+                                //queryresult = Client.GetVerenigingenByQuery("00000000", Guid.NewGuid(), new DataSourceSelectArguments { MaximumRows = maximumRows, StartRowIndex = startRowIndex, RetrieveTotalRowCount = false, SortExpression = "" }, collection);
                             }
 
                         }
@@ -270,9 +281,7 @@ namespace ClubCloud.Internet
                         }
                     }
                 }
-
                 operation.End(this.Parent.Request.Url.AbsolutePath);
-
             }
             return processed;
 
@@ -354,6 +363,16 @@ namespace ClubCloud.Internet
                             if (pages == null)
                                 pages = web.Lists.TryGetList("Sitepagina's");
 
+                            SPQuery query = new SPQuery();
+                            query.Query = string.Format("<Where><Eq><FieldRef Name=\"Title\" /><Value Type=\"Text\">ClubCloud : De slimme keuze voor {0}</Value></Eq></Where>", vereniging.Naam);
+                            query.RowLimit = 1;
+                            query.ViewFields = @"<FieldRef Name=""Title"" />";
+                            query.ViewAttributes = @"Scope=""Recursive""";
+                            SPListItemCollection items = pages.GetItems(query);
+
+                            if (items.Count > 0)
+                                throw new SPDuplicateObjectException("Club already mailed", new Exception("Club already mailed"));
+
                             if (pages != null)
                                 SitePages = (SPDocumentLibrary)pages;
 
@@ -375,6 +394,7 @@ namespace ClubCloud.Internet
 
                             if (Online != null && Online.Exists)
                             {
+                                
                                 Webversion = Online.Files.Add(Guid.NewGuid() + ".aspx", System.Text.Encoding.UTF8.GetBytes(body), true);
                                 WebversionItem = pages.GetItemByUniqueId(Webversion.UniqueId);
                                 WebversionItem["Title"] = string.Format("ClubCloud : De slimme keuze voor {0}", vereniging.Naam);
@@ -404,6 +424,7 @@ namespace ClubCloud.Internet
                 catch (Exception ex)
                 {
                     Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                    message = null;
                 }
             });
 

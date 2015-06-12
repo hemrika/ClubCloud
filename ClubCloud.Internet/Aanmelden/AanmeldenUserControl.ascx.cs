@@ -25,6 +25,7 @@ using ClubCloud.Zimbra.Service;
 using System.Configuration;
 using System.Net;
 using Microsoft.SharePoint.Administration;
+using Microsoft.SharePoint.Utilities;
 
 namespace ClubCloud.Internet
 {
@@ -85,7 +86,8 @@ namespace ClubCloud.Internet
 
                 VerenigingDataSource.ViewName = "VerenigingView";// this.ViewName;
                 VerenigingDataSource.Assembly = typeof(AanmeldenUserControl).Assembly;
-                
+                VerenigingDataSource.View.WhereParameters = new ParameterCollection();
+                VerenigingDataSource.View.Parent = this.Page;
             }
         }
 
@@ -139,12 +141,19 @@ namespace ClubCloud.Internet
 
         protected void wzd_aanmelden_FinishButtonClick(object sender, WizardNavigationEventArgs e)
         {
-            try
+            using (SPLongOperation operation = new SPLongOperation(this.Page))
             {
-                XDocument xmlInputData = new XDocument(new XElement("Properties"));
+                operation.Begin();
 
-                XElement elements = new XElement("Elements",
-                new object[]{
+                using (new SPMonitoredScope("Mailing SendMail"))
+                {
+
+                    try
+                    {
+                        XDocument xmlInputData = new XDocument(new XElement("Properties"));
+
+                        XElement elements = new XElement("Elements",
+                        new object[]{
                         new XElement("HEADER"),
                         new XElement("FEATURED_AREA"),
                         new XElement("VERENIGING"),
@@ -153,271 +162,278 @@ namespace ClubCloud.Internet
                         new XElement("BOTTOM_CALL_TO_ACTION"),
                         new XElement("FOOTER")
                         });
-                xmlInputData.Root.Add(elements);
+                        xmlInputData.Root.Add(elements);
 
-                ClubCloud_Vereniging vereniging = new ClubCloud_Vereniging();
+                        ClubCloud_Vereniging vereniging = new ClubCloud_Vereniging();
 
-                string verenigingsnummer = tbx_verenigingsnummer.Text;
+                        string verenigingsnummer = tbx_verenigingsnummer.Text;
 
-                string number = string.Empty;
-                int parsed = 0;
+                        string number = string.Empty;
+                        int parsed = 0;
 
-                if (verenigingsnummer.IndexOf('-') > 0)
-                {
-                    number = verenigingsnummer.Split('-')[0].Trim();
-                }
-                else
-                {
-                    number = verenigingsnummer;
-                }
+                        if (verenigingsnummer.IndexOf('-') > 0)
+                        {
+                            number = verenigingsnummer.Split('-')[0].Trim();
+                        }
+                        else
+                        {
+                            number = verenigingsnummer;
+                        }
 
-                if (int.TryParse(number, out parsed))
-                {
-                    try
-                    {
-                        vereniging = Client.GetVerenigingByNummer("00000000", parsed.ToString(), false);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
-                    }
-                }
+                        if (int.TryParse(number, out parsed))
+                        {
+                            try
+                            {
+                                vereniging = Client.GetVerenigingByNummer("00000000", parsed.ToString(), false);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                            }
+                        }
 
-                if (vereniging == null)
-                    vereniging = new ClubCloud_Vereniging();
+                        if (vereniging == null)
+                            vereniging = new ClubCloud_Vereniging();
 
-                if (vereniging.Nummer != number)
-                    vereniging.Nummer = number;
+                        if (vereniging.Nummer != number)
+                            vereniging.Nummer = number;
 
-                TextBox vereniging_naam = (TextBox)fvw_vereniging.FindControl("Naam");
-                string verenigingnaam = vereniging_naam.Text;
-                if (vereniging.Naam != vereniging_naam.Text && !string.IsNullOrWhiteSpace(vereniging_naam.Text))
-                    vereniging.Naam = vereniging_naam.Text;
+                        TextBox vereniging_naam = (TextBox)fvw_vereniging.FindControl("Naam");
+                        string verenigingnaam = vereniging_naam.Text;
+                        if (vereniging.Naam != vereniging_naam.Text && !string.IsNullOrWhiteSpace(vereniging_naam.Text))
+                            vereniging.Naam = vereniging_naam.Text;
 
-                TextBox vereniging_KvKNummer = (TextBox)fvw_vereniging.FindControl("KvKNummer");
-                string verenigingkvknummer = vereniging_KvKNummer.Text;
-                if (vereniging.KvKnummer != vereniging_KvKNummer.Text && !string.IsNullOrWhiteSpace(vereniging_KvKNummer.Text))
-                    vereniging.KvKnummer = vereniging_KvKNummer.Text;
+                        TextBox vereniging_KvKNummer = (TextBox)fvw_vereniging.FindControl("KvKNummer");
+                        string verenigingkvknummer = vereniging_KvKNummer.Text;
+                        if (vereniging.KvKnummer != vereniging_KvKNummer.Text && !string.IsNullOrWhiteSpace(vereniging_KvKNummer.Text))
+                            vereniging.KvKnummer = vereniging_KvKNummer.Text;
 
-                TextBox vereniging_KvKPlaats = (TextBox)fvw_vereniging.FindControl("KvKPlaats");
-                string verenigingkvkplaats = vereniging_KvKPlaats.Text;
-                if (vereniging.KvKplaats != vereniging_KvKPlaats.Text && !string.IsNullOrWhiteSpace(vereniging_KvKPlaats.Text))
-                    vereniging.KvKplaats = vereniging_KvKPlaats.Text;
+                        TextBox vereniging_KvKPlaats = (TextBox)fvw_vereniging.FindControl("KvKPlaats");
+                        string verenigingkvkplaats = vereniging_KvKPlaats.Text;
+                        if (vereniging.KvKplaats != vereniging_KvKPlaats.Text && !string.IsNullOrWhiteSpace(vereniging_KvKPlaats.Text))
+                            vereniging.KvKplaats = vereniging_KvKPlaats.Text;
 
-                TextBox vereniging_BankNummer = (TextBox)fvw_vereniging.FindControl("BankNummer");
-                string verenigingbanknummer = vereniging_BankNummer.Text;
-                if (vereniging.BankNummer != vereniging_BankNummer.Text && !string.IsNullOrWhiteSpace(vereniging_BankNummer.Text))
-                    vereniging.BankNummer = vereniging_BankNummer.Text;
+                        TextBox vereniging_BankNummer = (TextBox)fvw_vereniging.FindControl("BankNummer");
+                        string verenigingbanknummer = vereniging_BankNummer.Text;
+                        if (vereniging.BankNummer != vereniging_BankNummer.Text && !string.IsNullOrWhiteSpace(vereniging_BankNummer.Text))
+                            vereniging.BankNummer = vereniging_BankNummer.Text;
 
-                TextBox vereniging_BankIban = (TextBox)fvw_vereniging.FindControl("BankIban");
-                string verenigingbankiban = vereniging_BankIban.Text;
-                if (vereniging.BankIban != vereniging_BankIban.Text && !string.IsNullOrWhiteSpace(vereniging_BankIban.Text))
-                    vereniging.BankIban = vereniging_BankIban.Text;
+                        TextBox vereniging_BankIban = (TextBox)fvw_vereniging.FindControl("BankIban");
+                        string verenigingbankiban = vereniging_BankIban.Text;
+                        if (vereniging.BankIban != vereniging_BankIban.Text && !string.IsNullOrWhiteSpace(vereniging_BankIban.Text))
+                            vereniging.BankIban = vereniging_BankIban.Text;
 
-                TextBox vereniging_BankPlaats = (TextBox)fvw_vereniging.FindControl("BankPlaats");
-                string verenigingbankplaats = vereniging_BankPlaats.Text;
-                if (vereniging.BankPlaats != vereniging_BankPlaats.Text && !string.IsNullOrWhiteSpace(vereniging_BankPlaats.Text))
-                    vereniging.BankPlaats = vereniging_BankPlaats.Text;
+                        TextBox vereniging_BankPlaats = (TextBox)fvw_vereniging.FindControl("BankPlaats");
+                        string verenigingbankplaats = vereniging_BankPlaats.Text;
+                        if (vereniging.BankPlaats != vereniging_BankPlaats.Text && !string.IsNullOrWhiteSpace(vereniging_BankPlaats.Text))
+                            vereniging.BankPlaats = vereniging_BankPlaats.Text;
 
-                TextBox vereniging_TelefoonOverdag = (TextBox)fvw_vereniging.FindControl("TelefoonOverdag");
-                string verenigingtelefoonoverdag = vereniging_TelefoonOverdag.Text;
-                if (vereniging.TelefoonOverdag != vereniging_TelefoonOverdag.Text && !string.IsNullOrWhiteSpace(vereniging_TelefoonOverdag.Text))
-                    vereniging.TelefoonOverdag = vereniging_TelefoonOverdag.Text;
+                        TextBox vereniging_TelefoonOverdag = (TextBox)fvw_vereniging.FindControl("TelefoonOverdag");
+                        string verenigingtelefoonoverdag = vereniging_TelefoonOverdag.Text;
+                        if (vereniging.TelefoonOverdag != vereniging_TelefoonOverdag.Text && !string.IsNullOrWhiteSpace(vereniging_TelefoonOverdag.Text))
+                            vereniging.TelefoonOverdag = vereniging_TelefoonOverdag.Text;
 
-                TextBox vereniging_TelefoonAvond = (TextBox)fvw_vereniging.FindControl("TelefoonAvond");
-                string verenigingtelefoonavond = vereniging_TelefoonAvond.Text;
-                if (vereniging.TelefoonAvond != vereniging_TelefoonAvond.Text && !string.IsNullOrWhiteSpace(vereniging_TelefoonAvond.Text))
-                    vereniging.TelefoonAvond = vereniging_TelefoonAvond.Text;
+                        TextBox vereniging_TelefoonAvond = (TextBox)fvw_vereniging.FindControl("TelefoonAvond");
+                        string verenigingtelefoonavond = vereniging_TelefoonAvond.Text;
+                        if (vereniging.TelefoonAvond != vereniging_TelefoonAvond.Text && !string.IsNullOrWhiteSpace(vereniging_TelefoonAvond.Text))
+                            vereniging.TelefoonAvond = vereniging_TelefoonAvond.Text;
 
-                TextBox vereniging_Email = (TextBox)fvw_vereniging.FindControl("Email");
-                string verenigingemail = vereniging_Email.Text;
-                if (vereniging.EmailKNLTB != vereniging_Email.Text && !string.IsNullOrWhiteSpace(vereniging_Email.Text))
-                    vereniging.EmailKNLTB = vereniging_Email.Text;
+                        TextBox vereniging_Email = (TextBox)fvw_vereniging.FindControl("Email");
+                        string verenigingemail = vereniging_Email.Text;
+                        if (vereniging.EmailKNLTB != vereniging_Email.Text && !string.IsNullOrWhiteSpace(vereniging_Email.Text))
+                            vereniging.EmailKNLTB = vereniging_Email.Text;
 
-                xmlInputData.Root.Add(vereniging.ToXElement<ClubCloud_Vereniging>());
+                        xmlInputData.Root.Add(vereniging.ToXElement<ClubCloud_Vereniging>());
 
-                ClubCloud_Gebruiker gebruiker = new ClubCloud_Gebruiker();
+                        ClubCloud_Gebruiker gebruiker = new ClubCloud_Gebruiker();
 
-                TextBox persoon_knltb = (TextBox)fvw_persoon.FindControl("KNLTBNummer");
-                string persoonknltb = persoon_knltb.Text;
+                        TextBox persoon_knltb = (TextBox)fvw_persoon.FindControl("KNLTBNummer");
+                        string persoonknltb = persoon_knltb.Text;
 
-                parsed = 0;
+                        string lm = string.Empty;
+                        parsed = 0;
 
-                if (int.TryParse(persoonknltb, out parsed))
-                {
-                    try
-                    {
-                        gebruiker = Client.GetGebruikerByNummer("00000000", vereniging.Id, parsed.ToString(), false);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
-                    }
-                }
-                
-                if (gebruiker == null)
-                    gebruiker = new ClubCloud_Gebruiker();
+                        if (int.TryParse(persoonknltb, out parsed))
+                            lm = "luckyme";
+                        /*
+                        {
+                            try
+                            {
+                                gebruiker = Client.GetGebruikerByNummer("00000000", vereniging.Id, parsed.ToString(), false);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                            }
+                        }
+                        */
 
-                if (gebruiker.Bondsnummer != parsed.ToString())
-                    gebruiker.Bondsnummer = parsed.ToString();
+                        if (gebruiker == null)
+                            gebruiker = new ClubCloud_Gebruiker();
 
-                TextBox persoon_naam = (TextBox)fvw_persoon.FindControl("Naam");
-                string persoonnaam = persoon_naam.Text;
-                if (gebruiker.Volledigenaam != persoon_naam.Text && !string.IsNullOrWhiteSpace(persoon_naam.Text))
-                    gebruiker.Volledigenaam = persoon_naam.Text;
+                        if (gebruiker.Bondsnummer != parsed.ToString())
+                            gebruiker.Bondsnummer = parsed.ToString();
 
-                TextBox persoon_TelefoonOverdag = (TextBox)fvw_persoon.FindControl("TelefoonOverdag");
-                string persoontelefoonoverdag = persoon_TelefoonOverdag.Text;
-                if (gebruiker.TelefoonOverdag != persoon_TelefoonOverdag.Text && !string.IsNullOrWhiteSpace(persoon_TelefoonOverdag.Text))
-                    gebruiker.TelefoonOverdag = persoon_TelefoonOverdag.Text;
+                        TextBox persoon_naam = (TextBox)fvw_persoon.FindControl("Naam");
+                        string persoonnaam = persoon_naam.Text;
+                        if (gebruiker.Volledigenaam != persoon_naam.Text && !string.IsNullOrWhiteSpace(persoon_naam.Text))
+                            gebruiker.Volledigenaam = persoon_naam.Text;
 
-                TextBox persoon_TelefoonAvond = (TextBox)fvw_persoon.FindControl("TelefoonAvond");
-                string persoontelefoonavond = persoon_TelefoonAvond.Text;
-                if (gebruiker.TelefoonOverdag != persoon_TelefoonAvond.Text && !string.IsNullOrWhiteSpace(persoon_TelefoonAvond.Text))
-                    gebruiker.TelefoonOverdag = persoon_TelefoonAvond.Text;
+                        TextBox persoon_TelefoonOverdag = (TextBox)fvw_persoon.FindControl("TelefoonOverdag");
+                        string persoontelefoonoverdag = persoon_TelefoonOverdag.Text;
+                        if (gebruiker.TelefoonOverdag != persoon_TelefoonOverdag.Text && !string.IsNullOrWhiteSpace(persoon_TelefoonOverdag.Text))
+                            gebruiker.TelefoonOverdag = persoon_TelefoonOverdag.Text;
 
-                TextBox persoon_Email = (TextBox)fvw_persoon.FindControl("Email");
-                string persoonemail = persoon_Email.Text;
-                if (gebruiker.EmailKNLTB != persoon_Email.Text && !string.IsNullOrWhiteSpace(persoon_Email.Text))
-                    gebruiker.EmailKNLTB = persoon_Email.Text;
+                        TextBox persoon_TelefoonAvond = (TextBox)fvw_persoon.FindControl("TelefoonAvond");
+                        string persoontelefoonavond = persoon_TelefoonAvond.Text;
+                        if (gebruiker.TelefoonAvond != persoon_TelefoonAvond.Text && !string.IsNullOrWhiteSpace(persoon_TelefoonAvond.Text))
+                            gebruiker.TelefoonAvond = persoon_TelefoonAvond.Text;
 
-                xmlInputData.Root.Add(gebruiker.ToXElement<ClubCloud_Gebruiker>());
+                        TextBox persoon_Email = (TextBox)fvw_persoon.FindControl("Email");
+                        string persoonemail = persoon_Email.Text;
+                        if (gebruiker.EmailKNLTB != persoon_Email.Text && !string.IsNullOrWhiteSpace(persoon_Email.Text))
+                            gebruiker.EmailKNLTB = persoon_Email.Text;
 
-                XElement aanmelden = new XElement("Aanmelden",
-                new object[]{
+                        xmlInputData.Root.Add(gebruiker.ToXElement<ClubCloud_Gebruiker>());
+
+                        XElement aanmelden = new XElement("Aanmelden",
+                        new object[]{
                         new XElement("Opmerkingen", opmerkingen.Text),
                         new XElement("Akkoord", akkoord.Checked),
                         new XElement("Datum", DateTime.Now.ToString()),
                         new XElement("IP",GetIPAddress())
                         });
-                xmlInputData.Root.Add(aanmelden);
+                        xmlInputData.Root.Add(aanmelden);
 
-                EmailTracking tracking = new EmailTracking
-                {
-                    CampaignName = "Aanmelden",
-                    CampaignSource = "WebSite",
-                    ClientId = vereniging.Id,
-                    RecipientId = vereniging.Nummer,
-                    TrackingId = "UA-9934149-20",
-                    CampagneContent = "aanmelden",
-                    CampagneMedium = "email",
-                    CampagneTerm = "aanmelden"
-                };
-
-                xmlInputData.Root.Add(tracking.ToXElement<EmailTracking>());
-
-                XElement content = new XElement("Content",
-                    new XElement("Subject", string.Format("Aanmelden bij ClubCloud voor {0} ({1})", vereniging.Naam, vereniging.Nummer)));
-                xmlInputData.Root.Add(content);
-
-                SPSecurity.RunWithElevatedPrivileges(delegate()
-                {
-                    try
-                    {
-                        using (SPSite currentSite = new SPSite(SPContext.Current.Site.ID, SPUrlZone.Internet))
+                        EmailTracking tracking = new EmailTracking
                         {
-                            using (SPWeb web = currentSite.OpenWeb(SPContext.Current.Web.ID))
+                            CampaignName = "Aanmelden",
+                            CampaignSource = "WebSite",
+                            ClientId = vereniging.Id,
+                            RecipientId = vereniging.Nummer,
+                            TrackingId = "UA-9934149-20",
+                            CampagneContent = "aanmelden",
+                            CampagneMedium = "email",
+                            CampagneTerm = "aanmelden"
+                        };
+
+                        xmlInputData.Root.Add(tracking.ToXElement<EmailTracking>());
+
+                        XElement content = new XElement("Content",
+                            new XElement("Subject", string.Format("Aanmelden bij ClubCloud voor {0} ({1})", vereniging.Naam, vereniging.Nummer)));
+                        xmlInputData.Root.Add(content);
+
+                        SPSecurity.RunWithElevatedPrivileges(delegate()
+                        {
+                            try
                             {
-                                SPDocumentLibrary SiteAssets = null;
-                                SPDocumentLibrary SitePages = null;
-                                SPFolder Templates = null;
-                                SPFolder Online = null;
-                                SPFile Aanmelden = null;
-                                SPFile Webversion = null;
-                                SPItem WebversionItem = null;
-
-                                XmlReader template = null;
-
-                                SPList assets = web.Lists.TryGetList("SiteAssets");
-
-                                if(assets == null)
-                                    assets = web.Lists.TryGetList("Siteactiva");
-
-                                if (assets != null)
-                                    SiteAssets = (SPDocumentLibrary)assets;
-
-                                if (SiteAssets != null)
-                                    Templates = SiteAssets.RootFolder.SubFolders["Templates"];
-
-                                SPList pages = web.Lists.TryGetList("SitePages");
-
-                                if (pages == null)
-                                    pages = web.Lists.TryGetList("Sitepagina's");
-
-                                if (pages != null)
-                                    SitePages = (SPDocumentLibrary)pages;
-
-                                if (SitePages != null)
-                                    Online = SitePages.RootFolder.SubFolders["Online"];
-
-                                if (Templates != null && Templates.Exists)
-                                    Aanmelden = Templates.Files["aanmelden.xsl"];
-
-                                if(Aanmelden != null && Aanmelden.Exists)
-                                    template = XmlReader.Create(Aanmelden.OpenBinaryStream());
-
-                                if (template == null)
-                                    throw new FileNotFoundException("Template not Found", Aanmelden.Url);
-
-                                string body = GenerateEmailBody(template, xmlInputData);
-
-                                web.AllowUnsafeUpdates = true;
-
-                                if (Online != null && Online.Exists)
+                                using (SPSite currentSite = new SPSite(SPContext.Current.Site.ID, SPUrlZone.Internet))
                                 {
-                                    Webversion = Online.Files.Add(Guid.NewGuid() + ".aspx", System.Text.Encoding.UTF8.GetBytes(body), true);
-                                    WebversionItem = pages.GetItemByUniqueId(Webversion.UniqueId);
-                                    WebversionItem["Title"] = string.Format("Aanmelden bij ClubCloud voor {0} ({1})", vereniging.Naam, vereniging.Nummer);
-                                    WebversionItem.Update();
-                                }
-                                if (Webversion != null && Webversion.Exists)
-                                {
-                                    XElement online = new XElement("Online",
-                                        new object[]{
+                                    using (SPWeb web = currentSite.OpenWeb(SPContext.Current.Web.ID))
+                                    {
+                                        SPDocumentLibrary SiteAssets = null;
+                                        SPDocumentLibrary SitePages = null;
+                                        SPFolder Templates = null;
+                                        SPFolder Online = null;
+                                        SPFile Aanmelden = null;
+                                        SPFile Webversion = null;
+                                        SPItem WebversionItem = null;
+
+                                        XmlReader template = null;
+
+                                        SPList assets = web.Lists.TryGetList("SiteAssets");
+
+                                        if (assets == null)
+                                            assets = web.Lists.TryGetList("Siteactiva");
+
+                                        if (assets != null)
+                                            SiteAssets = (SPDocumentLibrary)assets;
+
+                                        if (SiteAssets != null)
+                                            Templates = SiteAssets.RootFolder.SubFolders["Templates"];
+
+                                        SPList pages = web.Lists.TryGetList("SitePages");
+
+                                        if (pages == null)
+                                            pages = web.Lists.TryGetList("Sitepagina's");
+
+                                        if (pages != null)
+                                            SitePages = (SPDocumentLibrary)pages;
+
+                                        if (SitePages != null)
+                                            Online = SitePages.RootFolder.SubFolders["Online"];
+
+                                        if (Templates != null && Templates.Exists)
+                                            Aanmelden = Templates.Files["aanmelden.xsl"];
+
+                                        if (Aanmelden != null && Aanmelden.Exists)
+                                            template = XmlReader.Create(Aanmelden.OpenBinaryStream());
+
+                                        if (template == null)
+                                            throw new FileNotFoundException("Template not Found", Aanmelden.Url);
+
+                                        string body = GenerateEmailBody(template, xmlInputData);
+
+                                        web.AllowUnsafeUpdates = true;
+
+                                        if (Online != null && Online.Exists)
+                                        {
+                                            Webversion = Online.Files.Add(Guid.NewGuid() + ".aspx", System.Text.Encoding.UTF8.GetBytes(body), true);
+                                            WebversionItem = pages.GetItemByUniqueId(Webversion.UniqueId);
+                                            WebversionItem["Title"] = string.Format("Aanmelden bij ClubCloud voor {0} ({1})", vereniging.Naam, vereniging.Nummer);
+                                            WebversionItem.Update();
+                                        }
+                                        if (Webversion != null && Webversion.Exists)
+                                        {
+                                            XElement online = new XElement("Online",
+                                                new object[]{
                                             new XElement("WebVersion", string.Format("{0}/{1}", currentSite.Url,Webversion.Url))
                                     });
-                                    xmlInputData.Root.Add(online);
+                                            xmlInputData.Root.Add(online);
+                                        }
+
+                                        if (Aanmelden != null && Aanmelden.Exists)
+                                            template = XmlReader.Create(Aanmelden.OpenBinaryStream());
+
+                                        body = GenerateEmailBody(template, xmlInputData);
+
+                                        web.AllowUnsafeUpdates = false;
+
+                                        MailMessage message = Email.CreateMailMessage(body);
+
+                                        MailAddress tovereniging = new MailAddress(vereniging.EmailKNLTB, vereniging.Naam, Encoding.UTF8);
+                                        message.To.Add(tovereniging);
+
+                                        MailAddress topersoon = new MailAddress(gebruiker.EmailKNLTB, gebruiker.Volledigenaam, Encoding.UTF8);
+                                        message.To.Add(topersoon);
+
+                                        message.CC.Add(new MailAddress("aanmelden@clubcloud.nl", "Aanmelden bij ClubCloud"));
+                                        message.From = new MailAddress("aanmelden@clubcloud.nl", "Aanmelden bij ClubCloud");
+                                        message.Subject = string.Format("Aanmelden bij ClubCloud voor {0}({1})", vereniging.Naam, vereniging.Nummer);
+                                        message.Priority = MailPriority.Normal;
+                                        message.ReplyToList.Add(new MailAddress("aanmelden@clubcloud.nl", "Aanmelden bij ClubCloud"));
+                                        message.Sender = new MailAddress("aanmelden@clubcloud.nl", "Aanmelden bij ClubCloud");
+
+                                        SmtpClient client = new SmtpClient(ZimbraConfiguration.Server.SendMailHost, zimbraconfiguration.Server.SendMailPort);
+                                        client.Credentials = new System.Net.NetworkCredential(ZimbraConfiguration.Server.SendMailUserName, ZimbraConfiguration.Server.SendMailPassword);
+                                        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                                        message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure | DeliveryNotificationOptions.OnSuccess | DeliveryNotificationOptions.Delay;
+                                        Email.Send(message, client);
+                                    }
                                 }
-
-                                if (Aanmelden != null && Aanmelden.Exists)
-                                    template = XmlReader.Create(Aanmelden.OpenBinaryStream());
-
-                                body = GenerateEmailBody(template, xmlInputData);
-
-                                web.AllowUnsafeUpdates = false;
-                                
-                                MailMessage message = Email.CreateMailMessage(body);
-
-                                MailAddress tovereniging = new MailAddress(vereniging.EmailKNLTB, vereniging.Naam, Encoding.UTF8);
-                                message.To.Add(tovereniging);
-
-                                MailAddress topersoon = new MailAddress(gebruiker.EmailKNLTB, gebruiker.Volledigenaam, Encoding.UTF8);
-                                message.To.Add(topersoon);
-
-                                message.CC.Add(new MailAddress("aanmelden@clubcloud.nl", "Aanmelden bij ClubCloud"));
-                                message.From = new MailAddress("aanmelden@clubcloud.nl", "Aanmelden bij ClubCloud");
-                                message.Subject = string.Format("Aanmelden bij ClubCloud voor {0}({1})", vereniging.Naam, vereniging.Nummer);
-                                message.Priority = MailPriority.Normal;
-                                message.ReplyToList.Add(new MailAddress("aanmelden@clubcloud.nl", "Aanmelden bij ClubCloud"));
-                                message.Sender = new MailAddress("aanmelden@clubcloud.nl", "Aanmelden bij ClubCloud");
-
-                                SmtpClient client = new SmtpClient(ZimbraConfiguration.Server.SendMailHost, zimbraconfiguration.Server.SendMailPort);
-                                client.Credentials = new System.Net.NetworkCredential(ZimbraConfiguration.Server.SendMailUserName, ZimbraConfiguration.Server.SendMailPassword);
-                                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure | DeliveryNotificationOptions.OnSuccess | DeliveryNotificationOptions.Delay;
-                                Email.Send(message, client);
                             }
-                        }
+                            catch (Exception ex)
+                            {
+                                Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                            }
+                        });
                     }
                     catch (Exception ex)
                     {
                         Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
                     }
-                });
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                }
+                operation.End("bedankt.aspx");
             }
         }
 
