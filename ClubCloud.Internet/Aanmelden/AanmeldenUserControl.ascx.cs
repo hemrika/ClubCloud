@@ -141,9 +141,9 @@ namespace ClubCloud.Internet
 
         protected void wzd_aanmelden_FinishButtonClick(object sender, WizardNavigationEventArgs e)
         {
-            using (SPLongOperation operation = new SPLongOperation(this.Page))
-            {
-                operation.Begin();
+            //using (SPLongOperation operation = new SPLongOperation(this.Page))
+            //{
+            //    operation.Begin();
 
                 using (new SPMonitoredScope("Mailing SendMail"))
                 {
@@ -433,8 +433,8 @@ namespace ClubCloud.Internet
                         Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
                     }
                 }
-                operation.End("bedankt.aspx");
-            }
+                //operation.End("bedankt.aspx");
+            //}
         }
 
         public static string GenerateEmailBody(XmlReader template, XNode xmlInputData)
