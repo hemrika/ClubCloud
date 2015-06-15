@@ -81,7 +81,7 @@ namespace ClubCloud.Common.Mail
 
             try
             {
-                //client.SendCompleted += client_SendCompleted;
+                client.SendCompleted += client_SendCompleted;
                 client.Send(message);
             }
             catch (Exception ex)
