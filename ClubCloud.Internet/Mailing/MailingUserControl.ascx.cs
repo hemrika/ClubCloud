@@ -110,15 +110,15 @@ namespace ClubCloud.Internet
             }
             else
             {
-                if (Request.QueryString.AllKeys.Contains("IsDlg"))
+                if (Page.Request.QueryString.AllKeys.Contains("IsDlg"))
                 {
-                    Response.Write("<script type='text/javascript'>window.frameElement.commitPopup()</script>");
-                    Response.Flush();
-                    Response.End();
+                    Page.Response.Write("<script type='text/javascript'>window.frameElement.commitPopup()</script>");
+                    Page.Response.Flush();
+                    Page.Response.End();
                 }
                 else
                 {
-                    Response.Redirect("mailing.aspx");
+                    Page.Response.Redirect("mailing.aspx");
                 }
             }
         }

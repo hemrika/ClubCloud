@@ -305,14 +305,15 @@ namespace ClubCloud.Provider
                         }
                         catch(Exception ex) 
                         {
+                            HttpRuntime.UnloadAppDomain();
                             Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
                         }
 
                         if (string.IsNullOrEmpty(AdminToken))
                         {
+                            System.Threading.Thread.Sleep(100);
                             //zimbraServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName);
-                            zimbraServer.TriggerWebSite();
-                            System.Threading.Thread.Sleep(1000);
+                            //PingResponse ping = await zimbraServer.Message(new PingRequest{}) as PingResponse;//.TriggerWebSite();                            
                         }
                         //}
 

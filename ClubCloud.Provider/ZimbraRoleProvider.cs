@@ -17,6 +17,7 @@ using ClubCloud.Zimbra.Global;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Microsoft.SharePoint.Utilities;
+using ClubCloud.Zimbra.Administration;
 
 namespace ClubCloud.Provider
 {
@@ -194,11 +195,13 @@ namespace ClubCloud.Provider
                         }
                         catch (Exception ex)
                         {
+                            HttpRuntime.UnloadAppDomain();
                             Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
                         }
 
                         if (string.IsNullOrEmpty(AdminToken))
                         {
+                            //PingResponse ping = await zimbraServer.Message(new PingRequest { }) as PingResponse;//.TriggerWebSite();
                             //zimbraServer = new Zimbra.ZimbraServer(zimbraconfiguration.Server.ServerName);
                             //zimbraServer.TriggerWebSite();
                             System.Threading.Thread.Sleep(1000);

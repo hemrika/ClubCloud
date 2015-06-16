@@ -180,7 +180,15 @@ namespace ClubCloud.Service
         [OperationContract]
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetReserveringen", ResponseFormat = WebMessageFormat.Json)]
         List<ClubCloud_Reservering> GetReserveringen();
-      
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingenBySearch/{prefixText}/{count}/{contextKey}", ResponseFormat = WebMessageFormat.Json)]
+        List<ClubCloud_Vereniging> GetVerenigingenBySearch(string prefixText, int count, string contextKey);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetGebruikersBySearch/{prefixText}/{count}/{contextKey}", ResponseFormat = WebMessageFormat.Json)]
+        List<ClubCloud_Gebruiker> GetGebruikersBySearch(string prefixText, int count, string contextKey);
+
         #endregion
 
     }

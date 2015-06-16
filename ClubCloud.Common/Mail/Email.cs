@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -54,6 +55,60 @@ namespace ClubCloud.Common.Mail
             Send(mailMessage);
         }
 
+        private static Queue<MailMessage> _messages = new Queue<MailMessage>();
+        private static SmtpClient Client = null;
+        private static bool sending = false;
+
+        public static Task SendAsync(MailMessage message, SmtpClient client)
+        {
+            if (client == null)
+                client = new SmtpClient();
+
+            if (client.DeliveryMethod == SmtpDeliveryMethod.PickupDirectoryFromIis)
+                client.DeliveryMethod = SmtpDeliveryMethod.Network; client.EnableSsl = true;
+
+            if (client.DeliveryMethod == SmtpDeliveryMethod.SpecifiedPickupDirectory)
+                client.DeliveryMethod = SmtpDeliveryMethod.Network; client.EnableSsl = true;
+
+            if (client.DeliveryMethod == SmtpDeliveryMethod.Network)
+                client.EnableSsl = true;
+
+            bool valid = true;
+            if (string.IsNullOrWhiteSpace(client.Host))
+                valid = false;
+
+            int output;
+            if (!int.TryParse(client.Port.ToString(), out output))
+                valid = false;
+
+            if (client.Credentials == null)
+                valid = false;
+
+            try
+            {
+                if (valid)
+                {
+                    if (Client == null)
+                    {
+                        Client = client;
+                        Client.SendCompleted += client_SendCompleted;
+                    }
+
+                    while (sending) { Thread.Sleep(100); }
+
+                    sending = true;
+                    Client.SendAsync(message, message);
+                    //client.Send(message);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+            }
+
+            return Task.FromResult<object>(null);
+        }
+
         /// <summary>
         /// Sends the E-mail using the configured delivery method.
         /// </summary>
@@ -81,7 +136,7 @@ namespace ClubCloud.Common.Mail
 
             try
             {
-                client.SendCompleted += client_SendCompleted;
+                //client.SendCompleted += client_SendCompleted;
                 client.Send(message);
             }
             catch (Exception ex)
@@ -110,6 +165,10 @@ namespace ClubCloud.Common.Mail
             catch (Exception ex)
             {
                 Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+            }
+            finally
+            {
+                sending = false;
             }
         }
 
@@ -368,5 +427,6 @@ namespace ClubCloud.Common.Mail
             //return inline;
             return resource;
         }
+
     }
 }

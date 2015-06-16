@@ -42,6 +42,19 @@ namespace ClubCloud.Zimbra.Administration
             }
         }
 
+        public NoOpResponse NoOpRequest(NoOpRequest request)
+        {
+            try
+            {
+                return base.Channel.NoOpRequest(request);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return null;
+            }
+        }
+
         public GetVersionInfoResponse GetVersionInfoRequest(GetVersionInfoRequest request)
         {
             return base.Channel.GetVersionInfoRequest(request);

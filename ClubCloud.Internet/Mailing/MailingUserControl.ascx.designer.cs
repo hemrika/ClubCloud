@@ -22,22 +22,31 @@ namespace ClubCloud.Internet {
         protected global::ClubCloud.Common.Controls.ClubCloudDataSource Mailing_DataSource;
         
         /// <summary>
-        /// udp_progress control.
+        /// udp_mailing_progress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress udp_progress;
+        protected global::System.Web.UI.UpdateProgress udp_mailing_progress;
         
         /// <summary>
-        /// udp_aanmelden control.
+        /// udp_animation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udp_aanmelden;
+        protected global::AjaxControlToolkit.UpdatePanelAnimationExtender udp_animation;
+        
+        /// <summary>
+        /// udp_mailing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udp_mailing;
         
         /// <summary>
         /// Mailingform control.
@@ -47,14 +56,5 @@ namespace ClubCloud.Internet {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FormView Mailingform;
-        
-        /// <summary>
-        /// cbl_templates control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cbl_templates;
     }
 }

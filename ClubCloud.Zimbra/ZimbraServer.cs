@@ -10,7 +10,9 @@ using System.Net;
 using System.Reflection;
 using System.ServiceModel;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ClubCloud.Zimbra
 {
@@ -243,18 +245,32 @@ namespace ClubCloud.Zimbra
                     {
                         administration = new ZimbraAdminSoapClient(binding, remoteAddressAdmin);
                     }
-                    Zimbra.Administration.AuthRequest request = new Administration.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.AdministratorName, Value = UserName }, password = Password };
-                    response = administration.AccountAuth(request);
-                    if (!string.IsNullOrEmpty(response.authToken))
-                    {
-                        ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
-                        ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = true };
-                        ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
-                        //ZimbraEndpointAddress.ZimbraHeaderContext.account.by = accountBy.name;
 
-                        AuthenticatedAdminLifetime = response.lifetime;
-                        AuthenticatedAdmin = true;
-                        AuthToken = response.authToken;
+                    NoOpResponse noop = new NoOpResponse();
+
+                    if (!string.IsNullOrWhiteSpace(ZimbraEndpointAddress.ZimbraHeaderContext.authToken))
+                        noop = administration.NoOpRequest(new NoOpRequest { });
+
+                    if(noop != null)
+                    {
+                        noop.Dispose();
+                    }
+
+                    if (string.IsNullOrWhiteSpace(ZimbraEndpointAddress.ZimbraHeaderContext.authToken))
+                    {
+                        Zimbra.Administration.AuthRequest request = new Administration.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.AdministratorName, Value = UserName }, password = Password, persistAuthTokenCookie = true };
+                        response = administration.AccountAuth(request);
+                        if (!string.IsNullOrEmpty(response.authToken))
+                        {
+                            ZimbraEndpointAddress.ZimbraHeaderContext.authToken = response.authToken;
+                            ZimbraEndpointAddress.ZimbraHeaderContext.AuthTokenControl = new authTokenControl { voidOnExpired = true };
+                            ZimbraEndpointAddress.ZimbraHeaderContext.account = request.account.Value;
+                            //ZimbraEndpointAddress.ZimbraHeaderContext.account.by = accountBy.name;
+
+                            AuthenticatedAdminLifetime = response.lifetime;
+                            AuthenticatedAdmin = true;
+                            AuthToken = response.authToken;
+                        }
                     }
                 }
                 else
@@ -266,7 +282,7 @@ namespace ClubCloud.Zimbra
                     {
                         account = new ZimbraAccountSoapClient(binding, remoteAddress);
                     }
-                    Zimbra.Account.AuthRequest request = new Account.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.Name, Value = UserName }, password = Password };
+                    Zimbra.Account.AuthRequest request = new Account.AuthRequest { account = new Global.accountSelector { by = Global.accountBy.Name, Value = UserName }, password = Password, persistAuthTokenCookie = true };
                     response = account.AccountAuth(request);
                     if (!string.IsNullOrEmpty(response.authToken))
                     {
@@ -284,7 +300,12 @@ namespace ClubCloud.Zimbra
                 //GetVersioInfo(asAdmin);
                 return AuthToken;
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) 
+            {
+                HttpRuntime.UnloadAppDomain();
+                Thread.Sleep(100);
+                throw ex; 
+            }
         }
 
         private CookieContainer _Container;

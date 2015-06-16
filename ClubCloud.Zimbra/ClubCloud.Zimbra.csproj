@@ -108,6 +108,10 @@
     <Compile Include="Administration\ModifyDomainRequest.cs" />
     <Compile Include="Administration\ModifyDomainResponse.cs" />
     <Compile Include="Administration\modifyUCServiceRequest.cs" />
+    <Compile Include="Administration\NoOpRequest.cs" />
+    <Compile Include="Administration\NoOpResponse.cs" />
+    <Compile Include="Administration\PingRequest.cs" />
+    <Compile Include="Administration\PingResponse.cs" />
     <Compile Include="Administration\RemoveDistributionListMemberRequest.cs" />
     <Compile Include="Administration\RemoveDistributionListMemberResponse.cs" />
     <Compile Include="Administration\SearchDirectoryRequest.cs" />

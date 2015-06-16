@@ -1360,7 +1360,6 @@ namespace ClubCloud.Service
             return result;
         }
 
-
         public ClubCloud_Vereniging GetVerenigingByLocation(string Latitude, string Longitude)
         {
             ClubCloud_Vereniging vereniging = new ClubCloud_Vereniging();
@@ -1431,6 +1430,44 @@ namespace ClubCloud.Service
             return vereniging;
         }
 
+        public List<ClubCloud_Vereniging> GetVerenigingenBySearch(string prefixText, int count, string contextKey)
+        {
+            List<ClubCloud_Vereniging> result = new List<ClubCloud_Vereniging>();
+            try
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+
+                result = client.GetVerenigingenBySearch(prefixText, count, contextKey);
+            }
+            catch { };
+
+            return result;
+        }
+
+        public List<ClubCloud_Gebruiker> GetGebruikersBySearch(string prefixText, int count, string contextKey)
+        {
+            List<ClubCloud_Gebruiker> result = new List<ClubCloud_Gebruiker>();
+
+            int parsed;
+            if (SPContext.Current != null && SPContext.Current.Web != null && SPContext.Current.Web.CurrentUser != null)
+            {
+                string bondsnummer = HttpContext.Current.User.Identity.Name.Split('|').Last();
+                if (int.TryParse(bondsnummer, out parsed))
+                {
+                    try
+                    {
+                        ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+                        ClubCloud_Setting settings = client.GetClubCloudSettings(bondsnummer);
+                        if (settings != null)
+                            result = client.GetGebruikersBySearch(prefixText, count, contextKey, settings);
+                    }
+                    catch { }
+                }
+
+            }
+
+            return result;
+        }        
         #endregion
 
     }

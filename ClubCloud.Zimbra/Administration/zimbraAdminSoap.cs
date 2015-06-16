@@ -89,6 +89,11 @@ namespace ClubCloud.Zimbra.Administration
         [System.ServiceModel.OperationContractAttribute(Name = "SetPasswordRequest", Action = "AdminSetPasswordRequest", ReplyAction = "AdminSetPasswordResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
         SetPasswordResponse SetPasswordRequest(SetPasswordRequest request);
+
+        [System.ServiceModel.OperationContractAttribute(Name = "NoOpRequest", Action = "AdminNoOpRequest", ReplyAction = "AdminNoOpResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
+        NoOpResponse NoOpRequest(NoOpRequest request);
+
         
     }
     

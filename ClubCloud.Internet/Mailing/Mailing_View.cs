@@ -24,6 +24,7 @@ using System.Threading;
 using ClubCloud.Zimbra.Service;
 using System.Configuration;
 using System.Web;
+using System.Web.Hosting;
 
 namespace ClubCloud.Internet
 {
@@ -240,10 +241,12 @@ namespace ClubCloud.Internet
                             SmtpClient client = new SmtpClient(ZimbraConfiguration.Server.SendMailHost, zimbraconfiguration.Server.SendMailPort);
                             client.Credentials = new System.Net.NetworkCredential(ZimbraConfiguration.Server.SendMailUserName, ZimbraConfiguration.Server.SendMailPassword);
                             client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            client.DeliveryFormat = SmtpDeliveryFormat.International;
+                            //client.SendCompleted += client_SendCompleted;
 
                             bool more = true;
-                            int startRowIndex = SelectOnlineVersions()-10;
-                            int maximumRows = 200;
+                            int startRowIndex = 0;// SelectOnlineVersions() - 10;
+                            int maximumRows = 30;
                             int totalrows = 0;
 
                             List<Parameter> collection = new List<Parameter>();
@@ -291,6 +294,7 @@ namespace ClubCloud.Internet
                                                     {
                                                         try
                                                         {
+                                                            //message.To.Add(new MailAddress("rutger@hemrika.nl","Rutger Hemrika", Encoding.UTF8));
                                                             message.To.Add(new MailAddress(email.ToLower(), vereniging.Naam, Encoding.UTF8));
                                                         }
                                                         catch (Exception ex)
@@ -310,7 +314,8 @@ namespace ClubCloud.Internet
 
                                                     try
                                                     {
-                                                        Email.Send(message, client);
+                                                        HostingEnvironment.QueueBackgroundWorkItem(ct => Email.SendAsync(message, client));
+                                                        //Email.Send(message, client);
                                                         Thread.Sleep(100);
                                                     }
                                                     catch (Exception ex)
@@ -319,7 +324,7 @@ namespace ClubCloud.Internet
                                                     }
                                                     finally
                                                     {
-                                                        message.Dispose();
+                                                        //message.Dispose();
                                                     }
 
                                                     Thread.Sleep(200);
@@ -339,6 +344,7 @@ namespace ClubCloud.Internet
                                     if (processed >= totalrows || (queryresult != null && queryresult.ClubCloud_Vereniging.Count == 0))
                                         more = false;
 
+                                    //more = false;
                                 }
                                 catch (Exception ex)
                                 {
@@ -361,6 +367,31 @@ namespace ClubCloud.Internet
 
     	}
 
+
+        static void client_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            try
+            {
+                //TaskCompletionSource< source = (TaskCompletionSource)e.UserState;
+
+                MailMessage message = (MailMessage)e.UserState;
+
+                if (e.Cancelled)
+                {
+                    Logger.WriteLog(Logger.Category.Unexpected, "ClubCLoud.Common.Mail", message.Subject);
+                }
+                if (e.Error != null)
+                {
+                    Logger.WriteLog(Logger.Category.Unexpected, e.Error.Source, e.Error.Message);
+                }
+
+                message.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+            }
+        }
         private MailMessage BuidMailMessage(ClubCloud_Vereniging vereniging)
         {
             MailMessage message = null;
