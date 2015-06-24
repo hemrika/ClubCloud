@@ -10,106 +10,79 @@
 namespace ClubCloud.Administratie.WebControls {
     
     
-    public partial class ClubCloud_GebruikersUserControl {
+    public partial class ClubCloud_BaantypesUserControl {
         
         /// <summary>
-        /// udp_Gebruikers_progress control.
+        /// ClubCloud_Baantype_DataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress udp_Gebruikers_progress;
+        protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Baantype_DataSource;
         
         /// <summary>
-        /// tmr_loader_Gebruikers control.
+        /// udp_Baantypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.Timer tmr_loader_Gebruikers;
+        protected global::System.Web.UI.UpdatePanel udp_Baantypes;
         
         /// <summary>
-        /// ClubCloud_Gebruiker_DataSource control.
+        /// tmr_loader_Baantypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Gebruiker_DataSource;
+        protected global::System.Web.UI.Timer tmr_loader_Baantypes;
         
         /// <summary>
-        /// udp_Gebruikers control.
+        /// BaantypeMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udp_Gebruikers;
+        protected global::Microsoft.SharePoint.WebControls.MenuTemplate BaantypeMenu;
         
         /// <summary>
-        /// GebruikerMenu control.
+        /// Baantype_Details control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.MenuTemplate GebruikerMenu;
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Baantype_Details;
         
         /// <summary>
-        /// Gebruiker_Details control.
+        /// Baansoorten control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Gebruiker_Details;
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Baansoorten;
         
         /// <summary>
-        /// Functionarissen control.
+        /// Baanblokken control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Functionarissen;
+        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Baanblokken;
         
         /// <summary>
-        /// Lidmaatschappen control.
+        /// pnl_Baantypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Lidmaatschappen;
-        
-        /// <summary>
-        /// Addressen control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Addressen;
-        
-        /// <summary>
-        /// Profielen control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Profielen;
-        
-        /// <summary>
-        /// pnl_Gebruikers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_Gebruikers;
+        protected global::System.Web.UI.WebControls.Panel pnl_Baantypes;
         
         /// <summary>
         /// spgvpager_top control.
@@ -121,13 +94,13 @@ namespace ClubCloud.Administratie.WebControls {
         protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_top;
         
         /// <summary>
-        /// Gebruikers_Grid control.
+        /// Baantypes_Grid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.SPGridView Gebruikers_Grid;
+        protected global::Microsoft.SharePoint.WebControls.SPGridView Baantypes_Grid;
         
         /// <summary>
         /// spgvpager_bottom control.
@@ -146,5 +119,14 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
+        /// udp_Baantypes_progress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress udp_Baantypes_progress;
     }
 }

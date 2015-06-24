@@ -28,12 +28,12 @@
 	<asp:ContentPlaceHolder id="PlaceHolderPageTitle" runat="server">
 	<SharePoint:ProjectProperty Property="Title" runat="server" /></asp:ContentPlaceHolder>
 </SharePoint:PageTitle>
-<SharePoint:SPShortcutIcon runat="server" IconUrl="/_layouts/15/images/favicon.ico?rev=23" />
-<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjax.js" async=""></script>
-<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxWebForms.js" async=""></script>
-<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxApplicationServices.js" async=""></script>
-<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxTimer.js" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.min.js" async=""></script>
+<SharePoint:SPShortcutIcon runat="server" IconUrl="/_catalogs/masterpage/ClubCloud/Images/favicon.ico" />
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjax.js" ></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxWebForms.js" ></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxApplicationServices.js" ></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjaxTimer.js" ></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.min.js" ></script>
 <SharePoint:CssLink runat="server" Version="15" />
 <SharePoint:CacheManifestLink runat="server" />
 <!-- ===== STARTER: Additional header placeholder - overridden by asp:content on pages or page layouts  =========================== -->
@@ -67,7 +67,7 @@
 
 <body class="full-layout">
 
-					<a name="top" id="top" />
+					<a name="top" id="top" ></a>
 <!-- ===== STARTER: SP IDs / Prefetch SP images / SP Form  =========================================================================== -->
 <SharePoint:SPClientIDGenerator runat="server" ServerControlID="DeltaPlaceHolderMain;DeltaPlaceHolderPageTitleInTitleArea;DeltaPlaceHolderUtilityContent" />
 <SharePoint:ImageLink runat="server" />
@@ -94,7 +94,7 @@
 
 		<!-- ===== STARTER: Web Part Manager  ============================================================================================= -->
 		<SharePoint:AjaxDelta id="DeltaSPWebPartManager" runat="server"><WebPartPages:SPWebPartManager runat="server"/></SharePoint:AjaxDelta>
-		
+
 		
 			<!-- ===== STARTER: Main Scrolling Body Starts Here =============================================================================== -->
 			<div id="s4-workspace body-wrapper">
@@ -117,15 +117,18 @@
 								<li  class="menu-item"><a href="/"><i class="icon-home fa-fw special"></i> Start</a></li>
 								<li  class="menu-item"><a href="gebruikers.aspx"><i class="fa fa-credit-card fa-fw special"></i> gebruikers</a>
 								<ul class="sub-menu">
+                                    <li  class="menu-item"><a href="bestuursorganen.aspx"><i class="icon-docs fa-fw special"></i> Bestuursorganen</a></li>
 									<li  class="menu-item"><a href="functionarissen.aspx"><i class="icon-docs fa-fw special"></i> Functionarissen</a></li>
 									<li  class="menu-item"><a href="functies.aspx"><i class="icon-docs fa-fw special"></i> Functies</a></li>																	
 								</ul>
 								</li>								
 								<li  class="menu-item"><a href="banen.aspx"><i class="fa fa-tasks fa-fw special"></i> Banen</a>
 								<ul class="sub-menu">
-									<li  class="menu-item"><a href="baanblokken.aspx"><i class="icon-docs fa-fw special"></i> Baanblokken</a></li>								
+                                    <li  class="menu-item"><a href="banenspeciaal.aspx"><i class="icon-docs fa-fw special"></i> Speciaal</a></li>								
+									<li  class="menu-item"><a href="baanblokken.aspx"><i class="icon-docs fa-fw special"></i> Blokken</a></li>								
 									<li  class="menu-item"><a href="baanschemas.aspx"><i class="fa fa-cloud fa-fw special"></i> Schema's</a></li>
-									<li  class="menu-item"><a href="baansoorten.aspx"><i class="icon-docs fa-fw special"></i> Baansoorten</a></li>
+									<li  class="menu-item"><a href="baansoorten.aspx"><i class="icon-docs fa-fw special"></i> Soorten</a></li>
+                                    <li  class="menu-item"><a href="baantypes.aspx"><i class="icon-docs fa-fw special"></i> Types</a></li>
 								</ul>
 								</li>
 								<li  class="menu-item"><a href="vereniging.aspx"><i class="icon-user fa-fw special"></i> Vereniging</a>
@@ -240,19 +243,17 @@
 </div>
 <!-- End Body Wrapper -->
 
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/ddsmoothmenu.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/ddsmoothmenu.js" ></script>
 <script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.isotope.min.js" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/selectnav.min.js" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.slickforms.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/selectnav.min.js" ></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.slickforms.js" ></script>
 <script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.easytabs.min.js" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.themepunch.plugins.min.js" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.themepunch.revolution.min.js" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.fancybox.pack.js" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/fancybox/helpers/jquery.fancybox-buttons0ff5.js" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/fancybox/helpers/jquery.fancybox-thumbs0ff5.js" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/fancybox/helpers/jquery.fancybox-mediae209.js" async=""></script>
-<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/scripts.js" async=""></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.themepunch.plugins.min.js" ></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.themepunch.revolution.min.js" ></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/jquery.themepunch.tools.min.js" ></script>
+<script type="text/javascript" src="/_catalogs/masterpage/ClubCloud/js/scripts.js" ></script>
 <script type="text/javascript" >
+
     $(document).ready(function () {
 
         $(function () {
@@ -290,12 +291,13 @@
 <SharePoint:ScriptLink language="javascript" name="menu.js" runat="server" Localizable="false" Defer="true" LoadAfterUI="true"/>
 <SharePoint:ScriptLink language="javascript" name="sp.js" runat="server" Localizable="false" Defer="true" LoadAfterUI="true"/>
 <SharePoint:ScriptLink language="javascript" name="SP.UI.Dialog.js" runat="server" Localizable="false" Defer="true" LoadAfterUI="true"/> 
-<SharePoint:CustomJSUrl runat="server" />
+<SharePoint:CustomJSUrl runat="server"/>
 <SharePoint:SoapDiscoveryLink runat="server"/>
-<SharePoint:CssRegistration Name="Themable/corev15.css" runat="server" />
-<SharePoint:StartScript runat="server"   />
+<SharePoint:CssRegistration Name="Themable/corev15.css" runat="server"/>
+<SharePoint:StartScript runat="server"/>
 </div>
 </SharePoint:SharePointForm>
+
 
 <!-- ===== STARTER: Hidden Placeholders =========================================================================================== -->	
 <asp:ContentPlaceHolder id="PlaceHolderLeftNavBarDataSource" Visible="False" runat="server" />

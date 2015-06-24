@@ -40,7 +40,7 @@ namespace ClubCloud.Administratie.WebControls
     
     	protected void tmr_loader_Gebruikers_Tick(object sender, EventArgs e)
     	{
-    		tmr_loader_Gebruikers.Enabled = false;
+    		//tmr_loader_Gebruikers.Enabled = false;
     
     		if(ClubCloud_Gebruiker_DataSource.ViewName != this.ViewName)
     			ClubCloud_Gebruiker_DataSource.ViewName = this.ViewName;

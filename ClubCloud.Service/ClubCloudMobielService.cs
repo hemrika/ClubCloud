@@ -60,6 +60,20 @@ namespace ClubCloud.Service
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
     public class ClubCloudMobielService : IClubCloudMobielService
     {
+        private static ClubCloudServiceClient client;
+
+        public static ClubCloudServiceClient Client
+        {
+            get
+            {
+                if (client == null)
+                    client = new ClubCloudServiceClient(SPServiceContext.Current);
+
+                //client.Proxy.Status == SPObjectStatus.Offline
+
+                return ClubCloudMobielService.client;
+            }
+        }
 
         #region Security
 
@@ -1430,21 +1444,21 @@ namespace ClubCloud.Service
             return vereniging;
         }
 
-        public List<ClubCloud_Vereniging> GetVerenigingenBySearch(string prefixText, int count, string contextKey)
+        public List<ClubCloud_Vereniging> GetVerenigingenBySearch(string prefixText, string count, string contextKey)
         {
             List<ClubCloud_Vereniging> result = new List<ClubCloud_Vereniging>();
             try
             {
                 ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
 
-                result = client.GetVerenigingenBySearch(prefixText, count, contextKey);
+                result = client.GetVerenigingenBySearch(prefixText, int.Parse(count), contextKey);
             }
             catch { };
 
             return result;
         }
 
-        public List<ClubCloud_Gebruiker> GetGebruikersBySearch(string prefixText, int count, string contextKey)
+        public List<ClubCloud_Gebruiker> GetGebruikersBySearch(string prefixText, string count, string contextKey)
         {
             List<ClubCloud_Gebruiker> result = new List<ClubCloud_Gebruiker>();
 
@@ -1459,7 +1473,7 @@ namespace ClubCloud.Service
                         ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
                         ClubCloud_Setting settings = client.GetClubCloudSettings(bondsnummer);
                         if (settings != null)
-                            result = client.GetGebruikersBySearch(prefixText, count, contextKey, settings);
+                            result = client.GetGebruikersBySearch(prefixText, int.Parse(count), contextKey, settings);
                     }
                     catch { }
                 }
@@ -1468,6 +1482,165 @@ namespace ClubCloud.Service
 
             return result;
         }        
+        #endregion
+
+        #region ClubCloud Verenigingen
+
+        public List<ClubCloud_Vereniging> GetVerenigingen(string query)
+        {
+            List<ClubCloud_Vereniging> result = new List<ClubCloud_Vereniging>();
+            try
+            {
+                result = Client.GetVerenigingenBySearch(query, 5, query);
+            }
+            catch (Exception ex)
+            {
+                throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
+            }
+
+            return result;
+        }
+
+        public ClubCloud_Vereniging GetVerenigingById(string VerenigingId)
+        {
+            ClubCloud_Vereniging result = new ClubCloud_Vereniging();
+            try
+            {
+                Guid parsed;
+                if (Guid.TryParse(VerenigingId, out parsed))
+                {
+                    result = Client.GetVerenigingById(parsed, false, new ClubCloud_Setting { Id = 00000000, VerenigingId = parsed, Access = false });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
+            }
+
+            return result;
+        }
+
+        public List<ClubCloud_Address> GetVerenigingAdressen(string VerenigingId)
+        {
+            List<ClubCloud_Address> result = new List<ClubCloud_Address>();
+            try
+            {
+                Guid parsed;
+                if (Guid.TryParse(VerenigingId, out parsed))
+                {
+                    result = Client.GetAddressenForVerenigingById(parsed, false, new ClubCloud_Setting { Id = 00000000, VerenigingId = Guid.Empty, Access = false });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
+            }
+
+            return result;
+        }
+
+        public ClubCloud_Accommodatie GetVerenigingAccommodatie(string VerenigingId)
+        {
+            ClubCloud_Accommodatie result = new ClubCloud_Accommodatie();
+            try
+            {
+                Guid parsed;
+                if (Guid.TryParse(VerenigingId, out parsed))
+                {
+                    result = Client.GetAccommodatieForVerenigingById(parsed, false, new ClubCloud_Setting { Id = 00000000, VerenigingId = parsed, Access = false });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
+            }
+
+            return result;
+        }
+
+        public List<ClubCloud_Address> GetVerenigingAccommodatieAdressen(string VerenigingId)
+        {
+            List<ClubCloud_Address> result = new List<ClubCloud_Address>();
+            try
+            {
+                Guid parsed;
+                if (Guid.TryParse(VerenigingId, out parsed))
+                {
+                    ClubCloud_Accommodatie accommodatie = Client.GetAccommodatieForVerenigingById(parsed, false, new ClubCloud_Setting { Id = 00000000, VerenigingId = parsed, Access = false });
+
+                    if (accommodatie != null)
+                        result = Client.GetAddressenForAccommodatieById(accommodatie.Id, false, new ClubCloud_Setting { Id = 00000000, VerenigingId = parsed, Access = false });                      
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
+            }
+
+            return result;
+        }
+
+        public List<ClubCloud_Functionaris> GetVerenigingFunctionarissen(string VerenigingId)
+        {
+            List<ClubCloud_Functionaris> result = new List<ClubCloud_Functionaris>();
+            try
+            {
+                Guid parsed;
+                if (Guid.TryParse(VerenigingId, out parsed))
+                {
+                    result = Client.GetFunctionarissenForVerenigingById(parsed, false, new ClubCloud_Setting { Id = 00000000, VerenigingId = parsed, Access = false });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
+            }
+
+            return result;
+
+        }
+
+        public ClubCloud_Functionaris GetVerenigingFunctionaris(string VerenigingId, string FunctionarisId)
+        {
+            ClubCloud_Functionaris result = new ClubCloud_Functionaris();
+            try
+            {
+                Guid parsed;
+                if (Guid.TryParse(FunctionarisId, out parsed))
+                {
+                    Guid fparsed;
+                    if (Guid.TryParse(FunctionarisId, out fparsed))
+                    {
+                        result = Client.GetFunctionarisById(fparsed, false, new ClubCloud_Setting { Id = 00000000, VerenigingId = parsed, Access = false });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
+            }
+
+            return result;
+        }
+
+        public ClubCloud_Vereniging GetVerenigingNearby(string Latitude, string Longitude)
+        {
+            ClubCloud_Vereniging vereniging = new ClubCloud_Vereniging();
+
+            try
+            {
+                ClubCloudServiceClient client = new ClubCloudServiceClient(SPServiceContext.Current);
+
+                vereniging = client.GetVerenigingByLocation("00000000", double.Parse(Latitude), double.Parse(Longitude));
+            }
+            catch (Exception ex)
+            {
+                throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
+            }
+
+            return vereniging;
+        }
+
         #endregion
 
     }

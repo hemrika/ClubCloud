@@ -42,16 +42,9 @@ var navigationProperties = typeMapper.GetNavigationProperties(entity);
 <%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entitySet)#>.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entitySet)#>UserControl" %>
-<asp:UpdateProgress ID="udp_<#=code.Escape(entitySetName)#>_progress" runat="server" AssociatedUpdatePanelID="udp_<#=code.Escape(entitySetName)#>" DisplayAfter="50">
-    <progresstemplate>
-        <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity=80); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; z-index: 10000;">
-        <div class="bubbles aligncenter" style="top:48%;">laden...</div>
-        </div>
-</progresstemplate>
-</asp:UpdateProgress>
-<!-- <asp:Timer runat="server" ID="tmr_loader_<#=code.Escape(entitySetName)#>" OnTick="tmr_loader_<#=code.Escape(entitySetName)#>_Tick" interval="500" /> -->
 <Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="tmr_loader_<#=code.Escape(entitySetName)#>_Tick" ViewName="<#=code.Escape(entitySet)#>_View" />
-<asp:UpdatePanel ID="udp_<#=code.Escape(entitySetName)#>" runat="server" UpdateMode="Conditional" RenderMode="Block" ChildrenAsTriggers="true" >
+<asp:Timer runat="server" ID="tmr_loader_<#=code.Escape(entitySetName)#>" OnTick="tmr_loader_<#=code.Escape(entitySetName)#>_Tick" interval="500" />
+<asp:UpdatePanel ID="udp_<#=code.Escape(entitySetName)#>" runat="server" UpdateMode="Always">
     <contenttemplate>
 		
 <#
@@ -113,17 +106,7 @@ if(entitySetName == "Functionarissen")
 <#
 }
 #>
-<#
-    if (simpleProperties.Any())
-    {
-	    foreach (var edmProperty in simpleProperties)
-        {
-        }
-    }
-#>
-	FilteredDataSourcePropertyFormat="{1} like '{0}'"
-    FilteredDataSourcePropertyName="FilterExpression"
-    FilteringIsCaseSensitive="false" >
+	OnDataBinding="tmr_loader_<#=code.Escape(entitySetName)#>_Tick" >
     <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
@@ -291,16 +274,18 @@ if(entitySetName == "Functionarissen")
 <p>
     <asp:Label runat="server" ID="lblMessage" ForeColor="Red" />
 </p>
+    </contenttemplate>
     <triggers>
         <asp:AsyncPostBackTrigger ControlID="tmr_loader_<#=code.Escape(entitySetName)#>" EventName="Tick" />
     </triggers>
-    </contenttemplate>
-    <triggers>
-        <asp:PostBackTrigger ControlID="spgvpager_top" />
-        <asp:PostBackTrigger ControlID="spgvpager_bottom" />
-        <asp:PostBackTrigger ControlID="<#=code.Escape(entitySetName)#>_Grid" />
-    </triggers>
 </asp:UpdatePanel>
+<asp:UpdateProgress ID="udp_<#=code.Escape(entitySetName)#>_progress" runat="server" AssociatedUpdatePanelID="udp_<#=code.Escape(entitySetName)#>" DisplayAfter="50">
+    <progresstemplate>
+        <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity=80); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; z-index: 10000;">
+        <div class="bubbles aligncenter" style="top:48%;">laden...</div>
+        </div>
+</progresstemplate>
+</asp:UpdateProgress>
 <#
 fileManager.StartNewFile(entitySet.Name+".ascx.cs");
 #>
@@ -321,7 +306,7 @@ public partial class <#=code.Escape(entitySet)#>UserControl : UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+		udp_<#=code.Escape(entitySetName)#>_progress.Visible = true;
 		/*
         <#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
         <#=code.Escape(entity)#>_DataSource.Assembly = typeof(<#=code.Escape(entitySet)#>UserControl).Assembly;
@@ -368,8 +353,9 @@ public partial class <#=code.Escape(entitySet)#>UserControl : UserControl
 
 	protected void tmr_loader_<#=code.Escape(entitySetName)#>_Tick(object sender, EventArgs e)
 	{
-		//tmr_loader_<#=code.Escape(entitySetName)#>.Enabled = false;
+		tmr_loader_<#=code.Escape(entitySetName)#>.Enabled = false;
 
+		/*
 		if(<#=code.Escape(entity)#>_DataSource.ViewName != this.ViewName)
 			<#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
 
@@ -416,12 +402,15 @@ public partial class <#=code.Escape(entitySet)#>UserControl : UserControl
 				}      
 			}
 		}
+		*/
 
 		udp_<#=code.Escape(entitySetName)#>_progress.Visible = false;
 	}
 
 	protected void Grid<#=code.Escape(entitySetName)#>_CallingDataMethods(object sender, CallingDataMethodsEventArgs e)
 	{
+		
+
 		if(<#=code.Escape(entity)#>_DataSource.ViewName != this.ViewName)
 			<#=code.Escape(entity)#>_DataSource.ViewName = this.ViewName;
 
@@ -457,8 +446,8 @@ public partial class <#=code.Escape(entitySet)#>UserControl : UserControl
                 }
             }
 		}
-
 		e.DataMethodsObject = <#=code.Escape(entity)#>_DataSource.View;
+		udp_<#=code.Escape(entitySetName)#>_progress.Visible = false;
 	}
 
     [Browsable(true)]

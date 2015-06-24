@@ -181,13 +181,48 @@ namespace ClubCloud.Service
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetReserveringen", ResponseFormat = WebMessageFormat.Json)]
         List<ClubCloud_Reservering> GetReserveringen();
 
+        #region ClubCloud Verenigingen
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Verenigingen/{query}", ResponseFormat = WebMessageFormat.Json)]
+        List<ClubCloud_Vereniging> GetVerenigingen(string query);
+
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Vereniging/{VerenigingId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud_Vereniging GetVerenigingById(string VerenigingId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Verenigingen/Nearby/{Latitude}/{Longitude}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud_Vereniging GetVerenigingNearby(string Latitude, string Longitude);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Vereniging/{VerenigingId}/Adressen", ResponseFormat = WebMessageFormat.Json)]
+        List<ClubCloud_Address> GetVerenigingAdressen(string VerenigingId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Vereniging/{VerenigingId}/Accommodatie", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud_Accommodatie GetVerenigingAccommodatie(string VerenigingId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Vereniging/{VerenigingId}/Accommodatie/Adressen", ResponseFormat = WebMessageFormat.Json)]
+        List<ClubCloud_Address> GetVerenigingAccommodatieAdressen(string VerenigingId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Vereniging/{VerenigingId}/Functionarissen", ResponseFormat = WebMessageFormat.Json)]
+        List<ClubCloud_Functionaris> GetVerenigingFunctionarissen(string VerenigingId);
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Vereniging/{VerenigingId}/Functionarissen/{FunctionarisId}", ResponseFormat = WebMessageFormat.Json)]
+        ClubCloud_Functionaris GetVerenigingFunctionaris(string VerenigingId, string FunctionarisId);
+
         [OperationContract]
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetVerenigingenBySearch/{prefixText}/{count}/{contextKey}", ResponseFormat = WebMessageFormat.Json)]
-        List<ClubCloud_Vereniging> GetVerenigingenBySearch(string prefixText, int count, string contextKey);
+        List<ClubCloud_Vereniging> GetVerenigingenBySearch(string prefixText, string count, string contextKey);
 
         [OperationContract]
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetGebruikersBySearch/{prefixText}/{count}/{contextKey}", ResponseFormat = WebMessageFormat.Json)]
-        List<ClubCloud_Gebruiker> GetGebruikersBySearch(string prefixText, int count, string contextKey);
+        List<ClubCloud_Gebruiker> GetGebruikersBySearch(string prefixText, string count, string contextKey);
+        
+        #endregion
 
         #endregion
 

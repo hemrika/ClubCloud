@@ -5,6 +5,7 @@
     using Microsoft.SharePoint;
     using Microsoft.SharePoint.Administration;
     using Microsoft.SharePoint.Client.Services;
+    using Microsoft.SharePoint.Utilities;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -127,78 +128,84 @@
         /// <param name="verenigingId"></param>
 		private void ValidateBondsnummer(ref string bondsnummer, Guid verenigingId)
 		{
-			string working = bondsnummer;
-
-			ClubCloud_Gebruiker gebruiker = null;
-			ClubCloud_Setting settings = null;
-
-            gebruiker = beheerModel.ClubCloud_Gebruikers.FirstOrDefault(g => g.Bondsnummer == working);
-
-			if (gebruiker != null)
-			{
-				settings = beheerModel.ClubCloud_Settings.Find(int.Parse(gebruiker.Bondsnummer));
-			}
-
-			if (settings != null)
-			{
-				if (!settings.Access && !string.IsNullOrEmpty(settings.Password))
-				{
-					gebruiker = null;
-				}
-			}
-			else
-			{
-				gebruiker = null;
-			}
-
-			if (gebruiker == null && verenigingId != Guid.Empty)
-			{
-				List<ClubCloud_Functionaris> functionarissen = new List<ClubCloud_Functionaris>();
-
-				functionarissen = beheerModel.ClubCloud_Functionarissen.Where(f => f.VerenigingId.Value == verenigingId && f.Autorisatie == true && (f.FunctieId == new Guid("516B73DD-61B8-4B5F-BD15-78232C2D071C") || f.FunctieId == new Guid("C91FB5B2-E6CB-4B34-B9DC-BEBDFD6D35C7"))).ToList();
-
-				if (functionarissen != null && functionarissen.Count > 0)
-				{
-					foreach (ClubCloud_Functionaris functionaris in functionarissen)
-					{
-						gebruiker = beheerModel.ClubCloud_Gebruikers.Find(functionaris.GebruikerId.Value);
-
-						settings = beheerModel.ClubCloud_Settings.Find(int.Parse(gebruiker.Bondsnummer));
-						if (settings != null)
-						{
-							if (settings.Access && !string.IsNullOrEmpty(settings.Password))
-							{
-								break;
-							}
-						}
-					}
-				}
-			}
-
-            if (gebruiker != null)
-			{
-				bondsnummer = gebruiker.Bondsnummer;
-			}
-			else
-			{
-/*
-#if DEBUG
-				bondsnummer = "12073385";
-#else
-				bondsnummer = string.Empty;
-#endif
-*/
-                if (bondsnummer != "0000000")
+            using (new SPMonitoredScope("ValidateBondsnummer"))
+            {
+                try
                 {
-                    if (settings == null)
-                    {
-                        settings = beheerModel.ClubCloud_Settings.Find(int.Parse(bondsnummer));
+                    Guid working_verenigingId = verenigingId;
+                    string working_bondsnummer = bondsnummer;                    
 
-                        if (!settings.Access && string.IsNullOrWhiteSpace(settings.Password))
-                            bondsnummer = string.Empty;
+                    ClubCloud_Gebruiker gebruiker = null;
+                    ClubCloud_Setting settings = null;
+
+                    gebruiker = beheerModel.ClubCloud_Gebruikers.FirstOrDefault(g => g.Bondsnummer == working_bondsnummer);
+
+                    if (gebruiker != null)
+                    {
+                        settings = beheerModel.ClubCloud_Settings.Find(int.Parse(gebruiker.Bondsnummer));
                     }
+
+                    if (settings != null)
+                    {
+                        if (!settings.Access && !string.IsNullOrEmpty(settings.Password))
+                        {
+                            gebruiker = null;
+                        }
+                    }
+                    else
+                    {
+                        gebruiker = null;
+                    }
+
+                    if (gebruiker == null && verenigingId != Guid.Empty)
+                    {
+                        List<ClubCloud_Functionaris> functionarissen = new List<ClubCloud_Functionaris>();
+
+                        functionarissen = beheerModel.ClubCloud_Functionarissen.Where(f => f.VerenigingId.Value == verenigingId && f.Autorisatie == true && (f.FunctieId == new Guid("516B73DD-61B8-4B5F-BD15-78232C2D071C") || f.FunctieId == new Guid("C91FB5B2-E6CB-4B34-B9DC-BEBDFD6D35C7"))).ToList();
+
+                        if (functionarissen != null && functionarissen.Count > 0)
+                        {
+                            foreach (ClubCloud_Functionaris functionaris in functionarissen)
+                            {
+                                gebruiker = beheerModel.ClubCloud_Gebruikers.Find(functionaris.GebruikerId.Value);
+
+                                settings = beheerModel.ClubCloud_Settings.Find(int.Parse(gebruiker.Bondsnummer));
+                                if (settings != null)
+                                {
+                                    if (settings.Access && !string.IsNullOrEmpty(settings.Password))
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (gebruiker != null)
+                    {
+                        bondsnummer = gebruiker.Bondsnummer;
+                    }
+                    /*
+                    else
+                    {
+                        if (working_bondsnummer != "0000000" || working_bondsnummer != "0")
+                        {
+                            if (settings == null)
+                            {
+                                settings = beheerModel.ClubCloud_Settings.Find(int.Parse(working_bondsnummer));
+
+                                if (!settings.Access && string.IsNullOrWhiteSpace(settings.Password))
+                                    bondsnummer = string.Empty;
+                            }
+                        }
+                    }
+                    */
                 }
-			}
+                catch (Exception ex)
+                {
+                    Logger.WriteLog(Logger.Category.Unexpected, ex.Source, ex.Message);
+                }
+            }
 		}
 
         /// <summary>
@@ -207,16 +214,18 @@
         /// <param name="settings"></param>
         private void ValidateSettings(ref ClubCloud_Setting settings)
         {
-            string working = settings.Id.ToString();
-            ValidateBondsnummer(ref working, settings.VerenigingId.Value);
+            //string working_Id = settings.Id.ToString();
+            //Guid working_VerenigingId = settings.VerenigingId.Value;
 
-            if (!string.IsNullOrWhiteSpace(working) && working != "0000000")
-            {
-                settings = beheerModel.ClubCloud_Settings.Find(int.Parse(working));
-            }
+            //ValidateBondsnummer(ref working_Id, working_VerenigingId);
 
-            try { beheerModel.ObjectContext.Detach(settings); }
-            catch { }
+            //if (!string.IsNullOrWhiteSpace(working_Id) && (working_Id != "0000000" || working_Id != "0"))
+            //{
+            //    settings = beheerModel.ClubCloud_Settings.Find(int.Parse(working_Id));
+            //}
+
+            //try { beheerModel.ObjectContext.Detach(settings); }
+            //catch { }
         }
 
 		#endregion

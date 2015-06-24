@@ -11,10 +11,18 @@
 <%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClubCloud_Gebruikers.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.ClubCloud_GebruikersUserControl" %>
+<asp:UpdateProgress ID="udp_Gebruikers_progress" runat="server" AssociatedUpdatePanelID="udp_Gebruikers" DisplayAfter="50">
+    <progresstemplate>
+        <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity=80); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; z-index: 10000;">
+        <div class="bubbles aligncenter" style="top:48%;">laden...</div>
+        </div>
+</progresstemplate>
+</asp:UpdateProgress>
+<!-- <asp:Timer runat="server" ID="tmr_loader_Gebruikers" OnTick="tmr_loader_Gebruikers_Tick" interval="500" /> -->
 <Common:ClubCloudDataSource ID="ClubCloud_Gebruiker_DataSource" runat="server" OnDataBinding="tmr_loader_Gebruikers_Tick" ViewName="ClubCloud_Gebruikers_View" />
-<asp:UpdatePanel ID="udp_Gebruikers" runat="server" UpdateMode="Always">
+<asp:UpdatePanel ID="udp_Gebruikers" runat="server" UpdateMode="Conditional" RenderMode="Block" ChildrenAsTriggers="true" >
     <contenttemplate>
-		<asp:Timer runat="server" ID="tmr_loader_Gebruikers" OnTick="tmr_loader_Gebruikers_Tick" interval="500" />
+		
 <SharePoint:MenuTemplate ID="GebruikerMenu" runat="server" LargeIconMode="true">
 	<SharePoint:MenuItemTemplate ID="Gebruiker_Details" runat="server" Text="Details van %Naam%" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Gebruiker.aspx?Id=%Id%', title:'Details van %Naam%', autoSize:true});" Title="Details van %Naam%"></SharePoint:MenuItemTemplate>
     <SharePoint:MenuItemTemplate ID="Functionarissen" runat="server" Text="Functionarissen" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'Functionarissen.aspx?GebruikerId=%Id%',title:'Functionarissen', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" Title="Functionarissen"></SharePoint:MenuItemTemplate>
@@ -40,7 +48,9 @@
     ShowHeader="true"
 	EnableViewState="false"
 	ViewStateMode="Disabled"
-	OnDataBinding="tmr_loader_Gebruikers_Tick" >
+	FilteredDataSourcePropertyFormat="{1} like '{0}'"
+    FilteredDataSourcePropertyName="FilterExpression"
+    FilteringIsCaseSensitive="false" >
     <HeaderStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <FooterStyle BackColor="#0072C6" BorderColor="#0072C6" ForeColor="White" Font-Bold="true" Font-Size="Large" />
     <RowStyle BorderColor="#0072C6" BorderStyle="Solid" BorderWidth="1px" />
@@ -332,14 +342,12 @@
         <asp:AsyncPostBackTrigger ControlID="tmr_loader_Gebruikers" EventName="Tick" />
     </triggers>
     </contenttemplate>
+    <triggers>
+        <asp:PostBackTrigger ControlID="spgvpager_top" />
+        <asp:PostBackTrigger ControlID="spgvpager_bottom" />
+        <asp:PostBackTrigger ControlID="Gebruikers_Grid" />
+    </triggers>
 </asp:UpdatePanel>
-<asp:UpdateProgress ID="udp_Gebruikers_progress" runat="server" AssociatedUpdatePanelID="udp_Gebruikers" DisplayAfter="50">
-    <progresstemplate>
-        <div class="progess" style="position: absolute; background-color: #F9F9F9; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity=80); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; z-index: 10000;">
-        <div class="bubbles aligncenter" style="top:48%;">laden...</div>
-        </div>
-</progresstemplate>
-</asp:UpdateProgress>
 
 
 
