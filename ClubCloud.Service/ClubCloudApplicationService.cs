@@ -214,18 +214,21 @@
         /// <param name="settings"></param>
         private void ValidateSettings(ref ClubCloud_Setting settings)
         {
-            //string working_Id = settings.Id.ToString();
-            //Guid working_VerenigingId = settings.VerenigingId.Value;
+            ClubCloud_Setting working_settings = (ClubCloud_Setting)settings.Clone();
+            string working_Id = working_settings.Id.ToString();
+            Guid working_VerenigingId = working_settings.VerenigingId.Value;
 
-            //ValidateBondsnummer(ref working_Id, working_VerenigingId);
+            ValidateBondsnummer(ref working_Id, working_VerenigingId);
 
-            //if (!string.IsNullOrWhiteSpace(working_Id) && (working_Id != "0000000" || working_Id != "0"))
-            //{
-            //    settings = beheerModel.ClubCloud_Settings.Find(int.Parse(working_Id));
-            //}
+            if (!string.IsNullOrWhiteSpace(working_Id) && (working_Id != "0000000" || working_Id != "0"))
+            {
+                working_settings = beheerModel.ClubCloud_Settings.Find(int.Parse(working_Id));
+                if (working_settings != null)
+                    settings = (ClubCloud_Setting)working_settings.Clone();
+            }
 
-            //try { beheerModel.ObjectContext.Detach(settings); }
-            //catch { }
+            try { beheerModel.ObjectContext.Detach(working_settings); }
+            catch { }
         }
 
 		#endregion
@@ -11518,7 +11521,8 @@
 
                     if (result != null)
                     {
-                        vereniging.ClubCloud_Accommodatie = result;
+                        result.ClubCloud_Vereniging.Add(vereniging);
+                        //vereniging.ClubCloud_Accommodatie = result;
                         beheerModel.SaveChanges();
                     }
                 }
@@ -11561,7 +11565,8 @@
 
                     foreach (ClubCloud_Address address in result)
                     {
-                        vereniging.ClubCloud_Address.Add(address);
+                        address.ClubCloud_Vereniging = vereniging;
+                        //vereniging.ClubCloud_Address.Add(address);
                     }
                     beheerModel.SaveChanges();
                 }

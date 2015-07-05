@@ -305,7 +305,7 @@ namespace ClubCloud.Model
     				//throw ex;
                 }
             }
-            while (!saved && s.Elapsed < TimeSpan.FromSeconds(30));
+            while (!saved && s.Elapsed < TimeSpan.FromSeconds(5));
             s.Stop();
             
     		this.ObjectContext.AcceptAllChanges();

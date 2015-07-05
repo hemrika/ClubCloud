@@ -180,6 +180,7 @@
     <Compile Include="ADMIN\ClubCloud.Service\Properties.aspx.designer.cs">
       <DependentUpon>Properties.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Attributes\AuthorizeAttributeExtension.cs" />
     <Compile Include="BaseServiceClient.cs" />
     <Compile Include="Attributes\AllowAnonymousAttribute.cs" />
     <Compile Include="ClubCloudApplicationService_Accommodatie.cs">

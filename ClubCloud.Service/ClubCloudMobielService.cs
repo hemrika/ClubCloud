@@ -27,6 +27,7 @@ namespace ClubCloud.Service
     using System.Runtime.Serialization;
     using ClubCloud.Service.Attributes;
     using Microsoft.SharePoint.Administration.Claims;
+    using Microsoft.IdentityModel.Claims;
 
     public enum LoginErrorCode
     {
@@ -73,37 +74,153 @@ namespace ClubCloud.Service
 
                 return ClubCloudMobielService.client;
             }
+            private set { client = value; }
+        }
+
+        private static SPFederationAuthenticationModule _FederationAuthenticationModule = null;
+
+        internal static SPFederationAuthenticationModule FederationAuthenticationModule
+        {
+            get
+            {
+                if (ClubCloudMobielService._FederationAuthenticationModule == null)
+                    ClubCloudMobielService._FederationAuthenticationModule = FederatedAuthentication.WSFederationAuthenticationModule as SPFederationAuthenticationModule;
+
+                return ClubCloudMobielService._FederationAuthenticationModule;
+            }
+            private set { _FederationAuthenticationModule = value; }
+        }
+
+        private static SPSessionAuthenticationModule _SessionAuthenticationModule = null;
+
+        internal static SPSessionAuthenticationModule SessionAuthenticationModule
+        {
+            get
+            {
+                if (ClubCloudMobielService._SessionAuthenticationModule == null)
+                    ClubCloudMobielService._SessionAuthenticationModule = FederatedAuthentication.SessionAuthenticationModule as SPSessionAuthenticationModule;
+
+                return ClubCloudMobielService._SessionAuthenticationModule;
+            }
+            private set { _SessionAuthenticationModule = value; }
+        }
+
+        /*
+        private static SPClaimsAuthenticationManager _ClaimsAuthenticationManager = null;
+
+        public static SPClaimsAuthenticationManager ClaimsAuthenticationManager
+        {
+            get
+            {
+                if (ClubCloudMobielService._ClaimsAuthenticationManager == null)
+                    _ClaimsAuthenticationManager = FederatedAuthentication.ClaimsPrincipalHttpModule.AuthenticationManager as SPClaimsAuthenticationManager;
+
+                return ClubCloudMobielService._ClaimsAuthenticationManager;
+            }
+            private set { _ClaimsAuthenticationManager = value; }
+        }
+        */
+
+        public static bool Authorized
+        {
+            get
+            {
+                bool result = false;
+
+                if (HttpContext.Current != null && HttpContext.Current.User != null && HttpContext.Current.User.Identity != null && HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    result = true;
+                }
+                else
+                {
+                    IClaimsPrincipal principal = null;
+                    string FedAuth_header = HttpContext.Current.Request.Headers.Get("FedAuth");                    
+
+                    if (!string.IsNullOrWhiteSpace(FedAuth_header))
+                    {
+                        byte[] FedAuth_bytes = System.Convert.FromBase64String(FedAuth_header);
+                        Microsoft.IdentityModel.Tokens.SessionSecurityToken sstoken = SessionAuthenticationModule.ReadSessionTokenFromCookie(FedAuth_bytes);
+
+                        principal = sstoken.ClaimsPrincipal;
+
+                        if (sstoken.ClaimsPrincipal.Identity.IsAuthenticated)
+                            FederationAuthenticationModule.SetPrincipalAndWriteSessionToken(sstoken, false);
+                        else
+                            SessionAuthenticationModule.AuthenticateSessionSecurityToken(sstoken, true);
+                            //principal = ClaimsAuthenticationManager.Authenticate(string.Empty, sstoken.ClaimsPrincipal); FederationAuthenticationModule.SetPrincipalAndWriteSessionToken(sstoken, false);
+
+                        
+                    }
+
+                    if(principal != null)
+                        result = principal.Identity.IsAuthenticated;
+                    /*
+                    if (principal != null)
+                    {
+                        IClaimsIdentity claimsIdentity = (IClaimsIdentity)principal.Identity;
+
+                        foreach (Claim claim in claimsIdentity.Claims)
+                        {
+                            string ClaimType = claim.ClaimType;
+                            string Value = claim.Value;
+                        }
+                    }
+                    */
+                }
+
+                if (!result)
+                    HttpContext.Current.Items.Add("Send401ForceAuthenticationContextItemKey", true);
+
+                    //HttpContext.Current.Items.Add("Send401ForceAuthenticationContextItemKey", true);
+                    //WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.Unauthorized; FederationAuthenticationModule.PassiveRedirectEnabled = false; HttpContext.Current.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+
+
+                return result;
+            }
+        }
+
+        public static bool Forbidden
+        {
+            get
+            {
+                WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.Forbidden;
+                HttpContext.Current.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
+                return true;
+            }
+        }
+        public static bool InternalServerError
+        {
+            get
+            {
+                WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
+                HttpContext.Current.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
+                return true;
+            }
         }
 
         #region Security
 
         public LoginResult Login(string username, string password)
         {
-            SPFederationAuthenticationModule federationAuthenticationModule = FederatedAuthentication.WSFederationAuthenticationModule as SPFederationAuthenticationModule;
-
-            SPSessionAuthenticationModule sessionAuthenticationModule = FederatedAuthentication.SessionAuthenticationModule as SPSessionAuthenticationModule;
-            sessionAuthenticationModule.CookieHandler.HideFromClientScript = false;
-
-            TimeSpan formsAuthenticationTimeout = TimeSpan.FromMinutes(30);
             try
             {
-                if (AuthenticationMode.Forms != SPSecurity.AuthenticationMode || sessionAuthenticationModule == null)
+                if (AuthenticationMode.Forms != SPSecurity.AuthenticationMode || SessionAuthenticationModule == null)
                 {
-                    //result.ErrorCode = LoginErrorCode.NotInFormsAuthenticationMode;
                     return new LoginResult { ErrorCode = LoginErrorCode.NotInFormsAuthenticationMode, Message = "NotInFormsAuthenticationMode" };
                 }
                 if (!SPClaimsUtility.AuthenticateFormsUser(SPAlternateUrl.ContextUri, username, password))
                 {
-                    //result.ErrorCode = LoginErrorCode.PasswordNotMatch;
                     return new LoginResult { ErrorCode = LoginErrorCode.PasswordNotMatch, Message = "PasswordNotMatch" };
                 }
 
                 return new LoginResult
                 {
                     ErrorCode = LoginErrorCode.NoError,
-                    CookieName = sessionAuthenticationModule.CookieHandler.Name,
-                    TimeoutSeconds = sessionAuthenticationModule.CookieHandler.PersistentSessionLifetime.Value.Seconds,
-                    FedAuth = HttpContext.Current.Response.Cookies.Get(sessionAuthenticationModule.CookieHandler.Name).Value
+                    CookieName = SessionAuthenticationModule.CookieHandler.Name,
+                    TimeoutSeconds = SessionAuthenticationModule.CookieHandler.PersistentSessionLifetime.Value.Seconds,
+                    FedAuth = HttpContext.Current.Response.Cookies.Get(SessionAuthenticationModule.CookieHandler.Name).Value
                 };
             }
             catch (Exception ex)
@@ -117,17 +234,16 @@ namespace ClubCloud.Service
             }
         }
 
-        public AuthenticationMode LoginMode()
+        public void Logout()
         {
-            return SPSecurity.AuthenticationMode;
+            FederationAuthenticationModule.SignOut(true);
+            SessionAuthenticationModule.SignOut();            
         }
-
 
         #endregion
 
         #region Gebruiker
 
-        [Authorize(Roles="Voorzitter")]
         public ClubCloud_Gebruiker GetGebruiker()
         {
             ClubCloud_Gebruiker gebruiker = new ClubCloud_Gebruiker();
@@ -309,7 +425,9 @@ namespace ClubCloud.Service
             List<ClubCloud_Address> result = new List<ClubCloud_Address>();
 
             int parsed;
-            if (HttpContext.Current != null && HttpContext.Current.User != null && HttpContext.Current.User.Identity != null && HttpContext.Current.User.Identity.IsAuthenticated)
+            
+            //if (HttpContext.Current != null && HttpContext.Current.User != null && HttpContext.Current.User.Identity != null && HttpContext.Current.User.Identity.IsAuthenticated)
+            if (Authorized)
             {
                 string bondsnummer = HttpContext.Current.User.Identity.Name.Split('|').Last();
                 if (int.TryParse(bondsnummer, out parsed))
@@ -323,19 +441,23 @@ namespace ClubCloud.Service
                     }
                     catch (Exception ex)
                     {
-                        throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
+                        WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
+                        //throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
                     }
                 }
                 else
                 {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.Forbidden;
                     throw new WebFaultException(HttpStatusCode.Forbidden);
                 }
             }
+            /*
             else
             {
-                throw new WebFaultException(HttpStatusCode.Unauthorized);
+                WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.Unauthorized;
+                //throw new WebFaultException(HttpStatusCode.Unauthorized);
             }
-
+            */
 
             return result;
         }
@@ -1491,7 +1613,8 @@ namespace ClubCloud.Service
             List<ClubCloud_Vereniging> result = new List<ClubCloud_Vereniging>();
             try
             {
-                result = Client.GetVerenigingenBySearch(query, 5, query);
+                //if(Authorized)
+                    result = Client.GetVerenigingenBySearch(query, 5, query);
             }
             catch (Exception ex)
             {

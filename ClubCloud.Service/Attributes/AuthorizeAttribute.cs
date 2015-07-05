@@ -14,7 +14,7 @@ namespace ClubCloud.Service.Attributes
         void OnAuthorization(HttpContext filterContext);
     }
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
     public class AuthorizeAttribute : FilterAttribute, IAuthorizationFilter
     {
         private readonly object _typeId = new object();

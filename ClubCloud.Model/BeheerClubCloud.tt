@@ -207,6 +207,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 			return false;
 		}
 	}
+
+	public object Clone()
+    {
+        return (this.MemberwiseClone());
+    }
 }
 
 <#
@@ -544,7 +549,7 @@ public class CodeStringGenerator
 		Accessibility.ForType(entity),
 		_code.SpaceAfter(_code.AbstractOption(entity)),
 		_code.Escape(entity),
-		_code.StringBefore(" : ", string.IsNullOrEmpty(_typeMapper.GetTypeName(entity.BaseType)) ? "INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo" : _typeMapper.GetTypeName(entity.BaseType)));
+		_code.StringBefore(" : ", string.IsNullOrEmpty(_typeMapper.GetTypeName(entity.BaseType)) ? "INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo, ICloneable" : _typeMapper.GetTypeName(entity.BaseType)));
 		
 //        return string.Format(
 //            CultureInfo.InvariantCulture,

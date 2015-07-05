@@ -7,6 +7,7 @@ namespace ClubCloud.Service
 {
 
     using ClubCloud.Model;
+    using ClubCloud.Service.Attributes;
     using Microsoft.SharePoint;
     using System;
     using System.Collections.Generic;
@@ -174,8 +175,8 @@ namespace ClubCloud.Service
         LoginResult Login(string username, string password);
 
         [OperationContract]
-        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "LoginMode", ResponseFormat = WebMessageFormat.Json)]
-        System.Web.Configuration.AuthenticationMode LoginMode();
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Logout", ResponseFormat = WebMessageFormat.Json)]
+        void Logout();
 
         [OperationContract]
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetReserveringen", ResponseFormat = WebMessageFormat.Json)]
