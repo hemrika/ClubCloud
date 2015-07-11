@@ -383,7 +383,7 @@
     <Property Name="RegioId" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Actief" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="ClubCloud_Functies">
+  <EntityType Name="ClubCloud_Functies" >
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -2105,17 +2105,41 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="Naam" Type="String" Nullable="false" />
-          <Property Name="Nummer" Type="Int32" Nullable="false" />
+          <Property Name="Naam" Type="String" Nullable="false" >
+          </Property>
+          <Property Name="Nummer" Type="Int32" Nullable="false" >
+            <Documentation>
+              <Summary>[grid]</Summary>
+            </Documentation>
+          </Property>
           <NavigationProperty Name="ClubCloud_Reservering" Relationship="BeheerClubCloud.ClubCloud_Reservering_Baan" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Reservering" />
-          <Property Name="BaanblokId" Type="Guid" Nullable="true" />
-          <Property Name="AccommodatieId" Type="Guid" Nullable="true" />
-          <Property Name="Status" Type="String" Nullable="false" />
-          <Property Name="Keuring" Type="DateTime" Nullable="true" />
-          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" />
-          <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_Baan_Baanblok" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Baanblok" />
+          <Property Name="BaanblokId" Type="Guid" Nullable="true" >
+          </Property>
+          <Property Name="AccommodatieId" Type="Guid" Nullable="true" >
+          </Property>
+          <Property Name="Status" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>[grid]</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Keuring" Type="DateTime" Nullable="true" >
+          </Property>
+          <Property Name="Actief" Type="BeheerClubCloud.ActiefSoort" Nullable="false" >
+            <Documentation>
+              <Summary>[grid]</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="ClubCloud_Baanblok" Relationship="BeheerClubCloud.ClubCloud_Baan_Baanblok" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Baanblok" >
+            <Documentation>
+              <Summary>[grid]</Summary>
+            </Documentation>
+          </NavigationProperty>
           <NavigationProperty Name="ClubCloud_Accommodatie" Relationship="BeheerClubCloud.ClubCloud_Baan_Accommodatie" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Accommodatie" />
-          <NavigationProperty Name="ClubCloud_Baanschema" Relationship="BeheerClubCloud.ClubCloud_Baanschema_Baan" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Baanschema" />
+          <NavigationProperty Name="ClubCloud_Baanschema" Relationship="BeheerClubCloud.ClubCloud_Baanschema_Baan" FromRole="ClubCloud_Baan" ToRole="ClubCloud_Baanschema" >
+            <Documentation>
+              <Summary>[grid]</Summary>
+            </Documentation>
+          </NavigationProperty>
         </EntityType>
         <EntityType Name="ClubCloud_Bouwaard">
           <Key>
@@ -2133,7 +2157,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+          </Property>
           <Property Name="Naam" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Baansoort" Type="BeheerClubCloud.BaanSoort" Nullable="false" />
           <Property Name="AccommodatieId" Type="Guid" Nullable="true" />

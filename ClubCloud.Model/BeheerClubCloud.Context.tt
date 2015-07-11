@@ -85,7 +85,7 @@ using System.Linq;
 		}
 		#>
 
-		this.Configuration.AutoDetectChangesEnabled = false;
+		this.Configuration.AutoDetectChangesEnabled = true;
 		this.Configuration.UseDatabaseNullSemantics = false;
 		this.Configuration.ValidateOnSaveEnabled = true;
 
@@ -143,7 +143,7 @@ using System.Linq;
 		}
 		#>
 
-		this.Configuration.AutoDetectChangesEnabled = false;
+		this.Configuration.AutoDetectChangesEnabled = true;
 		this.Configuration.UseDatabaseNullSemantics = false;
 		this.Configuration.ValidateOnSaveEnabled = true;
 
@@ -384,7 +384,7 @@ using System.Linq;
 				//throw ex;
             }
         }
-        while (!saved && s.Elapsed < TimeSpan.FromSeconds(30));
+        while (!saved && s.Elapsed < TimeSpan.FromSeconds(1));
         s.Stop();
         
 		this.ObjectContext.AcceptAllChanges();

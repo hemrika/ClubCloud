@@ -39,7 +39,7 @@ namespace ClubCloud.Model
     		this.Configuration.LazyLoadingEnabled = false;
     
     		
-    		this.Configuration.AutoDetectChangesEnabled = false;
+    		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = true;
     
@@ -77,7 +77,7 @@ namespace ClubCloud.Model
     		this.Configuration.LazyLoadingEnabled = false;
     
     		
-    		this.Configuration.AutoDetectChangesEnabled = false;
+    		this.Configuration.AutoDetectChangesEnabled = true;
     		this.Configuration.UseDatabaseNullSemantics = false;
     		this.Configuration.ValidateOnSaveEnabled = true;
     
@@ -305,7 +305,7 @@ namespace ClubCloud.Model
     				//throw ex;
                 }
             }
-            while (!saved && s.Elapsed < TimeSpan.FromSeconds(5));
+            while (!saved && s.Elapsed < TimeSpan.FromSeconds(1));
             s.Stop();
             
     		this.ObjectContext.AcceptAllChanges();
