@@ -7,38 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClubCloud.Administratie.WebControls {
+namespace ClubCloud.Administratie.WebControls
+{
+    public partial class ClubCloud_GebruikersUserControl 
+    {
     
-    
-    public partial class ClubCloud_GebruikersUserControl {
-        
-        /// <summary>
-        /// udp_Gebruikers_progress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress udp_Gebruikers_progress;
-        
-        /// <summary>
-        /// tmr_loader_Gebruikers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.Timer tmr_loader_Gebruikers;
-        
-        /// <summary>
-        /// ClubCloud_Gebruiker_DataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Gebruiker_DataSource;
-        
         /// <summary>
         /// udp_Gebruikers control.
         /// </summary>
@@ -47,7 +20,34 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel udp_Gebruikers;
-        
+    
+    	/// <summary>
+    	/// tmr_loader_Gebruikers control.
+    	/// </summary>
+    	/// <remarks>
+    	/// Auto-generated field.
+    	/// To modify move field declaration from designer file to code-behind file.
+    	/// </remarks>
+    	protected global::System.Web.UI.Timer tmr_loader_Gebruikers;
+            
+    	/// <summary>
+    	/// pnl_Gebruikers control.
+    	/// </summary>
+    	/// <remarks>
+    	/// Auto-generated field.
+    	/// To modify move field declaration from designer file to code-behind file.
+    	/// </remarks>
+    	protected global::System.Web.UI.WebControls.Panel pnl_Gebruikers;
+    
+    	/// <summary>
+    	/// udp_Gebruikers_progress control.
+    	/// </summary>
+    	/// <remarks>
+    	/// Auto-generated field.
+    	/// To modify move field declaration from designer file to code-behind file.
+    	/// </remarks>
+    	protected global::System.Web.UI.UpdateProgress udp_Gebruikers_progress;
+    
         /// <summary>
         /// GebruikerMenu control.
         /// </summary>
@@ -56,8 +56,8 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuTemplate GebruikerMenu;
-        
-        /// <summary>
+    
+    	/// <summary>
         /// Gebruiker_Details control.
         /// </summary>
         /// <remarks>
@@ -65,7 +65,7 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Gebruiker_Details;
-        
+    
         /// <summary>
         /// Functionarissen control.
         /// </summary>
@@ -74,7 +74,7 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Functionarissen;
-        
+    
         /// <summary>
         /// Lidmaatschappen control.
         /// </summary>
@@ -83,7 +83,7 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Lidmaatschappen;
-        
+    
         /// <summary>
         /// Addressen control.
         /// </summary>
@@ -92,7 +92,7 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Addressen;
-        
+    
         /// <summary>
         /// Profielen control.
         /// </summary>
@@ -101,16 +101,16 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.MenuItemTemplate Profielen;
-        
+    
         /// <summary>
-        /// pnl_Gebruikers control.
+        /// ClubCloud_Gebruiker_DataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_Gebruikers;
-        
+    	protected global::ClubCloud.Common.Controls.ClubCloudDataSource ClubCloud_Gebruiker_DataSource;
+    
         /// <summary>
         /// spgvpager_top control.
         /// </summary>
@@ -119,16 +119,16 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_top;
-        
+    
         /// <summary>
-        /// Gebruikers_Grid control.
+        /// ClubCloud_Gebruikers_Grid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.SPGridView Gebruikers_Grid;
-        
+    
         /// <summary>
         /// spgvpager_bottom control.
         /// </summary>
@@ -137,7 +137,7 @@ namespace ClubCloud.Administratie.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.SPGridViewPager spgvpager_bottom;
-        
+            
         /// <summary>
         /// lblMessage control.
         /// </summary>
@@ -148,3 +148,4 @@ namespace ClubCloud.Administratie.WebControls {
         protected global::System.Web.UI.WebControls.Label lblMessage;
     }
 }
+

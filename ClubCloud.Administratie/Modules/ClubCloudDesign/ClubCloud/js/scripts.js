@@ -1,3 +1,14 @@
+
+function AutosizeDialog() {
+    //resize dialog if we are in one
+    var dlg = typeof (SP.UI.ModalDialog.get_childDialog) == "function" ? SP.UI.ModalDialog.get_childDialog() : null;
+    if (dlg != null) {
+        dlg.autoSize();
+        var dlgWin = $(".ms-dlgContent", window.parent.document);
+        dlgWin.css({ top: ($(window.top).height() / 2 - dlgWin.height() / 2) + "px", left: $(window.top).width() / 2 - dlgWin.width() / 2 });
+    }
+}
+
 /*-----------------------------------------------------------------------------------*/
 /*	RETINA.JS
 /*-----------------------------------------------------------------------------------*/

@@ -39,42 +39,14 @@ var navigationProperties = typeMapper.GetNavigationProperties(entity);
 <%@ Register TagPrefix="Administratie" Namespace="ClubCloud.Administratie.WebControls" Assembly="ClubCloud.Administratie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" %>
 <%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
-<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
+<%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=15.1.1.100, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <%@ Register TagPrefix="ClubCloud" Assembly="ClubCloud.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e" Namespace="ClubCloud.Common.Controls"  %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="<#=code.Escape(entitySet)#>.ascx.cs" Inherits="ClubCloud.Administratie.WebControls.<#=code.Escape(entitySet)#>UserControl" %>
 <Common:ClubCloudDataSource ID="<#=code.Escape(entity)#>_DataSource" runat="server" OnDataBinding="tmr_loader_<#=code.Escape(entitySetName)#>_Tick" ViewName="<#=code.Escape(entitySet)#>_View" />
 <asp:UpdatePanel ID="udp_<#=code.Escape(entitySetName)#>" runat="server" UpdateMode="Always">
     <contenttemplate>
 		<asp:Timer runat="server" ID="tmr_loader_<#=code.Escape(entitySetName)#>" OnTick="tmr_loader_<#=code.Escape(entitySetName)#>_Tick" interval="500" />
-<#
-    if (navigationProperties.Any())
-    {
-#>
-<SharePoint:MenuTemplate ID="<#=code.Escape(entityName)#>Menu" runat="server" LargeIconMode="true">
-	<SharePoint:MenuItemTemplate ID="<#=code.Escape(entityName)#>_Details" runat="server" Text="Details van %Naam%" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id=%Id%', title:'Details van %Naam%', autoSize:true});" Title="Details van %Naam%"></SharePoint:MenuItemTemplate>
-<#
-        foreach (var navigationProperty in navigationProperties)
-        {
-
-			var endEntity = navigationProperty.ToEndMember.GetEntityType();
-			var endentityName = endEntity.Name.Split('_').Last();
-			var endEntitySet = typeMapper.GetEntitySet(container, endEntity);
-			var endentitySetName = endEntitySet.Name.Split('_').Last();			
-
-			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
-            {
-				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
-#>
-    <SharePoint:MenuItemTemplate ID="<#=code.Escape(endentitySetName)#>" runat="server" Text="<#=code.Escape(endentitySetName)#>" ImageUrl="/_layouts/15/images/ClubCloud.Administratie/Contact/Contact_32.png" ClientOnClickScript="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endentitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=%Id%',title:'<#=code.Escape(endentitySetName)#>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" Title="<#=code.Escape(endentitySetName)#>"></SharePoint:MenuItemTemplate>
-<#
-            }
-        }
-#>
-</SharePoint:MenuTemplate>
-<#
-    }
-#>
-<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>_Insert.aspx', title:'Toevoegen <#=code.Escape(entityName)#>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="Toevoegen" >Toevoegen <#=code.Escape(entityName)#></a>
+<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>_Insert.aspx', title:'Toevoegen <#=code.Escape(entityName)#>', autoSize:false, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="Toevoegen" >Toevoegen <#=code.Escape(entityName)#></a>
 <br/>
 <asp:panel runat="server" ID="pnl_<#=code.Escape(entitySetName)#>" >
 <SharePoint:SPGridViewPager ID="spgvpager_top" GridViewId="<#=code.Escape(entitySetName)#>_Grid" runat="server" />
@@ -117,7 +89,9 @@ if(entitySetName == "Functionarissen")
     {
 	    foreach (var edmProperty in simpleProperties)
         {
-
+			if(edmProperty.Documentation != null && !edmProperty.Documentation.Summary.Contains("[grid]"))
+				continue;
+				
 			if(entitySetName == "Functionarissen")
 			{
 #>
@@ -126,7 +100,7 @@ if(entitySetName == "Functionarissen")
 			    <asp:LinkButton ForeColor="White" ID="<#=code.Escape(edmProperty.Name)#>_Sort" runat="server" Text="Naam" CommandName="Sort" CommandArgument="<#=code.Escape(edmProperty.Name)#>"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" name="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" name="<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>', autoSize:false, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("ClubCloud_Gebruiker_Volledigenaam") %>
                 </a>
 			</ItemTemplate>
@@ -143,7 +117,7 @@ if(entitySetName == "Functionarissen")
 			    <asp:LinkButton ForeColor="White" ID="<#=code.Escape(edmProperty.Name)#>_Sort" runat="server" Text="Bondsnummer" CommandName="Sort" CommandArgument="Bondsnummer"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("Volledigenaam") %>" name="<%# Eval("Volledigenaam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Volledigenaam") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("Volledigenaam") %>" name="<%# Eval("Volledigenaam") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Volledigenaam") %>', autoSize:false, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("Bondsnummer") %>
                 </a>
 			</ItemTemplate>
@@ -160,7 +134,7 @@ if(entitySetName == "Functionarissen")
 			    <asp:LinkButton ForeColor="White" ID="<#=code.Escape(edmProperty.Name)#>_Sort" runat="server" Text="<#=code.Escape(edmProperty.Name)#>" CommandName="Sort" CommandArgument="<#=code.Escape(edmProperty.Name)#>"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" name="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" name="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>', autoSize:false, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("<#=code.Escape(edmProperty.Name)#>") %>
                 </a>
 			</ItemTemplate>
@@ -177,7 +151,7 @@ if(entitySetName == "Functionarissen")
 			    <asp:LinkButton ForeColor="White" ID="<#=code.Escape(edmProperty.Name)#>_Sort" runat="server" Text="<#=code.Escape(edmProperty.Name)#>" CommandName="Sort" CommandArgument="<#=code.Escape(edmProperty.Name)#>"></asp:LinkButton>
 			</HeaderTemplate>
 			<ItemTemplate>
-                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" name="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Id") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
+                <a id="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" title="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" name="<%# Eval("<#=code.Escape(edmProperty.Name)#>") %>" onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(entityName)#>.aspx?Id='+'<%# Eval("Id") %>', title:'Details van '+'<%# Eval("Id") %>', autoSize:false, dialogReturnValueCallback:RefreshOnDialogClose});" style="white-space:nowrap;" href="#" >
                     <%# Eval("<#=code.Escape(edmProperty.Name)#>") %>
                 </a>
 			</ItemTemplate>
@@ -193,19 +167,24 @@ if(entitySetName == "Functionarissen")
     {
         foreach (var edmProperty in simpleProperties)
         {
+			if(primarykey.Name ==  edmProperty.Name) continue;
+			if(edmProperty.Documentation == null) continue;
 
-			if(edmProperty.Name == "Naam" || edmProperty.Name == "Nummer" || edmProperty.Name == "Bondsnummer" || typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.Guid" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.Guid>") continue;
-#>
-        <SharePoint:SPBoundField
-            DataField="<#=code.Escape(edmProperty)#>"
-            HeaderText="<#=code.Escape(edmProperty)#>"
-            SortExpression="<#=code.Escape(edmProperty)#>"
-            ItemStyle-Width="40px">
-        </SharePoint:SPBoundField>
+			if(edmProperty.Documentation != null && !edmProperty.Documentation.Summary.Contains("[grid]")) continue;
+
+			//if(edmProperty.Name == "Naam" || edmProperty.Name == "Nummer" || edmProperty.Name == "Bondsnummer" || typeMapper.GetTypeName(edmProperty.TypeUsage) == "System.Guid" || typeMapper.GetTypeName(edmProperty.TypeUsage) ==  "Nullable<System.Guid>") continue;
+#>		
+		<SharePoint:SPBoundField
+			DataField="<#=code.Escape(edmProperty)#>"
+			HeaderText="<#=code.Escape(edmProperty)#>"
+			SortExpression="<#=code.Escape(edmProperty)#>"
+			ItemStyle-Width="40px">
+		</SharePoint:SPBoundField>
 <#
         }
     }
 #>    
+
 <#
     if (navigationProperties.Any())
     {
@@ -216,6 +195,9 @@ if(entitySetName == "Functionarissen")
 
         foreach (var navigationProperty in navigationProperties)
         {
+			if(navigationProperty.Documentation == null) continue;
+
+			if(navigationProperty.Documentation != null && !navigationProperty.Documentation.Summary.Contains("[grid]")) continue;
 
 			var endEntity = navigationProperty.ToEndMember.GetEntityType();
 			var endentityName = endEntity.Name.Split('_').Last();
@@ -224,8 +206,9 @@ if(entitySetName == "Functionarissen")
 
 			if(navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
             {
-				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
+				//if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties"|| endentitySetName == "Gebruikers"  || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 #>
+		
 		<asp:TemplateField HeaderText="<#=code.Escape(endentitySetName)#>" SortExpression="<#=code.Escape(endentityName)#>Id">
 			<ItemTemplate>
 				<asp:Label ID="<#=code.Escape(navigationProperty.Name)#>" runat="server" Text='<%# Bind("<#=code.Escape(navigationProperty.Name)#>.Count") %>'></asp:Label>
@@ -236,7 +219,7 @@ if(entitySetName == "Functionarissen")
 
 			if(navigationProperty.ToEndMember.RelationshipMultiplicity != RelationshipMultiplicity.Many)
             {
-				if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties" || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
+				//if(endentitySetName == "Verenigingen"|| endentitySetName == "Accommodaties" || endentitySetName == "Reserveringen" || endentitySetName == "Settings" ) continue;
 #>
 		<asp:TemplateField HeaderText="<#=code.Escape(endentityName)#>" SortExpression="<#=code.Escape(endentityName)#>Id">
 			<ItemTemplate>
@@ -258,7 +241,7 @@ if(entitySetName == "Functionarissen")
 		</asp:TemplateField>
 <#
             }
-        }
+			}
         }
     }
 #>
@@ -274,7 +257,7 @@ if(entitySetName == "Functionarissen")
     <asp:Label runat="server" ID="lblMessage" ForeColor="Red" />
 </p>
     <triggers>
-        <asp:AsyncPostBackTrigger ControlID="tmr_loader_<#=code.Escape(entitySetName)#>" EventName="Tick" />
+        <asp:AsyncPostBackTrigger ControlID="tmr_loader_<#=code.Escape(entitySetName)#>" EventName="Tick" ></asp:AsyncPostBackTrigger>
     </triggers>
     </contenttemplate>
 </asp:UpdatePanel>
@@ -663,13 +646,13 @@ fileManager.StartNewFile(entity.Name+".ascx");
 				{
 
 #>
-		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endentitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=<%# Eval("<#=code.Escape(primarykey.Name)#>") %>', title:'<#=code.Escape(endentitySetName)#> van <%# Eval("<#=code.Escape("Naam")#>") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="<#=code.Escape(endentitySetName)#>" ><#=code.Escape(endentitySetName)#></a>
+		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endentitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=<%# Eval("<#=code.Escape(primarykey.Name)#>") %>', title:'<#=code.Escape(endentitySetName)#> van <%# Eval("<#=code.Escape("Naam")#>") %>', autoSize:false, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="<#=code.Escape(endentitySetName)#>" ><#=code.Escape(endentitySetName)#></a>
 <#
 				}
 				else
 				{
 #>
-		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endentitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=<%# Eval("<#=code.Escape(primarykey.Name)#>") %>', title:'<#=code.Escape(endentitySetName)#> van <%# Eval("<#=code.Escape("Volledigenaam")#>") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="<#=code.Escape(endentitySetName)#>" ><#=code.Escape(endentitySetName)#></a>
+		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'<#=code.Escape(endentitySetName)#>.aspx?<#=code.Escape(entityName)#>Id=<%# Eval("<#=code.Escape(primarykey.Name)#>") %>', title:'<#=code.Escape(endentitySetName)#> van <%# Eval("<#=code.Escape("Volledigenaam")#>") %>', autoSize:false, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="<#=code.Escape(endentitySetName)#>" ><#=code.Escape(endentitySetName)#></a>
 <#
 				}
 			}

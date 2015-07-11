@@ -1276,7 +1276,8 @@
 
                     foreach (ClubCloud_Baan baan in result)
                     {
-                        accommodatie.ClubCloud_Baan.Add(baan);
+                        baan.ClubCloud_Accommodatie = accommodatie;
+                        //accommodatie.ClubCloud_Baan.Add(baan);
                     }
                     beheerModel.SaveChanges();
                 }
@@ -1378,7 +1379,8 @@
                                     foreach (sgt_alg_baan baan in entities)
                                     {
                                         ClubCloud_Baan entity = beheerModel.ClubCloud_Banen.Find(baan.sgt_alg_baanid.Value);
-                                        accommodatie.ClubCloud_Baan.Add(entity);
+                                        entity.ClubCloud_Accommodatie = accommodatie;
+                                        //accommodatie.ClubCloud_Baan.Add(entity);
                                     }
 
                                     beheerModel.SaveChanges();
@@ -11565,8 +11567,8 @@
 
                     foreach (ClubCloud_Address address in result)
                     {
-                        address.ClubCloud_Vereniging = vereniging;
-                        //vereniging.ClubCloud_Address.Add(address);
+                        //address.ClubCloud_Vereniging = vereniging;
+                        vereniging.ClubCloud_Address.Add(address);
                     }
                     beheerModel.SaveChanges();
                 }

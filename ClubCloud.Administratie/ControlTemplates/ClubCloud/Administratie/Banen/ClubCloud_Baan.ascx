@@ -26,7 +26,7 @@
 	<span style="display:inline-block;" >
 		<asp:LinkButton CssClass="button big"  ID="btn_goback_top" runat="server" Text="Terug naar Banen" CausesValidation="false" OnClientClick="javascript:SP.UI.ModalDialog.commonModalDialogClose(SP.UI.DialogResult.OK, null);" SkinID="Button"/>
         <asp:LinkButton CssClass="button big"  ID="btn_edit_top" runat="server" Text="Bewerken" CausesValidation="false" OnClick="GoEdit" OnCommand="GoEdit" CommandArgument='<%# Eval("Id") %>'/></br>
-		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baanschemas.aspx?BaanId=<%# Eval("Id") %>', title:'Baanschemas van <%# Eval("Naam") %>', autoSize:true, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="Baanschemas" >Baanschemas</a>
+		<a class="button big"  onclick="javascript:SP.UI.ModalDialog.showModalDialog({url:'Baanschemas.aspx?BaanId=<%# Eval("Id") %>', title:'Baanschemas van <%# Eval("Naam") %>', autoSize:false, dialogReturnValueCallback:RefreshOnDialogClose});" href="#" target="_self" title="Baanschemas" >Baanschemas</a>
 	</span>
     </HeaderTemplate>
     <FooterTemplate>
