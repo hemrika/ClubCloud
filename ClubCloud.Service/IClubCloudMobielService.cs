@@ -182,6 +182,7 @@ namespace ClubCloud.Service
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetReserveringen", ResponseFormat = WebMessageFormat.Json)]
         List<ClubCloud_Reservering> GetReserveringen();
 
+        #endregion
         #region ClubCloud Verenigingen
 
         [OperationContract]
@@ -224,6 +225,8 @@ namespace ClubCloud.Service
         List<ClubCloud_Gebruiker> GetGebruikersBySearch(string prefixText, string count, string contextKey);
         
         #endregion
+
+        #region ClubCloud Afhangen
 
         #endregion
 
