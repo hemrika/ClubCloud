@@ -59,15 +59,199 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\ClubCloud_Afhangen_WebSite_Modules\ClubCloud_Afhangen_WebSite_Modules.feature">
+      <FeatureId>{f140a81b-d59b-41df-b88e-1ebb28d996c8}</FeatureId>
+    </None>
+    <None Include="Modules\Css\bootstrap-theme.css.map" />
+    <None Include="Modules\Css\bootstrap-theme.min.css.map" />
+    <None Include="Modules\Css\bootstrap.css.map" />
+    <None Include="Modules\Css\bootstrap.min.css.map" />
+    <None Include="Modules\Css\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{71af9c5d-1a48-460c-bba9-3f0b9ca380ba}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Fonts\fontawesome-webfont.eot" />
+    <None Include="Modules\Fonts\fontawesome-webfont.ttf" />
+    <None Include="Modules\Fonts\fontawesome-webfont.woff" />
+    <None Include="Modules\Fonts\fontawesome-webfont.woff2" />
+    <None Include="Modules\Fonts\FontAwesome.otf" />
+    <None Include="Modules\Fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Modules\Fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Modules\Fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Modules\Fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Modules\Fonts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6bf48dba-af64-443d-bd5a-d9f18f0f6e49}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Scripts\AMD\angularAMD.min.map" />
+    <None Include="Modules\Scripts\AMD\ngload.min.map" />
+    <None Include="Modules\Scripts\Angular\angular-animate.min.js.map" />
+    <None Include="Modules\Scripts\Angular\angular-aria.min.js.map" />
+    <None Include="Modules\Scripts\Angular\angular-cookies.min.js.map" />
+    <None Include="Modules\Scripts\Angular\angular-loader.min.js.map" />
+    <None Include="Modules\Scripts\Angular\angular-message-format.min.js.map" />
+    <None Include="Modules\Scripts\Angular\angular-messages.min.js.map" />
+    <None Include="Modules\Scripts\Angular\angular-resource.min.js.map" />
+    <None Include="Modules\Scripts\Angular\angular-route.min.js.map" />
+    <None Include="Modules\Scripts\Angular\angular-sanitize.min.js.map" />
+    <None Include="Modules\Scripts\Angular\angular-touch.min.js.map" />
+    <None Include="Modules\Scripts\Angular\angular.min.js.map" />
+    <None Include="Modules\Scripts\jQuery\jquery.min.map" />
+    <None Include="Modules\Scripts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5c602d71-3334-4907-a544-b83bfbfdf11c}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Directives\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{06847a60-3481-4436-94c9-d4c2a78d003e}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Directives\Directives.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Directives.js</LastGenOutput>
+    </None>
+    <None Include="Modules\Services\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a28d3742-ade5-496a-8060-7cad78b19074}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Services\Services.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Services.js</LastGenOutput>
+    </None>
+    <None Include="Modules\Controllers\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{16d20c90-d3b4-4a2c-ac84-52609ffb8446}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Controllers\Controllers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Controllers.js</LastGenOutput>
+    </None>
+    <None Include="Modules\Views\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6229fe52-08a2-4e3e-a6fc-31a7161bae6b}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Views\Views.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Views.js</LastGenOutput>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{d1fba650-fd7d-4a70-a30b-791304f9abb5}</PackageId>
     </None>
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
+    <None Include="SaveOutput.tt">
+      <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
+&lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
+    </None>
+    <None Include="SiteDefinitions\ClubCloudAfhangen\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{499551a9-5e4a-424f-89e9-372a8ba532e2}</SharePointProjectItemId>
+    </None>
+    <None Include="Template\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{87c86fe8-90e0-4014-a55c-f17decc606eb}</SharePointProjectItemId>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\ClubCloud_Afhangen_WebSite_Modules\ClubCloud_Afhangen_WebSite_Modules.Template.xml">
+      <DependentUpon>ClubCloud_Afhangen_WebSite_Modules.feature</DependentUpon>
+    </Content>
+    <Content Include="Modules\Css\bootstrap-theme.css" />
+    <Content Include="Modules\Css\bootstrap-theme.min.css" />
+    <Content Include="Modules\Css\bootstrap.css" />
+    <Content Include="Modules\Css\bootstrap.min.css" />
+    <Content Include="Modules\Css\Elements.xml" />
+    <Content Include="Modules\Css\font-awesome.css" />
+    <Content Include="Modules\Css\font-awesome.min.css" />
+    <Content Include="Modules\Fonts\Elements.xml" />
+    <Content Include="Modules\Fonts\fontawesome-webfont.svg" />
+    <Content Include="Modules\Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Modules\Scripts\AMD\angularAMD.js" />
+    <Content Include="Modules\Scripts\AMD\angularAMD.min.js" />
+    <Content Include="Modules\Scripts\AMD\ngload.js" />
+    <Content Include="Modules\Scripts\AMD\ngload.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-animate.js" />
+    <Content Include="Modules\Scripts\Angular\angular-animate.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-aria.js" />
+    <Content Include="Modules\Scripts\Angular\angular-aria.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-block-ui.js" />
+    <Content Include="Modules\Scripts\Angular\angular-block-ui.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-cookies.js" />
+    <Content Include="Modules\Scripts\Angular\angular-cookies.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-csp.css" />
+    <Content Include="Modules\Scripts\Angular\angular-loader.js" />
+    <Content Include="Modules\Scripts\Angular\angular-loader.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-message-format.js" />
+    <Content Include="Modules\Scripts\Angular\angular-message-format.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-messages.js" />
+    <Content Include="Modules\Scripts\Angular\angular-messages.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-mocks.js" />
+    <Content Include="Modules\Scripts\Angular\angular-resource.js" />
+    <Content Include="Modules\Scripts\Angular\angular-resource.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-route.js" />
+    <Content Include="Modules\Scripts\Angular\angular-route.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-sanitize.js" />
+    <Content Include="Modules\Scripts\Angular\angular-sanitize.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular-scenario.js" />
+    <Content Include="Modules\Scripts\Angular\angular-touch.js" />
+    <Content Include="Modules\Scripts\Angular\angular-touch.min.js" />
+    <Content Include="Modules\Scripts\Angular\angular.js" />
+    <Content Include="Modules\Scripts\Angular\angular.min.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_en-001.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_en-150.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_en-us.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_en.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-aw.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-be.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-bq.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-cw.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-nl.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-sr.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-sx.js" />
+    <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl.js" />
+    <Content Include="Modules\Scripts\Bootstrap\bootstrap.js" />
+    <Content Include="Modules\Scripts\Bootstrap\bootstrap.min.js" />
+    <Content Include="Modules\Scripts\Bootstrap\ui-bootstrap-tpls.js" />
+    <Content Include="Modules\Scripts\Bootstrap\ui-bootstrap-tpls.min.js" />
+    <Content Include="Modules\Scripts\Bootstrap\ui-bootstrap.js" />
+    <Content Include="Modules\Scripts\Bootstrap\ui-bootstrap.min.js" />
+    <Content Include="Modules\Scripts\Elements.xml" />
+    <Content Include="Modules\Directives\Elements.xml" />
+    <Content Include="Modules\Directives\Directives.js">
+      <DependentUpon>Directives.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Modules\Scripts\jQuery\additional-methods.js" />
+    <Content Include="Modules\Scripts\jQuery\additional-methods.min.js" />
+    <Content Include="Modules\Scripts\jQuery\jquery.intellisense.js" />
+    <Content Include="Modules\Scripts\jQuery\jquery.js" />
+    <Content Include="Modules\Scripts\jQuery\jquery.min.js" />
+    <Content Include="Modules\Scripts\jQuery\jquery.validate-vsdoc.js" />
+    <Content Include="Modules\Scripts\jQuery\jquery.validate.js" />
+    <Content Include="Modules\Scripts\jQuery\jquery.validate.min.js" />
+    <Content Include="Modules\Scripts\jQuery\jquery.validate.unobtrusive.js" />
+    <Content Include="Modules\Scripts\jQuery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Modules\Scripts\jQuery\localization\messages_nl.js" />
+    <Content Include="Modules\Scripts\jQuery\localization\messages_nl.min.js" />
+    <Content Include="Modules\Scripts\Modernizr\modernizr.js" />
+    <Content Include="Modules\Scripts\Require\require.js" />
+    <Content Include="Modules\Services\Elements.xml" />
+    <Content Include="Modules\Services\Services.js">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.tt</DependentUpon>
+    </Content>
+    <Content Include="Modules\Controllers\Elements.xml" />
+    <Content Include="Modules\Controllers\Controllers.js">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Controllers.tt</DependentUpon>
+    </Content>
+    <Content Include="Modules\Views\Elements.xml" />
+    <Content Include="Modules\Views\Views.js">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Views.tt</DependentUpon>
+    </Content>
+    <Content Include="SiteDefinitions\ClubCloudAfhangen\ClubCloudAfhangen.gif" />
+    <Content Include="SiteDefinitions\ClubCloudAfhangen\onet.xml" />
+    <Content Include="SiteDefinitions\ClubCloudAfhangen\WEBTEMPClubCloudAfhangen.xml" />
+    <Content Include="Template\Images\ClubCloud_Afhangen_WebSite\FeatureIcon_Views.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

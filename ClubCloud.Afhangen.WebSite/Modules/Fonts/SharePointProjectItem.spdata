@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Views\" Type="ElementManifest" />
+    <ProjectItemFile Source="fontawesome-webfont.eot" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="fontawesome-webfont.svg" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="fontawesome-webfont.ttf" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="fontawesome-webfont.woff" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="fontawesome-webfont.woff2" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="FontAwesome.otf" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="glyphicons-halflings-regular.eot" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="glyphicons-halflings-regular.svg" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="glyphicons-halflings-regular.ttf" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="glyphicons-halflings-regular.woff" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="glyphicons-halflings-regular.woff2" Target="Fonts\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

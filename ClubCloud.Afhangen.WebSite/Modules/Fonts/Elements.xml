@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Fonts">
+    <File Path="Fonts\fontawesome-webfont.eot" Url="Fonts/fontawesome-webfont.eot" />
+    <File Path="Fonts\fontawesome-webfont.svg" Url="Fonts/fontawesome-webfont.svg" />
+    <File Path="Fonts\fontawesome-webfont.ttf" Url="Fonts/fontawesome-webfont.ttf" />
+    <File Path="Fonts\fontawesome-webfont.woff" Url="Fonts/fontawesome-webfont.woff" />
+    <File Path="Fonts\fontawesome-webfont.woff2" Url="Fonts/fontawesome-webfont.woff2" />
+    <File Path="Fonts\FontAwesome.otf" Url="Fonts/FontAwesome.otf" />
+    <File Path="Fonts\glyphicons-halflings-regular.eot" Url="Fonts/glyphicons-halflings-regular.eot" />
+    <File Path="Fonts\glyphicons-halflings-regular.svg" Url="Fonts/glyphicons-halflings-regular.svg" />
+    <File Path="Fonts\glyphicons-halflings-regular.ttf" Url="Fonts/glyphicons-halflings-regular.ttf" />
+    <File Path="Fonts\glyphicons-halflings-regular.woff" Url="Fonts/glyphicons-halflings-regular.woff" />
+    <File Path="Fonts\glyphicons-halflings-regular.woff2" Url="Fonts/glyphicons-halflings-regular.woff2" />
+  </Module>
+</Elements>

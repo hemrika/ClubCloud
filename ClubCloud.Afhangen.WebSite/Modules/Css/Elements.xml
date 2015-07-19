@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Css">
+    <File Path="Css\bootstrap-theme.css" Url="Css/bootstrap-theme.css" />
+    <File Path="Css\bootstrap-theme.css.map" Url="Css/bootstrap-theme.css.map" />
+    <File Path="Css\bootstrap-theme.min.css" Url="Css/bootstrap-theme.min.css" />
+    <File Path="Css\bootstrap-theme.min.css.map" Url="Css/bootstrap-theme.min.css.map" />
+    <File Path="Css\bootstrap.css" Url="Css/bootstrap.css" />
+    <File Path="Css\bootstrap.css.map" Url="Css/bootstrap.css.map" />
+    <File Path="Css\bootstrap.min.css" Url="Css/bootstrap.min.css" />
+    <File Path="Css\bootstrap.min.css.map" Url="Css/bootstrap.min.css.map" />
+    <File Path="Css\font-awesome.css" Url="Css/font-awesome.css" />
+    <File Path="Css\font-awesome.min.css" Url="Css/font-awesome.min.css" />
+  </Module>
+</Elements>

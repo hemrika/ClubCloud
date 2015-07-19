@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Controllers">
+    <File Path="Controllers\Controllers.js" Url="Controllers/Controllers.js" />
+  </Module>
+</Elements>

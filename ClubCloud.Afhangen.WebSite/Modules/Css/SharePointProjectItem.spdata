@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Views\" Type="ElementManifest" />
+    <ProjectItemFile Source="bootstrap-theme.css" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="bootstrap-theme.css.map" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="bootstrap-theme.min.css" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="bootstrap-theme.min.css.map" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="bootstrap.css" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="bootstrap.css.map" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="bootstrap.min.css" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="bootstrap.min.css.map" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="font-awesome.css" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="font-awesome.min.css" Target="Css\" Type="ElementFile" />
+  </Files>
+</ProjectItem>
