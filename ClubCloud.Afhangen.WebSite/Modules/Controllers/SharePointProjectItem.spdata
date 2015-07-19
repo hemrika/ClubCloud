@@ -6,5 +6,7 @@
     <ProjectItemFile Source="Afhangen.Configuration.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="Afhangen.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="DefaultController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="LoginController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="LogoutController.js" Target="Controllers\" Type="ElementFile" />
   </Files>
 </ProjectItem>

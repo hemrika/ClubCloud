@@ -158,6 +158,8 @@
     <Content Include="Features\ClubCloud_Afhangen_WebSite_Modules\ClubCloud_Afhangen_WebSite_Modules.Template.xml">
       <DependentUpon>ClubCloud_Afhangen_WebSite_Modules.feature</DependentUpon>
     </Content>
+    <Content Include="Modules\Controllers\LoginController.js" />
+    <Content Include="Modules\Controllers\LogoutController.js" />
     <Content Include="Modules\Css\angular-block-ui.css" />
     <Content Include="Modules\Css\angular-block-ui.min.css" />
     <Content Include="Modules\Css\bootstrap-theme.css" />
@@ -167,6 +169,7 @@
     <Content Include="Modules\Css\Elements.xml" />
     <Content Include="Modules\Css\font-awesome.css" />
     <Content Include="Modules\Css\font-awesome.min.css" />
+    <Content Include="Modules\Css\styles.css" />
     <Content Include="Modules\Fonts\Elements.xml" />
     <Content Include="Modules\Fonts\fontawesome-webfont.svg" />
     <Content Include="Modules\Fonts\glyphicons-halflings-regular.svg" />
@@ -261,6 +264,8 @@
     <Content Include="Modules\Views\Default.html" />
     <Content Include="Modules\Controllers\DefaultController.js" />
     <Content Include="Modules\Views\Elements.xml" />
+    <Content Include="Modules\Views\Login.html" />
+    <Content Include="Modules\Views\Logout.html" />
     <Content Include="Modules\Views\Views.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

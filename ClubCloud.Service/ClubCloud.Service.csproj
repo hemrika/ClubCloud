@@ -293,6 +293,7 @@
     <Compile Include="ClubCloudApplicationService_Zimbra.cs" />
     <Compile Include="Attributes\AuthorizeAttribute.cs" />
     <Compile Include="Attributes\FilterAttribute.cs" />
+    <Compile Include="ClubCloudAfhangenWebSiteService.cs" />
     <Compile Include="ClubCloudLogger.cs" />
     <Compile Include="ClubCloudServiceClientModel.cs">
       <AutoGen>True</AutoGen>
@@ -314,6 +315,7 @@
     </Compile>
     <Compile Include="ClubCloudServiceClient.cs" />
     <Compile Include="ClubCloudApplicationService.cs" />
+    <Compile Include="IClubCloudAfhangenWebSiteService.cs" />
     <Compile Include="IClubCloudMobielService.cs" />
     <Compile Include="IClubCloudAfhangenService.cs" />
     <Compile Include="IClubCloudClientService.cs" />
@@ -372,11 +374,13 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ClubCloudApplicationService_StoreModel1.cs</LastGenOutput>
     </None>
+    <Content Include="ISAPI\ClubCloud\Afhangen.svc" />
     <Content Include="ISAPI\ClubCloud.Mobiel\Mobiel.svc" />
     <Content Include="ISAPI\ClubCloud.Afhangen\Afhangen.svc" />
     <Content Include="ISAPI\ClubCloud.Service\web.config" />
     <Content Include="ISAPI\ClubCloud.Afhangen\web.config" />
     <Content Include="ISAPI\ClubCloud.Mobiel\web.config" />
+    <Content Include="ISAPI\ClubCloud\web.config" />
     <None Include="ISAPI\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{c6486a53-a50c-430c-8820-347e87f19a2b}</SharePointProjectItemId>
     </None>

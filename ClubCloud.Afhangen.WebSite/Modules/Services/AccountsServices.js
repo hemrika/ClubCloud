@@ -1,4 +1,5 @@
-﻿define(['afhangen-configuration', 'ajaxService'], function (app) {
+﻿/// <reference path="afhangen.js" />
+define(['afhangen-configuration', 'ajaxService'], function (app) {
 
     app.register.service('accountsService', ['ajaxService', function (ajaxService) {
 

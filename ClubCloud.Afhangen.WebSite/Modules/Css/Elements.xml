@@ -14,5 +14,6 @@
     <File Path="Css\font-awesome.min.css" Url="Css/font-awesome.min.css" />
     <File Path="Css\angular-block-ui.css" Url="Css/angular-block-ui.css" />
     <File Path="Css\angular-block-ui.min.css" Url="Css/angular-block-ui.min.css" />
+    <File Path="Css\styles.css" Url="Css/styles.css" />
   </Module>
 </Elements>

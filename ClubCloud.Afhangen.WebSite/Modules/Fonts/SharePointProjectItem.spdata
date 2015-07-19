@@ -13,5 +13,7 @@
     <ProjectItemFile Source="glyphicons-halflings-regular.ttf" Target="Fonts\" Type="ElementFile" />
     <ProjectItemFile Source="glyphicons-halflings-regular.woff" Target="Fonts\" Type="ElementFile" />
     <ProjectItemFile Source="glyphicons-halflings-regular.woff2" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="Raleway-Regular-webfont.ttf" Target="Fonts\" Type="ElementFile" />
+    <ProjectItemFile Source="Ubuntu-Regular-webfont.ttf" Target="Fonts\" Type="ElementFile" />
   </Files>
 </ProjectItem>

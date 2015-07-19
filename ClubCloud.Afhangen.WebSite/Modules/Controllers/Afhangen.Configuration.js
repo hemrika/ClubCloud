@@ -1,4 +1,5 @@
-﻿"use strict";
+﻿/// <reference path="../Services/afhangen.js" />
+"use strict";
 
 define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'blockUI', ], function (angularAMD) {
     var app = angular.module("mainModule", ['ngRoute', 'blockUI', 'ngSanitize', 'ui.bootstrap']);
@@ -126,7 +127,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
             $rootScope.displayContent = false;
             if ($location.path() != "")        
             {                      
-                //$scope.initializeApplication($scope.initializeApplicationComplete, $scope.initializeApplicationError);
+                $scope.initializeApplication($scope.initializeApplicationComplete, $scope.initializeApplicationError);
             }
         }
 
@@ -137,15 +138,19 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
         }
 
         $scope.initializeApplication = function (successFunction, errorFunction) {
-            blockUI.start();           
-            $scope.AjaxGet("/api/main/InitializeApplication", successFunction, errorFunction);
+            blockUI.start();
+            var proxy = clubcloud.nl.ClubCloudAfhangen;
+            proxy.GetVerenigingByNummer('12073385', '82503', false, successFunction, errorFunction);
+            //$scope.AjaxGet("/api/main/InitializeApplication", successFunction, errorFunction);
             blockUI.stop();
         };
               
         $scope.authenicateUser = function (route, successFunction, errorFunction) {
             var authenication = new Object();
             authenication.route = route;
-            $scope.AjaxGetWithData(authenication, "/api/main/AuthenicateUser", successFunction, errorFunction);
+            var proxy = clubcloud.nl.ClubCloudAfhangen;
+            proxy.GetVerenigingByNummer('12073385', '82503', false, successFunction, errorFunction);
+            //$scope.AjaxGetWithData(authenication, "/api/main/AuthenicateUser", successFunction, errorFunction);
         };
            
         $scope.authenicateUserComplete = function (response) {

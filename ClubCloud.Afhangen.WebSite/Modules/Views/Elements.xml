@@ -7,5 +7,7 @@
 		Url="Views">
     <File Path="Views.js" Url="Views.js" />
     <File Path="default.html" Url="default.html" />
+    <File Path="Login.html" Url="Login.html" />
+    <File Path="Logout.html" Url="Logout.html" />
   </Module>
 </Elements>

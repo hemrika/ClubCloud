@@ -6,5 +6,7 @@
     <File Path="Controllers\Afhangen.Configuration.js" Url="Controllers/Afhangen.Configuration.js" />
     <File Path="Controllers\Afhangen.js" Url="Controllers/Afhangen.js" />
     <File Path="Controllers\DefaultController.js" Url="Controllers/DefaultController.js" />
+    <File Path="Controllers\LoginController.js" Url="Controllers/LoginController.js" />
+    <File Path="Controllers\LogoutController.js" Url="Controllers/LogoutController.js" />
   </Module>
 </Elements>

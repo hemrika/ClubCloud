@@ -13,5 +13,7 @@
     <File Path="Fonts\glyphicons-halflings-regular.ttf" Url="Fonts/glyphicons-halflings-regular.ttf" />
     <File Path="Fonts\glyphicons-halflings-regular.woff" Url="Fonts/glyphicons-halflings-regular.woff" />
     <File Path="Fonts\glyphicons-halflings-regular.woff2" Url="Fonts/glyphicons-halflings-regular.woff2" />
+    <File Path="Fonts\Raleway-Regular-webfont.ttf" Url="Fonts/Raleway-Regular-webfont.ttf" />
+    <File Path="Fonts\Ubuntu-Regular-webfont.ttf" Url="Fonts/Ubuntu-Regular-webfont.ttf" />
   </Module>
 </Elements>

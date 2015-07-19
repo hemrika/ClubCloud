@@ -14,5 +14,6 @@
     <ProjectItemFile Source="font-awesome.min.css" Target="Css\" Type="ElementFile" />
     <ProjectItemFile Source="angular-block-ui.css" Target="Css\" Type="ElementFile" />
     <ProjectItemFile Source="angular-block-ui.min.css" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="styles.css" Target="Css\" Type="ElementFile" />
   </Files>
 </ProjectItem>

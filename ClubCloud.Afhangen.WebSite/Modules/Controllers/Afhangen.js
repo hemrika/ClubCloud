@@ -5,7 +5,7 @@ require.config({
 
     // alias libraries paths
     paths: {
-        'afhangen-configuration': 'Scripts/Afhangen.configuration',       
+        'afhangen-configuration': 'Controllers/Afhangen.configuration',       
         'angular': 'Scripts/Angular/angular',
         'angular-route': 'Scripts/Angular/angular-route',
         'angularAMD': 'Scripts/AMD/angularAMD',

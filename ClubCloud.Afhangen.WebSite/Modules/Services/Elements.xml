@@ -7,5 +7,6 @@
     <File Path="Services\AccountsServices.js" Url="Services/AccountsServices.js" />
     <File Path="Services\MainServices.js" Url="Services/MainServices.js" />
     <File Path="Services\AlertsServices.js" Url="Services/AlertsServices.js" />
+    <File Path="Services\afhangen.js" Url="Services/afhangen.js" />
   </Module>
 </Elements>

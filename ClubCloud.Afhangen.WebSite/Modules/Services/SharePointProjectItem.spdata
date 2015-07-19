@@ -7,5 +7,6 @@
     <ProjectItemFile Source="AccountsServices.js" Target="Services\" Type="ElementFile" />
     <ProjectItemFile Source="MainServices.js" Target="Services\" Type="ElementFile" />
     <ProjectItemFile Source="AlertsServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="afhangen.js" Target="Services\" Type="ElementFile" />
   </Files>
 </ProjectItem>

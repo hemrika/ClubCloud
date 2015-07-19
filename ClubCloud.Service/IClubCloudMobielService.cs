@@ -183,6 +183,7 @@ namespace ClubCloud.Service
         List<ClubCloud_Reservering> GetReserveringen();
 
         #endregion
+
         #region ClubCloud Verenigingen
 
         [OperationContract]

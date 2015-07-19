@@ -7,11 +7,29 @@ define(['afhangen-configuration', 'mainService', 'alertsService'], function (app
         $rootScope.closeAlert = alertsService.closeAlert;
 
         $scope.initializeController = function () {
+            $rootScope.MenuItems = [];
+            $rootScope.MenuItems = [{
+                'Route': '#/',
+                'Description': 'Home'
+            }, {
+                'Route': '#/Afhangen',
+                'Description': 'Afhangen'
+            }, {
+                'Route': '#/Reserveringen',
+                'Description': 'Reserveringen'
+            }, {
+                'Route': '#/Bezetting',
+                'Description': 'Bezetting'
+            }];
+
+            $rootScope.displayContent = true;
+
             mainService.initializeApplication($scope.initializeApplicationComplete, $scope.initializeApplicationError);
         }
 
         $scope.initializeApplicationComplete = function (response) {
-            $rootScope.MenuItems = response.MenuItems;
+            $rootScope.MenuItems = [];
+            $rootScope.MenuItems.push({ Route: '#Main/Home', Description: 'Home' });
             $rootScope.displayContent = true;
 
             if (response.IsAuthenicated == true) {
