@@ -2,7 +2,7 @@
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.SiteDefinition" DefaultFile="onet.xml" SupportedTrustLevels="FullTrust" SupportedDeploymentScopes="Package" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
     <ProjectItemFile Source="onet.xml" Target="SiteTemplates\ClubCloudAfhangen\XML\" Type="TemplateFile" />
-    <ProjectItemFile Source="WEBTEMPClubCloudAfhangen.xml" Target="1033\XML\" Type="TemplateFile" />
+    <ProjectItemFile Source="webtemp_ClubCloudAfhangen.xml" Target="1043\XML\" Type="TemplateFile" />
     <ProjectItemFile Source="ClubCloudAfhangen.gif" Target="Images\ClubCloud_Afhangen_WebSite\" Type="TemplateFile" />
     <ProjectItemFile Source="index.html" Target="SiteTemplates\ClubCloudAfhangen\" Type="TemplateFile" />
   </Files>

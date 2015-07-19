@@ -3,5 +3,8 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Module Name="Controllers">
     <File Path="Controllers\Controllers.js" Url="Controllers/Controllers.js" />
+    <File Path="Controllers\Afhangen.Configuration.js" Url="Controllers/Afhangen.Configuration.js" />
+    <File Path="Controllers\Afhangen.js" Url="Controllers/Afhangen.js" />
+    <File Path="Controllers\DefaultController.js" Url="Controllers/DefaultController.js" />
   </Module>
 </Elements>

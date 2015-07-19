@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
-    <ProjectItemFile Source="Elements.xml" Target="Views\" Type="ElementManifest" />
+    <ProjectItemFile Source="Elements.xml" Target="Controllers\" Type="ElementManifest" />
     <ProjectItemFile Source="Controllers.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Afhangen.Configuration.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Afhangen.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="DefaultController.js" Target="Controllers\" Type="ElementFile" />
   </Files>
 </ProjectItem>

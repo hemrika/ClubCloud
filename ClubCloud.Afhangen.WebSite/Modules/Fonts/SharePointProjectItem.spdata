@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
-    <ProjectItemFile Source="Elements.xml" Target="Views\" Type="ElementManifest" />
+    <ProjectItemFile Source="Elements.xml" Target="Fonts\" Type="ElementManifest" />
     <ProjectItemFile Source="fontawesome-webfont.eot" Target="Fonts\" Type="ElementFile" />
     <ProjectItemFile Source="fontawesome-webfont.svg" Target="Fonts\" Type="ElementFile" />
     <ProjectItemFile Source="fontawesome-webfont.ttf" Target="Fonts\" Type="ElementFile" />

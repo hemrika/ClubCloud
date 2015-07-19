@@ -12,7 +12,11 @@ require.config({
         'ui-bootstrap': 'Scripts/Bootstrap/ui-bootstrap-tpls',
         'blockUI': 'Scripts/Angular/angular-block-ui',
         'ngload': 'Scripts/AMD/ngload',
-        'angular-sanitize': 'Scripts/Angular/angular-sanitize'
+        'angular-sanitize': 'Scripts/Angular/angular-sanitize',
+        'mainService': 'Services/mainServices',
+        'ajaxService': 'Services/AjaxServices',
+        'alertsService': 'Services/AlertsServices',
+        'accountsService': 'Services/AccountsServices'
     },
 
     // Add angular modules that does not support AMD out of the box, put it in a shim

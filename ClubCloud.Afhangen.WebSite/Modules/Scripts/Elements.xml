@@ -79,7 +79,5 @@
     <File Path="Scripts\jQuery\localization\messages_nl.min.js" Url="Scripts/jQuery/localization/messages_nl.min.js" />
     <File Path="Scripts\Modernizr\modernizr.js" Url="Scripts/Modernizr/modernizr.js" />
     <File Path="Scripts\Require\require.js" Url="Scripts/Require/require.js" />
-    <File Path="Scripts\Afhangen.js" Url="Scripts/Afhangen.js" />
-    <File Path="Scripts\Afhangen.Configuration.js" Url="Scripts/Afhangen.Configuration.js" />
   </Module>
 </Elements>

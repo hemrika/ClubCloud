@@ -34,14 +34,14 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
 
            .when("/", angularAMD.route({
                          
-                templateUrl: function (rp) {  return 'Views/Main/default.html';  },               
-                controllerUrl: "Views/Main/defaultController"            
+                templateUrl: function (rp) {  return 'Views/Default.html';  },               
+                controllerUrl: "Controllers/DefaultController"            
 
             }))
 
             .when("/:section/:tree", angularAMD.route({
 
-                templateUrl: function (rp) { return 'views/' + rp.section + '/' + rp.tree + '.html'; },
+                templateUrl: function (rp) { return 'Views/' + rp.section + '/' + rp.tree + '.html'; },
 
                 resolve: {
 
@@ -52,7 +52,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
                         var parentPath = parsePath[1];
                         var controllerName = parsePath[2];
 
-                        var loadController = "Views/" + parentPath + "/" + controllerName + "Controller";                 
+                        var loadController = "Controllers/" + parentPath + "/" + controllerName + "Controller";                 
 
                         var deferred = $q.defer();
                         require([loadController], function () {
@@ -68,7 +68,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
 
             .when("/:section/:tree/:id", angularAMD.route({
 
-                templateUrl: function (rp) { return 'views/' + rp.section + '/' + rp.tree + '.html'; },
+                templateUrl: function (rp) { return 'Views/' + rp.section + '/' + rp.tree + '.html'; },
 
                 resolve: {
 
@@ -79,7 +79,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
                         var parentPath = parsePath[1];
                         var controllerName = parsePath[2];
 
-                        var loadController = "Views/" + parentPath + "/" + controllerName + "Controller";
+                        var loadController = "Controllers/" + parentPath + "/" + controllerName + "Controller";
                                              
                         var deferred = $q.defer();
                         require([loadController], function () {
@@ -126,7 +126,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
             $rootScope.displayContent = false;
             if ($location.path() != "")        
             {                      
-                $scope.initializeApplication($scope.initializeApplicationComplete, $scope.initializeApplicationError);
+                //$scope.initializeApplication($scope.initializeApplicationComplete, $scope.initializeApplicationError);
             }
         }
 

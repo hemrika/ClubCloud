@@ -48,6 +48,7 @@
     <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.SharePoint.Security, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -58,9 +59,13 @@
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventHandlers\WebSiteAfhangenHandler\WebSiteAfhangenHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="EventHandlers\WebSiteAfhangenHandler\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b98be66f-389a-4a45-8707-b8cc343c1e94}</SharePointProjectItemId>
+    </None>
     <None Include="Features\ClubCloud_Afhangen_WebSite_Modules\ClubCloud_Afhangen_WebSite_Modules.feature">
       <FeatureId>{f140a81b-d59b-41df-b88e-1ebb28d996c8}</FeatureId>
     </None>
@@ -149,6 +154,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EventHandlers\WebSiteAfhangenHandler\Elements.xml" />
     <Content Include="Features\ClubCloud_Afhangen_WebSite_Modules\ClubCloud_Afhangen_WebSite_Modules.Template.xml">
       <DependentUpon>ClubCloud_Afhangen_WebSite_Modules.feature</DependentUpon>
     </Content>
@@ -207,7 +213,7 @@
     <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-sr.js" />
     <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-sx.js" />
     <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl.js" />
-    <Content Include="Modules\Scripts\Afhangen.Configuration.js" />
+    <Content Include="Modules\Controllers\Afhangen.Configuration.js" />
     <Content Include="Modules\Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Modules\Scripts\Bootstrap\bootstrap.min.js" />
     <Content Include="Modules\Scripts\Bootstrap\ui-bootstrap-tpls.js" />
@@ -233,10 +239,14 @@
     <Content Include="Modules\Scripts\jQuery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Modules\Scripts\jQuery\localization\messages_nl.js" />
     <Content Include="Modules\Scripts\jQuery\localization\messages_nl.min.js" />
-    <Content Include="Modules\Scripts\Afhangen.js" />
+    <Content Include="Modules\Controllers\Afhangen.js" />
     <Content Include="Modules\Scripts\Modernizr\modernizr.js" />
     <Content Include="Modules\Scripts\Require\require.js" />
+    <Content Include="Modules\Services\AccountsServices.js" />
+    <Content Include="Modules\Services\AjaxServices.js" />
+    <Content Include="Modules\Services\AlertsServices.js" />
     <Content Include="Modules\Services\Elements.xml" />
+    <Content Include="Modules\Services\MainServices.js" />
     <Content Include="Modules\Services\Services.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -248,6 +258,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Controllers.tt</DependentUpon>
     </Content>
+    <Content Include="Modules\Views\Default.html" />
+    <Content Include="Modules\Controllers\DefaultController.js" />
     <Content Include="Modules\Views\Elements.xml" />
     <Content Include="Modules\Views\Views.js">
       <AutoGen>True</AutoGen>
@@ -257,7 +269,7 @@
     <Content Include="SiteDefinitions\ClubCloudAfhangen\ClubCloudAfhangen.gif" />
     <Content Include="SiteDefinitions\ClubCloudAfhangen\index.html" />
     <Content Include="SiteDefinitions\ClubCloudAfhangen\onet.xml" />
-    <Content Include="SiteDefinitions\ClubCloudAfhangen\WEBTEMPClubCloudAfhangen.xml" />
+    <Content Include="SiteDefinitions\ClubCloudAfhangen\webtemp_ClubCloudAfhangen.xml" />
     <Content Include="Template\Images\ClubCloud_Afhangen_WebSite\FeatureIcon_Views.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

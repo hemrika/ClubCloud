@@ -6,5 +6,6 @@
 		Path="Views"
 		Url="Views">
     <File Path="Views.js" Url="Views.js" />
+    <File Path="default.html" Url="default.html" />
   </Module>
 </Elements>
