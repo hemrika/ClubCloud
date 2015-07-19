@@ -79,5 +79,7 @@
     <ProjectItemFile Source="jQuery\localization\messages_nl.min.js" Target="Scripts\jQuery\localization\" Type="ElementFile" />
     <ProjectItemFile Source="Modernizr\modernizr.js" Target="Scripts\Modernizr\" Type="ElementFile" />
     <ProjectItemFile Source="Require\require.js" Target="Scripts\Require\" Type="ElementFile" />
+    <ProjectItemFile Source="Afhangen.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="Afhangen.Configuration.js" Target="Scripts\" Type="ElementFile" />
   </Files>
 </ProjectItem>

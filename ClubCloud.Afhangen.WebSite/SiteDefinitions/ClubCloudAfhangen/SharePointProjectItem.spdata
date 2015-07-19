@@ -4,5 +4,6 @@
     <ProjectItemFile Source="onet.xml" Target="SiteTemplates\ClubCloudAfhangen\XML\" Type="TemplateFile" />
     <ProjectItemFile Source="WEBTEMPClubCloudAfhangen.xml" Target="1033\XML\" Type="TemplateFile" />
     <ProjectItemFile Source="ClubCloudAfhangen.gif" Target="Images\ClubCloud_Afhangen_WebSite\" Type="TemplateFile" />
+    <ProjectItemFile Source="index.html" Target="SiteTemplates\ClubCloudAfhangen\" Type="TemplateFile" />
   </Files>
 </ProjectItem>

@@ -19,6 +19,8 @@
     <SccProvider>SAK</SccProvider>
     <SandboxedSolution>False</SandboxedSolution>
     <TargetFrameworkProfile />
+    <ActiveDeploymentConfiguration>No Activation</ActiveDeploymentConfiguration>
+    <AssemblyDeploymentTarget>WebApplication</AssemblyDeploymentTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -150,6 +152,8 @@
     <Content Include="Features\ClubCloud_Afhangen_WebSite_Modules\ClubCloud_Afhangen_WebSite_Modules.Template.xml">
       <DependentUpon>ClubCloud_Afhangen_WebSite_Modules.feature</DependentUpon>
     </Content>
+    <Content Include="Modules\Css\angular-block-ui.css" />
+    <Content Include="Modules\Css\angular-block-ui.min.css" />
     <Content Include="Modules\Css\bootstrap-theme.css" />
     <Content Include="Modules\Css\bootstrap-theme.min.css" />
     <Content Include="Modules\Css\bootstrap.css" />
@@ -203,6 +207,7 @@
     <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-sr.js" />
     <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl-sx.js" />
     <Content Include="Modules\Scripts\Angular\i18n\angular-locale_nl.js" />
+    <Content Include="Modules\Scripts\Afhangen.Configuration.js" />
     <Content Include="Modules\Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Modules\Scripts\Bootstrap\bootstrap.min.js" />
     <Content Include="Modules\Scripts\Bootstrap\ui-bootstrap-tpls.js" />
@@ -228,6 +233,7 @@
     <Content Include="Modules\Scripts\jQuery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Modules\Scripts\jQuery\localization\messages_nl.js" />
     <Content Include="Modules\Scripts\jQuery\localization\messages_nl.min.js" />
+    <Content Include="Modules\Scripts\Afhangen.js" />
     <Content Include="Modules\Scripts\Modernizr\modernizr.js" />
     <Content Include="Modules\Scripts\Require\require.js" />
     <Content Include="Modules\Services\Elements.xml" />
@@ -249,6 +255,7 @@
       <DependentUpon>Views.tt</DependentUpon>
     </Content>
     <Content Include="SiteDefinitions\ClubCloudAfhangen\ClubCloudAfhangen.gif" />
+    <Content Include="SiteDefinitions\ClubCloudAfhangen\index.html" />
     <Content Include="SiteDefinitions\ClubCloudAfhangen\onet.xml" />
     <Content Include="SiteDefinitions\ClubCloudAfhangen\WEBTEMPClubCloudAfhangen.xml" />
     <Content Include="Template\Images\ClubCloud_Afhangen_WebSite\FeatureIcon_Views.gif" />

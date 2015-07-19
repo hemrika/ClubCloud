@@ -12,5 +12,7 @@
     <ProjectItemFile Source="bootstrap.min.css.map" Target="Css\" Type="ElementFile" />
     <ProjectItemFile Source="font-awesome.css" Target="Css\" Type="ElementFile" />
     <ProjectItemFile Source="font-awesome.min.css" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="angular-block-ui.css" Target="Css\" Type="ElementFile" />
+    <ProjectItemFile Source="angular-block-ui.min.css" Target="Css\" Type="ElementFile" />
   </Files>
 </ProjectItem>

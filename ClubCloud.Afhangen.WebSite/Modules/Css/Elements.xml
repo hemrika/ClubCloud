@@ -12,5 +12,7 @@
     <File Path="Css\bootstrap.min.css.map" Url="Css/bootstrap.min.css.map" />
     <File Path="Css\font-awesome.css" Url="Css/font-awesome.css" />
     <File Path="Css\font-awesome.min.css" Url="Css/font-awesome.min.css" />
+    <File Path="Css\angular-block-ui.css" Url="Css/angular-block-ui.css" />
+    <File Path="Css\angular-block-ui.min.css" Url="Css/angular-block-ui.min.css" />
   </Module>
 </Elements>
