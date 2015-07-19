@@ -85,9 +85,11 @@
     <None Include="Modules\Fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Modules\Fonts\glyphicons-halflings-regular.woff" />
     <None Include="Modules\Fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Modules\Fonts\Raleway-Regular-webfont.ttf" />
     <None Include="Modules\Fonts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6bf48dba-af64-443d-bd5a-d9f18f0f6e49}</SharePointProjectItemId>
     </None>
+    <None Include="Modules\Fonts\Ubuntu-Regular-webfont.ttf" />
     <None Include="Modules\Scripts\AMD\angularAMD.min.map" />
     <None Include="Modules\Scripts\AMD\ngload.min.map" />
     <None Include="Modules\Scripts\Angular\angular-animate.min.js.map" />
@@ -246,6 +248,7 @@
     <Content Include="Modules\Scripts\Modernizr\modernizr.js" />
     <Content Include="Modules\Scripts\Require\require.js" />
     <Content Include="Modules\Services\AccountsServices.js" />
+    <None Include="Modules\Services\afhangen.js" />
     <Content Include="Modules\Services\AjaxServices.js" />
     <Content Include="Modules\Services\AlertsServices.js" />
     <Content Include="Modules\Services\Elements.xml" />

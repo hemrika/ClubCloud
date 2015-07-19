@@ -183,6 +183,7 @@
     <Compile Include="Attributes\AuthorizeAttributeExtension.cs" />
     <Compile Include="BaseServiceClient.cs" />
     <Compile Include="Attributes\AllowAnonymousAttribute.cs" />
+    <Compile Include="ClubCloudApplicationService.cs" />
     <Compile Include="ClubCloudApplicationService_Accommodatie.cs">
       <DependentUpon>ClubCloudApplicationService_BeheerModel.tt</DependentUpon>
     </Compile>
@@ -314,7 +315,6 @@
       <DependentUpon>ClubCloudServiceAdministration.feature</DependentUpon>
     </Compile>
     <Compile Include="ClubCloudServiceClient.cs" />
-    <Compile Include="ClubCloudApplicationService.cs" />
     <Compile Include="IClubCloudAfhangenWebSiteService.cs" />
     <Compile Include="IClubCloudMobielService.cs" />
     <Compile Include="IClubCloudAfhangenService.cs" />
