@@ -18,7 +18,7 @@ namespace ClubCloud.Service
     ///
     /// </summary>
     [ServiceKnownType("GetKnownTypes", typeof(BeheerContainer_KnownTypes))]
-    [ServiceContract(Namespace = "http://clubcloud.nl/", Name = "ClubCloudAfhangen")]
+    [ServiceContract(Namespace = "http://nl.clubcloud/", Name = "Afhangen")]
     public interface IClubCloudAfhangenWebSiteService
     {
         [OperationContract]
@@ -26,6 +26,9 @@ namespace ClubCloud.Service
 
         [OperationContract]
         void Logout();
+
+        [OperationContract]
+        LoginResult IsAuthorized();
 
     }
 }

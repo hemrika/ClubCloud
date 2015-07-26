@@ -2,7 +2,7 @@
 
 define(['afhangen-configuration', 'mainService', 'alertsService'], function (app) {
 
-    app.register.controller('defaultController', ['$scope', '$rootScope', 'mainService', 'alertsService', function ($scope, $rootScope, mainService, alertsService) {
+    app.register.controller('defaultController', ['$scope', '$rootScope', '$cookieStore', 'mainService', 'alertsService', function ($scope, $rootScope, $cookieStore, mainService, alertsService) {
 
         $rootScope.closeAlert = alertsService.closeAlert;
 
@@ -12,28 +12,32 @@ define(['afhangen-configuration', 'mainService', 'alertsService'], function (app
                 'Route': '#/',
                 'Description': 'Home'
             }, {
-                'Route': '#/Afhangen',
+                'Route': '#/Afhangen/Start',
                 'Description': 'Afhangen'
             }, {
-                'Route': '#/Reserveringen',
+                'Route': '#/Reserveringen/Start',
                 'Description': 'Reserveringen'
             }, {
-                'Route': '#/Bezetting',
+                'Route': '#/Bezetting/Baa',
                 'Description': 'Bezetting'
             }];
 
             $rootScope.displayContent = true;
 
-            mainService.initializeApplication($scope.initializeApplicationComplete, $scope.initializeApplicationError);
+            var FedAuth = $cookieStore.get('FedAuth');
+            var proxy = nl.clubcloud.Afhangen;
+            proxy.IsAuthorized(FedAuth, $scope.initializeApplicationComplete, $scope.initializeApplicationError);
+
+            //mainService.initializeApplication($scope.initializeApplicationComplete, $scope.initializeApplicationError);
         }
 
         $scope.initializeApplicationComplete = function (response) {
             $rootScope.MenuItems = [];
-            $rootScope.MenuItems.push({ Route: '#Main/Home', Description: 'Home' });
+
             $rootScope.displayContent = true;
 
-            if (response.IsAuthenicated == true) {
-                window.location = "/applicationMasterPage.html#/Customers/CustomerInquiry";
+            if (response.ErrorCode == 'NoError') {
+                window.location = "/index.html";
             }
             else {
 

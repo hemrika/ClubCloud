@@ -5,24 +5,20 @@
 //-----------------------------------------------------------------------
 namespace ClubCloud.Service
 {
-    using System;  
-    using System.ServiceModel;
-    using System.ServiceModel.Activation;
+    using Microsoft.IdentityModel.Claims;
+    using Microsoft.IdentityModel.Web;
+    using Microsoft.SharePoint;
     using Microsoft.SharePoint.Administration;
     using Microsoft.SharePoint.Client.Services;
-    using Microsoft.SharePoint;
-    using ClubCloud.Model;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.ServiceModel.Web;
-    using System.Collections.Generic;
-    using System.Web.Script.Serialization;
-    using System.Web.UI;
     using Microsoft.SharePoint.IdentityModel;
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
+    using System.ServiceModel.Web;
     using System.Web;
-    using Microsoft.IdentityModel.Claims;
     using System.Web.Configuration;
-    using Microsoft.IdentityModel.Web;
 
     /// <summary>
     /// The REST Service.
@@ -31,7 +27,7 @@ namespace ClubCloud.Service
     [ServiceFactoryUsingAuthSchemeInEndpointAddress(UsingAuthSchemeInEndpointAddress = false)]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     [System.Runtime.InteropServices.Guid("76bd8f39-c25c-4dff-95c0-2d84a0a2a445")]
-    [ServiceBehavior(Namespace = "http://clubcloud.nl/", Name = "ClubCloudWebSiteService", IncludeExceptionDetailInFaults = true)]
+    [ServiceBehavior(Namespace = "http://nl.clubcloud/", Name = "Afhangen", IncludeExceptionDetailInFaults = true)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by the WCF runtime automatically.")]
     public class ClubCloudAfhangenWebSiteService : IClubCloudAfhangenWebSiteService
     {
@@ -79,21 +75,6 @@ namespace ClubCloud.Service
             private set { _SessionAuthenticationModule = value; }
         }
 
-        /*
-        private static SPClaimsAuthenticationManager _ClaimsAuthenticationManager = null;
-
-        public static SPClaimsAuthenticationManager ClaimsAuthenticationManager
-        {
-            get
-            {
-                if (ClubCloudMobielService._ClaimsAuthenticationManager == null)
-                    _ClaimsAuthenticationManager = FederatedAuthentication.ClaimsPrincipalHttpModule.AuthenticationManager as SPClaimsAuthenticationManager;
-
-                return ClubCloudMobielService._ClaimsAuthenticationManager;
-            }
-            private set { _ClaimsAuthenticationManager = value; }
-        }
-        */
 
         public static bool Authorized
         {
@@ -214,6 +195,45 @@ namespace ClubCloud.Service
             SessionAuthenticationModule.SignOut();
         }
 
+        public LoginResult IsAuthorized()
+        {
+            int parsed;
+
+            if (Authorized)
+            {
+                string bondsnummer = HttpContext.Current.User.Identity.Name.Split('|').Last();
+                if (int.TryParse(bondsnummer, out parsed))
+                {
+                    try
+                    {
+                        return new LoginResult
+                        {
+                            ErrorCode = LoginErrorCode.NoError,
+                            CookieName = SessionAuthenticationModule.CookieHandler.Name,
+                            TimeoutSeconds = SessionAuthenticationModule.CookieHandler.PersistentSessionLifetime.Value.Seconds,
+                            FedAuth = HttpContext.Current.Response.Cookies.Get(SessionAuthenticationModule.CookieHandler.Name).Value
+                        };
+                    }
+                    catch (Exception ex)
+                    {
+                        WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
+                        //throw new WebFaultException<string>(ex.Message, HttpStatusCode.InternalServerError);
+                    }
+                }
+                else
+                {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.Forbidden;
+                    throw new WebFaultException(HttpStatusCode.Forbidden);
+                }
+            }
+
+            return new LoginResult
+            {
+                ErrorCode = LoginErrorCode.Exception,
+                Message = "NotAuthorized"
+            };
+        }
         #endregion
+
     }
 }

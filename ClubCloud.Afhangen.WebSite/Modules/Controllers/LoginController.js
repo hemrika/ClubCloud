@@ -2,8 +2,8 @@
 
 define(['afhangen-configuration', 'accountsService', 'alertsService'], function (app) {
 
-    app.register.controller('loginController', ['$scope', '$rootScope', 'accountsService', 'alertsService',
-        function ($scope, $rootScope, accountsService, alertsService) {
+    app.register.controller('loginController', ['$scope', '$rootScope', '$cookieStore', 'accountsService', 'alertsService',
+        function ($scope, $rootScope, $cookieStore, accountsService, alertsService) {
 
             $rootScope.closeAlert = alertsService.closeAlert;
             $rootScope.alerts = [];
@@ -13,27 +13,37 @@ define(['afhangen-configuration', 'accountsService', 'alertsService'], function 
                 $scope.UserName = "";
                 $scope.Password = "";
 
-                alertsService.RenderSuccessMessage("Please register if you do not have an account.");
+                //alertsService.RenderSuccessMessage("Please register if you do not have an account.");
 
             }
 
             $scope.login = function () {
                 $rootScope.IsloggedIn = false;
-                var user = $scope.createLoginCredentials();
-                accountsService.login(user, $scope.loginCompleted, $scope.loginError);
+
+                var FedAuth = $cookieStore.get('FedAuth');
+                var proxy = nl.clubcloud.Afhangen;
+                proxy.Login($scope.UserName, $scope.Password, $scope.loginCompleted, $scope.loginError)
             }
 
             $scope.loginCompleted = function (response) {
-                $rootScope.MenuItems = response.MenuItems;
-                window.location = "/applicationMasterPage.html#/Customers/CustomerInquiry";
+                if (response.ErrorCode == 'NoError')
+                {
+                    $cookieStore.put('FedAuth', response.FedAuth);
+                    $rootScope.IsloggedIn = true;
+                    window.location = "/index.html";
+                }
+                else {
+                    alertsService.RenderErrorMessage(response.ErrorCode + " : " + response.Message);
+                    $rootScope.IsloggedIn = false;
+                }
             }
 
             $scope.loginError = function (response) {
 
-                alertsService.RenderErrorMessage(response.ReturnMessage);
+                alertsService.RenderErrorMessage(response.ErrorCode + " : " + response.Message);
 
                 $scope.clearValidationErrors();
-                alertsService.SetValidationErrors($scope, response.ValidationErrors);
+                alertsService.SetValidationErrors($scope, response.ErrorCode + " : " + response.Message);
 
             }
 

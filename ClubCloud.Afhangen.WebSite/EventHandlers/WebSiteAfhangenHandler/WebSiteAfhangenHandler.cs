@@ -1,4 +1,4 @@
-// <copyright file="WebSiteAboutHandler.cs" company="Hemrika">
+// <copyright file="WebSiteAfhangenHandler.cs" company="Hemrika">
 // Copyright Hemrika. All rights reserved.
 // </copyright>
 // <author>MARKETING\Administrator</author>
@@ -17,7 +17,7 @@ namespace ClubCloud.Afhangen.WebSite
     /// <summary>
     /// TODO: Add comment for WebSiteAboutHandler
     /// </summary> 
-    public class WebSiteAboutHandler : SPWebEventReceiver
+    public class WebSiteAfhangenHandler : SPWebEventReceiver
     {
         /// <summary>
         /// TODO: Add comment for event WebProvisioned in WebSiteAfhangenHandler 

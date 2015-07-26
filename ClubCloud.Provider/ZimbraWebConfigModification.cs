@@ -41,10 +41,10 @@ namespace ClubCloud.Provider
             </sectionGroup>         
             */
             //*[local-name()='sectionGroup'][*/@name='Zimbra']
+
             var sectionGroup = new SPWebConfigModification
             {
-                
-                Name = "*[local-name()='sectionGroup'][*/@name='Zimbra']",
+                Name = "sectionGroup[@name='Zimbra']",
                 Owner = Owner,
                 Sequence = 0,
                 Path = "configuration/configSections",

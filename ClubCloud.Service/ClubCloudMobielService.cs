@@ -426,7 +426,6 @@ namespace ClubCloud.Service
 
             int parsed;
             
-            //if (HttpContext.Current != null && HttpContext.Current.User != null && HttpContext.Current.User.Identity != null && HttpContext.Current.User.Identity.IsAuthenticated)
             if (Authorized)
             {
                 string bondsnummer = HttpContext.Current.User.Identity.Name.Split('|').Last();

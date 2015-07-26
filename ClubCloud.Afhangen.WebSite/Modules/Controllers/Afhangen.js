@@ -8,6 +8,7 @@ require.config({
         'afhangen-configuration': 'Controllers/Afhangen.configuration',       
         'angular': 'Scripts/Angular/angular',
         'angular-route': 'Scripts/Angular/angular-route',
+        'angular-cookies': 'Scripts/Angular/angular-cookies',
         'angularAMD': 'Scripts/AMD/angularAMD',
         'ui-bootstrap': 'Scripts/Bootstrap/ui-bootstrap-tpls',
         'blockUI': 'Scripts/Angular/angular-block-ui',
@@ -25,6 +26,7 @@ require.config({
         'angular-route': ['angular'],
         'blockUI': ['angular'],
         'angular-sanitize': ['angular'],
+        'angular-cookies': ['angular'],
         'ui-bootstrap': ['angular']
          
     },

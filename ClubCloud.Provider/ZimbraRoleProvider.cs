@@ -263,7 +263,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -358,7 +358,7 @@ namespace ClubCloud.Provider
                 string dl_id = null;
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -453,7 +453,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -525,7 +525,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -739,7 +739,7 @@ namespace ClubCloud.Provider
                 string dl_id = null;
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -822,7 +822,7 @@ namespace ClubCloud.Provider
                 string dl_id = null;
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -899,7 +899,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -972,7 +972,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -1066,7 +1066,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -1169,7 +1169,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -1339,7 +1339,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -1441,7 +1441,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -1527,7 +1527,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -1614,7 +1614,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -1716,7 +1716,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -1810,7 +1810,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -1903,7 +1903,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -1996,7 +1996,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -2104,7 +2104,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 
@@ -2183,7 +2183,7 @@ namespace ClubCloud.Provider
 
                 SPContext context = null;
                 if (SPContext.Current == null)
-                    context = SPContext.GetContext(HttpContext.Current);
+                    if(HttpContext.Current != null) context = SPContext.GetContext(HttpContext.Current);
                 else
                     context = SPContext.Current;
 

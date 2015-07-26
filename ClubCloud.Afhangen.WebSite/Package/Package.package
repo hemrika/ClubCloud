@@ -2,9 +2,9 @@
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="d1fba650-fd7d-4a70-a30b-791304f9abb5" solutionId="d1fba650-fd7d-4a70-a30b-791304f9abb5" resetWebServer="false" title="ClubCloud Afhangen Website" sharePointProductVersion="15.0" name="ClubCloud.Afhangen.WebSite" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <features>
     <featureReference itemId="f140a81b-d59b-41df-b88e-1ebb28d996c8" />
+    <featureReference itemId="b7e46f9d-0a9e-40bd-9c17-69f4e1dfed95" />
   </features>
   <projectItems>
     <projectItemReference itemId="499551a9-5e4a-424f-89e9-372a8ba532e2" />
-    <projectItemReference itemId="87c86fe8-90e0-4014-a55c-f17decc606eb" />
   </projectItems>
 </package>

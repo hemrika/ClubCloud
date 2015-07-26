@@ -15,7 +15,9 @@
     <Configuration ID="-1" Name="NewWeb" />
 		<Configuration ID="0" Name="ClubClooud Afhangen WebSite">
 			<Lists />
-			<SiteFeatures />
+      <SiteFeatures >
+        <Feature ID="1b966fa3-5a7a-4da1-bc78-3d72b70b839f" />
+      </SiteFeatures>
 			<WebFeatures>
         <!-- ClubCloud_Afhangen_WebSite_Modules -->
         <Feature ID="d5764a12-0d4b-4a88-b572-f75b2ea52cba" />

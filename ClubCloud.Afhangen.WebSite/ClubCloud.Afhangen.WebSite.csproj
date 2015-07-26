@@ -20,7 +20,7 @@
     <SandboxedSolution>False</SandboxedSolution>
     <TargetFrameworkProfile />
     <ActiveDeploymentConfiguration>No Activation</ActiveDeploymentConfiguration>
-    <AssemblyDeploymentTarget>WebApplication</AssemblyDeploymentTarget>
+    <AssemblyDeploymentTarget>GlobalAssemblyCache</AssemblyDeploymentTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,6 +68,9 @@
     </None>
     <None Include="Features\ClubCloud_Afhangen_WebSite_Modules\ClubCloud_Afhangen_WebSite_Modules.feature">
       <FeatureId>{f140a81b-d59b-41df-b88e-1ebb28d996c8}</FeatureId>
+    </None>
+    <None Include="Features\ClubCloud_Afhangen_WebSite_Handlers\ClubCloud_Afhangen_WebSite_Handlers.feature">
+      <FeatureId>{b7e46f9d-0a9e-40bd-9c17-69f4e1dfed95}</FeatureId>
     </None>
     <None Include="Modules\Css\bootstrap-theme.css.map" />
     <None Include="Modules\Css\bootstrap-theme.min.css.map" />
@@ -148,9 +151,6 @@
     <None Include="SiteDefinitions\ClubCloudAfhangen\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{499551a9-5e4a-424f-89e9-372a8ba532e2}</SharePointProjectItemId>
     </None>
-    <None Include="Template\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{87c86fe8-90e0-4014-a55c-f17decc606eb}</SharePointProjectItemId>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -159,6 +159,9 @@
     <Content Include="EventHandlers\WebSiteAfhangenHandler\Elements.xml" />
     <Content Include="Features\ClubCloud_Afhangen_WebSite_Modules\ClubCloud_Afhangen_WebSite_Modules.Template.xml">
       <DependentUpon>ClubCloud_Afhangen_WebSite_Modules.feature</DependentUpon>
+    </Content>
+    <Content Include="Features\ClubCloud_Afhangen_WebSite_Handlers\ClubCloud_Afhangen_WebSite_Handlers.Template.xml">
+      <DependentUpon>ClubCloud_Afhangen_WebSite_Handlers.feature</DependentUpon>
     </Content>
     <Content Include="Modules\Controllers\LoginController.js" />
     <Content Include="Modules\Controllers\LogoutController.js" />
@@ -278,7 +281,6 @@
     <Content Include="SiteDefinitions\ClubCloudAfhangen\index.html" />
     <Content Include="SiteDefinitions\ClubCloudAfhangen\onet.xml" />
     <Content Include="SiteDefinitions\ClubCloudAfhangen\webtemp_ClubCloudAfhangen.xml" />
-    <Content Include="Template\Images\ClubCloud_Afhangen_WebSite\FeatureIcon_Views.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,8 +1,8 @@
 ﻿/// <reference path="../Services/afhangen.js" />
 "use strict";
 
-define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'blockUI', ], function (angularAMD) {
-    var app = angular.module("mainModule", ['ngRoute', 'blockUI', 'ngSanitize', 'ui.bootstrap']);
+define(['angularAMD', 'angular-route', 'angular-cookies', 'ui-bootstrap', 'angular-sanitize', 'blockUI'], function (angularAMD) {
+    var app = angular.module("mainModule", ['ngRoute', 'ngCookies', 'blockUI', 'ngSanitize', 'ui.bootstrap']);
    
     app.filter("leadingZeroes", function () {
         return function (data) {
@@ -42,7 +42,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
 
             .when("/:section/:tree", angularAMD.route({
 
-                templateUrl: function (rp) { return 'Views/' + rp.section + '/' + rp.tree + '.html'; },
+                templateUrl: function (rp) { return 'Views/' + rp.tree + '.html'; },
 
                 resolve: {
 
@@ -53,7 +53,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
                         var parentPath = parsePath[1];
                         var controllerName = parsePath[2];
 
-                        var loadController = "Controllers/" + parentPath + "/" + controllerName + "Controller";                 
+                        var loadController = "Controllers/" + controllerName + "Controller";                 
 
                         var deferred = $q.defer();
                         require([loadController], function () {
@@ -69,7 +69,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
 
             .when("/:section/:tree/:id", angularAMD.route({
 
-                templateUrl: function (rp) { return 'Views/' + rp.section + '/' + rp.tree + '.html'; },
+                templateUrl: function (rp) { return 'Views/' + rp.tree + '.html'; },
 
                 resolve: {
 
@@ -80,7 +80,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
                         var parentPath = parsePath[1];
                         var controllerName = parsePath[2];
 
-                        var loadController = "Controllers/" + parentPath + "/" + controllerName + "Controller";
+                        var loadController = "Controllers/" + controllerName + "Controller";
                                              
                         var deferred = $q.defer();
                         require([loadController], function () {
@@ -100,7 +100,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
     }]);
 
 
-    var indexController = function ($scope, $rootScope, $http, $location, blockUI) {
+    var indexController = function ($scope, $rootScope, $cookieStore, $http, $location, blockUI) {
              
         $scope.$on('$routeChangeStart', function (scope, next, current) {
              
@@ -132,37 +132,39 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
         }
 
         $scope.initializeApplicationComplete = function (response) {
-            $rootScope.MenuItems = response.MenuItems;
-            $rootScope.displayContent = true;
-            $rootScope.IsloggedIn = true;          
+            if (response.ErrorCode == 'NoError') {
+                $rootScope.MenuItems = response.MenuItems;
+                $rootScope.displayContent = true;
+                $rootScope.IsloggedIn = true;
+            }
         }
 
         $scope.initializeApplication = function (successFunction, errorFunction) {
             blockUI.start();
-            var proxy = clubcloud.nl.ClubCloudAfhangen;
-            proxy.GetVerenigingByNummer('12073385', '82503', false, successFunction, errorFunction);
-            //$scope.AjaxGet("/api/main/InitializeApplication", successFunction, errorFunction);
+            var FedAuth = $cookieStore.get('FedAuth');
+            var proxy = nl.clubcloud.Afhangen;
+            proxy.IsAuthorized(FedAuth,successFunction, errorFunction);
             blockUI.stop();
         };
               
         $scope.authenicateUser = function (route, successFunction, errorFunction) {
-            var authenication = new Object();
-            authenication.route = route;
-            var proxy = clubcloud.nl.ClubCloudAfhangen;
-            proxy.GetVerenigingByNummer('12073385', '82503', false, successFunction, errorFunction);
+            var FedAuth = $cookieStore.get('FedAuth');
+            var proxy = nl.clubcloud.Afhangen;
+            proxy.IsAuthorized(FedAuth,successFunction, errorFunction);
             //$scope.AjaxGetWithData(authenication, "/api/main/AuthenicateUser", successFunction, errorFunction);
         };
            
         $scope.authenicateUserComplete = function (response) {
            
-            if (response.IsAuthenicated==false)               
+            if (response.ErrorCode == 'NoError')
                 window.location = "/index.html";
         }
 
         $scope.authenicateUserError = function (response) {
-            alert("ERROR= "+response.IsAuthenicated);
+            alert("Error " + response.ErrorCode + " : " + response.Message);
         }
 
+        /*
         $scope.AjaxGet = function (route, successFunction, errorFunction) {         
             setTimeout(function () {
                 $http({ method: 'GET', url: route }).success(function (response, status, headers, config) {                 
@@ -184,10 +186,10 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'bloc
             }, 1);
 
         }
-
+        */
     };
 
-    indexController.$inject = ['$scope', '$rootScope', '$http', '$location', 'blockUI'];
+    indexController.$inject = ['$scope', '$rootScope', '$cookieStore', '$http', '$location', 'blockUI'];
     app.controller("indexController", indexController);
   
     // Bootstrap Angular when DOM is ready

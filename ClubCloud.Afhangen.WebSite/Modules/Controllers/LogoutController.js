@@ -2,13 +2,16 @@
 
 define(['afhangen-configuration', 'mainService', 'alertsService'], function (app) {
 
-    app.register.controller('logoutController', ['$scope', '$rootScope', 'mainService', 'alertsService', function ($scope, $rootScope, mainService, alertsService) {
+    app.register.controller('logoutController', ['$scope', '$rootScope', '$cookieStore', 'mainService', 'alertsService', function ($scope, $rootScope, mainService, alertsService) {
 
         $scope.initializeController = function () {
-            mainService.logout($scope.logoutComplete, $scope.logoutError);
+            var proxy = nl.clubcloud.Afhangen;
+            proxy.Logout($scope.logoutComplete, $scope.logoutError);
+            //mainService.logout($scope.logoutComplete, $scope.logoutError);
         }
 
         $scope.logoutComplete = function (response) {
+            $cookieStore.put('FedAuth', null);
             window.location = "/index.html";
         }
 
