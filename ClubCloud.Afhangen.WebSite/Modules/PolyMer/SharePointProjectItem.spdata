@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
-    <ProjectItemFile Source="Components\polymer\polymer-micro.html" Target="Components\Script\" Type="ElementFile" />
-    <ProjectItemFile Source="Components\polymer\polymer-mini.html" Target="Components\Script\" Type="ElementFile" />
-    <ProjectItemFile Source="Components\polymer\polymer.html" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\polymer\polymer-micro.html" Target="Components\Polymer\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\polymer\polymer-mini.html" Target="Components\Polymer\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\polymer\polymer.html" Target="Components\Polymer\" Type="ElementFile" />
     <ProjectItemFile Source="Components\webcomponentsjs\CustomElements.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\webcomponentsjs\CustomElements.min.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\webcomponentsjs\HTMLImports.js" Target="Components\Script\" Type="ElementFile" />
@@ -158,5 +158,6 @@
     <ProjectItemFile Source="Components\web-animations-js\web-animations.html" Target="Components\Elements\web-animations-js\" Type="ElementFile" />
     <ProjectItemFile Source="Components\web-animations-js\web-animations.min.js" Target="Components\Elements\web-animations-js\" Type="ElementFile" />
     <ProjectItemFile Source="Components\web-animations-js\web-animations.min.js.map" Target="Components\Elements\web-animations-js\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\elements.html" Target="Components\Elements\" Type="ElementFile" />
   </Files>
 </ProjectItem>

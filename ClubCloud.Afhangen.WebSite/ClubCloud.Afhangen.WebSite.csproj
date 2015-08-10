@@ -330,6 +330,7 @@
     <Content Include="Modules\jQuery\Components\jquery\dist\jquery.js" />
     <Content Include="Modules\jQuery\Components\jquery\dist\jquery.min.js" />
     <Content Include="Modules\Modernizr\Components\modernizr\modernizr.js" />
+    <Content Include="Modules\Polymer\Components\elements.html" />
     <Content Include="Modules\Polymer\Components\font-roboto\roboto.html" />
     <Content Include="Modules\Polymer\Components\iron-a11y-announcer\iron-a11y-announcer.html" />
     <Content Include="Modules\Polymer\Components\iron-a11y-keys-behavior\iron-a11y-keys-behavior.html" />
