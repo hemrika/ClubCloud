@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Components\angular-sharepoint\angular-sharepoint.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-sharepoint\angular-sharepoint.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-sharepoint\angular-sharepoint.min.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ShareCoffee\dist\ShareCoffee.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ShareCoffee\dist\ShareCoffee.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ShareCoffee\dist\ShareCoffee.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ShareCoffee.Search\dist\ShareCoffee.Search.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ShareCoffee.Search\dist\ShareCoffee.Search.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ShareCoffee.Search\dist\ShareCoffee.Search.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ShareCoffee.UserProfiles\dist\ShareCoffee.UserProfiles.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ShareCoffee.UserProfiles\dist\ShareCoffee.UserProfiles.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ShareCoffee.UserProfiles\dist\ShareCoffee.UserProfiles.min.js" Target="Components\Script\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

@@ -5,7 +5,7 @@ require.config({
 
     // alias libraries paths
     paths: {
-        'afhangen-configuration': 'Controllers/Afhangen.configuration',       
+        'afhangen-configuration': 'Controllers/Afhangen.configuration',
         'angular': 'Scripts/Angular/angular',
         'angular-route': 'Scripts/Angular/angular-route',
         'angular-cookies': 'Scripts/Angular/angular-cookies',
@@ -28,7 +28,7 @@ require.config({
         'angular-sanitize': ['angular'],
         'angular-cookies': ['angular'],
         'ui-bootstrap': ['angular']
-         
+
     },
 
     // kick start application

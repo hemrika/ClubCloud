@@ -7,7 +7,8 @@
 		Url="Views">
     <File Path="Views.js" Url="Views.js" />
     <File Path="default.html" Url="default.html" />
-    <File Path="Login.html" Url="Login.html" />
-    <File Path="Logout.html" Url="Logout.html" />
+    <File Path="Accounts\Login.html" Url="Accounts/Login.html" />
+    <File Path="Accounts\Logout.html" Url="Accounts/Logout.html" />
+    <File Path="Afhangen\start.html" Url="Afhangen/start.html" />
   </Module>
 </Elements>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+	<CustomAction
+		Id="Ribbon.ClubCloud.WebSite.Wiki.Snippets"
+		Location="CommandUI.Ribbon"
+		Title="Wiki Snippets" >
+		<CommandUIExtension>
+			<CommandUIDefinitions>
+				<CommandUIDefinition Location="Ribbon.EditingTools.CPInsert.Groups._children">
+            <Group 
+              Id="Ribbon.EditingTools.CPInsert.CCSnippet" 
+              Sequence="100" 
+              Description="$Resources:CCSnippet_Description;" 
+              Title="$Resources:CCSnippet_Title;" 
+              Template="Ribbon.Templates.Flexible">
+              <Controls Id="Ribbon.EditingTools.CPInsert.CCSnippet.Controls">
+                <FlyoutAnchor
+                  Id="Ribbon.EditingTools.CPInsert.CCSnippet.Dropdown"
+                  Sequence="10"
+                  Command="ClubCloud.Wiki.Editor.CanInsertSnippet"
+                  Image16by16="/_layouts/15/images/ClubCloud/Club_WebSite/WikiSnippets_16.gif"
+                  Image32by32="/_layouts/15/images/ClubCloud/Club_WebSite/WikiSnippets_32.gif"
+                  PopulateDynamically="true"
+                  PopulateOnlyOnce="true"
+                  PopulateQueryCommand="ClubCloud.Wiki.Editor.Snippet.PopulateDropDown"					  
+                  Alt="$Resources:CCSnippetdd_Alt;"  
+                  LabelText="$Resources:CCSnippetdd_LabelText;"
+                  ToolTipTitle="$Resources:CCSnippetdd_ToolTipTitle;"
+                  ToolTipDescription="$Resources:CCSnippetdd_ToolTipDescription;"
+                  TemplateAlias="o1" />
+              </Controls>
+            </Group>
+				</CommandUIDefinition>
+			</CommandUIDefinitions>
+		</CommandUIExtension>
+	</CustomAction>
+</Elements>

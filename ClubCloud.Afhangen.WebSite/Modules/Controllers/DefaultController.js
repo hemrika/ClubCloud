@@ -2,7 +2,7 @@
 
 define(['afhangen-configuration', 'mainService', 'alertsService'], function (app) {
 
-    app.register.controller('defaultController', ['$scope', '$rootScope', '$cookieStore', 'mainService', 'alertsService', function ($scope, $rootScope, $cookieStore, mainService, alertsService) {
+    app.register.controller('defaultController', ['$scope', '$rootScope', '$cookies', 'mainService', 'alertsService', function ($scope, $rootScope, $cookies, mainService, alertsService) {
 
         $rootScope.closeAlert = alertsService.closeAlert;
 
@@ -18,39 +18,39 @@ define(['afhangen-configuration', 'mainService', 'alertsService'], function (app
                 'Route': '#/Reserveringen/Start',
                 'Description': 'Reserveringen'
             }, {
-                'Route': '#/Bezetting/Baa',
+                'Route': '#/Bezetting/Banen',
                 'Description': 'Bezetting'
             }];
 
             $rootScope.displayContent = true;
 
-            var FedAuth = $cookieStore.get('FedAuth');
             var proxy = nl.clubcloud.Afhangen;
-            proxy.IsAuthorized(FedAuth, $scope.initializeApplicationComplete, $scope.initializeApplicationError);
+            proxy.IsAuthorized($scope.initializeApplicationComplete, $scope.initializeApplicationError);
+            //mainService.IsAuthorized($scope.initializeApplicationComplete, $scope.initializeApplicationError);
 
-            //mainService.initializeApplication($scope.initializeApplicationComplete, $scope.initializeApplicationError);
         }
 
         $scope.initializeApplicationComplete = function (response) {
-            $rootScope.MenuItems = [];
 
-            $rootScope.displayContent = true;
-
-            if (response.ErrorCode == 'NoError') {
-                window.location = "/index.html";
+            if (response.ErrorCode == ClubCloud.Service.LoginErrorCode.NoError) {
+                $rootScope.displayContent = true;
+                //window.location = "index.html";
             }
             else {
-
-                // set timeout needed to prevent AngularJS from raising a digest error
                 setTimeout(function () {
                     window.location = "#Accounts/Login";
                 }, 10);
-
             }
         }
 
         $scope.initializeApplicationError = function (response) {
-            alertsService.RenderErrorMessage(response.ReturnMessage);
+            if (response) {
+                if (response._statusCode == '401') {
+                    setTimeout(function () {
+                        window.location = "#Accounts/Login";
+                    }, 10);
+                }
+            }
         }
 
 

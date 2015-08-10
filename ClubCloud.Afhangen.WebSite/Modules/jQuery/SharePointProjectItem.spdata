@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Components\jquery\dist\jquery.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\jquery\dist\jquery.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\jquery\dist\jquery.min.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\jquery.validate\dist\additional-methods.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\jquery.validate\dist\additional-methods.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\jquery.validate\dist\jquery.validate.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\jquery.validate\dist\jquery.validate.min.js" Target="Components\Script\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

@@ -8,5 +8,8 @@
     <ProjectItemFile Source="DefaultController.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="LoginController.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="LogoutController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Accounts\LoginController.js" Target="Controllers\Accounts\" Type="ElementFile" />
+    <ProjectItemFile Source="Accounts\LogoutController.js" Target="Controllers\Accounts\" Type="ElementFile" />
+    <ProjectItemFile Source="Afhangen\StartController.js" Target="Controllers\Afhangen\" Type="ElementFile" />
   </Files>
 </ProjectItem>

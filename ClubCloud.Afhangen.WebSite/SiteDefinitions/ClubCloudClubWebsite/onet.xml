@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Project   xmlns:ows="Microsoft SharePoint" xmlns="http://schemas.microsoft.com/sharepoint/" 
+  Title="ClubCloud Club WebSite" 
+  Revision="2" 
+  ListDir="Lists"
+  DisableWebDesignFeatures="false"  
+  EnableMinimalDownload="false" 
+  HideSiteContentsLink="false">
+	<!-- _locID@Title="camlidonet1" _locComment="{StringCategory=HTX}" -->
+  <NavBars>
+    <NavBar Name="$Resources:core,category_Top;" Separator="&amp;nbsp;&amp;nbsp;&amp;nbsp;" Body="&lt;a ID='onettopnavbar#LABEL_ID#' href='#URL#' accesskey='J'&gt;#LABEL#&lt;/a&gt;" ID="1002" />
+    <NavBar Name="Pagina's" Prefix="&lt;table border='0' cellpadding='4' cellspacing='0'&gt;" Body="&lt;tr&gt;&lt;td&gt;&lt;table border='0' cellpadding='0' cellspacing='0'&gt;&lt;tr&gt;&lt;td&gt;&lt;img src='/_layouts/15/images/blank.gif' id='100' alt='' border='0'&gt;&amp;nbsp;&lt;/td&gt;&lt;td valign='top'&gt;&lt;a id='onetleftnavbar#LABEL_ID#' href='#URL#'&gt;#LABEL#&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;" Suffix="&lt;/table&gt;" ID="1010" Url="Lists/Pagina's/Forms/AllPages.aspx" />
+    <NavBar Name="Documenten" Prefix="&lt;table border='0' cellpadding='4' cellspacing='0'&gt;" Body="&lt;tr&gt;&lt;td&gt;&lt;table border='0' cellpadding='0' cellspacing='0'&gt;&lt;tr&gt;&lt;td&gt;&lt;img src='/_layouts/15/images/blank.gif' id='100' alt='' border='0'&gt;&amp;nbsp;&lt;/td&gt;&lt;td valign='top'&gt;&lt;a id='onetleftnavbar#LABEL_ID#' href='#URL#'&gt;#LABEL#&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;" Suffix="&lt;/table&gt;" ID="1010" Url="Lists/Documenten/Forms/AllItems.aspx" />
+  </NavBars>
+  <Configurations>
+      <Configuration ID="-1" Name="NewWeb" />
+		<Configuration ID="0" Name="ClubCloud Club WebSite" MasterUrl="_catalogs/masterpage/seattle.master">
+      <Lists>
+        <List Type="101" Title="Documenten" Url="Lists/Documenten" FeatureId="00BFEA71-E717-4E80-AA17-D0C71B360101" VersioningEnabled="TRUE" />
+        <List Type="104" Title="Mededelingen" Url="Lists/Mededelingen" FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104" />
+        <List Type="106" Title="Agenda" Url="Lists/Agenda" FeatureId="00BFEA71-EC85-4903-972D-EBE475780106" />
+        <List Type="119" Title="Pagina's" Url="Lists/Pagina's" FeatureId="00BFEA71-C796-4402-9F2F-0EB9A6E71B18" VersioningEnabled="TRUE" />
+      </Lists>
+      <SiteFeatures >
+        <Feature ID="1b966fa3-5a7a-4da1-bc78-3d72b70b839f" />
+        <!-- BasicWebParts Feature -->
+        <Feature ID="00BFEA71-1C5E-4A24-B310-BA51C3EB7A57" />
+        <!-- Three-state Workflow Feature -->
+        <Feature ID="FDE5D850-671E-4143-950A-87B473922DC7" />
+      </SiteFeatures>
+			<WebFeatures>
+        <!-- ClubCloud_Afhangen_WebSite_Modules -->
+        <Feature ID="d5764a12-0d4b-4a88-b572-f75b2ea52cba" />
+        <!-- Zimbra Receiver -->
+        <Feature ID="27829f49-e2cf-4991-b4d4-632e869c50fd" />
+        <!-- TeamCollab Feature -->
+        <Feature ID="00BFEA71-4EA5-48D4-A4AD-7EA5C011ABE5" />
+        <!-- Blog feature -->
+        <Feature ID="FAF00902-6BAB-4583-BD02-84DB191801D8" />
+        <!-- MDS -->
+        <Feature ID="87294C72-F260-42f3-A41B-981A2FFCE37A" />
+      </WebFeatures>
+      <Modules>
+        <Module Name="Basics" />
+      </Modules>
+		</Configuration>
+	</Configurations>
+  <Modules>
+    <Module Name="Basics" Url="" Path="" >
+      <File Url="index.html" NavBarHome="True" Type="Ghostable"    />
+    </Module>
+  </Modules>
+  <ServerEmailFooter>$Resources:ServerEmailFooter;</ServerEmailFooter>
+</Project>

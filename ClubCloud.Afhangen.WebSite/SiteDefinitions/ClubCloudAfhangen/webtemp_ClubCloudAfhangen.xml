@@ -6,12 +6,12 @@
 		ID="20000">
 		<Configuration
 			ID="0"
-			Title="ClubCloud Afhangen"
+			Title="ClubCloud Afhangen Website"
 			Description="ClubCloudAfhangen Description"
 			DisplayCategory="ClubCloud"
 			Hidden="False"
 			ImageUrl="/_layouts/15/images/ClubCloud_Afhangen_WebSite/ClubCloudAfhangen.gif"
-			RootWebOnly="False"
+			RootWebOnly="True"
 			VisibilityFeatureDependency="" />
 	</Template>
 </Templates>

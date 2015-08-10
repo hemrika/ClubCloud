@@ -1,0 +1,8 @@
+{
+  "name": "Require",
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "requirejs": "~2.1.20"
+  }
+}

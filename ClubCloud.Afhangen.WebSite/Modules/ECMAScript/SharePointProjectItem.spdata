@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Components\es5-shim\es5-sham.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es5-shim\es5-sham.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es5-shim\es5-sham.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es5-shim\es5-shim.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es5-shim\es5-shim.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es5-shim\es5-shim.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es6-shim\es6-sham.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es6-shim\es6-sham.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es6-shim\es6-sham.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es6-shim\es6-shim.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es6-shim\es6-shim.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es6-shim\es6-shim.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\String.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\SIMD.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\RegExp.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\Set.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\Object.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\Map.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\es7-shim.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\Array.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\RegExp.escape.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\Set.prototype.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\String.prototype.at.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\String.prototype.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\String.prototype.padLeft.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\String.prototype.padRight.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\String.prototype.trimLeft.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\String.prototype.trimRight.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\Array.prototype.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\es7-shim\Map.prototype.js" Target="Components\Script\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

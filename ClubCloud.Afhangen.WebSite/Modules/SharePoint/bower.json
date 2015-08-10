@@ -1,0 +1,14 @@
+{
+  "name": "SharePoint",
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "ShareCoffee": "~0.1.4",
+    "ShareCoffee.Search": "~0.0.2",
+    "ShareCoffee.UserProfiles": "*",
+    "angular-sharepoint": "~0.3.4"
+  },
+  "resolutions": {
+    "ShareCoffee": "0.1.4"
+  }
+}

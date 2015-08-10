@@ -72,12 +72,55 @@
     <None Include="Features\ClubCloud_Afhangen_WebSite_Handlers\ClubCloud_Afhangen_WebSite_Handlers.feature">
       <FeatureId>{b7e46f9d-0a9e-40bd-9c17-69f4e1dfed95}</FeatureId>
     </None>
+    <None Include="Features\ClubCloud_WebSite_Components\ClubCloud_WebSite_Components.feature">
+      <FeatureId>{80566da0-27bd-4297-a30e-36c627d361d1}</FeatureId>
+    </None>
+    <None Include="Modules\Angular\.bowerrc" />
+    <None Include="Modules\Angular\bower.json" />
+    <None Include="Modules\Angular\Components\angular-animate\angular-animate.min.js.map" />
+    <None Include="Modules\Angular\Components\angular-aria\angular-aria.min.js.map" />
+    <None Include="Modules\Angular\Components\angular-block-ui\dist\angular-block-ui.css.map" />
+    <None Include="Modules\Angular\Components\angular-block-ui\dist\angular-block-ui.js.map" />
+    <None Include="Modules\Angular\Components\angular-block-ui\dist\angular-block-ui.min.js.map" />
+    <None Include="Modules\Angular\Components\angular-cookies\angular-cookies.min.js.map" />
+    <None Include="Modules\Angular\Components\angular-loader\angular-loader.min.js.map" />
+    <None Include="Modules\Angular\Components\angular-messages\angular-messages.min.js.map" />
+    <None Include="Modules\Angular\Components\angular-resource\angular-resource.min.js.map" />
+    <None Include="Modules\Angular\Components\angular-route\angular-route.min.js.map" />
+    <None Include="Modules\Angular\Components\angular-sanitize\angular-sanitize.min.js.map" />
+    <None Include="Modules\Angular\Components\angular-touch\angular-touch.min.js.map" />
+    <None Include="Modules\Angular\Components\angularAMD\angularAMD.min.map" />
+    <None Include="Modules\Angular\Components\angular\angular.min.js.map" />
+    <None Include="Modules\Angular\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b5a3f669-658d-41e2-9402-267d00f99a97}</SharePointProjectItemId>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Modules\Bootstrap\.bowerrc" />
+    <None Include="Modules\Bootstrap\bower.json" />
+    <None Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <None Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="Modules\Bootstrap\Components\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Modules\Bootstrap\Components\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Modules\Bootstrap\Components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Modules\Bootstrap\Components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Modules\Bootstrap\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{88650f64-63cd-4f5b-80aa-621267ae527f}</SharePointProjectItemId>
+    </None>
     <None Include="Modules\Css\bootstrap-theme.css.map" />
     <None Include="Modules\Css\bootstrap-theme.min.css.map" />
     <None Include="Modules\Css\bootstrap.css.map" />
     <None Include="Modules\Css\bootstrap.min.css.map" />
     <None Include="Modules\Css\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{71af9c5d-1a48-460c-bba9-3f0b9ca380ba}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\ECMAScript\.bowerrc" />
+    <None Include="Modules\ECMAScript\bower.json" />
+    <None Include="Modules\ECMAScript\Components\es5-shim\es5-sham.map" />
+    <None Include="Modules\ECMAScript\Components\es5-shim\es5-shim.map" />
+    <None Include="Modules\ECMAScript\Components\es6-shim\es6-sham.map" />
+    <None Include="Modules\ECMAScript\Components\es6-shim\es6-shim.map" />
+    <None Include="Modules\ECMAScript\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{31ae1dd7-2578-46f2-865d-073cf79fc1aa}</SharePointProjectItemId>
     </None>
     <None Include="Modules\Fonts\fontawesome-webfont.eot" />
     <None Include="Modules\Fonts\fontawesome-webfont.ttf" />
@@ -93,6 +136,30 @@
       <SharePointProjectItemId>{6bf48dba-af64-443d-bd5a-d9f18f0f6e49}</SharePointProjectItemId>
     </None>
     <None Include="Modules\Fonts\Ubuntu-Regular-webfont.ttf" />
+    <None Include="Modules\jQuery\.bowerrc" />
+    <None Include="Modules\jQuery\bower.json" />
+    <None Include="Modules\jQuery\Components\jquery\dist\jquery.min.map" />
+    <None Include="Modules\jQuery\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5ddc94cd-6c0d-49d8-a33f-2369780a24fd}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Modernizr\.bowerrc" />
+    <None Include="Modules\Modernizr\bower.json" />
+    <None Include="Modules\Modernizr\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{50154064-ad1c-4897-b5e5-9638b247eb9b}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Polymer\.bowerrc" />
+    <None Include="Modules\Polymer\bower.json" />
+    <None Include="Modules\Polymer\Components\web-animations-js\web-animations-next-lite.min.js.map" />
+    <None Include="Modules\Polymer\Components\web-animations-js\web-animations-next.min.js.map" />
+    <None Include="Modules\Polymer\Components\web-animations-js\web-animations.min.js.map" />
+    <None Include="Modules\Polymer\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8345d6b7-f418-4262-8483-1810703c1881}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Require\.bowerrc" />
+    <None Include="Modules\Require\bower.json" />
+    <None Include="Modules\Require\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{69942736-7ff0-455b-ba89-4e6081977963}</SharePointProjectItemId>
+    </None>
     <None Include="Modules\Scripts\AMD\angularAMD.min.map" />
     <None Include="Modules\Scripts\AMD\ngload.min.map" />
     <None Include="Modules\Scripts\Angular\angular-animate.min.js.map" />
@@ -131,6 +198,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Controllers.js</LastGenOutput>
     </None>
+    <None Include="Modules\SharePoint\.bowerrc" />
+    <None Include="Modules\SharePoint\bower.json" />
+    <None Include="Modules\SharePoint\Components\angular-sharepoint\angular-sharepoint.min.map" />
+    <None Include="Modules\SharePoint\Components\ShareCoffee.Search\dist\ShareCoffee.Search.js.map" />
+    <None Include="Modules\SharePoint\Components\ShareCoffee.UserProfiles\dist\ShareCoffee.UserProfiles.js.map" />
+    <None Include="Modules\SharePoint\Components\ShareCoffee\dist\ShareCoffee.js.map" />
+    <None Include="Modules\SharePoint\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{12a359e8-81fc-42f5-b152-e509bf93b766}</SharePointProjectItemId>
+    </None>
     <None Include="Modules\Views\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6229fe52-08a2-4e3e-a6fc-31a7161bae6b}</SharePointProjectItemId>
     </None>
@@ -144,9 +220,8 @@
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
-    <None Include="SaveOutput.tt">
-      <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
-&lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
+    <None Include="SiteDefinitions\ClubCloudClubWebsite\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{61eda96a-0304-478a-9f3e-9e15edc490fa}</SharePointProjectItemId>
     </None>
     <None Include="SiteDefinitions\ClubCloudAfhangen\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{499551a9-5e4a-424f-89e9-372a8ba532e2}</SharePointProjectItemId>
@@ -163,6 +238,50 @@
     <Content Include="Features\ClubCloud_Afhangen_WebSite_Handlers\ClubCloud_Afhangen_WebSite_Handlers.Template.xml">
       <DependentUpon>ClubCloud_Afhangen_WebSite_Handlers.feature</DependentUpon>
     </Content>
+    <Content Include="Features\ClubCloud_WebSite_Components\ClubCloud_WebSite_Components.Template.xml">
+      <DependentUpon>ClubCloud_WebSite_Components.feature</DependentUpon>
+    </Content>
+    <Content Include="Modules\Angular\Components\angular-animate\angular-animate.js" />
+    <Content Include="Modules\Angular\Components\angular-animate\angular-animate.min.js" />
+    <Content Include="Modules\Angular\Components\angular-aria\angular-aria.js" />
+    <Content Include="Modules\Angular\Components\angular-aria\angular-aria.min.js" />
+    <Content Include="Modules\Angular\Components\angular-block-ui\dist\angular-block-ui.css" />
+    <Content Include="Modules\Angular\Components\angular-block-ui\dist\angular-block-ui.js" />
+    <Content Include="Modules\Angular\Components\angular-block-ui\dist\angular-block-ui.min.css" />
+    <Content Include="Modules\Angular\Components\angular-block-ui\dist\angular-block-ui.min.js" />
+    <Content Include="Modules\Angular\Components\angular-bootstrap\ui-bootstrap.js" />
+    <Content Include="Modules\Angular\Components\angular-bootstrap\ui-bootstrap.min.js" />
+    <Content Include="Modules\Angular\Components\angular-cookies\angular-cookies.js" />
+    <Content Include="Modules\Angular\Components\angular-cookies\angular-cookies.min.js" />
+    <Content Include="Modules\Angular\Components\angular-i18n\angular-locale_nl.js" />
+    <Content Include="Modules\Angular\Components\angular-loader\angular-loader.js" />
+    <Content Include="Modules\Angular\Components\angular-loader\angular-loader.min.js" />
+    <Content Include="Modules\Angular\Components\angular-messages\angular-messages.js" />
+    <Content Include="Modules\Angular\Components\angular-messages\angular-messages.min.js" />
+    <Content Include="Modules\Angular\Components\angular-resource\angular-resource.js" />
+    <Content Include="Modules\Angular\Components\angular-resource\angular-resource.min.js" />
+    <Content Include="Modules\Angular\Components\angular-route\angular-route.js" />
+    <Content Include="Modules\Angular\Components\angular-route\angular-route.min.js" />
+    <Content Include="Modules\Angular\Components\angular-sanitize\angular-sanitize.js" />
+    <Content Include="Modules\Angular\Components\angular-sanitize\angular-sanitize.min.js" />
+    <Content Include="Modules\Angular\Components\angular-touch\angular-touch.js" />
+    <Content Include="Modules\Angular\Components\angular-touch\angular-touch.min.js" />
+    <Content Include="Modules\Angular\Components\angular-ui-router\release\angular-ui-router.js" />
+    <Content Include="Modules\Angular\Components\angular-ui-router\release\angular-ui-router.min.js" />
+    <Content Include="Modules\Angular\Components\angularAMD\angularAMD.js" />
+    <Content Include="Modules\Angular\Components\angularAMD\angularAMD.min.js" />
+    <Content Include="Modules\Angular\Components\angular\angular.js" />
+    <Content Include="Modules\Angular\Components\angular\angular.min.js" />
+    <Content Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Modules\Bootstrap\Components\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Modules\Bootstrap\Components\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Modules\Bootstrap\Components\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Modules\Controllers\Accounts\LoginController.js" />
+    <Content Include="Modules\Controllers\Accounts\LogoutController.js" />
+    <Content Include="Modules\Controllers\Afhangen\StartController.js" />
     <Content Include="Modules\Controllers\LoginController.js" />
     <Content Include="Modules\Controllers\LogoutController.js" />
     <Content Include="Modules\Css\angular-block-ui.css" />
@@ -175,9 +294,197 @@
     <Content Include="Modules\Css\font-awesome.css" />
     <Content Include="Modules\Css\font-awesome.min.css" />
     <Content Include="Modules\Css\styles.css" />
+    <Content Include="Modules\ECMAScript\Components\es5-shim\es5-sham.js" />
+    <Content Include="Modules\ECMAScript\Components\es5-shim\es5-sham.min.js" />
+    <Content Include="Modules\ECMAScript\Components\es5-shim\es5-shim.js" />
+    <Content Include="Modules\ECMAScript\Components\es5-shim\es5-shim.min.js" />
+    <Content Include="Modules\ECMAScript\Components\es6-shim\es6-sham.js" />
+    <Content Include="Modules\ECMAScript\Components\es6-shim\es6-sham.min.js" />
+    <Content Include="Modules\ECMAScript\Components\es6-shim\es6-shim.js" />
+    <Content Include="Modules\ECMAScript\Components\es6-shim\es6-shim.min.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\Array.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\Array.prototype.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\es7-shim.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\Map.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\Map.prototype.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\Object.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\RegExp.escape.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\RegExp.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\Set.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\Set.prototype.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\SIMD.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\String.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\String.prototype.at.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\String.prototype.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\String.prototype.padLeft.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\String.prototype.padRight.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\String.prototype.trimLeft.js" />
+    <Content Include="Modules\ECMAScript\Components\es7-shim\String.prototype.trimRight.js" />
     <Content Include="Modules\Fonts\Elements.xml" />
     <Content Include="Modules\Fonts\fontawesome-webfont.svg" />
     <Content Include="Modules\Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Modules\jQuery\Components\jquery.validate\dist\additional-methods.js" />
+    <Content Include="Modules\jQuery\Components\jquery.validate\dist\additional-methods.min.js" />
+    <Content Include="Modules\jQuery\Components\jquery.validate\dist\jquery.validate.js" />
+    <Content Include="Modules\jQuery\Components\jquery.validate\dist\jquery.validate.min.js" />
+    <Content Include="Modules\jQuery\Components\jquery\dist\jquery.js" />
+    <Content Include="Modules\jQuery\Components\jquery\dist\jquery.min.js" />
+    <Content Include="Modules\Modernizr\Components\modernizr\modernizr.js" />
+    <Content Include="Modules\Polymer\Components\font-roboto\roboto.html" />
+    <Content Include="Modules\Polymer\Components\iron-a11y-announcer\iron-a11y-announcer.html" />
+    <Content Include="Modules\Polymer\Components\iron-a11y-keys-behavior\iron-a11y-keys-behavior.html" />
+    <Content Include="Modules\Polymer\Components\iron-a11y-keys\iron-a11y-keys.html" />
+    <Content Include="Modules\Polymer\Components\iron-ajax\iron-ajax.html" />
+    <Content Include="Modules\Polymer\Components\iron-ajax\iron-request.html" />
+    <Content Include="Modules\Polymer\Components\iron-autogrow-textarea\iron-autogrow-textarea.html" />
+    <Content Include="Modules\Polymer\Components\iron-behaviors\iron-button-state.html" />
+    <Content Include="Modules\Polymer\Components\iron-behaviors\iron-control-state.html" />
+    <Content Include="Modules\Polymer\Components\iron-collapse\iron-collapse.html" />
+    <Content Include="Modules\Polymer\Components\iron-component-page\iron-component-page.css" />
+    <Content Include="Modules\Polymer\Components\iron-component-page\iron-component-page.html" />
+    <Content Include="Modules\Polymer\Components\iron-doc-viewer\iron-doc-property.css" />
+    <Content Include="Modules\Polymer\Components\iron-doc-viewer\iron-doc-property.html" />
+    <Content Include="Modules\Polymer\Components\iron-doc-viewer\iron-doc-viewer.css" />
+    <Content Include="Modules\Polymer\Components\iron-doc-viewer\iron-doc-viewer.html" />
+    <Content Include="Modules\Polymer\Components\iron-dropdown\iron-dropdown-scroll-manager.html" />
+    <Content Include="Modules\Polymer\Components\iron-dropdown\iron-dropdown.html" />
+    <Content Include="Modules\Polymer\Components\iron-fit-behavior\iron-fit-behavior.html" />
+    <Content Include="Modules\Polymer\Components\iron-flex-layout\iron-flex-layout.html" />
+    <Content Include="Modules\Polymer\Components\iron-form-element-behavior\iron-form-element-behavior.html" />
+    <Content Include="Modules\Polymer\Components\iron-form\iron-form.html" />
+    <Content Include="Modules\Polymer\Components\iron-iconset-svg\iron-iconset-svg.html" />
+    <Content Include="Modules\Polymer\Components\iron-iconset\iron-iconset.html" />
+    <Content Include="Modules\Polymer\Components\iron-icons\av-icons.html" />
+    <Content Include="Modules\Polymer\Components\iron-icons\communication-icons.html" />
+    <Content Include="Modules\Polymer\Components\iron-icons\device-icons.html" />
+    <Content Include="Modules\Polymer\Components\iron-icons\editor-icons.html" />
+    <Content Include="Modules\Polymer\Components\iron-icons\hardware-icons.html" />
+    <Content Include="Modules\Polymer\Components\iron-icons\image-icons.html" />
+    <Content Include="Modules\Polymer\Components\iron-icons\iron-icons.html" />
+    <Content Include="Modules\Polymer\Components\iron-icons\maps-icons.html" />
+    <Content Include="Modules\Polymer\Components\iron-icons\notification-icons.html" />
+    <Content Include="Modules\Polymer\Components\iron-icons\social-icons.html" />
+    <Content Include="Modules\Polymer\Components\iron-icon\iron-icon.html" />
+    <Content Include="Modules\Polymer\Components\iron-image\iron-image.html" />
+    <Content Include="Modules\Polymer\Components\iron-input\iron-input.html" />
+    <Content Include="Modules\Polymer\Components\iron-jsonp-library\iron-jsonp-library.html" />
+    <Content Include="Modules\Polymer\Components\iron-list\iron-list.html" />
+    <Content Include="Modules\Polymer\Components\iron-localstorage\iron-localstorage.html" />
+    <Content Include="Modules\Polymer\Components\iron-media-query\iron-media-query.html" />
+    <Content Include="Modules\Polymer\Components\iron-menu-behavior\iron-menu-behavior.html" />
+    <Content Include="Modules\Polymer\Components\iron-menu-behavior\iron-menubar-behavior.html" />
+    <Content Include="Modules\Polymer\Components\iron-meta\iron-meta.html" />
+    <Content Include="Modules\Polymer\Components\iron-overlay-behavior\iron-overlay-backdrop.html" />
+    <Content Include="Modules\Polymer\Components\iron-overlay-behavior\iron-overlay-behavior.html" />
+    <Content Include="Modules\Polymer\Components\iron-overlay-behavior\iron-overlay-manager.html" />
+    <Content Include="Modules\Polymer\Components\iron-pages\iron-pages.html" />
+    <Content Include="Modules\Polymer\Components\iron-range-behavior\iron-range-behavior.html" />
+    <Content Include="Modules\Polymer\Components\iron-resizable-behavior\iron-resizable-behavior.html" />
+    <Content Include="Modules\Polymer\Components\iron-selector\iron-multi-selectable.html" />
+    <Content Include="Modules\Polymer\Components\iron-selector\iron-selectable.html" />
+    <Content Include="Modules\Polymer\Components\iron-selector\iron-selection.html" />
+    <Content Include="Modules\Polymer\Components\iron-selector\iron-selector.html" />
+    <Content Include="Modules\Polymer\Components\iron-signals\iron-signals.html" />
+    <Content Include="Modules\Polymer\Components\iron-validatable-behavior\iron-validatable-behavior.html" />
+    <Content Include="Modules\Polymer\Components\iron-validator-behavior\iron-validator-behavior.html" />
+    <Content Include="Modules\Polymer\Components\neon-animation\neon-animatable-behavior.html" />
+    <Content Include="Modules\Polymer\Components\neon-animation\neon-animatable.html" />
+    <Content Include="Modules\Polymer\Components\neon-animation\neon-animated-pages.html" />
+    <Content Include="Modules\Polymer\Components\neon-animation\neon-animation-behavior.html" />
+    <Content Include="Modules\Polymer\Components\neon-animation\neon-animation-runner-behavior.html" />
+    <Content Include="Modules\Polymer\Components\neon-animation\neon-animation.html" />
+    <Content Include="Modules\Polymer\Components\neon-animation\neon-animations.html" />
+    <Content Include="Modules\Polymer\Components\neon-animation\neon-shared-element-animatable-behavior.html" />
+    <Content Include="Modules\Polymer\Components\neon-animation\neon-shared-element-animation-behavior.html" />
+    <Content Include="Modules\Polymer\Components\neon-animation\web-animations.html" />
+    <Content Include="Modules\Polymer\Components\paper-badge\paper-badge.html" />
+    <Content Include="Modules\Polymer\Components\paper-behaviors\paper-button-behavior.html" />
+    <Content Include="Modules\Polymer\Components\paper-behaviors\paper-inky-focus-behavior.html" />
+    <Content Include="Modules\Polymer\Components\paper-button\paper-button.html" />
+    <Content Include="Modules\Polymer\Components\paper-card\paper-card.html" />
+    <Content Include="Modules\Polymer\Components\paper-checkbox\metadata.html" />
+    <Content Include="Modules\Polymer\Components\paper-checkbox\paper-checkbox.css" />
+    <Content Include="Modules\Polymer\Components\paper-checkbox\paper-checkbox.html" />
+    <Content Include="Modules\Polymer\Components\paper-dialog-behavior\paper-dialog-behavior.html" />
+    <Content Include="Modules\Polymer\Components\paper-dialog-behavior\paper-dialog-common.css" />
+    <Content Include="Modules\Polymer\Components\paper-dialog-scrollable\paper-dialog-scrollable.html" />
+    <Content Include="Modules\Polymer\Components\paper-dialog\paper-dialog.html" />
+    <Content Include="Modules\Polymer\Components\paper-drawer-panel\paper-drawer-panel.css" />
+    <Content Include="Modules\Polymer\Components\paper-drawer-panel\paper-drawer-panel.html" />
+    <Content Include="Modules\Polymer\Components\paper-dropdown-menu\paper-dropdown-menu.html" />
+    <Content Include="Modules\Polymer\Components\paper-fab\paper-fab.html" />
+    <Content Include="Modules\Polymer\Components\paper-header-panel\paper-header-panel.css" />
+    <Content Include="Modules\Polymer\Components\paper-header-panel\paper-header-panel.html" />
+    <Content Include="Modules\Polymer\Components\paper-icon-button\paper-icon-button.html" />
+    <Content Include="Modules\Polymer\Components\paper-input\paper-input-addon-behavior.html" />
+    <Content Include="Modules\Polymer\Components\paper-input\paper-input-behavior.html" />
+    <Content Include="Modules\Polymer\Components\paper-input\paper-input-char-counter.html" />
+    <Content Include="Modules\Polymer\Components\paper-input\paper-input-container.html" />
+    <Content Include="Modules\Polymer\Components\paper-input\paper-input-error.html" />
+    <Content Include="Modules\Polymer\Components\paper-input\paper-input.html" />
+    <Content Include="Modules\Polymer\Components\paper-input\paper-textarea.html" />
+    <Content Include="Modules\Polymer\Components\paper-item\paper-icon-item.html" />
+    <Content Include="Modules\Polymer\Components\paper-item\paper-item-body.html" />
+    <Content Include="Modules\Polymer\Components\paper-item\paper-item-shared.css" />
+    <Content Include="Modules\Polymer\Components\paper-item\paper-item.html" />
+    <Content Include="Modules\Polymer\Components\paper-material\paper-material.html" />
+    <Content Include="Modules\Polymer\Components\paper-menu-button\paper-menu-button-animations.html" />
+    <Content Include="Modules\Polymer\Components\paper-menu-button\paper-menu-button.html" />
+    <Content Include="Modules\Polymer\Components\paper-menu\paper-menu-shared.css" />
+    <Content Include="Modules\Polymer\Components\paper-menu\paper-menu.html" />
+    <Content Include="Modules\Polymer\Components\paper-menu\paper-submenu.html" />
+    <Content Include="Modules\Polymer\Components\paper-progress\paper-progress.html" />
+    <Content Include="Modules\Polymer\Components\paper-radio-button\paper-radio-button.css" />
+    <Content Include="Modules\Polymer\Components\paper-radio-button\paper-radio-button.html" />
+    <Content Include="Modules\Polymer\Components\paper-radio-group\paper-radio-group.html" />
+    <Content Include="Modules\Polymer\Components\paper-ripple\paper-ripple.html" />
+    <Content Include="Modules\Polymer\Components\paper-scroll-header-panel\paper-scroll-header-panel.html" />
+    <Content Include="Modules\Polymer\Components\paper-slider\paper-slider.css" />
+    <Content Include="Modules\Polymer\Components\paper-slider\paper-slider.html" />
+    <Content Include="Modules\Polymer\Components\paper-spinner\paper-spinner.css" />
+    <Content Include="Modules\Polymer\Components\paper-spinner\paper-spinner.html" />
+    <Content Include="Modules\Polymer\Components\paper-styles\classes\global.html" />
+    <Content Include="Modules\Polymer\Components\paper-styles\classes\shadow-layout.html" />
+    <Content Include="Modules\Polymer\Components\paper-styles\classes\shadow.html" />
+    <Content Include="Modules\Polymer\Components\paper-styles\classes\typography.html" />
+    <Content Include="Modules\Polymer\Components\paper-styles\color.html" />
+    <Content Include="Modules\Polymer\Components\paper-styles\paper-styles-classes.html" />
+    <Content Include="Modules\Polymer\Components\paper-styles\paper-styles.html" />
+    <Content Include="Modules\Polymer\Components\paper-styles\shadow.html" />
+    <Content Include="Modules\Polymer\Components\paper-styles\typography.html" />
+    <Content Include="Modules\Polymer\Components\paper-tabs\paper-tab.html" />
+    <Content Include="Modules\Polymer\Components\paper-tabs\paper-tabs-icons.html" />
+    <Content Include="Modules\Polymer\Components\paper-tabs\paper-tabs.html" />
+    <Content Include="Modules\Polymer\Components\paper-toast\paper-toast.html" />
+    <Content Include="Modules\Polymer\Components\paper-toggle-button\paper-toggle-button.css" />
+    <Content Include="Modules\Polymer\Components\paper-toggle-button\paper-toggle-button.html" />
+    <Content Include="Modules\Polymer\Components\paper-toolbar\paper-toolbar.html" />
+    <Content Include="Modules\Polymer\Components\paper-tooltip\paper-tooltip.html" />
+    <Content Include="Modules\Polymer\Components\polymer\polymer-micro.html" />
+    <Content Include="Modules\Polymer\Components\polymer\polymer-mini.html" />
+    <Content Include="Modules\Polymer\Components\polymer\polymer.html" />
+    <Content Include="Modules\Polymer\Components\promise-polyfill\promise-polyfill-lite.html" />
+    <Content Include="Modules\Polymer\Components\promise-polyfill\promise-polyfill.html" />
+    <Content Include="Modules\Polymer\Components\promise-polyfill\Promise-Statics.js" />
+    <Content Include="Modules\Polymer\Components\promise-polyfill\Promise.js" />
+    <Content Include="Modules\Polymer\Components\promise-polyfill\Promise.min.js" />
+    <Content Include="Modules\Polymer\Components\web-animations-js\web-animations-next-lite.min.js" />
+    <Content Include="Modules\Polymer\Components\web-animations-js\web-animations-next.min.js" />
+    <Content Include="Modules\Polymer\Components\web-animations-js\web-animations.html" />
+    <Content Include="Modules\Polymer\Components\web-animations-js\web-animations.min.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\CustomElements.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\CustomElements.min.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\HTMLImports.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\HTMLImports.min.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\MutationObserver.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\MutationObserver.min.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\ShadowDOM.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\ShadowDOM.min.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\webcomponents-lite.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\webcomponents-lite.min.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\webcomponents.js" />
+    <Content Include="Modules\Polymer\Components\webcomponentsjs\webcomponents.min.js" />
+    <Content Include="Modules\Require\Components\requirejs\require.js" />
     <Content Include="Modules\Scripts\AMD\angularAMD.js" />
     <Content Include="Modules\Scripts\AMD\angularAMD.min.js" />
     <Content Include="Modules\Scripts\AMD\ngload.js" />
@@ -251,7 +558,8 @@
     <Content Include="Modules\Scripts\Modernizr\modernizr.js" />
     <Content Include="Modules\Scripts\Require\require.js" />
     <Content Include="Modules\Services\AccountsServices.js" />
-    <None Include="Modules\Services\afhangen.js" />
+    <None Include="Modules\Services\Afhangen.js" />
+    <Content Include="Modules\Services\Afhangen\StartServices.js" />
     <Content Include="Modules\Services\AjaxServices.js" />
     <Content Include="Modules\Services\AlertsServices.js" />
     <Content Include="Modules\Services\Elements.xml" />
@@ -267,20 +575,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Controllers.tt</DependentUpon>
     </Content>
+    <Content Include="Modules\SharePoint\Components\angular-sharepoint\angular-sharepoint.js" />
+    <Content Include="Modules\SharePoint\Components\angular-sharepoint\angular-sharepoint.min.js" />
+    <Content Include="Modules\SharePoint\Components\ShareCoffee.Search\dist\ShareCoffee.Search.js" />
+    <Content Include="Modules\SharePoint\Components\ShareCoffee.Search\dist\ShareCoffee.Search.min.js" />
+    <Content Include="Modules\SharePoint\Components\ShareCoffee.UserProfiles\dist\ShareCoffee.UserProfiles.js" />
+    <Content Include="Modules\SharePoint\Components\ShareCoffee.UserProfiles\dist\ShareCoffee.UserProfiles.min.js" />
+    <Content Include="Modules\SharePoint\Components\ShareCoffee\dist\ShareCoffee.js" />
+    <Content Include="Modules\SharePoint\Components\ShareCoffee\dist\ShareCoffee.min.js" />
+    <Content Include="Modules\Views\Afhangen\start.html" />
     <Content Include="Modules\Views\Default.html" />
     <Content Include="Modules\Controllers\DefaultController.js" />
     <Content Include="Modules\Views\Elements.xml" />
-    <Content Include="Modules\Views\Login.html" />
-    <Content Include="Modules\Views\Logout.html" />
+    <Content Include="Modules\Views\Accounts\Login.html" />
+    <Content Include="Modules\Views\Accounts\Logout.html" />
     <Content Include="Modules\Views\Views.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Views.tt</DependentUpon>
     </Content>
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\ClubCloudClubWebSite.gif" />
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\index.html" />
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\onet.xml" />
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\webtemp_ClubCloudClubWebSite.xml" />
     <Content Include="SiteDefinitions\ClubCloudAfhangen\ClubCloudAfhangen.gif" />
     <Content Include="SiteDefinitions\ClubCloudAfhangen\index.html" />
     <Content Include="SiteDefinitions\ClubCloudAfhangen\onet.xml" />
     <Content Include="SiteDefinitions\ClubCloudAfhangen\webtemp_ClubCloudAfhangen.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ribbons\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

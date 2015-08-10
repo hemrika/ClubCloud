@@ -3,8 +3,10 @@
   <features>
     <featureReference itemId="f140a81b-d59b-41df-b88e-1ebb28d996c8" />
     <featureReference itemId="b7e46f9d-0a9e-40bd-9c17-69f4e1dfed95" />
+    <featureReference itemId="80566da0-27bd-4297-a30e-36c627d361d1" />
   </features>
   <projectItems>
     <projectItemReference itemId="499551a9-5e4a-424f-89e9-372a8ba532e2" />
+    <projectItemReference itemId="61eda96a-0304-478a-9f3e-9e15edc490fa" />
   </projectItems>
 </package>

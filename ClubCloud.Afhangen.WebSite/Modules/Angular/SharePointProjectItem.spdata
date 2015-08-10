@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Components\angular\angular.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular\angular.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-animate\angular-animate.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-animate\angular-animate.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular\angular.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-animate\angular-animate.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-aria\angular-aria.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-aria\angular-aria.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-aria\angular-aria.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-block-ui\dist\angular-block-ui.css" Target="Components\Style\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-block-ui\dist\angular-block-ui.css.map" Target="Components\Style\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-block-ui\dist\angular-block-ui.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-block-ui\dist\angular-block-ui.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-block-ui\dist\angular-block-ui.min.css" Target="Components\Style\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-block-ui\dist\angular-block-ui.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-block-ui\dist\angular-block-ui.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-bootstrap\ui-bootstrap.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-bootstrap\ui-bootstrap.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-cookies\angular-cookies.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-cookies\angular-cookies.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-cookies\angular-cookies.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-i18n\angular-locale_nl.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-loader\angular-loader.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-loader\angular-loader.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-loader\angular-loader.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-messages\angular-messages.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-messages\angular-messages.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-messages\angular-messages.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-resource\angular-resource.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-resource\angular-resource.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-resource\angular-resource.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-route\angular-route.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-route\angular-route.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-route\angular-route.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-sanitize\angular-sanitize.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-sanitize\angular-sanitize.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-sanitize\angular-sanitize.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-scenario\angular-scenario.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-touch\angular-touch.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-touch\angular-touch.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-touch\angular-touch.min.js.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-ui-router\release\angular-ui-router.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angular-ui-router\release\angular-ui-router.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angularAMD\angularAMD.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angularAMD\angularAMD.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angularAMD\angularAMD.min.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angularAMD\ngload.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angularAMD\ngload.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\angularAMD\ngload.min.map" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\requirejs\require.js" Target="Components\Script\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

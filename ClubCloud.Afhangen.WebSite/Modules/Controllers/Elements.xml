@@ -8,5 +8,8 @@
     <File Path="Controllers\DefaultController.js" Url="Controllers/DefaultController.js" />
     <File Path="Controllers\LoginController.js" Url="Controllers/LoginController.js" />
     <File Path="Controllers\LogoutController.js" Url="Controllers/LogoutController.js" />
+    <File Path="Controllers\Accounts\LoginController.js" Url="Controllers/Accounts/LoginController.js" />
+    <File Path="Controllers\Accounts\LogoutController.js" Url="Controllers/Accounts/LogoutController.js" />
+    <File Path="Controllers\Afhangen\StartController.js" Url="Controllers/Afhangen/StartController.js" />
   </Module>
 </Elements>

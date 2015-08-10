@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Templates xmlns:ows="Microsoft SharePoint">
+	<Template
+		Name="ClubCloudClubWebSite"
+		ID="20001">
+		<Configuration
+			ID="0"
+			Title="ClubCloud Club WebSite"
+			Description="ClubCloud Club WebSite"
+			DisplayCategory="ClubCloud"
+			Hidden="False"
+			ImageUrl="/_layouts/15/images/ClubCloud/Club_WebSite/ClubCloudClubWebSite.gif"
+			RootWebOnly="True"
+			VisibilityFeatureDependency="" />
+	</Template>
+</Templates>

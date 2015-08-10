@@ -4,7 +4,8 @@
     <ProjectItemFile Source="Elements.xml" Target="Views\" Type="ElementManifest" />
     <ProjectItemFile Source="Views.js" Target="Views\" Type="ElementFile" />
     <ProjectItemFile Source="Default.html" Target="Views\" Type="ElementFile" />
-    <ProjectItemFile Source="Login.html" Target="Views\" Type="ElementFile" />
-    <ProjectItemFile Source="Logout.html" Target="Views\" Type="ElementFile" />
+    <ProjectItemFile Source="Accounts\Login.html" Target="Views\Accounts\" Type="ElementFile" />
+    <ProjectItemFile Source="Accounts\Logout.html" Target="Views\Accounts\" Type="ElementFile" />
+    <ProjectItemFile Source="Afhangen\start.html" Target="Views\Afhangen\" Type="ElementFile" />
   </Files>
 </ProjectItem>

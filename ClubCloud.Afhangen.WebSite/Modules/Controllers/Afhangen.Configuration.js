@@ -3,7 +3,7 @@
 
 define(['angularAMD', 'angular-route', 'angular-cookies', 'ui-bootstrap', 'angular-sanitize', 'blockUI'], function (angularAMD) {
     var app = angular.module("mainModule", ['ngRoute', 'ngCookies', 'blockUI', 'ngSanitize', 'ui.bootstrap']);
-   
+
     app.filter("leadingZeroes", function () {
         return function (data) {
             var pad = "000" + data;
@@ -11,7 +11,7 @@ define(['angularAMD', 'angular-route', 'angular-cookies', 'ui-bootstrap', 'angul
             return pad;
         }
     });
-   
+
 
     app.config(function ($httpProvider) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -29,20 +29,20 @@ define(['angularAMD', 'angular-route', 'angular-cookies', 'ui-bootstrap', 'angul
 
     });
 
-    app.config(['$routeProvider', function ($routeProvider) {
-   
+    app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+
         $routeProvider
 
            .when("/", angularAMD.route({
-                         
-                templateUrl: function (rp) {  return 'Views/Default.html';  },               
-                controllerUrl: "Controllers/DefaultController"            
 
-            }))
+               templateUrl: function (rp) { return 'Views/Default.html'; },
+               controllerUrl: "Controllers/DefaultController"
+
+           }))
 
             .when("/:section/:tree", angularAMD.route({
 
-                templateUrl: function (rp) { return 'Views/' + rp.tree + '.html'; },
+                templateUrl: function (rp) { return 'Views/' + rp.section + '/' + rp.tree + '.html'; },
 
                 resolve: {
 
@@ -53,7 +53,7 @@ define(['angularAMD', 'angular-route', 'angular-cookies', 'ui-bootstrap', 'angul
                         var parentPath = parsePath[1];
                         var controllerName = parsePath[2];
 
-                        var loadController = "Controllers/" + controllerName + "Controller";                 
+                        var loadController = "Controllers/" + parentPath + '/' + controllerName + "Controller";
 
                         var deferred = $q.defer();
                         require([loadController], function () {
@@ -61,6 +61,16 @@ define(['angularAMD', 'angular-route', 'angular-cookies', 'ui-bootstrap', 'angul
                                 deferred.resolve();
                             });
                         });
+
+                        var loadServices = "Services/" + parentPath + '/' + controllerName + "Services";
+
+                        var deferred = $q.defer();
+                        require([loadServices], function () {
+                            $rootScope.$apply(function () {
+                                deferred.resolve();
+                            });
+                        });
+
                         return deferred.promise;
                     }]
                 }
@@ -69,7 +79,7 @@ define(['angularAMD', 'angular-route', 'angular-cookies', 'ui-bootstrap', 'angul
 
             .when("/:section/:tree/:id", angularAMD.route({
 
-                templateUrl: function (rp) { return 'Views/' + rp.tree + '.html'; },
+                templateUrl: function (rp) { return 'Views/' + rp.section + '/' + rp.tree + '.html'; },
 
                 resolve: {
 
@@ -80,14 +90,23 @@ define(['angularAMD', 'angular-route', 'angular-cookies', 'ui-bootstrap', 'angul
                         var parentPath = parsePath[1];
                         var controllerName = parsePath[2];
 
-                        var loadController = "Controllers/" + controllerName + "Controller";
-                                             
+                        var loadController = "Controllers/" + parentPath + '/' + controllerName + "Controller";
+
                         var deferred = $q.defer();
                         require([loadController], function () {
                             $rootScope.$apply(function () {
                                 deferred.resolve();
                             });
                         });
+
+                        var loadServices = "Services/" + parentPath + '/' + controllerName + "Services";
+
+                        require([loadServices], function () {
+                            $rootScope.$apply(function () {
+                                deferred.resolve();
+                            });
+                        });
+
                         return deferred.promise;
                     }]
                 }
@@ -95,69 +114,118 @@ define(['angularAMD', 'angular-route', 'angular-cookies', 'ui-bootstrap', 'angul
             }))
 
 
-            .otherwise({ redirectTo: '/' }) 
+            .otherwise({ redirectTo: '/' })
 
+        //$locationProvider.html5Mode(true);
+        //$locationProvider.html5Mode({ enabled: true,  requireBase: false});
     }]);
-
-
-    var indexController = function ($scope, $rootScope, $cookieStore, $http, $location, blockUI) {
-             
-        $scope.$on('$routeChangeStart', function (scope, next, current) {
-             
-            if ($rootScope.IsloggedIn==true)
-            {               
-                $scope.authenicateUser($location.path(),$scope.authenicateUserComplete, $scope.authenicateUserError);
+    /*
+	app.factory('authHttpResponseInterceptor',['$q','$location',function($q,$location){
+    return {
+        response: function(response){
+            if (response.status === 401) {
+                console.log("Response 401");
             }
-         
+            return response || $q.when(response);
+        },
+        responseError: function(rejection) {
+            if (rejection.status === 401) {
+                console.log("Response Error 401",rejection);
+                $location.path('/login').search('returnTo', $location.path());
+            }
+            return $q.reject(rejection);
+        }
+    }
+	}])
+	
+	app.config(['$httpProvider',function($httpProvider) {
+    //Http Intercpetor to check auth failures for xhr requests
+    $httpProvider.interceptors.push('authHttpResponseInterceptor');
+	}]);
+	*/
+    var indexController = function ($scope, $rootScope, $cookieStore, $http, $location, blockUI) {
+
+        $scope.$on('$routeChangeStart', function (scope, next, current) {
+
+            if ($rootScope.IsloggedIn == true) {
+                $scope.authenicateUser($location.path(), $scope.authenicateUserComplete, $scope.authenicateUserError);
+            }
+
         });
 
         $scope.$on('$routeChangeSuccess', function (scope, next, current) {
-         
+
             setTimeout(function () {
-                if ($scope.isCollapsed == true) {                   
+                if ($scope.isCollapsed == true) {
                     set95PercentWidth();
-                }              
+                }
             }, 1000);
-         
+
 
         });
 
 
         $scope.initializeController = function () {
             $rootScope.displayContent = false;
-            if ($location.path() != "")        
-            {                      
+            if ($location.path() != "") {
                 $scope.initializeApplication($scope.initializeApplicationComplete, $scope.initializeApplicationError);
             }
         }
 
         $scope.initializeApplicationComplete = function (response) {
-            if (response.ErrorCode == 'NoError') {
-                $rootScope.MenuItems = response.MenuItems;
+            if (response.ErrorCode == ClubCloud.Service.LoginErrorCode.NoError) {
+                $rootScope.MenuItems = [];
+                $rootScope.MenuItems = [{
+                    'Route': '#/',
+                    'Description': 'Home'
+                }, {
+                    'Route': '#/Afhangen/Start',
+                    'Description': 'Afhangen'
+                }, {
+                    'Route': '#/Reserveringen/Start',
+                    'Description': 'Reserveringen'
+                }, {
+                    'Route': '#/Bezetting/Baa',
+                    'Description': 'Bezetting'
+                }];
                 $rootScope.displayContent = true;
                 $rootScope.IsloggedIn = true;
             }
         }
 
+        $scope.initializeApplicationError = function (response) {
+            if (response) {
+                if (response._statusCode == '401') {
+                    setTimeout(function () {
+                        window.location = "#Accounts/Login";
+                    }, 10);
+                }
+            }
+        }
+
         $scope.initializeApplication = function (successFunction, errorFunction) {
             blockUI.start();
-            var FedAuth = $cookieStore.get('FedAuth');
             var proxy = nl.clubcloud.Afhangen;
-            proxy.IsAuthorized(FedAuth,successFunction, errorFunction);
+            proxy.IsAuthorized($scope.initializeApplicationComplete, $scope.initializeApplicationError);
             blockUI.stop();
         };
-              
+
         $scope.authenicateUser = function (route, successFunction, errorFunction) {
-            var FedAuth = $cookieStore.get('FedAuth');
             var proxy = nl.clubcloud.Afhangen;
-            proxy.IsAuthorized(FedAuth,successFunction, errorFunction);
+            proxy.IsAuthorized($scope.authenicateUserComplete, $scope.authenicateUserError);
             //$scope.AjaxGetWithData(authenication, "/api/main/AuthenicateUser", successFunction, errorFunction);
         };
-           
+
         $scope.authenicateUserComplete = function (response) {
-           
-            if (response.ErrorCode == 'NoError')
-                window.location = "/index.html";
+
+            if (response.ErrorCode == ClubCloud.Service.LoginErrorCode.NoError) {
+                window.location = "index.html";
+            }
+            else {
+                setTimeout(function () {
+                    window.location = "#Accounts/Login";
+                }, 10);
+            }
         }
 
         $scope.authenicateUserError = function (response) {
@@ -189,13 +257,13 @@ define(['angularAMD', 'angular-route', 'angular-cookies', 'ui-bootstrap', 'angul
         */
     };
 
-    indexController.$inject = ['$scope', '$rootScope', '$cookieStore', '$http', '$location', 'blockUI'];
+    indexController.$inject = ['$scope', '$rootScope', '$cookies', '$http', '$location', 'blockUI'];
     app.controller("indexController", indexController);
-  
+
     // Bootstrap Angular when DOM is ready
     angularAMD.bootstrap(app);
 
-  
+
     return app;
 });
 

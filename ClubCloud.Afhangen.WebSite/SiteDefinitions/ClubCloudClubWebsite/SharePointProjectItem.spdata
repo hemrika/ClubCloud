@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.SiteDefinition" DefaultFile="onet.xml" SupportedTrustLevels="FullTrust" SupportedDeploymentScopes="Package" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="onet.xml" Target="SiteTemplates\ClubCloudClubWebSite\XML\" Type="TemplateFile" />
+    <ProjectItemFile Source="webtemp_ClubCloudClubWebSite.xml" Target="1043\XML\" Type="TemplateFile" />
+    <ProjectItemFile Source="ClubCloudClubWebSite.gif" Target="Images\ClubCloud\Club_WebSite\" Type="TemplateFile" />
+    <ProjectItemFile Source="index.html" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
+  </Files>
+</ProjectItem>
