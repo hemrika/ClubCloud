@@ -209,9 +209,9 @@ namespace ClubCloud.Service
                         return new LoginResult
                         {
                             ErrorCode = LoginErrorCode.NoError,
-                            CookieName = SessionAuthenticationModule.CookieHandler.Name,
-                            TimeoutSeconds = SessionAuthenticationModule.CookieHandler.PersistentSessionLifetime.Value.Seconds,
-                            FedAuth = HttpContext.Current.Response.Cookies.Get(SessionAuthenticationModule.CookieHandler.Name).Value
+                            //CookieName = SessionAuthenticationModule.CookieHandler.Name,
+                            //TimeoutSeconds = SessionAuthenticationModule.CookieHandler.PersistentSessionLifetime.Value.Seconds,
+                            //FedAuth = HttpContext.Current.Response.Cookies.Get(SessionAuthenticationModule.CookieHandler.Name).Value
                         };
                     }
                     catch (Exception ex)

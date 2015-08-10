@@ -129,7 +129,10 @@ namespace ClubCloud.Provider
                             {
                                 VirtualDirectory login = siteServices.VirtualDirectories.Add(vDirName, vDirPath);
                             }
-                            catch { }
+                            catch (Exception ex)
+                            {
+                                ProviderLogging.LogError(ex);
+                            }
                         }
 
                     }
@@ -196,7 +199,6 @@ namespace ClubCloud.Provider
             {
                 try
                 {
-
                     webConfig.Load(configFilePath);
                 }
                 catch (Exception ex)
@@ -253,7 +255,7 @@ namespace ClubCloud.Provider
                         XmlAttribute nameAttribute = webConfig.CreateAttribute("name");
                         nameAttribute.Value = "Zimbra";
                         sectionGroup.Attributes.Append(nameAttribute);
-                        sectionGroup.InnerXml = string.Format("<section name=\"Configuration\" type=\"ClubCloud.Zimbra.Service.ZimbraConfigurationHandler, {0} \" />", fullname);
+                        sectionGroup.InnerXml = string.Format("<section name=\"Configuration\" type=\"ClubCloud.Zimbra.Service.ZimbraConfigurationHandler, {0} \" allowOverride=\"true\" />", fullname);
                         configSections.AppendChild(sectionGroup);
                     }
 
@@ -310,11 +312,13 @@ namespace ClubCloud.Provider
                                 break;
                             }
                         }
+
                         if (sectionGroup != null)
                         {
                             configSections.RemoveChild(sectionGroup);
                         }
                     }
+
 
                     XmlNode configuration = webConfig.SelectSingleNode("/configuration");
                     XmlNode zimbraNode = null;
@@ -328,6 +332,7 @@ namespace ClubCloud.Provider
                                 break;
                             }
                         }
+
                         if (zimbraNode != null)
                         {
                             webConfig.RemoveChild(zimbraNode);
