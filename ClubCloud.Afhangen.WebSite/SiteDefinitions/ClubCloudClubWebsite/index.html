@@ -1,51 +1,31 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+﻿<!doctype html>
+<html class="ng-scope" lang="{{site.Language}}" dir="{{site.Direction}}">
 <head>
-    <title></title>
-    <script src="Scripts/jQuery/jquery.js" type="text/javascript"></script>
-    <script src="//ajax.aspnetcdn.com/ajax/4.5.2/1/MicrosoftAjax.js" type="text/javascript"></script>
-    <script src="_vti_bin/ClubCloud/Afhangen.svc/script/js" type="text/javascript"></script>
-    <script data-main="Controllers/Afhangen.js" src="Scripts/Require/require.js"></script>
-    <link href="Css/angular-block-ui.css" rel="stylesheet" />
-    <link href="Css/bootstrap.css" rel="stylesheet" />
-    <link href="Css/Styles.css" rel="stylesheet" />
+    <title>{{site.Name}} - {{page.Name}}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="{{page.Description}}">
+    <meta name="keywords" content="{{page.Keywords}}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="ClubCloud">
+    <meta name="theme-color" content="#303F9F">
+    <meta name="msapplication-TileColor" content="#3372DF">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="{{site.Name}}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="{{site.Name}}">
+
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="Components/webcomponentsjs/webcomponents-lite.js" type="text/javascript"></script>
+    <link rel="import" href="Components/Elements/Elements.html">
+    <script data-main="Components/ClubCloud/ClubCloud.js" src="Components/Script/require.js" type="text/javascript"></script>
 </head>
-
-<body ng-controller="indexController" ng-init="initializeController()" ng-cloak="">
-
-    <div class="header">
-        <div class="header-top">
-            <div class="container">
-                <div class="top-nav">
-                    <span class="menu"><img src="images/menu.png" alt=""> </span>
-                    <ul class="nav navbar-nav">
-                        <li ng-repeat="menuItem in MenuItems">
-                            <a href="{{menuItem.Route}}">{{menuItem.Description}}</a><span>/</span>
-                        </li>
-                    </ul>
-                    <!--script-->
-                    <script>
-                        $("span.menu").click(function () {
-                            $(".top-nav ul").slideToggle(500, function () {
-                            });
-                        });
-                    </script>
-                </div>
-            </div>
-        </div>
-        <div class="header-bottom">
-            <div class="container">
-                <div class="logo">
-                    <h1><a href="index.html">ClubCloud Afhangen</a></h1>
-                    <p>Social Services</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="ViewPort" ng-view="">
-    </div>
-
+<body>
+    <div data-ui-view=""></div>
+    <div data-ui-view="header"></div>
+    <div data-ui-view="container"></div>
+    <div data-ui-view="footer"></div>
 </body>
-
 </html>

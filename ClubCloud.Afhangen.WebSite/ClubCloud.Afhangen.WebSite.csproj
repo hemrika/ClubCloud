@@ -89,7 +89,11 @@
     <None Include="Modules\Angular\Components\angular-route\angular-route.min.js.map" />
     <None Include="Modules\Angular\Components\angular-sanitize\angular-sanitize.min.js.map" />
     <None Include="Modules\Angular\Components\angular-touch\angular-touch.min.js.map" />
+    <None Include="Modules\Angular\Components\angularAMD\angularAMD.min.js.map">
+      <DependentUpon>angularAMD.min.js</DependentUpon>
+    </None>
     <None Include="Modules\Angular\Components\angularAMD\angularAMD.min.map" />
+    <None Include="Modules\Angular\Components\angularAMD\ngload.min.map" />
     <None Include="Modules\Angular\Components\angular\angular.min.js.map" />
     <None Include="Modules\Angular\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b5a3f669-658d-41e2-9402-267d00f99a97}</SharePointProjectItemId>
@@ -141,6 +145,14 @@
     <None Include="Modules\jQuery\Components\jquery\dist\jquery.min.map" />
     <None Include="Modules\jQuery\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{5ddc94cd-6c0d-49d8-a33f-2369780a24fd}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\ClubCloud\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a8efb29f-3231-428e-8b0e-2eab282c2ac1}</SharePointProjectItemId>
+    </None>
+    <None Include="Modules\Microsoft\.bowerrc" />
+    <None Include="Modules\Microsoft\bower.json" />
+    <None Include="Modules\Microsoft\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{be81bff1-dd4e-42d0-9827-0d6e674e5887}</SharePointProjectItemId>
     </None>
     <None Include="Modules\Modernizr\.bowerrc" />
     <None Include="Modules\Modernizr\bower.json" />
@@ -249,6 +261,8 @@
     <Content Include="Modules\Angular\Components\angular-block-ui\dist\angular-block-ui.js" />
     <Content Include="Modules\Angular\Components\angular-block-ui\dist\angular-block-ui.min.css" />
     <Content Include="Modules\Angular\Components\angular-block-ui\dist\angular-block-ui.min.js" />
+    <Content Include="Modules\Angular\Components\angular-bootstrap\ui-bootstrap-tpls.js" />
+    <Content Include="Modules\Angular\Components\angular-bootstrap\ui-bootstrap-tpls.min.js" />
     <Content Include="Modules\Angular\Components\angular-bootstrap\ui-bootstrap.js" />
     <Content Include="Modules\Angular\Components\angular-bootstrap\ui-bootstrap.min.js" />
     <Content Include="Modules\Angular\Components\angular-cookies\angular-cookies.js" />
@@ -270,8 +284,12 @@
     <Content Include="Modules\Angular\Components\angular-ui-router\release\angular-ui-router.min.js" />
     <Content Include="Modules\Angular\Components\angularAMD\angularAMD.js" />
     <Content Include="Modules\Angular\Components\angularAMD\angularAMD.min.js" />
+    <Content Include="Modules\Angular\Components\angularAMD\ngload.js" />
+    <Content Include="Modules\Angular\Components\angularAMD\ngload.min.js" />
     <Content Include="Modules\Angular\Components\angular\angular.js" />
     <Content Include="Modules\Angular\Components\angular\angular.min.js" />
+    <Content Include="Modules\Angular\Components\ui-router-extras\release\ct-ui-router-extras.js" />
+    <Content Include="Modules\Angular\Components\ui-router-extras\release\ct-ui-router-extras.min.js" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap.css" />
@@ -279,6 +297,7 @@
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\js\bootstrap.js" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Modules\ClubCloud\Components\ClubCloud\ClubCloud.Configuration.js" />
     <Content Include="Modules\Controllers\Accounts\LoginController.js" />
     <Content Include="Modules\Controllers\Accounts\LogoutController.js" />
     <Content Include="Modules\Controllers\Afhangen\StartController.js" />
@@ -329,6 +348,17 @@
     <Content Include="Modules\jQuery\Components\jquery.validate\dist\jquery.validate.min.js" />
     <Content Include="Modules\jQuery\Components\jquery\dist\jquery.js" />
     <Content Include="Modules\jQuery\Components\jquery\dist\jquery.min.js" />
+    <Content Include="Modules\ClubCloud\Components\ClubCloud\ClubCloud.js" />
+    <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjax.js" />
+    <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjax.min.js" />
+    <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxCore.js" />
+    <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxCore.min.js" />
+    <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxNetwork.min.js" />
+    <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxNetwork.js" />
+    <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxSerialization.js" />
+    <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxSerialization.min.js" />
+    <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxWebServices.js" />
+    <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxWebServices.min.js" />
     <Content Include="Modules\Modernizr\Components\modernizr\modernizr.js" />
     <Content Include="Modules\Polymer\Components\elements.html" />
     <Content Include="Modules\Polymer\Components\font-roboto\roboto.html" />

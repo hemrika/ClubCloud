@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Components\Microsoft\MicrosoftAjax.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\Microsoft\MicrosoftAjax.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxWebServices.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxWebServices.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxCore.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxCore.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxSerialization.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxSerialization.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxNetwork.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxNetwork.min.js" Target="Components\Script\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

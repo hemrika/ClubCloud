@@ -17,7 +17,8 @@
     "angular-sanitize": "~1.4.3",
     "angular-touch": "~1.4.3",
     "angular-i18n": "~1.4.3",
-    "angularAMD": "~0.2.1"
+    "angularAMD": "~0.2.1",
+    "ui-router-extras": "~0.0.14"
   },
   "resolutions": {
     "angular": "1.4.3"
