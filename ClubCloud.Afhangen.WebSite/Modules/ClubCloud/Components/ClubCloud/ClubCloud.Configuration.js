@@ -6,9 +6,35 @@ define(['angularAMD', 'angular-animate', 'angular-aria', 'angular-block-ui', 'an
     app.config(['$futureStateProvider', '$controllerProvider',
       function ($futureStateProvider, $controllerProvider) {
           $urp.otherwise("/home");
-          /*
+          
           // Loading states from .json file during runtime
           var loadAndRegisterFutureStates = function ($http) {
+
+              var header = {
+                  stateName: "Header",
+                  urlPrefix: "/Header",
+                  templateUrl: "/Views/Header.html",
+                  type: "PaginasController"
+              }
+              $futureStateProvider.futureState(header);
+
+              var footer = {
+                  stateName: "Footer",
+                  urlPrefix: "/Footer",
+                  templateUrl: "/Views/Footer.html",
+                  type: "PaginasController"
+              }
+              $futureStateProvider.futureState(footer);
+
+              var content = {
+                  stateName: "Content",
+                  urlPrefix: "/Content",
+                  templateUrl: "/Views/Content.html",
+                  type: "PaginasController"
+              }
+              $futureStateProvider.futureState(content);
+              
+              /*
               // $http.get().then() returns a promise
               return $http.get('futureStates.json').then(function (resp) {
                   angular.forEach(resp.data, function (fstate) {
@@ -16,8 +42,9 @@ define(['angularAMD', 'angular-animate', 'angular-aria', 'angular-block-ui', 'an
                       $futureStateProvider.futureState(fstate);
                   });
               });
+              */
           };
-          */
+          
 
           $futureStateProvider.stateFactory('ngload', ngloadStateFactory);
           $futureStateProvider.stateFactory('BerichtenController', requireCtrlStateFactory);
@@ -32,7 +59,8 @@ define(['angularAMD', 'angular-animate', 'angular-aria', 'angular-block-ui', 'an
           $futureStateProvider.stateFactory('AlbumsController', AlbumsCtrlStateFactory);
           $futureStateProvider.stateFactory('EnquetesController', EnquetesCtrlStateFactory);
           $futureStateProvider.stateFactory('FormulierenController', FormulierenCtrlStateFactory);
-          //$futureStateProvider.addResolve(loadAndRegisterFutureStates);
+
+          $futureStateProvider.addResolve(loadAndRegisterFutureStates);
       }]);
 
     app.run(function ($rootScope, $state, $window, $timeout) {

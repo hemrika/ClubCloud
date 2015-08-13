@@ -38,7 +38,6 @@
     <ProjectItemFile Source="Components\angular-sanitize\angular-sanitize.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\angular-sanitize\angular-sanitize.min.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\angular-sanitize\angular-sanitize.min.js.map" Target="Components\Script\" Type="ElementFile" />
-    <ProjectItemFile Source="Components\angular-scenario\angular-scenario.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\angular-touch\angular-touch.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\angular-touch\angular-touch.min.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\angular-touch\angular-touch.min.js.map" Target="Components\Script\" Type="ElementFile" />

@@ -30,8 +30,8 @@
         <Feature ID="FDE5D850-671E-4143-950A-87B473922DC7" />
       </SiteFeatures>
 			<WebFeatures>
-        <!-- ClubCloud_Afhangen_WebSite_Modules -->
-        <Feature ID="d5764a12-0d4b-4a88-b572-f75b2ea52cba" />
+        <!-- ClubCloud_WebSite_Components -->
+        <Feature ID="554c0c9b-5975-44fb-ba7d-3e5a1d7c767f" />
         <!-- Zimbra Receiver -->
         <Feature ID="27829f49-e2cf-4991-b4d4-632e869c50fd" />
         <!-- TeamCollab Feature -->

@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
-    <ProjectItemFile Source="Components\ClubCloud\ClubCloud.js" Target="Components\Script\" Type="ElementFile" />
-    <ProjectItemFile Source="Components\ClubCloud\ClubCloud.Configuration.js" Target="ClubCloud\Components\ClubCloud\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\ClubCloud.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\ClubCloud.Configuration.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\BerichtenController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\CategorieenController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\EvenementenController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\KalenderController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\MededelingenController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\OpmerkingenController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\DocumentenController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\FotosController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\PaginasController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\AlbumsController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\EnquetesController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\FormulierenController.js" Target="Controllers\" Type="ElementFile" />
   </Files>
 </ProjectItem>
