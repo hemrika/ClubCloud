@@ -13,5 +13,6 @@
     <ProjectItemFile Source="Components\ShareCoffee.UserProfiles\dist\ShareCoffee.UserProfiles.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ShareCoffee.UserProfiles\dist\ShareCoffee.UserProfiles.js.map" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ShareCoffee.UserProfiles\dist\ShareCoffee.UserProfiles.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Elements.xml" Target="SharePoint\" Type="ElementManifest" />
   </Files>
 </ProjectItem>

@@ -11,5 +11,6 @@
     <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxSerialization.min.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxNetwork.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\Microsoft\MicrosoftAjaxNetwork.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Elements.xml" Target="Microsoft\" Type="ElementManifest" />
   </Files>
 </ProjectItem>

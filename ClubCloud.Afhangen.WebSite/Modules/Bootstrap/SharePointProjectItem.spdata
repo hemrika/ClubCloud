@@ -14,5 +14,6 @@
     <ProjectItemFile Source="Components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" Target="Components\Font\" Type="ElementFile" />
     <ProjectItemFile Source="Components\bootstrap\dist\js\bootstrap.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\bootstrap\dist\js\bootstrap.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Elements.xml" Target="Bootstrap\" Type="ElementManifest" />
   </Files>
 </ProjectItem>

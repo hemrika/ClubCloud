@@ -8,5 +8,6 @@
     <ProjectItemFile Source="Components\jquery.validate\dist\additional-methods.min.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\jquery.validate\dist\jquery.validate.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\jquery.validate\dist\jquery.validate.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Elements.xml" Target="jQuery\" Type="ElementManifest" />
   </Files>
 </ProjectItem>

@@ -146,7 +146,7 @@
     <None Include="Modules\jQuery\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{5ddc94cd-6c0d-49d8-a33f-2369780a24fd}</SharePointProjectItemId>
     </None>
-    <None Include="Modules\ClubCloud\SharePointProjectItem.spdata">
+    <None Include="Modules\ClubCloud Controllers\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a8efb29f-3231-428e-8b0e-2eab282c2ac1}</SharePointProjectItemId>
     </None>
     <None Include="Modules\Microsoft\.bowerrc" />
@@ -290,6 +290,7 @@
     <Content Include="Modules\Angular\Components\angular\angular.min.js" />
     <Content Include="Modules\Angular\Components\ui-router-extras\release\ct-ui-router-extras.js" />
     <Content Include="Modules\Angular\Components\ui-router-extras\release\ct-ui-router-extras.min.js" />
+    <Content Include="Modules\Angular\Elements.xml" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\css\bootstrap.css" />
@@ -297,19 +298,21 @@
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\js\bootstrap.js" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\js\bootstrap.min.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\FormulierenController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\EnquetesController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\AlbumsController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\PaginasController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\FotosController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\DocumentenController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\OpmerkingenController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\MededelingenController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\KalenderController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\EvenementenController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\CategorieenController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\BerichtenController.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\ClubCloud.Configuration.js" />
+    <Content Include="Modules\Bootstrap\Elements.xml" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\FormulierenController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\EnquetesController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\AlbumsController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\PaginasController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\FotosController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\DocumentenController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\OpmerkingenController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\MededelingenController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\KalenderController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\EvenementenController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\CategorieenController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\BerichtenController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\ClubCloud.Configuration.js" />
+    <Content Include="Modules\ClubCloud Controllers\ClubCloud.xml" />
     <Content Include="Modules\Controllers\Accounts\LoginController.js" />
     <Content Include="Modules\Controllers\Accounts\LogoutController.js" />
     <Content Include="Modules\Controllers\Afhangen\StartController.js" />
@@ -351,6 +354,7 @@
     <Content Include="Modules\ECMAScript\Components\es7-shim\String.prototype.padRight.js" />
     <Content Include="Modules\ECMAScript\Components\es7-shim\String.prototype.trimLeft.js" />
     <Content Include="Modules\ECMAScript\Components\es7-shim\String.prototype.trimRight.js" />
+    <Content Include="Modules\ECMAScript\Elements.xml" />
     <Content Include="Modules\Fonts\Elements.xml" />
     <Content Include="Modules\Fonts\fontawesome-webfont.svg" />
     <Content Include="Modules\Fonts\glyphicons-halflings-regular.svg" />
@@ -360,7 +364,8 @@
     <Content Include="Modules\jQuery\Components\jquery.validate\dist\jquery.validate.min.js" />
     <Content Include="Modules\jQuery\Components\jquery\dist\jquery.js" />
     <Content Include="Modules\jQuery\Components\jquery\dist\jquery.min.js" />
-    <Content Include="Modules\ClubCloud\Components\ClubCloud\ClubCloud.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\ClubCloud.js" />
+    <Content Include="Modules\jQuery\Elements.xml" />
     <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjax.js" />
     <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjax.min.js" />
     <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxCore.js" />
@@ -371,7 +376,9 @@
     <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxSerialization.min.js" />
     <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxWebServices.js" />
     <Content Include="Modules\Microsoft\Components\Microsoft\MicrosoftAjaxWebServices.min.js" />
+    <Content Include="Modules\Microsoft\Elements.xml" />
     <Content Include="Modules\Modernizr\Components\modernizr\modernizr.js" />
+    <Content Include="Modules\Modernizr\Elements.xml" />
     <Content Include="Modules\Polymer\Components\elements.html" />
     <Content Include="Modules\Polymer\Components\font-roboto\roboto.html" />
     <Content Include="Modules\Polymer\Components\iron-a11y-announcer\iron-a11y-announcer.html" />
@@ -527,7 +534,9 @@
     <Content Include="Modules\Polymer\Components\webcomponentsjs\webcomponents-lite.min.js" />
     <Content Include="Modules\Polymer\Components\webcomponentsjs\webcomponents.js" />
     <Content Include="Modules\Polymer\Components\webcomponentsjs\webcomponents.min.js" />
+    <Content Include="Modules\Polymer\Elements.xml" />
     <Content Include="Modules\Require\Components\requirejs\require.js" />
+    <Content Include="Modules\Require\Require.xml" />
     <Content Include="Modules\Scripts\AMD\angularAMD.js" />
     <Content Include="Modules\Scripts\AMD\angularAMD.min.js" />
     <Content Include="Modules\Scripts\AMD\ngload.js" />
@@ -626,6 +635,7 @@
     <Content Include="Modules\SharePoint\Components\ShareCoffee.UserProfiles\dist\ShareCoffee.UserProfiles.min.js" />
     <Content Include="Modules\SharePoint\Components\ShareCoffee\dist\ShareCoffee.js" />
     <Content Include="Modules\SharePoint\Components\ShareCoffee\dist\ShareCoffee.min.js" />
+    <Content Include="Modules\SharePoint\Elements.xml" />
     <Content Include="Modules\Views\Afhangen\start.html" />
     <Content Include="Modules\Views\Default.html" />
     <Content Include="Modules\Controllers\DefaultController.js" />

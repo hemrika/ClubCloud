@@ -15,5 +15,6 @@
     <ProjectItemFile Source="Components\ClubCloud\AlbumsController.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\EnquetesController.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\FormulierenController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="ClubCloud.xml" Target="ClubCloud Controllers\" Type="ElementManifest" />
   </Files>
 </ProjectItem>

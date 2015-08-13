@@ -54,5 +54,6 @@
     <ProjectItemFile Source="Components\angular-bootstrap\ui-bootstrap-tpls.min.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ui-router-extras\release\ct-ui-router-extras.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ui-router-extras\release\ct-ui-router-extras.min.js" Target="Components\Script\" Type="ElementFile" />
+    <ProjectItemFile Source="Elements.xml" Target="Angular\" Type="ElementManifest" />
   </Files>
 </ProjectItem>

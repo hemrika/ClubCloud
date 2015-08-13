@@ -159,5 +159,6 @@
     <ProjectItemFile Source="Components\web-animations-js\web-animations.min.js" Target="Components\Elements\web-animations-js\" Type="ElementFile" />
     <ProjectItemFile Source="Components\web-animations-js\web-animations.min.js.map" Target="Components\Elements\web-animations-js\" Type="ElementFile" />
     <ProjectItemFile Source="Components\elements.html" Target="Components\Elements\" Type="ElementFile" />
+    <ProjectItemFile Source="Elements.xml" Target="Polymer\" Type="ElementManifest" />
   </Files>
 </ProjectItem>
