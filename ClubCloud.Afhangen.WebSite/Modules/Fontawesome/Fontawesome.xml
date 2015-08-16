@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Fontawesome" Path="Components" Url="Components">
+    <File Path="Style\font-awesome.css" Url="Style/font-awesome.css" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Style\font-awesome.css.map" Url="Style/font-awesome.css.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Style\font-awesome.min.css" Url="Style/font-awesome.min.css" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font\fontawesome-webfont.eot" Url="Font/fontawesome-webfont.eot" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font\fontawesome-webfont.svg" Url="Font/fontawesome-webfont.svg" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font\fontawesome-webfont.ttf" Url="Font/fontawesome-webfont.ttf" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font\fontawesome-webfont.woff" Url="Font/fontawesome-webfont.woff" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font\fontawesome-webfont.woff2" Url="Font/fontawesome-webfont.woff2" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font\FontAwesome.otf" Url="Font/FontAwesome.otf" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+  </Module>
+</Elements>

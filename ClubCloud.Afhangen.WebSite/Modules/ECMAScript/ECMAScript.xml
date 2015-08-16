@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="ECMAScript" Path="Components" Url="Components"> 
+    <File Path="Script/es5-sham.js" Url="Script/es5-sham.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es5-sham.map" Url="Script/es5-sham.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es5-sham.min.js" Url="Script/es5-sham.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es5-shim.js" Url="Script/es5-shim.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es5-shim.map" Url="Script/es5-shim.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es5-shim.min.js" Url="Script/es5-shim.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es6-sham.js" Url="Script/es6-sham.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es6-sham.map" Url="Script/es6-sham.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es6-sham.min.js" Url="Script/es6-sham.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es6-shim.js" Url="Script/es6-shim.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es6-shim.map" Url="Script/es6-shim.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es6-shim.min.js" Url="Script/es6-shim.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/String.js" Url="Script/String.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/SIMD.js" Url="Script/SIMD.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/RegExp.js" Url="Script/RegExp.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/Set.js" Url="Script/Set.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/Object.js" Url="Script/Object.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/Map.js" Url="Script/Map.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/es7-shim.js" Url="Script/es7-shim.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/Array.js" Url="Script/Array.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/RegExp.escape.js" Url="Script/RegExp.escape.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/Set.prototype.js" Url="Script/Set.prototype.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/String.prototype.at.js" Url="Script/String.prototype.at.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/String.prototype.js" Url="Script/String.prototype.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/String.prototype.padLeft.js" Url="Script/String.prototype.padLeft.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/String.prototype.padRight.js" Url="Script/String.prototype.padRight.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/String.prototype.trimLeft.js" Url="Script/String.prototype.trimLeft.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/String.prototype.trimRight.js" Url="Script/String.prototype.trimRight.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/Array.prototype.js" Url="Script/Array.prototype.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/Map.prototype.js" Url="Script/Map.prototype.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />    
+  </Module>
+</Elements>

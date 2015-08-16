@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
+    <ProjectItemFile Source="Controllers.xml" Target="Controllers\" Type="ElementManifest" />
     <ProjectItemFile Source="Components\ClubCloud\ClubCloud.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\ClubCloud.Configuration.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\BerichtenController.js" Target="Controllers\" Type="ElementFile" />
@@ -14,7 +15,8 @@
     <ProjectItemFile Source="Components\ClubCloud\PaginasController.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\AlbumsController.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\EnquetesController.js" Target="Controllers\" Type="ElementFile" />
-    <ProjectItemFile Source="Components\ClubCloud\FormulierenController.js" Target="Controllers\" Type="ElementFile" />
-    <ProjectItemFile Source="ClubCloud.xml" Target="ClubCloud Controllers\" Type="ElementManifest" />
+    <ProjectItemFile Source="Components\ClubCloud\FormulierenController.js" Target="Controllers\" Type="ElementFile" />    
+    <ProjectItemFile Source="Components\ClubCloud\FooterController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\HeaderController.js" Target="Controllers\" Type="ElementFile" />
   </Files>
 </ProjectItem>

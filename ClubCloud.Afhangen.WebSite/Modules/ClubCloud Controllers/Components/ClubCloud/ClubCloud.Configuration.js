@@ -1,69 +1,82 @@
 ﻿"use strict";
 
-define(['angularAMD', 'angular-animate', 'angular-aria', 'angular-block-ui', 'angular-cookies', 'angular-messages', 'angular-resource',/* 'angular-route',*/ 'angular-sanitize', 'angular-touch', 'angular-ui-router'], function (angularAMD) {
-    var app = angular.module("ClubCloud", ['ng-animate', 'ngAria', 'blockUI', 'ngCookies', 'ngMessages', 'ngResource', /*'ngRoute',*/ 'ngSanitize', 'ngTouch', 'ui.router', 'ct.ui.router.extras']);
+define(['angularAMD', 'angular-animate', 'angular-aria' /*, 'angular-block-ui'*/, 'angular-cookies', 'angular-formly', 'angular-messages', 'angular-resource',/* 'angular-route',*/ 'angular-sanitize', 'angular-touch', 'angular-ui-router', 'ct-ui-router-extras', 'jquery', 'modernizr', 'MicrosoftAjax', 'ShareCoffee'], function (angularAMD) {
+    var app = angular.module("ClubCloud", ['ngAnimate', 'ngAria' /*, 'blockUI'*/, 'ngCookies', 'formly', 'ngMessages', 'ngResource', /*'ngRoute',*/ 'ngSanitize', 'ngTouch', 'ui.router', 'ct.ui.router.extras']);
 
-    app.config(['$futureStateProvider', '$controllerProvider',
-      function ($futureStateProvider, $controllerProvider) {
-          $urp.otherwise("/home");
-          
-          // Loading states from .json file during runtime
-          var loadAndRegisterFutureStates = function ($http) {
+    app.config(['$futureStateProvider', '$controllerProvider', '$urlRouterProvider', '$stateProvider', '$locationProvider',
+	function ($futureStateProvider, $controllerProvider, $urlRouterProvider, $stateProvider, $locationProvider) {
 
-              var header = {
-                  stateName: "Header",
-                  urlPrefix: "/Header",
-                  templateUrl: "/Views/Header.html",
-                  type: "PaginasController"
-              }
-              $futureStateProvider.futureState(header);
+	    //$locationProvider.html5Mode({ enabled: true, requireBase: false });
 
-              var footer = {
-                  stateName: "Footer",
-                  urlPrefix: "/Footer",
-                  templateUrl: "/Views/Footer.html",
-                  type: "PaginasController"
-              }
-              $futureStateProvider.futureState(footer);
+	    $urlRouterProvider.otherwise("/");
 
-              var content = {
-                  stateName: "Content",
-                  urlPrefix: "/Content",
-                  templateUrl: "/Views/Content.html",
-                  type: "PaginasController"
-              }
-              $futureStateProvider.futureState(content);
-              
-              /*
-              // $http.get().then() returns a promise
-              return $http.get('futureStates.json').then(function (resp) {
-                  angular.forEach(resp.data, function (fstate) {
-                      // Register each state returned from $http.get() with $futureStateProvider
-                      $futureStateProvider.futureState(fstate);
-                  });
-              });
-              */
-          };
-          
+	    $stateProvider
+            .state('Content', {
+                views: {
+                    'Content': {
+                        template: '<div ui-view=""></div>',
+                    },
+                    'Header': angularAMD.route({ templateUrl: 'Views/Header.html', controller: 'HeaderController' })
+			      ,
+                    'Footer': angularAMD.route({ templateUrl: 'Views/Footer.html', controller: 'FooterController' })
+                }
+            })
 
-          $futureStateProvider.stateFactory('ngload', ngloadStateFactory);
-          $futureStateProvider.stateFactory('BerichtenController', requireCtrlStateFactory);
-          $futureStateProvider.stateFactory('CategorieenController', BerichtenControllerCtrlStateFactory);
-          $futureStateProvider.stateFactory('EvenementenController', EvenementenCtrlStateFactory);
-          $futureStateProvider.stateFactory('KalenderController', KalenderCtrlStateFactory);
-          $futureStateProvider.stateFactory('MededelingenController', MededelingenCtrlStateFactory);
-          $futureStateProvider.stateFactory('OpmerkingenController', OpmerkingenCtrlStateFactory);
-          $futureStateProvider.stateFactory('DocumentenController', DocumentenCtrlStateFactory);
-          $futureStateProvider.stateFactory('FotosController', FotosCtrlStateFactory);
-          $futureStateProvider.stateFactory('PaginasController', PaginasCtrlStateFactory);
-          $futureStateProvider.stateFactory('AlbumsController', AlbumsCtrlStateFactory);
-          $futureStateProvider.stateFactory('EnquetesController', EnquetesCtrlStateFactory);
-          $futureStateProvider.stateFactory('FormulierenController', FormulierenCtrlStateFactory);
+	    // Loading states from .json file during runtime
+	    var loadAndRegisterFutureStates = function ($http) {
 
-          $futureStateProvider.addResolve(loadAndRegisterFutureStates);
-      }]);
+	        var content = {
+	            stateName: "Content.Home",
+	            urlPrefix: "/",
+	            templateUrl: "Views/Default.html",
+	            type: "PaginasController"
+	        }
+
+	        $futureStateProvider.futureState(content);
+
+	        var contact = {
+	            stateName: "Content.Contact",
+	            urlPrefix: "/Contact",
+	            templateUrl: "Views/Contact.html",
+	            type: "PaginasController"
+	        }
+
+	        $futureStateProvider.futureState(contact);
+
+	        /*
+            // $http.get().then() returns a promise
+            return $http.get('futureStates.json').then(function (resp) {
+                angular.forEach(resp.data, function (fstate) {
+                    // Register each state returned from $http.get() with $futureStateProvider
+                    $futureStateProvider.futureState(fstate);
+                });
+            });
+            */
+	    };
+
+
+	    $futureStateProvider.stateFactory('ngload', ngloadStateFactory);
+	    $futureStateProvider.stateFactory('BerichtenController', BerichtenControllerCtrlStateFactory);
+	    $futureStateProvider.stateFactory('CategorieenController', CategorieenCtrlStateFactory);
+	    $futureStateProvider.stateFactory('EvenementenController', EvenementenCtrlStateFactory);
+	    $futureStateProvider.stateFactory('KalenderController', KalenderCtrlStateFactory);
+	    $futureStateProvider.stateFactory('MededelingenController', MededelingenCtrlStateFactory);
+	    $futureStateProvider.stateFactory('OpmerkingenController', OpmerkingenCtrlStateFactory);
+	    $futureStateProvider.stateFactory('DocumentenController', DocumentenCtrlStateFactory);
+	    $futureStateProvider.stateFactory('FotosController', FotosCtrlStateFactory);
+	    $futureStateProvider.stateFactory('PaginasController', PaginasCtrlStateFactory);
+	    $futureStateProvider.stateFactory('AlbumsController', AlbumsCtrlStateFactory);
+	    $futureStateProvider.stateFactory('EnquetesController', EnquetesCtrlStateFactory);
+	    $futureStateProvider.stateFactory('FormulierenController', FormulierenCtrlStateFactory);
+
+	    $futureStateProvider.addResolve(loadAndRegisterFutureStates);
+
+	}]);
 
     app.run(function ($rootScope, $state, $window, $timeout) {
+        $rootScope.site = {};
+        $rootScope.Menu = { Header: {}, Footer: {} };
+
         $rootScope.$state = $state;
         $rootScope.$on("$stateChangeSuccess", function () {
             /*
@@ -74,14 +87,15 @@ define(['angularAMD', 'angular-animate', 'angular-aria', 'angular-block-ui', 'an
         });
     });
 
+
     // Tell angularAMD to tell angular to bootstrap our app
-    angularAMD.bootstrap(app);
+    return angularAMD.bootstrap(app);
     // return app for requireJS registration
-    return app;
+    //return app;
 
     /* Berichten */
     function BerichtenControllerCtrlStateFactory($q, futureState) {
-        var d = $q.defer(); 
+        var d = $q.defer();
         require(['Controllers/BerichtenController'], function (BerichtenController) {
             var fullstate = {
                 controller: BerichtenController,

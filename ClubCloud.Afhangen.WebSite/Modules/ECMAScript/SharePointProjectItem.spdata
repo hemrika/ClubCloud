@@ -31,6 +31,6 @@
     <ProjectItemFile Source="Components\es7-shim\String.prototype.trimRight.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\es7-shim\Array.prototype.js" Target="Components\Script\" Type="ElementFile" />
     <ProjectItemFile Source="Components\es7-shim\Map.prototype.js" Target="Components\Script\" Type="ElementFile" />
-    <ProjectItemFile Source="Elements.xml" Target="ECMAScript\" Type="ElementManifest" />
+    <ProjectItemFile Source="ECMAScript.xml" Target="ECMAScript\" Type="ElementManifest" />
   </Files>
 </ProjectItem>

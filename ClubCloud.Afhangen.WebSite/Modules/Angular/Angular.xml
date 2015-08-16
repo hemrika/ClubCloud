@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Angular" Path="Components" Url="Components">
+    <File Path="Script\angular.min.js.map" Url="Script/angular.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular.min.js" Url="Script/angular.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular.js" Url="Script/angular.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-animate.js" Url="Script/angular-animate.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-animate.min.js" Url="Script/angular-animate.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-animate.min.js.map" Url="Script/angular-animate.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-aria.js" Url="Script/angular-aria.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-aria.min.js" Url="Script/angular-aria.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-aria.min.js.map" Url="Script/angular-aria.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Style\angular-block-ui.css" Url="Style/angular-block-ui.css" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Style\angular-block-ui.css.map" Url="Style/angular-block-ui.css.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-block-ui.js" Url="Script/angular-block-ui.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-block-ui.js.map" Url="Script/angular-block-ui.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Style\angular-block-ui.min.css" Url="Style/angular-block-ui.min.css" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-block-ui.min.js" Url="Script/angular-block-ui.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-block-ui.min.js.map" Url="Script/angular-block-ui.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\ui-bootstrap-tpls.js" Url="Script/ui-bootstrap-tpls.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\ui-bootstrap-tpls.min.js" Url="Script/ui-bootstrap-tpls.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\ui-bootstrap.js" Url="Script/ui-bootstrap.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\ui-bootstrap.min.js" Url="Script/ui-bootstrap.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-cookies.js" Url="Script/angular-cookies.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-cookies.min.js" Url="Script/angular-cookies.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-cookies.min.js.map" Url="Script/angular-cookies.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\formly.js" Url="Script/formly.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\formly.min.js" Url="Script/formly.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\formly.min.js.map" Url="Script/formly.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-locale_nl.js" Url="Script/angular-locale_nl.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-loader.js" Url="Script/angular-loader.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-loader.min.js" Url="Script/angular-loader.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-loader.min.js.map" Url="Script/angular-loader.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-messages.js" Url="Script/angular-messages.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-messages.min.js" Url="Script/angular-messages.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-messages.min.js.map" Url="Script/angular-messages.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-resource.js" Url="Script/angular-resource.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-resource.min.js" Url="Script/angular-resource.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-resource.min.js.map" Url="Script/angular-resource.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-route.js" Url="Script/angular-route.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-route.min.js" Url="Script/angular-route.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-route.min.js.map" Url="Script/angular-route.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-sanitize.js" Url="Script/angular-sanitize.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-sanitize.min.js" Url="Script/angular-sanitize.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-sanitize.min.js.map" Url="Script/angular-sanitize.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-touch.js" Url="Script/angular-touch.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-touch.min.js" Url="Script/angular-touch.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-touch.min.js.map" Url="Script/angular-touch.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-ui-router.js" Url="Script/angular-ui-router.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angular-ui-router.min.js" Url="Script/angular-ui-router.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angularAMD.js" Url="Script/angularAMD.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angularAMD.min.js" Url="Script/angularAMD.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angularAMD.min.js.map" Url="Script/angularAMD.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\angularAMD.min.map" Url="Script/angularAMD.min.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\ngload.js" Url="Script/ngload.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\ngload.min.js" Url="Script/ngload.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\ngload.min.map" Url="Script/ngload.min.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\api-check.js" Url="Script/api-check.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\api-check.min.js" Url="Script/api-check.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\api-check.min.js.map" Url="Script/api-check.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\ct-ui-router-extras.js" Url="Script/ct-ui-router-extras.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script\ct-ui-router-extras.min.js" Url="Script/ct-ui-router-extras.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+  </Module>
+</Elements>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="jQuery" Path="Components" Url="Components">
+    <File Path="Script/jquery.js" Url="Script/jquery.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/jquery.min.js" Url="Script/jquery.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/jquery.min.map" Url="Script/jquery.min.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/additional-methods.js" Url="Script/additional-methods.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/additional-methods.min.js" Url="Script/additional-methods.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/jquery.validate.js" Url="Script/jquery.validate.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/jquery.validate.min.js" Url="Script/jquery.validate.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />    
+  </Module>
+</Elements>

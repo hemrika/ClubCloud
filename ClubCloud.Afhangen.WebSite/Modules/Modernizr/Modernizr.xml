@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Modernizr" Path="Components" Url="Components">
+    <File Path="Script/modernizr.js" Url="Script/modernizr.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+  </Module>
+</Elements>

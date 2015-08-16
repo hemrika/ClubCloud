@@ -1,0 +1,10 @@
+{
+  "name": "Expand",
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "expandjs": "ExpandJS/expandjs#~0.9.6",
+    "mat-elements": "ExpandJS/mat-elements#~0.9.6",
+    "xp-elements": "ExpandJS/xp-elements#~0.9.6"
+  }
+}

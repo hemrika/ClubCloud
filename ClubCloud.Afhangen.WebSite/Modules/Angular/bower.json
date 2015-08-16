@@ -18,7 +18,8 @@
     "angular-touch": "~1.4.3",
     "angular-i18n": "~1.4.3",
     "angularAMD": "~0.2.1",
-    "ui-router-extras": "~0.0.14"
+    "ui-router-extras": "~0.0.14",
+    "angular-formly": "~6.23.2"
   },
   "resolutions": {
     "angular": "1.4.3"

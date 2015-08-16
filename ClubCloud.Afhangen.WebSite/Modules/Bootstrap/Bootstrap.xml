@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Bootstrap" Path="Components" Url="Components">
+    <File Path="Style/bootstrap-theme.css" Url="Style/bootstrap-theme.css" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Style/bootstrap-theme.css.map" Url="Style/bootstrap-theme.css.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Style/bootstrap-theme.min.css" Url="Style/bootstrap-theme.min.css" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Style/bootstrap.css" Url="Style/bootstrap.css" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Style/bootstrap.css.map" Url="Style/bootstrap.css.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Style/bootstrap.min.css" Url="Style/bootstrap.min.css" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font/glyphicons-halflings-regular.eot" Url="Script/glyphicons-halflings-regular.eot" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font/glyphicons-halflings-regular.svg" Url="Script/glyphicons-halflings-regular.svg" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font/glyphicons-halflings-regular.ttf" Url="Script/glyphicons-halflings-regular.ttf" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font/glyphicons-halflings-regular.woff" Url="Script/glyphicons-halflings-regular.woff" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Font/glyphicons-halflings-regular.woff2" Url="Script/glyphicons-halflings-regular.woff2" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/bootstrap.js" Url="Script/bootstrap.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/bootstrap.min.js" Url="Script/bootstrap.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+  </Module>
+</Elements>

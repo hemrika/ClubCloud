@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Polymer" Path="Components" Url="Components" >
+    <File Path="Polymer/polymer-micro.html" Url="Polymer/polymer-micro.html" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Polymer/polymer-mini.html" Url="Polymer/polymer-mini.html" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Polymer/polymer.html" Url="Polymer/polymer.html" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/CustomElements.js" Url="Script/CustomElements.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/CustomElements.min.js" Url="Script/CustomElements.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/HTMLImports.js" Url="Script/HTMLImports.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/HTMLImports.min.js" Url="Script/HTMLImports.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/MutationObserver.js" Url="Script/MutationObserver.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/MutationObserver.min.js" Url="Script/MutationObserver.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/ShadowDOM.js" Url="Script/ShadowDOM.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/ShadowDOM.min.js" Url="Script/ShadowDOM.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/webcomponents-lite.js" Url="Script/webcomponents-lite.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/webcomponents-lite.min.js" Url="Script/webcomponents-lite.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/webcomponents.js" Url="Script/webcomponents.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/webcomponents.min.js" Url="Script/webcomponents.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+  </Module>
+</Elements>

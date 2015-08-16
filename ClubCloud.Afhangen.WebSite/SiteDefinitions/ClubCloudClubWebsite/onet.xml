@@ -48,7 +48,10 @@
 	</Configurations>
   <Modules>
     <Module Name="Basics" Url="" Path="" >
-      <File Url="index.html" NavBarHome="True" Type="Ghostable"    />
+      <File Path="index.html" Url="index.html" NavBarHome="True" Type="Ghostable"    />
+      <File Path="default.html" Url="Views/default.html" Type="Ghostable" />
+      <File Path="Header.html" Url="ViewsHeader.html" Type="Ghostable"/>
+      <File Path="Footer.html" Url="Views/Footer.html" Type="Ghostable"/>
     </Module>
   </Modules>
   <ServerEmailFooter>$Resources:ServerEmailFooter;</ServerEmailFooter>

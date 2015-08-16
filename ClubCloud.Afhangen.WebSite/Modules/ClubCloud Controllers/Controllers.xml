@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="ClubCloud Controllers" Path="Controllers" Url="Controllers">
+    <File Path="AlbumsController.js" Url="AlbumsController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="BerichtenController.js" Url="BerichtenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="CategorieenController.js" Url="CategorieenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="ClubCloud.Configuration.js" Url="ClubCloud.Configuration.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="ClubCloud.js" Url="ClubCloud.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="DocumentenController.js" Url="DocumentenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="EnquetesController.js" Url="EnquetesController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="EvenementenController.js" Url="EvenementenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="FormulierenController.js" Url="FormulierenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="FotosController.js" Url="FotosController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="KalenderController.js" Url="KalenderController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="MededelingenController.js" Url="MededelingenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="OpmerkingenController.js" Url="OpmerkingenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="PaginasController.js" Url="PaginasController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="FooterController.js" Url="FooterController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="HeaderController.js" Url="HeaderController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+  </Module>
+</Elements>

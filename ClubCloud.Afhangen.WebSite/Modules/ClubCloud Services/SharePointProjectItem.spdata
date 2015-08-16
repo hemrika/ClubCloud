@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Services.xml" Target="Services\" Type="ElementManifest" />
+    <ProjectItemFile Source="Components\ClubCloud\BerichtenServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\CategorieenServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\EvenementenServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\KalenderServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\MededelingenServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\OpmerkingenServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\DocumentenServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\FotosServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\PaginasServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\AlbumsServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\EnquetesServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\FormulierenServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\FooterServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\HeaderServices.js" Target="Services\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

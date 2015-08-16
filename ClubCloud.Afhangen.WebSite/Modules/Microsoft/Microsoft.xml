@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Microsoft" Path="Components" Url="Components">
+    <File Path="Script/MicrosoftAjax.min.js" Url="Script/MicrosoftAjax.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/MicrosoftAjax.js" Url="Script/MicrosoftAjax.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/MicrosoftAjaxWebServices.min.js" Url="Script/MicrosoftAjaxWebServices.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/MicrosoftAjaxWebServices.js" Url="Script/MicrosoftAjaxWebServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/MicrosoftAjaxCore.js" Url="Script/MicrosoftAjaxCore.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/MicrosoftAjaxCore.min.js" Url="Script/MicrosoftAjaxCore.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/MicrosoftAjaxSerialization.js" Url="Script/MicrosoftAjaxSerialization.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/MicrosoftAjaxSerialization.min.js" Url="Script/MicrosoftAjaxSerialization.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/MicrosoftAjaxNetwork.js" Url="Script/MicrosoftAjaxNetwork.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/MicrosoftAjaxNetwork.min.js" Url="Script/MicrosoftAjaxNetwork.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+  </Module>
+</Elements>

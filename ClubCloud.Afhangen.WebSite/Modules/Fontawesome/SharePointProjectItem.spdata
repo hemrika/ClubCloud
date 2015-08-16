@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Fontawesome.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Fontawesome.xml" Target="Fontawesome\" Type="ElementManifest" />
+    <ProjectItemFile Source="Components\fontawesome\css\font-awesome.css" Target="Components\Style\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\fontawesome\css\font-awesome.css.map" Target="Components\Style\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\fontawesome\css\font-awesome.min.css" Target="Components\Style\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\fontawesome\fonts\fontawesome-webfont.eot" Target="Components\Font\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\fontawesome\fonts\fontawesome-webfont.svg" Target="Components\Font\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\fontawesome\fonts\fontawesome-webfont.ttf" Target="Components\Font\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\fontawesome\fonts\fontawesome-webfont.woff" Target="Components\Font\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\fontawesome\fonts\fontawesome-webfont.woff2" Target="Components\Font\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\fontawesome\fonts\FontAwesome.otf" Target="Components\Font\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

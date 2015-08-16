@@ -2,6 +2,6 @@
 <!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Module Name="Require" Path="Components" Url="Components">
-    <File Path="require.js" Url="require.js" />
+    <File Path="Script/require.js" Url="Script/require.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
   </Module>
 </Elements>

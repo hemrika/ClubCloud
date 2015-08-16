@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="ClubCloud Services" Path="Services" Url="Services">
+    <File Path="AlbumsServices.js" Url="AlbumsServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="BerichtenServices.js" Url="BerichtenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="CategorieenServices.js" Url="CategorieenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="DocumentenServices.js" Url="DocumentenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="EnquetesServices.js" Url="EnquetesServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="EvenementenServices.js" Url="EvenementenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="FormulierenServices.js" Url="FormulierenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="FotosServices.js" Url="FotosServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="KalenderServices.js" Url="KalenderServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="MededelingenServices.js" Url="MededelingenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="OpmerkingenServices.js" Url="OpmerkingenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="PaginasServices.js" Url="PaginasServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="FooterServices.js" Url="FooterServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="HeaderServices.js" Url="HeaderServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+  </Module>
+</Elements>
