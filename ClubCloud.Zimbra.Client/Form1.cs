@@ -443,10 +443,44 @@ namespace ClubCloud.Zimbra.Client
                 //ConditionExpression conditiontype = new ConditionExpression { AttributeName = "objecttypecode", Operator = ConditionOperator.Equal, Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
                 //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { conditionid } };
 
-                ConditionExpression condition = new ConditionExpression { AttributeName = "contactid", Operator = ConditionOperator.Equal, uitype = "contactid", Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
-                FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
-                LinkEntity link = new LinkEntity { LinkToEntityName = "contact", LinkFromAttributeName = "sgt_functionarisid", LinkToAttributeName = "contactid", LinkCriteria = expression };
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "contactid", Operator = ConditionOperator.Equal, uitype = "contactid", Values = new object[1] { new Guid("6f0df085-8b6c-414c-9a2e-27dc351b0c39") } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+                //LinkEntity link = new LinkEntity { LinkToEntityName = "contact", LinkFromAttributeName = "sgt_functionarisid", LinkToAttributeName = "contactid", LinkCriteria = expression };
                 //List<BusinessEntity> entities = RetrieveMultiple(service, "sgt_alg_functionaris", out moreRecords, ref pageNum, null, link);
+
+                //sgt_com_aantal_afdelingen
+                //sgt_com_afdeling
+                //sgt_com_baan_gereserveerd_competitie
+                //sgt_com_beslissingswedstrijd
+                //sgt_com_bezoek_consul
+                //sgt_com_competitie                
+                //sgt_com_competitie_afsluiting
+                //sgt_com_competitie_districtsselectie
+                //sgt_com_competitie_indeling
+                //sgt_com_competitiegedelegeerde
+                //sgt_com_competitieinschrijving
+                //sgt_com_competitierecht
+                //sgt_com_competitiesoort
+                //sgt_com_competitietype
+                //sgt_com_ingedeelde_ploeg
+                //sgt_com_kalender
+                //sgt_com_klasse
+                //sgt_com_klassegroep
+                //sgt_com_klassevolgorde
+                //sgt_com_partij_uitslag
+                //sgt_com_partij_uitslag_mutatie
+                //sgt_com_piramide
+                //sgt_com_ploeg
+                //sgt_com_ploeginschrijving
+                //sgt_com_ploeginschrijving_afhandeling
+                //sgt_com_ploegsamenstelling
+                //sgt_com_reeks_speeldatums
+                //sgt_com_speelschema_standaard
+                //sgt_com_speelschema_wedstrijd
+                //sgt_com_wedstrijdgegevens
+                //ConditionExpression condition = new ConditionExpression { AttributeName = "sgt_dss_bondsnummer", Operator = ConditionOperator.Equal, Values = new object[1] { "12073385" } };
+                //FilterExpression expression = new FilterExpression { FilterOperator = LogicalOperator.And, Conditions = new ConditionExpression[1] { condition } };
+
 
                 PagingInfo pageInfo = new PagingInfo();
                 pageInfo.Count = 50; // the number of rows in each batch
@@ -455,23 +489,10 @@ namespace ClubCloud.Zimbra.Client
                 // Create the QueryExpression.
                 QueryExpression query = new QueryExpression();
 
-                // Set the properties of the QueryExpression.
-                //sgt_alg_ledenpas_vereniging
-                //organization
-                //sgt_alg_kenmerk
-                //sgt_alg_administratie
-                //sgt_alg_bestuursorgaan
-                //sgt_alg_functie
-                //sgt_alg_functionaris
-                //sgt_alg_gebeurtenis
-                //sgt_alg_type_bestuursorgaan
-                //sgt_alg_district
-                //systemuser
-                //FilterExpression expression = new FilterExpression();
                 query.EntityName = "sgt_alg_functionaris";
                 query.ColumnSet = cols;
                 //query.Criteria = expression;
-                query.LinkEntities = new LinkEntity[] { link };
+                //query.LinkEntities = new LinkEntity[] { link };
                 query.PageInfo = pageInfo;
                 query.Distinct = true;
 
