@@ -5,7 +5,7 @@
     <ProjectItemFile Source="Components\ClubCloud\BerichtenServices.js" Target="Services\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\CategorieenServices.js" Target="Services\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\EvenementenServices.js" Target="Services\" Type="ElementFile" />
-    <ProjectItemFile Source="Components\ClubCloud\KalenderServices.js" Target="Services\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\KalendersServices.js" Target="Services\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\MededelingenServices.js" Target="Services\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\OpmerkingenServices.js" Target="Services\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\DocumentenServices.js" Target="Services\" Type="ElementFile" />

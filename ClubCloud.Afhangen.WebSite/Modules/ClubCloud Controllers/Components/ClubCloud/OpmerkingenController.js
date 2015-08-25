@@ -3,9 +3,9 @@
 define(['angularAMD', 'Services/OpmerkingenServices'], function (app, OpmerkingenServices) {
     app.controller('OpmerkingenController', function ($rootScope, $scope, $state, $stateParams, $window, OpmerkingenServices) {
 
-        $rootScope.Pagina = {};
+        $rootScope.Opmerkingen = {};
 
-        $rootScope.$on('$viewContentLoading', function (event) {
+        $scope.$on('$viewContentLoading', function (event) {
             event.preventDefault();
 
             try {
@@ -13,7 +13,7 @@ define(['angularAMD', 'Services/OpmerkingenServices'], function (app, Opmerkinge
             catch (err) { }
         })
 
-        $rootScope.$on('$viewContentLoaded', function (event) {
+        $scope.$on('$viewContentLoaded', function (event) {
             event.preventDefault();
             try {
             }

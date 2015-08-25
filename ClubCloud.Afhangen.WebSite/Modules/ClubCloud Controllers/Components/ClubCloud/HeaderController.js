@@ -14,7 +14,7 @@ define(['angularAMD', 'Services/HeaderServices'], function (app, HeaderServices)
         }
         catch (err) { }
 
-        $rootScope.$on('$viewContentLoading', function (event) {
+        $scope.$on('$viewContentLoading', function (event) {
             event.preventDefault();
             try {
                 HeaderServices.get().then(function (result) {
@@ -24,7 +24,7 @@ define(['angularAMD', 'Services/HeaderServices'], function (app, HeaderServices)
             catch (err) { }
         })
 
-        $rootScope.$on('$viewContentLoaded', function (event) {
+        $scope.$on('$viewContentLoaded', function (event) {
             event.preventDefault();
             try {
                 $(".memenu").memenu();

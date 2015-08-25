@@ -3,9 +3,9 @@
 define(['angularAMD', 'Services/FormulierenServices'], function (app, FormulierenServices) {
     app.controller('FormulierenController', function ($rootScope, $scope, $state, $stateParams, $window, FormulierenServices) {
 
-        $rootScope.Pagina = {};
+        $rootScope.Formulieren = {};
 
-        $rootScope.$on('$viewContentLoading', function (event) {
+        $scope.$on('$viewContentLoading', function (event) {
             event.preventDefault();
 
             try {
@@ -13,7 +13,7 @@ define(['angularAMD', 'Services/FormulierenServices'], function (app, Formuliere
             catch (err) { }
         })
 
-        $rootScope.$on('$viewContentLoaded', function (event) {
+        $scope.$on('$viewContentLoaded', function (event) {
             event.preventDefault();
             try {
             }

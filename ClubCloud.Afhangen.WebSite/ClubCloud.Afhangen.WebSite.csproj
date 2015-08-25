@@ -339,7 +339,7 @@
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\FormulierenServices.js" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\FotosServices.js" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\HeaderServices.js" />
-    <Content Include="Modules\ClubCloud Services\Components\ClubCloud\KalenderServices.js" />
+    <Content Include="Modules\ClubCloud Services\Components\ClubCloud\KalendersServices.js" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\MededelingenServices.js" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\OpmerkingenServices.js" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\PaginasServices.js" />
@@ -354,7 +354,7 @@
     <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\DocumentenController.js" />
     <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\OpmerkingenController.js" />
     <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\MededelingenController.js" />
-    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\KalenderController.js" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\KalendersController.js" />
     <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\EvenementenController.js" />
     <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\CategorieenController.js" />
     <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\BerichtenController.js" />

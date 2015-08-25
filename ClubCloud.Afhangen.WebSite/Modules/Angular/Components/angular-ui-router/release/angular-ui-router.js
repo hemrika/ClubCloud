@@ -1943,7 +1943,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
    *
    * }).run(function ($rootScope, $urlRouter, UserService) {
    *
-   *   $rootScope.$on('$locationChangeSuccess', function(e) {
+   *   $scope.$on('$locationChangeSuccess', function(e) {
    *     // UserService is an example service for managing user state
    *     if (UserService.isLoggedIn()) return;
    *
@@ -2020,7 +2020,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
     }
 
     function listen() {
-      listener = listener || $rootScope.$on('$locationChangeSuccess', update);
+      listener = listener || $scope.$on('$locationChangeSuccess', update);
       return listener;
     }
 
@@ -2042,7 +2042,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
        * <pre>
        * angular.module('app', ['ui.router'])
        *   .run(function($rootScope, $urlRouter) {
-       *     $rootScope.$on('$locationChangeSuccess', function(evt) {
+       *     $scope.$on('$locationChangeSuccess', function(evt) {
        *       // Halt state change from even starting
        *       evt.preventDefault();
        *       // Perform custom logic
@@ -3218,7 +3218,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
          * @example
          *
          * <pre>
-         * $rootScope.$on('$stateChangeStart',
+         * $scope.$on('$stateChangeStart',
          * function(event, toState, toParams, fromState, fromParams){
          *     event.preventDefault();
          *     // transitionTo() promise will be rejected with

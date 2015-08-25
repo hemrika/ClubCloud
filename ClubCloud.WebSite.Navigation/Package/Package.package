@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="36889cc9-2d65-4838-957d-6a746d4b3eba" solutionId="36889cc9-2d65-4838-957d-6a746d4b3eba" resetWebServer="true" title="ClubCloud Website Navigation" resetWebServerModeOnUpgrade="Recycle" sharePointProductVersion="15.0" name="ClubCloud.WebSite.Navigation" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel" />

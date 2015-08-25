@@ -5,7 +5,7 @@ define(['angularAMD', 'Services/FooterServices'], function (app, FooterServices)
 
         $rootScope.Menu.Footer = {};
 
-        $rootScope.$on('$viewContentLoading', function (event) {
+        $scope.$on('$viewContentLoading', function (event) {
             event.preventDefault();
 
             try {
@@ -13,7 +13,7 @@ define(['angularAMD', 'Services/FooterServices'], function (app, FooterServices)
             catch (err) { }
         })
 
-        $rootScope.$on('$viewContentLoaded', function (event) {
+        $scope.$on('$viewContentLoaded', function (event) {
             event.preventDefault();
             try {
             }

@@ -6,7 +6,7 @@
     <File Path="Script/angular-sharepoint.min.js" Url="Script/angular-sharepoint.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
     <File Path="Script/angular-sharepoint.min.map" Url="Script/angular-sharepoint.min.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
     <File Path="Script/ShareCoffee.js" Url="Script/ShareCoffee.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
-    <File Path="Script/ShareCoffee.js.map" Url="Script/jquery.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/ShareCoffee.js.map" Url="Script/ShareCoffee.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
     <File Path="Script/ShareCoffee.min.js" Url="Script/ShareCoffee.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
     <File Path="Script/ShareCoffee.Search.js" Url="Script/ShareCoffee.Search.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
     <File Path="Script/ShareCoffee.Search.js.map" Url="Script/ShareCoffee.Search.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />

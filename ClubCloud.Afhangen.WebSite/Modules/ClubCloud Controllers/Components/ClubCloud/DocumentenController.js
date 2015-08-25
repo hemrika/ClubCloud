@@ -3,9 +3,9 @@
 define(['angularAMD', 'Services/DocumentenServices'], function (app, DocumentenServices) {
     app.controller('DocumentenController', function ($rootScope, $scope, $state, $stateParams, $window, DocumentenServices) {
 
-        $rootScope.Pagina = {};
+        $rootScope.Documenten = {};
 
-        $rootScope.$on('$viewContentLoading', function (event) {
+        $scope.$on('$viewContentLoading', function (event) {
             event.preventDefault();
 
             try {
@@ -13,7 +13,7 @@ define(['angularAMD', 'Services/DocumentenServices'], function (app, DocumentenS
             catch (err) { }
         })
 
-        $rootScope.$on('$viewContentLoaded', function (event) {
+        $scope.$on('$viewContentLoaded', function (event) {
             event.preventDefault();
             try {
             }

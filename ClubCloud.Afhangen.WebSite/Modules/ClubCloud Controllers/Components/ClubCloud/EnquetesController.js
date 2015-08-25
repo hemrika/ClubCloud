@@ -3,9 +3,9 @@
 define(['angularAMD', 'Services/EnquetesServices'], function (app, EnquetesServices) {
     app.controller('EnquetesController', function ($rootScope, $scope, $state, $stateParams, $window, EnquetesServices) {
 
-        $rootScope.Pagina = {};
+        $rootScope.Enquetes = {};
 
-        $rootScope.$on('$viewContentLoading', function (event) {
+        $scope.$on('$viewContentLoading', function (event) {
             event.preventDefault();
 
             try {
@@ -13,7 +13,7 @@ define(['angularAMD', 'Services/EnquetesServices'], function (app, EnquetesServi
             catch (err) { }
         })
 
-        $rootScope.$on('$viewContentLoaded', function (event) {
+        $scope.$on('$viewContentLoaded', function (event) {
             event.preventDefault();
             try {
             }

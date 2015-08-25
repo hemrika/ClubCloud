@@ -10,7 +10,7 @@
     <File Path="EvenementenServices.js" Url="EvenementenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="FormulierenServices.js" Url="FormulierenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="FotosServices.js" Url="FotosServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
-    <File Path="KalenderServices.js" Url="KalenderServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="KalendersServices.js" Url="KalendersServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="MededelingenServices.js" Url="MededelingenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="OpmerkingenServices.js" Url="OpmerkingenServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="PaginasServices.js" Url="PaginasServices.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>

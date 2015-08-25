@@ -3,9 +3,9 @@
 define(['angularAMD', 'Services/EvenementenServices'], function (app, EvenementenServices) {
     app.controller('EvenementenController', function ($rootScope, $scope, $state, $stateParams, $window, EvenementenServices) {
 
-        $rootScope.Pagina = {};
+        $rootScope.Evenementen = {};
 
-        $rootScope.$on('$viewContentLoading', function (event) {
+        $scope.$on('$viewContentLoading', function (event) {
             event.preventDefault();
 
             try {
@@ -13,7 +13,7 @@ define(['angularAMD', 'Services/EvenementenServices'], function (app, Evenemente
             catch (err) { }
         })
 
-        $rootScope.$on('$viewContentLoaded', function (event) {
+        $scope.$on('$viewContentLoaded', function (event) {
             event.preventDefault();
             try {
             }

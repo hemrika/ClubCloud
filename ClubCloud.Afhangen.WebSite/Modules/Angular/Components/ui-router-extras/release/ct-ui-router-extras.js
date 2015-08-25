@@ -293,7 +293,7 @@ angular.module('ct.ui.router.extras.dsr').service("$deepStateRedirect", [ '$root
     return angular.toJson(paramsToString);
   }
 
-  $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+  $scope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
     var cfg = getConfig(toState);
     if (ignoreDsr || (computeDeepStateStatus(toState) !== REDIRECT) && !cfg['default']) return;
     // We're changing directly to one of the redirect (tab) states.
@@ -312,7 +312,7 @@ angular.module('ct.ui.router.extras.dsr').service("$deepStateRedirect", [ '$root
     $state.go(redirect.state, angular.extend(redirectParams, redirect.params));
   });
 
-  $rootScope.$on("$stateChangeSuccess", function (event, toState, toParams, fromState, fromParams) {
+  $scope.$on("$stateChangeSuccess", function (event, toState, toParams, fromState, fromParams) {
     var deepStateStatus = computeDeepStateStatus(toState);
     if (deepStateStatus) {
       var name = toState.name;
@@ -1468,7 +1468,7 @@ angular.module("ct.ui.router.extras.sticky").config(
     this.$get = [ '$injector', '$state', '$q', '$rootScope', '$urlRouter', '$timeout', '$log',
       function futureStateProvider_get($injector, $state, $q, $rootScope, $urlRouter, $timeout, $log) {
         function init() {
-          $rootScope.$on("$stateNotFound", function futureState_notFound(event, unfoundState, fromState, fromParams) {
+          $scope.$on("$stateNotFound", function futureState_notFound(event, unfoundState, fromState, fromParams) {
             if (lazyloadInProgress) return;
             //$log.debug("event, unfoundState, fromState, fromParams", event, unfoundState, fromState, fromParams);
 
@@ -1563,7 +1563,7 @@ angular.module('ct.ui.router.extras.previous', [ 'ct.ui.router.extras.core', 'ct
     function ($rootScope, $state) {
       var previous = null, lastPrevious = null, memos = {};
 
-      $rootScope.$on("$transitionStart", function(evt, $transition$) {
+      $scope.$on("$transitionStart", function(evt, $transition$) {
         var from = $transition$.from;
         // Check if the fromState is navigable before tracking it.
         // Root state doesn't get decorated with $$state().  Doh.
@@ -1683,7 +1683,7 @@ angular.module("ct.ui.router.extras.transition", [ 'ct.ui.router.extras.core' ])
           };
 
           // This event is handled synchronously in transitionTo call stack
-          $rootScope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
+          $scope.$on("$stateChangeStart", function (evt, toState, toParams, fromState, fromParams) {
               var depth = transitionDepth;
               // To/From is now normalized by ui-router.  Add this information to the transition data object.
               var tData = angular.extend(tDataStack[depth], {

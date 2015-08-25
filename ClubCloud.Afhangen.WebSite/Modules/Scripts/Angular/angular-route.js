@@ -500,8 +500,8 @@ function $RouteProvider() {
           }
         };
 
-    $rootScope.$on('$locationChangeStart', prepareRoute);
-    $rootScope.$on('$locationChangeSuccess', commitRoute);
+    $scope.$on('$locationChangeStart', prepareRoute);
+    $scope.$on('$locationChangeSuccess', commitRoute);
 
     return $route;
 

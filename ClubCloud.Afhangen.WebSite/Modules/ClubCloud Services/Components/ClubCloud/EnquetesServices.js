@@ -1,10 +1,10 @@
 ﻿"use strict";
 
 define(['angularAMD'], function (app) {
-    app.factory('PaginasFactory', function ($timeout, $http, $q) {
+    app.factory('EnquetesFactory', function ($timeout, $http, $q) {
 
     });
-    app.service('PaginasServices', function ($timeout, $http, $q) {
+    app.service('EnquetesServices', function ($timeout, $http, $q) {
 
     });
 });

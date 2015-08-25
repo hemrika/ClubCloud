@@ -8,58 +8,67 @@ define(['angularAMD', 'angular-animate', 'angular-aria' /*, 'angular-block-ui'*/
 
 	    //$locationProvider.html5Mode({ enabled: true, requireBase: false });
 
-	    $urlRouterProvider.otherwise("/");
+	    $urlRouterProvider.otherwise("/Home");
 
 	    $stateProvider
             .state('Content', {
+                url: "/",
                 views: {
-                    'Content': {
-                        template: '<div ui-view=""></div>',
-                    },
-                    'Header': angularAMD.route({ templateUrl: 'Views/Header.html', controller: 'HeaderController' })
-			      ,
+                    'Content': { template: '<div ui-view=""></div>', },
+                    'Header': angularAMD.route({ templateUrl: 'Views/Header.html', controller: 'HeaderController' }),
                     'Footer': angularAMD.route({ templateUrl: 'Views/Footer.html', controller: 'FooterController' })
                 }
             })
 
-	    // Loading states from .json file during runtime
-	    var loadAndRegisterFutureStates = function ($http) {
+            .state('Content.Home', {
+                url: "/Home",
+                views: angularAMD.route({ templateUrl: 'Views/Default.html', controller: 'PaginasController' })
+            })
 
-	        var content = {
-	            stateName: "Content.Home",
-	            urlPrefix: "/",
-	            templateUrl: "Views/Default.html",
-	            type: "PaginasController"
-	        }
+            .state('Content.Contact', {
+                url: "/Contact",
+                views: angularAMD.route({ templateUrl: 'Views/Contact.html', controller: 'PaginasController' })
+            })
 
-	        $futureStateProvider.futureState(content);
 
-	        var contact = {
-	            stateName: "Content.Contact",
-	            urlPrefix: "/Contact",
-	            templateUrl: "Views/Contact.html",
-	            type: "PaginasController"
-	        }
+	    //// Loading states from .json file during runtime
+	    //var loadAndRegisterFutureStates = function ($http) {
 
-	        $futureStateProvider.futureState(contact);
+	    //    var content = {
+	    //        stateName: "Content.Home",
+	    //        urlPrefix: "/",
+	    //        templateUrl: "Views/Default.html",
+	    //        type: "PaginasController"
+	    //    }
 
-	        /*
-            // $http.get().then() returns a promise
-            return $http.get('futureStates.json').then(function (resp) {
-                angular.forEach(resp.data, function (fstate) {
-                    // Register each state returned from $http.get() with $futureStateProvider
-                    $futureStateProvider.futureState(fstate);
-                });
-            });
-            */
-	    };
+	    //    $futureStateProvider.futureState(content);
+
+	    //    var contact = {
+	    //        stateName: "Content.Contact",
+	    //        urlPrefix: "/Contact",
+	    //        templateUrl: "Views/Contact.html",
+	    //        type: "PaginasController"
+	    //    }
+
+	    //    $futureStateProvider.futureState(contact);
+
+	    //    /*
+        //    // $http.get().then() returns a promise
+        //    return $http.get('futureStates.json').then(function (resp) {
+        //        angular.forEach(resp.data, function (fstate) {
+        //            // Register each state returned from $http.get() with $futureStateProvider
+        //            $futureStateProvider.futureState(fstate);
+        //        });
+        //    });
+        //    */
+	    //};
 
 
 	    $futureStateProvider.stateFactory('ngload', ngloadStateFactory);
 	    $futureStateProvider.stateFactory('BerichtenController', BerichtenControllerCtrlStateFactory);
 	    $futureStateProvider.stateFactory('CategorieenController', CategorieenCtrlStateFactory);
 	    $futureStateProvider.stateFactory('EvenementenController', EvenementenCtrlStateFactory);
-	    $futureStateProvider.stateFactory('KalenderController', KalenderCtrlStateFactory);
+	    $futureStateProvider.stateFactory('KalendersController', KalendersCtrlStateFactory);
 	    $futureStateProvider.stateFactory('MededelingenController', MededelingenCtrlStateFactory);
 	    $futureStateProvider.stateFactory('OpmerkingenController', OpmerkingenCtrlStateFactory);
 	    $futureStateProvider.stateFactory('DocumentenController', DocumentenCtrlStateFactory);
@@ -140,11 +149,11 @@ define(['angularAMD', 'angular-animate', 'angular-aria' /*, 'angular-block-ui'*/
 
     /* Kalender */
 
-    function KalenderCtrlStateFactory($q, futureState) {
+    function KalendersCtrlStateFactory($q, futureState) {
         var d = $q.defer();
-        require(['Controllers/KalenderController'], function (KalenderController) {
+        require(['Controllers/KalendersController'], function (KalendersController) {
             var fullstate = {
-                controller: KalenderController,
+                controller: KalendersController,
                 name: futureState.stateName,
                 url: futureState.urlPrefix,
                 templateUrl: futureState.templateUrl

@@ -3,9 +3,9 @@
 define(['angularAMD', 'Services/AlbumsServices'], function (app, AlbumsServices) {
     app.controller('AlbumsController', function ($rootScope, $scope, $state, $stateParams, $window, AlbumsServices) {
 
-        $rootScope.Pagina = {};
+        $root.Albums = {};
 
-        $rootScope.$on('$viewContentLoading', function (event) {
+        $scope.$on('$viewContentLoading', function (event) {
             event.preventDefault();
 
             try {
@@ -13,7 +13,7 @@ define(['angularAMD', 'Services/AlbumsServices'], function (app, AlbumsServices)
             catch (err) { }
         })
 
-        $rootScope.$on('$viewContentLoaded', function (event) {
+        $scope.$on('$viewContentLoaded', function (event) {
             event.preventDefault();
             try {
             }

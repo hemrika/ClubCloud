@@ -2,6 +2,23 @@
 <!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Module Name="Elements" Path="Components" Url="Components">
+    <!-- PolyMer Components -->
+    <File Path="Polymer/polymer-micro.html" Url="Elements/Polymer/polymer-micro.html" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Polymer/polymer-mini.html" Url="Elements/Polymer/polymer-mini.html" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Polymer/polymer.html" Url="Elements/Polymer/polymer.html" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
+    <File Path="Script/CustomElements.js" Url="Elements/webcomponentsjs/CustomElements.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/CustomElements.min.js" Url="Elements/webcomponentsjs/CustomElements.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/HTMLImports.js" Url="Elements/webcomponentsjs/HTMLImports.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/HTMLImports.min.js" Url="Elements/webcomponentsjs/HTMLImports.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/MutationObserver.js" Url="Elements/webcomponentsjs/MutationObserver.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/MutationObserver.min.js" Url="Elements/webcomponentsjs/MutationObserver.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/ShadowDOM.js" Url="Elements/webcomponentsjs/ShadowDOM.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/ShadowDOM.min.js" Url="Elements/webcomponentsjs/ShadowDOM.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/webcomponents-lite.js" Url="Elements/webcomponentsjs/webcomponents-lite.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/webcomponents-lite.min.js" Url="ScriptElements/webcomponentsjs/webcomponents-lite.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/webcomponents.js" Url="Elements/webcomponentsjs/webcomponents.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/webcomponents.min.js" Url="Elements/webcomponentsjs/webcomponents.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <!-- Google Elements -->
     <File Path="Elements\elements.html" Url="Elements/elements.html" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
     <File Path="Elements\web-animations-js\web-animations-next-lite.min.js" Url="Elements/web-animations-js/web-animations-next-lite.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true" />
     <File Path="Elements\web-animations-js\web-animations-next-lite.min.js.map" Url="Elements/web-animations-js/web-animations-next-lite.min.js.map" IgnoreIfAlreadyExists="true" ReplaceContent="true" />

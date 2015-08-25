@@ -9,6 +9,7 @@
   HideSiteContentsLink="true">
 	<!-- _locID@Title="camlidonet1" _locComment="{StringCategory=HTX}" -->
 	<NavBars>
+    <NavBar ID="1002" Name="ClubCloud Afhangen" ></NavBar>
 	</NavBars>
 	<Configurations>
       <Configuration ID="-1" Name="NewWeb" />

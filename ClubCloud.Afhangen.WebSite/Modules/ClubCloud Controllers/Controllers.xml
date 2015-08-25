@@ -12,7 +12,7 @@
     <File Path="EvenementenController.js" Url="EvenementenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="FormulierenController.js" Url="FormulierenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="FotosController.js" Url="FotosController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
-    <File Path="KalenderController.js" Url="KalenderController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="KalendersController.js" Url="KalendersController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="MededelingenController.js" Url="MededelingenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="OpmerkingenController.js" Url="OpmerkingenController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="PaginasController.js" Url="PaginasController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>

@@ -3,9 +3,9 @@
 define(['angularAMD', 'Services/CategorieenServices'], function (app, CategorieenServices) {
     app.controller('CategorieenController', function ($rootScope, $scope, $state, $stateParams, $window, CategorieenServices) {
 
-        $rootScope.Pagina = {};
+        $rootScope.Categorieen = {};
 
-        $rootScope.$on('$viewContentLoading', function (event) {
+        $scope.$on('$viewContentLoading', function (event) {
             event.preventDefault();
 
             try {
@@ -13,7 +13,7 @@ define(['angularAMD', 'Services/CategorieenServices'], function (app, Categoriee
             catch (err) { }
         })
 
-        $rootScope.$on('$viewContentLoaded', function (event) {
+        $scope.$on('$viewContentLoaded', function (event) {
             event.preventDefault();
             try {
             }

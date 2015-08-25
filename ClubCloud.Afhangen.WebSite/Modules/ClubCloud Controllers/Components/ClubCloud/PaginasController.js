@@ -3,9 +3,9 @@
 define(['angularAMD', 'Services/PaginasServices'], function (app, PaginasServices) {
     app.controller('PaginasController', function ($rootScope, $scope, $state, $stateParams, $window, PaginasServices) {
 
-        $rootScope.Pagina = {};
+        $rootScope.Paginas = {};
 
-        $rootScope.$on('$viewContentLoading', function (event) {
+        $scope.$on('$viewContentLoading', function (event) {
             event.preventDefault();
 
             try {
@@ -13,7 +13,7 @@ define(['angularAMD', 'Services/PaginasServices'], function (app, PaginasService
             catch (err) { }
         })
 
-        $rootScope.$on('$viewContentLoaded', function (event) {
+        $scope.$on('$viewContentLoaded', function (event) {
             event.preventDefault();
             try {
             }
