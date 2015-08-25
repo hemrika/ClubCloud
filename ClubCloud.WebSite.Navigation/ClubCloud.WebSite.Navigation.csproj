@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClubCloud.WebSite.Navigation</RootNamespace>
     <AssemblyName>ClubCloud.WebSite.Navigation</AssemblyName>
-    <SignAssembly>False</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)\</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetOfficeVersion>15.0</TargetOfficeVersion>
@@ -42,6 +42,12 @@
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\\Common\ClubCloud.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,6 +66,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\ClubCloud WebSite Navigation\ClubCloud WebSite Navigation.EventReceiver.cs">
+      <DependentUpon>ClubCloud WebSite Navigation.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,10 +81,10 @@
     <None Include="Fields\NavigationFields\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b1ec0b90-78bb-46d6-ba08-ffee60d0f4dc}</SharePointProjectItemId>
     </None>
-    <None Include="ListDefinitions\SiteMapEntries\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{68761e1f-45bf-4712-b206-96a456e80478}</SharePointProjectItemId>
+    <None Include="ListDefinitions\NavigationEntries\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d8067802-a71b-4602-b67a-3b29f5b6cfa9}</SharePointProjectItemId>
     </None>
-    <None Include="ListInstances\SiteMap\SharePointProjectItem.spdata">
+    <None Include="ListInstances\Navigation\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{8d90467d-dadf-4184-9b40-6434e8fbe1bc}</SharePointProjectItemId>
     </None>
     <None Include="Package\Package.package">
@@ -83,6 +92,9 @@
     </None>
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="Template\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2e7bc32d-ef78-4098-ab1e-f42d0d571584}</SharePointProjectItemId>
     </None>
   </ItemGroup>
   <ItemGroup />
@@ -92,9 +104,10 @@
       <DependentUpon>ClubCloud WebSite Navigation.feature</DependentUpon>
     </Content>
     <Content Include="Fields\NavigationFields\Elements.xml" />
-    <Content Include="ListDefinitions\SiteMapEntries\Elements.xml" />
-    <Content Include="ListDefinitions\SiteMapEntries\schema.xml" />
-    <Content Include="ListInstances\SiteMap\Elements.xml" />
+    <Content Include="ListDefinitions\NavigationEntries\Elements.xml" />
+    <Content Include="ListDefinitions\NavigationEntries\schema.xml" />
+    <Content Include="ListInstances\Navigation\Elements.xml" />
+    <Content Include="Template\Images\ClubCloud_Afhangen_WebSite\ListIcon_NavigationEntries.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
