@@ -21,6 +21,7 @@
         <List Type="104" Title="Mededelingen" Url="Lists/Mededelingen" FeatureId="00BFEA71-D1CE-42de-9C63-A44004CE0104" />
         <List Type="106" Title="Agenda" Url="Lists/Agenda" FeatureId="00BFEA71-EC85-4903-972D-EBE475780106" />
         <List Type="119" Title="Pagina's" Url="Lists/Paginas" FeatureId="00BFEA71-C796-4402-9F2F-0EB9A6E71B18" VersioningEnabled="TRUE" />
+        <List Type="20005" Title="Navigation" Url="Lists/Navigation" FeatureId="836c91ee-d953-46c5-b101-97b71425c100" VersioningEnabled="FALSE" />
       </Lists>
       <SiteFeatures >
         <Feature ID="1b966fa3-5a7a-4da1-bc78-3d72b70b839f" />

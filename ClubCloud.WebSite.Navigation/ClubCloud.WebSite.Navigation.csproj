@@ -83,10 +83,10 @@
       <SharePointProjectItemId>{b1ec0b90-78bb-46d6-ba08-ffee60d0f4dc}</SharePointProjectItemId>
     </None>
     <None Include="ListDefinitions\NavigationEntries\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{d8067802-a71b-4602-b67a-3b29f5b6cfa9}</SharePointProjectItemId>
+      <SharePointProjectItemId>{b9625493-40a4-4e83-93d5-0fbc31178a9b}</SharePointProjectItemId>
     </None>
     <None Include="ListInstances\Navigation\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{8d90467d-dadf-4184-9b40-6434e8fbe1bc}</SharePointProjectItemId>
+      <SharePointProjectItemId>{34c1ed58-cee7-4f98-87a0-4614c3801bde}</SharePointProjectItemId>
     </None>
     <None Include="Package\Package.package">
       <PackageId>{36889CC9-2D65-4838-957D-6A746D4B3EBA}</PackageId>

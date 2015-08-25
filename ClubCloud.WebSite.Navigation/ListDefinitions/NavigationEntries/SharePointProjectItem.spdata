@@ -4,4 +4,7 @@
     <ProjectItemFile Source="Elements.xml" Target="NavigationEntries\" Type="ElementManifest" />
     <ProjectItemFile Source="schema.xml" Target="NavigationEntries\" Type="ElementFile" />
   </Files>
+  <ExtensionData>
+    <ExtensionDataItem Key="Microsoft.VisualStudio.SharePoint.ListSettings.ListFieldsContentTypeID" Value="0x01009f99a9b7caae4086acb749064b155e1d" />
+  </ExtensionData>
 </ProjectItem>

@@ -9,7 +9,7 @@
 		BaseType="0"
 		Default="FALSE"
 		OnQuickLaunch="TRUE"
-		Category="Tracking"
+		Category="Custom Lists"
 		DisableAttachments="TRUE"
 		DisallowContentTypes="FALSE"
 		VersioningEnabled="FALSE"

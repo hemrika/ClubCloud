@@ -1,5 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- Code initially generated with SharePoint Software Factory 2010, Version 3.2 , spsf.codeplex.com -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <ListInstance Title="Navigation" Url="Navigation" OnQuickLaunch="TRUE" Hidden="FALSE" RootWebOnly="TRUE" TemplateType="20005" Description="Navigation Entries"></ListInstance>
+	<ListInstance
+		Title="Navigation"
+		Description="Navigation Description"
+		FeatureId="836c91ee-d953-46c5-b101-97b71425c100"
+		Id="B57D5778-4624-4B08-B8BD-C7CCC3355D00"
+		Url="Lists/Navigation"
+		OnQuickLaunch="TRUE"
+		QuickLaunchUrl="Lists/Navigation/AllItems.aspx"
+		RootWebOnly="FALSE"
+		TemplateType="20005" />
 </Elements>
