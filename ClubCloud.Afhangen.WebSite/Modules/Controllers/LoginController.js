@@ -2,8 +2,8 @@
 
 define(['afhangen-configuration', 'accountsService', 'alertsService'], function (app) {
 
-    app.register.controller('loginController', ['$scope', '$rootScope', '$cookieStore', 'accountsService', 'alertsService',
-        function ($scope, $rootScope, $cookieStore, accountsService, alertsService) {
+    app.register.controller('loginController', ['$scope', '$rootScope', '$cookies', 'accountsService', 'alertsService',
+        function ($scope, $rootScope, $cookies, accountsService, alertsService) {
 
             $rootScope.closeAlert = alertsService.closeAlert;
             $rootScope.alerts = [];
@@ -19,18 +19,14 @@ define(['afhangen-configuration', 'accountsService', 'alertsService'], function 
 
             $scope.login = function () {
                 $rootScope.IsloggedIn = false;
-
-                var FedAuth = $cookieStore.get('FedAuth');
                 var proxy = nl.clubcloud.Afhangen;
                 proxy.Login($scope.UserName, $scope.Password, $scope.loginCompleted, $scope.loginError)
             }
 
             $scope.loginCompleted = function (response) {
-                if (response.ErrorCode == 'NoError')
-                {
-                    $cookieStore.put('FedAuth', response.FedAuth);
+                if (response.ErrorCode == ClubCloud.Service.LoginErrorCode.NoError) {
                     $rootScope.IsloggedIn = true;
-                    window.location = "/index.html";
+                    window.location = "index.html";
                 }
                 else {
                     alertsService.RenderErrorMessage(response.ErrorCode + " : " + response.Message);
