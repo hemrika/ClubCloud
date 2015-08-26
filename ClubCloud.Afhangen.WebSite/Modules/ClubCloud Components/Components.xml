@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Code initially generated with SharePoint Software Factory, Version 4.1 , spsf.codeplex.com -->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="ClubCloud Components">
+    <File Path="ClubCloud Components\Components\ClubCloud\Agenda\Agenda.html" Url="ClubCloud Components/Components/ClubCloud/Agenda/Agenda.html" />
+    <File Path="ClubCloud Components\Components\ClubCloud\clubcloud-innerHTML\clubcloud-innerHTML.html" Url="ClubCloud Components/Components/ClubCloud/clubcloud-innerHTML/clubcloud-innerHTML.html" />
+    <File Path="ClubCloud Components\Components\ClubCloud\Content\Content.html" Url="ClubCloud Components/Components/ClubCloud/Content/Content.html" />
+    <File Path="ClubCloud Components\Components\ClubCloud\Mededelingen\Mededelingen.html" Url="ClubCloud Components/Components/ClubCloud/Mededelingen/Mededelingen.html" />
+  </Module>
+</Elements>

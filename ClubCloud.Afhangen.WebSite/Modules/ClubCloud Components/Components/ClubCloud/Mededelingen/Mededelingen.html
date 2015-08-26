@@ -1,0 +1,75 @@
+﻿<link rel="import" href="../../Elements/polymer/polymer.html">
+<link rel="import" href="../clubcloud-innerHTML/clubcloud-innerHTML.html">
+<link rel="import" href="../../Elements/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../Elements/iron-list/iron-list.html">
+<dom-module id="clubcloud-mededelingen">
+
+    <style>
+    </style>
+
+    <template>
+        <iron-ajax id="mededelingen" last-response="{{Mededelingen}}" on-response="ResolveMededelingen" on-error="ErrorMededelingen"></iron-ajax>
+        <div class="mededeling">
+            <div class="mededeling lijst"><a href="[[ModuleLink(Lijst)]]">[[Lijst]]</a></div>
+            <iron-list items="[[Mededelingen.d.results]]" as="mededeling">
+                <template>
+                    <div class="item">
+                        <div class="pad">
+                            <div class="mededeling title">[[mededeling.Title]]</div>
+                            <div class="mededeling created">[[mededeling.Created]]</div>
+                            <div class="mededeling expires">[[mededeling.Expires]]</div>
+                            <div class="mededeling body"><clubcloud-innerhtml html="[[mededeling.Body]]"></clubcloud-innerhtml></div>
+                            <div class="mededeling link"><a href="[[ModuleItemLink(mededeling.Title)]]">details</a></div>
+                        </div>
+                    </div>
+                </template>
+            </iron-list>
+        </div>
+    </template>
+
+    <script>
+        // element registration
+        Polymer({
+            is: "clubcloud-mededelingen",
+            // add properties and methods on the element's prototype
+            properties: {
+                // declare properties for the element's public API
+                Lijst: {
+                    type: String,
+                    value: "Mededelingen"
+                },
+                Top: {
+                    type: Number,
+                    value: 5
+                }
+                /*,
+                Mededelingen: {
+                    type: Array,
+                    value: {}
+                }
+                */
+            },
+
+            ready: function () {
+                this.$.mededelingen.url = "_api/web/lists/GetByTitle('" + this.Lijst + "')/items?$select=*&$top=" + this.Top + "";
+                this.$.mededelingen.headers = { "accept": "application/json;odata=verbose" };
+                this.$.mededelingen.handleAs = "json";
+                this.$.mededelingen.generateRequest();
+            },
+            ModuleLink: function (name) {
+                return "#/" + this.Lijst + "";
+            },
+            ModuleItemLink: function (name) {
+                return "#/" + this.Lijst + "/" + name + "";
+            },
+            ResolveMededelingen: function (request, detail) {
+                //this.Mededelingen = request.detail.response.d.results
+                //console.log(this.Mededelingen );
+            },
+            ErrorMededelingen: function (request, error) {
+                console.log(error);
+            }
+
+        });
+    </script>
+</dom-module>

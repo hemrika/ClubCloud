@@ -1,5 +1,4 @@
 require.config({
-
     baseUrl: "",
 
     paths: {
@@ -39,11 +38,13 @@ require.config({
         'bootstrap': 'Components/Script/bootstrap',
         'jquery': 'Components/Script/jquery',
         'modernizr': 'Components/Script/modernizr',
-        'webcomponents': 'Components/Script/webcomponents',
+        /*'moment': 'Components/Script/moment',*/
+        'webcomponents': 'Components/Script/webcomponents-lite',
         'ShareCoffee': 'Components/Script/ShareCoffee',
+        'ShareCoffee-Search': 'Components/Script/ShareCoffee.Search',
         'MicrosoftAjax': 'Components/Script/MicrosoftAjax',
-        'HeaderController': 'Controllers/HeaderController',
-        'FooterController': 'Controllers/FooterController'
+        'SharePoint': '_layouts/15/sp',
+        'SharePointRuntTime': '_layouts/15/sp.runtime'
     },
 
     // Add angular modules that does not support AMD out of the box, put it in a shim

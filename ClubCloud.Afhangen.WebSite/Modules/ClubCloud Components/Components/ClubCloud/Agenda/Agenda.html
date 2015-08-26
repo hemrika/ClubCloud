@@ -1,0 +1,115 @@
+﻿<link rel="import" href="../../Elements/polymer/polymer.html">
+<link rel="import" href="../clubcloud-innerHTML/clubcloud-innerHTML.html">
+<link rel="import" href="../../Elements/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../Elements/iron-list/iron-list.html">
+<dom-module id="clubcloud-agenda">
+
+    <style>
+    </style>
+
+    <template>
+        <iron-ajax id="contextinfo" last-response="{{contextinfo}}" on-response="ResolveContextinfo" on-error="ErrorContextinfo"></iron-ajax>
+        <iron-ajax id="agenda" last-response="{{evenementen}}" on-response="ResolveAgenda" on-error="ErrorAgenda"></iron-ajax>
+        <div class="agenda">
+            <div class="agenda lijst"><a href="[[ModuleLink(Lijst)]]">[[Lijst]]</a></div>
+            <iron-list items="[[evenementen.d.results]]" as="evenement">
+                <template>
+                    <div class="item">
+                        <div class="pad">
+                            <div class="agenda title"><b>[[evenement.Title]]</b></div>
+                            <div class="agenda created">[[evenement.EventDate]]</div>
+                            <div class="agenda created">[[evenement.fRecurrence]]</div>
+                            <div class="agenda created">[[evenement.fAllDayEvent]]</div>
+                            <div class="agenda expires">[[evenement.FreeBusy]]</div>
+                            <div class="agenda expires">[[evenement.Description]]</div>
+                            <div class="agenda expires">[[evenement.Category]]</div>
+                            <div class="agenda expires">[[evenement.EndDate]]</div>
+                            <div class="agenda expires">[[evenement.Location]]</div>
+                            <div class="agenda expires">[[evenement.Facilities]]</div>
+                            <div class="agenda body"><clubcloud-innerhtml html="[[evenement.Body]]"></clubcloud-innerhtml></div>
+                            <div class="agenda link">
+                                <a href="[[ModuleItemLink(evenement.Title)]]">details</a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </iron-list>
+        </div>
+    </template>
+
+    <script>
+        // element registration
+        Polymer({
+            is: "clubcloud-agenda",
+            // add properties and methods on the element's prototype
+            properties: {
+                // declare properties for the element's public API
+                Lijst: {
+                    type: String,
+                    value: "Agenda"
+                },
+                Top: {
+                    type: Number,
+                    value: 5
+                }
+              ,
+                FormDigestValue: {
+                    type: String
+                }
+
+            },
+
+            ready: function () {
+                this.FormDigestValue = $('#__REQUESTDIGEST').val();
+                this.$.contextinfo.url = "/_api/contextinfo";
+                this.$.contextinfo.method = "POST";
+                this.$.contextinfo.headers = { "accept": "application/json;odata=verbose" };
+                this.$.contextinfo.generateRequest();
+                /*
+                 this.$.agenda.url = "_api/web/lists/GetByTitle('"+this.Lijst+"')/getitems";//items?$select=*&$top=" + this.Top + "";//&$filter=(Eindtijd le datetime'2015-08-30T00%3a00%3a00')";
+                 this.$.agenda.headers= {"accept": "application/json;odata=verbose", "X-RequestDigest": "$('#__REQUESTDIGEST').val()"};
+                 this.$.agenda.handleAs="json";
+                 this.$.agenda.method="POST";
+                 this.$.agenda.body= "'__metadata': { 'type': 'SP.CamlQuery' }, 'ViewXml' : '<View><Query><Where><DateRangesOverlap><FieldRef Name=\"EventDate\" /><FieldRef Name=\"EndDate\" /><FieldRef Name=\"RecurrenceID\" /><Value Type=\"DateTime\"><Month /></Value></DateRangesOverlap></Where></Query></View>'";
+
+                 this.$.agenda.generateRequest();
+                */
+            },
+            ModuleLink: function (name) {
+                return "#/" + this.Lijst + "";
+            },
+            ModuleItemLink: function (name) {
+                return "#/" + this.Lijst + "/" + name + "";
+            },
+
+            ResolveContextinfo: function (request, detail) {
+                //$('#__REQUESTDIGEST').val(data.d.GetContextWebInformation.FormDigestValue)
+                this.FormDigestValue = request.detail.response.d.GetContextWebInformation.FormDigestValue;
+                //this.$('#__REQUESTDIGEST').val(FormDigestValue);
+
+                this.$.agenda.url = "_api/web/lists/GetByTitle('" + this.Lijst + "')/getitems";//items?$select=*&$top=" + this.Top + "";//&$filter=(Eindtijd le datetime'2015-08-30T00%3a00%3a00')";
+                this.$.agenda.headers = { "X-RequestDigest": this.FormDigestValue, "Accept": "application/json; odata=verbose" };
+                this.$.agenda.contentType = "application/json; odata=verbose";
+                this.$.agenda.handleAs = "json";
+                this.$.agenda.method = "POST";
+                this.$.agenda.body = { query: { __metadata: { type: 'SP.CamlQuery' }, ViewXml: '<View><Query><OrderBy><FieldRef Name=\"EventDate\" Ascending=\"True\" /></OrderBy></Query><ViewFields><FieldRef Name=\"EventDate\" /><FieldRef Name=\"EndDate\" /><FieldRef Name=\"Title\" /><FieldRef Name=\"fRecurrence\" /><FieldRef Name=\"ItemChildCount\" /><FieldRef Name=\"FreeBusy\" /><FieldRef Name=\"LinkTitleNoMenu\" /><FieldRef Name=\"DocIcon\" /><FieldRef Name=\"LinkTitle\" /><FieldRef Name=\"RecurrenceData\" /></ViewFields><QueryOptions /></View>' } };
+                //<OrderBy><FieldRef Name="EventDate" /></OrderBy>
+                //<View><Query><Where><DateRangesOverlap><FieldRef Name=\"EventDate\" /><FieldRef Name=\"EndDate\" /><FieldRef Name=\"RecurrenceID\" /><Value Type=\"DateTime\"><Month /></Value></DateRangesOverlap></Where></Query></View>
+                //<View><Query><OrderBy><FieldRef Name="EventDate" Ascending="True" /></OrderBy></Query><ViewFields><FieldRef Name="EventDate" /><FieldRef Name="EndDate" /><FieldRef Name="Title" /><FieldRef Name="fRecurrence" /><FieldRef Name="ItemChildCount" /><FieldRef Name="FreeBusy" /><FieldRef Name="LinkTitleNoMenu" /><FieldRef Name="DocIcon" /><FieldRef Name="LinkTitle" /></ViewFields><QueryOptions /></View>
+                this.$.agenda.generateRequest();
+            },
+
+            ResolveAgenda: function (request, detail) {
+                var mm = request.detail.response;
+                console.log(mm);
+            },
+            ErrorAgenda: function (request, error) {
+                console.log(error);
+            },
+            ErrorContextinfo: function (request, error) {
+                console.log(error);
+            }
+
+        });
+    </script>
+</dom-module>

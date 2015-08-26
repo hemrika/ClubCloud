@@ -2,7 +2,6 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <ContentType ID="0x0100AC0BDBCFCED44248B1A3368090B8E248" Name="NavigationEntry" Group="Navigation Content Types" Description="ClubCloud Navigation Entries" Inherits="true" Version="0" Overwrite="TRUE">
     <FieldRefs>
-      <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" DisplayName="$Resources:core,Title;" Name="Title" />
       <FieldRef ID="{c29e077d-f466-4d8e-8bbe-72b66c5f205c}" DisplayName="$Resources:core,URL;" Name="URL" />
       <FieldRef ID="{52578FC3-1F01-4f4d-B016-94CCBCF428CF}" DisplayName="$Resources:core,Comments;" Description="$Resources:core,_CommentsDesc;" Name="_Comments" Sealed="TRUE" ShowInFileDlg="FALSE" Sortable="FALSE" />
       <FieldRef ID="{49e684d1-8b7a-4179-9787-167ee1b6e1de}" DisplayName="Enabled" Required="FALSE" Name="Enabled" />

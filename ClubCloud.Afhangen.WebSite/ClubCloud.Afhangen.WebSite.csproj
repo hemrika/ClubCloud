@@ -112,6 +112,9 @@
     <None Include="Modules\Bootstrap\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{88650f64-63cd-4f5b-80aa-621267ae527f}</SharePointProjectItemId>
     </None>
+    <None Include="Modules\ClubCloud Components\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{292d6e24-f69c-4691-ac88-d1cb70fd217a}</SharePointProjectItemId>
+    </None>
     <None Include="Modules\ClubCloud Services\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{33df773c-dca4-4395-a003-e401c5ffb275}</SharePointProjectItemId>
     </None>
@@ -329,6 +332,11 @@
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\js\bootstrap.js" />
     <Content Include="Modules\Bootstrap\Components\bootstrap\dist\js\bootstrap.min.js" />
     <Content Include="Modules\Bootstrap\Bootstrap.xml" />
+    <Content Include="Modules\ClubCloud Components\Components.xml" />
+    <Content Include="Modules\ClubCloud Components\Components\ClubCloud\Agenda\Agenda.html" />
+    <Content Include="Modules\ClubCloud Components\Components\ClubCloud\clubcloud-innerHTML\clubcloud-innerHTML.html" />
+    <Content Include="Modules\ClubCloud Components\Components\ClubCloud\Content\Content.html" />
+    <Content Include="Modules\ClubCloud Components\Components\ClubCloud\Mededelingen\Mededelingen.html" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\AlbumsServices.js" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\BerichtenServices.js" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\CategorieenServices.js" />
@@ -729,8 +737,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Views.tt</DependentUpon>
     </Content>
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\animations.css" />
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\Paginas-List.html" />
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\Paginas.html" />
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\Berichten-List.html" />
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\Berichten.html" />
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\400.html" />
     <Content Include="SiteDefinitions\ClubCloudClubWebsite\ClubCloudClubWebSite.gif" />
     <Content Include="SiteDefinitions\ClubCloudClubWebsite\Footer.html" />
+    <Content Include="SiteDefinitions\ClubCloudClubWebsite\500.html" />
     <Content Include="SiteDefinitions\ClubCloudClubWebsite\Header.html" />
     <Content Include="SiteDefinitions\ClubCloudClubWebsite\Default.html" />
     <Content Include="SiteDefinitions\ClubCloudClubWebsite\index.html" />

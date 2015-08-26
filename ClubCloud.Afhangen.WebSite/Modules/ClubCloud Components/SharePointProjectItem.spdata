@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Components.xml" Target="Components\" Type="ElementManifest" />
+    <ProjectItemFile Source="Components\ClubCloud\Agenda\Agenda.html" Target="ClubCloud Components\Components\ClubCloud\Agenda\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\clubcloud-innerHTML\clubcloud-innerHTML.html" Target="ClubCloud Components\Components\ClubCloud\clubcloud-innerHTML\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\Content\Content.html" Target="ClubCloud Components\Components\ClubCloud\Content\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\Mededelingen\Mededelingen.html" Target="ClubCloud Components\Components\ClubCloud\Mededelingen\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

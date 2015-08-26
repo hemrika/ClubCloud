@@ -8,5 +8,12 @@
     <ProjectItemFile Source="Default.html" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
     <ProjectItemFile Source="Header.html" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
     <ProjectItemFile Source="Footer.html" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
+    <ProjectItemFile Source="500.html" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
+    <ProjectItemFile Source="400.html" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
+    <ProjectItemFile Source="Berichten.html" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
+    <ProjectItemFile Source="Berichten-List.html" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
+    <ProjectItemFile Source="Paginas.html" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
+    <ProjectItemFile Source="Paginas-List.html" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
+    <ProjectItemFile Source="animations.css" Target="SiteTemplates\ClubCloudClubWebSite\" Type="TemplateFile" />
   </Files>
 </ProjectItem>

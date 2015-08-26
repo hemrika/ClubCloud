@@ -1,0 +1,80 @@
+﻿<link rel="import" href="../../Elements/polymer/polymer.html">
+<link rel="import" href="../clubcloud-innerHTML/clubcloud-innerHTML.html">
+<link rel="import" href="../../Elements/iron-ajax/iron-ajax.html">
+<dom-module id="clubcloud-content">
+
+    <style>
+    </style>
+
+    <template>
+        <iron-ajax id="contextinfo" last-response="{{contextinfo}}" on-response="ResolveContextinfo" on-error="ErrorContextinfo"></iron-ajax>
+        <iron-ajax id="pagina" last-response="{{contents}}" on-response="ResolvePagina" on-error="ErrorPagina"></iron-ajax>
+        <div>
+            <template is="dom-repeat" items="{{contents.d.results }}" as="content">
+                <div class="pagina title">[[content.FileLeafRef]]</div>
+                <div class="pagina body"><clubcloud-innerhtml html="[[content.WikiField]]"></clubcloud-innerhtml></div>
+            </template>
+        </div>
+    </template>
+
+    <script>
+        // element registration
+        Polymer({
+            is: "clubcloud-content",
+            // add properties and methods on the element's prototype
+            properties: {
+                // declare properties for the element's public API
+                Lijst: {
+                    type: String,
+                    value: "Paginas"
+                },
+                Title: {
+                    type: String,
+                    value: 'Intro'
+                },
+                FormDigestValue: {
+                    type: String
+                }
+            },
+
+            ready: function () {
+                this.FormDigestValue = $('#__REQUESTDIGEST').val();
+                this.$.contextinfo.url = "/_api/contextinfo";
+                this.$.contextinfo.method = "POST";
+                this.$.contextinfo.headers = { "accept": "application/json;odata=verbose" };
+                this.$.contextinfo.generateRequest();
+            },
+            ModuleLink: function (name) {
+                return "#/" + this.Lijst + "";
+            },
+            ModuleItemLink: function (name) {
+                return "#/" + this.Lijst + "/" + name + "";
+            },
+
+            ResolveContextinfo: function (request, detail) {
+
+                this.FormDigestValue = request.detail.response.d.GetContextWebInformation.FormDigestValue;
+                this.$.pagina.url = "_api/web/lists/GetByTitle('" + this.Lijst + "')/getitems";
+                this.$.pagina.headers = { "X-RequestDigest": this.FormDigestValue, "Accept": "application/json; odata=verbose" };
+                this.$.pagina.contentType = "application/json; odata=verbose";
+                this.$.pagina.handleAs = "json";
+                this.$.pagina.method = "POST";
+                this.$.pagina.body = "{'query' : { '__metadata': { 'type': 'SP.CamlQuery' }, 'ViewXml' : '<Where><BeginsWith><FieldRef Name=\"LinkFilename\" /><Value Type=\"Computed\">" + this.Title + "</Value></BeginsWith></Where><ViewFields><FieldRef Name=\"FileLeafRef\" /><FieldRef Name=\"WikiField\" /></ViewFields>'}}";
+                this.$.pagina.generateRequest();
+                //<Where><BeginsWith><FieldRef Name=\"LinkFilename\" /><Value Type='Computed'>Intro</Value></BeginsWith></Where><ViewFields><FieldRef Name='FileLeafRef' /><FieldRef Name='WikiField' /></ViewFields>
+            },
+
+            ResolvePagina: function (request, detail) {
+                var body = request.detail.response.d.results.pop().WikiField;
+                console.log(body);
+            },
+            ErrorPagina: function (request, error) {
+                console.log(error);
+            },
+            ErrorContextinfo: function (request, error) {
+                console.log(error);
+            }
+
+        });
+    </script>
+</dom-module>

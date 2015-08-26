@@ -59,7 +59,6 @@
     StaticName="Parent"
     Name="Parent"
     PrependId="TRUE"
-    WebId="~sitecollection"
     Overwrite="TRUE" AllowDeletion="TRUE"
     SourceID="http://schemas.microsoft.com/sharepoint/v3">
   </Field>

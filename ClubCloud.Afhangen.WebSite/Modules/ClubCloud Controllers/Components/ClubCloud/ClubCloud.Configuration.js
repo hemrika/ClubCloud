@@ -1,85 +1,175 @@
 ﻿"use strict";
 
-define(['angularAMD', 'angular-animate', 'angular-aria' /*, 'angular-block-ui'*/, 'angular-cookies', 'angular-formly', 'angular-messages', 'angular-resource',/* 'angular-route',*/ 'angular-sanitize', 'angular-touch', 'angular-ui-router', 'ct-ui-router-extras', 'jquery', 'modernizr', 'MicrosoftAjax', 'ShareCoffee'], function (angularAMD) {
-    var app = angular.module("ClubCloud", ['ngAnimate', 'ngAria' /*, 'blockUI'*/, 'ngCookies', 'formly', 'ngMessages', 'ngResource', /*'ngRoute',*/ 'ngSanitize', 'ngTouch', 'ui.router', 'ct.ui.router.extras']);
+define(['angularAMD', 'angular-animate', 'angular-aria' /*, 'angular-block-ui'*/, 'angular-cookies', 'angular-formly', 'angular-messages', 'angular-resource',/* 'angular-route',*/ 'angular-sanitize', 'angular-touch', 'angular-ui-router'/*, 'ct-ui-router-extras'*/, 'jquery', 'modernizr', /*'moment',*/ 'MicrosoftAjax', /*'SharePoint', 'SharePointRuntTime',*/ 'ShareCoffee'], function (angularAMD) {
+    var app = angular.module("ClubCloud", ['ngAnimate', 'ngAria' /*, 'blockUI'*/, 'ngCookies', 'formly', 'ngMessages', 'ngResource', /*'ngRoute',*/ 'ngSanitize', 'ngTouch', 'ui.router'/*, 'ct.ui.router.extras'*/]);
 
-    app.config(['$futureStateProvider', '$controllerProvider', '$urlRouterProvider', '$stateProvider', '$locationProvider',
-	function ($futureStateProvider, $controllerProvider, $urlRouterProvider, $stateProvider, $locationProvider) {
-
+    app.config(['$urlMatcherFactoryProvider', '$urlRouterProvider', '$stateProvider', '$locationProvider',
+	function ($urlMatcherFactory, $urlRouterProvider, $stateProvider, $locationProvider) {
 	    //$locationProvider.html5Mode({ enabled: true, requireBase: false });
+	    $urlMatcherFactory.caseInsensitive(true);
+	    //$urlMatcherFactory.strictMode(false);
+	    //$urlRouterProvider.otherwise("/");
+	    var modules = ['HeaderConller', 'FooterController', 'PaginasController', 'BerichtenController'];
 
-	    $urlRouterProvider.otherwise("/Home");
+	    function KnowModule(module) {
+	        return (modules.indexOf(module) > -1);
+	    }
 
 	    $stateProvider
-            .state('Content', {
-                url: "/",
+	        .state('Content', {
+	            url: "/",
+	            views: {
+	                'Content': angularAMD.route({ templateUrl: 'Views/Default.html', controller: 'PaginasController', controllerUrl: 'Controllers/PaginasController' }),
+	                'Header': angularAMD.route({ templateUrl: 'Views/Header.html', controller: 'HeaderController', controllerUrl: 'Controllers/HeaderController' }),
+	                'Footer': angularAMD.route({ templateUrl: 'Views/Footer.html', controller: 'FooterController', controllerUrl: 'Controllers/FooterController' })
+	            }
+	        })
+
+            .state('Content.404', {
+                url: "404",
                 views: {
-                    'Content': { template: '<div ui-view=""></div>', },
-                    'Header': angularAMD.route({ templateUrl: 'Views/Header.html', controller: 'HeaderController' }),
-                    'Footer': angularAMD.route({ templateUrl: 'Views/Footer.html', controller: 'FooterController' })
+                    'Content@': angularAMD.route({ templateUrl: 'Views/404.html', controller: 'PaginasController', controllerUrl: 'Controllers/PaginasController' }),
                 }
             })
 
-            .state('Content.Home', {
-                url: "/Home",
-                views: angularAMD.route({ templateUrl: 'Views/Default.html', controller: 'PaginasController' })
+            .state('Content.500', {
+                url: "500",
+                views: {
+                    'Content@': angularAMD.route({ templateUrl: 'Views/500.html', controller: 'PaginasController', controllerUrl: 'Controllers/PaginasController' }),
+                }
             })
 
-            .state('Content.Contact', {
-                url: "/Contact",
-                views: angularAMD.route({ templateUrl: 'Views/Contact.html', controller: 'PaginasController' })
+            .state('Content.Listing', {
+                url: "{Module:string}",
+                views: {
+                    'Content@': angularAMD.route({
+                        templateUrl: function ($stateParams) { return 'Views/' + $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + '.html'; },
+                        resolve: {
+                            loadController: ['$rootScope', '$q', '$stateParams',
+                                function ($rootScope, $q, $stateParams) {
+                                    var deferred = $q.defer();
+                                    var controllerName = $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + 'Controller';
+                                    if (!KnowModule(controllerName)) {
+                                        controllerName = 'PaginasController'
+                                        $stateParams.Name = $stateParams.Module;
+                                        $stateParams.Module = "Paginas";
+                                    }
+
+                                    require(['Controllers/' + controllerName], function () { $rootScope.Controller = controllerName; deferred.resolve(); });
+                                    return deferred.promise;
+                                }]
+                        },
+                        controllerProvider: function ($rootScope) { return $rootScope.Controller; }
+                    })
+                }
             })
 
+            .state('Content.Filter', {
+                url: "{Module:string}/filter/{Filter:string}",
+                views: {
+                    'Content@': angularAMD.route({
+                        templateUrl: function ($stateParams) { return 'Views/' + $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + '.html'; },
+                        resolve: {
+                            loadController: ['$rootScope', '$q', '$stateParams',
+                                function ($rootScope, $q, $stateParams) {
+                                    var deferred = $q.defer();
+                                    var controllerName = $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + 'Controller';
+                                    if (!KnowModule(controllerName)) {
+                                        controllerName = 'PaginasController'
+                                        $stateParams.Name = $stateParams.Module;
+                                        $stateParams.Module = "Paginas";
+                                    }
 
-	    //// Loading states from .json file during runtime
-	    //var loadAndRegisterFutureStates = function ($http) {
+                                    require(['Controllers/' + controllerName], function () { $rootScope.Controller = controllerName; deferred.resolve(); });
+                                    return deferred.promise;
+                                }]
+                        },
+                        controllerProvider: function ($rootScope) { return $rootScope.Controller; }
+                    })
+                }
+            })
 
-	    //    var content = {
-	    //        stateName: "Content.Home",
-	    //        urlPrefix: "/",
-	    //        templateUrl: "Views/Default.html",
-	    //        type: "PaginasController"
-	    //    }
+            .state('Content.Paged', {
+                url: "{Module:string}/{Skip:int}/{Top:int}",
+                views: {
+                    'Content@': angularAMD.route({
+                        templateUrl: function ($stateParams) { return 'Views/' + $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + '.html'; },
+                        resolve: {
+                            loadController: ['$rootScope', '$q', '$stateParams',
+                                function ($rootScope, $q, $stateParams) {
+                                    var deferred = $q.defer();
+                                    var controllerName = $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + 'Controller';
+                                    if (!KnowModule(controllerName)) {
+                                        controllerName = 'PaginasController'
+                                        $stateParams.Name = $stateParams.Module;
+                                        $stateParams.Module = "Paginas";
+                                    }
 
-	    //    $futureStateProvider.futureState(content);
+                                    require(['Controllers/' + controllerName], function () { $rootScope.Controller = controllerName; deferred.resolve(); });
+                                    return deferred.promise;
+                                }]
+                        },
+                        controllerProvider: function ($rootScope) { return $rootScope.Controller; }
+                    })
+                }
+            })
 
-	    //    var contact = {
-	    //        stateName: "Content.Contact",
-	    //        urlPrefix: "/Contact",
-	    //        templateUrl: "Views/Contact.html",
-	    //        type: "PaginasController"
-	    //    }
+            .state('Content.Ordered', {
+                url: "{Module:string}/{Skip:int}/{Top:int}/{Orderby:string}/{Sort:string}",
+                views: {
+                    'Content@': angularAMD.route({
+                        templateUrl: function ($stateParams) { return 'Views/' + $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + '.html'; },
+                        resolve: {
+                            loadController: ['$rootScope', '$q', '$stateParams',
+                                function ($rootScope, $q, $stateParams) {
+                                    var deferred = $q.defer();
+                                    var controllerName = $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + 'Controller';
+                                    if (!KnowModule(controllerName)) {
+                                        controllerName = 'PaginasController'
+                                        $stateParams.Name = $stateParams.Module;
+                                        $stateParams.Module = "Paginas";
+                                    }
 
-	    //    $futureStateProvider.futureState(contact);
+                                    require(['Controllers/' + controllerName], function () { $rootScope.Controller = controllerName; deferred.resolve(); });
+                                    return deferred.promise;
+                                }]
+                        },
+                        controllerProvider: function ($rootScope) { return $rootScope.Controller; }
+                    })
+                }
+            })
 
-	    //    /*
-        //    // $http.get().then() returns a promise
-        //    return $http.get('futureStates.json').then(function (resp) {
-        //        angular.forEach(resp.data, function (fstate) {
-        //            // Register each state returned from $http.get() with $futureStateProvider
-        //            $futureStateProvider.futureState(fstate);
-        //        });
-        //    });
-        //    */
-	    //};
+            .state('Content.Name', {
+                url: "{Module:string}/{Name:string}",
+                views: {
+                    'Content@': angularAMD.route({
+                        templateUrl: function ($stateParams) { return 'Views/' + $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + '.html'; },
+                        resolve: {
+                            loadController: ['$rootScope', '$q', '$stateParams',
+                                function ($rootScope, $q, $stateParams) {
+                                    var deferred = $q.defer();
+                                    var controllerName = $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + 'Controller';
+                                    if (!KnowModule(controllerName)) {
+                                        controllerName = 'PaginasController'
+                                        $stateParams.Name = $stateParams.Module;
+                                        $stateParams.Module = "Paginas";
+                                    }
 
+                                    require(['Controllers/' + controllerName], function () { $rootScope.Controller = controllerName; deferred.resolve(); });
+                                    return deferred.promise;
+                                }]
+                        },
+                        controllerProvider: function ($rootScope) { return $rootScope.Controller; }
+                    })
+                }
+            })
 
-	    $futureStateProvider.stateFactory('ngload', ngloadStateFactory);
-	    $futureStateProvider.stateFactory('BerichtenController', BerichtenControllerCtrlStateFactory);
-	    $futureStateProvider.stateFactory('CategorieenController', CategorieenCtrlStateFactory);
-	    $futureStateProvider.stateFactory('EvenementenController', EvenementenCtrlStateFactory);
-	    $futureStateProvider.stateFactory('KalendersController', KalendersCtrlStateFactory);
-	    $futureStateProvider.stateFactory('MededelingenController', MededelingenCtrlStateFactory);
-	    $futureStateProvider.stateFactory('OpmerkingenController', OpmerkingenCtrlStateFactory);
-	    $futureStateProvider.stateFactory('DocumentenController', DocumentenCtrlStateFactory);
-	    $futureStateProvider.stateFactory('FotosController', FotosCtrlStateFactory);
-	    $futureStateProvider.stateFactory('PaginasController', PaginasCtrlStateFactory);
-	    $futureStateProvider.stateFactory('AlbumsController', AlbumsCtrlStateFactory);
-	    $futureStateProvider.stateFactory('EnquetesController', EnquetesCtrlStateFactory);
-	    $futureStateProvider.stateFactory('FormulierenController', FormulierenCtrlStateFactory);
-
-	    $futureStateProvider.addResolve(loadAndRegisterFutureStates);
-
+	    $urlRouterProvider.when('', '/');
+	    $urlRouterProvider.otherwise(function ($injector, $location) {
+	        var state = $injector.get('$state');
+	        state.go('Content.404');
+	        return $location.path();
+	    });
 	}]);
 
     app.run(function ($rootScope, $state, $window, $timeout) {
@@ -94,214 +184,42 @@ define(['angularAMD', 'angular-animate', 'angular-aria' /*, 'angular-block-ui'*/
             });
             */
         });
-    });
 
+        $rootScope.$on('$stateChangeError', function (event) {
+            $state.go('Content.404');
+        });
+
+        $rootScope.$on('$stateNotFound', function (event) {
+            $state.go('Content.404');
+        });
+    });
 
     // Tell angularAMD to tell angular to bootstrap our app
     return angularAMD.bootstrap(app);
     // return app for requireJS registration
     //return app;
-
-    /* Berichten */
-    function BerichtenControllerCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/BerichtenController'], function (BerichtenController) {
-            var fullstate = {
-                controller: BerichtenController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    /* Categorieen */
-    function CategorieenCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/CategorieenController'], function (CategorieenController) {
-            var fullstate = {
-                controller: CategorieenController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    /* Evenementen */
-    function EvenementenCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/EvenementenController'], function (EvenementenController) {
-            var fullstate = {
-                controller: EvenementenController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    /* Kalender */
-
-    function KalendersCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/KalendersController'], function (KalendersController) {
-            var fullstate = {
-                controller: KalendersController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    /* Mededelingen */
-
-    function MededelingenCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/MededelingenController'], function (MededelingenController) {
-            var fullstate = {
-                controller: MededelingenController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    /* Opmerkingen */
-
-    function OpmerkingenCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/OpmerkingenController'], function (OpmerkingenController) {
-            var fullstate = {
-                controller: OpmerkingenController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    /* Documenten */
-
-    function DocumentenCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/DocumentenController'], function (DocumentenController) {
-            var fullstate = {
-                controller: DocumentenController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    /* Fotos */
-
-    function FotosCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/FotosController'], function (FotosController) {
-            var fullstate = {
-                controller: FotosController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    /* Paginas */
-
-    function PaginasCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/PaginasController'], function (PaginasController) {
-            var fullstate = {
-                controller: PaginasController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    /* Albums */
-
-    function AlbumsCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/AlbumsController'], function (AlbumsController) {
-            var fullstate = {
-                controller: AlbumsController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-
-    /* Enquetes */
-
-    function EnquetesCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/EnquetesController'], function (EnquetesController) {
-            var fullstate = {
-                controller: EnquetesController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    /* Formulieren */
-
-    function FormulierenCtrlStateFactory($q, futureState) {
-        var d = $q.defer();
-        require(['Controllers/FormulierenController'], function (FormulierenController) {
-            var fullstate = {
-                controller: FormulierenController,
-                name: futureState.stateName,
-                url: futureState.urlPrefix,
-                templateUrl: futureState.templateUrl
-            };
-            d.resolve(fullstate);
-        });
-        return d.promise;
-    }
-
-    function ngloadStateFactory($q, futureState) {
-        var ngloadDeferred = $q.defer();
-        require(["ngload!" + futureState.src, 'ngload', 'angularAMD'],
-            function ngloadCallback(result, ngload, angularAMD) {
-                angularAMD.processQueue();
-                ngloadDeferred.resolve(undefined);
-            });
-        return ngloadDeferred.promise;
-    }
-
 });
 
+// Initializes a new instance of the StringBuilder class
+// and appends the given value if supplied
+function StringBuilder(value) {
+    this.strings = new Array("");
+    this.append(value);
+}
 
+// Appends the given value to the end of this instance.
+StringBuilder.prototype.append = function (value) {
+    if (value) {
+        this.strings.push(value);
+    }
+}
+
+// Clears the string buffer
+StringBuilder.prototype.clear = function () {
+    this.strings.length = 1;
+}
+
+// Converts this instance to a String.
+StringBuilder.prototype.toString = function () {
+    return this.strings.join("");
+}
