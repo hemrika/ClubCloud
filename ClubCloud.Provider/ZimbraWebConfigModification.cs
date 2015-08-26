@@ -49,9 +49,20 @@ namespace ClubCloud.Provider
                 Sequence = 0,
                 Path = "configuration/configSections",
                 Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
-                Value = "<sectionGroup name=\"Zimbra\"><section name=\"Configuration\" type=\"ClubCloud.Zimbra.Service.ZimbraConfigurationHandler,ClubCloud.Zimbra, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e\" allowOverride=\"false\" /></sectionGroup>"
+                Value = "<sectionGroup name=\"Zimbra\"></sectionGroup>"
             };
             _modifications.Add(sectionGroup);
+
+            var sectionConfiguration = new SPWebConfigModification
+            {
+                Name = "section[@name='Configuration'][type='ClubCloud.Zimbra.Service.ZimbraConfigurationHandler,ClubCloud.Zimbra, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e']",
+                Owner = Owner,
+                Sequence = 2,
+                Path = "configuration/configSections/sectionGroup[@name='Zimbra']",
+                Type = SPWebConfigModification.SPWebConfigModificationType.EnsureChildNode,
+                Value = "<section name=\"Configuration\" type=\"ClubCloud.Zimbra.Service.ZimbraConfigurationHandler,ClubCloud.Zimbra, Version=1.0.0.0, Culture=neutral, PublicKeyToken=144fd205e283172e\" />"
+            };
+            _modifications.Add(sectionConfiguration);
 
             /*
             <Zimbra>

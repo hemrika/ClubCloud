@@ -255,7 +255,7 @@ namespace ClubCloud.Provider
                         XmlAttribute nameAttribute = webConfig.CreateAttribute("name");
                         nameAttribute.Value = "Zimbra";
                         sectionGroup.Attributes.Append(nameAttribute);
-                        sectionGroup.InnerXml = string.Format("<section name=\"Configuration\" type=\"ClubCloud.Zimbra.Service.ZimbraConfigurationHandler, {0} \" allowOverride=\"true\" />", fullname);
+                        sectionGroup.InnerXml = string.Format("<section name=\"Configuration\" type=\"ClubCloud.Zimbra.Service.ZimbraConfigurationHandler, {0} \" />", fullname);
                         configSections.AppendChild(sectionGroup);
                     }
 
