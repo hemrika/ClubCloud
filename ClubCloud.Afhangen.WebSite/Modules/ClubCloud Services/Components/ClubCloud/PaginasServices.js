@@ -2,12 +2,12 @@
 
 define(['angularAMD'], function (app) {
     app.factory('PaginasFactory', function ($timeout, $http, $q) {
-        var Ophalen = {};
-        Ophalen.Digest = function (onSucces, onError, $stateParams) { $q.all([FormDigest()]).then(onSucces, onError); };
-        Ophalen.Item = function (onSucces, onError, $stateParams) { $q.all([Item($stateParams), Suggesties($stateParams)]).then(onSucces, onError); };
-        Ophalen.Items = function (onSucces, onError, $stateParams) { $q.all([Items($stateParams)]).then(onSucces, onError); };
-        Ophalen.Suggesties = function (onSucces, onError, $stateParams) { $q.all([Suggesties($stateParams)]).then(onSucces, onError); };
-        return Ophalen;
+        var pagina = {};
+        pagina.Digest = function (onSucces, onError, $stateParams) { $q.all([FormDigest()]).then(onSucces, onError); };
+        pagina.Item = function (onSucces, onError, $stateParams) { $q.all([Item($stateParams), Suggesties($stateParams)]).then(onSucces, onError); };
+        pagina.Items = function (onSucces, onError, $stateParams) { $q.all([Items($stateParams)]).then(onSucces, onError); };
+        pagina.Suggesties = function (onSucces, onError, $stateParams) { $q.all([Suggesties($stateParams)]).then(onSucces, onError); };
+        return pagina;
 
         var FormDigestValue = null;
 

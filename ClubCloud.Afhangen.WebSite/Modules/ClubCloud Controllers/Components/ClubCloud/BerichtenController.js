@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-define(['angularAMD', 'Services/BerichtenServices', 'ShareCoffee', 'ShareCoffee-Search'], function (app, BerichtenFactory, ShareCoffee, ShareCoffeeSearch) {
+define(['angularAMD', 'Services/BerichtenServices'], function (app, BerichtenFactory) {
     app.controller('BerichtenController', function ($rootScope, $scope, $state, $stateParams, $window, BerichtenFactory) {
 
         $scope.Bericht = {};

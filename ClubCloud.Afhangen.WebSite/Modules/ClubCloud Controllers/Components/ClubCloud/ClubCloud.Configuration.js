@@ -5,7 +5,6 @@
 
     app.config(['$urlMatcherFactoryProvider', '$urlRouterProvider', '$stateProvider', '$locationProvider',
 	function ($urlMatcherFactory, $urlRouterProvider, $stateProvider, $locationProvider) {
-	    
 	    $urlMatcherFactory.caseInsensitive(true);
 	    //$urlMatcherFactory.strictMode(false);
 	    //$locationProvider.html5Mode({ enabled: true, requireBase: false });
@@ -14,15 +13,15 @@
 	        .state('Content', {
 	            url: "/",
 	            views: {
-	                'Content': angularAMD.route({ templateUrl: 'Views/Default.html', controller: 'PaginasController', controllerUrl: 'Controllers/PaginasController' }),
-	                'Header': angularAMD.route({ templateUrl: 'Views/Header.html', controller: 'HeaderController', controllerUrl: 'Controllers/HeaderController' }),
-	                'Footer': angularAMD.route({ templateUrl: 'Views/Footer.html', controller: 'FooterController', controllerUrl: 'Controllers/FooterController' })
+	                'Content': angularAMD.route({ templateUrl: 'Views/Default.html', controller: 'PaginasController', controllerUrl: 'ngload!Controllers/PaginasController' }),
+	                'Header': angularAMD.route({ templateUrl: 'Views/Header.html', controller: 'HeaderController', controllerUrl: 'ngload!Controllers/HeaderController' }),
+	                'Footer': angularAMD.route({ templateUrl: 'Views/Footer.html', controller: 'FooterController', controllerUrl: 'ngload!Controllers/FooterController' })
 	            }
 	        })
 
             .state('Content.404', {
                 url: "404",
-                views: {
+                views: {    
                     'Content@': angularAMD.route({ templateUrl: 'Views/404.html', controller: 'PaginasController', controllerUrl: 'Controllers/PaginasController' }),
                 }
             })
@@ -160,7 +159,8 @@
             })
 
 	    $urlRouterProvider.when('', '/');
-        /*
+	    $urlRouterProvider.otherwise("/");
+	    /*
 	    $urlRouterProvider.otherwise(function ($injector, $location) {
 	        var state = $injector.get('$state');
 	        state.go('Content.404');
@@ -169,7 +169,7 @@
         */
 	}]);
 
-    app.run(function ($rootScope, $state, $window, $timeout) {
+    app.run(['$rootScope', '$state', '$stateParams', '$window', '$timeout', function ($rootScope, $state, $stateParams, $window, $timeout) {
         $rootScope.site = {};
         $rootScope.Menu = { Header: {}, Footer: {} };
 
@@ -189,7 +189,7 @@
         $rootScope.$on('$stateNotFound', function (event) {
             $state.go('Content.404');
         });
-    });
+    }]);
 
     // Tell angularAMD to tell angular to bootstrap our app
     angularAMD.bootstrap(app);
@@ -201,7 +201,6 @@
     function KnowModule(module) {
         return (modules.indexOf(module) > -1);
     }
-
 });
 
 // Initializes a new instance of the StringBuilder class

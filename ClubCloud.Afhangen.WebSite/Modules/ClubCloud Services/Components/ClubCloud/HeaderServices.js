@@ -3,11 +3,11 @@
 define(['angularAMD'], function (app) {
     app.factory('HeaderFactory', function ($timeout, $http, $q) {
 
-        var Ophalen = {};
-        Ophalen.TopNavigation = function (onSucces, onError, $stateParams) { $q.all([TopNavigation($stateParams)]).then(onSucces, onError); };
-        Ophalen.QuickLaunch = function (onSucces, onError, $stateParams) { $q.all([QuickLaunch($stateParams)]).then(onSucces, onError); };
+        var header = {};
+        header.TopNavigation = function (onSucces, onError, $stateParams) { $q.all([TopNavigation($stateParams)]).then(onSucces, onError); };
+        header.QuickLaunch = function (onSucces, onError, $stateParams) { $q.all([QuickLaunch($stateParams)]).then(onSucces, onError); };
 
-        return Ophalen;
+        return header;
 
         function TopNavigation($stateParams) {
             var deferred = $q.defer();

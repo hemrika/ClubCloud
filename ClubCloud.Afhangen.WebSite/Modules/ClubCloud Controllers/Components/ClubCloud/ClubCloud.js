@@ -49,7 +49,7 @@
         'ngload': ['angularAMD'],
         'angularAMD': ['angular'],
         'angular-animate': ['angular'],
-        'angular-aria': ['angular'],        
+        'angular-aria': ['angular'],
         'angular-cookies': ['angular'],
         'angular-loader': ['angular'],
         'angular-formly': ['angular'],
