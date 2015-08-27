@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
  * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -2354,7 +2354,7 @@ if (typeof HTMLTemplateElement === "undefined") {
        case ">":
         return "&gt;";
 
-       case " ":
+       case "Â ":
         return "&nbsp;";
       }
     }

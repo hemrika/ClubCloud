@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 var includes = require('./Array.prototype.includes');
 

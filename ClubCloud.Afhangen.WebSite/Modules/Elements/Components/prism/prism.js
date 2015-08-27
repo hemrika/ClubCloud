@@ -1,4 +1,4 @@
-
+﻿
 /* **********************************************
      Begin prism-core.js
 ********************************************** */
@@ -267,7 +267,7 @@ var _ = _self.Prism = {
 
 				pattern = pattern.pattern || pattern;
 
-				for (var i=0; i<strarr.length; i++) { // Don’t cache length as it changes during the loop
+				for (var i=0; i<strarr.length; i++) { // Donâ€™t cache length as it changes during the loop
 
 					var str = strarr[i];
 
@@ -668,7 +668,7 @@ if (Prism.languages.markup) {
 
 				pre.textContent = '';
 
-				code.textContent = 'Loading…';
+				code.textContent = 'Loadingâ€¦';
 
 				pre.appendChild(code);
 
@@ -685,10 +685,10 @@ if (Prism.languages.markup) {
 							Prism.highlightElement(code);
 						}
 						else if (xhr.status >= 400) {
-							code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+							code.textContent = 'âœ– Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
 						}
 						else {
-							code.textContent = '✖ Error: File does not exist or is empty';
+							code.textContent = 'âœ– Error: File does not exist or is empty';
 						}
 					}
 				};

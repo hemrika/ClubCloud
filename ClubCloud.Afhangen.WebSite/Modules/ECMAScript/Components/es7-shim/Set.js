@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 var proto = require('./Set.prototype');
 

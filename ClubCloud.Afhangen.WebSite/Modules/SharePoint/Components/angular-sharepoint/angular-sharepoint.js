@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 /**
  * @ngdoc overview
  * @name ExpertsInside.SharePoint.Core

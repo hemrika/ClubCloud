@@ -337,6 +337,7 @@
     <Content Include="Modules\ClubCloud Components\Components\ClubCloud\clubcloud-innerHTML\clubcloud-innerHTML.html" />
     <Content Include="Modules\ClubCloud Components\Components\ClubCloud\Content\Content.html" />
     <Content Include="Modules\ClubCloud Components\Components\ClubCloud\Mededelingen\Mededelingen.html" />
+    <Content Include="Modules\ClubCloud Controllers\Components\ClubCloud\ClubCloud.Common.js" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\AlbumsServices.js" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\BerichtenServices.js" />
     <Content Include="Modules\ClubCloud Services\Components\ClubCloud\CategorieenServices.js" />
@@ -758,7 +759,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Modules\Expand\Components\" />
-    <Folder Include="Ribbons\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-define(['angularAMD', 'Services/HeaderServices', 'ShareCoffee', 'ShareCoffee-Search'], function (app, HeaderFactory, ShareCoffee, ShareCoffeeSearch) {
+define(['angularAMD', 'Services/HeaderServices'], function (app, HeaderFactory) {
     app.controller('HeaderController', function ($rootScope, $scope, $state, $stateParams, HeaderFactory) {
 
         $rootScope.site = { Name: 'ClubCloud', Language: 'nl-nl', Direction: 'ltr' };

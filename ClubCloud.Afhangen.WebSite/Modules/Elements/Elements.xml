@@ -15,7 +15,7 @@
     <File Path="Script/ShadowDOM.js" Url="Elements/webcomponentsjs/ShadowDOM.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
     <File Path="Script/ShadowDOM.min.js" Url="Elements/webcomponentsjs/ShadowDOM.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
     <File Path="Script/webcomponents-lite.js" Url="Elements/webcomponentsjs/webcomponents-lite.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
-    <File Path="Script/webcomponents-lite.min.js" Url="ScriptElements/webcomponentsjs/webcomponents-lite.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
+    <File Path="Script/webcomponents-lite.min.js" Url="Elements/webcomponentsjs/webcomponents-lite.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
     <File Path="Script/webcomponents.js" Url="Elements/webcomponentsjs/webcomponents.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
     <File Path="Script/webcomponents.min.js" Url="Elements/webcomponentsjs/webcomponents.min.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"  />
     <!-- Google Elements -->

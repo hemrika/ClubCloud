@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 var toJSON = require('./Map.prototype.toJSON');
 

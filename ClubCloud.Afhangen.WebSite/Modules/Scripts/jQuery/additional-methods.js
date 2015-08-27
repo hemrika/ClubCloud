@@ -1,9 +1,9 @@
-/*!
+﻿/*!
  * jQuery Validation Plugin v1.14.0
  *
  * http://jqueryvalidation.org/
  *
- * Copyright (c) 2015 Jörn Zaefferer
+ * Copyright (c) 2015 JÃ¶rn Zaefferer
  * Released under the MIT license
  */
 (function( factory ) {
@@ -20,7 +20,7 @@
 		// remove html tags and space chars
 		return value.replace(/<.[^<>]*?>/g, " ").replace(/&nbsp;|&#160;/gi, " ")
 		// remove punctuation
-		.replace(/[.(),;:!?%#$'\"_+=\/\-“”’]*/g, "");
+		.replace(/[.(),;:!?%#$'\"_+=\/\-â€œâ€â€™]*/g, "");
 	}
 
 	$.validator.addMethod("maxWords", function(value, element, params) {
@@ -127,7 +127,7 @@ $.validator.addMethod("bic", function(value, element) {
 }, "Please specify a valid BIC code");
 
 /*
- * Código de identificación fiscal ( CIF ) is the tax identification code for Spanish legal entities
+ * CÃ³digo de identificaciÃ³n fiscal ( CIF ) is the tax identification code for Spanish legal entities
  * Further rules can be found in Spanish on http://es.wikipedia.org/wiki/C%C3%B3digo_de_identificaci%C3%B3n_fiscal
  */
 $.validator.addMethod( "cifES", function( value ) {
@@ -189,7 +189,7 @@ $.validator.addMethod( "cifES", function( value ) {
 }, "Please specify a valid CIF number." );
 
 /*
- * Brazillian CPF number (Cadastrado de Pessoas Físicas) is the equivalent of a Brazilian tax registration number.
+ * Brazillian CPF number (Cadastrado de Pessoas FÃ­sicas) is the equivalent of a Brazilian tax registration number.
  * CPF numbers have 11 digits in total: 9 numbers followed by 2 check numbers that are being used for validation.
  */
 $.validator.addMethod("cpfBR", function(value) {
@@ -321,7 +321,7 @@ $.validator.addMethod("creditcardtypes", function(value, element, param) {
  * Symbols can be optional or required. Symbols required by default
  *
  * Usage examples:
- *  currency: ["£", false] - Use false for soft currency validation
+ *  currency: ["Â£", false] - Use false for soft currency validation
  *  currency: ["$", false]
  *  currency: ["RM", false] - also works with text based symbols such as "RM" - Malaysia Ringgit etc
  *
@@ -341,7 +341,7 @@ $.validator.addMethod("creditcardtypes", function(value, element, param) {
  *
  * Multiple Symbols
  *  currencyInput: {
- *     currency: "$,£,¢"
+ *     currency: "$,Â£,Â¢"
  *  }
  */
 $.validator.addMethod("currency", function(value, element, param) {
@@ -581,7 +581,7 @@ $.validator.addMethod("mobileUK", function(phone_number, element) {
 }, "Please specify a valid mobile number");
 
 /*
- * The número de identidad de extranjero ( NIE )is a code used to identify the non-nationals in Spain
+ * The nÃºmero de identidad de extranjero ( NIE )is a code used to identify the non-nationals in Spain
  */
 $.validator.addMethod( "nieES", function( value ) {
 	"use strict";
@@ -616,7 +616,7 @@ $.validator.addMethod( "nieES", function( value ) {
 }, "Please specify a valid NIE number." );
 
 /*
- * The Número de Identificación Fiscal ( NIF ) is the way tax identification used in Spain for individuals
+ * The NÃºmero de IdentificaciÃ³n Fiscal ( NIF ) is the way tax identification used in Spain for individuals
  */
 $.validator.addMethod( "nifES", function( value ) {
 	"use strict";
@@ -757,7 +757,7 @@ $.validator.addMethod( "postalCodeCA", function( value, element ) {
 */
 $.validator.addMethod("postalcodeBR", function(cep_value, element) {
 	return this.optional(element) || /^\d{2}.\d{3}-\d{3}?$|^\d{5}-?\d{3}?$/.test( cep_value );
-}, "Informe um CEP válido.");
+}, "Informe um CEP vÃ¡lido.");
 
 /* Matches Italian postcode (CAP) */
 $.validator.addMethod("postalcodeIT", function(value, element) {

@@ -1,4 +1,4 @@
-Promise.all = Promise.all || function () {
+﻿Promise.all = Promise.all || function () {
   var args = Array.prototype.slice.call(arguments.length === 1 && Array.isArray(arguments[0]) ? arguments[0] : arguments);
 
   return new Promise(function (resolve, reject) {

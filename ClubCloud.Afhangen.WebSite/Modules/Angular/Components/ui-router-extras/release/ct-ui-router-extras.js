@@ -1,4 +1,4 @@
-/**
+﻿/**
  * UI-Router Extras: Sticky states, Future States, Deep State Redirect, Transition promise
  * Monolithic build (all modules)
  * @version 0.0.14
@@ -1815,7 +1815,7 @@ angular.module("ct.ui.router.extras.transition", [ 'ct.ui.router.extras.core' ])
 
           nodes.forEach(function (d) { d.y = d.depth * 70; });
 
-          // Add entering nodes in the parent’s old position.
+          // Add entering nodes in the parentâ€™s old position.
           var nodeEnter = node.enter();
 
           function stateName(node) {
@@ -1848,7 +1848,7 @@ angular.module("ct.ui.router.extras.transition", [ 'ct.ui.router.extras.core' ])
             .style("fill-opacity", 1);
 
 
-          // Add entering links in the parent’s old position.
+          // Add entering links in the parentâ€™s old position.
           link.enter().insert("path", ".node")
             .attr("class", "link")
             .attr("d", function (d) {

@@ -1,4 +1,4 @@
-Type.registerNamespace('clubcloud.nl');
+﻿Type.registerNamespace('clubcloud.nl');
 clubcloud.nl.ClubCloudAfhangen = function () {
     clubcloud.nl.ClubCloudAfhangen.initializeBase(this);
     this._timeout = 0;

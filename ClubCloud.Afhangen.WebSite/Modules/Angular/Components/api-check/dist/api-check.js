@@ -1,4 +1,4 @@
-//! api-check version 7.5.0 built with ♥ by Kent C. Dodds <kent@doddsfamily.us> (http://kent.doddsfamily.us) (ó ì_í)=óò=(ì_í ò)
+﻿//! api-check version 7.5.0 built with â™¥ by Kent C. Dodds <kent@doddsfamily.us> (http://kent.doddsfamily.us) (Ã³ Ã¬_Ã­)=Ã³Ã²=(Ã¬_Ã­ Ã²)
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')

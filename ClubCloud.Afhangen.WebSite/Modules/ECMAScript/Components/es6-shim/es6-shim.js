@@ -1,4 +1,4 @@
- /*!
+﻿ /*!
   * https://github.com/paulmillr/es6-shim
   * @license es6-shim Copyright 2013-2015 by Paul Miller (http://paulmillr.com)
   *   and contributors,  MIT License
@@ -95,7 +95,7 @@
   };
 
   // Define configurable, writable and non-enumerable props
-  // if they don’t exist.
+  // if they donâ€™t exist.
   var defineProperties = function (object, map) {
     _forEach(Object.keys(map), function (name) {
       var method = map[name];

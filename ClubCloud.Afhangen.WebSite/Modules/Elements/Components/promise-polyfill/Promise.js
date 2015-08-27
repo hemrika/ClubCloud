@@ -1,4 +1,4 @@
-function MakePromise (asap) {
+﻿function MakePromise (asap) {
   function Promise(fn) {
 		if (typeof this !== 'object' || typeof fn !== 'function') throw new TypeError();
 		this._state = null;

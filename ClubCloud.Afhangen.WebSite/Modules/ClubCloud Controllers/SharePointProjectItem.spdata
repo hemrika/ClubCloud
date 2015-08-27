@@ -18,5 +18,6 @@
     <ProjectItemFile Source="Components\ClubCloud\FormulierenController.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\FooterController.js" Target="Controllers\" Type="ElementFile" />
     <ProjectItemFile Source="Components\ClubCloud\HeaderController.js" Target="Controllers\" Type="ElementFile" />
+    <ProjectItemFile Source="Components\ClubCloud\ClubCloud.Common.js" Target="Controllers\" Type="ElementFile" />
   </Files>
 </ProjectItem>

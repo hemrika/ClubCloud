@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 var at = require('./String.prototype.at');
 var padLeft = require('./String.prototype.padLeft');

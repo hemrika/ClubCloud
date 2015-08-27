@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-define(['angularAMD', 'Services/PaginasServices', 'ShareCoffee', 'ShareCoffee-Search'], function (app, PaginasFactory, ShareCoffee, ShareCoffeeSearch) {
+define(['angularAMD', 'Services/PaginasServices'], function (app, PaginasFactory) {
     app.controller('PaginasController', function ($rootScope, $scope, $state, $stateParams, $window, PaginasFactory) {
         $scope.Pagina = {};
         $scope.Paginas = [];

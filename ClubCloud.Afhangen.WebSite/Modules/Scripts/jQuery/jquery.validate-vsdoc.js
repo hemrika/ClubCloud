@@ -1,4 +1,4 @@
-/*
+﻿/*
 * This file has been commented to support Visual Studio Intellisense.
 * You should not use this file at runtime inside the browser--it is only
 * intended to be used only for design-time IntelliSense.  Please use the
@@ -20,7 +20,7 @@
 * http://bassistance.de/jquery-plugins/jquery-plugin-validation/
 * http://docs.jquery.com/Plugins/Validation
 *
-* Copyright (c) 2006 - 2011 Jörn Zaefferer
+* Copyright (c) 2006 - 2011 JÃ¶rn Zaefferer
 *
 */
 

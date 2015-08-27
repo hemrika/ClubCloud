@@ -18,5 +18,6 @@
     <File Path="PaginasController.js" Url="PaginasController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="FooterController.js" Url="FooterController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
     <File Path="HeaderController.js" Url="HeaderController.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
+    <File Path="ClubCloud.Common.js" Url="ClubCloud.Common.js" IgnoreIfAlreadyExists="true" ReplaceContent="true"/>
   </Module>
 </Elements>

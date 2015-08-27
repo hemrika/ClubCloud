@@ -1,19 +1,14 @@
-﻿"use strict";
+﻿define(['ClubCloud-Common'], function (angularAMD) {
+    "use strict";
 
-define(['angularAMD', 'angular-animate', 'angular-aria' /*, 'angular-block-ui'*/, 'angular-cookies', 'angular-formly', 'angular-messages', 'angular-resource',/* 'angular-route',*/ 'angular-sanitize', 'angular-touch', 'angular-ui-router'/*, 'ct-ui-router-extras'*/, 'jquery', 'modernizr', /*'moment',*/ 'MicrosoftAjax', /*'SharePoint', 'SharePointRuntTime',*/ 'ShareCoffee'], function (angularAMD) {
-    var app = angular.module("ClubCloud", ['ngAnimate', 'ngAria' /*, 'blockUI'*/, 'ngCookies', 'formly', 'ngMessages', 'ngResource', /*'ngRoute',*/ 'ngSanitize', 'ngTouch', 'ui.router'/*, 'ct.ui.router.extras'*/]);
+    var app = angular.module("ClubCloud", ['ngAnimate', 'ngAria', 'ngCookies', 'ngMessages', 'ngResource', 'ngSanitize', 'ngTouch', 'ui.router']);
 
     app.config(['$urlMatcherFactoryProvider', '$urlRouterProvider', '$stateProvider', '$locationProvider',
 	function ($urlMatcherFactory, $urlRouterProvider, $stateProvider, $locationProvider) {
-	    //$locationProvider.html5Mode({ enabled: true, requireBase: false });
+	    
 	    $urlMatcherFactory.caseInsensitive(true);
 	    //$urlMatcherFactory.strictMode(false);
-	    //$urlRouterProvider.otherwise("/");
-	    var modules = ['HeaderConller', 'FooterController', 'PaginasController', 'BerichtenController'];
-
-	    function KnowModule(module) {
-	        return (modules.indexOf(module) > -1);
-	    }
+	    //$locationProvider.html5Mode({ enabled: true, requireBase: false });
 
 	    $stateProvider
 	        .state('Content', {
@@ -43,7 +38,7 @@ define(['angularAMD', 'angular-animate', 'angular-aria' /*, 'angular-block-ui'*/
                 url: "{Module:string}",
                 views: {
                     'Content@': angularAMD.route({
-                        templateUrl: function ($stateParams) { return 'Views/' + $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + '.html'; },
+                        templateUrl: function ($stateParams) { return 'Views/' + $stateParams.Module.charAt(0).toUpperCase() + $stateParams.Module.substring(1) + '-List.html'; },
                         resolve: {
                             loadController: ['$rootScope', '$q', '$stateParams',
                                 function ($rootScope, $q, $stateParams) {
@@ -165,11 +160,13 @@ define(['angularAMD', 'angular-animate', 'angular-aria' /*, 'angular-block-ui'*/
             })
 
 	    $urlRouterProvider.when('', '/');
+        /*
 	    $urlRouterProvider.otherwise(function ($injector, $location) {
 	        var state = $injector.get('$state');
 	        state.go('Content.404');
 	        return $location.path();
 	    });
+        */
 	}]);
 
     app.run(function ($rootScope, $state, $window, $timeout) {
@@ -195,9 +192,16 @@ define(['angularAMD', 'angular-animate', 'angular-aria' /*, 'angular-block-ui'*/
     });
 
     // Tell angularAMD to tell angular to bootstrap our app
-    return angularAMD.bootstrap(app);
+    angularAMD.bootstrap(app);
     // return app for requireJS registration
-    //return app;
+    return app;
+
+    var modules = ['HeaderController', 'FooterController', 'PaginasController', 'BerichtenController'];
+
+    function KnowModule(module) {
+        return (modules.indexOf(module) > -1);
+    }
+
 });
 
 // Initializes a new instance of the StringBuilder class

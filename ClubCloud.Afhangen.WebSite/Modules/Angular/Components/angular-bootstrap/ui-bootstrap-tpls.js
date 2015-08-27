@@ -1,4 +1,4 @@
-/*
+﻿/*
  * angular-ui-bootstrap
  * http://angular-ui.github.io/bootstrap/
 
@@ -3099,8 +3099,8 @@ angular.module('ui.bootstrap.pagination', [])
 
 .constant('pagerConfig', {
   itemsPerPage: 10,
-  previousText: '« Previous',
-  nextText: 'Next »',
+  previousText: 'Â« Previous',
+  nextText: 'Next Â»',
   align: true
 })
 

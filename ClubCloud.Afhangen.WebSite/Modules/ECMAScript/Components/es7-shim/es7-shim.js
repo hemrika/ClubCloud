@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * https://github.com/es-shims/es7-shim
  * @license es7-shim Copyright 2014 by contributors, MIT License
  * see https://github.com/es-shims/es7-shim/blob/master/LICENSE

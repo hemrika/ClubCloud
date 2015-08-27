@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.4.3
+ * @license AngularJS v1.4.4
  * (c) 2010-2015 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -500,8 +500,8 @@ function $RouteProvider() {
           }
         };
 
-    $scope.$on('$locationChangeStart', prepareRoute);
-    $scope.$on('$locationChangeSuccess', commitRoute);
+    $rootScope.$on('$locationChangeStart', prepareRoute);
+    $rootScope.$on('$locationChangeSuccess', commitRoute);
 
     return $route;
 

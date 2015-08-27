@@ -1,4 +1,4 @@
-/* Copyright (c) 2013-2014, Null McNull https://github.com/McNull, LICENSE: MIT */
+﻿/* Copyright (c) 2013-2014, Null McNull https://github.com/McNull, LICENSE: MIT */
 angular.module('blockUI', ['templates-angularBlockUI']);
 
 angular.module('blockUI').config(function($provide, $httpProvider) {
