@@ -179,8 +179,8 @@ namespace ClubCloud.Zimbra.Client
                 if (cc == null)
                 {
                     ClubCloud.KNLTB.Security.KNLTBContainer container = new KNLTB.Security.KNLTBContainer();
-                    container.MijnRequestAcces("12073385", "rjm557308453!");
-                    //container.ServItRequestAcces("27908313", "rjm557308453!");
+                    container.MijnRequestAcces("12073385", "");
+                    //container.ServItRequestAcces("27908313", "");
 
                     while (container.Container == null) { }
                     cc = container.Container;
