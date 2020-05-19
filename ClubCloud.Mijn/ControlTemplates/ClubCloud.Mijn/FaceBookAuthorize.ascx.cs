@@ -12,8 +12,8 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class FaceBookAuthorize : ClubCloudUserControl
     {
-        private string AppId = "554213928032357";
-        private string AppSecret = "77fcabfeb52728726784ebc0b552f0c9";
+        private string AppId = "<AppId>";
+        private string AppSecret = "<AppSecret>";
 
         public string AuthCode
         {
