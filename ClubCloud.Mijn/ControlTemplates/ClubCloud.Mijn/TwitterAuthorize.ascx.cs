@@ -14,8 +14,8 @@ namespace ClubCloud.Mijn.ControlTemplates
 {
     public partial class TwitterAuthorize : ClubCloudUserControl
     {
-        private string ConsumerKey = "xKESVN9CwdlWGA1ve7qWdPPzU";
-        private string ConsumerSecret = "szoyhGCcw4fp7fDlt8pit0o3HwwdvFd3BUbBEDTfkU08ToJyNS";
+        private string ConsumerKey = "<ConsumerKey>";
+        private string ConsumerSecret = "<ConsumerSecret>";
 
         public string OAuthToken
         {
